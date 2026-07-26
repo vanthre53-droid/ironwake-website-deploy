@@ -59,3 +59,15 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Known limitation: the credential owner must rotate the previously inline provider credential outside the repository. The controller baseline remains staged but uncommitted.
 - Ending commit: none.
 - Next exact action: human supplies public Git author name and email; OpenCode configures them locally only and reruns the staged checks before committing.
+
+### 2026-07-26T15:28:59Z — P0/controller_baseline_commit_and_resume_gate
+- CLI: OpenCode
+- Starting commit: none; controller baseline scope was staged and the state still reported missing Git identity.
+- Files changed: controller baseline committed at `133542b81d6dff13627b45183446e4138e92ff78`; continuity checkpoint updates are pending in the working tree.
+- Commands/tests: full resume-state readback; `scripts/validate-state.sh` PASS; `scripts/validate-execution-pack.sh` PASS; Python YAML parse PASS; `git config --local --get user.name`; `git config --local --get user.email`; staged nested-path readback; staged credential-pattern scan; `git diff --cached --check`; `git show -s HEAD`.
+- Result: PASS. A repository-local Git identity was present, the approved controller-only scope excluded the nested worktree and detected credential signatures, and the baseline commit was created.
+- Evidence: `reports/STATE_DRIFT.md`; `reports/SECRET_EXPOSURE.md`; `state/EVIDENCE_INDEX.md`.
+- Approval/external action: prior user approval for the controller-only baseline commit was executed; no provider, model, publication, or deployment action occurred.
+- Known limitation: the nested portfolio candidate remains materially dirty; the credential owner still must rotate the previously exposed credential outside the repository.
+- Ending commit: `133542b81d6dff13627b45183446e4138e92ff78`.
+- Next exact action: OpenCode C1 reads `prompts/01_PHASE_0_AUDIT.md` and performs only its first uncompleted P0 audit unit against the committed controller baseline.

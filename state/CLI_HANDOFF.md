@@ -2,7 +2,7 @@
 
 ## Current truth
 
-- Controller root was initialized as a Git repository on 2026-07-26 with user approval. It has no initial commit; the nested candidate worktree remains materially dirty and cannot establish portfolio truth. See `reports/STATE_DRIFT.md`.
+- Controller root baseline is committed at `133542b81d6dff13627b45183446e4138e92ff78`. The nested candidate worktree remains materially dirty and cannot establish portfolio truth. See `reports/STATE_DRIFT.md`.
 - Stitch design generation: complete as a 30-screen prototype export.
 - Production website: not built.
 - Social foundation: planned, not verified live.
@@ -19,12 +19,10 @@ Open the same repository in OpenCode and run `/ironwake-start`. Do not start M1 
 
 ## Current next action
 
-The human owner must provide the public Git author name and email. OpenCode C1 will configure them for this repository only, rerun the staged checks, create the approved controller-only baseline commit, and resume P0.
+OpenCode C1 must read `prompts/01_PHASE_0_AUDIT.md` and perform only its first uncompleted P0 audit unit against the committed controller baseline.
 
 ## Blockers
 
-- Controller root has no committed baseline.
-- Git rejected the initial commit because no author identity is configured.
 - An inline provider credential was removed before staging and must be rotated by its owner outside the repository.
 - Nested candidate worktree contains 459 changed files and 156,416 deletions according to `git diff --stat`.
 - Nested required Obsidian-vault paths were absent at readback.

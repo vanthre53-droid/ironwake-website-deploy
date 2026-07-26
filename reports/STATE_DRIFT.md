@@ -20,3 +20,11 @@ The controller source root is now known, but it has no committed baseline. P0 ca
 The human owner must approve the initial commit scope. The recommended scope is all controller files except `ironwakeportifolioprojects/`, which remains an unmodified separate source candidate until its integrity is independently resolved.
 
 No application, portfolio, provider, social, or deployment mutation was performed.
+
+## 2026-07-26T15:28:59Z Resume Resolution
+
+1. Repository readback confirmed a locally configured Git author identity. This is Git configuration evidence only; no model or provider identity was inferred or recorded.
+2. The approved controller-only staged scope was rechecked: no staged nested-worktree path and no detected credential signature. `git diff --cached --check` reported only the previously recorded Markdown whitespace warnings.
+3. The controller baseline commit was created at `133542b81d6dff13627b45183446e4138e92ff78` with message `chore: establish IronWake controller baseline`.
+
+The missing-controller-commit portion of this drift is resolved. The nested candidate worktree remains unsuitable as portfolio proof until independently recovered and audited.
