@@ -1,8 +1,8 @@
 # P0 Source Inventory
 
-- Audited: 2026-07-26T08:57:57Z
+- Audited: 2026-07-26T15:28:59Z
 - Scope: controller inputs, source archives, source-control location, and candidate portfolio workspace
-- Status: partial; controller root initialized, initial commit approval pending
+- Status: partial; controller baseline committed, Stitch archive audit complete
 
 ## Controller Inputs
 
@@ -14,8 +14,8 @@
 | `inputs/APPROVALS.md` | `ef68dc5a96f6fe49633f1595ad960386839d578acb617faa3b79d0e011e3d871` | All gates pending |
 | `inputs/REAL_DATA_INTAKE.md` | `c37650d765d2a45e458286acc4b14cb539f1157f9640e773bc8a34e160fed353` | Identity, contact, pricing, providers, and proof unresolved |
 | `inputs/SOCIAL_SETUP_REAL_DATA.md` | `bd643b5b742bc457390c65b2f7832dd43792f9060b4b7779c4872de7c19971f9` | Instagram reported but unverified; all other live state unknown |
-| `state/PROJECT_STATE.yaml` | `df07d8f5be26f7b49a1ca48bc60a33f69c4fe74d75a9e7267273fa879db0b4ef` | Superseded by this checkpoint |
-| `state/CLI_HANDOFF.md` | `b1e8d80e2c905073bae79bf836bf18983cc65ee911c194513ae423519e968cbc` | Superseded by this checkpoint |
+| `state/PROJECT_STATE.yaml` | `df07d8f5be26f7b49a1ca48bc60a33f69c4fe74d75a9e7267273fa879db0b4ef` | Historical hash; current state is checkpointed separately |
+| `state/CLI_HANDOFF.md` | `b1e8d80e2c905073bae79bf836bf18983cc65ee911c194513ae423519e968cbc` | Historical hash; current handoff is checkpointed separately |
 
 ## Archives
 
@@ -38,7 +38,7 @@
 
 | Location | Readback | Result |
 |---|---|---|
-| Controller root | `git init`, then `git status --short --branch` | Empty Git repository on `master`; no commit yet |
+| Controller root | `git status --short --branch`, `git show -s HEAD` | Baseline committed on `master` at `133542b81d6dff13627b45183446e4138e92ff78` |
 | `ironwakeportifolioprojects/` | Branch `master`, `HEAD` `f511259` | Dirty; unsuitable as a reproducible baseline |
 
-The Stitch audit script was reviewed but not run: it accepts only an unzipped export, and extraction would not resolve the source-root ambiguity. No archive contents were modified.
+The Stitch audit script was reviewed and run after extraction to `/tmp/opencode/ironwake-stitch-audit`. It reported 30 HTML screens, 30 PNG screens, 169 external URL occurrences, and 38 Google Aida-hosted image occurrences. See `reports/STITCH_AUDIT.md`, `reports/CLAIM_QUARANTINE.md`, and `reports/ASSET_LEDGER.md`. No archive contents were modified.
