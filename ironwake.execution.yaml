@@ -1,0 +1,202 @@
+project: IronWake production website and operator system
+version: 5.0.0-opencode-only
+design_phase: complete
+production_phase: pending
+durable_state: state/PROJECT_STATE.yaml
+universal_resume_prompt: prompts/00_START_OR_RESUME.md
+scope_registry: docs/12_FULL_PROGRAM_SCOPE_REGISTRY.md
+ownership_protocol: docs/11_OPENCODE_ROLE_AND_MODEL_OWNERSHIP_PROTOCOL.md
+
+executor_pipeline:
+  - stage: C1
+    required_role: C1
+    allowed_harness: OPENCODE
+    prompt: prompts/10_OPENCODE_STAGE_C1_ARCHITECT.md
+    gate: GC1_ARCHITECTURE_APPROVED
+  - stage: M1
+    required_role: M1
+    allowed_harness: OPENCODE
+    prompt: prompts/11_OPENCODE_STAGE_M1_IMPLEMENT.md
+    gate: GM1_IMPLEMENTATION_COMPLETE
+  - stage: C2
+    required_role: C2
+    allowed_harness: OPENCODE
+    prompt: prompts/12_OPENCODE_STAGE_C2_AUDIT.md
+    gate: GC2_REMEDIATION_APPROVED
+  - stage: M2
+    required_role: M2
+    allowed_harness: OPENCODE
+    prompt: prompts/13_OPENCODE_STAGE_M2_REMEDIATE.md
+    gate: GM2_REMEDIATION_COMPLETE
+  - stage: C3
+    required_role: C3
+    allowed_harness: OPENCODE
+    prompt: prompts/14_OPENCODE_STAGE_C3_FINAL_GATE.md
+    gate: GC3_RELEASE_CANDIDATE_PASS
+
+full_program_scope:
+  required_ids:
+    - W00
+    - W01
+    - W02
+    - W03
+    - W04
+    - W05
+    - W06
+    - W07
+    - W08
+    - W09
+    - W10
+    - W11
+    - W12
+    - W13
+    - W14
+    - W15
+    - W16
+    - W17
+    - W18
+    - W19
+    - W20
+    - W21
+    - W22
+  social_is_full_workstream: true
+  silent_omission_allowed: false
+
+principles:
+  - no invented facts, proof, prices, photos, integrations, or success states
+  - user approval for material business, legal, provider, public, cost, and deployment decisions
+  - objective reversible engineering proceeds inside an approved phase
+  - database and API before dependent UI
+  - evidence before completion claims
+  - current official documentation overrides stale kit versions
+  - portfolio truth and minimum social foundation precede public website implementation
+  - every atomic task updates durable state and evidence
+  - a new OpenCode session resumes verified work instead of restarting it
+  - OpenCode role boundaries own judgment, sealed specifications, implementation, remediation and release gates
+  - every W00-W22 scope item receives a task, gate, evidence path, and final status
+  - full social setup includes profiles, security, content, publication, operations, and CRM attribution
+
+required_inputs:
+  stitch_export: discover
+  agency_kit: discover
+  voice_kit: discover
+  whatsapp_kit: discover
+  additional_skills_folder: discover_optional
+  personal_agency_branding_system: discover_required
+  platform_profile_execution_pack: discover_required
+  real_data_intake: inputs/REAL_DATA_INTAKE.md
+  approvals: inputs/APPROVALS.md
+
+prebuild_workstreams:
+  - id: P1_5
+    name: portfolio_truth_and_launch_proof
+    starts_after: G1_USER_APPROVAL
+    must_pass_before: S1
+    prompt: prompts/02A_PHASE_1_5_PORTFOLIO_PROOF.md
+    evidence:
+      - reports/PORTFOLIO_PROOF_GATE.md
+      - reports/CLAIM_LEDGER.md
+      - reports/ASSET_LEDGER.md
+      - reports/evidence/PORTFOLIO_PROVIDER_PROOF.md
+  - id: S1
+    name: social_profiles_proof_content_and_attribution
+    starts_after: P1_5
+    must_pass_before: P2
+    public_mutation: named_human_approval_only
+    prompt: prompts/08_SOCIAL_MEDIA_PROFILE_CONTENT_WORKSTREAM.md
+    evidence:
+      - reports/SOCIAL_PLATFORM_MATRIX.md
+      - reports/SOCIAL_PROFILE_COPY_AND_ASSETS.md
+      - reports/SOCIAL_FOUNDATION_CONTENT_REGISTER.md
+      - reports/SOCIAL_VERIFIED_URL_REGISTRY.md
+      - reports/evidence/SOCIAL_CONTACT_AND_CRM_ATTRIBUTION.md
+    stop_gate: GS1_SOCIAL_FOUNDATION_APPROVAL
+
+phases:
+  - id: P0
+    name: inventory_truth_and_skill_discovery
+    mutation: read_only_except_reports
+    prompt: prompts/01_PHASE_0_AUDIT.md
+    evidence:
+      - reports/SOURCE_INVENTORY.md
+      - reports/STITCH_AUDIT.md
+      - reports/CLAIM_QUARANTINE.md
+      - reports/ASSET_LEDGER.md
+      - reports/SKILL_INVENTORY.md
+      - reports/SCREEN_ROUTE_MATRIX.md
+  - id: P1
+    name: live_research_and_decision_packet
+    mutation: reports_only
+    prompt: prompts/02_PHASE_1_RESEARCH_AND_APPROVAL.md
+    evidence:
+      - reports/COMPETITOR_RESEARCH.md
+      - reports/UX_CONVERSION_RESEARCH.md
+      - reports/PRICING_LOCALIZATION_RESEARCH.md
+      - reports/TECHNICAL_DECISION_RECORD.md
+      - reports/PHASE_1_DECISION_PACKET.md
+    stop_gate: G1_USER_APPROVAL
+  - id: P2
+    name: foundation_data_auth_and_server
+    mutation: approved_internal_build
+    prompt: prompts/03_PHASE_2_FOUNDATION.md
+    requires_gates:
+      - G1_USER_APPROVAL
+      - G1_5_PORTFOLIO_TRUTH_GATE
+      - GS1_SOCIAL_FOUNDATION_APPROVAL
+    evidence:
+      - reports/evidence/P2_SCHEMA_AND_RLS.md
+      - reports/evidence/P2_API_TESTS.md
+      - reports/evidence/P2_AUTH_TESTS.md
+  - id: P3
+    name: design_system_routes_and_responsive_ui
+    mutation: approved_internal_build
+    prompt: prompts/04_PHASE_3_FRONTEND.md
+    evidence:
+      - reports/evidence/P3_VISUAL_COMPARISON.md
+      - reports/evidence/P3_RESPONSIVE_A11Y.md
+      - reports/evidence/P3_COMPONENT_COVERAGE.md
+  - id: P4
+    name: crm_booking_notifications_and_gated_integrations
+    mutation: approved_internal_build_with_provider_gates
+    prompt: prompts/05_PHASE_4_OPERATING_SYSTEM.md
+    evidence:
+      - reports/evidence/P4_INQUIRY_BOOKING_E2E.md
+      - reports/evidence/P4_CRM_AUTHORIZATION.md
+      - reports/evidence/P4_NOTIFICATION_IDEMPOTENCY.md
+      - reports/evidence/P4_PROVIDER_PROOF.md
+    stop_gate: G4_EXTERNAL_PROVIDER_APPROVAL_IF_NEEDED
+  - id: P5
+    name: seo_performance_security_and_release
+    mutation: preview_allowed_production_requires_approval
+    prompt: prompts/06_PHASE_5_RELEASE.md
+    evidence:
+      - reports/evidence/P5_SECURITY.md
+      - reports/evidence/P5_SEO.md
+      - reports/evidence/P5_PERFORMANCE.md
+      - reports/evidence/P5_ACCESSIBILITY.md
+      - reports/evidence/P5_E2E.md
+      - reports/evidence/P5_ROLLBACK.md
+    stop_gate: G5_PRODUCTION_DEPLOY_APPROVAL
+  - id: P6
+    name: production_deploy_observation_and_handover
+    mutation: explicit_production_approval_only
+    prompt: prompts/07_PHASE_6_DEPLOY_AND_HANDOVER.md
+    evidence:
+      - reports/evidence/P6_DEPLOYMENT.md
+      - reports/evidence/P6_REAL_SUBMISSION_AND_DELETION.md
+      - reports/evidence/P6_MONITORING.md
+      - reports/evidence/P6_HANDOVER.md
+
+release_targets:
+  accessibility: WCAG_2_2_AA_target
+  security: OWASP_ASVS_L2_aligned_for_sensitive_surfaces
+  performance_mobile_p75:
+    LCP_ms: 2500
+    INP_ms: 200
+    CLS: 0.1
+  responsive_widths_px: [320, 390, 768, 1024, 1280, 1440]
+  guarantees:
+    google_rank_1: false
+    zero_future_bugs: false
+    military_grade_security: false
+    customers_never_compare_prices: false

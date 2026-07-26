@@ -1,0 +1,13 @@
+schema_version: 1
+queue_version: pending_codex_c2
+sealed_by: none
+sealed_commit: unknown
+gate: PRE_GC2
+immutable_during_m2: true
+findings: []
+
+# OpenCode C2 replaces the empty findings list when remediation is required.
+# Each finding must contain:
+# id, severity, status, evidence, violated_requirement, depends_on,
+# allowed_paths, exact_fix, forbidden, acceptance_commands, evidence_path,
+# rollback_note, and blockers.

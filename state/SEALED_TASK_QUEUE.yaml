@@ -1,0 +1,13 @@
+schema_version: 1
+spec_version: pending_codex_c1
+sealed_by: none
+sealed_commit: unknown
+gate: PRE_GC1
+immutable_during_m1: true
+tasks: []
+
+# OpenCode C1 replaces the empty tasks list with dependency-ordered atomic tasks.
+# Each task must contain:
+# id, workstream, title, status, depends_on, authority_class, allowed_paths,
+# source_refs, requirements, forbidden, acceptance_commands, evidence_path,
+# rollback_note, blockers, and implementation_notes.
