@@ -4,7 +4,7 @@ Initial state: execution has not started. OpenCode C1 must replace `pending` wit
 
 | ID | Workstream | Status | Required executor/owner | Evidence | Blocker/next action |
 |---|---|---|---|---|---|
-| W00 | Source and execution control | in_progress | OpenCode C1 + human owner | `reports/STATE_DRIFT.md`, `reports/SOURCE_INVENTORY.md`, `reports/SKILL_INVENTORY.md`, `reports/CONTRADICTIONS.md`, `reports/SECRET_EXPOSURE.md`, `reports/STITCH_AUDIT.md`, `reports/CLAIM_QUARANTINE.md`, `reports/ASSET_LEDGER.md` | Reconcile every audited Stitch screen to a route, CTA, data dependency, and production disposition |
+| W00 | Source and execution control | in_progress | OpenCode C1 + human owner | `reports/STATE_DRIFT.md`, `reports/SOURCE_INVENTORY.md`, `reports/SKILL_INVENTORY.md`, `reports/CONTRADICTIONS.md`, `reports/SECRET_EXPOSURE.md`, `reports/STITCH_AUDIT.md`, `reports/CLAIM_QUARANTINE.md`, `reports/ASSET_LEDGER.md`, `reports/SCREEN_ROUTE_MATRIX.md` | Maintain source control and evidence while P1/P3/P10 candidate snapshots are audited without accepting portfolio claims |
 | W01 | Portfolio truth and proof | blocked_source_integrity | OpenCode C1 + human/provider | `reports/STATE_DRIFT.md` | Resolve W00 before auditing P1/P3/P10 source and provider proof |
 | W02 | Agency/founder brand architecture | not_started | OpenCode C1 + user | pending | Audit approvals |
 | W03 | Platform eligibility/ownership/security | not_started | OpenCode C1 + human | pending | Current rule research |

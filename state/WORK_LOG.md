@@ -83,3 +83,15 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Known limitation: the screen/route/CTA matrix and portfolio proof audit remain incomplete; the nested worktree remains unsuitable as portfolio proof.
 - Ending commit: `a3aa9286fe50ea74a033b263e0136cbe272c4fe4`.
 - Next exact action: OpenCode C1 creates `reports/SCREEN_ROUTE_MATRIX.md` by reconciling every audited Stitch screen to its proposed route, CTA, data dependency, and truthful production disposition.
+
+### 2026-07-26T15:38:28Z — P0/stitch_screen_route_cta_matrix
+- CLI: OpenCode
+- Starting commit: `18327c2`.
+- Files changed: `reports/SCREEN_ROUTE_MATRIX.md` committed at `59179adf297ad9e9cbdabf87c2d3fe4c1a32a661`; continuity checkpoint updates are pending in the working tree.
+- Commands/tests: actual extracted-screen and CTA review against `docs/02_STITCH_ROUTE_COMPONENT_MAP.md`; `rg` count readback from both the matrix and audit output; `git diff --check`.
+- Result: PASS. All 30 prototype screens are mapped to a route, CTA summary, data/provider dependency, and truthful keep/rebuild/defer/private-only disposition.
+- Evidence: `reports/SCREEN_ROUTE_MATRIX.md`.
+- Approval/external action: none. This is an internal audit; no page, link, account, provider, or public claim was changed.
+- Known limitation: route intent is not route approval; all public implementation remains gated by P1.5 and GS1, and portfolio/provider proof is still unverified.
+- Ending commit: `59179adf297ad9e9cbdabf87c2d3fe4c1a32a661`.
+- Next exact action: OpenCode C1 inventories the P1 RapidPulse, P3 DentaCare, and P10 Atelier source snapshots and records their code, test, provider-proof, and public-claim status without accepting archive contents as live proof.

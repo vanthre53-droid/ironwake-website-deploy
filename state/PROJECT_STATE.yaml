@@ -9,13 +9,13 @@ model_binding_status: pending_user_provider_connection
 active_spec_version: unsealed
 current_phase: P0
 current_gate: P0_SOURCE_INTEGRITY
-current_workstream: W00_source_and_execution_control
-current_atomic_task: reconcile_stitch_screen_route_cta_matrix
-last_verified_task: stitch_export_audit_completed
-last_verified_commit: a3aa9286fe50ea74a033b263e0136cbe272c4fe4
-last_checkpoint_utc: 2026-07-26T15:32:35Z
+current_workstream: W01_portfolio_truth_and_proof
+current_atomic_task: audit_p1_p3_p10_source_archives
+last_verified_task: stitch_screen_route_matrix_completed
+last_verified_commit: 59179adf297ad9e9cbdabf87c2d3fe4c1a32a661
+last_checkpoint_utc: 2026-07-26T15:38:28Z
 phase_prompt: prompts/10_OPENCODE_STAGE_C1_ARCHITECT.md
-next_exact_action: OpenCode C1 creates reports/SCREEN_ROUTE_MATRIX.md by reconciling every audited Stitch screen to its proposed route, CTA, data dependency, and truthful production disposition.
+next_exact_action: OpenCode C1 inventories the P1 RapidPulse, P3 DentaCare, and P10 Atelier source snapshots and records their code, test, provider-proof, and public-claim status without accepting archive contents as live proof.
 blocked_by:
   - SOURCE_TRUTH: the nested worktree remains materially dirty and cannot establish portfolio truth.
 completed_evidence:
@@ -27,6 +27,7 @@ completed_evidence:
   - reports/STITCH_AUDIT.md
   - reports/CLAIM_QUARANTINE.md
   - reports/ASSET_LEDGER.md
+  - reports/SCREEN_ROUTE_MATRIX.md
 in_progress_files: []
 tests_passed:
   - scripts/validate-execution-pack.sh
@@ -37,6 +38,7 @@ tests_passed:
   - Resume state gate validation on 2026-07-26T15:27:41Z
   - Approved controller baseline staged-scope and credential scan on 2026-07-26T15:27:41Z
   - Stitch export audit script readback on 2026-07-26T15:31:58Z
+  - Screen route matrix count readback on 2026-07-26T15:38:28Z
 tests_pending: []
 external_mutations_completed: []
 external_mutations_pending: []
