@@ -71,3 +71,15 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Known limitation: the nested portfolio candidate remains materially dirty; the credential owner still must rotate the previously exposed credential outside the repository.
 - Ending commit: `133542b81d6dff13627b45183446e4138e92ff78`.
 - Next exact action: OpenCode C1 reads `prompts/01_PHASE_0_AUDIT.md` and performs only its first uncompleted P0 audit unit against the committed controller baseline.
+
+### 2026-07-26T15:32:35Z — P0/stitch_export_audit_and_quarantine
+- CLI: OpenCode
+- Starting commit: `53e8aa7`.
+- Files changed: `reports/STITCH_AUDIT.md`, `reports/CLAIM_QUARANTINE.md`, `reports/ASSET_LEDGER.md`, and `reports/SOURCE_INVENTORY.md` committed at `a3aa9286fe50ea74a033b263e0136cbe272c4fe4`; continuity checkpoint updates are pending in the working tree.
+- Commands/tests: SHA-256 readback; safe extraction to `/tmp/opencode/ironwake-stitch-audit`; `scripts/audit-stitch-export.sh`; repeated count readback; `git diff --check`.
+- Result: PASS. The export contains 30 HTML/PNG screens, 169 external URL occurrences, 38 Google Aida-hosted image occurrences, and 30 Tailwind CDN/inline-script prototype pages. Prices, metrics, provider states, portfolio outcomes, and external assets are quarantined.
+- Evidence: `reports/STITCH_AUDIT.md`; `reports/CLAIM_QUARANTINE.md`; `reports/ASSET_LEDGER.md`; `reports/SOURCE_INVENTORY.md`.
+- Approval/external action: none. Archive extraction was temporary and read-only; no provider, public profile, or production mutation occurred.
+- Known limitation: the screen/route/CTA matrix and portfolio proof audit remain incomplete; the nested worktree remains unsuitable as portfolio proof.
+- Ending commit: `a3aa9286fe50ea74a033b263e0136cbe272c4fe4`.
+- Next exact action: OpenCode C1 creates `reports/SCREEN_ROUTE_MATRIX.md` by reconciling every audited Stitch screen to its proposed route, CTA, data dependency, and truthful production disposition.

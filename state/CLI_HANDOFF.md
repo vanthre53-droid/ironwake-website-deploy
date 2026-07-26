@@ -3,6 +3,7 @@
 ## Current truth
 
 - Controller root baseline is committed at `133542b81d6dff13627b45183446e4138e92ff78`. The nested candidate worktree remains materially dirty and cannot establish portfolio truth. See `reports/STATE_DRIFT.md`.
+- Stitch archive audit is committed at `a3aa9286fe50ea74a033b263e0136cbe272c4fe4`; prototype claims, provider states, and external assets are quarantined.
 - Stitch design generation: complete as a 30-screen prototype export.
 - Production website: not built.
 - Social foundation: planned, not verified live.
@@ -19,7 +20,7 @@ Open the same repository in OpenCode and run `/ironwake-start`. Do not start M1 
 
 ## Current next action
 
-OpenCode C1 must read `prompts/01_PHASE_0_AUDIT.md` and perform only its first uncompleted P0 audit unit against the committed controller baseline.
+OpenCode C1 must create `reports/SCREEN_ROUTE_MATRIX.md` by reconciling every audited Stitch screen to its proposed route, CTA, data dependency, and truthful production disposition.
 
 ## Blockers
 
