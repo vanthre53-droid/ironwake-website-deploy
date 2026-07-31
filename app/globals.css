@@ -67,10 +67,29 @@ button, input, textarea { font: inherit; }
 .status-card div { display: flex; justify-content: space-between; gap: 8px; border-top: 1px solid var(--rule); padding-top: 7px; font: 9px/1.3 var(--mono); }
 .status-card dt { color: var(--graphite); }.status-card dd { margin: 0; color: var(--copper-dark); }
 
+/* signal rail: name=hero-signal-rail; business_meaning=inquiry -> owner -> next-action operating model; trigger=on-view/loop; duration=5.4s; easing=cubic-bezier(.4,0,.2,1); interruptible=yes (decorative only, no input capture); reduced_motion=pulse hidden, static rail remains; performance_cost=transform/opacity only, no layout properties. */
+.signal-rail { position: relative; display: flex; width: 216px; max-width: 100%; margin: 22px 0 0; }
+.signal-rail::before { content: ""; position: absolute; top: 7px; left: 36px; right: 36px; height: 1px; background: var(--rule); }
+.signal-rail-node { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.signal-rail-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--graphite); background: var(--paper); }
+.signal-rail-label { font: 500 9px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--graphite); }
+.signal-rail-pulse { position: absolute; top: 0; left: 29px; z-index: 2; width: 14px; height: 14px; border-radius: 50%; background: var(--copper); opacity: 0; animation: signal-rail-move 5.4s cubic-bezier(.4, 0, .2, 1) infinite; }
+@keyframes signal-rail-move {
+  0% { transform: translateX(0); opacity: 0; }
+  6% { opacity: 1; }
+  30% { transform: translateX(0); opacity: 1; }
+  36% { transform: translateX(72px); opacity: 1; }
+  64% { transform: translateX(72px); opacity: 1; }
+  70% { transform: translateX(144px); opacity: 1; }
+  94% { transform: translateX(144px); opacity: 1; }
+  100% { transform: translateX(144px); opacity: 0; }
+}
+
 .section { padding: 88px 0; border-top: 1px solid var(--rule); }
 .section.intro { margin-top: 66px; }
 .section h2 { margin: 8px 0 30px; font-size: clamp(31px, 3.5vw, 51px); line-height: 1; letter-spacing: -.045em; }
 .system-grid, .industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.system-grid > a, .industry-grid > a, .case-grid > a, .case-stack > a { text-decoration: none; display: block; }
 .system-card, .industry-card { min-height: 210px; border: 1px solid var(--rule); background: var(--surface); padding: 22px; display: flex; flex-direction: column; }
 .system-card h3, .industry-card h3 { margin: 24px 0 8px; font-size: 23px; line-height: 1.05; letter-spacing: -.035em; }
 .system-card p, .industry-card p { margin: 0; color: var(--graphite); font-size: 12px; line-height: 1.55; }
@@ -104,3 +123,11 @@ button, input, textarea { font: inherit; }
 
 @media (max-width: 860px) { .shell { padding-inline: 24px; }.status-card { display: none; }.system-grid, .industry-grid { grid-template-columns: 1fr; }.case-grid, .progress-grid, .disclosure, .founder, .audit-grid { grid-template-columns: 1fr; }.journey { margin-inline: -24px; padding-inline: 24px; }.journey-grid { grid-template-columns: 1fr 1fr; }.footer { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 580px) { .header { min-height: 65px; }.desktop-nav { display: none !important; }.mobile-nav { display: block; position: relative; }.mobile-nav summary { min-height: 44px; display: grid; place-items: center; cursor: pointer; color: var(--ink); font: 600 10px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }.mobile-nav nav { position: absolute; z-index: 2; top: calc(100% + 4px); right: 0; width: min(280px, calc(100vw - 48px)); display: grid; gap: 4px; border: 1px solid var(--rule); background: var(--paper); padding: 12px; box-shadow: 0 12px 26px rgb(23 25 22 / .12); }.mobile-nav nav a { min-height: 44px; display: flex; align-items: center; padding: 0 10px; color: var(--ink); font: 500 10px/1 var(--mono); letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }.mobile-nav nav .nav-cta { margin-top: 4px; color: var(--white); }.hero { padding-top: 27px; }.hero h1 { font-size: 43px; }.section { padding: 62px 0; }.section.intro { margin-top: 48px; }.section h2 { font-size: 34px; }.journey-grid, .footer { grid-template-columns: 1fr; }.journey { padding-block: 62px; }.system-card, .industry-card { min-height: 175px; }.footer { margin-top: 46px; }.button { width: 100%; }.hero-actions .button.secondary { display: none; }.record-list dl div { flex-direction: column; gap: 2px; } }
+
+/* Reduced motion is a hard requirement, not a progressive enhancement: every animation and transition
+   in the app collapses to effectively instant, and the decorative signal-rail pulse is removed outright
+   rather than left to jump through its keyframes once. Static content (the rail's labelled nodes) stays. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .signal-rail-pulse { display: none; }
+}

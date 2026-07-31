@@ -7,4 +7,5 @@ test('site footer keeps the demonstration disclosure and active legal drafts', a
   assert.match(source, /Demonstrations are labelled/);
   assert.match(source, /href="\/privacy"/);
   assert.match(source, /href="\/terms"/);
+  assert.match(source, /href="\/industries"/);
 });
