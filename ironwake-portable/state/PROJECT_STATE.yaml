@@ -1,0 +1,52 @@
+# DURABLE MACHINE STATE — the single source of truth across every CLI.
+# Any harness reads this first and resumes from it. Never hand-edit mid-session.
+schema_version: 6.0.0
+
+active_stage: C1
+required_role: C1
+current_phase: P0
+current_gate: none
+next_exact_action: "Run prompts/01_PHASE_0_AUDIT.md - inventory every source archive, skill, and Stitch screen; write reports/SOURCE_INVENTORY.md. No mutations outside reports/."
+
+harness: none              # CLI that ran the last checkpoint (claude-code | opencode | codex | cursor | gemini | aider)
+model: unreported          # only if the CLI explicitly reports it - never inferred
+last_safe_boundary: none   # commit sha of the last safe switch point
+last_verified_task: none
+blocked_on: none           # category | name | exact remediation given to the human
+
+gates:
+  G1_USER_APPROVAL: pending
+  G1_5_PORTFOLIO_TRUTH_GATE: pending
+  GS1_SOCIAL_FOUNDATION_APPROVAL: pending
+  GC1_ARCHITECTURE_APPROVED: pending
+  GM1_IMPLEMENTATION_COMPLETE: pending
+  GC2_REMEDIATION_APPROVED: pending
+  GM2_REMEDIATION_COMPLETE: pending
+  GC3_RELEASE_CANDIDATE_PASS: pending
+  G4_EXTERNAL_PROVIDER_APPROVAL: pending
+  G5_PRODUCTION_DEPLOY_APPROVAL: pending
+
+workstream_status:   # W00-W22, all must reach a status + evidence row before completion
+  W00: not_started
+  W01: not_started
+  W02: not_started
+  W03: not_started
+  W04: not_started
+  W05: not_started
+  W06: not_started
+  W07: not_started
+  W08: not_started
+  W09: not_started
+  W10: not_started
+  W11: not_started
+  W12: not_started
+  W13: not_started
+  W14: not_started
+  W15: not_started
+  W16: not_started
+  W17: not_started
+  W18: not_started
+  W19: not_started
+  W20: not_started
+  W21: not_started
+  W22: not_started

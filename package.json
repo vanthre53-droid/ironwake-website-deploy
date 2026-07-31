@@ -1,0 +1,31 @@
+{
+  "name": "ironwake",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --test tests/audit-validation.test.mjs lib/ai-triage.test.mjs lib/sentry-dsn.test.mjs supabase/migrations/003_owner_crm_core.test.mjs supabase/migrations/004_fix_task_due_date.test.mjs supabase/migrations/005_grant_owner_crm_access.test.mjs app/api/audit/route.test.js app/audit/page.test.js app/audit/AuditForm.test.js app/owner/page.test.js app/owner/OwnerDashboard.test.js app/admin/page.test.js app/admin/AdminDashboard.test.js app/components/SiteFooter.test.js app/components/SiteHeader.test.js app/layout.test.js app/page.test.js app/systems/page.test.js app/work/page.test.js app/process/page.test.js app/about/page.test.js app/book/page.test.js app/globals.css.test.js app/seo.test.js 'app/[[]slug[]]/page.test.js' app/not-found.test.js app/error.test.js app/global-error.test.js instrumentation.test.js sentry.server.config.test.js",
+    "test:website": "node website/app.test.js"
+  },
+  "dependencies": {
+    "@sentry/nextjs": "^10.69.0",
+    "@supabase/supabase-js": "^2.57.4",
+    "next": "^16.2.12",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^7.0.2"
+  },
+  "overrides": {
+    "postcss": "8.5.25",
+    "sharp": "0.35.3"
+  }
+}

@@ -1,13 +1,375 @@
 schema_version: 1
-spec_version: pending_codex_c1
-sealed_by: none
-sealed_commit: unknown
-gate: PRE_GC1
+spec_version: c1-resume-gate-reconciliation-v1
+sealed_by: OpenCode C1; G1/G1.5 approved by Revanth Nunna; user-directed C1 resume reconciliation
+sealed_commit: pending_checkpoint_commit
+gate: GC1_ARCHITECTURE_APPROVED
 immutable_during_m1: true
-tasks: []
+activation: "Active for M1 after G1 approval; execute dependency order and stop at remaining gates."
+tasks:
+  - id: W00-T01
+    workstream: W00
+    title: "Maintain source, state, evidence, and continuity control"
+    status: verified_in_progress
+    depends_on: []
+    authority_class: A1
+    allowed_paths: ["state/**", "reports/**", "docs/13_GOVERNED_MCP_CONTROL_PLANE.md"]
+    source_refs: ["AGENTS.md", "docs/09_CONTINUITY_PROTOCOL.md", "state/PROJECT_STATE.yaml"]
+    requirements: ["Append atomic evidence", "Preserve unrelated worktree changes", "Record MCP failures without upgrading them"]
+    forbidden: ["Do not modify application code in P0/P1", "Do not store secrets or private customer data"]
+    acceptance_commands: ["scripts/validate-state.sh", "scripts/validate-execution-pack.sh", "git diff --check"]
+    evidence_path: "state/PROJECT_STATE.yaml; state/WORK_LOG.md; state/EVIDENCE_INDEX.md; state/CLI_HANDOFF.md"
+    rollback_note: "Revert only the task-scoped continuity edits; preserve prior history."
+    blockers: ["Nested candidate worktree is materially dirty", "W01 provider/client evidence is missing"]
+    implementation_notes: "OpenCode remains the only harness; model identity stays unclaimed."
 
-# OpenCode C1 replaces the empty tasks list with dependency-ordered atomic tasks.
-# Each task must contain:
-# id, workstream, title, status, depends_on, authority_class, allowed_paths,
-# source_refs, requirements, forbidden, acceptance_commands, evidence_path,
-# rollback_note, blockers, and implementation_notes.
+  - id: W01-T02
+    workstream: W01
+    title: "Repair portfolio truth and provider-proof gate"
+    status: verified_complete_demo_only
+    depends_on: [W00-T01]
+    authority_class: A2
+    allowed_paths: ["reports/**", "inputs/**", "reports/evidence/**"]
+    source_refs: ["reports/PORTFOLIO_SOURCE_SNAPSHOT_AUDIT.md", "reports/CLAIM_QUARANTINE.md", "docs/12_FULL_PROGRAM_SCOPE_REGISTRY.md"]
+    requirements: ["Classify all nine projects", "Obtain reproducible P1/P3/P10 evidence before public claims", "Record approved proof labels"]
+    forbidden: ["Do not call a demonstration a client engagement", "Do not invent metrics, testimonials, provider callbacks, or live URLs"]
+    acceptance_commands: ["scripts/validate-state.sh", "git diff --check"]
+    evidence_path: "reports/PORTFOLIO_PROOF_GATE.md; reports/CLAIM_LEDGER.md; reports/evidence/PORTFOLIO_PROVIDER_PROOF.md"
+    rollback_note: "Remove only unapproved claim/asset wording; keep source audit history."
+    blockers: ["G3 wording/assets approval remains required before public rendering"]
+    implementation_notes: "Projects are portfolio demonstrations for capability proof; provider/client evidence is not claimed or required for this classification."
+
+  - id: W02-T03
+    workstream: W02
+    title: "Approve agency and founder brand architecture"
+    status: verified_complete_internal
+    depends_on: [W01-T02]
+    authority_class: A2
+    allowed_paths: ["reports/**", "inputs/**"]
+    source_refs: ["reports/PHASE_1_DECISION_PACKET.md", "inputs/REAL_DATA_INTAKE.md", "docs/08_SOCIAL_MEDIA_BRAND_AND_ACQUISITION.md"]
+    requirements: ["Separate IronWake commercial role from founder reasoning role", "Use logo-led agency identity", "Keep unsupported identity and proof neutral"]
+    forbidden: ["Do not invent founder name, portrait, team, address, results, or certification"]
+    acceptance_commands: ["scripts/validate-state.sh"]
+    evidence_path: "reports/M1_W02_BRAND_ARCHITECTURE.md; reports/SOCIAL_PROFILE_COPY_AND_ASSETS.md; reports/ASSET_LEDGER.md"
+    rollback_note: "Withdraw draft copy without changing any verified source record."
+    blockers: ["G3 public copy/assets approval remains required; social ownership remains a separate human gate"]
+    implementation_notes: "Internal brand architecture is verified from supplied logo, founder name, email, and operating policy. External publication remains prohibited until later gates."
+
+  - id: W03-T04
+    workstream: W03
+    title: "Verify platform eligibility, ownership, and recovery"
+    status: verified_human_attestation
+    depends_on: [W02-T03]
+    authority_class: A3
+    allowed_paths: ["reports/**", "inputs/**"]
+    source_refs: ["reports/SOCIAL_PLATFORM_MATRIX.md", "docs/08_SOCIAL_MEDIA_BRAND_AND_ACQUISITION.md"]
+    requirements: ["Record real owner and recovery owner", "Record MFA/admin/disconnect state", "Check current eligibility one platform at a time"]
+    forbidden: ["Do not log in, bypass CAPTCHA/KYC, accept terms, or request/store secrets"]
+    acceptance_commands: ["scripts/validate-state.sh"]
+    evidence_path: "reports/M1_W03_INSTAGRAM_URL_READBACK.md; reports/SOCIAL_PLATFORM_MATRIX.md; inputs/SOCIAL_SETUP_REAL_DATA.md"
+    rollback_note: "No external change is made by this task; remove only stale draft rows."
+    blockers: ["Profile copy/logo/CTA approval and GS1 remain separate gates"]
+    implementation_notes: "Search/research may prepare a packet; only the human performs account actions."
+
+  - id: W04-T05
+    workstream: W04
+    title: "Prepare and verify approved social profiles"
+    status: deferred_user_instruction
+    depends_on: [W03-T04, W05-T06]
+    authority_class: A3
+    allowed_paths: ["reports/**", "inputs/**"]
+    source_refs: ["reports/SOCIAL_PROFILE_COPY_AND_ASSETS.md", "reports/SOCIAL_VERIFIED_URL_REGISTRY.md", "docs/08_SOCIAL_MEDIA_BRAND_AND_ACQUISITION.md"]
+    requirements: ["Use approved copy/assets only", "Verify public URL and CTA logged out on desktop/mobile", "Omit unverified URLs from the website"]
+    forbidden: ["Do not create/edit/publish accounts without named approval", "Do not fabricate handles or verification"]
+    acceptance_commands: ["scripts/validate-state.sh"]
+    evidence_path: "reports/SOCIAL_VERIFIED_URL_REGISTRY.md; reports/evidence/SOCIAL_CONTACT_AND_CRM_ATTRIBUTION.md"
+    rollback_note: "Disconnect/remove only after human owner confirms the external rollback path."
+    blockers: ["Discovered Instagram API has no profile bio/avatar/website/contact write endpoint; Wayland-enabled browser preflight exposed no capturable window; task is deferred by user instruction"]
+    implementation_notes: "W04 profile packet is approved for Instagram only but deferred. The registry remains OMIT FROM WEBSITE until logged-out profile and CTA proof exists."
+
+  - id: W05-T06
+    workstream: W05
+    title: "Produce nine truthful social foundation assets"
+    status: verified_internal_draft_pending_gs1
+    depends_on: [W01-T02, W02-T03]
+    authority_class: A1
+    allowed_paths: ["reports/**", "public/assets/**", "content/**"]
+    source_refs: ["reports/SOCIAL_FOUNDATION_CONTENT_REGISTER.md", "reports/ASSET_LEDGER.md", "docs/08_SOCIAL_MEDIA_BRAND_AND_ACQUISITION.md"]
+    requirements: ["Create SF01-SF09 with proof references, labels, alt text, CTA, and confidentiality review", "Prepare SF01-SF03 as pin targets"]
+    forbidden: ["Do not publish automatically", "Do not use unlicensed imagery or unsupported project outcomes"]
+    acceptance_commands: ["scripts/validate-state.sh", "git diff --check"]
+    evidence_path: "content/social-foundation-drafts.md; reports/SOCIAL_FOUNDATION_CONTENT_REGISTER.md; reports/ASSET_LEDGER.md"
+    rollback_note: "Delete only unapproved draft exports; preserve approved source references."
+    blockers: ["Proof approval, owned assets, contact route, and GS1 are missing"]
+    implementation_notes: "Nine truthful internal copy drafts exist. They cannot be represented as published until GS1, platform ownership, asset, and human publication gates pass."
+
+  - id: W06-T07
+    workstream: W06
+    title: "Define social publishing, response, and moderation operations"
+    status: verified_internal_draft_blocked_dependencies
+    depends_on: [W03-T04, W05-T06]
+    authority_class: A2
+    allowed_paths: ["reports/**", "inputs/**"]
+    source_refs: ["docs/08_SOCIAL_MEDIA_BRAND_AND_ACQUISITION.md", "reports/SOCIAL_PLATFORM_MATRIX.md"]
+    requirements: ["Define sustainable cadence", "Define consent, opt-out, reply, escalation, analytics, and disconnect rules", "Keep all outreach human-controlled"]
+    forbidden: ["Do not automate unsolicited DMs, follows, connections, comments, or engagement"]
+    acceptance_commands: ["scripts/validate-state.sh"]
+    evidence_path: "reports/SOCIAL_OPERATIONS_RUNBOOK.md; reports/SOCIAL_PLATFORM_MATRIX.md; reports/SOCIAL_FOUNDATION_CONTENT_REGISTER.md"
+    rollback_note: "Replace the draft runbook without external side effects."
+    blockers: ["Owner, platform set, and approved tools are unknown"]
+    implementation_notes: "Internal operations runbook is prepared. No scheduler, inbox, analytics, or external automation connection is authorized by this task."
+
+  - id: W07-T08
+    workstream: W07
+    title: "Implement social-to-CRM attribution contract"
+    status: queued_pending_g2
+    depends_on: [W04-T05, W06-T07, W13-T14]
+    authority_class: A1
+    allowed_paths: ["app/**", "src/**", "supabase/**", "tests/**", "reports/evidence/**"]
+    source_refs: ["docs/08_SOCIAL_MEDIA_BRAND_AND_ACQUISITION.md", "reports/C1_ARCHITECTURE_AND_CONTROLS.md"]
+    requirements: ["Capture platform/account/content ID/source/medium/first-last touch/consent/next action/outcome", "Minimise message content and deduplicate leads"]
+    forbidden: ["Do not expose CRM or private messages publicly", "Do not treat analytics as sales evidence"]
+    acceptance_commands: ["npm test", "npm run lint", "scripts/validate-state.sh"]
+    evidence_path: "reports/evidence/SOCIAL_CONTACT_AND_CRM_ATTRIBUTION.md"
+    rollback_note: "Disable the attribution field path without deleting durable lead records."
+    blockers: ["G1, G2, verified CTA/URLs, and application stack approval are missing"]
+    implementation_notes: "Server-side source preservation is authoritative; browser parameters are untrusted."
+
+  - id: W08-T09
+    workstream: W08
+    title: "Approve offers, pricing, and market choice architecture"
+    status: blocked_g1_pricing
+    depends_on: [W10-T11]
+    authority_class: A2
+    allowed_paths: ["reports/**", "inputs/**"]
+    source_refs: ["reports/PRICING_LOCALIZATION_RESEARCH.md", "inputs/REAL_DATA_INTAKE.md", "docs/10_PRIORITY_DECISION_AND_DATA_PROTOCOL.md"]
+    requirements: ["Use smallest-sufficient outcome recommendation", "Separate provider/hosting/domain/payment/tax costs", "Record price-ledger approval and review date"]
+    forbidden: ["Do not publish old Stitch prices, fake discounts, anchors, guarantees, or ROI"]
+    acceptance_commands: ["scripts/validate-state.sh"]
+    evidence_path: "reports/PRICING_LOCALIZATION_RESEARCH.md; inputs/APPROVALS.md"
+    rollback_note: "Remove unapproved price display and revert to Request scope."
+    blockers: ["Capacity, legal owner, taxes, refunds, budget, and named G1 approval are unknown/pending"]
+    implementation_notes: "Public pricing remains Request scope until explicitly approved."
+
+  - id: W09-T10
+    workstream: W09
+    title: "Establish truthful contact and business infrastructure"
+    status: target_mailbox_oauth_initializing
+    depends_on: [W02-T03]
+    authority_class: A3
+    allowed_paths: ["inputs/**", "reports/**"]
+    source_refs: ["inputs/REAL_DATA_INTAKE.md", "inputs/SOCIAL_SETUP_REAL_DATA.md"]
+    requirements: ["Verify domain, monitored mailbox, CTA destination, hours, privacy contact, and optional phone/WhatsApp", "Record ownership without secrets"]
+    forbidden: ["Do not invent contact details or claim a domain/mailbox is live without send/receive proof"]
+    acceptance_commands: ["scripts/validate-state.sh"]
+    evidence_path: "inputs/REAL_DATA_INTAKE.md; reports/SOCIAL_VERIFIED_URL_REGISTRY.md"
+    rollback_note: "Hide any unverified contact field; do not delete human-owned infrastructure."
+    blockers: ["The target Gmail OAuth connection for ironwake.dev@gmail.com is initializing but not active; send/receive and monitoring-owner proof remain pending"]
+    implementation_notes: "The target OAuth consent progressed, but its alias remains initializing. A different Gmail mailbox is confirmed active and was not used. No domain, target mailbox, phone, or provider delivery is verified."
+
+  - id: W10-T11
+    workstream: W10
+    title: "Refresh dated competitor, UX, pricing, and official research"
+    status: verified_complete_current_refresh
+    depends_on: [W00-T01]
+    authority_class: A0
+    allowed_paths: ["reports/**", "state/**"]
+    source_refs: ["reports/COMPOSIO_RESEARCH_BLOCK.md", "reports/COMPETITOR_RESEARCH.md", "reports/TECHNICAL_DECISION_RECORD.md"]
+    requirements: ["Use Composio Search discovery, exact schemas, search, and fetch", "Record dated URLs and primary-source observations", "Update the four P1 reports and decision packet"]
+    forbidden: ["Do not bypass a failed MCP operation", "Do not treat candidate 2026-07-26 research as refreshed evidence"]
+    acceptance_commands: ["scripts/validate-state.sh", "git diff --check"]
+    evidence_path: "reports/COMPETITOR_RESEARCH.md; reports/UX_CONVERSION_RESEARCH.md; reports/PRICING_LOCALIZATION_RESEARCH.md; reports/TECHNICAL_DECISION_RECORD.md"
+    rollback_note: "Keep the blocked checkpoint and revert only unsupported new citations."
+    blockers: []
+    implementation_notes: "Current-source refresh completed 2026-07-28 and G1 was approved. No further C1 research is required unless sources become stale or scope changes."
+
+  - id: W11-T12
+    workstream: W11
+    title: "Rebuild the reusable responsive design system from reconciled Stitch sources"
+    status: verified_local_implementation
+    depends_on: [W01-T02, W02-T03, W03-T04, W04-T05, W05-T06, W06-T07, W10-T11]
+    authority_class: A1
+    allowed_paths: ["app/**", "src/**", "public/**", "tests/**", "reports/evidence/**"]
+    source_refs: ["reports/C1_VISUAL_SOURCE_RECONCILIATION.md", "reports/SCREEN_ROUTE_MATRIX.md", "reports/STITCH_AUDIT.md", "reports/C1_ARCHITECTURE_AND_CONTROLS.md"]
+    requirements: ["Use the external Stitch design ZIP for visual tokens and the 30-screen archive for composition", "Keep app/ as the single runtime", "Account for all approved routes and 30 screens", "Use owned assets, shared components, accessible states, and responsive widths", "Preserve the verified audit API, validation, migration, and tests"]
+    forbidden: ["Do not extend the lime diagnostic-console system", "Do not copy Stitch HTML/CDN/inline scripts or unverified copy/assets", "Do not build or publish public pages before G1.5, GS1, and G3", "Do not retain website/ as a second runtime after app/ parity is verified"]
+    acceptance_commands: ["npm run build", "npm test", "npm run test:website", "git diff --check"]
+    evidence_path: "reports/evidence/P3_VISUAL_COMPARISON.md; reports/evidence/P3_RESPONSIVE_A11Y.md; reports/evidence/P3_COMPONENT_COVERAGE.md"
+    rollback_note: "Revert task-scoped components while preserving approved content ledgers."
+    blockers: ["GS1 remains incomplete; W11 local implementation is complete under named G3 local-only approval, but publication, provider, social, and mobile-visual acceptance remain prohibited/pending"]
+    implementation_notes: "Verified 2026-07-30: app/ is the sole production runtime; shared responsive header/footer, truthful route set, clean unknown-route 404, and local production build/smoke evidence exist. External design ZIP controls visual tokens; the 30-screen export controls route/composition reference. Truthful pending states outrank prototype success states."
+
+  - id: W12-T13
+    workstream: W12
+    title: "Implement the public audit request and recovery flow"
+    status: partial_ai_triage_foundation
+    depends_on: [W08-T09, W09-T10, W13-T14]
+    authority_class: A1
+    allowed_paths: ["app/**", "src/**", "supabase/**", "tests/**", "reports/evidence/**"]
+    source_refs: ["reports/UX_CONVERSION_RESEARCH.md", "reports/C1_ARCHITECTURE_AND_CONTROLS.md"]
+    requirements: ["Validate server-side, persist inquiry before notification, capture consent/source, and return received-awaiting-confirmation", "Provide loading/error/retry/recovery states"]
+    forbidden: ["Do not claim booking, assignment, provider delivery, or instant quote", "Do not collect unnecessary sensitive data"]
+    acceptance_commands: ["npm test", "npm run e2e", "scripts/validate-state.sh"]
+    evidence_path: "reports/evidence/P4_INQUIRY_BOOKING_E2E.md"
+    rollback_note: "Disable the form route and preserve durable records for operator review."
+    blockers: ["Notification/outbox path and recovery readback remain; G2 API/schema/auth approval remains incomplete"]
+    implementation_notes: "Verified partial foundation: inquiry persists before private triage storage; no customer reply or provider delivery is claimed. The first release can use request scope without booking or payment."
+
+  - id: W13-T14
+    workstream: W13
+    title: "Implement data, authorization, owner auth, and CRM"
+    status: queued_pending_g2
+    depends_on: [W08-T09, W09-T10]
+    authority_class: A2
+    allowed_paths: ["supabase/**", "app/**", "src/**", "tests/**", "reports/evidence/**"]
+    source_refs: ["reports/C1_ARCHITECTURE_AND_CONTROLS.md", "reports/SECURITY_PRIVACY_MODEL.md", "docs/04_ARCHITECTURE_CRM_AND_INTEGRATIONS.md"]
+    requirements: ["Implement approved schema/RLS/auth/audit/outbox/retention/export/deletion", "Test wrong-role, expired-session, direct-object, duplicate, and safe-error paths"]
+    forbidden: ["Do not use service credentials in browser", "Do not start migration without G2 approval"]
+    acceptance_commands: ["npm test", "npm run lint", "scripts/validate-state.sh"]
+    evidence_path: "reports/evidence/P2_SCHEMA_AND_RLS.md; reports/evidence/P2_API_TESTS.md; reports/evidence/P2_AUTH_TESTS.md"
+    rollback_note: "Use tested migration rollback/forward fix; never destructive-reset production data."
+    blockers: ["G1 stack and G2 migration/auth/retention approval are missing"]
+    implementation_notes: "Single-owner launch is sufficient; avoid premature multi-tenant complexity."
+
+  - id: W14-T15
+    workstream: W14
+    title: "Add provider-neutral notification and integration adapters"
+    status: deferred_provider_approval
+    depends_on: [W13-T14]
+    authority_class: A2
+    allowed_paths: ["app/**", "src/**", "supabase/**", "tests/**", "reports/evidence/**"]
+    source_refs: ["reports/PROVIDER_MATRIX.md", "reports/C1_ARCHITECTURE_AND_CONTROLS.md", "docs/04_ARCHITECTURE_CRM_AND_INTEGRATIONS.md"]
+    requirements: ["Keep test doubles and outbox contract", "Require provider approval, signatures, idempotency, retry, dead-letter, and readback before enablement"]
+    forbidden: ["Do not connect accounts, send messages, place calls, create bookings, charge, or claim delivery without G4"]
+    acceptance_commands: ["npm test", "npm run lint"]
+    evidence_path: "reports/evidence/P4_NOTIFICATION_IDEMPOTENCY.md; reports/evidence/P4_PROVIDER_PROOF.md"
+    rollback_note: "Disable adapter feature flags and replay only safe dead letters after approval."
+    blockers: ["No G4 provider approvals, owners, budgets, recipients, or current policy refresh"]
+    implementation_notes: "Email/WhatsApp/voice/calendar/payment remain independently gated."
+
+  - id: W15-T16
+    workstream: W15
+    title: "Implement sales qualification and follow-up discipline"
+    status: draft_pending_g1
+    depends_on: [W08-T09, W12-T13, W13-T14]
+    authority_class: A1
+    allowed_paths: ["app/**", "src/**", "reports/**", "tests/**"]
+    source_refs: ["reports/PHASE_1_DECISION_PACKET.md", "docs/10_PRIORITY_DECISION_AND_DATA_PROTOCOL.md"]
+    requirements: ["Define qualification, next action, due date, proposal state, lost reason, and opt-out handling", "Keep outbound actions human-approved"]
+    forbidden: ["Do not automate unsolicited outreach or represent forecasts as real outcomes"]
+    acceptance_commands: ["npm test", "npm run lint"]
+    evidence_path: "reports/evidence/P4_INQUIRY_BOOKING_E2E.md"
+    rollback_note: "Remove unapproved sequence templates without altering lead history."
+    blockers: ["G1 offer/CTA and owner operations approval are missing"]
+    implementation_notes: "Bulk external sending is excluded from launch."
+
+  - id: W16-T17
+    workstream: W16
+    title: "Define controlled proposals, contracts, invoices, and payments"
+    status: deferred_legal_owner
+    depends_on: [W08-T09, W15-T16]
+    authority_class: A4
+    allowed_paths: ["reports/**", "inputs/**", "app/**", "src/**", "tests/**"]
+    source_refs: ["reports/PRICING_LOCALIZATION_RESEARCH.md", "docs/04_ARCHITECTURE_CRM_AND_INTEGRATIONS.md", "inputs/APPROVALS.md"]
+    requirements: ["Require adult/legal review of scope, tax, refund, cancellation, KYC, payment ownership, reconciliation, and access transfer"]
+    forbidden: ["Do not generate binding legal terms or activate payments from C1", "Do not store card data"]
+    acceptance_commands: ["scripts/validate-state.sh"]
+    evidence_path: "reports/evidence/P4_PROVIDER_PROOF.md; reports/evidence/P6_HANDOVER.md"
+    rollback_note: "Keep payment disabled and withdraw draft templates if legal review fails."
+    blockers: ["Legal owner, tax treatment, KYC, approved price, and payment provider are unknown"]
+    implementation_notes: "Payment remains excluded from the first implementation queue by default."
+
+  - id: W17-T18
+    workstream: W17
+    title: "Build truthful revenue and sales intelligence from real records"
+    status: queued_pending_real_data
+    depends_on: [W07-T08, W13-T14, W15-T16]
+    authority_class: A1
+    allowed_paths: ["app/**", "src/**", "supabase/**", "tests/**", "reports/evidence/**"]
+    source_refs: ["docs/12_FULL_PROGRAM_SCOPE_REGISTRY.md", "reports/C1_ARCHITECTURE_AND_CONTROLS.md"]
+    requirements: ["Track source/content attribution, stages, lost reasons, costs, and actual revenue only", "Label estimates and forecasts distinctly"]
+    forbidden: ["Do not seed fake KPIs, sample sales, ROI, or conversion claims into production views"]
+    acceptance_commands: ["npm test", "npm run lint"]
+    evidence_path: "reports/evidence/P4_CRM_AUTHORIZATION.md"
+    rollback_note: "Remove unsupported metric views without deleting source records."
+    blockers: ["No real lead/revenue/cost data or approved fields exist"]
+    implementation_notes: "Link to existing Revenue Command references rather than duplicating finance prematurely."
+
+  - id: W18-T19
+    workstream: W18
+    title: "Define client delivery, retainers, and offboarding workflow"
+    status: draft_pending_scope_and_legal
+    depends_on: [W15-T16, W16-T17]
+    authority_class: A2
+    allowed_paths: ["reports/**", "inputs/**", "app/**", "src/**"]
+    source_refs: ["docs/12_FULL_PROGRAM_SCOPE_REGISTRY.md", "docs/04_ARCHITECTURE_CRM_AND_INTEGRATIONS.md"]
+    requirements: ["Cover onboarding, access, scope/version, milestones, QA, approvals, handover, support, renewal, backup/export, and ownership transfer"]
+    forbidden: ["Do not promise SLA, support, ownership, or deliverables without approved terms"]
+    acceptance_commands: ["scripts/validate-state.sh"]
+    evidence_path: "reports/evidence/P6_HANDOVER.md"
+    rollback_note: "Keep the workflow internal until commercial and legal approval exists."
+    blockers: ["No approved offers, contracts, client data, or legal owner"]
+    implementation_notes: "C1 specifies workflow boundaries; M1 implements only approved scope."
+
+  - id: W19-T20
+    workstream: W19
+    title: "Implement truthful SEO and content operations"
+    status: verified_local_noindex_baseline
+    depends_on: [W02-T03, W08-T09, W11-T12]
+    authority_class: A1
+    allowed_paths: ["app/**", "src/**", "content/**", "public/**", "tests/**", "reports/evidence/**"]
+    source_refs: ["reports/SEO_ACCESSIBILITY_PLAN.md", "reports/CLAIM_QUARANTINE.md", "docs/06_SEO_PERFORMANCE_ACCESSIBILITY.md"]
+    requirements: ["Implement metadata/canonical/sitemap/robots/404/internal links and reviewed content", "Keep claims/assets/prices tied to ledgers"]
+    forbidden: ["Do not publish quarantined metrics, fake schema, placeholder brackets, or unsupported local claims"]
+    acceptance_commands: ["npm run build", "npm test", "npm run lint"]
+    evidence_path: "reports/evidence/P5_SEO.md"
+    rollback_note: "Noindex or remove unsupported content and restore the prior canonical map."
+    blockers: ["Verified public domain, publication approval, approved claims/assets, and reviewed indexable content are missing"]
+    implementation_notes: "The local app emits noindex/Disallow until a verified public domain and named release approval exist. Search eligibility is targeted; no ranking guarantee is permitted."
+
+  - id: W20-T21
+    workstream: W20
+    title: "Implement security, privacy, and resilience controls"
+    status: specified_pending_implementation
+    depends_on: [W13-T14, W14-T15]
+    authority_class: A1
+    allowed_paths: ["app/**", "src/**", "supabase/**", "tests/**", "reports/evidence/**", "scripts/**"]
+    source_refs: ["reports/SECURITY_PRIVACY_MODEL.md", "docs/05_SECURITY_PRIVACY_COMPLIANCE.md"]
+    requirements: ["Run auth/API/input/webhook/rate-limit/secret/PII/backup/restore/deletion checks", "Document incident, rollback, retention, and residual risk"]
+    forbidden: ["Do not claim certification or military-grade security", "Do not skip negative tests because the UI looks correct"]
+    acceptance_commands: ["npm test", "npm run lint", "scripts/validate-state.sh"]
+    evidence_path: "reports/evidence/P5_SECURITY.md; reports/evidence/P5_ROLLBACK.md"
+    rollback_note: "Use tested application rollback and migration recovery; never force-reset production."
+    blockers: ["Implementation cannot begin before G1/G2 and provider decisions"]
+    implementation_notes: "Professional penetration testing remains a residual recommendation."
+
+  - id: W21-T22
+    workstream: W21
+    title: "Run accessibility, performance, browser, and failure QA"
+    status: queued_release_verification
+    depends_on: [W11-T12, W12-T13, W19-T20, W20-T21]
+    authority_class: A0
+    allowed_paths: ["tests/**", "reports/evidence/**", "scripts/**"]
+    source_refs: ["reports/SEO_ACCESSIBILITY_PLAN.md", "ironwake.execution.yaml", "docs/07_TEST_RELEASE_AND_HANDOFF_GATES.md"]
+    requirements: ["Test required widths, keyboard/screen reader states, reduced motion, CWV budgets, E2E, provider failure, and privacy boundaries"]
+    forbidden: ["Do not mark green UI as provider or production proof", "Do not skip mobile or recovery states"]
+    acceptance_commands: ["npm test", "npm run build", "npm run e2e"]
+    evidence_path: "reports/evidence/P3_RESPONSIVE_A11Y.md; reports/evidence/P5_PERFORMANCE.md; reports/evidence/P5_ACCESSIBILITY.md; reports/evidence/P5_E2E.md"
+    rollback_note: "Hold release and return to the remediation queue for failed evidence."
+    blockers: ["No application implementation or preview commit exists"]
+    implementation_notes: "C3 independently verifies the exact release candidate."
+
+  - id: W22-T23
+    workstream: W22
+    title: "Control preview, production, monitoring, and handover"
+    status: blocked_production_approval
+    depends_on: [W21-T22]
+    authority_class: A3
+    allowed_paths: ["reports/evidence/**", "docs/**", "README*", "state/**"]
+    source_refs: ["docs/07_TEST_RELEASE_AND_HANDOFF_GATES.md", "inputs/APPROVALS.md"]
+    requirements: ["Record exact commit, preview, costs, limitations, rollback, monitoring, approved real test, deletion, and handover"]
+    forbidden: ["Do not deploy, send, spend, publish, or change DNS without G5/G6 approval", "Do not claim live provider success without callback and durable commit"]
+    acceptance_commands: ["scripts/validate-state.sh", "git diff --check"]
+    evidence_path: "reports/evidence/P5_ROLLBACK.md; reports/evidence/P6_DEPLOYMENT.md; reports/evidence/P6_REAL_SUBMISSION_AND_DELETION.md; reports/evidence/P6_MONITORING.md; reports/evidence/P6_HANDOVER.md"
+    rollback_note: "Use the verified rollback target and stop observation if production evidence diverges."
+    blockers: ["No preview approval, production approval, domain owner, monitoring owner, or G6 test authorization"]
+    implementation_notes: "C3 controls the final release gate; human owner controls production approval."

@@ -13,6 +13,7 @@
 | AS-005 | Material Symbols URL references | Prototype icon source | Delivery/license choice unverified | None | Pending | Use a reviewed icon strategy with accessibility labels and local/runtime controls. |
 | AS-006 | Prototype external Vercel project URLs | Claimed demonstration links | Ownership and live state unverified | None | Quarantined | Verify project source, owner permission, public URL, and proof label before any link is published. |
 | AS-007 | Canvas/WebGL shader code in prototype screens | Decorative visual treatment | Generated prototype code; no production performance review | Internal reference only | Quarantined | Rebuild only as a budgeted progressive enhancement with static and reduced-motion fallback. |
+| AS-008 | `public/assets/brand/ironwake-logo.jpg` | IronWake agency logo | User-supplied image; ownership asserted by user, final public asset approval pending G3 | Internal build and prepared public surfaces only; no publication yet | Prepared — pending G3 | Convert to an optimized SVG/transparent variant if available; retain this exact source hash in evidence. |
 
 ## Rules Applied
 

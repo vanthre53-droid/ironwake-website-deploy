@@ -1,0 +1,53 @@
+:root {
+  color-scheme: light;
+  --ink: #171916;
+  --muted: #555a52;
+  --line: #d8d9d1;
+  --paper: #f4f3ee;
+  --accent: #c8f04a;
+  --white: #fff;
+  --focus: #496700;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+a { color: inherit; }
+.skip-link { position: fixed; left: 16px; top: 12px; z-index: 2; transform: translateY(-160%); background: var(--ink); color: var(--white); padding: 12px 16px; }
+.skip-link:focus { transform: translateY(0); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+.site-header, .site-footer { max-width: 1180px; margin: auto; padding: 24px; display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+.site-header { border-bottom: 1px solid var(--line); }
+.brand { font-weight: 900; letter-spacing: .16em; text-decoration: none; }
+.brand span { color: var(--focus); }
+nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 8px 10px; text-decoration: none; font-size: .88rem; }
+.nav-cta { background: var(--ink); color: var(--white); border-radius: 999px; }
+#app { max-width: 1180px; margin: auto; padding: 84px 24px 120px; min-height: 68vh; }
+.eyebrow, .card-label { color: var(--muted); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; }
+h1, h2, h3 { font-family: "Arial Narrow", "Helvetica Neue", sans-serif; }
+h1 { max-width: 850px; margin: 16px 0 28px; font-size: clamp(3.4rem, 9vw, 8rem); line-height: .88; letter-spacing: -.075em; }
+h2 { font-size: clamp(2rem, 4vw, 4rem); line-height: 1; letter-spacing: -.05em; }
+h3 { font-size: 1.45rem; letter-spacing: -.035em; }
+p { max-width: 650px; color: #3d423a; }
+.button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; margin-top: 20px; background: var(--accent); padding: 13px 18px; border-radius: 999px; text-decoration: none; font-weight: 800; }
+.signal-rail { display: flex; align-items: center; gap: 12px; max-width: 760px; margin: 72px 0 12px; color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .14em; }
+.signal-rail i { position: relative; flex: 1; height: 1px; background: var(--ink); }
+.signal-rail i::after { content: ""; position: absolute; top: -3px; left: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: signal-pass 2.8s ease-in-out infinite; }
+.grid { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 1px; background: var(--line); margin-top: 64px; }
+.card { background: var(--paper); padding: 28px; min-height: 190px; }
+.card-primary { background: var(--ink); color: var(--white); min-height: 230px; }
+.card-primary p, .card-primary .card-label { color: #d1d5ca; }
+.card h3 { margin: 26px 0 10px; }
+.card p { margin-bottom: 0; }
+form { max-width: 640px; margin-top: 40px; display: grid; gap: 16px; }
+label { display: grid; gap: 7px; font-weight: 700; }
+input, textarea { width: 100%; border: 1px solid var(--line); background: var(--white); padding: 14px; font: inherit; border-radius: 4px; }
+input { min-height: 48px; }
+textarea { min-height: 130px; }
+button { border: 0; cursor: pointer; font: inherit; }
+.notice { border-left: 4px solid var(--accent); padding: 14px 18px; background: var(--white); max-width: 680px; }
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+@keyframes signal-pass { 0%, 100% { transform: translateX(0); opacity: .35; } 50% { transform: translateX(120px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .signal-rail i::after { animation: none; } }
+@media (max-width: 720px) { .site-header, .site-footer { align-items: flex-start; flex-direction: column; } #app { padding-top: 52px; } .grid { grid-template-columns: 1fr; } .signal-rail { gap: 7px; font-size: .58rem; } .signal-rail i::after { animation-duration: 3.8s; } }

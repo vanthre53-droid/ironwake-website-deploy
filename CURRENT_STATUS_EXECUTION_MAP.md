@@ -1,7 +1,7 @@
 # IronWake Current Status and Exact Execution Map
 
 **Source-of-truth date:** 25 July 2026  
-**Controller:** OpenCode-only Execution Pack v5 — full-program pipeline
+**Controller:** OpenCode-governed Execution Pack v5 — full-program pipeline
 **Boundary:** Stitch generation is finished. Real post-Stitch execution has not started.
 
 ## 1. What exists, where it is used, and what remains
@@ -16,7 +16,7 @@
 | WhatsApp Kit | Complete as conditional runbooks | P4 only after WABA/number/template approval | Ownership, opt-in, provider proof |
 | Additional user design/build skills | Pending placement | Discover and score at every phase | Read fully; use only relevant/current/safe skills |
 | Master Execution Control | Complete as plan | Authority, gates, evidence, sequencing | Apply through v4 state and approvals |
-| Hermes/Claude/Codex architecture | Complete as protocol | Cross-CLI handoff and bounded agents | Repository evidence and real tool connections |
+| Governed MCP architecture | Complete as protocol | Hermes governance, Composio external-app operations, and OpenCode role boundaries | Repository evidence and real tool connections |
 | Branding system | Complete as plan | S1 founder/agency roles, voice, content | Real profiles, assets, public contact routes |
 | Platform/Profile Execution Pack | Complete as runbook | S1 one-platform-at-a-time setup | Human login, MFA, verification, logged-out tests |
 | Nine foundation social assets plan | Defined | S1 proof/trust foundation | Real evidence, production, approval, publication |
@@ -26,7 +26,7 @@
 | Revenue Command workbook | Complete but empty/data-dependent | P2/P4 schema/reporting reference | CRM ingestion and disciplined real records |
 | Client delivery/retainer system | Complete as runbook | Post-sale CRM, handover, support | Real contract/scope/provider setup |
 | CLI Execution Pack v3 | Superseded | Historical controller only | Do not use |
-| CLI Execution Pack v4 | Built; validation pending final report | Controls full W00–W22 program and Codex/MiMo gates | Run Codex C1 inside the real Git repository |
+| OpenCode execution pack v5 | Built; validation pending final report | Controls full W00–W22 program with OpenCode roles and governed MCP evidence | Run OpenCode C1 inside the real Git repository |
 | Production website | Not built | P2–P5 | Implementation and evidence |
 | Owner CRM/dashboard | Not built | P2/P4 | Schema, auth, UI, workflows, tests |
 | Email/WhatsApp/calendar/voice/payment | Not connected | P4 conditional adapters | Approvals, accounts, credentials, provider readback |

@@ -1,0 +1,16 @@
+# SEALED M1 QUEUE - written by C1 only, consumed by M1 only.
+# M1 implements exactly these. M1 never adds, redesigns, or reinterprets scope.
+# Empty until C1 completes and GC1_ARCHITECTURE_APPROVED passes.
+sealed: false
+sealed_by: null
+sealed_at: null
+sealed_commit: null
+tasks: []
+# task shape:
+#   - id: T001
+#     workstream: W11
+#     description: exact, atomic, independently testable
+#     acceptance: the named test/readback that proves it
+#     evidence_path: reports/evidence/...
+#     authority_class: A1
+#     status: todo | in_progress | done | blocked

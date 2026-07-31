@@ -20,15 +20,15 @@ The current Stitch archive contains 30 desktop screen folders, each with `code.h
 | Branding system | Complete as positioning system | Voice, proof labels, content roles | Real profiles, handles, public contact, assets |
 | Platform/Profile Execution Pack | Complete as execution runbook | One-platform-at-a-time setup, ownership, profile fields, acceptance tests | Human login/publication, verified URLs, permissions, real contact tests |
 | Social foundation content system | Complete as plan | Nine foundation assets, pinned proof, repurposing and cadence | Evidence-backed assets, approval, publication and measurement |
-| Hermes/Claude/Codex architecture | Complete as protocol | Authority classes, handoff, evidence, resume | Repository implementation and current tool connections |
+| OpenCode governed-MCP architecture | Complete as protocol | Authority classes, Hermes governance, Composio external-app control, evidence, resume | Repository implementation and current tool connections |
 | Website strategy and DESIGN.md | Complete as design direction | Information architecture and visual tokens | Production components, content truth, mobile behavior |
 | 30 Stitch screens/code | Complete as design export | Visual comparison, route/component mapping | Refactor, responsiveness, backend, accessibility, QA |
 | Stitch QA/handoff rules | Complete as design checklist | Visual/state acceptance | Browser implementation evidence |
-| Codex/MCP readiness plan | Complete as planning | Starting architecture/provider checklist | Exact repo, approved stack, secrets entered outside chat |
+| OpenCode/MCP readiness plan | Complete as planning | Starting architecture/provider checklist | Exact repo, approved stack, secrets entered outside chat |
 | Agency Kit V7 | Complete as skill/runbook library | Security, gates, API/page/migration practices | Current-version refresh and project implementation |
 | Voice Kit v2.2 | Complete as conditional skill library | Voice disclosure, price grounding, handoff, latency, QA | Provider account, real number, consent, live test evidence |
 | WhatsApp Kit v2.2 | Complete as conditional skill library | Webhook, consent, opt-out, template, quality runbooks | WABA/number, templates, business verification, live proof |
-| CLI Execution Pack v4 | Complete when validated | Runs the full W00–W22 program with Codex/MiMo ownership, sealed queues, and durable continuation | User fills gates and the required executor acts against the actual repo |
+| OpenCode execution pack v5 | Complete when validated | Runs the full W00–W22 program with OpenCode ownership, governed MCP records, sealed queues, and durable continuation | User fills gates and the required OpenCode role acts against the actual repo |
 | Cross-CLI continuity state | Complete as controller files | Preserves verified phase/task/evidence across usage limits and CLI switches | Each executing CLI must update it after every atomic task |
 
 ## Actual Stitch defects to correct

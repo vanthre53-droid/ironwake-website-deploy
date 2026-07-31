@@ -1,5 +1,9 @@
 # Claim Quarantine
 
+## 2026-07-26 P1/P3/P10 source-snapshot extension
+
+`reports/PORTFOLIO_SOURCE_SNAPSHOT_AUDIT.md` records the P1 RapidPulse, P3 DentaCare Pro, and P10 Atelier ZIP snapshots. Their embedded UI/data/provider states are unverified demonstration fixtures, not public proof. Quarantine every claim of provider availability, live/real-time workflow, booking/order/payment/delivery confirmation, verified review, price, result, client engagement, technical/security outcome, and named person or business status until the P1.5 proof gate records reproducible evidence and approved wording.
+
 - Audited: 2026-07-26T15:28:59Z
 - Source: verified Stitch archive `0b4b617524385637fca115965d596eac7dac56a29a578b155a3a09cea1dbd16d`
 - Status: all items below are `DO NOT PUBLISH` until evidence and named approval are recorded in a claim ledger.

@@ -10,3 +10,9 @@
 .env
 .env.*
 !.env.example
+
+# Local build and tooling output.
+/.next/
+/node_modules/
+/.ironwake/
+/graphify-out/

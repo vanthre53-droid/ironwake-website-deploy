@@ -1,0 +1,15 @@
+# SEALED M2 QUEUE - written by C2 only, consumed by M2 only.
+# Empty until C2 completes its audit.
+sealed: false
+sealed_by: null
+sealed_at: null
+sealed_commit: null
+findings: []
+# finding shape:
+#   - id: R001
+#     severity: sev1 | sev2 | sev3
+#     found_in: file/route/evidence
+#     problem: what is actually wrong
+#     required_fix: exact, minimal
+#     acceptance: the test that proves it fixed
+#     status: todo | done

@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { readFile } from 'node:fs/promises';
+
+test('owner dashboard uses Supabase auth and does not expose service credentials', async () => {
+  const source = await readFile(new URL('./OwnerDashboard.js', import.meta.url), 'utf8');
+  assert.match(source, /'use client'/);
+  assert.match(source, /signInWithPassword/);
+  assert.match(source, /signOut/);
+  assert.match(source, /from\('inquiries'\)\.select/);
+  assert.match(source, /NEXT_PUBLIC_SUPABASE_ANON_KEY/);
+  assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY/);
+});
+
+test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter', async () => {
+  const source = await readFile(new URL('./OwnerDashboard.js', import.meta.url), 'utf8');
+  assert.match(source, /lead_stage,next_action,due_at/);
+  assert.match(source, /aria-label="Filter by lead stage"/);
+  assert.match(source, /STAGES = \[.*'won', 'lost'\]/);
+  assert.match(source, /query\.eq\('lead_stage', stage\)/);
+  assert.match(source, /Next action/);
+  assert.match(source, /formatDue/);
+});

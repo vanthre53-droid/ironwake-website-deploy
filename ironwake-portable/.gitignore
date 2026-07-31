@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+id_rsa*
+credentials.json
+.DS_Store
+*.log
+.opencode/cache/
+.claude/cache/

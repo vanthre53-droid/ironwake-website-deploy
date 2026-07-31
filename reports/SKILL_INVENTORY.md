@@ -1,6 +1,6 @@
 # P0 Skill Inventory
 
-- Audited: 2026-07-26T08:57:57Z
+- Audited: 2026-07-26T16:10:00Z
 - Status: discovery complete for immediately relevant candidates; none used or executed
 
 | Name | Path | Purpose | Freshness | Required inputs | Side effects | Compatibility | Chosen phase |
@@ -15,3 +15,7 @@
 ## Result
 
 No root-level `SKILL.md`, `.claude/skills/*.md`, `skills/**/INDEX.md`, or `rules/*.md` exists in the controller root. Candidate skills were not invoked, and no third-party script was executed. A targeted skill may be reviewed only after the intended Git root is identified and the relevant phase is unblocked.
+
+### Discovery refresh
+
+The nested workspace contains four historical `.claude` skill files. The historical Agency ZIP lists seven `SKILL.md` files. The mixed `ironwake-skills.tar.gz` lists 150+ candidates, including controller/model-routing, outbound, provider, publishing, and automation skills. They remain discovery-only: several conflict with the OpenCode-only controller law or could create external/provider side effects; none is selected for P0/P1. A candidate is read in full only if it is chosen for a later compatible task, and its freshness and side effects will then be recorded in `reports/SKILL_USAGE_LOG.md`.
