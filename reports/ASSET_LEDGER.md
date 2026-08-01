@@ -14,6 +14,9 @@
 | AS-006 | Prototype external Vercel project URLs | Claimed demonstration links | Ownership and live state unverified | None | Quarantined | Verify project source, owner permission, public URL, and proof label before any link is published. |
 | AS-007 | Canvas/WebGL shader code in prototype screens | Decorative visual treatment | Generated prototype code; no production performance review | Internal reference only | Quarantined | Rebuild only as a budgeted progressive enhancement with static and reduced-motion fallback. |
 | AS-008 | `public/assets/brand/ironwake-logo.jpg` | IronWake agency logo | User-supplied image; ownership asserted by user, final public asset approval pending G3 | Internal build and prepared public surfaces only; no publication yet | Prepared — pending G3 | Convert to an optimized SVG/transparent variant if available; retain this exact source hash in evidence. |
+| AS-009 | `public/assets/visuals/inquiry-flow.svg` | Abstract inquiry-flow illustration | Generated locally in this repository; non-documentary concept visual | Local review only | Prepared — pending G3 | Keep the `DEMONSTRATION` label; do not represent it as project, client, or provider evidence. |
+| AS-010 | `public/assets/visuals/intake-grid.svg` | Abstract intake illustration | Generated locally in this repository; non-documentary concept visual | Local review only | Prepared — pending G3 | Keep the `DEMONSTRATION` label; do not represent it as project, client, or provider evidence. |
+| AS-011 | `public/assets/visuals/follow-up-path.svg` | Abstract follow-up illustration | Generated locally in this repository; non-documentary concept visual | Local review only | Prepared — pending G3 | Keep the `DEMONSTRATION` label; do not represent it as project, client, or provider evidence. |
 
 ## Rules Applied
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 function authClient() {
@@ -22,6 +22,9 @@ export function OwnerDashboard() {
   const [user, setUser] = useState(null);
   const [inquiries, setInquiries] = useState([]);
   const [stage, setStage] = useState('all');
+  const [query, setQuery] = useState('');
+  const [sort, setSort] = useState('newest');
+  const [selectedId, setSelectedId] = useState(null);
   const [status, setStatus] = useState('');
 
   useEffect(() => {
@@ -54,6 +57,17 @@ export function OwnerDashboard() {
     setStatus('Signed out.');
   }
 
+  const visibleInquiries = useMemo(() => inquiries.filter((inquiry) => `${inquiry.business_name} ${inquiry.email}`.toLowerCase().includes(query.toLowerCase())).sort((a, b) => sort === 'oldest' ? new Date(a.created_at) - new Date(b.created_at) : new Date(b.created_at) - new Date(a.created_at)), [inquiries, query, sort]);
+  const selected = visibleInquiries.find(({ id }) => id === selectedId) || visibleInquiries[0];
+
+  function exportVisible() {
+    const rows = [['Business', 'Email', 'Stage', 'Next action', 'Due'], ...visibleInquiries.map((item) => [item.business_name, item.email, item.lead_stage, item.next_action || '', item.due_at || ''])];
+    const blob = new Blob([rows.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(',')).join('\n')], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url; link.download = 'ironwake-inquiries.csv'; link.click(); URL.revokeObjectURL(url);
+  }
+
   return <main className="shell owner-shell">
     <section className="owner-card">
       <span className="eyebrow">Private / owner only</span>
@@ -61,11 +75,12 @@ export function OwnerDashboard() {
       {user ? <>
         <p>Authenticated session active. CRM records remain protected by database owner policy.</p>
         <div className="dashboard-links"><a href="/admin">Notification status →</a></div>
+        <div className="crm-toolbar"><label>Search inquiries<input type="search" value={query} onChange={(event) => setQuery(event.target.value)} /></label><label>Sort<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label><button type="button" className="button secondary" onClick={exportVisible}>Export visible</button></div>
         <div role="group" aria-label="Filter by lead stage" className="stage-filter">
           {STAGES.map((value) => <button type="button" key={value} aria-pressed={stage === value} onClick={() => setStage(value)}>{value.replace('_', ' ')}</button>)}
         </div>
-        <ul className="record-list" aria-label="Recent inquiries">
-          {inquiries.length ? inquiries.map((inquiry) => <li key={inquiry.id}><article>
+        <div className="crm-workspace"><ul className="record-list" aria-label="Recent inquiries">
+          {visibleInquiries.length ? visibleInquiries.map((inquiry) => <li key={inquiry.id}><button type="button" className={`record-card${selected?.id === inquiry.id ? ' selected' : ''}`} onClick={() => setSelectedId(inquiry.id)}>
             <h3>{inquiry.business_name}</h3>
             <dl>
               <div><dt>Email</dt><dd>{inquiry.email}</dd></div>
@@ -73,8 +88,8 @@ export function OwnerDashboard() {
               <div><dt>Next action</dt><dd>{inquiry.next_action || 'Not set'}</dd></div>
               <div><dt>Due</dt><dd>{formatDue(inquiry.due_at)}</dd></div>
             </dl>
-          </article></li>) : <li>No accessible inquiries for this filter yet.</li>}
-        </ul>
+          </button></li>) : <li>No accessible inquiries for this filter yet.</li>}
+        </ul><aside className="crm-detail" aria-live="polite"><span className="eyebrow">Inquiry detail</span>{selected ? <><h2>{selected.business_name}</h2><p>{selected.email}</p><dl><div><dt>Lead stage</dt><dd>{selected.lead_stage}</dd></div><div><dt>Next action</dt><dd>{selected.next_action || 'Not set'}</dd></div><div><dt>Due date</dt><dd>{formatDue(selected.due_at)}</dd></div><div><dt>Booking request</dt><dd>Not connected</dd></div></dl><div className="crm-detail-note"><strong>Tasks, notes, timeline, retry/dead-letter, and retention actions</strong><p>These private records are available only when the authorized owner schema and account session expose them. This screen never seeds or invents CRM activity.</p></div></> : <p>Select an inquiry to view its available details. Empty lists remain empty until a real authorized record exists.</p>}</aside></div>
         <button className="button" onClick={signOut}>Sign out</button>
       </> : <form className="owner-form" onSubmit={signIn}>
         <p>Use the owner account. This screen never accepts or exposes service credentials.</p>

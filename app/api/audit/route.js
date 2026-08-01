@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import { parseAuditPayload } from '../../../lib/audit-validation.mjs';
 import { triageInquiry } from '../../../lib/ai-triage.mjs';
+import { allowRequest, requestIdentity } from '../../../lib/request-rate-limit.mjs';
 
 export const runtime = 'nodejs';
 
@@ -11,6 +12,8 @@ export async function POST(request) {
   const parsed = parseAuditPayload(body);
   if (!parsed.success) return NextResponse.json({ error: 'Check the required fields and try again.' }, { status: 400 });
   if (parsed.data.website) return NextResponse.json({ received: true }, { status: 202 });
+  // ponytail: process-local abuse brake; replace with a shared store before multi-instance production.
+  if (!allowRequest(requestIdentity(request))) return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;

@@ -20,4 +20,9 @@ test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter'
   assert.match(source, /query\.eq\('lead_stage', stage\)/);
   assert.match(source, /Next action/);
   assert.match(source, /formatDue/);
+  assert.match(source, /Search inquiries/);
+  assert.match(source, /Export visible/);
+  assert.match(source, /Inquiry detail/);
+  assert.match(source, /Booking request/);
+  assert.match(source, /This screen never seeds or invents CRM activity/);
 });

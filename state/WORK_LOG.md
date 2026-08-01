@@ -530,3 +530,26 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Known limitation: a live-browser visual check could not be completed — no `chromium-cli`, `playwright` package, or connected browser MCP was available in this sandbox, and installing one would hit the same dependency-change gate. Verification substituted direct inspection of `next build`'s static output and compiled CSS, which confirms markup/metadata/CSS correctness but not pixel-level rendering; dark-mode contrast was additionally hand-verified against WCAG ratios during design. Several unrelated orphaned `next start` processes from other sessions were found bound to ports 3000/3004/3005/3006; they were left untouched. This session's own dev server was briefly killed by an overly broad `pkill -f next-server` before the mistake was caught; no repository state was affected, and a later `npm run build` plus static-artifact readback served as the substitute verification.
 - Ending commit: `d0f83fe8711314439f34c240aeac876254d5aef8`; this checkpoint entry follows as a separate commit.
 - Next exact action: unchanged underlying blocker — W13 authenticated owner login/MFA/recovery/session and wrong-role/anonymous negative-authorization evidence remain NOT_RUN; W09 monitored-mailbox/production-notification ownership and GS1 completion remain pending. Resume at the next unblocked sealed task per `state/SEALED_TASK_QUEUE.yaml`; do not send, publish, deploy, accept payment, or claim production email delivery.
+
+### 2026-08-01T00:00:00Z — C3/release_gate_verification
+- CLI: Hermes; model explicitly reported as `gpt-5.6-terra`.
+- Starting commit: `475fb5c6e25d17992c6a06d02a8f86169c2064e0` with pre-existing uncommitted application, evidence, and state changes preserved.
+- Files changed: `reports/C3_RELEASE_CANDIDATE.md` and continuity records only.
+- Commands/tests: `scripts/validate-state.sh`; `scripts/validate-execution-pack.sh`; `npm test` (56/56); `npm run build` (26 routes); `npm audit --omit=dev --audit-level=critical` (0 vulnerabilities); tracked-source credential-signature scan; targeted public-app claim scan; local browser accessibility/visual readback of `/`.
+- Result: PARTIAL / NOT APPROVED. Automated checks passed, but C3 cannot approve a release because GS1, live owner-auth/MFA evidence, providers, legal approval, G5, and real production-flow proof remain pending. The worktree is dirty, so no exact commit-backed shipping candidate exists.
+- Evidence: `reports/C3_RELEASE_CANDIDATE.md`.
+- Approval/external action: none. No deployment, provider mutation, publication, send, payment, or secret read occurred.
+- Known limitation: the user requested a local visual redesign after this gate. C3 has therefore handed back to C1 for a bounded visual amendment; the prior candidate remains NOT APPROVED.
+- Ending commit: `475fb5c6e25d17992c6a06d02a8f86169c2064e0`; no commit created because unrelated pre-existing changes must be preserved.
+- Next exact action: C1 records and seals the local-only glassmorphism visual amendment before M1 changes presentation code.
+
+### 2026-08-01T00:00:00Z — C1/glassmorphism_visual_amendment
+- CLI: Hermes; model explicitly reported as `gpt-5.6-terra`.
+- Starting commit: `475fb5c6e25d17992c6a06d02a8f86169c2064e0`; unrelated uncommitted work remains preserved.
+- Files changed: `reports/C1_GLASSMORPHISM_VISUAL_AMENDMENT.md`, sealed queue, and continuity records only.
+- Commands/tests: read all repository docs/prompts/inputs/state instructions; direct readback of both Stitch `DESIGN.md` sources and 30-screen archive inventory; live browser accessibility/visual readback of `/`, `/audit`, and `/owner`; source/CSS/component trace.
+- Result: VERIFIED design direction. The token source explicitly authorizes light glass; the composition source supplies the editorial structure. C1 sealed the presentation-only W11-T12A task: shared CSS/static header and focused tests only.
+- Approval/external action: user-directed local visual revision under existing G3 local-only authorization; no external side effect.
+- Known limitation: the task remains in C1 because the repository requires a clean task-scoped checkpoint before a role switch. No application code was changed.
+- Ending commit: unchanged; no commit created because unrelated pre-existing changes must be preserved and no commit request was made.
+- Next exact action: create a task-scoped C1 checkpoint, then execute W11-T12A as M1.

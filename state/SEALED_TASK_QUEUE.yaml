@@ -1,6 +1,6 @@
 schema_version: 1
-spec_version: c1-resume-gate-reconciliation-v1
-sealed_by: OpenCode C1; G1/G1.5 approved by Revanth Nunna; user-directed C1 resume reconciliation
+spec_version: c1-glassmorphism-visual-amendment-v1
+sealed_by: Hermes C1; local-only amendment directed by Revanth Nunna; existing G3 local implementation approval retained
 sealed_commit: pending_checkpoint_commit
 gate: GC1_ARCHITECTURE_APPROVED
 immutable_during_m1: true
@@ -185,7 +185,7 @@ tasks:
   - id: W11-T12
     workstream: W11
     title: "Rebuild the reusable responsive design system from reconciled Stitch sources"
-    status: verified_local_implementation
+    status: verified_local_implementation_pending_visual_amendment
     depends_on: [W01-T02, W02-T03, W03-T04, W04-T05, W05-T06, W06-T07, W10-T11]
     authority_class: A1
     allowed_paths: ["app/**", "src/**", "public/**", "tests/**", "reports/evidence/**"]
@@ -196,7 +196,23 @@ tasks:
     evidence_path: "reports/evidence/P3_VISUAL_COMPARISON.md; reports/evidence/P3_RESPONSIVE_A11Y.md; reports/evidence/P3_COMPONENT_COVERAGE.md"
     rollback_note: "Revert task-scoped components while preserving approved content ledgers."
     blockers: ["GS1 remains incomplete; W11 local implementation is complete under named G3 local-only approval, but publication, provider, social, and mobile-visual acceptance remain prohibited/pending"]
-    implementation_notes: "Verified 2026-07-30: app/ is the sole production runtime; shared responsive header/footer, truthful route set, clean unknown-route 404, and local production build/smoke evidence exist. External design ZIP controls visual tokens; the 30-screen export controls route/composition reference. Truthful pending states outrank prototype success states."
+    implementation_notes: "Verified 2026-07-30: app/ is the sole production runtime; shared responsive header/footer, truthful route set, clean unknown-route 404, and local production build/smoke evidence exist. External design ZIP controls visual tokens; the 30-screen export controls route/composition reference. Truthful pending states outrank prototype success states. C1 amendment 2026-08-01 adds W11-T12A before any further W11 release claim."
+
+  - id: W11-T12A
+    workstream: W11
+    title: "Apply the bounded light-glass presentation amendment"
+    status: queued
+    depends_on: [W11-T12]
+    authority_class: A1
+    allowed_paths: ["app/globals.css", "app/globals.css.test.js", "app/components/SiteHeader.js", "app/components/SiteHeader.test.js", "reports/evidence/**"]
+    source_refs: ["reports/C1_GLASSMORPHISM_VISUAL_AMENDMENT.md", "reports/C1_VISUAL_SOURCE_RECONCILIATION.md", "stitch_ironwake_design_system.zip:DESIGN.md"]
+    requirements: ["Make the approved 40-70% light-glass surface visibly legible over an ivory ambient canvas", "Keep the header glass without scroll-state JavaScript", "Remove decorative reveal, hover-lift, dot-glow, and rail-pulse motion while preserving the labelled static rail", "Preserve focus, reduced-motion behavior, responsive layout, route copy, form/API behavior, and private-data boundaries"]
+    forbidden: ["Do not change public claims, routes, data flow, providers, authentication, assets, or deployment state", "Do not add dependencies, remote assets, generic dark glow, gradients in headline text, or floating blobs"]
+    acceptance_commands: ["npm test", "npm run build", "git diff --check"]
+    evidence_path: "reports/evidence/P3_GLASSMORPHISM.md"
+    rollback_note: "Revert only the listed presentation and focused-test paths; retain the prior verified data and content behavior."
+    blockers: ["No clean task-scoped checkpoint commit exists yet; do not switch C1 to M1 until this C1 amendment is committed."]
+    implementation_notes: "Ponytail scope: shared CSS plus static header is sufficient; no component framework or visual dependency is justified."
 
   - id: W12-T13
     workstream: W12

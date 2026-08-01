@@ -1,4 +1,5 @@
 import './globals.css';
+import { SiteAssistant } from './components/SiteAssistant';
 
 export const metadata = {
   title: 'IronWake — Systems that answer',
@@ -18,5 +19,5 @@ export const viewport = {
 // Server Component layout — see app/error.js (segment) and app/global-error.js (root).
 // Both stay inert until SENTRY_DSN/NEXT_PUBLIC_SENTRY_DSN are configured.
 export default function RootLayout({ children }) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body>{children}<SiteAssistant /></body></html>;
 }

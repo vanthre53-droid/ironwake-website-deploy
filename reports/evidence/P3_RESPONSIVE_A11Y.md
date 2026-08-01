@@ -1,17 +1,35 @@
-# P3 Responsive and Accessibility Evidence
+# P3 Responsive/A11y Evidence
 
-Status: `PARTIAL — LOCAL SOURCE/DOM VERIFICATION; MOBILE VISUAL SCREENSHOT NOT RUN`
-Date: 2026-07-30T15:52:58Z
+Status: `PARTIAL — BROWSER ACCESSIBILITY VERIFIED; VISUAL RESPONSIVE PASS PENDING`
 
-## Verified locally
+Date: 2026-07-31
 
-- Mobile navigation uses native `<details>` and `<summary>`; no JavaScript state is required.
-- Mobile menu links and primary CTA use a 44px minimum target.
-- CSS collapses grids below 860px and the primary navigation below 580px.
-- `:focus-visible` is visible in copper; screen-reader-only Home text is provided for the brand link.
-- Desktop DOM has one H1 and no horizontal overflow at 1280px.
+## Browser verification (Hermes M2 session)
 
-## Not run
+Routes verified via live browser accessibility snapshots:
 
-- Mobile screenshot/viewport inspection: Playwright could not start because its Chromium binary is not installed. No browser package was installed because it is unrelated to the local website artifact and user deferred environment work.
-- Screen-reader and full keyboard traversal remain C2/C3 evidence, not a production completion claim.
+| Route | Title correct | Navigation present | Semantic landmarks | Interactive elements labeled | Notes |
+|-------|--------------|-------------------|-------------------|---------------------------|-------|
+| `/` | IronWake — Systems that answer ✅ | Header nav + footer nav ✅ | main, sectionheader, sectionfooter, complementary ✅ | Links/buttons labeled ✅ | Demo labels present |
+| `/audit` | Business Leak Audit — IronWake ✅ | Header + footer ✅ | main, form ✅ | All inputs labeled, honeypot present, consent checkbox ✅ | Form accessible |
+| `/systems` | Systems — IronWake ✅ | Header + footer ✅ | main ✅ | Links labeled ✅ | Truthful content |
+| `/work` | Work — IronWake ✅ | Header + footer ✅ | main ✅ | Links labeled ✅ | DEMONSTRATION labels |
+| `/process` | Process — IronWake ✅ | Header + footer ✅ | main ✅ | Links labeled ✅ | No SLA/price claims |
+| `/about` | About — IronWake ✅ | Header + footer ✅ | main ✅ | Links labeled ✅ | Founder attribution |
+| `/book` | Book — IronWake ✅ | Header + footer ✅ | main, note ✅ | Links labeled ✅ | Cal.com placeholder |
+| `/owner` | Owner CRM — IronWake (private) ✅ | None (auth-gated) ✅ | main, form ✅ | Email/password labeled ✅ | Auth gate correct |
+| `/admin` | Notification status — IronWake (private) ✅ | None (auth-gated) ✅ | main, form ✅ | Email/password labeled ✅ | Auth gate correct |
+
+## Dark mode
+
+`globals.css` contains `@media (prefers-color-scheme: dark)` with semantic color tokens. No manual toggle dependency. Test `app/globals.css.test.js` verifies dark-theme variables exist.
+
+## Keyboard/focus
+
+`:focus-visible` rule present in globals.css with `outline: 2px solid var(--copper); outline-offset: 3px`. All interactive elements are native HTML (`a`, `button`, `input`, `textarea`, `select`) which receive keyboard focus by default.
+
+## Limitations
+
+- No pixel-level visual comparison against the 30 Stitch design screens was performed in this session.
+- No reduced-motion or screen-reader-specific testing was performed.
+- Responsive breakpoints (860px, 580px) exist in CSS but were not tested at each width via browser resize.

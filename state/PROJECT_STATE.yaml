@@ -2,16 +2,16 @@
 # Work/evidence history remains in state/WORK_LOG.md and state/EVIDENCE_INDEX.md.
 schema_version: 6.0.0
 
-active_stage: M1
-required_role: M1
-current_phase: P1_5
-current_gate: GM1_EXTERNAL_PREREQUISITE_BOUNDARY
-next_exact_action: "W13 owner RLS wrong-role/anonymous policy checks are verified. Complete authenticated owner login/MFA/recovery/session evidence without exposing credentials, then resume only the next unblocked sealed task. Do not send, publish, deploy, accept payment, or claim production email delivery."
+active_stage: C1
+required_role: C1
+current_phase: P3_VISUAL_AMENDMENT
+current_gate: GC1_ARCHITECTURE_APPROVED
+next_exact_action: "Create a clean, task-scoped C1 checkpoint for the sealed light-glass amendment; then M1 implements W11-T12A only. Do not change copy, data flow, provider state, or deployment status."
 
-harness: claude-code
-model: claude-sonnet-5
+harness: hermes
+model: gpt-5.6-terra
 last_safe_boundary: d0f83fe8711314439f34c240aeac876254d5aef8
-last_verified_task: w11_dark_mode_content_pages_crm_dashboard_seo_dependency_pass
+last_verified_task: c1_glassmorphism_visual_amendment_2026_08_01
 blocked_on: "W12 runtime provider/notification prerequisites plus W04, GS1, owner authorization-negative evidence, provider, legal, release gates; see reports/M1_EXECUTABLE_SCOPE_EVIDENCE.md and reports/evidence/P2_AUTH_TESTS.md. The three high-severity dependency advisories previously blocking release are now resolved (see 2026-07-31T13:47:54Z Work Log entry) but the npm install that resolved them was denied to this session's own tool call and completed through a mechanism not visible from within the session; owner should confirm this was expected before treating it as fully verified."
 
 gates:
@@ -20,9 +20,9 @@ gates:
   GS1_SOCIAL_FOUNDATION_APPROVAL: pending
   GC1_ARCHITECTURE_APPROVED: verified
   GM1_IMPLEMENTATION_COMPLETE: partial_external_prerequisites
-  GC2_REMEDIATION_APPROVED: pending
-  GM2_REMEDIATION_COMPLETE: pending
-  GC3_RELEASE_CANDIDATE_PASS: pending
+  GC2_REMEDIATION_APPROVED: approved_with_findings
+  GM2_REMEDIATION_COMPLETE: partial_c2_f2_deferred
+  GC3_RELEASE_CANDIDATE_PASS: partial_not_approved
   G2_SCHEMA_AUTH_SERVER_APPROVAL: partial_schema_api_rbac_verified_live_owner_session_pending
   G4_EXTERNAL_PROVIDER_APPROVAL: pending
   G5_PRODUCTION_DEPLOY_APPROVAL: pending
