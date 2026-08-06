@@ -33,7 +33,7 @@ export function AtelierCaseStudy() {
           <div className="case-art" aria-label="Abstract local visual for the Atelier demonstration" role="img" />
           <div className="case-copy">
             <span className="micro">Portfolio demonstration</span>
-            <h3>Atelier Safe</h3>
+            <h2>Atelier Safe</h2>
             <p>Built to demonstrate consultation-request capture and follow-up ownership for salons, studios, and appointment-led businesses.</p>
           </div>
         </article>
@@ -48,7 +48,7 @@ export function AtelierCaseStudy() {
           {steps.map((s) => (
             <article key={s.num}>
               <span className="micro">{s.num} /</span>
-              <h3>{s.title}</h3>
+              <h2>{s.title}</h2>
               <p>{s.text}</p>
             </article>
           ))}
@@ -63,7 +63,7 @@ export function AtelierCaseStudy() {
         <div className="system-grid">
           {features.map(([title, text]) => (
             <article className="system-card" key={title}>
-              <h3>{title}</h3>
+              <h2>{title}</h2>
               <p>{text}</p>
             </article>
           ))}
@@ -74,7 +74,7 @@ export function AtelierCaseStudy() {
     <section className="section disclosure">
       <div>
         <span className="eyebrow">Proof status</span>
-        <h3>What this demonstration does not claim.</h3>
+        <h2>What this demonstration does not claim.</h2>
         <p>No testimonial, metric, benchmark, or provider callback is attached to this work.</p>
       </div>
       <div className="disclosure-box">

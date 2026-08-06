@@ -33,7 +33,7 @@ export function DentaCareCaseStudy() {
           <div className="case-art" aria-label="Abstract local visual for the DentaCare demonstration" role="img" />
           <div className="case-copy">
             <span className="micro">Portfolio demonstration</span>
-            <h3>DentaCare Intake</h3>
+            <h2>DentaCare Intake</h2>
             <p>Built to demonstrate reception-flow handling for clinics that juggle phone calls, walk-ins, and online requests at the same time.</p>
           </div>
         </article>
@@ -48,7 +48,7 @@ export function DentaCareCaseStudy() {
           {steps.map((s) => (
             <article key={s.num}>
               <span className="micro">{s.num} /</span>
-              <h3>{s.title}</h3>
+              <h2>{s.title}</h2>
               <p>{s.text}</p>
             </article>
           ))}
@@ -63,7 +63,7 @@ export function DentaCareCaseStudy() {
         <div className="system-grid">
           {features.map(([title, text]) => (
             <article className="system-card" key={title}>
-              <h3>{title}</h3>
+              <h2>{title}</h2>
               <p>{text}</p>
             </article>
           ))}
@@ -74,7 +74,7 @@ export function DentaCareCaseStudy() {
     <section className="section disclosure">
       <div>
         <span className="eyebrow">Proof status</span>
-        <h3>What this demonstration does not claim.</h3>
+        <h2>What this demonstration does not claim.</h2>
         <p>No testimonial, metric, benchmark, or provider callback is attached to this work, and no clinical or compliance claim is made anywhere on this page.</p>
       </div>
       <div className="disclosure-box">
