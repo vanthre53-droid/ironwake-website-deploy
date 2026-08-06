@@ -2,7 +2,7 @@ const links = [
   ['/', 'Home'],
   ['/systems', 'Systems'],
   ['/work', 'Work'],
-  ['/scope', 'Request scope'],
+  ['/pricing', 'Pricing'],
   ['/industries', 'Industries'],
   ['/process', 'Process'],
   ['/about', 'About']

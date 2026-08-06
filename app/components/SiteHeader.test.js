@@ -8,7 +8,7 @@ test('site header exposes every active route through native navigation', async (
     ['/', 'Home'],
     ['/systems', 'Systems'],
     ['/work', 'Work'],
-    ['/scope', 'Request scope'],
+    ['/pricing', 'Pricing'],
     ['/industries', 'Industries'],
     ['/process', 'Process'],
     ['/about', 'About']
