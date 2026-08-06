@@ -9,13 +9,13 @@ export const metadata = {
 
 const portfolio = [
   { id: 'rapidpulse', name: 'RapidPulse Response', industry: 'Emergency Services', tag: 'Inquiry-to-response ownership', url: 'https://rapidpulse-plumbing.vercel.app', caseHref: '/work/rapidpulse' },
-  { id: 'harbour', name: 'Harbour Estates', industry: 'Real Estate', tag: 'Property inquiry routing', url: 'https://bristol-architectural.vercel.app', caseHref: null },
+  { id: 'harbour', name: 'Harbour Estates', industry: 'Real Estate', tag: 'Property inquiry routing', url: 'https://bristol-architectural.vercel.app', caseHref: '/work/harbour-estates' },
   { id: 'dentacare', name: 'DentaCare Pro', industry: 'Dental Clinics', tag: 'Front-desk intake flow', url: 'https://manchester-gentle-dental.vercel.app', caseHref: '/work/dentacare-pro' },
-  { id: 'aura', name: 'Aura Archives', industry: 'Fine Jewellery', tag: 'Bespoke consultation capture', url: 'https://bluestone-jewellery-prototype.vercel.app', caseHref: null },
-  { id: 'luxe', name: 'Luxe Studio', industry: 'Wine & Lifestyle', tag: 'Curated experience booking', url: 'https://luxe-studio-wine.vercel.app', caseHref: null },
-  { id: 'bramble', name: 'Bramble Cafe', industry: 'Hospitality', tag: 'Order and enquiry intake', url: 'https://bramble-cafe.vercel.app', caseHref: null },
-  { id: 'voltix', name: 'Voltix', industry: 'Electronics', tag: 'Product inquiry routing', url: 'https://voltix-fawn.vercel.app', caseHref: null },
-  { id: 'retech', name: 'RE-TECH', industry: 'Technology', tag: 'Service request capture', url: 'https://re-tech-umber.vercel.app', caseHref: null },
+  { id: 'aura', name: 'Aura Archives', industry: 'Luxury Retail', tag: 'Bespoke inquiry capture', url: 'https://bluestone-jewellery-prototype.vercel.app', caseHref: '/work/aura-archives' },
+  { id: 'luxe', name: 'Luxe Studio', industry: 'Wine & Spirits', tag: 'Booking and studio system', url: 'https://luxe-studio-wine.vercel.app', caseHref: '/work/luxe-studio' },
+  { id: 'bramble', name: 'Bramble Cafe', industry: 'Hospitality', tag: 'Reservation and catering', url: 'https://bramble-cafe.vercel.app', caseHref: '/work/bramble-cafe' },
+  { id: 'voltix', name: 'Voltix', industry: 'Electronics', tag: 'Quote and support capture', url: 'https://voltix-fawn.vercel.app', caseHref: '/work/voltix' },
+  { id: 'retech', name: 'RE-TECH', industry: 'Technology', tag: 'Service request capture', url: 'https://re-tech-umber.vercel.app', caseHref: '/work/retech' },
   { id: 'atelier', name: 'Atelier Safe', industry: 'Salons & Spas', tag: 'Consultation follow-up ownership', url: 'https://atelier-luxury-salon.vercel.app', caseHref: '/work/atelier' },
 ];
 
