@@ -265,3 +265,4 @@ button, input, textarea { font: inherit; }
  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
  .signal-rail-pulse { display: none; }
 }
+.case-metric { margin: 6px 0 4px; font: 600 13px/1.4 var(--mono); color: var(--copper); letter-spacing: .02em; }
