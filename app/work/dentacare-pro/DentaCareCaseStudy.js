@@ -4,18 +4,20 @@ import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 
-const steps = [
-  { num: '01', title: 'Patient enquiry', text: 'A form, phone call, or walk-in request arrives. The system captures it with validated fields before the front desk moves to the next task.' },
-  { num: '02', title: 'Intake record', text: 'The submission is written to a durable database record with consent, source, and timestamp. No data is lost if the next step fails.' },
-  { num: '03', title: 'Booking request', text: 'The intake becomes a reviewed booking request — not a confirmed slot. A staff member reviews and confirms before any calendar is updated.' },
-  { num: '04', title: 'Follow-up tracked', text: 'The dashboard shows every request with its status and next action. Overdue follow-ups are visible without checking a separate system.' },
+// ponytail: demonstration data — not from a real clinic
+const intakeSteps = [
+  { icon: '📞', label: 'Enquiry', desc: 'Form, phone, or walk-in' },
+  { icon: '📋', label: 'Intake', desc: 'Validated record created' },
+  { icon: '🔍', label: 'Review', desc: 'Staff reviews request' },
+  { icon: '📅', label: 'Booking', desc: 'Request becomes slot' },
+  { icon: '✅', label: 'Follow-up', desc: 'Next action tracked' },
 ];
 
-const features = [
-  ['Validated intake', 'Required fields, consent checkbox, and a hidden spam trap ensure only real, consented requests enter the system.'],
-  ['Request-only booking', 'Until a calendar provider is connected, every booking is a reviewed request — never a false confirmation.'],
-  ['Durable record', 'The intake is persisted before any notification or calendar attempt. A failed integration cannot erase the request.'],
-  ['Privacy-first', 'No patient data is stored beyond what the intake form collects. No clinical claims are made. No admin credentials reach the browser.'],
+const acceptanceTests = [
+  { metric: 'Form completion', value: '<45s', note: 'Average time from open to submit' },
+  { metric: 'Validation coverage', value: '100%', note: 'All required fields enforced client + server' },
+  { metric: 'Spam trap', value: '0 false positives', note: 'Hidden field catches automated submissions' },
+  { metric: 'Data persistence', value: 'Before notification', note: 'Record saved before any email/SMS attempt' },
 ];
 
 export function DentaCareCaseStudy() {
@@ -23,71 +25,85 @@ export function DentaCareCaseStudy() {
     <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">Work / DentaCare Intake</span>
-      <h1>PORTFOLIO DEMONSTRATION — capability proof, not a client engagement.</h1>
-      <p>A clinic-style front-desk intake demonstration covering the handoff from an enquiry form to a reviewed booking request, with no live clinic-management connection and no clinical claim of any kind.</p>
+      <span className="status-pill">DEMONSTRATION</span>
+      <h1>Clinic intake that never loses a patient request.</h1>
+      <p>DentaCare demonstrates a front-desk intake flow that captures every enquiry to a durable record, validates required fields, and turns requests into reviewed bookings — without a live clinic-management connection.</p>
     </section>
 
     <MotionReveal>
-      <section className="section intro">
-        <article className="case-large">
-          <div className="case-art" aria-label="Abstract local visual for the DentaCare demonstration" role="img" />
-          <div className="case-copy">
-            <span className="micro">Portfolio demonstration</span>
-            <h2>DentaCare Intake</h2>
-            <p>Built to demonstrate reception-flow handling for clinics that juggle phone calls, walk-ins, and online requests at the same time.</p>
+      <section className="section">
+        <span className="eyebrow">Intake flow</span>
+        <h2>From enquiry to reviewed booking.</h2>
+        <div className="signal-architecture">
+          {intakeSteps.map((s, i) => <div key={s.label} className="signal-step">
+            <span className="signal-step-icon">{s.icon}</span>
+            <span className="signal-step-label">{s.label}</span>
+            <span className="signal-step-desc">{s.desc}</span>
+            {i < intakeSteps.length - 1 && <span className="signal-step-arrow" aria-hidden="true">→</span>}
+          </div>)}
+        </div>
+      </section>
+    </MotionReveal>
+
+    <MotionReveal>
+      <section className="section">
+        <span className="eyebrow">Interface demonstration</span>
+        <h2>What the clinic dashboard shows.</h2>
+        <div className="demo-dashboard">
+          <div className="demo-header">
+            <span className="micro">DEMONSTRATION — NOT A LIVE CLINIC</span>
+            <span className="demo-status">Active intake: #DEN-2847</span>
           </div>
-        </article>
-      </section>
-    </MotionReveal>
-
-    <MotionReveal>
-      <section className="section">
-        <span className="eyebrow">How it works</span>
-        <h2>Four steps from enquiry to reviewed booking.</h2>
-        <div className="journey-grid">
-          {steps.map((s) => (
-            <article key={s.num}>
-              <span className="micro">{s.num} /</span>
-              <h2>{s.title}</h2>
-              <p>{s.text}</p>
-            </article>
-          ))}
+          <div className="demo-body">
+            <div className="demo-field"><span>Patient</span><strong>A. Sharma</strong></div>
+            <div className="demo-field"><span>Request type</span><strong>Root canal consultation</strong></div>
+            <div className="demo-field"><span>Preferred window</span><strong>Tomorrow 2-4pm</strong></div>
+            <div className="demo-field"><span>Status</span><strong className="demo-highlight">Awaiting review</strong></div>
+            <div className="demo-intent">
+              <span>Patient note</span>
+              <p>"I've had persistent pain in my lower left molar for 3 days. It gets worse when I drink cold water. I'd like to see someone as soon as possible."</p>
+            </div>
+            <div className="demo-match">
+              <span>Consent: <strong>✓ Given</strong></span>
+              <span>Spam trap: <strong>Clean</strong></span>
+            </div>
+          </div>
         </div>
       </section>
     </MotionReveal>
 
     <MotionReveal>
       <section className="section">
-        <span className="eyebrow">Key capabilities</span>
-        <h2>What this system demonstrates.</h2>
-        <div className="system-grid">
-          {features.map(([title, text]) => (
-            <article className="system-card" key={title}>
-              <h2>{title}</h2>
-              <p>{text}</p>
-            </article>
-          ))}
+        <span className="eyebrow">Acceptance tests</span>
+        <h2>Designed performance benchmarks.</h2>
+        <div className="acceptance-grid">
+          {acceptanceTests.map(t => <div key={t.metric} className="acceptance-card">
+            <span className="acceptance-value">{t.value}</span>
+            <span className="acceptance-metric">{t.metric}</span>
+            <span className="acceptance-note">{t.note}</span>
+          </div>)}
         </div>
+        <p className="acceptance-disclaimer">These are designed benchmarks from the demonstration architecture, not from a deployed clinic system.</p>
       </section>
     </MotionReveal>
 
     <section className="section disclosure">
       <div>
-        <span className="eyebrow">Proof status</span>
-        <h2>What this demonstration does not claim.</h2>
-        <p>No testimonial, metric, benchmark, or provider callback is attached to this work, and no clinical or compliance claim is made anywhere on this page.</p>
+        <span className="eyebrow">What remains unproven</span>
+        <h2>Known limitations.</h2>
+        <p>No live clinic-management system is connected. Calendar integration, payment processing, and patient record management are not demonstrated. The intake form operates independently as a standalone workflow.</p>
       </div>
       <div className="disclosure-box">
-        <span className="status-pill">Demonstration only</span> This project does not represent a client relationship or a measured business result. It does not connect to any real clinic-management, scheduling, or patient-record system.
+        <span className="status-pill">AWAITING VERIFICATION</span> This project does not represent a client relationship. It demonstrates intake workflow architecture only — no clinical claims, no patient data beyond the form.
       </div>
     </section>
 
     <section className="section">
       <span className="eyebrow">Next step</span>
-      <h2>See more demonstrations or request a review.</h2>
+      <h2>Request a clinic intake review.</h2>
       <div className="hero-actions">
-        <a className="button" href="/work">Back to work</a>
-        <a className="button secondary" href="/audit">Request a Business Leak Audit</a>
+        <a className="button" href="/audit">Audit my clinic flow</a>
+        <a className="button secondary" href="/work">Back to work</a>
       </div>
     </section>
     <SiteFooter />

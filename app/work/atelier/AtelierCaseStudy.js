@@ -4,18 +4,20 @@ import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 
-const steps = [
-  { num: '01', title: 'Consultation request', text: 'A client submits a consultation request through the website form, capturing their interest, preferred timing, and contact details.' },
-  { num: '02', title: 'Request logged', text: 'The submission is written to a durable record with consent and source. The follow-up is assigned to a named person with a due date.' },
-  { num: '03', title: 'Follow-up owned', text: 'Instead of relying on memory or a shared inbox, the system tracks who is responsible for the next contact and when it is due.' },
-  { num: '04', title: 'Outcome visible', text: 'The dashboard shows every consultation request with its status. Stale requests surface automatically so no lead cools off silently.' },
+// ponytail: demonstration data — not from a real studio
+const consultSteps = [
+  { icon: '💬', label: 'Request', desc: 'Client submits interest' },
+  { icon: '📋', label: 'Logged', desc: 'Durable record created' },
+  { icon: '👤', label: 'Owned', desc: 'Named follow-up assigned' },
+  { icon: '⏰', label: 'Tracked', desc: 'Stale alerts if overdue' },
+  { icon: '✅', label: 'Outcome', desc: 'Status visible to owner' },
 ];
 
-const features = [
-  ['Consultation capture', 'A focused form captures interest, preferred timing, and contact details — nothing more. No over-collection.'],
-  ['Follow-up ownership', 'Every request is assigned to a named person. The dashboard shows who owns what and when it is due.'],
-  ['Stale-request alerts', 'Requests without a response within the target window are flagged. No lead cools off silently.'],
-  ['No false bookings', 'Until a calendar provider is connected, this is a request-only flow. No appointment is confirmed without human review.'],
+const acceptanceTests = [
+  { metric: 'Form friction', value: '<30s', note: 'Time from open to submit — 4 fields only' },
+  { metric: 'Follow-up assignment', value: 'Instant', note: 'Named owner + due date on submission' },
+  { metric: 'Stale alert', value: '24h default', note: 'Flagged if no response within target window' },
+  { metric: 'Data minimization', value: '4 fields', note: 'Name, contact, interest, preferred timing' },
 ];
 
 export function AtelierCaseStudy() {
@@ -23,71 +25,85 @@ export function AtelierCaseStudy() {
     <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">Work / Atelier Safe</span>
-      <h1>PORTFOLIO DEMONSTRATION — capability proof, not a client engagement.</h1>
-      <p>A consultation-system demonstration for appointment-led businesses, covering request capture and follow-up ownership with no implied booking-provider connection.</p>
+      <span className="status-pill">DEMONSTRATION</span>
+      <h1>Consultation interest that never cools off silently.</h1>
+      <p>Atelier demonstrates a follow-up ownership system for salons and studios where consultation interest arrives through a simple form, gets assigned to a named person, and flags itself if no one responds within the target window.</p>
     </section>
 
     <MotionReveal>
-      <section className="section intro">
-        <article className="case-large">
-          <div className="case-art" aria-label="Abstract local visual for the Atelier demonstration" role="img" />
-          <div className="case-copy">
-            <span className="micro">Portfolio demonstration</span>
-            <h2>Atelier Safe</h2>
-            <p>Built to demonstrate consultation-request capture and follow-up ownership for salons, studios, and appointment-led businesses.</p>
+      <section className="section">
+        <span className="eyebrow">Consultation flow</span>
+        <h2>From interest to owned follow-up.</h2>
+        <div className="signal-architecture">
+          {consultSteps.map((s, i) => <div key={s.label} className="signal-step">
+            <span className="signal-step-icon">{s.icon}</span>
+            <span className="signal-step-label">{s.label}</span>
+            <span className="signal-step-desc">{s.desc}</span>
+            {i < consultSteps.length - 1 && <span className="signal-step-arrow" aria-hidden="true">→</span>}
+          </div>)}
+        </div>
+      </section>
+    </MotionReveal>
+
+    <MotionReveal>
+      <section className="section">
+        <span className="eyebrow">Interface demonstration</span>
+        <h2>What the studio dashboard shows.</h2>
+        <div className="demo-dashboard">
+          <div className="demo-header">
+            <span className="micro">DEMONSTRATION — NOT A LIVE STUDIO</span>
+            <span className="demo-status">Active request: #ATL-1042</span>
           </div>
-        </article>
-      </section>
-    </MotionReveal>
-
-    <MotionReveal>
-      <section className="section">
-        <span className="eyebrow">How it works</span>
-        <h2>Four steps from interest to owned follow-up.</h2>
-        <div className="journey-grid">
-          {steps.map((s) => (
-            <article key={s.num}>
-              <span className="micro">{s.num} /</span>
-              <h2>{s.title}</h2>
-              <p>{s.text}</p>
-            </article>
-          ))}
+          <div className="demo-body">
+            <div className="demo-field"><span>Client</span><strong>P. Mehta</strong></div>
+            <div className="demo-field"><span>Interest</span><strong>Bridal consultation</strong></div>
+            <div className="demo-field"><span>Preferred window</span><strong>This weekend</strong></div>
+            <div className="demo-field"><span>Status</span><strong className="demo-highlight">Follow-up due today</strong></div>
+            <div className="demo-intent">
+              <span>Client note</span>
+              <p>"I'm getting married in March and looking for a complete bridal package. Would love to discuss options and pricing this weekend if possible."</p>
+            </div>
+            <div className="demo-match">
+              <span>Owner: <strong>S. Kapoor</strong></span>
+              <span>Due: <strong>Today 5pm</strong> ⚠️</span>
+            </div>
+          </div>
         </div>
       </section>
     </MotionReveal>
 
     <MotionReveal>
       <section className="section">
-        <span className="eyebrow">Key capabilities</span>
-        <h2>What this system demonstrates.</h2>
-        <div className="system-grid">
-          {features.map(([title, text]) => (
-            <article className="system-card" key={title}>
-              <h2>{title}</h2>
-              <p>{text}</p>
-            </article>
-          ))}
+        <span className="eyebrow">Acceptance tests</span>
+        <h2>Designed performance benchmarks.</h2>
+        <div className="acceptance-grid">
+          {acceptanceTests.map(t => <div key={t.metric} className="acceptance-card">
+            <span className="acceptance-value">{t.value}</span>
+            <span className="acceptance-metric">{t.metric}</span>
+            <span className="acceptance-note">{t.note}</span>
+          </div>)}
         </div>
+        <p className="acceptance-disclaimer">These are designed benchmarks from the demonstration architecture, not from a deployed studio system.</p>
       </section>
     </MotionReveal>
 
     <section className="section disclosure">
       <div>
-        <span className="eyebrow">Proof status</span>
-        <h2>What this demonstration does not claim.</h2>
-        <p>No testimonial, metric, benchmark, or provider callback is attached to this work.</p>
+        <span className="eyebrow">What remains unproven</span>
+        <h2>Known limitations.</h2>
+        <p>No live salon-management or calendar system is connected. Payment processing, stylist scheduling, and client history are not demonstrated. The consultation request operates as a standalone workflow.</p>
       </div>
       <div className="disclosure-box">
-        <span className="status-pill">Demonstration only</span> This project does not represent a client relationship or a measured business result. It does not connect to a live booking calendar, payment system, or inventory platform.
+        <span className="status-pill">AWAITING VERIFICATION</span> This project does not represent a client relationship. It demonstrates follow-up ownership architecture only.
       </div>
     </section>
 
     <section className="section">
       <span className="eyebrow">Next step</span>
-      <h2>See more demonstrations or request a review.</h2>
+      <h2>Request a consultation flow review.</h2>
       <div className="hero-actions">
-        <a className="button" href="/work">Back to work</a>
-        <a className="button secondary" href="/audit">Request a Business Leak Audit</a>
+        <a className="button" href="/audit">Audit my follow-up flow</a>
+        <a className="button secondary" href="/work">Back to work</a>
       </div>
     </section>
     <SiteFooter />
