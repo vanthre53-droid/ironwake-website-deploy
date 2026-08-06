@@ -2,14 +2,18 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 
-test('globals.css defines a dark theme without a manual toggle dependency', async () => {
+test('globals.css defines the Stitch light design system', async () => {
   const source = await readFile(new URL('./globals.css', import.meta.url), 'utf8');
-  assert.match(source, /@media \(prefers-color-scheme: dark\)/);
-  assert.match(source, /--paper: #111110;/);
-  assert.match(source, /color-scheme: dark;/);
-  assert.match(source, /color-scheme: light;/);
-  const rawSurfaceLiteralCount = (source.match(/#ffffff/gi) || []).length;
-  assert.ok(rawSurfaceLiteralCount >= 1, '--surface token must be defined as solid white');
+  // Stitch canvas color
+  assert.match(source, /--paper:\s*#f5f3ee/);
+  // Stitch ink color
+  assert.match(source, /--ink:\s*#0a0a0a/);
+  // Stitch iron red
+  assert.match(source, /--copper:\s*#b94d2f/);
+  // Light color scheme
+  assert.match(source, /color-scheme:\s*light/);
+  // Solid surfaces (no translucent)
+  assert.match(source, /--surface:\s*#ffffff/);
 });
 
 test('signal rail animation is transform/opacity only and fully disabled under reduced motion', async () => {

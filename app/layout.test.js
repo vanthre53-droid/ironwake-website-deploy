@@ -8,10 +8,10 @@ test('layout defines IronWake metadata', async () => {
   assert.match(source, /IronWake helps service businesses/);
 });
 
-test('layout documents the Sentry error-boundary pair and sets a theme-aware viewport', async () => {
+test('layout documents Sentry error-boundary pair and sets Stitch viewport', async () => {
   const source = await readFile(new URL('./layout.js', import.meta.url), 'utf8');
   assert.match(source, /app\/error\.js/);
   assert.match(source, /app\/global-error\.js/);
   assert.match(source, /export const viewport/);
-  assert.match(source, /prefers-color-scheme: dark/);
+  assert.match(source, /#f5f3ee/);
 });
