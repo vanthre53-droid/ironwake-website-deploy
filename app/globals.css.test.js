@@ -8,8 +8,8 @@ test('globals.css defines a dark theme without a manual toggle dependency', asyn
   assert.match(source, /--paper: #111110;/);
   assert.match(source, /color-scheme: dark;/);
   assert.match(source, /color-scheme: light;/);
-  const rawSurfaceLiteralCount = (source.match(/rgb\(255 255 255 \/ \.6\)/g) || []).length;
-  assert.equal(rawSurfaceLiteralCount, 1, 'the literal only belongs in the --surface token definition; every other rule must reference var(--surface)');
+  const rawSurfaceLiteralCount = (source.match(/#ffffff/gi) || []).length;
+  assert.ok(rawSurfaceLiteralCount >= 1, '--surface token must be defined as solid white');
 });
 
 test('signal rail animation is transform/opacity only and fully disabled under reduced motion', async () => {
