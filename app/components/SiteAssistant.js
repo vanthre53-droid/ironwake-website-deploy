@@ -1,61 +1,155 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-const answers = {
-  services: 'IronWake maps and improves inquiry, booking, follow-up, and reception workflows. Each engagement begins with a Business Leak Audit so the next step stays scoped to the actual handoff.',
-  pricing: 'IronWake does not publish prices before scope, provider costs, and legal terms are approved. You can request scope and receive a human-reviewed outline instead.',
-  booking: 'Calendar booking is currently a request-preview, not a confirmed time. You can choose a preferred window and IronWake will review it before anything is confirmed.'
+// ponytail: deterministic decision-tree assistant; no AI provider required.
+// Upgrade path: wire to /api/chat when a provider is configured.
+const FLOWS = {
+  start: {
+    message: "I can help you find where your business might be losing enquiries. What best describes your business?",
+    options: [
+      { label: 'Service business (plumbing, HVAC, electrical)', next: 'service_type' },
+      { label: 'Clinic or dental practice', next: 'clinic' },
+      { label: 'Salon, spa, or wellness studio', next: 'salon' },
+      { label: 'Other service business', next: 'other' },
+      { label: "I just want to see how IronWake works", next: 'how_it_works' }
+    ]
+  },
+  service_type: {
+    message: "Service businesses often miss enquiries that come in after hours or when the team is on-site. Which sounds most like your situation?",
+    options: [
+      { label: 'We miss calls and don\'t call back in time', next: 'missed_calls' },
+      { label: 'Enquiries come in but nobody follows up', next: 'no_followup' },
+      { label: 'We book jobs but lose track of confirmations', next: 'booking_confusion' },
+      { label: 'Not sure — we just know leads disappear', next: 'not_sure' }
+    ]
+  },
+  clinic: {
+    message: "Clinics often lose enquiries between the first call and the actual appointment. Which matches your experience?",
+    options: [
+      { label: 'Patients call but we can\'t always answer', next: 'missed_calls' },
+      { label: 'We take details but follow-up is inconsistent', next: 'no_followup' },
+      { label: 'Appointments get double-booked or missed', next: 'booking_confusion' },
+      { label: 'We want to see what IronWake recommends', next: 'recommendation' }
+    ]
+  },
+  salon: {
+    message: "Salons and spas often lose consultation interest when it isn't followed up within a day. What's your biggest challenge?",
+    options: [
+      { label: 'DMs and enquiries go unanswered too long', next: 'missed_calls' },
+      { label: 'We book but clients forget or don\'t show', next: 'booking_confusion' },
+      { label: 'We want more repeat bookings', next: 'no_followup' },
+      { label: 'Show me what IronWake can do', next: 'recommendation' }
+    ]
+  },
+  other: {
+    message: "That's fine — IronWake works with any service business that takes enquiries and turns them into bookings or jobs. What would you most like to fix?",
+    options: [
+      { label: 'Capture every enquiry reliably', next: 'missed_calls' },
+      { label: 'Make follow-up automatic and visible', next: 'no_followup' },
+      { label: 'Stop losing track of bookings', next: 'booking_confusion' },
+      { label: 'Just show me the demo', next: 'recommendation' }
+    ]
+  },
+  missed_calls: {
+    message: "That's exactly what Missed Lead Recovery fixes. It ensures every enquiry is written to a durable record before any notification runs — so a dropped call or unanswered DM can't erase the lead.",
+    options: [
+      { label: 'Show me how it works', action: 'link', href: '/systems/missed-lead-recovery' },
+      { label: 'I want a free audit of my workflow', action: 'link', href: '/audit' },
+      { label: 'Start over', next: 'start' }
+    ]
+  },
+  no_followup: {
+    message: "That's a follow-up ownership problem. IronWake assigns every enquiry to a named person with a visible next action — so you can see exactly who owns what and what's overdue.",
+    options: [
+      { label: 'Show me the system', action: 'link', href: '/systems/missed-lead-recovery' },
+      { label: 'See a real demonstration', action: 'link', href: '/work/rapidpulse' },
+      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'Start over', next: 'start' }
+    ]
+  },
+  booking_confusion: {
+    message: "That's a booking certainty problem. IronWake separates booking requests from confirmed appointments so nobody assumes the wrong state. Every booking stays a reviewed request until verified.",
+    options: [
+      { label: 'Show me Booking Certainty', action: 'link', href: '/systems/booking-control' },
+      { label: 'See a demonstration', action: 'link', href: '/work/dentacare-pro' },
+      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'Start over', next: 'start' }
+    ]
+  },
+  not_sure: {
+    message: "That's common — most businesses know leads are slipping but can't pinpoint where. A Business Leak Audit maps exactly where your process loses momentum. It's free, takes about 5 minutes to request, and you get a written review.",
+    options: [
+      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'See how IronWake works first', next: 'how_it_works' },
+      { label: 'Start over', next: 'start' }
+    ]
+  },
+  recommendation: {
+    message: "Based on what you've described, I'd recommend starting with a Business Leak Audit. It identifies the exact point where your enquiry or booking process loses momentum, and gives you a written review with the smallest next step to fix it.",
+    options: [
+      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'See our case studies', action: 'link', href: '/work' },
+      { label: 'Start over', next: 'start' }
+    ]
+  },
+  how_it_works: {
+    message: "IronWake maps where your enquiry, booking, or follow-up process loses momentum, then implements the smallest system that makes the next step visible and owned. We start with a free Business Leak Audit, then scope a bounded solution. No vague promises — just inspectable operational improvements.",
+    options: [
+      { label: 'See our systems', action: 'link', href: '/systems' },
+      { label: 'See case studies', action: 'link', href: '/work' },
+      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'Start over', next: 'start' }
+    ]
+  }
 };
 
 export function SiteAssistant() {
   const [open, setOpen] = useState(false);
-  const [answer, setAnswer] = useState('');
-  const [status, setStatus] = useState('idle');
-  const [message, setMessage] = useState('');
+  const [history, setHistory] = useState([]);
+  const [currentFlow, setCurrentFlow] = useState('start');
+  const panelRef = useRef(null);
 
-  async function submit(event) {
-    event.preventDefault();
-    setStatus('loading');
-    setMessage('');
-    const form = new FormData(event.currentTarget);
-    const payload = {
-      business: form.get('business'),
-      email: form.get('email'),
-      leak: form.get('request'),
-      consent: form.get('consent') === 'on',
-      website: ''
-    };
-    try {
-      const response = await fetch('/api/audit', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
-      const result = await response.json();
-      setStatus(response.ok ? 'success' : 'error');
-      setMessage(result.message || result.error || 'Please try again.');
-      if (response.ok) event.currentTarget.reset();
-    } catch {
-      setStatus('error');
-      setMessage('Your request could not be sent. Please try again.');
+  useEffect(() => {
+    if (open && panelRef.current) {
+      panelRef.current.scrollTop = panelRef.current.scrollHeight;
     }
+  }, [open, history]);
+
+  function handleOption(option) {
+    if (option.action === 'link') {
+      window.location.href = option.href;
+      return;
+    }
+    setHistory(prev => [...prev, { flow: currentFlow, option: option.label }]);
+    setCurrentFlow(option.next);
   }
 
-  return <aside id="ironwake-assistant" className={`site-assistant${open ? ' is-open' : ''}`} aria-label="IronWake request guide">
-    {open && <section className="assistant-panel" aria-live="polite">
-      <div className="assistant-heading"><div><span className="eyebrow">Quick help</span><h2>What do you need?</h2></div><button className="icon-button" type="button" onClick={() => setOpen(false)} aria-label="Close request guide">×</button></div>
-      <p>Choose a common question or send a request for human review. This is a simple guide, not a live AI chat.</p>
-      <div className="assistant-prompts" aria-label="Common questions">
-        {Object.entries(answers).map(([key, value]) => <button type="button" key={key} onClick={() => setAnswer(value)}>{key === 'services' ? 'What does IronWake do?' : key === 'pricing' ? 'How does pricing work?' : 'How do I book?'}</button>)}
+  function restart() {
+    setHistory([]);
+    setCurrentFlow('start');
+  }
+
+  const flow = FLOWS[currentFlow];
+
+  return <aside id="ironwake-assistant" className={`site-assistant${open ? ' is-open' : ''}`} aria-label="IronWake workflow assistant">
+    {open && <section className="assistant-panel" ref={panelRef} aria-live="polite">
+      <div className="assistant-heading">
+        <div><span className="eyebrow">Workflow guide</span><h2>Find your leak</h2></div>
+        <button className="icon-button" type="button" onClick={() => setOpen(false)} aria-label="Close assistant">×</button>
       </div>
-      {answer && <p className="assistant-answer" role="status">{answer}</p>}
-      <form className="assistant-form" onSubmit={submit} aria-busy={status === 'loading'}>
-        <label>Business name<input name="business" minLength="2" maxLength="120" autoComplete="organization" required /></label>
-        <label>Work email<input name="email" type="email" maxLength="254" autoComplete="email" required /></label>
-        <label>What would you like reviewed?<textarea name="request" minLength="10" maxLength="4000" required /></label>
-        <label className="check"><input name="consent" type="checkbox" required /> I agree to be contacted about this request.</label>
-        <button className="button" disabled={status === 'loading'}>{status === 'loading' ? 'Sending request…' : 'Send for review'}</button>
-        <a className="text-link" href="/book">Prefer to request a call? →</a>
-        {message && <p className={`notice ${status}`} role="status">{message}</p>}
-      </form>
+      <div className="assistant-chat">
+        {history.map((h, i) => <div key={i} className="chat-exchange">
+          <p className="chat-user"><span className="sr-only">You said: </span>{h.option}</p>
+        </div>)}
+        <p className="chat-assistant">{flow.message}</p>
+        <div className="chat-options" aria-label="Choose a response">
+          {flow.options.map((opt, i) => <button key={i} type="button" className="chat-option" onClick={() => handleOption(opt)}>{opt.label}</button>)}
+        </div>
+      </div>
+      {history.length > 0 && <button type="button" className="text-link" onClick={restart}>Start over →</button>}
+      <p className="assistant-note">This is a guided decision tree, not a live AI. Responses are pre-written by IronWake.</p>
     </section>}
-    <button className="assistant-trigger" type="button" onClick={() => setOpen(value => !value)} aria-expanded={open} aria-controls="ironwake-assistant">{open ? 'Close help' : 'Need help?'}</button>
+    <button className="assistant-trigger" type="button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-controls="ironwake-assistant">{open ? 'Close' : 'Need help?'}</button>
   </aside>;
 }
