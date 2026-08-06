@@ -187,6 +187,7 @@ button, input, textarea { font: inherit; }
 .portfolio-card { border: 1px solid var(--rule); border-radius: 20px; background: var(--surface); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
 .portfolio-card:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -30px rgb(16 35 44 / .72); border-color: rgb(182 73 47 / .5); }
 .portfolio-art { min-height: 160px; background: var(--stone); position: relative; overflow: hidden; }
+.portfolio-art::before { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 Q50 60 100 100 T200 100' fill='none' stroke='rgba(255,255,255,.12)' stroke-width='1.5'/%3E%3Ccircle cx='100' cy='100' r='4' fill='rgba(179,69,44,.6)'/%3E%3Ccircle cx='50' cy='80' r='3' fill='rgba(255,255,255,.2)'/%3E%3C/svg%3E") center / 80% no-repeat; opacity: .7; }
 .portfolio-art::after { content: "DEMONSTRATION"; position: absolute; inset: auto 12px 12px auto; color: white; font: 9px var(--mono); letter-spacing: .12em; background: rgb(16 35 44 / .7); padding: 4px 8px; border-radius: 4px; }
 .portfolio-art[data-project="rapidpulse"] { background: linear-gradient(135deg, #1a3a4a, #2d5a6a); }
 .portfolio-art[data-project="harbour"] { background: linear-gradient(135deg, #2a3a4a, #4a5a6a); }
