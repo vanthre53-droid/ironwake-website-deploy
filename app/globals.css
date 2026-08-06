@@ -130,6 +130,17 @@ button, input, textarea { font: inherit; }
 .disclosure { display: grid; grid-template-columns: 1fr 1.25fr; gap: 42px; }.disclosure h3 { margin: 8px 0; font-size: 27px; }.disclosure p { margin: 0; color: var(--graphite); font-size: 14px; line-height: 1.6; }.disclosure-box { border: 1px solid var(--rule); background: var(--surface); padding: 23px; color: var(--graphite); font: 12px/1.65 var(--mono); transition: transform .25s ease, box-shadow .25s ease; }
 .founder { display: grid; grid-template-columns: .75fr 1.25fr; gap: 38px; align-items: center; }.founder-mark { min-height: 210px; display: grid; place-items: center; border: 1px solid var(--rule); background: var(--stone); color: var(--copper-dark); font: 500 11px var(--mono); letter-spacing: .14em; }.founder h2 { margin-bottom: 10px; }.founder p { max-width: 540px; color: var(--graphite); }
 
+.workflow-demo { display: flex; align-items: center; gap: 8px; margin: 32px 0 0; padding: 20px 24px; border: 1px solid var(--rule); border-radius: 14px; background: var(--white); }
+.workflow-step { display: flex; align-items: center; gap: 12px; opacity: .35; transform: translateX(-8px); transition: opacity .5s ease, transform .5s ease; }
+.workflow-step.active { opacity: 1; transform: translateX(0); }
+.workflow-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; background: var(--stone); color: var(--copper); flex-shrink: 0; }
+.workflow-step.active .workflow-icon { background: var(--copper); color: var(--white); }
+.workflow-content { display: flex; flex-direction: column; gap: 2px; }
+.workflow-label { font: 600 13px/1.3 var(--body); color: var(--ink); }
+.workflow-detail { font: 400 12px/1.3 var(--mono); color: var(--graphite); }
+.workflow-connector { color: var(--rule); flex-shrink: 0; opacity: .3; transition: opacity .5s ease, color .5s ease; }
+.workflow-connector.active { opacity: 1; color: var(--copper); }
+
 .faq-grid { display: grid; gap: 0; border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; }
 .faq-item { border-bottom: 1px solid var(--rule); }
 .faq-item:last-child { border-bottom: 0; }
