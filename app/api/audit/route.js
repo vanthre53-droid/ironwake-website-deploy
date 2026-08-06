@@ -39,7 +39,7 @@ export async function POST(request) {
     triage_category: triage.category,
     triage_summary: triage.summary,
     triage_suggested_reply: triage.suggested_reply,
-    triage_model: process.env.OPENAI_MODEL || null,
+    triage_model: process.env.AI_MODEL || process.env.OPENAI_MODEL || null,
     triaged_at: triage.status === 'unconfigured' ? null : new Date().toISOString()
   }).eq('id', inquiryId);
 
