@@ -61,11 +61,12 @@ export function OwnerDashboard() {
   const selected = visibleInquiries.find(({ id }) => id === selectedId) || visibleInquiries[0];
 
   function exportVisible() {
+    if (!visibleInquiries.length) return setStatus('There are no visible inquiries to export.');
     const rows = [['Business', 'Email', 'Stage', 'Next action', 'Due'], ...visibleInquiries.map((item) => [item.business_name, item.email, item.lead_stage, item.next_action || '', item.due_at || ''])];
     const blob = new Blob([rows.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(',')).join('\n')], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = url; link.download = 'ironwake-inquiries.csv'; link.click(); URL.revokeObjectURL(url);
+    link.href = url; link.download = 'ironwake-inquiries.csv'; link.click(); URL.revokeObjectURL(url); setStatus(`Exported ${visibleInquiries.length} visible inquiries.`);
   }
 
   return <main className="shell owner-shell">
@@ -75,7 +76,7 @@ export function OwnerDashboard() {
       {user ? <>
         <p>Authenticated session active. CRM records remain protected by database owner policy.</p>
         <div className="dashboard-links"><a href="/admin">Notification status →</a></div>
-        <div className="crm-toolbar"><label>Search inquiries<input type="search" value={query} onChange={(event) => setQuery(event.target.value)} /></label><label>Sort<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label><button type="button" className="button secondary" onClick={exportVisible}>Export visible</button></div>
+        <div className="crm-toolbar"><label>Search inquiries<input type="search" value={query} onChange={(event) => setQuery(event.target.value)} /></label><label>Sort<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label><button type="button" className="button secondary" onClick={exportVisible} disabled={!visibleInquiries.length}>Export visible</button></div>
         <div role="group" aria-label="Filter by lead stage" className="stage-filter">
           {STAGES.map((value) => <button type="button" key={value} aria-pressed={stage === value} onClick={() => setStage(value)}>{value.replace('_', ' ')}</button>)}
         </div>
@@ -93,9 +94,10 @@ export function OwnerDashboard() {
         <button className="button" onClick={signOut}>Sign out</button>
       </> : <form className="owner-form" onSubmit={signIn}>
         <p>Use the owner account. This screen never accepts or exposes service credentials.</p>
+        {!client && <p className="notice" role="status">Owner login is not connected on this preview.</p>}
         <label>Email<input name="email" type="email" autoComplete="email" required /></label>
         <label>Password<input name="password" type="password" autoComplete="current-password" required /></label>
-        <button className="button" type="submit">Sign in</button>
+        <button className="button" type="submit" disabled={!client}>Sign in</button>
       </form>}
       {status && <p className="notice" role="status">{status}</p>}
     </section>

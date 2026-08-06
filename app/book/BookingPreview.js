@@ -21,15 +21,15 @@ export function BookingPreview() {
     } catch { setStatus('error'); setMessage('Your request could not be sent. Please try again.'); }
   }
   return <section className="booking-preview" aria-labelledby="booking-preview-heading">
-    <div><span className="eyebrow">Calendar request preview</span><h2 id="booking-preview-heading">Choose a preferred window.</h2><p>Cal.com is not connected. Choosing a window records no appointment and sends no invitation; it only makes the request you want to discuss explicit.</p></div>
+    <div><span className="eyebrow">Your preference</span><h2 id="booking-preview-heading">Choose a date and time window.</h2><p>IronWake will review this request and reply separately. Nothing is booked when you press send.</p></div>
     <form className="booking-form" onSubmit={submit} aria-busy={status === 'loading'}>
       <label>Preferred date<input type="date" name="date" required /></label>
       <label>Preferred window<select name="window" required defaultValue=""><option value="" disabled>Select a window</option>{windows.map(window => <option key={window}>{window}</option>)}</select></label>
       <label>What should the first call cover?<textarea name="scope" minLength="10" maxLength="4000" required /></label>
-      <label>Business name<input name="business" minLength="2" maxLength="120" required /></label>
-      <label>Work email<input name="email" type="email" maxLength="254" required /></label>
+      <label>Business name<input name="business" minLength="2" maxLength="120" autoComplete="organization" required /></label>
+      <label>Work email<input name="email" type="email" maxLength="254" autoComplete="email" required /></label>
       <label className="check"><input name="consent" type="checkbox" required /> I agree to be contacted about this request.</label>
-      <button className="button" type="submit" disabled={status === 'loading'}>{status === 'loading' ? 'Sending…' : 'Send booking request'}</button>
+      <button className="button" type="submit" disabled={status === 'loading'}>{status === 'loading' ? 'Sending request…' : 'Request this time'}</button>
       {message && <p className={`notice ${status}`} role="status">{message}</p>}
     </form>
   </section>;

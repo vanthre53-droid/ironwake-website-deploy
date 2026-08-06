@@ -72,9 +72,10 @@ export function AdminDashboard() {
         <button className="button" onClick={signOut}>Sign out</button>
       </> : <form className="owner-form" onSubmit={signIn}>
         <p>Use the owner account. This screen never accepts or exposes service credentials.</p>
+        {!client && <p className="notice" role="status">Owner login is not connected on this preview.</p>}
         <label>Email<input name="email" type="email" autoComplete="email" required /></label>
         <label>Password<input name="password" type="password" autoComplete="current-password" required /></label>
-        <button className="button" type="submit">Sign in</button>
+        <button className="button" type="submit" disabled={!client}>Sign in</button>
       </form>}
       {status && <p className="notice" role="status">{status}</p>}
     </section>

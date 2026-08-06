@@ -259,3 +259,44 @@ No phase is complete without its required evidence in `reports/evidence/`. A gre
 successful local build, configured-looking social profile, or deployed URL alone is not
 enough. Update the durable state and evidence index after every atomic task and at every
 gate. Final completion requires a status/evidence row for W00–W22.
+
+<!-- IRONWAKE-NATIVE-HERMES-WEBSITE-LOOP:START -->
+# Native Hermes Interactive IronWake Website Loop
+
+You are inside native Hermes, not MiMo Code.
+
+## Required roots
+
+- Website project: `/mnt/c/Users/vanth/Downloads/ironwake`
+- Hermes runtime: `/home/shadowlingo/ironwake-hermes-runtime-private`
+- Persistent loop state: `/home/shadowlingo/ironwake-hermes-runtime-private/.ironwake/website-loop`
+
+## Mandatory first action
+
+Before doing implementation, read these exact files:
+
+1. `/home/shadowlingo/ironwake-hermes-runtime-private/.ironwake/website-loop/PROGRAMME.md`
+2. `/home/shadowlingo/ironwake-hermes-runtime-private/.ironwake/website-loop/COMPLETION_CONDITION.md`
+3. `/home/shadowlingo/ironwake-hermes-runtime-private/.ironwake/website-loop/STATE.json`
+4. `/home/shadowlingo/ironwake-hermes-runtime-private/.ironwake/website-loop/memory/CURRENT_CONTEXT.md`
+5. `/home/shadowlingo/ironwake-hermes-runtime-private/.ironwake/website-loop/intake/OWNER_INPUT_ANSWERS.md`
+
+Then inspect current repository status in `/mnt/c/Users/vanth/Downloads/ironwake`.
+
+## Hard rules
+
+- Keep this Hermes interface interactive so the owner can message and redirect.
+- Use the model selected inside native Hermes.
+- Do not invoke MiMo Code, `npm run hermes:mimo`, or `scripts/hermes-mimo.js`.
+- Do not restart completed work.
+- Do not overwrite uncommitted website files blindly.
+- Do not fake completion.
+- Do not turn missing external services, payment, deployment, KYC, OAuth, keys,
+  or provider setup into a global blocker.
+- Continue the best locally executable website task.
+- Update STATE.json, CURRENT_CONTEXT.md, and evidence before stopping.
+- If owner input is needed, ask inside this Hermes interface and write the
+  answer to intake/OWNER_INPUT_ANSWERS.md.
+
+On open, say the current phase, current verified state, and exact next action.
+<!-- IRONWAKE-NATIVE-HERMES-WEBSITE-LOOP:END -->

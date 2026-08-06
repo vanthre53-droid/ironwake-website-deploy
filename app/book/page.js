@@ -10,9 +10,9 @@ export const metadata = {
 export default function BookPage() {
   return <main className="shell">
     <SiteHeader />
-    <section className="hero compact"><span className="eyebrow">Book / IronWake</span><h1>Make the first conversation easier to place.</h1><p>Calendar confirmation is not connected yet. Start with a preferred date and window; IronWake reviews it before anything is booked or an invitation is sent.</p></section>
+    <section className="hero compact"><span className="eyebrow">Request a conversation</span><h1>Tell IronWake when you would like to talk.</h1><p>Choose a preferred date and time window. This sends a request for human review—it does not confirm an appointment or send a calendar invitation.</p></section>
     <section className="section intro"><BookingPreview /></section>
-    <section className="section disclosure"><div><span className="eyebrow">What works today</span><h3>Request scope, reviewed by a person.</h3><p>Until scheduling is verified end to end, every meeting request goes through the same reviewed intake as any other inquiry.</p></div><div className="disclosure-box">A submitted Business Leak Audit request is saved first, then reviewed by the owner within one Asia/Kolkata business day. No request on this site is treated as a confirmed appointment unless a connected calendar provider says so.</div></section>
+    <section className="section disclosure"><div><span className="eyebrow">What happens next</span><h3>A person reviews the request.</h3><p>Until scheduling is connected and verified, every meeting request goes through the same reviewed intake as any other enquiry.</p></div><div className="disclosure-box">Submitting this form records your preference only. No appointment is confirmed unless IronWake follows up with an explicit confirmation.</div></section>
     <SiteFooter />
   </main>;
 }

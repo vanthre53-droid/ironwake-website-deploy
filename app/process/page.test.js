@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 test('process page describes the map/fix/test/document method without SLA or price claims', async () => {
   const source = await readFile(new URL('./page.js', import.meta.url), 'utf8');
-  assert.match(source, /Map\. Fix\. Test\. Document\./);
+  assert.match(source, /Map the handoff, fix the smallest useful part, test the real state, and document what can be trusted/);
   assert.match(source, /'01 \/ map', 'Map'/);
   assert.match(source, /'02 \/ fix', 'Fix'/);
   assert.match(source, /'03 \/ test', 'Test'/);

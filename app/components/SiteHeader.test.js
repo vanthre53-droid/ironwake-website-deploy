@@ -15,6 +15,6 @@ test('site header exposes every active route through native navigation', async (
   ]) {
     assert.match(source, new RegExp(`\\['${href}', '${label}'\\]`));
   }
-  assert.match(source, /href="\/audit">Request a Business Leak Audit/);
+  assert.match(source, /href="\/audit">Find my workflow leak/);
   assert.match(source, /<details className="mobile-nav">/);
 });

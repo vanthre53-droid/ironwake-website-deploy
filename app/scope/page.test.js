@@ -8,6 +8,6 @@ test('scope page presents engagement shapes and boundaries without inventing pub
   assert.match(source, /Workflow build/);
   assert.match(source, /Operating support/);
   assert.match(source, /Provider and hosting costs/);
-  assert.match(source, /Prices remain private/);
+  assert.match(source, /No generic package or invented price/);
   assert.doesNotMatch(source, /₹|\$\d|USD|INR/);
 });

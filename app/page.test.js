@@ -4,9 +4,12 @@ import { readFile } from 'node:fs/promises';
 
 test('homepage keeps truthful audit CTA and operating path', async () => {
   const source = await readFile(new URL('./page.js', import.meta.url), 'utf8');
-  assert.match(source, /Request a Business Leak Audit/);
-  assert.match(source, /Stop letting good leads disappear/);
+  assert.match(source, /Find the leak in my workflow/);
+  assert.match(source, /Turn every serious enquiry into a clear next action/);
   assert.match(source, /<SiteFooter \/>/);
+  for (const href of ['/systems/missed-lead-recovery', '/systems/booking-control', '/systems/ai-receptionist', '/work/rapidpulse', '/work/dentacare-pro', '/work/atelier', '/industries/home-services', '/industries/dental-clinics', '/industries/salons-spas']) {
+    assert.ok(source.includes(href), `homepage should expose ${href}`);
+  }
 });
 
 test('homepage signal rail is decorative, labelled, and CSS-only', async () => {
