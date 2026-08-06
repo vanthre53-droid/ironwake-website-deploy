@@ -99,6 +99,14 @@ export default function WorkPage() {
         Allowed wording for all projects: <strong>PORTFOLIO DEMONSTRATION — capability proof; not a client engagement.</strong> No testimonial, metric, benchmark, or provider callback is attached to this work, and none will be added without reproducible evidence and named approval.
       </div>
     </section>
+    <section className="section">
+      <span className="eyebrow">Ready to fix your workflow?</span>
+      <h2>Have your own enquiry path reviewed.</h2>
+      <div className="hero-actions">
+        <a className="button" href="/audit">Request a Business Leak Audit</a>
+        <a className="button secondary" href="/scope">Request scope</a>
+      </div>
+    </section>
     <SiteFooter />
   </main>;
 }
