@@ -553,3 +553,15 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Known limitation: the task remains in C1 because the repository requires a clean task-scoped checkpoint before a role switch. No application code was changed.
 - Ending commit: unchanged; no commit created because unrelated pre-existing changes must be preserved and no commit request was made.
 - Next exact action: create a task-scoped C1 checkpoint, then execute W11-T12A as M1.
+
+### 2026-08-01T12:45:00Z — C3/local_candidate_checkpoint
+- CLI: Hermes; model explicitly reported as `gpt-5.6-terra`.
+- Starting commit: `475fb5c6e25d17992c6a06d02a8f86169c2064e0` with the scoped local experience correction in the worktree.
+- Files changed: local visual system, truthful request guide and booking intake, owner dashboard affordances, rate-limit test, original local SVG visuals, tests, and C1/C2/C3 evidence were committed.
+- Commands/tests: `npm run test` (62/62); `npm run build` (27 generated pages); `git diff --check`; `scripts/validate-state.sh`; `scripts/validate-execution-pack.sh`; `npm audit --omit=dev --audit-level=critical` (0 vulnerabilities); local browser/accessibility readback.
+- Result: VERIFIED LOCAL CANDIDATE. `ada66f133841a8054ce55ec3a1c0e5a9ad970f5d` is the exact commit-backed local correction candidate.
+- Evidence: `reports/C1_GLASSMORPHISM_VISUAL_AMENDMENT.md`; `reports/C2_AUDIT.md`; `reports/C3_RELEASE_CANDIDATE.md`.
+- Approval/external action: user approved the task-scoped local checkpoint. No deployment, publication, provider connection, payment, external message, or secret read occurred.
+- Known limitation: GS1, live owner MFA/recovery, provider proof, legal approval, domain/deployment approval, and an approved production end-to-end test remain blocked human-controlled gates.
+- Ending commit: `ada66f133841a8054ce55ec3a1c0e5a9ad970f5d`.
+- Next exact action: collect the named human-controlled gate evidence before a release approval or deployment attempt.

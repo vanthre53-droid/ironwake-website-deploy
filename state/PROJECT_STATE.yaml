@@ -2,17 +2,17 @@
 # Work/evidence history remains in state/WORK_LOG.md and state/EVIDENCE_INDEX.md.
 schema_version: 6.0.0
 
-active_stage: C1
-required_role: C1
-current_phase: P3_VISUAL_AMENDMENT
-current_gate: GC1_ARCHITECTURE_APPROVED
-next_exact_action: "Create a clean, task-scoped C1 checkpoint for the sealed light-glass amendment; then M1 implements W11-T12A only. Do not change copy, data flow, provider state, or deployment status."
+active_stage: C3
+required_role: C3
+current_phase: P5_RELEASE_GATE
+current_gate: GC3_RELEASE_CANDIDATE_PASS
+next_exact_action: "Obtain human-controlled GS1, owner MFA/recovery, provider, legal, domain/deployment, and production end-to-end evidence. Do not deploy, publish, or connect providers without their named approvals."
 
 harness: hermes
 model: gpt-5.6-terra
-last_safe_boundary: d0f83fe8711314439f34c240aeac876254d5aef8
-last_verified_task: c1_glassmorphism_visual_amendment_2026_08_01
-blocked_on: "W12 runtime provider/notification prerequisites plus W04, GS1, owner authorization-negative evidence, provider, legal, release gates; see reports/M1_EXECUTABLE_SCOPE_EVIDENCE.md and reports/evidence/P2_AUTH_TESTS.md. The three high-severity dependency advisories previously blocking release are now resolved (see 2026-07-31T13:47:54Z Work Log entry) but the npm install that resolved them was denied to this session's own tool call and completed through a mechanism not visible from within the session; owner should confirm this was expected before treating it as fully verified."
+last_safe_boundary: ada66f133841a8054ce55ec3a1c0e5a9ad970f5d
+last_verified_task: c3_local_candidate_ada66f1_2026_08_01
+blocked_on: "GS1 social foundation; live owner authentication/MFA/recovery proof; provider connections; legal approval; domain/deployment approval; and an approved production end-to-end test. Local candidate ada66f1 is technically verified but is not approved for production."
 
 gates:
   G1_USER_APPROVAL: verified

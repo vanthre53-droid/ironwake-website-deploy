@@ -1,13 +1,13 @@
 # C3 Release Candidate — 2026-08-01
 
-Verdict: `FAIL — NOT APPROVED FOR PRODUCTION`
+Verdict: `PARTIAL — NOT APPROVED FOR PRODUCTION`
 
 ## Candidate identity
 
-- Git HEAD verified at the gate: `475fb5c6e25d17992c6a06d02a8f86169c2064e0`.
-- Release candidate identity: `MISMATCH`. The worktree has uncommitted application,
-  evidence, and state changes, so there is no exact, commit-backed artifact that C3 can
-  approve for release.
+- Git HEAD verified at the local C3 gate: `ada66f133841a8054ce55ec3a1c0e5a9ad970f5d`.
+- Release candidate identity: `VERIFIED LOCAL CANDIDATE`. Commit `ada66f1` contains the
+  scoped experience correction, its tests, and its C1/C2/C3 evidence. This is not a
+  production approval.
 
 ## Verification checklist
 
@@ -87,8 +87,8 @@ replace the candidate-identity failure above or turn a local build into a releas
 
 ### Non-waivable blockers
 
-The following remain `BLOCKED` or `PENDING`: a clean task-scoped candidate commit;
-GS1 social foundation; live owner authentication, MFA, and recovery evidence; calendar,
+The following remain `BLOCKED` or `PENDING`: GS1 social foundation; live owner
+authentication, MFA, and recovery evidence; calendar,
 email, monitoring, and notification provider proof; legal approval of the draft routes;
 deployment/domain approval; and a real approved end-to-end production test. No production
 deployment, publication, provider connection, payment action, or external communication
