@@ -16,3 +16,5 @@
 /node_modules/
 /.ironwake/
 /graphify-out/
+.open-next
+.dev.vars
