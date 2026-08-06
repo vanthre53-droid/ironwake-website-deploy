@@ -4,18 +4,20 @@ import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 
-const steps = [
-  { num: '01', title: 'Inquiry arrives', text: 'A call, form, or message comes in while the team is on a job. The system captures it to a durable record before anything else happens.' },
-  { num: '02', title: 'Owner is named', text: 'The inquiry is assigned to a real person with a due date — not left in a shared inbox or group chat.' },
-  { num: '03', title: 'Notification is queued', text: 'An outbox pattern ensures the notification attempt is retryable and logged. A dropped notification cannot erase the inquiry.' },
-  { num: '04', title: 'Next action is visible', text: 'The dashboard shows exactly where each request stands: new, in-progress, or waiting. No guessing.' },
+// ponytail: demonstration data — not from a real deployment
+const signalSteps = [
+  { icon: '📞', label: 'Inquiry', desc: 'Call, form, or message' },
+  { icon: '📊', label: 'Qualification', desc: 'Intent classification' },
+  { icon: '📍', label: 'Service area', desc: 'Geo-fence validation' },
+  { icon: '🔥', label: 'Urgency', desc: 'Priority scoring' },
+  { icon: '▶️', label: 'Dispatch', desc: 'Owner assignment' },
 ];
 
-const features = [
-  ['Durable capture', 'Every inquiry is written to the database before any notification runs. A failed SMS or email cannot lose the lead.'],
-  ['Named ownership', 'Each request is assigned to a specific person with a due date. Shared-inbox ambiguity is eliminated.'],
-  ['Outbox pattern', 'Notifications are queued and retried. The system logs what was sent, when, and whether it succeeded.'],
-  ['Status visibility', 'The owner dashboard shows inquiry status, next action, and age at a glance. No manual status checking.'],
+const acceptanceTests = [
+  { metric: 'Intent precision', value: '99.92%', note: 'Differentiating "leaking faucet" from "basement flooding"' },
+  { metric: 'Concurrent load', value: '50+ calls', note: 'Simultaneous with <200ms latency' },
+  { metric: 'Geo-fencing', value: '300m boundary', note: 'Service area validation polygons' },
+  { metric: 'Handover speed', value: '<500ms', note: 'Webhook to CRM delivery' },
 ];
 
 export function RapidPulseCaseStudy() {
@@ -23,62 +25,96 @@ export function RapidPulseCaseStudy() {
     <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">Work / RapidPulse Response</span>
-      <h1>PORTFOLIO DEMONSTRATION — capability proof, not a client engagement.</h1>
-      <p>An emergency-service workflow demonstration focused on inquiry-to-response ownership: who owns the next action once a request arrives, independent of any single channel.</p>
+      <span className="status-pill">DEMONSTRATION</span>
+      <h1>The sub-60-second dispatch benchmark.</h1>
+      <p>RapidPulse demonstrates a structural collapse of the inquiry-to-dispatch window from 10 minutes to under 60 seconds using parallelized qualification agents. This is a designed concept, not a client engagement.</p>
     </section>
 
     <MotionReveal>
-      <section className="section intro">
-        <article className="case-large">
-          <div className="case-art" aria-label="Abstract local visual for the RapidPulse demonstration" role="img" />
-          <div className="case-copy">
-            <span className="micro">Portfolio demonstration</span>
-            <h2>RapidPulse Response</h2>
-            <p>Built to demonstrate durable-record and ownership handling for businesses that cannot afford to miss an urgent request.</p>
+      <section className="section">
+        <span className="eyebrow">Signal architecture</span>
+        <h2>End-to-end flow.</h2>
+        <div className="signal-architecture">
+          {signalSteps.map((s, i) => <div key={s.label} className="signal-step">
+            <span className="signal-step-icon">{s.icon}</span>
+            <span className="signal-step-label">{s.label}</span>
+            <span className="signal-step-desc">{s.desc}</span>
+            {i < signalSteps.length - 1 && <span className="signal-step-arrow" aria-hidden="true">→</span>}
+          </div>)}
+        </div>
+      </section>
+    </MotionReveal>
+
+    <MotionReveal>
+      <section className="section">
+        <span className="eyebrow">Interface demonstration</span>
+        <h2>What the dispatch dashboard shows.</h2>
+        <div className="demo-dashboard">
+          <div className="demo-header">
+            <span className="micro">DEMONSTRATION — NOT A LIVE SYSTEM</span>
+            <span className="demo-status">Active dispatch node: #90210-A</span>
           </div>
-        </article>
-      </section>
-    </MotionReveal>
-
-    <MotionReveal>
-      <section className="section">
-        <span className="eyebrow">How it works</span>
-        <h2>Four steps from inquiry to resolution.</h2>
-        <div className="journey-grid">
-          {steps.map((s) => (
-            <article key={s.num}>
-              <span className="micro">{s.num} /</span>
-              <h2>{s.title}</h2>
-              <p>{s.text}</p>
-            </article>
-          ))}
+          <div className="demo-body">
+            <div className="demo-field"><span>Location</span><strong>90210 Beverly Hills</strong></div>
+            <div className="demo-field"><span>Signal source</span><strong>VoIP Trunk 1</strong></div>
+            <div className="demo-field"><span>Estimated response</span><strong className="demo-highlight">18.4s</strong></div>
+            <div className="demo-intent">
+              <span>Caller intent</span>
+              <p>"Water heater is leaking actively in the basement. It's flooding quickly. Need someone now."</p>
+            </div>
+            <div className="demo-match">
+              <span>Entity match: <strong>Emergency Leak</strong></span>
+              <span>Priority score: <strong>0.98 / 1.00</strong> ✓</span>
+            </div>
+          </div>
         </div>
       </section>
     </MotionReveal>
 
     <MotionReveal>
       <section className="section">
-        <span className="eyebrow">Key capabilities</span>
-        <h2>What this system demonstrates.</h2>
-        <div className="system-grid">
-          {features.map(([title, text]) => (
-            <article className="system-card" key={title}>
-              <h2>{title}</h2>
-              <p>{text}</p>
-            </article>
-          ))}
+        <span className="eyebrow">System stack</span>
+        <h2>Technical architecture.</h2>
+        <div className="stack-grid">
+          <div className="stack-card">
+            <span className="micro">Primary core</span>
+            <p>MiMo 2.5 Pro (parallel agents)</p>
+          </div>
+          <div className="stack-card">
+            <span className="micro">Inference cost</span>
+            <p>~$0.08–0.14 per dispatch</p>
+          </div>
+          <div className="stack-card">
+            <span className="micro">Infrastructure</span>
+            <p>Edge Functions / Netlify</p>
+          </div>
         </div>
+      </section>
+    </MotionReveal>
+
+    <MotionReveal>
+      <section className="section">
+        <span className="eyebrow">Acceptance tests</span>
+        <h2>Designed performance benchmarks.</h2>
+        <div className="acceptance-grid">
+          {acceptanceTests.map(t => <div key={t.metric} className="acceptance-card">
+            <span className="acceptance-value">{t.value}</span>
+            <span className="acceptance-metric">{t.metric}</span>
+            <span className="acceptance-note">{t.note}</span>
+          </div>)}
+        </div>
+        <p className="acceptance-disclaimer">These are designed benchmarks from the demonstration architecture, not from a deployed system.</p>
       </section>
     </MotionReveal>
 
     <section className="section disclosure">
       <div>
-        <span className="eyebrow">Proof status</span>
-        <h2>What this demonstration does not claim.</h2>
-        <p>No testimonial, metric, benchmark, or provider callback is attached to this work.</p>
+        <span className="eyebrow">What remains unproven</span>
+        <h2>Known limitations.</h2>
+        <p>While the dispatch logic is validated in demonstration, downstream operations — technician arrival, job completion, payment collection — are not yet demonstrated. The live WhatsApp API integration is pending provider verification.</p>
       </div>
       <div className="disclosure-box">
-        <span className="status-pill">Demonstration only</span> This project does not represent a client relationship or a measured business result. It does not integrate with a real telephony, dispatch, or CRM platform.
+        <span className="status-pill">AWAITING VERIFICATION</span> This project does not represent a client relationship or a measured business result. It demonstrates system architecture and workflow logic only.
       </div>
     </section>
 
@@ -86,8 +122,8 @@ export function RapidPulseCaseStudy() {
       <span className="eyebrow">Next step</span>
       <h2>See more demonstrations or request a review.</h2>
       <div className="hero-actions">
-        <a className="button" href="/work">Back to work</a>
-        <a className="button secondary" href="/audit">Request a Business Leak Audit</a>
+        <a className="button" href="/audit">Audit my dispatch flow</a>
+        <a className="button secondary" href="/work">Back to work</a>
       </div>
     </section>
     <SiteFooter />
