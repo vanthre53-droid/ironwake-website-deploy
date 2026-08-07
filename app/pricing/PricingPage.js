@@ -3,94 +3,126 @@
 import { useState } from 'react';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
+import { MotionReveal } from '../components/MotionReveal';
 
-export const metadata = {
-  title: 'Pricing — IronWake',
-  description: 'IronWake pricing for India and international service businesses. Outcome-based tiers for lead recovery, booking control, and AI reception.'
-};
-
-const indiaPricing = [
-  { code: 'RECOVERY / 01', name: 'Free Lead Leak Check', price: '₹0', desc: 'Audit your existing CRM and response times to find hidden lost revenue.', cta: 'Request Audit', highlight: false },
-  { code: 'RECOVERY / 02', name: 'Missed Lead Recovery Fix', price: '₹3.5k', range: ' - 6k', desc: 'Automated missed-call SMS back, instant email notifications, lead logging script.', cta: 'Deploy System', highlight: false },
-  { code: 'PRESENCE / 03', name: 'Trust + Lead Website', price: '₹15k', range: ' - 25k', desc: 'High-intent service providers needing a conversion-optimized technical front.', cta: 'Build Architecture', highlight: false },
-  { code: 'CONTROL / 04', name: 'Booking + Control System', price: '₹30k', range: ' - 40k', desc: 'Full end-to-end CRM setup, automated scheduling engine, payment integration (UPI/Cards), lead nurture flows.', cta: 'Select System', highlight: true },
-  { code: 'INTELLIGENCE / 05', name: 'AI Receptionist Starter', price: '₹50k', range: ' - 80k', desc: '24/7 automated WhatsApp/Web AI agent trained on your specific business knowledge base.', cta: 'Configure Agent', highlight: false },
-  { code: 'SUSTENANCE / 06', name: 'System Care Plan', price: '₹6k', range: ' - 15k/mo', desc: 'Monthly logic audits, priority technical support, minor system adjustments.', cta: 'Join Care Plan', highlight: false },
-];
-
-const intlPricing = [
-  { code: 'RECOVERY / 01', name: 'Free Lead Leak Check', price: '$0', desc: 'Audit your existing CRM and response times to find hidden lost revenue.', cta: 'Request Audit', highlight: false },
-  { code: 'RECOVERY / 02', name: 'Missed Lead Recovery', price: '$49', range: ' - 99', desc: 'Automated missed-call SMS back, instant email notifications, lead logging script.', cta: 'Deploy System', highlight: false },
-  { code: 'PRESENCE / 03', name: 'Trust + Lead Website', price: '$149', range: ' - 249', desc: 'High-intent service providers needing a conversion-optimized technical front.', cta: 'Build Architecture', highlight: false },
-  { code: 'CONTROL / 04', name: 'Booking + Control', price: '$499', range: ' - 899', desc: 'Full end-to-end CRM setup, automated scheduling engine, payment integration, lead nurture flows.', cta: 'Select System', highlight: true },
-  { code: 'INTELLIGENCE / 05', name: 'AI Receptionist', price: '$899', range: ' - 1.5k', desc: '24/7 automated WhatsApp/Web AI agent trained on your specific business knowledge base.', cta: 'Configure Agent', highlight: false },
-  { code: 'SUSTENANCE / 06', name: 'System Care Plan', price: '$199', range: ' - 599/mo', desc: 'Monthly logic audits, priority technical support, minor system adjustments.', cta: 'Join Care Plan', highlight: false },
+// ponytail: canonical pricing from owner-approved offers. Lite/Standard/Pro per offer.
+const offers = [
+  {
+    name: 'Business Leak Audit',
+    desc: 'Written review identifying where your enquiry, booking, or follow-up process loses momentum.',
+    cta: 'Book Diagnostic',
+    india: ['₹799', '₹1,499', '₹2,999'],
+    intl: ['$29', '$59', '$99'],
+    tiers: ['Lite', 'Standard', 'Pro'],
+    recommended: 'Standard',
+  },
+  {
+    name: 'Missed Lead Recovery Setup',
+    desc: 'Automated missed-call callback, instant email notifications, lead logging — no enquiry silently lost.',
+    cta: 'Deploy System',
+    india: ['₹2,200', '₹3,500', '₹5,999'],
+    intl: ['$99', '$149', '$249'],
+    tiers: ['Lite', 'Standard', 'Pro'],
+    recommended: 'Standard',
+  },
+  {
+    name: 'Booking Certainty Starter',
+    desc: 'Separate booking requests from confirmed appointments. CRM, scheduling engine, lead nurture flows.',
+    cta: 'Select System',
+    india: ['₹12,999', '₹24,999', '₹39,999'],
+    intl: ['$199', '$399', '$699'],
+    tiers: ['Lite', 'Standard', 'Pro'],
+    recommended: 'Pro',
+  },
+  {
+    name: 'Trust + Lead Capture Starter',
+    desc: 'Conversion-optimised service website with trust signals, lead capture, and owner attribution.',
+    cta: 'Build Architecture',
+    india: ['₹12,999', '₹18,999', '₹24,999'],
+    intl: ['$499', '$899', '$1,499'],
+    tiers: ['Lite', 'Standard', 'Pro'],
+    recommended: 'Standard',
+  },
+  {
+    name: 'AI Receptionist Starter',
+    desc: '24/7 automated WhatsApp/Web AI agent trained on your specific business knowledge base.',
+    cta: 'Configure Agent',
+    india: ['₹29,999', '₹49,999', '₹79,999'],
+    intl: ['$1,000', '$1,800', '$3,000'],
+    tiers: ['Lite', 'Standard', 'Pro'],
+    recommended: 'Pro',
+  },
 ];
 
 export default function PricingPage() {
   const [region, setRegion] = useState('india');
-  const tiers = region === 'india' ? indiaPricing : intlPricing;
 
   return <main className="shell">
     <SiteHeader />
     <section className="hero compact">
-      <span className="eyebrow">Engagement & pricing</span>
-      <h1>Outcome-based tiers for service businesses.</h1>
-      <p>Implementation fees cover architecture setup and logic deployment. Third-party operational costs (domain, hosting, WhatsApp API, AI compute) are billed directly by providers for transparency.</p>
+      <span className="eyebrow">Pricing</span>
+      <h1>Five systems. Three tiers each. No hidden costs.</h1>
+      <p>Every engagement starts with a Business Leak Audit. Implementation fees cover architecture and logic deployment. Third-party provider costs (domain, hosting, WhatsApp API, AI compute) are billed directly by providers — IronWake never marks them up.</p>
       <div className="pricing-toggle">
-        <button className={region === 'india' ? 'active' : ''} onClick={() => setRegion('india')}>India pricing</button>
-        <button className={region === 'intl' ? 'active' : ''} onClick={() => setRegion('intl')}>International pricing</button>
+        <button className={region === 'india' ? 'active' : ''} onClick={() => setRegion('india')}>India (₹)</button>
+        <button className={region === 'intl' ? 'active' : ''} onClick={() => setRegion('intl')}>International ($)</button>
       </div>
     </section>
 
-    <section className="section intro">
-      <div className="pricing-grid">
-        {tiers.map(t => <article key={t.code} className={`pricing-card${t.highlight ? ' recommended' : ''}`}>
-          {t.highlight && <span className="pricing-badge">Recommended</span>}
-          <span className="micro">{t.code}</span>
-          <h3>{t.name}</h3>
-          <p className="pricing-amount">{t.price}{t.range && <span className="pricing-range">{t.range}</span>}</p>
-          <p className="pricing-desc">{t.desc}</p>
-          <a className={`button${t.highlight ? '' : ' secondary'}`} href="/audit">{t.cta}</a>
-        </article>)}
+    <MotionReveal stagger><section className="section intro">
+      <div className="pricing-offers">
+        {offers.map((offer, idx) => {
+          const prices = region === 'india' ? offer.india : offer.intl;
+          return <article key={offer.name} className="pricing-offer">
+            <div className="pricing-offer-header">
+              <span className="micro">{String(idx + 1).padStart(2, '0')} / offer</span>
+              <h3>{offer.name}</h3>
+              <p className="pricing-desc">{offer.desc}</p>
+            </div>
+            <div className="pricing-tiers">
+              {offer.tiers.map((tier, i) => <div key={tier} className={`pricing-tier${tier === offer.recommended ? ' recommended' : ''}`}>
+                {tier === offer.recommended && <span className="pricing-badge">Popular</span>}
+                <span className="pricing-tier-name">{tier}</span>
+                <span className="pricing-amount">{prices[i]}</span>
+                <a className={`button${tier === offer.recommended ? '' : ' secondary'}`} href="/audit">{offer.cta}</a>
+              </div>)}
+            </div>
+          </article>;
+        })}
       </div>
-    </section>
+    </section></MotionReveal>
 
-    <section className="section">
+    <MotionReveal><section className="section">
       <span className="eyebrow">Selection guide</span>
       <h2>Which tier fits your business?</h2>
       <div className="pricing-guide">
         <article>
-          <h3>Phase 1: Stabilization</h3>
-          <p className="pricing-volume">Less than 20 leads/month</p>
-          <p>Stop the immediate bleed. If you miss more than 2 calls a day, start with Missed Lead Recovery.</p>
+          <h3>Start with the Audit</h3>
+          <p>Every engagement begins here. A written review of where your process loses momentum — no obligation, no pressure.</p>
         </article>
         <article>
-          <h3>Phase 2: Efficiency</h3>
-          <p className="pricing-volume">20-100 leads/month</p>
-          <p>Automate manual data entry and back-and-forth scheduling with Booking + Control.</p>
+          <h3>Stabilise first</h3>
+          <p>If you miss more than 2 calls a day, Missed Lead Recovery stops the immediate bleed.</p>
         </article>
         <article>
-          <h3>Phase 3: Scale</h3>
-          <p className="pricing-volume">Over 100 leads/month</p>
-          <p>Deploy AI agents to qualify and route leads before they reach a human operator.</p>
+          <h3>Then control</h3>
+          <p>Once leads are captured, Booking Certainty or Trust + Lead Capture gives you ownership over the next step.</p>
         </article>
         <article>
-          <h3>Continuity</h3>
-          <p className="pricing-volume">Ongoing maintenance</p>
-          <p>Software updates daily. The Care Plan ensures your business logic stays working as APIs change.</p>
+          <h3>Scale with AI</h3>
+          <p>When volume justifies it, the AI Receptionist qualifies and routes leads before they reach a human.</p>
         </article>
       </div>
-    </section>
+    </section></MotionReveal>
 
-    <section className="section disclosure">
+    <MotionReveal><section className="section disclosure">
       <div>
         <span className="eyebrow">Cost transparency</span>
         <h3>What you pay and what you don't.</h3>
-        <p>Implementation fees are one-time. Third-party provider costs (domain, hosting, WhatsApp API, AI compute minutes) are billed directly by the providers to your account. IronWake never marks up provider costs.</p>
+        <p>Implementation fees are one-time per system. Third-party provider costs (domain, hosting, WhatsApp API, AI compute) are billed directly by providers to your account. IronWake never marks up provider costs.</p>
       </div>
-      <div className="disclosure-box">All prices are indicative ranges. Final scope and pricing are confirmed after a Business Leak Audit. No work begins without written approval.</div>
-    </section>
+      <div className="disclosure-box">All prices are confirmed offer ranges. Final scope is confirmed after a Business Leak Audit. No work begins without written approval.</div>
+    </section></MotionReveal>
 
     <SiteFooter />
   </main>;

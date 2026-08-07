@@ -351,3 +351,20 @@ button, input, textarea { font: inherit; }
 .dashboard-detail-actions .button { flex: 1; min-height: 38px; font-size: 11px; }
 .dashboard-disclaimer { font: 11px/1.5 var(--mono); color: var(--graphite); font-style: italic; margin: 0; }
 @media (max-width: 860px) { .dashboard-demo { grid-template-columns: 1fr; }.dashboard-list { border-right: 0; border-bottom: 1px solid var(--rule); } }
+
+/* Pricing offers — tier-per-offer layout */
+.pricing-offers { display: grid; gap: 28px; }
+.pricing-offer { border: 1px solid var(--rule); border-radius: 18px; background: var(--surface); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+.pricing-offer:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -12px rgb(10 10 10 / .14); }
+.pricing-offer-header { padding: 28px 28px 20px; }
+.pricing-offer-header h3 { margin: 8px 0; font: 400 28px/1.1 var(--display); letter-spacing: -.03em; }
+.pricing-desc { margin: 0; color: var(--graphite); font-size: 15px; line-height: 1.65; }
+.pricing-tiers { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); }
+.pricing-tier { position: relative; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; border-right: 1px solid var(--rule); }
+.pricing-tier:last-child { border-right: 0; }
+.pricing-tier.recommended { background: linear-gradient(180deg, rgb(185 77 47 / .06), transparent); }
+.pricing-tier-name { font: 600 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--graphite); }
+.pricing-tier .pricing-amount { font: 400 34px/1 var(--display); color: var(--ink); letter-spacing: -.03em; }
+.pricing-tier .button { width: 100%; margin-top: 8px; padding: 10px 14px; font-size: 10px; }
+.pricing-tier .pricing-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--copper); color: var(--white); padding: 3px 10px; font: 600 9px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; border-radius: 0 0 6px 6px; }
+@media (max-width: 860px) { .pricing-tiers { grid-template-columns: 1fr; border-top: 0; } .pricing-tier { border-right: 0; border-bottom: 1px solid var(--rule); } .pricing-tier:last-child { border-bottom: 0; } }

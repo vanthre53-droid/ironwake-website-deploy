@@ -1,8 +1,8 @@
 export function SiteFooter() {
   return <footer className="footer">
-    <div><strong>IronWake</strong><p>Clear ownership from first enquiry to next action.</p></div>
-    <div><span className="micro">Explore</span><a href="/systems">Systems</a><a href="/work">Demonstrations</a><a href="/pricing">Pricing</a><a href="/industries">Industries</a></div>
-    <div><span className="micro">Start here</span><a href="/audit">Business Leak Audit</a><a href="/book">Request a call</a><a href="/insights">Insights</a></div>
-    <div className="footer-note">Demonstrations and pending providers are clearly labelled. <a href="/process">How IronWake works →</a><a href="/about">About IronWake</a><a href="/privacy">Privacy draft</a><a href="/terms">Terms draft</a></div>
+    <div><strong>IronWake</strong><p>Operational systems for service businesses. Capture every enquiry, assign a named owner, make the next action visible.</p></div>
+    <div><span className="micro">Explore</span><a href="/work">Work</a><a href="/systems">Services</a><a href="/systems/ai-receptionist">AI Systems</a><a href="/process">Process</a></div>
+    <div><span className="micro">Start here</span><a href="/pricing">Pricing</a><a href="/audit">Book Diagnostic</a><a href="/insights">Insights</a><a href="/about">About</a></div>
+    <div className="footer-note">Demonstrations and pending providers are clearly labelled. <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></div>
   </footer>;
 }

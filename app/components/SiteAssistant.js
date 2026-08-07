@@ -2,20 +2,29 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-// ponytail: deterministic decision-tree assistant; no AI provider required.
+// ponytail: deterministic decision-tree assistant with pricing knowledge; no AI provider required.
 // Upgrade path: wire to /api/chat when a provider is configured.
 const FLOWS = {
   start: {
-    message: "I can help you find where your business might be losing enquiries. What best describes your business?",
+    message: "I can help you find where your business might be losing enquiries, or show you our pricing. What would you like?",
     options: [
-      { label: 'Service business (plumbing, HVAC, electrical)', next: 'service_type' },
-      { label: 'Clinic or dental practice', next: 'clinic' },
-      { label: 'Salon, spa, or wellness studio', next: 'salon' },
-      { label: 'Other service business', next: 'other' },
-      { label: "I just want to see how IronWake works", next: 'how_it_works' }
+      { label: 'Find my workflow leak', next: 'service_type' },
+      { label: 'Show me pricing', next: 'pricing_overview' },
+      { label: 'How does IronWake work?', next: 'how_it_works' },
+      { label: 'Show me your portfolio', action: 'link', href: '/work' },
+      { label: 'Book a diagnostic', action: 'link', href: '/audit' }
     ]
   },
   service_type: {
+    message: "What best describes your business?",
+    options: [
+      { label: 'Service business (plumbing, HVAC, electrical)', next: 'service_diagnosis' },
+      { label: 'Clinic or dental practice', next: 'clinic_diagnosis' },
+      { label: 'Salon, spa, or wellness studio', next: 'salon_diagnosis' },
+      { label: 'Other service business', next: 'other_diagnosis' }
+    ]
+  },
+  service_diagnosis: {
     message: "Service businesses often miss enquiries that come in after hours or when the team is on-site. Which sounds most like your situation?",
     options: [
       { label: 'We miss calls and don\'t call back in time', next: 'missed_calls' },
@@ -24,7 +33,7 @@ const FLOWS = {
       { label: 'Not sure — we just know leads disappear', next: 'not_sure' }
     ]
   },
-  clinic: {
+  clinic_diagnosis: {
     message: "Clinics often lose enquiries between the first call and the actual appointment. Which matches your experience?",
     options: [
       { label: 'Patients call but we can\'t always answer', next: 'missed_calls' },
@@ -33,7 +42,7 @@ const FLOWS = {
       { label: 'We want to see what IronWake recommends', next: 'recommendation' }
     ]
   },
-  salon: {
+  salon_diagnosis: {
     message: "Salons and spas often lose consultation interest when it isn't followed up within a day. What's your biggest challenge?",
     options: [
       { label: 'DMs and enquiries go unanswered too long', next: 'missed_calls' },
@@ -42,8 +51,8 @@ const FLOWS = {
       { label: 'Show me what IronWake can do', next: 'recommendation' }
     ]
   },
-  other: {
-    message: "That's fine — IronWake works with any service business that takes enquiries and turns them into bookings or jobs. What would you most like to fix?",
+  other_diagnosis: {
+    message: "IronWake works with any service business that takes enquiries and turns them into bookings or jobs. What would you most like to fix?",
     options: [
       { label: 'Capture every enquiry reliably', next: 'missed_calls' },
       { label: 'Make follow-up automatic and visible', next: 'no_followup' },
@@ -52,54 +61,66 @@ const FLOWS = {
     ]
   },
   missed_calls: {
-    message: "That's exactly what Missed Lead Recovery fixes. It ensures every enquiry is written to a durable record before any notification runs — so a dropped call or unanswered DM can't erase the lead.",
+    message: "That's exactly what Missed Lead Recovery fixes. It ensures every enquiry is written to a durable record before any notification runs — so a dropped call or unanswered DM can't erase the lead. Setup starts at ₹2,200 / $99.",
     options: [
       { label: 'Show me how it works', action: 'link', href: '/systems/missed-lead-recovery' },
-      { label: 'I want a free audit of my workflow', action: 'link', href: '/audit' },
+      { label: 'Book a diagnostic (₹799 / $29)', action: 'link', href: '/audit' },
+      { label: 'See all pricing', next: 'pricing_overview' },
       { label: 'Start over', next: 'start' }
     ]
   },
   no_followup: {
-    message: "That's a follow-up ownership problem. IronWake assigns every enquiry to a named person with a visible next action — so you can see exactly who owns what and what's overdue.",
+    message: "That's a follow-up ownership problem. IronWake assigns every enquiry to a named person with a visible next action — so you can see exactly who owns what and what's overdue. This is part of Booking Certainty, starting at ₹12,999 / $199.",
     options: [
       { label: 'Show me the system', action: 'link', href: '/systems/missed-lead-recovery' },
       { label: 'See a real demonstration', action: 'link', href: '/work/rapidpulse' },
-      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'Book a diagnostic', action: 'link', href: '/audit' },
       { label: 'Start over', next: 'start' }
     ]
   },
   booking_confusion: {
-    message: "That's a booking certainty problem. IronWake separates booking requests from confirmed appointments so nobody assumes the wrong state. Every booking stays a reviewed request until verified.",
+    message: "That's a booking certainty problem. IronWake separates booking requests from confirmed appointments so nobody assumes the wrong state. Every booking stays a reviewed request until verified. Starts at ₹12,999 / $199.",
     options: [
       { label: 'Show me Booking Certainty', action: 'link', href: '/systems/booking-control' },
       { label: 'See a demonstration', action: 'link', href: '/work/dentacare-pro' },
-      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'Book a diagnostic', action: 'link', href: '/audit' },
       { label: 'Start over', next: 'start' }
     ]
   },
   not_sure: {
-    message: "That's common — most businesses know leads are slipping but can't pinpoint where. A Business Leak Audit maps exactly where your process loses momentum. It's free, takes about 5 minutes to request, and you get a written review.",
+    message: "That's common — most businesses know leads are slipping but can't pinpoint where. A Business Leak Audit maps exactly where your process loses momentum. It costs ₹799 / $29 and you get a written review.",
     options: [
-      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'Book a diagnostic', action: 'link', href: '/audit' },
       { label: 'See how IronWake works first', next: 'how_it_works' },
+      { label: 'See pricing', next: 'pricing_overview' },
       { label: 'Start over', next: 'start' }
     ]
   },
   recommendation: {
-    message: "Based on what you've described, I'd recommend starting with a Business Leak Audit. It identifies the exact point where your enquiry or booking process loses momentum, and gives you a written review with the smallest next step to fix it.",
+    message: "Based on what you've described, I'd recommend starting with a Business Leak Audit (₹799 / $29). It identifies the exact point where your process loses momentum, and gives you a written review with the smallest next step to fix it.",
     options: [
-      { label: 'Request a free audit', action: 'link', href: '/audit' },
+      { label: 'Book a diagnostic', action: 'link', href: '/audit' },
       { label: 'See our case studies', action: 'link', href: '/work' },
+      { label: 'See all pricing', next: 'pricing_overview' },
+      { label: 'Start over', next: 'start' }
+    ]
+  },
+  pricing_overview: {
+    message: "IronWake has five systems, each with Lite / Standard / Pro tiers:\n\n• Business Leak Audit — from ₹799 / $29\n• Missed Lead Recovery — from ₹2,200 / $99\n• Booking Certainty — from ₹12,999 / $199\n• Trust + Lead Capture — from ₹12,999 / $499\n• AI Receptionist — from ₹29,999 / $1,000\n\nEvery engagement starts with the diagnostic.",
+    options: [
+      { label: 'See full pricing page', action: 'link', href: '/pricing' },
+      { label: 'Book a diagnostic', action: 'link', href: '/audit' },
+      { label: 'Find my workflow leak', next: 'service_type' },
       { label: 'Start over', next: 'start' }
     ]
   },
   how_it_works: {
-    message: "IronWake maps where your enquiry, booking, or follow-up process loses momentum, then implements the smallest system that makes the next step visible and owned. We start with a free Business Leak Audit, then scope a bounded solution. No vague promises — just inspectable operational improvements.",
+    message: "IronWake maps where your enquiry, booking, or follow-up process loses momentum, then implements the smallest system that makes the next step visible and owned. We start with a Business Leak Audit (₹799 / $29), then scope a bounded solution. No vague promises — just inspectable operational improvements.",
     options: [
       { label: 'See our systems', action: 'link', href: '/systems' },
       { label: 'See case studies', action: 'link', href: '/work' },
-      { label: 'Request a free audit', action: 'link', href: '/audit' },
-      { label: 'Start over', next: 'start' }
+      { label: 'Book a diagnostic', action: 'link', href: '/audit' },
+      { label: 'See pricing', next: 'pricing_overview' }
     ]
   }
 };
