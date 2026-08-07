@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-export function MotionReveal({ children, className = '' }) {
+export function MotionReveal({ children, className = '', stagger = false }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -16,10 +16,10 @@ export function MotionReveal({ children, className = '' }) {
       if (!entry.isIntersecting) return;
       setVisible(true);
       observer.disconnect();
-    }, { threshold: .12 });
+    }, { threshold: 0.12 });
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
-  return <div ref={ref} className={`motion-reveal${visible ? ' is-visible' : ''} ${className}`}>{children}</div>;
+  return <div ref={ref} className={`motion-reveal${visible ? ' is-visible' : ''}${stagger ? ' stagger' : ''} ${className}`}>{children}</div>;
 }
