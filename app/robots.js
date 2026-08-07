@@ -1,4 +1,9 @@
 export default function robots() {
-  // ponytail: no verified public domain exists; block crawlers until release approval.
-  return { rules: { userAgent: '*', disallow: '/' } };
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+    },
+    sitemap: 'https://ironwake-app.netlify.app/sitemap.xml',
+  };
 }
