@@ -368,3 +368,41 @@ button, input, textarea { font: inherit; }
 .pricing-tier .button { width: 100%; margin-top: 8px; padding: 10px 14px; font-size: 10px; }
 .pricing-tier .pricing-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--copper); color: var(--white); padding: 3px 10px; font: 600 9px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; border-radius: 0 0 6px 6px; }
 @media (max-width: 860px) { .pricing-tiers { grid-template-columns: 1fr; border-top: 0; } .pricing-tier { border-right: 0; border-bottom: 1px solid var(--rule); } .pricing-tier:last-child { border-bottom: 0; } }
+
+/* Motion enhancements — CSS-only, no new JS components */
+.hero > .eyebrow { animation-delay: 0s; }
+.hero > h1 { animation-delay: .08s; }
+.hero > p { animation-delay: .16s; }
+.hero > .workflow-demo { animation-delay: .24s; }
+.hero > .signal-rail { animation-delay: .32s; }
+.hero > .hero-actions { animation-delay: .4s; }
+
+/* CTA micro-interaction: subtle glow pulse on primary button */
+.button:not(.secondary) { position: relative; }
+.button:not(.secondary)::after { content: ''; position: absolute; inset: -2px; border-radius: 12px; background: var(--copper); opacity: 0; z-index: -1; transition: opacity .3s ease; }
+.button:not(.secondary):hover::after { opacity: .15; }
+
+/* Card depth on hover — smoother lift */
+.system-card, .industry-card, .case-large, .case-stack article, .pricing-offer { will-change: transform; }
+
+/* Pricing tier hover */
+.pricing-tier { transition: background .2s ease; }
+.pricing-tier:hover { background: var(--stone); }
+.pricing-tier.recommended:hover { background: linear-gradient(180deg, rgb(185 77 47 / .1), rgb(185 77 47 / .03)); }
+
+/* Smooth nav link underline */
+.header nav a:not(.nav-cta) { transition: color .2s ease; }
+
+/* Assistant panel slide-in */
+.assistant-panel { animation: assistant-slide .32s cubic-bezier(.22, .68, .35, 1); }
+@keyframes assistant-slide { from { opacity: 0; transform: translateY(16px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* Scroll-to-top entrance */
+.scroll-to-top { animation: fade-up .3s ease; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Form field focus glow */
+.audit-form input:focus, .audit-form textarea:focus, .booking-form input:focus, .booking-form textarea:focus { box-shadow: 0 2px 0 0 var(--copper); }
+
+/* Status pill pulse for 'New' items */
+.dashboard-status { transition: opacity .2s ease; }
