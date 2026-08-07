@@ -406,3 +406,15 @@ button, input, textarea { font: inherit; }
 
 /* Status pill pulse for 'New' items */
 .dashboard-status { transition: opacity .2s ease; }
+
+/* Case study visual polish */
+.case-study .signal-architecture { background: linear-gradient(135deg, var(--white), var(--stone)); }
+.case-study .demo-dashboard { box-shadow: 0 8px 32px -8px rgb(10 10 10 / .12); }
+.case-study .demo-header { background: linear-gradient(90deg, var(--ink), #1a2a34); }
+.case-study .acceptance-card { transition: transform .25s ease, box-shadow .25s ease; }
+.case-study .acceptance-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -8px rgb(10 10 10 / .15); }
+.case-study .stack-card { transition: transform .2s ease; }
+.case-study .stack-card:hover { transform: translateY(-2px); }
+
+/* Case study metric highlight */
+.case-study .acceptance-value { background: linear-gradient(135deg, var(--copper), #d4654a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
