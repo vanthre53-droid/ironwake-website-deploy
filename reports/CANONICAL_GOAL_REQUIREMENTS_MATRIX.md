@@ -37,9 +37,10 @@ Each row: ID, requirement, route/component, files, status.
 | R31 | All 4 systems linked from homepage with canonical offer | /, /systems/* | app/page.js, app/components/PricingReference.js | VERIFIED_DEPLOYED (commit c8eb933) |
 | R32 | InteractiveLeadJourney: 3 channels, animated route | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2) |
 | R33 | Sitemap, robots, and JSON-LD point at the live production host | /sitemap.xml /robots.txt /layout.js JSON-LD | app/sitemap.js, app/robots.js, app/layout.js | VERIFIED_DEPLOYED (commit 0195f0a — source fix; deployed via Netlify deploy id `6a7711231746907d5d4a82da` built from master with full `next build`. Deployed sitemap + robots + JSON-LD now reference `https://lucent-sunflower-966982.netlify.app` only; no `ironwake-app.netlify.app` or `ironwake.netlify.app` strings remain on production.) |
+| R34 | Exactly one H1 per page (no double-h1 from streaming SSR + loading boundary) | / | app/loading.js, app/globals.css | VERIFIED_DEPLOYED (commit cb9ae74 — replaced loading boundary `<h1>` with `<div class="loading-headline">` and updated CSS selector to match both; added regression-guard test in app/loading.test.js. Deployed via Netlify deploy id `6a7713bf635bc722659e737a`. Deployed home HTML now contains exactly one `<h1>`: 'Stop losing leads between enquiry and follow-up.' The loading-boundary text 'Preparing the next view.' remains visible but is not a heading.) |
 
 ## Status counts
-- VERIFIED_DEPLOYED: 26
+- VERIFIED_DEPLOYED: 27
 - VERIFIED_SOURCE: 1
 - PARTIAL: 0
 - NEEDS_VERIFIED: 0
