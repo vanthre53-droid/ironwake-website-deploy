@@ -212,6 +212,21 @@ button, input, textarea { font: inherit; }
 .system-card:hover, .industry-card:hover, a.case-large:hover, .case-stack a:hover article { border-color: var(--copper); transform: translateY(-6px) scale(1.01); }
 .audit-form:hover, .owner-card:hover, .disclosure-box:hover, .embed-placeholder:hover { transform: none; box-shadow: none; }
 
+/* Interactive lead journey */
+.interactive-journey { border-top: 1px solid var(--rule); }
+.channel-picker { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 26px; }
+.channel-button { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 18px; border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: var(--graphite); font: 600 11px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; cursor: pointer; transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease; }
+.channel-button:hover { transform: translateY(-2px); border-color: var(--copper); }
+.channel-button.active { background: var(--copper); border-color: var(--copper); color: var(--white); }
+.journey-route { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; max-width: 720px; }
+.journey-node { display: grid; grid-template-columns: 48px 1fr; align-items: center; gap: 16px; padding: 14px 18px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: .35; transition: opacity .25s ease, transform .35s cubic-bezier(.2, .75, .25, 1), border-color .25s ease, background .25s ease; }
+.journey-node.active { opacity: 1; transform: translateX(8px); border-color: var(--copper); background: var(--surface-strong); }
+.journey-node.done { opacity: .85; }
+.journey-index { font: 500 10px/1 var(--mono); letter-spacing: .1em; color: var(--graphite); }
+.journey-node.active .journey-index { color: var(--copper); }
+.journey-label { font: 500 15px/1.4 var(--display); color: var(--ink); }
+.journey-note { margin: 22px 0 0; max-width: 600px; color: var(--graphite); font-size: 13px; line-height: 1.6; }
+
 /* Pricing reference on systems pages */
 .pricing-reference { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--stone); margin: 0 -40px; padding: 64px 40px; }
 .pricing-reference h3 { font-size: clamp(28px, 3.2vw, 42px); margin: 8px 0 12px; letter-spacing: -.035em; }
