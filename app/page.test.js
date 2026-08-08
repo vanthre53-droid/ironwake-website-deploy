@@ -19,5 +19,6 @@ test('homepage signal rail is decorative, labelled, and CSS-only', async () => {
   assert.match(source, /signal-rail-label">Inquiry/);
   assert.match(source, /signal-rail-label">Owner/);
   assert.match(source, /signal-rail-label">Next action/);
-  assert.match(source, /signal-rail-pulse" aria-hidden="true"/);
+  assert.match(source, /<WakeSVG/);
+  assert.match(source, /WakeSVG \/>/);
 });
