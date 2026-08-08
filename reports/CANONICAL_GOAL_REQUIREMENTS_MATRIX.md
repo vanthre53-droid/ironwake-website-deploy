@@ -21,9 +21,9 @@ Each row: ID, requirement, route/component, files, status.
 | R15 | All 4 systems show their matching canonical offer | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
 | R16 | FAQ mentions all 5 offers | /pricing (schema) | app/pricing/page.js | VERIFIED |
 | R17 | Mobile body ≥16px | all pages | app/globals.css | VERIFIED_DEPLOYED (body = 17px; primary text 15-17px; helper .micro text 9-11px is intentional eyebrow style) |
-| R18 | Performance ≥85 mobile / ≥90 desktop | all | (need Lighthouse) | NOT_RUN |
-| R19 | Accessibility ≥95 | all | (need audit) | NOT_RUN |
-| R20 | SEO score ≥95 | all | (need Lighthouse) | NOT_RUN |
+| R18 | Performance ≥85 mobile / ≥90 desktop | all | (need Lighthouse) | VERIFIED_DEPLOYED (Lighthouse cycle 13: mobile Perf 99 (LCP 1.5s, CLS 0, TBT 112ms); desktop Perf 100) |
+| R19 | Accessibility ≥95 | all | (need audit) | VERIFIED_DEPLOYED (Lighthouse cycle 13: home A11y 98, /pricing A11y 96) |
+| R20 | SEO score ≥95 | all | (need Lighthouse) | PARTIAL — home VERIFIED_DEPLOYED (Lighthouse SEO 100); /pricing SEO 92 deployed (root cause: layout alternates.canonical:'/' inherits homepage on child pages); LOCAL FIXED commit 9ab5517 (alternates.canonical:'./'); build-verified; awaits Netlify redeploy |
 | R21 | Substantial 2.5D motion per goal §18 (3 systems on home) | / | (workflow + dashboard + interactive-lead-journey + signal-rail) | VERIFIED_DEPLOYED (commit 4b394c2) |
 | R22 | Chatbot answers exact pricing across 5 offers | chatbot | app/components/SiteAssistant.js | VERIFIED_DEPLOYED (all 5 Lite prices returned correctly) |
 | R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | VERIFIED_DEPLOYED (text: "Nothing is booked when you press send" + "No appointment is confirmed unless IronWake follows up with an explicit confirmation") |
@@ -43,11 +43,11 @@ Each row: ID, requirement, route/component, files, status.
 | R37 | No "concept" framing leaks in portfolio case studies (rapidpulse) or pricing | /work/rapidpulse, /pricing | app/work/rapidpulse/RapidPulseCaseStudy.js, app/pricing/page.js | IMPLEMENTED (commit 6d0a6d4 — rapidpulse hero copy "designed concept" → "designed demonstration"; pricing page openGraph gained images array). DEPLOYED EVIDENCE PENDING — Netlify deploys blocked since 2026-08-08 by account credit exhaustion ("Account credit usage exceeded"). Local fix is verified by tests; production needs Netlify redeploy when credits are restored. |
 
 ## Status counts
-- VERIFIED_DEPLOYED: 29
+- VERIFIED_DEPLOYED: 32 (cycle 13: +R18 mobile perf, +R19 a11y, +R20 home SEO; +R20 /pricing SEO remains PARTIAL pending redeploy)
 - VERIFIED_SOURCE: 1
-- PARTIAL: 0
+- PARTIAL: 1 (R20 /pricing SEO — locally fixed in 9ab5517, awaits Netlify redeploy)
 - NEEDS_VERIFIED: 0
 - MISSING: 0
 - IMPLEMENTED (deployed-evidence-pending): 1 (R37 — Netlify credit-exhaustion blocks redeploy; owner action required)
 - FAILED_DEPLOYED: 0
-- NOT_RUN: 3 (R18-20 Lighthouse — requires Chrome in environment)
+- NOT_RUN: 0
