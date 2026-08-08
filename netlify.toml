@@ -2,6 +2,9 @@
   command = "next build"
   publish = ".next"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 # Security headers (matches next.config.mjs headers() for redundancy)
 [[headers]]
   for = "/*"
