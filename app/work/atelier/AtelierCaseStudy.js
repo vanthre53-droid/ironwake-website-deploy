@@ -3,6 +3,7 @@
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
+import { StepPipeline } from '../../components/StepPipeline';
 
 // ponytail: demonstration data — not from a real studio
 const consultSteps = [
@@ -34,14 +35,7 @@ export function AtelierCaseStudy() {
       <section className="section">
         <span className="eyebrow">Consultation flow</span>
         <h2>From interest to owned follow-up.</h2>
-        <div className="signal-architecture">
-          {consultSteps.map((s, i) => <div key={s.label} className="signal-step">
-            <span className="signal-step-icon">{s.icon}</span>
-            <span className="signal-step-label">{s.label}</span>
-            <span className="signal-step-desc">{s.desc}</span>
-            {i < consultSteps.length - 1 && <span className="signal-step-arrow" aria-hidden="true">→</span>}
-          </div>)}
-        </div>
+        <StepPipeline steps={consultSteps} ariaLabel="Atelier consultation pipeline" />
       </section>
     </MotionReveal>
 

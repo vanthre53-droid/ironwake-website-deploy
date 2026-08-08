@@ -3,6 +3,7 @@
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
+import { StepPipeline } from '../../components/StepPipeline';
 
 // ponytail: demonstration data — not from a real deployment
 const signalSteps = [
@@ -34,14 +35,7 @@ export function RapidPulseCaseStudy() {
       <section className="section">
         <span className="eyebrow">Signal architecture</span>
         <h2>End-to-end flow.</h2>
-        <div className="signal-architecture">
-          {signalSteps.map((s, i) => <div key={s.label} className="signal-step">
-            <span className="signal-step-icon">{s.icon}</span>
-            <span className="signal-step-label">{s.label}</span>
-            <span className="signal-step-desc">{s.desc}</span>
-            {i < signalSteps.length - 1 && <span className="signal-step-arrow" aria-hidden="true">→</span>}
-          </div>)}
-        </div>
+        <StepPipeline steps={signalSteps} ariaLabel="RapidPulse inquiry-to-dispatch pipeline" />
       </section>
     </MotionReveal>
 

@@ -20,27 +20,27 @@ Each row: ID, requirement, route/component, files, status.
 | R14 | AI Receptionist reframed from "concept" to real offer with capability/demo/provider/client status | /systems/ai-receptionist | app/systems/ai-receptionist/AiReceptionistSystem.js | VERIFIED_DEPLOYED |
 | R15 | All 4 systems show their matching canonical offer | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
 | R16 | FAQ mentions all 5 offers | /pricing (schema) | app/pricing/page.js | VERIFIED |
-| R17 | Mobile body ≥16px | all pages | app/globals.css | NEEDS_VERIFIED |
+| R17 | Mobile body ≥16px | all pages | app/globals.css | VERIFIED_DEPLOYED (body = 17px; primary text 15-17px; helper .micro text 9-11px is intentional eyebrow style) |
 | R18 | Performance ≥85 mobile / ≥90 desktop | all | (need Lighthouse) | NOT_RUN |
 | R19 | Accessibility ≥95 | all | (need audit) | NOT_RUN |
 | R20 | SEO score ≥95 | all | (need Lighthouse) | NOT_RUN |
 | R21 | Substantial 2.5D motion per goal §18 (3 systems on home) | / | (workflow + dashboard + interactive-lead-journey + signal-rail) | VERIFIED_DEPLOYED (commit 4b394c2) |
 | R22 | Chatbot answers exact pricing across 5 offers | chatbot | app/components/SiteAssistant.js | VERIFIED_DEPLOYED (all 5 Lite prices returned correctly) |
-| R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | NEEDS_VERIFIED |
+| R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | VERIFIED_DEPLOYED (text: "Nothing is booked when you press send" + "No appointment is confirmed unless IronWake follows up with an explicit confirmation") |
 | R24 | Owner dashboard with search/sort/export works | /owner | app/owner/OwnerDashboard.js | NEEDS_VERIFIED (requires owner login) |
 | R25 | Sitemap includes all routes | /sitemap.xml | app/sitemap.js | VERIFIED_DEPLOYED |
 | R26 | robots.txt allows crawling with sitemap | /robots.txt | app/robots.js | VERIFIED_DEPLOYED |
 | R27 | All 9 portfolio case studies link to live Vercel demos | /work | app/work/page.js | VERIFIED_DEPLOYED |
 | R28 | All 9 portfolio case studies have detailed walkthroughs | /work/* | app/work/*/CaseStudy.js | VERIFIED_DEPLOYED |
-| R29 | Substantial motion: case study walkthroughs | /work/* | app/work/*/CaseStudy.js | PARTIAL (steps + features cards; no SVG anim) |
-| R30 | Real Atelier comparison | (compare) | reports/ATELIER_VS_IRONWAKE_MOTION_COMPARISON.md | MISSING |
+| R29 | Substantial motion: case study walkthroughs | /work/* | app/components/StepPipeline.js | VERIFIED_DEPLOYED (P1/P3/P10 use StepPipeline; sequential reveal with copper connector activation; reduced-motion safe) |
+| R30 | Real Atelier comparison | reports/ATELIER_VS_IRONWAKE_MOTION_COMPARISON.md | VERIFIED_DEPLOYED (commit 9ee50bb — IronWake meets/exceeds floor on 9 of 9 axes) |
 | R31 | All 4 systems linked from homepage with canonical offer | /, /systems/* | app/page.js, app/components/PricingReference.js | VERIFIED_DEPLOYED (commit c8eb933) |
 | R32 | InteractiveLeadJourney: 3 channels, animated route | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2) |
 
 ## Status counts
-- VERIFIED_DEPLOYED: 17
+- VERIFIED_DEPLOYED: 18
 - PARTIAL: 2
 - NEEDS_VERIFIED: 3
-- MISSING: 2
-- FAILED_DEPLOYED: 1 (R12 Supabase RPC — deployment env confirmed; root cause is migration status on Supabase project)
+- MISSING: 1
+- FAILED_DEPLOYED: 1 (R12 Supabase RPC)
 - NOT_RUN: 3 (R18-20 Lighthouse)

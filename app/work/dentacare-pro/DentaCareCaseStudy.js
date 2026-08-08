@@ -3,6 +3,7 @@
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
+import { StepPipeline } from '../../components/StepPipeline';
 
 // ponytail: demonstration data — not from a real clinic
 const intakeSteps = [
@@ -34,14 +35,7 @@ export function DentaCareCaseStudy() {
       <section className="section">
         <span className="eyebrow">Intake flow</span>
         <h2>From enquiry to reviewed booking.</h2>
-        <div className="signal-architecture">
-          {intakeSteps.map((s, i) => <div key={s.label} className="signal-step">
-            <span className="signal-step-icon">{s.icon}</span>
-            <span className="signal-step-label">{s.label}</span>
-            <span className="signal-step-desc">{s.desc}</span>
-            {i < intakeSteps.length - 1 && <span className="signal-step-arrow" aria-hidden="true">→</span>}
-          </div>)}
-        </div>
+        <StepPipeline steps={intakeSteps} ariaLabel="DentaCare intake pipeline" />
       </section>
     </MotionReveal>
 
