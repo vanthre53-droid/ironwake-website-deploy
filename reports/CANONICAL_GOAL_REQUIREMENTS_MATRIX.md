@@ -36,14 +36,14 @@ Each row: ID, requirement, route/component, files, status.
 | R30 | Real Atelier comparison | reports/ATELIER_VS_IRONWAKE_MOTION_COMPARISON.md | VERIFIED_DEPLOYED (commit 9ee50bb — IronWake meets/exceeds floor on 9 of 9 axes) |
 | R31 | All 4 systems linked from homepage with canonical offer | /, /systems/* | app/page.js, app/components/PricingReference.js | VERIFIED_DEPLOYED (commit c8eb933) |
 | R32 | InteractiveLeadJourney: 3 channels, animated route | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2) |
-| R33 | Sitemap, robots, and JSON-LD point at the live production host | /sitemap.xml /robots.txt /layout.js JSON-LD | app/sitemap.js, app/robots.js, app/layout.js | IMPLEMENTED (commit 0195f0a — all three now read `NEXT_PUBLIC_SITE_URL` with `https://lucent-sunflower-966982.netlify.app` fallback; local Next build confirmed sitemap + robots prerender with the new URL). DEPLOYED EVIDENCE PENDING — requires a fresh Netlify build trigger, which the tool policy gates on owner approval. Old deployed sitemap still references `https://ironwake-app.netlify.app`; old deployed JSON-LD references `https://ironwake.netlify.app`. |
+| R33 | Sitemap, robots, and JSON-LD point at the live production host | /sitemap.xml /robots.txt /layout.js JSON-LD | app/sitemap.js, app/robots.js, app/layout.js | VERIFIED_DEPLOYED (commit 0195f0a — source fix; deployed via Netlify deploy id `6a7711231746907d5d4a82da` built from master with full `next build`. Deployed sitemap + robots + JSON-LD now reference `https://lucent-sunflower-966982.netlify.app` only; no `ironwake-app.netlify.app` or `ironwake.netlify.app` strings remain on production.) |
 
 ## Status counts
-- VERIFIED_DEPLOYED: 25
+- VERIFIED_DEPLOYED: 26
 - VERIFIED_SOURCE: 1
 - PARTIAL: 0
 - NEEDS_VERIFIED: 0
 - MISSING: 0
-- IMPLEMENTED (deployed-evidence-pending): 1 (R33 canonical URL — owner must trigger fresh Netlify build)
+- IMPLEMENTED (deployed-evidence-pending): 0
 - FAILED_DEPLOYED: 0
 - NOT_RUN: 3 (R18-20 Lighthouse — requires Chrome in environment)
