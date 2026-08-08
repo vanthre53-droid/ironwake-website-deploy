@@ -1,5 +1,8 @@
+// ponytail: canonical site URL drives sitemap, robots, and JSON-LD. Falls back to the current Netlify deployment so search engines and crawlers see the live host.
+const FALLBACK_SITE_URL = 'https://lucent-sunflower-966982.netlify.app';
+
 export default function sitemap() {
-  const base = 'https://ironwake-app.netlify.app';
+  const base = process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL;
   const pages = ['', '/systems', '/work', '/audit', '/book', '/pricing', '/scope', '/process', '/about', '/industries', '/privacy', '/terms', '/insights',
     '/systems/missed-lead-recovery', '/systems/booking-control', '/systems/trust-lead-capture', '/systems/ai-receptionist',
     '/work/rapidpulse', '/work/dentacare-pro', '/work/atelier', '/work/harbour-estates', '/work/aura-archives', '/work/luxe-studio', '/work/bramble-cafe', '/work/voltix', '/work/retech',
