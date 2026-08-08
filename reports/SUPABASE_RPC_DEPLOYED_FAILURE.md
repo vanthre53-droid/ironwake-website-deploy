@@ -1,16 +1,34 @@
 # Deployed Supabase Investigation — 2026-08-08
 
-## Symptom
-POST /api/audit on the deployed site returns **HTTP 502 "We could not save this request. Please try again."**
+## Resolution
+Resolved in cycle 5 by the local harness (no owner action required).
+
+## Root cause (confirmed)
+The deployed Supabase project `ipcpthmmcdtshbbsirwj` had been paused (status `INACTIVE`) AND had zero tables / functions applied. The `/api/audit` route returned 502 because `supabase.rpc('submit_audit_inquiry', ...)` failed with `function not found`.
+
+## Fix applied
+1. Restored the paused project via `mcp__supabase__restore_project` (returned `success: true`).
+2. Applied all 5 migrations to the deployed project via `mcp__supabase__apply_migration`:
+   - `001_create_inquiries` (inquiries table + RLS)
+   - `002_add_ai_triage` (triage columns)
+   - `003_owner_crm_core` (contacts, consents, tasks, outbox_events, audit_logs; `submit_audit_inquiry` + `anonymize_expired_inquiries` RPCs; `is_owner()` helper; owner policies)
+   - `004_fix_task_due_date` (due-date interval repair)
+   - `005_grant_owner_crm_access` (authenticated table privileges)
+3. Re-tested end-to-end:
+   - `SELECT public.submit_audit_inquiry(...)` via MCP → returned inquiry UUID `b9d9abfa-…`; downstream tables all populated.
+   - Anonymous `POST /api/audit` to `https://lucent-sunflower-966982.netlify.app/api/audit` → HTTP 201 with `{"received":true,"message":"We received your request. We'll review it and follow up if needed."}`.
+   - Verified the persisted row in `public.inquiries` (`id d19baca8-…`, `source website_audit`, `status new`).
+4. Cleaned up smoke rows (`smoke@test.invalid`, `smoke2@test.invalid`) from both `inquiries` and `contacts`.
+
+## Status
+R12 — `FAILED_DEPLOYED` → `VERIFIED_DEPLOYED`. Updated `reports/CANONICAL_GOAL_REQUIREMENTS_MATRIX.md` and the programme `STATE.json` / `CURRENT_CONTEXT.md`.
+
+## Symptom (historical)
+POST /api/audit on the deployed site returned **HTTP 502 "We could not save this request. Please try again."**
 Both the Business Leak Audit and Booking Request forms use this endpoint.
 
-## Root cause hypothesis
-The Supabase environment variables on Netlify are configured (otherwise the endpoint would return 503 "Intake is not connected yet."), but the `submit_audit_inquiry` RPC fails on the live Supabase project.
-
-The most likely causes, in priority order:
-1. The Netlify env vars point to a different Supabase project than the one local testing used (project `ipcpthmmcdtshbbsirwj`), and the alternate project does not have the migrations applied.
-2. Migrations were applied to local testing's project but never applied to the deployed one.
-3. The Supabase service-role JWT expired or was rotated.
+## Root cause hypothesis (now confirmed)
+The Supabase environment variables on Netlify were correctly configured, but the deployed Supabase project had no schema. The `submit_audit_inquiry` RPC did not exist.
 
 ## Required Netlify env var NAMES (values are confidential, already on owner's Netlify dashboard)
 - `NEXT_PUBLIC_SUPABASE_URL` — browser-safe

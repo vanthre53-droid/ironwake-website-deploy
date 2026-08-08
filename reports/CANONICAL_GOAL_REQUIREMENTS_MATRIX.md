@@ -15,7 +15,7 @@ Each row: ID, requirement, route/component, files, status.
 | R09 | PricingReference on each system page | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
 | R10 | 5 canonical offers on /pricing with Lite/Std/Pro India + Intl | /pricing | app/pricing/PricingPage.js | VERIFIED_DEPLOYED (default = India; toggle to Intl works) |
 | R11 | No fabricated metrics or stats | all | app/page.js, app/insights/page.js, app/audit/* | VERIFIED (committed c600bc8 + 3958aa4 + b068ec7 + 7367178) |
-| R12 | Supabase POST /api/audit works on deployed site | /api/audit | supabase/migrations/*, app/api/audit/route.js | FAILED_DEPLOYED (502 — RPC error; env vars confirmed set in Netlify production context; deployed Supabase project's `submit_audit_inquiry` RPC may be missing or migrations not applied; diagnostic logging added but Netlify free plan does not expose console.error — owner must verify via Supabase SQL Editor that all 5 migrations are applied to the project URL `ipcpthmmcdtshbbsirwj.supabase.co`) |
+| R12 | Supabase POST /api/audit works on deployed site | /api/audit | supabase/migrations/*, app/api/audit/route.js | VERIFIED_DEPLOYED (2026-08-08 — Supabase project was paused; restored + applied migrations 001–005 to `ipcpthmmcdtshbbsirwj` via Supabase MCP; anonymous POST returned HTTP 201 with row persisted in `public.inquiries`; cleaned up smoke rows) |
 | R13 | Anonymous /owner shows login, not data | /owner | app/owner/page.js | VERIFIED_DEPLOYED (login UI rendered) |
 | R14 | AI Receptionist reframed from "concept" to real offer with capability/demo/provider/client status | /systems/ai-receptionist | app/systems/ai-receptionist/AiReceptionistSystem.js | VERIFIED_DEPLOYED |
 | R15 | All 4 systems show their matching canonical offer | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
@@ -38,10 +38,10 @@ Each row: ID, requirement, route/component, files, status.
 | R32 | InteractiveLeadJourney: 3 channels, animated route | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2) |
 
 ## Status counts
-- VERIFIED_DEPLOYED: 24
+- VERIFIED_DEPLOYED: 25
 - VERIFIED_SOURCE: 1
 - PARTIAL: 0
 - NEEDS_VERIFIED: 0
 - MISSING: 0
-- FAILED_DEPLOYED: 1 (R12 Supabase RPC — owner must verify migrations on deployed Supabase project)
+- FAILED_DEPLOYED: 0
 - NOT_RUN: 3 (R18-20 Lighthouse — requires Chrome in environment)
