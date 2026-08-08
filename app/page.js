@@ -7,7 +7,8 @@ import { DashboardDemo } from './components/DashboardDemo';
 const systems = [
   ['01 / inquiry integrity', 'Missed Lead Recovery', 'See where an enquiry stalls, who owns it, and what should happen next.', '/systems/missed-lead-recovery'],
   ['02 / booking control', 'Booking Certainty', 'Separate a booking request from a confirmed appointment so nobody assumes the wrong state.', '/systems/booking-control'],
-  ['03 / reception layer', 'AI Receptionist', 'Explore the disclosed, human-supervised reception concept and its current limits.', '/systems/ai-receptionist']
+  ['03 / trust layer', 'Trust + Lead Capture', 'Capture enquiries on a conversion-optimised intake that persists first, notifies second.', '/systems/trust-lead-capture'],
+  ['04 / reception layer', 'AI Receptionist', 'A disclosed, human-supervised first response. Capability is built; live telephony waits on a verified provider account.', '/systems/ai-receptionist']
 ];
 
 

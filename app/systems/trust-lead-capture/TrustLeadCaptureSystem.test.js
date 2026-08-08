@@ -10,5 +10,7 @@ test('trust lead capture system documents real validation and credential handlin
   assert.match(source, /No service-role key in the browser/);
   assert.match(source, /<SiteHeader \/>/);
   assert.match(source, /<SiteFooter \/>/);
-  assert.doesNotMatch(source, /military-grade|100% secure|\$\d|₹\d/i);
+  assert.match(source, /PricingReference/);
+  assert.match(source, /Capability vs status/);
+  assert.doesNotMatch(source, /military-grade|100% secure/i);
 });

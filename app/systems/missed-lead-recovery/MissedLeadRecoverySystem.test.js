@@ -11,5 +11,7 @@ test('missed lead recovery system stays truthful and interactive', async () => {
   assert.match(source, /dead-letter/);
   assert.match(source, /<SiteHeader \/>/);
   assert.match(source, /<SiteFooter \/>/);
-  assert.doesNotMatch(source, /\$\d|₹\d|guaranteed|100%|24\/7/i);
+  assert.match(source, /PricingReference/);
+  assert.match(source, /Capability vs status/);
+  assert.doesNotMatch(source, /guaranteed|100%/i);
 });
