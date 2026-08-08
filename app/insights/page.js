@@ -8,8 +8,8 @@ export const metadata = {
 const articles = [
   {
     slug: 'missed-lead-recovery-service-businesses',
-    title: 'Why service businesses lose 30-40% of enquiries before follow-up',
-    excerpt: 'Most service businesses lose leads not because of bad marketing, but because of operational gaps between the first enquiry and the first response. Here is where the leak usually happens.',
+    title: 'Where service businesses typically lose enquiries before follow-up',
+    excerpt: 'Operational gaps between the first enquiry and the first response are the usual suspect. Here are the most common patterns and how to identify which one applies to your business.',
     category: 'Lead Recovery',
     date: '2026-08-01',
   },
