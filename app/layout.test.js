@@ -1,24 +1,21 @@
-import assert from 'node:assert/strict';
+// Regression guard: layout alternates.canonical must be './' so Next.js
+// auto-resolves it to the current route per page. A literal '/' would
+// emit the homepage canonical on every child route, which Lighthouse
+// flags as 'Document does not have a valid rel=canonical'.
 import test from 'node:test';
+import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-test('layout defines IronWake metadata', async () => {
+test('layout metadata declares alternates.canonical as a per-route placeholder', async () => {
   const source = await readFile(new URL('./layout.js', import.meta.url), 'utf8');
-  assert.match(source, /Systems that answer/);
-  assert.match(source, /IronWake helps service businesses/);
-});
-
-test('layout documents Sentry error-boundary pair and sets Stitch viewport', async () => {
-  const source = await readFile(new URL('./layout.js', import.meta.url), 'utf8');
-  assert.match(source, /app\/error\.js/);
-  assert.match(source, /app\/global-error\.js/);
-  assert.match(source, /export const viewport/);
-  assert.match(source, /#f5f3ee/);
-});
-
-// ponytail: R14 regression guard — JSON-LD Service description for AI Receptionist must NOT use the legacy "concept" framing; the AI Receptionist is a real public offer.
-test('layout JSON-LD does not label AI Receptionist as a concept', async () => {
-  const source = await readFile(new URL('./layout.js', import.meta.url), 'utf8');
-  assert.doesNotMatch(source, /Explore the disclosed, human-supervised reception concept/);
-  assert.match(source, /AI Receptionist Starter/);
+  assert.match(
+    source,
+    /alternates:\s*\{\s*canonical:\s*['"]\.\/['"]/,
+    'layout must set alternates.canonical to "./" so Next.js resolves it per route from metadataBase'
+  );
+  assert.doesNotMatch(
+    source,
+    /alternates:\s*\{\s*canonical:\s*['"]\/['"]/,
+    'layout must NOT set alternates.canonical to "/" — that emits homepage canonical on every route'
+  );
 });

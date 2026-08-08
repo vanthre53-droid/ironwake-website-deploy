@@ -11,7 +11,7 @@ export const metadata = {
   description: 'IronWake helps service businesses find leaks across inquiry, booking, follow-up, and reception workflows.',
   // ponytail: indexing enabled for netlify.app; update canonical when ironwake.dev is live.
   robots: { index: true, follow: true },
-  alternates: { canonical: '/' },
+  alternates: { canonical: './' }, // ponytail: './' lets Next.js auto-resolve canonical per route from metadataBase
   openGraph: {
     title: 'IronWake — Systems that answer',
     description: 'IronWake builds operational systems that capture enquiries, assign ownership, control follow-up and show business owners exactly what happens next.',
