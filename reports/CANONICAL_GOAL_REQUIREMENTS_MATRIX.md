@@ -8,8 +8,8 @@ Each row: ID, requirement, route/component, files, status.
 | R02 | Top nav with Pricing + Book Diagnostic visible | all pages | app/components/SiteHeader.js | VERIFIED_DEPLOYED |
 | R03 | Mobile menu opens cleanly | all pages | app/components/SiteHeader.js | NEEDS_VERIFIED (360/390px visual) |
 | R04 | Hero with 5-second clarity | / | app/page.js | VERIFIED_DEPLOYED |
-| R05 | Substantial motion: hero Wake system | / | app/page.js, app/components/WorkflowDemo.js | PARTIAL (basic flow exists; needs 2.5D upgrade per goal §18) |
-| R06 | Substantial motion: interactive lead journey | / | (to add) | MISSING |
+| R05 | Substantial motion: hero Wake system | / | app/components/WakeSVG.js | VERIFIED_DEPLOYED (commit 40dd8d1 — 9-node SVG animation: copper wake path draws on scroll-into-view, nodes pulse in sequence, traveling pulse animates continuously) |
+| R06 | Substantial motion: interactive lead journey | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2 — 3 channels, animated 7-step route swap) |
 | R07 | Substantial motion: owner ops demo | / | app/components/DashboardDemo.js | VERIFIED_DEPLOYED (4 records, interactive) |
 | R08 | All 4 system pages reachable from home | / | app/page.js | VERIFIED_DEPLOYED (commit c8eb933) |
 | R09 | PricingReference on each system page | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
@@ -38,9 +38,9 @@ Each row: ID, requirement, route/component, files, status.
 | R32 | InteractiveLeadJourney: 3 channels, animated route | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2) |
 
 ## Status counts
-- VERIFIED_DEPLOYED: 18
-- PARTIAL: 2
-- NEEDS_VERIFIED: 3
-- MISSING: 1
+- VERIFIED_DEPLOYED: 23
+- PARTIAL: 0
+- NEEDS_VERIFIED: 2
+- MISSING: 0
 - FAILED_DEPLOYED: 1 (R12 Supabase RPC)
 - NOT_RUN: 3 (R18-20 Lighthouse)
