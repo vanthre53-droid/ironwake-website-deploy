@@ -1,0 +1,14 @@
+{
+  "name": "IronWake — Systems that answer",
+  "short_name": "IronWake",
+  "description": "Operational systems for service businesses that capture every enquiry, assign ownership, control follow-up, and show business owners exactly what happens next.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f3ee",
+  "theme_color": "#f5f3ee",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-icon.svg", "sizes": "180x180", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "/og-default.svg", "sizes": "1200x630", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
