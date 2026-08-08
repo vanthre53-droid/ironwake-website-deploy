@@ -40,6 +40,7 @@ Each row: ID, requirement, route/component, files, status.
 | R34 | Exactly one H1 per page (no double-h1 from streaming SSR + loading boundary) | / | app/loading.js, app/globals.css | VERIFIED_DEPLOYED (commit cb9ae74 — replaced loading boundary `<h1>` with `<div class="loading-headline">` and updated CSS selector to match both; added regression-guard test in app/loading.test.js. Deployed via Netlify deploy id `6a7713bf635bc722659e737a`. Deployed home HTML now contains exactly one `<h1>`: 'Stop losing leads between enquiry and follow-up.' The loading-boundary text 'Preparing the next view.' remains visible but is not a heading.) |
 | R35 | AI Receptionist not labelled as a concept (page metadata, body CTA, JSON-LD) | /systems/ai-receptionist, all pages via layout JSON-LD | app/systems/ai-receptionist/page.js, app/systems/ai-receptionist/AiReceptionistSystem.js, app/layout.js | VERIFIED_DEPLOYED (commits 66f37b4 + f9ecccb — page title `'AI Receptionist Starter'`; body CTA `'Start with the AI Receptionist Starter'`; JSON-LD Service description rewritten. Deployed via Netlify deploy id `6a77185e6a27af202ea22902`. Confirmed: no user-visible "concept", "Concept", or "Talk to us about this concept" copy on any of the four system pages.) |
 | R36 | Site-wide canonical URL + OG image present on every public page | /, /pricing, /audit, /systems/*, /work, /insights, /book, /about, /process, /owner | app/layout.js, app/page.js, public/og-default.svg | VERIFIED_DEPLOYED (commits 66f37b4 + f9ecccb — added metadataBase + alternates.canonical to layout; added openGraph.images + twitter.images; added /og-default.svg; added images to home openGraph. Deployed via Netlify deploy id `6a77185e6a27af202ea22902`. Confirmed: canonical `<link rel="canonical" href="https://lucent-sunflower-966982.netlify.app">` and `og:image` referencing /og-default.svg both present on home; og-default.svg serves 200 image/svg+xml.) |
+| R37 | No "concept" framing leaks in portfolio case studies (rapidpulse) or pricing | /work/rapidpulse, /pricing | app/work/rapidpulse/RapidPulseCaseStudy.js, app/pricing/page.js | IMPLEMENTED (commit 6d0a6d4 — rapidpulse hero copy "designed concept" → "designed demonstration"; pricing page openGraph gained images array). DEPLOYED EVIDENCE PENDING — Netlify deploys blocked since 2026-08-08 by account credit exhaustion ("Account credit usage exceeded"). Local fix is verified by tests; production needs Netlify redeploy when credits are restored. |
 
 ## Status counts
 - VERIFIED_DEPLOYED: 29
@@ -47,6 +48,6 @@ Each row: ID, requirement, route/component, files, status.
 - PARTIAL: 0
 - NEEDS_VERIFIED: 0
 - MISSING: 0
-- IMPLEMENTED (deployed-evidence-pending): 0
+- IMPLEMENTED (deployed-evidence-pending): 1 (R37 — Netlify credit-exhaustion blocks redeploy; owner action required)
 - FAILED_DEPLOYED: 0
 - NOT_RUN: 3 (R18-20 Lighthouse — requires Chrome in environment)
