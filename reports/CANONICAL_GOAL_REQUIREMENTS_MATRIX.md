@@ -36,6 +36,7 @@ Each row: ID, requirement, route/component, files, status.
 | R30 | Real Atelier comparison | reports/ATELIER_VS_IRONWAKE_MOTION_COMPARISON.md | VERIFIED_DEPLOYED (commit 9ee50bb — IronWake meets/exceeds floor on 9 of 9 axes) |
 | R31 | All 4 systems linked from homepage with canonical offer | /, /systems/* | app/page.js, app/components/PricingReference.js | VERIFIED_DEPLOYED (commit c8eb933) |
 | R32 | InteractiveLeadJourney: 3 channels, animated route | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2) |
+| R33 | Sitemap, robots, and JSON-LD point at the live production host | /sitemap.xml /robots.txt /layout.js JSON-LD | app/sitemap.js, app/robots.js, app/layout.js | IMPLEMENTED (commit 0195f0a — all three now read `NEXT_PUBLIC_SITE_URL` with `https://lucent-sunflower-966982.netlify.app` fallback; local Next build confirmed sitemap + robots prerender with the new URL). DEPLOYED EVIDENCE PENDING — requires a fresh Netlify build trigger, which the tool policy gates on owner approval. Old deployed sitemap still references `https://ironwake-app.netlify.app`; old deployed JSON-LD references `https://ironwake.netlify.app`. |
 
 ## Status counts
 - VERIFIED_DEPLOYED: 25
@@ -43,5 +44,6 @@ Each row: ID, requirement, route/component, files, status.
 - PARTIAL: 0
 - NEEDS_VERIFIED: 0
 - MISSING: 0
+- IMPLEMENTED (deployed-evidence-pending): 1 (R33 canonical URL — owner must trigger fresh Netlify build)
 - FAILED_DEPLOYED: 0
 - NOT_RUN: 3 (R18-20 Lighthouse — requires Chrome in environment)
