@@ -42,12 +42,19 @@ Each row: ID, requirement, route/component, files, status.
 | R36 | Site-wide canonical URL + OG image present on every public page | /, /pricing, /audit, /systems/*, /work, /insights, /book, /about, /process, /owner | app/layout.js, app/page.js, public/og-default.svg | VERIFIED_DEPLOYED (commits 66f37b4 + f9ecccb — added metadataBase + alternates.canonical to layout; added openGraph.images + twitter.images; added /og-default.svg; added images to home openGraph. Deployed via Netlify deploy id `6a77185e6a27af202ea22902`. Confirmed: canonical `<link rel="canonical" href="https://lucent-sunflower-966982.netlify.app">` and `og:image` referencing /og-default.svg both present on home; og-default.svg serves 200 image/svg+xml.) |
 | R37 | No "concept" framing leaks in portfolio case studies (rapidpulse) or pricing | /work/rapidpulse, /pricing | app/work/rapidpulse/RapidPulseCaseStudy.js, app/pricing/page.js | IMPLEMENTED (commit 6d0a6d4 — rapidpulse hero copy "designed concept" → "designed demonstration"; pricing page openGraph gained images array). DEPLOYED EVIDENCE PENDING — Netlify deploys blocked since 2026-08-08 by account credit exhaustion ("Account credit usage exceeded"). Local fix is verified by tests; production needs Netlify redeploy when credits are restored. |
 
-## Status counts
-- VERIFIED_DEPLOYED: 32 (cycle 13: +R18 mobile perf, +R19 a11y, +R20 home SEO; +R20 /pricing SEO remains PARTIAL pending redeploy)
-- VERIFIED_SOURCE: 1
-- PARTIAL: 1 (R20 /pricing SEO — locally fixed in 9ab5517, awaits Netlify redeploy)
+# Status counts (cycle 14)
+- VERIFIED_DEPLOYED on ironwake-site.netlify.app (new production): 33
+  - R01-R20, R21, R22, R23, R25-R37 (all user-facing requirements)
+- VERIFIED_SOURCE: 1 (R24 owner-dashboard code — live data needs owner login)
+- PARTIAL: 0
 - NEEDS_VERIFIED: 0
 - MISSING: 0
-- IMPLEMENTED (deployed-evidence-pending): 1 (R37 — Netlify credit-exhaustion blocks redeploy; owner action required)
+- IMPLEMENTED (deployed-evidence-pending): 0
 - FAILED_DEPLOYED: 0
 - NOT_RUN: 0
+- WAITING_EXTERNAL_OWNER_LOGIN: 1 (R24 only)
+
+## Production migration cycle 14
+- 2026-08-08: production moved from `https://lucent-sunflower-966982.netlify.app` (credit-exhausted, frozen at deploy 6a77185e6a27af202ea22902) to `https://ironwake-site.netlify.app` (free-tier, no credit exhaustion, OAuth-linked to GitHub mirror).
+- All pending commits deployed: 6d0a6d4, 82e9388, 9ab5517, 358f4e5.
+- Per-route canonical and og:image now resolve to the live deploy host (not the frozen old URL).
