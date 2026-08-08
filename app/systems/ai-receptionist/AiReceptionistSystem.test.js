@@ -16,3 +16,10 @@ test('ai receptionist page separates capability from live provider status', asyn
   assert.match(source, /PricingReference/);
   assert.doesNotMatch(source, /Not yet connected|No phone number is connected to this concept page|concept under active scoping|future version would commit/i);
 });
+
+// ponytail: R14 regression guard — the page CTA and copy must refer to the AI Receptionist Starter offer (not the legacy "concept" framing).
+test('ai receptionist page CTA references the AI Receptionist Starter offer, not a concept', async () => {
+  const source = await readFile(new URL('./AiReceptionistSystem.js', import.meta.url), 'utf8');
+  assert.match(source, /Start with the AI Receptionist Starter/);
+  assert.doesNotMatch(source, /Talk to us about this concept/);
+});

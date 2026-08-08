@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="IronWake — Systems that answer">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2f2"/>
+      <stop offset=".5" stop-color="#f5f3ee"/>
+      <stop offset="1" stop-color="#d8e4e7"/>
+    </linearGradient>
+    <radialGradient id="accent1" cx=".82" cy="-.12" r=".4">
+      <stop offset="0" stop-color="#1e7582" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#1e7582" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="accent2" cx=".02" cy=".35" r=".45">
+      <stop offset="0" stop-color="#b6492f" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#b6492f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wake" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b94d2f"/>
+      <stop offset="1" stop-color="#b94d2f" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#accent1)"/>
+  <rect width="1200" height="630" fill="url(#accent2)"/>
+  <!-- copper wake line -->
+  <path d="M 80 430 C 220 430, 280 380, 380 380 S 540 430, 640 430 S 800 380, 900 380 S 1080 430, 1140 430" fill="none" stroke="url(#wake)" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="180" cy="430" r="9" fill="#b94d2f"/>
+  <circle cx="380" cy="380" r="9" fill="#b94d2f"/>
+  <circle cx="640" cy="430" r="9" fill="#b94d2f"/>
+  <circle cx="900" cy="380" r="9" fill="#b94d2f"/>
+  <circle cx="1140" cy="430" r="9" fill="#b94d2f"/>
+  <!-- brand wordmark -->
+  <g transform="translate(80,150)" font-family="Newsreader, Georgia, serif" fill="#0a0a0a">
+    <text font-size="56" font-weight="600" letter-spacing="-.04em">IronWake</text>
+    <text x="312" font-size="56" font-weight="600" fill="#b94d2f">_</text>
+  </g>
+  <!-- eyebrow + headline -->
+  <g transform="translate(80,230)" font-family="Manrope, system-ui, sans-serif" fill="#444748">
+    <text font-size="22" letter-spacing=".14em" text-transform="uppercase">Operational systems for service businesses</text>
+  </g>
+  <g transform="translate(80,300)" font-family="Newsreader, Georgia, serif" fill="#0a0a0a">
+    <text font-size="68" font-weight="600" letter-spacing="-.03em">Stop losing leads between</text>
+    <text y="80" font-size="68" font-weight="600" letter-spacing="-.03em">enquiry and follow-up.</text>
+  </g>
+  <!-- systems row -->
+  <g transform="translate(80,540)" font-family="Manrope, system-ui, sans-serif" fill="#444748" font-size="20">
+    <text>Missed Lead Recovery</text>
+    <text x="240">Booking Certainty</text>
+    <text x="430">Trust + Lead Capture</text>
+    <text x="660">AI Receptionist</text>
+    <text x="850">Business Leak Audit</text>
+  </g>
+</svg>
