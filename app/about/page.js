@@ -1,5 +1,6 @@
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
+import { MotionReveal } from '../components/MotionReveal';
 
 export const metadata = {
   title: 'About — IronWake',
@@ -16,9 +17,9 @@ export default function AboutPage() {
   return <main className="shell">
     <SiteHeader />
     <section className="hero compact"><span className="eyebrow">About IronWake</span><h1>Build trust by making the next action clear.</h1><p>IronWake is a founder-led systems practice for service businesses. The work begins with one real enquiry or booking handoff and improves it without hiding uncertainty behind software.</p><a className="button" href="/audit">Show me where the gap is</a></section>
-    <section className="section founder"><div className="founder-mark">IRONWAKE<br />SYSTEMS PRACTICE</div><div><span className="eyebrow">Founder</span><h2>Revanth Nunna</h2><p>IronWake is founder-led. The practice starts by making one business-critical handoff visible — an inquiry, a booking, a follow-up — and making the next action for it clear and owned, before adding any new tool or claim.</p><span className="micro">Founder, IronWake</span></div></section>
-    <section className="section intro"><span className="eyebrow">Operating standard</span><h2>What the labels on this site mean.</h2><div className="system-grid">{labels.map(([title, text]) => <article className="system-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></section>
-    <section className="section disclosure"><div><span className="eyebrow">Verification method</span><h3>Database and API evidence before an interface is trusted.</h3><p>A page is never allowed to imply a database commit, a sent notification, a booking, or a payment unless that evidence actually exists behind it.</p></div><div className="disclosure-box">No client, testimonial, logo, metric, benchmark, guarantee, or provider status is published without reproducible evidence and a named approval. Missing information is hidden or shown as a pending state — it is never filled in with a placeholder that reads like a fact.</div></section>
+    <MotionReveal><section className="section founder"><div className="founder-mark">IRONWAKE<br />SYSTEMS PRACTICE</div><div><span className="eyebrow">Founder</span><h2>Revanth Nunna</h2><p>IronWake is founder-led. The practice starts by making one business-critical handoff visible — an inquiry, a booking, a follow-up — and making the next action for it clear and owned, before adding any new tool or claim.</p><span className="micro">Founder, IronWake</span></div></section></MotionReveal>
+    <MotionReveal><section className="section intro"><span className="eyebrow">Operating standard</span><h2>What the labels on this site mean.</h2><div className="system-grid">{labels.map(([title, text]) => <article className="system-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></section></MotionReveal>
+    <MotionReveal><section className="section disclosure"><div><span className="eyebrow">Verification method</span><h3>Database and API evidence before an interface is trusted.</h3><p>A page is never allowed to imply a database commit, a sent notification, a booking, or a payment unless that evidence actually exists behind it.</p></div><div className="disclosure-box">No client, testimonial, logo, metric, benchmark, guarantee, or provider status is published without reproducible evidence and a named approval. Missing information is hidden or shown as a pending state — it is never filled in with a placeholder that reads like a fact.</div></section></MotionReveal>
     <SiteFooter />
   </main>;
 }
