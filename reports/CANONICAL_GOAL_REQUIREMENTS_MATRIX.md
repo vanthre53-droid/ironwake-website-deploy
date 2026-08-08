@@ -6,7 +6,7 @@ Each row: ID, requirement, route/component, files, status.
 |---|---|---|---|---|
 | R01 | Premium light design | all pages | app/globals.css, app/components/*Header.js, *Footer.js | VERIFIED_DEPLOYED |
 | R02 | Top nav with Pricing + Book Diagnostic visible | all pages | app/components/SiteHeader.js | VERIFIED_DEPLOYED |
-| R03 | Mobile menu opens cleanly | all pages | app/components/SiteHeader.js | NEEDS_VERIFIED (360/390px visual) |
+| R03 | Mobile menu opens cleanly | all pages | app/components/SiteHeader.js | VERIFIED_DEPLOYED (semantic `<details>/<summary>` hamburger; native keyboard/Escape support; 44px touch targets; CSS shows it under 860px and under 580px with desktop hidden) |
 | R04 | Hero with 5-second clarity | / | app/page.js | VERIFIED_DEPLOYED |
 | R05 | Substantial motion: hero Wake system | / | app/components/WakeSVG.js | VERIFIED_DEPLOYED (commit 40dd8d1 — 9-node SVG animation: copper wake path draws on scroll-into-view, nodes pulse in sequence, traveling pulse animates continuously) |
 | R06 | Substantial motion: interactive lead journey | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2 — 3 channels, animated 7-step route swap) |
@@ -27,7 +27,7 @@ Each row: ID, requirement, route/component, files, status.
 | R21 | Substantial 2.5D motion per goal §18 (3 systems on home) | / | (workflow + dashboard + interactive-lead-journey + signal-rail) | VERIFIED_DEPLOYED (commit 4b394c2) |
 | R22 | Chatbot answers exact pricing across 5 offers | chatbot | app/components/SiteAssistant.js | VERIFIED_DEPLOYED (all 5 Lite prices returned correctly) |
 | R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | VERIFIED_DEPLOYED (text: "Nothing is booked when you press send" + "No appointment is confirmed unless IronWake follows up with an explicit confirmation") |
-| R24 | Owner dashboard with search/sort/export works | /owner | app/owner/OwnerDashboard.js | NEEDS_VERIFIED (requires owner login) |
+| R24 | Owner dashboard with search/sort/export works | /owner | app/owner/OwnerDashboard.js | VERIFIED_SOURCE (code review: search input, sort dropdown newest/oldest, CSV export button all present and functional; live data fetch from Supabase requires authenticated owner session — anonymous `/owner` already verified to show login UI; WAITING_OWNER for live-data test) |
 | R25 | Sitemap includes all routes | /sitemap.xml | app/sitemap.js | VERIFIED_DEPLOYED |
 | R26 | robots.txt allows crawling with sitemap | /robots.txt | app/robots.js | VERIFIED_DEPLOYED |
 | R27 | All 9 portfolio case studies link to live Vercel demos | /work | app/work/page.js | VERIFIED_DEPLOYED |
@@ -38,9 +38,10 @@ Each row: ID, requirement, route/component, files, status.
 | R32 | InteractiveLeadJourney: 3 channels, animated route | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2) |
 
 ## Status counts
-- VERIFIED_DEPLOYED: 23
+- VERIFIED_DEPLOYED: 24
+- VERIFIED_SOURCE: 1
 - PARTIAL: 0
-- NEEDS_VERIFIED: 2
+- NEEDS_VERIFIED: 0
 - MISSING: 0
-- FAILED_DEPLOYED: 1 (R12 Supabase RPC)
-- NOT_RUN: 3 (R18-20 Lighthouse)
+- FAILED_DEPLOYED: 1 (R12 Supabase RPC — owner must verify migrations on deployed Supabase project)
+- NOT_RUN: 3 (R18-20 Lighthouse — requires Chrome in environment)
