@@ -17,7 +17,11 @@ export async function POST(request) {
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !serviceKey) return NextResponse.json({ error: 'Intake is not connected yet.' }, { status: 503 });
+  // ponytail: diagnostic in deployed logs — print URL host (no full URL/secret) when vars are missing.
+  if (!url || !serviceKey) {
+    console.error('[audit] missing env', { hasUrl: Boolean(url), hasServiceKey: Boolean(serviceKey) });
+    return NextResponse.json({ error: 'Intake is not connected yet.' }, { status: 503 });
+  }
 
   const supabase = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: inquiryId, error } = await supabase.rpc('submit_audit_inquiry', {
@@ -26,7 +30,13 @@ export async function POST(request) {
     p_leak_description: parsed.data.leak,
     p_source: 'website_audit'
   });
-  if (error) return NextResponse.json({ error: 'We could not save this request. Please try again.' }, { status: 502 });
+  if (error) {
+    // ponytail: log the Supabase error so the deploy logs reveal the real failure (RLS, missing function, bad params). URL host only, no secret.
+    let urlHost = 'unknown';
+    try { urlHost = new URL(url).host; } catch {}
+    console.error('[audit] submit_audit_inquiry failed', { urlHost, code: error.code, message: error.message, details: error.details, hint: error.hint });
+    return NextResponse.json({ error: 'We could not save this request. Please try again.' }, { status: 502 });
+  }
 
   const triage = await triageInquiry(parsed.data);
   const triageStatus = triage.status === 'complete'
