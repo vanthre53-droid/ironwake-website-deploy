@@ -23,6 +23,7 @@ export function generateMetadata() {
       description: 'Operational systems for service businesses. Capture every enquiry, assign a named owner, make the next action visible.',
       type: 'website',
       siteName: 'IronWake',
+      images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'IronWake — Stop losing leads between enquiry and follow-up' }]
     },
   };
 }
