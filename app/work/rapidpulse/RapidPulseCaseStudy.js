@@ -28,7 +28,7 @@ export function RapidPulseCaseStudy() {
       <span className="eyebrow">Work / RapidPulse Response</span>
       <span className="status-pill">DEMONSTRATION</span>
       <h1>The sub-60-second dispatch benchmark.</h1>
-      <p>RapidPulse demonstrates a structural collapse of the inquiry-to-dispatch window from 10 minutes to under 60 seconds using parallelized qualification agents. This is a designed concept, not a client engagement.</p>
+      <p>RapidPulse demonstrates a structural collapse of the inquiry-to-dispatch window from 10 minutes to under 60 seconds using parallelized qualification agents. This is a designed demonstration, not a client engagement.</p>
     </section>
 
     <MotionReveal>
