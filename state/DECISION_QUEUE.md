@@ -22,6 +22,8 @@ D-007 worker implementation result: `VERIFIED_LOCAL` on 2026-08-09 at commit `42
 
 D-007 webhook implementation result: `VERIFIED_LOCAL` on 2026-08-09 at commit `2e6b46e`; raw-body signature verification, sealed event normalization, service-role provider-event recording, safe responses, and replay/out-of-order/failure fixtures pass without network access. This does not approve or prove a signing secret, webhook registration, provider callback, email, delivery, or deployment. `IW-P0-NOTIFY-04` is next.
 
+D-007 owner-operations result: `VERIFIED_LOCAL` on 2026-08-09 at commit `542f15b`; server `whoami` authorization, owner-RLS inquiry/outbox/attempt reads, accepted-versus-delivered rendering, safe failures, and eligible non-legacy RPC replay controls pass focused/full tests and build. This does not approve or prove a live owner session/retry, provider execution, email, callback, or deployment. `IW-P0-NOTIFY-05` remains G4/G5 blocked; the independent next priority is user-defined P0.4 AI provider reality.
+
 ## Required decision format
 
 | ID | Priority | Missing fact/decision | Why it blocks | Recommended option | Alternatives/tradeoffs | Cost/risk | Required authority | Affected tasks | Status |

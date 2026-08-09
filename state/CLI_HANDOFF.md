@@ -1,5 +1,14 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex owner notification-operations checkpoint
+
+- Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
+- Local implementation commit: `542f15b`; live notification database state remains 36 cancelled legacy events and zero attempts/provider events.
+- Implemented locally: server-verified owner session boundary, owner-RLS inquiry/outbox/attempt relationship reads, saved-lead and notification state details, accepted-versus-delivered evidence, safe failures, and eligible non-legacy replay through the owner RPC only.
+- Verification: focused tests 8/8; full suite 133/133; Next.js build 39 routes; compiled private-page noindex; production audit 0; state/diff/direct-write/secret/client-bundle checks; live FK/RLS/row-count metadata.
+- Required role: M1. Resend live proof is G4/G5 blocked, so execute the user-defined P0.4 AI provider-reality unit next without using unknown credentials or calling an unapproved provider.
+- Boundary: no live owner session/retry, provider account/key/domain, signing secret, API call, email, webhook registration/callback, schedule deployment, or deployment occurred. Every exposed Netlify token remains compromised and must be revoked; none will be used.
+
 ## Current handoff — 2026-08-09 Codex signed-webhook checkpoint
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.

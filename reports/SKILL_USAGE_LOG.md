@@ -65,3 +65,11 @@
 - Actions: followed the skill's signature-first and idempotent callback principles; reconciled its older package notes against installed `resend@6.18.1` SDK source and types; used only local cryptographic fixtures.
 - Result: a bounded server route verifies before normalization, records metadata only through the service-role RPC, and passes forged/stale/replay/out-of-order/delivery/failure tests. Provider registration and live callbacks remain gated.
 - Side effects: local code/tests and existing evidence only. No secret, account, provider call, email, webhook registration, deployment, publication, or spend.
+
+## 2026-08-09 — P0 owner notification operations
+
+- Skill: `supabase`.
+- Why: the screen reads three RLS-protected relationships and invokes an owner-only replay RPC from a browser session.
+- Actions: preserved the publishable-client and server-whoami boundary, confirmed live foreign-key/RLS metadata read-only, kept browser table access read-only, and relied on the database function to recheck canonical owner authorization and legacy eligibility.
+- Result: local owner operations expose durable inquiry/event/attempt state and eligible replay without service credentials. Focused/full tests and build pass; live tables remain unchanged and empty for provider evidence.
+- Side effects: local code/tests/evidence plus read-only Supabase schema metadata. No row mutation, owner session, retry, provider action, email, callback, or deployment.

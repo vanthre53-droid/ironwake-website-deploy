@@ -7,17 +7,19 @@ authority is `reports/REAL_CAPABILITY_LEDGER.md`. W10/W19's live
 authorization/RPC failure is repaired and verified at `6677623`; the durable
 notification state base is live at `354c9cb`; the fail-closed worker is local at
 `42c5754`; the signed callback route is local at `2e6b46e`; W15 provider
-execution, W16 follow-up, W14 owner MFA/complete operations, and W22
+execution is G4/G5 blocked; owner notification operations are local at
+`542f15b`; W12 AI remains failed live, W16 follow-up, W14 owner MFA, and W22
 reproducible deployment remain missing, failed live, or implemented-only. No row
-is release-green. M1 owns the next local owner notification-operations task.
+is release-green. M1 owns the user-defined P0.4 AI provider-reality unit next.
 
 Resend Free is selected for code only at C1 checkpoint `27db52d`.
 `IW-P0-NOTIFY-01` is verified live at `354c9cb`, `IW-P0-NOTIFY-02` is verified
 local at `42c5754`, and `IW-P0-NOTIFY-03` is verified local at `2e6b46e`. M1
-now owns `IW-P0-NOTIFY-04`, the owner visibility and authorized replay task.
-Account terms, domain/DNS, secrets, sends, webhook registration, and deployment
-remain G4/G5 human-controlled gates and do not block local code and no-network
-tests.
+has also verified `IW-P0-NOTIFY-04` locally at `542f15b`. `IW-P0-NOTIFY-05`
+remains G4/G5 blocked, so the next independent work is P0.4 AI provider reality.
+Account terms, domain/DNS, secrets, sends, webhook registration, live AI use,
+and deployment remain human-controlled gates and do not block local code and
+injected no-network tests.
 
 Current owner: Codex M1. G1 architecture is approved; C2 and C3 must independently audit every row. No row is a production completion claim.
 
@@ -37,7 +39,7 @@ Current owner: Codex M1. G1 architecture is approved; C2 and C3 must independent
 | W11 | Website design system | sealed_pending_gs1_g3 | OpenCode M1; C2 audit | `reports/C1_VISUAL_SOURCE_RECONCILIATION.md`, `reports/SCREEN_ROUTE_MATRIX.md`, `reports/STITCH_AUDIT.md`, `reports/C1_ARCHITECTURE_AND_CONTROLS.md` | Rebuild only in `app/` from the reconciled Stitch sources after GS1/G3; retire `website/` after parity evidence |
 | W12 | Public conversion system | queued_pending_g1_g2 | OpenCode M1; C2 audit | `reports/UX_CONVERSION_RESEARCH.md`, `reports/C1_ARCHITECTURE_AND_CONTROLS.md` | Implement server-validated audit request after G1/G2 |
 | W13 | Data/auth/private CRM | queued_pending_g2 | OpenCode M1; C2 audit | `reports/C1_ARCHITECTURE_AND_CONTROLS.md`, `reports/SECURITY_PRIVACY_MODEL.md` | Obtain G2 migration/auth/retention approval, then test negative paths |
-| W14 | Notifications/providers | partial_webhook_local_provider_pending | Codex M1 + provider/human; C2 audit | `reports/REAL_CAPABILITY_LEDGER.md`, `reports/evidence/P2_SCHEMA_AND_RLS.md` | State is live and worker/webhook are local-only; expose owner failures/replay next, then keep registration/send proof behind G4/G5 |
+| W14 | Notifications/providers | partial_owner_operations_local_provider_pending | Codex M1 + provider/human; C2 audit | `reports/REAL_CAPABILITY_LEDGER.md`, `reports/evidence/P2_SCHEMA_AND_RLS.md` | State is live and worker/webhook/owner operations are local-only; registration/send proof remains behind G4/G5 while P0.4 AI work continues independently |
 | W15 | Sales execution system | draft_pending_g1 | OpenCode C1/M1 + human operations | `reports/PHASE_1_DECISION_PACKET.md`, `docs/10_PRIORITY_DECISION_AND_DATA_PROTOCOL.md` | Approve qualification/follow-up rules; keep outbound actions human-controlled |
 | W16 | Proposals/contracts/invoices/payments | deferred_legal_owner | OpenCode C1/M1 + adult/legal owner | `reports/PRICING_LOCALIZATION_RESEARCH.md`, `inputs/APPROVALS.md` | Decide legal/payment ownership or keep payments excluded |
 | W17 | Revenue Command/sales intelligence | queued_pending_real_data | OpenCode M1; C2 audit | `reports/C1_ARCHITECTURE_AND_CONTROLS.md`, `reports/evidence/P4_CRM_AUTHORIZATION.md` | Build only from real records; label estimates and forecasts |

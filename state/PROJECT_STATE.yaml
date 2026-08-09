@@ -6,15 +6,15 @@ programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
 active_stage: M1
 required_role: M1
-current_phase: P0_NOTIFICATION_OPERATIONS
-current_gate: P0_NOTIFICATION_WEBHOOK_VERIFIED_LOCAL
-next_exact_action: "Execute only IW-P0-NOTIFY-04: require server whoami authorization, expose durable notification state/attempt metadata to the owner, and permit only authorized non-legacy dead-letter/cancelled replay through owner_retry_notification, without configuring a provider, sending email, registering a webhook, or deploying."
+current_phase: P0_AI_PROVIDER_REALITY
+current_gate: P0_NOTIFICATION_OPERATIONS_VERIFIED_LOCAL
+next_exact_action: "Execute the user-defined P0.4 AI provider reality unit: inspect current AI configuration names/source/deployed failure evidence without exposing secret values, verify the current provider/model/endpoint contract from official sources, and implement the smallest durable local attempt/provider/model/failure contract with injected tests. Do not read or reuse unknown credentials, call an unapproved provider, publish AI claims, or deploy."
 
 harness: codex
 model: gpt-5.6-sol
-last_safe_boundary: 2e6b46e
-last_verified_task: iw_p0_notify_03_signed_webhook_2e6b46e
-blocked_on: "No blocker for local owner notification visibility and authorized replay UI. Adult provider account/terms, owned domain/DNS, secret entry, webhook registration, provider connection, live delivery, customer sends, deployment, and later full E2E remain separately gated. All exposed Netlify tokens require human revocation and will not be used."
+last_safe_boundary: 542f15b
+last_verified_task: iw_p0_notify_04_owner_notification_operations_542f15b
+blocked_on: "No blocker for local AI status/contract repair. A controlled live AI call requires an explicitly approved provider/account/model and synthetic-data boundary; Resend account/terms/domain/DNS/secret/webhook/send and deployment remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -46,7 +46,7 @@ workstream_status:
   W11: verified_local_implementation
   W12: failed_live_ai_triage_zero_completed
   W13: verified_live_intake_booking_lifecycle_missing
-  W14: failed_live_single_owner_rls_and_mfa
+  W14: verified_local_notification_operations_owner_mfa_pending
   W15: verified_local_notification_webhook_owner_operations_queued
   W16: missing_follow_up_engine
   W17: blocked_real_data
