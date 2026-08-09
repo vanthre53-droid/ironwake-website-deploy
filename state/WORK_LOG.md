@@ -746,3 +746,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: VERIFIED MISMATCH. Read-only Netlify metadata identifies the latest production deploy as `6a786d2b0207453cc9541555`, published `2026-08-09T12:06:35Z`, with commit `daafc01a7bf23cf1168bdaac6c285f621f5f3449`. It predates local MiniMax repair `3faadd3`.
 - Prevention rule: treat an environment-variable update or a reported build trigger as insufficient. Before production E2E verification, read back the latest deploy ID and commit and require it to contain the intended repair.
 - Next exact action: obtain named G5 approval to deploy the reviewed repair artifact, then rerun one bounded synthetic inquiry and an authenticated owner-dashboard readback.
+
+### 2026-08-09T13:28:00Z — M1/P0.18_public_intake_security_boundary
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commit: `6773e4e`.
+- Result: VERIFIED_LOCAL. Public intake now requires an exact JSON media type, rejects malformed/oversized bodies before any backend dependency, and rejects ASCII control characters in supplied business, email, request detail, and source while preserving ordinary Unicode. This narrows log, email, and persistence injection surfaces without changing valid user input semantics.
+- Verification: targeted validation and route-boundary tests 12/12; full suite 145/145; production build command completed successfully; `git diff --check`.
+- Known limitation: production remains commit `daafc01`, so these additional controls are not yet a live claim.
+- Next exact action: audit authenticated owner routes for bearer-token parsing and safe failure boundaries; retain exact MiniMax deployment proof as separately gated.
