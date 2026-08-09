@@ -15,6 +15,8 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   assert.match(source, /p_window_seconds: 900/);
   assert.match(source, /content-type/);
   assert.match(source, /status: 415/);
+  assert.match(source, /MAX_AUDIT_BODY_BYTES/);
+  assert.match(source, /status: 413/);
   assert.match(source, /status: 429/);
   assert.match(source, /triageStatus/);
   assert.match(source, /triage_needs_human/);

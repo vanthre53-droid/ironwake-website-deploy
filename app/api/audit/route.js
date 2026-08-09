@@ -8,13 +8,24 @@ import { createSupabaseNotificationStore } from '../../../lib/notifications/supa
 import { needsPriorityAlert, runNotificationWorkerBestEffort } from '../../../lib/notifications/worker.mjs';
 
 export const runtime = 'nodejs';
+const MAX_AUDIT_BODY_BYTES = 16_384;
 
 export async function POST(request) {
   if (!request.headers.get('content-type')?.toLowerCase().includes('application/json')) {
     return NextResponse.json({ error: 'Send a JSON request.' }, { status: 415 });
   }
+  const contentLength = Number(request.headers.get('content-length') || 0);
+  if (Number.isFinite(contentLength) && contentLength > MAX_AUDIT_BODY_BYTES) {
+    return NextResponse.json({ error: 'Request is too large.' }, { status: 413 });
+  }
   let body;
-  try { body = await request.json(); } catch { return NextResponse.json({ error: 'Send a valid JSON request.' }, { status: 400 }); }
+  try {
+    const raw = await request.text();
+    if (new TextEncoder().encode(raw).byteLength > MAX_AUDIT_BODY_BYTES) {
+      return NextResponse.json({ error: 'Request is too large.' }, { status: 413 });
+    }
+    body = JSON.parse(raw);
+  } catch { return NextResponse.json({ error: 'Send a valid JSON request.' }, { status: 400 }); }
   const parsed = parseAuditPayload(body);
   if (!parsed.success) return NextResponse.json({ error: 'Check the required fields and try again.' }, { status: 400 });
   if (parsed.data.website) return NextResponse.json({ received: true }, { status: 202 });
