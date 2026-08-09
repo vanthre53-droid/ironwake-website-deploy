@@ -29,6 +29,8 @@ test('admin operations query the durable inquiry, event, and attempt fields', as
     'Provider accepted', 'Delivered callback', 'Next available'
   ]) assert.match(source, new RegExp(field));
   assert.doesNotMatch(source, /leak_description/);
+  assert.match(source, /notification-readiness/);
+  assert.match(source, /Queued events have not been sent/);
 });
 
 test('owner retry uses only the authorized RPC and never browser table writes', async () => {

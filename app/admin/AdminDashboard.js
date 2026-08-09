@@ -38,6 +38,7 @@ export function AdminDashboard() {
   const [retryingId, setRetryingId] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
   const [status, setStatus] = useState('');
+  const [readiness, setReadiness] = useState(null);
 
   useEffect(() => {
     if (!client) return;
@@ -95,6 +96,14 @@ export function AdminDashboard() {
     return () => { cancelled = true; };
   }, [client, authorization.allowed, refreshKey]);
 
+  useEffect(() => {
+    if (!authorization.allowed || !session?.access_token) { setReadiness(null); return; }
+    fetch('/api/owner/notification-readiness', { method: 'POST', headers: { authorization: `Bearer ${session.access_token}` } })
+      .then((response) => response.json())
+      .then((body) => setReadiness(body.authorized ? body : null))
+      .catch(() => setReadiness(null));
+  }, [authorization.allowed, session]);
+
   async function signIn(event) {
     event.preventDefault();
     if (!client) return setStatus('Owner login is not connected yet.');
@@ -148,6 +157,8 @@ export function AdminDashboard() {
         <button className="button" onClick={signOut}>Sign out</button>
       </> : <>
         <p>Saved lead, queue, attempt, provider-acceptance, delivery, failure, and replay state are shown separately. Provider acceptance is not delivery.</p>
+        {readiness && !readiness.configured && <p className="notice" role="status">Provider configuration is not ready ({readiness.safeErrorCode}). Queued events have not been sent.</p>}
+        {readiness?.configured && <p className="notice" role="status">Provider configuration is present. Provider acceptance and delivery remain separate states.</p>}
         <div className="dashboard-links"><a href="/owner">Owner CRM →</a></div>
         {loading ? <p role="status">Loading notification records…</p> : <ul className="record-list notification-records" aria-label="Notification operations">
           {events.length ? events.map((event) => {
