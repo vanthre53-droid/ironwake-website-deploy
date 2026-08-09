@@ -19,7 +19,7 @@ export function latestNotificationAttempt(attempts = []) {
 
 export function notificationStatusDescription(status) {
   return ({
-    queued: 'Saved and waiting for an available notification worker.',
+    queued: 'Saved in the durable queue. No provider acceptance or delivery is recorded; it awaits a configured worker.',
     processing: 'A worker holds a bounded processing lease. Delivery is not established.',
     retry_scheduled: 'A prior attempt failed safely and another attempt is scheduled.',
     accepted_by_provider: 'The provider accepted the request. Delivery is still pending.',

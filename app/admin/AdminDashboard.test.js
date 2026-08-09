@@ -59,6 +59,7 @@ test('attempt and status helpers distinguish provider acceptance from delivery',
   ]);
   assert.equal(latest.status, 'accepted_by_provider');
   assert.match(notificationStatusDescription('accepted_by_provider'), /Delivery is still pending/);
+  assert.match(notificationStatusDescription('queued'), /No provider acceptance or delivery is recorded/);
   assert.match(notificationStatusDescription('delivered'), /signature-verified provider callback/);
   assert.notEqual(notificationStatusDescription('accepted_by_provider'), notificationStatusDescription('delivered'));
 });
