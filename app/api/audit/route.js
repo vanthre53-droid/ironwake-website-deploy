@@ -10,6 +10,9 @@ import { needsPriorityAlert, runNotificationWorkerBestEffort } from '../../../li
 export const runtime = 'nodejs';
 
 export async function POST(request) {
+  if (!request.headers.get('content-type')?.toLowerCase().includes('application/json')) {
+    return NextResponse.json({ error: 'Send a JSON request.' }, { status: 415 });
+  }
   let body;
   try { body = await request.json(); } catch { return NextResponse.json({ error: 'Send a valid JSON request.' }, { status: 400 }); }
   const parsed = parseAuditPayload(body);

@@ -13,6 +13,8 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   assert.match(source, /consume_request_rate_limit/);
   assert.match(source, /createHash\('sha256'\)/);
   assert.match(source, /p_window_seconds: 900/);
+  assert.match(source, /content-type/);
+  assert.match(source, /status: 415/);
   assert.match(source, /status: 429/);
   assert.match(source, /triageStatus/);
   assert.match(source, /triage_needs_human/);
