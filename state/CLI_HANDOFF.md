@@ -11,6 +11,15 @@
 - Exact next action: research current official zero-cost transactional-email options and seal the smallest provider-neutral notification/outbox implementation task. No provider connection or send is authorized.
 - External boundaries: do not send email, deploy, publish, connect a provider, accept legal terms, spend, or expose credentials.
 
+## Notification architecture checkpoint — 2026-08-09
+
+- C1 commit: `27db52d`; Resend Free is selected for code only from current official pricing/idempotency/webhook/domain evidence.
+- Current stable SDK readback is `resend@6.18.1`; the email skill's older version note is not used. React Email is intentionally omitted.
+- Five tasks are sealed: provider-neutral schema, adapter/worker, signed webhook, owner failure/replay UI, then gated live proof.
+- Required role: M1. Execute only `IW-P0-NOTIFY-01` next; no provider code or UI in that task.
+- The 36 existing `inquiry_received` rows must become safely cancelled legacy events, never retroactive sends. New inquiries atomically receive distinct owner/customer events.
+- A Netlify personal token was exposed in chat and a separate raw token was removed from a tracked historical report. No exposed token was used. The owner must revoke them; replacements belong only in encrypted provider/local credential storage.
+
 ## Portable governance migration — 2026-07-30T16:47:23Z
 
 - Root governance is now the uploaded v6 harness-neutral pack: `AGENTS.md`, `CLI-SETUP.md`, `MASTER_EXECUTION_PROMPT.md`, renamed role prompts/docs, v6 `ironwake.execution.yaml`, and validators.

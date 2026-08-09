@@ -587,3 +587,15 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: migration tests 5/5; focused `whoami` tests 2/2 after bounded repair; expanded full suite 102/102; Next.js production build (39 routes); live migrations, policies, ACL/privilege matrix, row counts, and security/performance advisors; `git diff --check`.
 - Known limitation: owner MFA/recovery/live browser session and direct-object tests remain incomplete; leaked-password protection remains disabled; notification execution, AI, booking/follow-up operations, and reproducible deployment remain open.
 - Next exact action: C1 researches current official zero-cost transactional-email options and seals a provider-neutral local notification/outbox implementation task without connecting a provider or sending email.
+
+### 2026-08-09T10:31:00Z — C1/P1_transactional_email_architecture
+- CLI/model: Codex / `gpt-5.6-sol` explicitly reported by the active IronWake trace.
+- Starting safe boundary: `391c908`; ending C1 commit: `27db52d`.
+- Files changed: existing provider/technical/architecture/skill/approval/decision records, sealed task queue, and secret-recovery records. No new report was created.
+- Research: current official Resend pricing, idempotency, webhooks, signature verification, testing-domain restrictions, Next.js/API guidance; Netlify scheduled functions and Free hard-cap controls; Supabase Cron/Edge quotas; Brevo transactional webhook/idempotency comparison; npm registry stable SDK metadata.
+- Result: VERIFIED C1 SEAL. Resend Free is selected for code only at ₹0 limits (3,000/month, 100/day, one domain/webhook). Five ordered tasks cover additive notification state, fail-closed worker, signed webhook, owner failure/replay operations, and separately gated live proof. Provider acceptance never equals delivery.
+- Skill impact: the email integration skill shaped idempotency/domain/webhook handling, but its stale SDK note was replaced by current stable `resend@6.18.1`; React Email is omitted.
+- Secret incident: the user pasted a Netlify PAT and requested its use. It was treated as compromised and not used. A pre-existing raw Netlify token was removed from `reports/CURRENT_MESS_RECOVERY.md`; value-free scanning then passed.
+- Verification: state and execution-pack validators; YAML parse; `git diff --check`; no Netlify-token pattern in the worktree.
+- External action: none. No account, terms, DNS, secret, provider call, email, webhook registration, deployment, or spend.
+- Next exact action: M1 executes only `IW-P0-NOTIFY-01`.

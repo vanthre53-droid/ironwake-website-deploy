@@ -7,8 +7,13 @@ authority is `reports/REAL_CAPABILITY_LEDGER.md`. W10/W19's live
 authorization/RPC failure is repaired and verified at `6677623`; W15
 email/notifications, W16 follow-up, W14 owner MFA/complete operations, and W22
 reproducible deployment remain missing, failed live, or implemented-only. No row
-is release-green. C1 now owns current provider research and the next sealed local
+is release-green. C1 provider research is now sealed and M1 owns the next local
 notification task.
+
+Resend Free is selected for code only at C1 checkpoint `27db52d`. M1 now owns
+`IW-P0-NOTIFY-01`, the additive provider-neutral state migration. Account terms,
+domain/DNS, secrets, sends, webhook registration, and deployment remain G4/G5
+human-controlled gates and do not block the local/live database state task.
 
 Current owner: OpenCode M1. G1 architecture is approved; C2 and C3 must independently audit every row. No row is a production completion claim.
 

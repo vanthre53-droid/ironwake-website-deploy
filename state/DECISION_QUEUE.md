@@ -14,6 +14,8 @@ Only material decisions belong here. Routine reversible engineering follows the 
 
 D-006 execution result: `VERIFIED_LIVE` on 2026-08-09 at commit `6677623`; Supabase migration `20260809101715` is applied, customer-table counts are unchanged, and the targeted advisor findings are cleared. This does not approve a provider, send, deployment, or MFA bypass.
 
+D-007 architecture result: `VERIFIED C1 SEAL` at commit `27db52d`. Resend is selected only for local/provider-adapter code; the first executable unit is additive state task `IW-P0-NOTIFY-01`. Provider account/terms/domain/secret/send/webhook registration/deployment remain unapproved external actions.
+
 ## Required decision format
 
 | ID | Priority | Missing fact/decision | Why it blocks | Recommended option | Alternatives/tradeoffs | Cost/risk | Required authority | Affected tasks | Status |

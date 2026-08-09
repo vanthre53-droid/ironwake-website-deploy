@@ -1,7 +1,7 @@
 schema_version: 1
 spec_version: c1-real-product-remediation-v1
 sealed_by: Codex C1; current IRONWAKE_REAL_PRODUCT_COMPLETION programme directed by the owner
-sealed_commit: pending_current_c1_checkpoint
+sealed_commit: 27db52d
 gate: GC1_ARCHITECTURE_APPROVED
 immutable_during_m1: true
 activation: "Active for M1 after G1 approval; execute dependency order and stop at remaining gates."
