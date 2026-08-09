@@ -4,7 +4,7 @@
 - Audit phase: `P0.1 REAL CAPABILITY AUDIT`
 - Audited by: Codex
 - Audited at: 2026-08-09 UTC
-- Repository HEAD: `55767cfc8e4b8b18c7caff71a4d7aca7e17235de`
+- Repository HEAD at this checkpoint: `e6b1a9f6ebe6ab1ae7facbdb8f8f1b4ce104eb44`
 - Deployed application commit: `daafc01a7bf23cf1168bdaac6c285f621f5f3449`
 - Production: `https://ironwake-site.netlify.app`
 - Rule: this ledger is reconstructed from current source, live provider/database readback, and deployed HTTP behavior. The prior `VERIFIED_COMPLETE` flag and matrix are historical evidence only.

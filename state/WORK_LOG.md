@@ -717,3 +717,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: PARTIAL. Live schema has an RLS-protected service-role-only atomic rate-limit function. Local audit route hashes request identity and fails closed if protection storage fails. Public-route proof needs G5 deployment.
 - Verification: targeted audit/limiter tests 3/3; migration apply succeeded; diff check.
 - Next exact action: audit audit-route content-type and safe error handling against the durable rate-limit path.
+
+### 2026-08-09T13:12:02Z — M1/P0.16_audit_request_boundaries
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commit: `e6b1a9f`.
+- Result: VERIFIED_LOCAL. The audit route rejects non-JSON and over-limit bodies before a durable limiter or database dependency is invoked. The durable rate-limit migration now has an executable contract test covering RLS, key hashing, bounded parameters, atomic upsert, service-role-only access, and no outbound side effect.
+- Verification: focused migration test 1/1; full suite 142/142; `git diff --check`.
+- Known limitation: the live Supabase function is present, but the deployed audit route remains at `daafc01`; public multi-instance rate enforcement is not yet proven and needs named G5 deployment approval.
+- Next exact action: remove duplicated regional pricing presentation by extracting one internal canonical source without changing approved amounts or public wording.
