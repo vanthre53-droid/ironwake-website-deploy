@@ -7,14 +7,14 @@ programme_status: PARTIAL
 active_stage: C1
 required_role: C1
 current_phase: P0_SECURITY_ASSURANCE
-current_gate: P0_CONSOLIDATED_LOCAL_TRUTH_REPAIR_DEPLOYMENT_HELD
-next_exact_action: "Continue only remaining locally executable P0 truth/security corrections and consolidate them in the local candidate. Do not push or deploy until the owner releases the deployment hold; independently await an MFA-enrolled authorized owner browser session, Resend account/domain/secret/webhook configuration, and adult/legal-owner D-008 retention/deletion/backup-restore decisions."
+current_gate: P0_RESEND_FULL_ACCESS_KEY_REQUIRED
+next_exact_action: "Replace only RESEND_API_KEY with a full-access Resend key in .env.local and ironwake-site production environment, then resume webhook registration, secret storage, redeploy, and one exact-event Resend test. Independently await an MFA-enrolled authorized owner browser session and adult/legal-owner D-008 retention/deletion/backup-restore decisions."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 113b766
-last_verified_task: iw_p0_27_public_operational_claims_and_assistant_local_candidate
-blocked_on: "No Netlify technical blocker remains, but deployment is explicitly held by the owner while local P0 truth/security repairs are consolidated. The remaining independent external items are: a real owner MFA-enrolled authenticated browser session for dashboard/direct-object proof; Resend account/domain/secret/webhook configuration and controlled delivery evidence; and adult/legal-owner D-008 retention/deletion/backup-restore decisions. All exposed Netlify tokens require human revocation and will not be used."
+last_safe_boundary: b0d5781
+last_verified_task: iw_p0_28_resend_send_only_key_boundary
+blocked_on: "Netlify production commit b0d5781 is ready. The configured Resend API key is explicitly restricted to sending and cannot create or list webhooks, so the only Resend prerequisite is a securely stored full-access replacement key; no webhook, signing secret, send, or callback was created. Independent remaining external items are an MFA-enrolled owner browser session and adult/legal-owner D-008 retention/deletion/backup-restore decisions. Exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -26,8 +26,8 @@ gates:
   GM2_REMEDIATION_COMPLETE: partial_c2_f2_deferred
   GC3_RELEASE_CANDIDATE_PASS: partial_not_approved
   G2_SCHEMA_AUTH_SERVER_APPROVAL: verified_notification_state_live_owner_session_pending
-  G4_EXTERNAL_PROVIDER_APPROVAL: resend_selected_code_only_connection_pending
-  G5_PRODUCTION_DEPLOY_APPROVAL: verified_deployed_c2f9663
+  G4_EXTERNAL_PROVIDER_APPROVAL: resend_send_only_key_full_access_required
+  G5_PRODUCTION_DEPLOY_APPROVAL: verified_deployed_b0d5781
   REAL_CAPABILITY_LEDGER_VERIFIED: verified
   IRONWAKE_REAL_PRODUCT_COMPLETION: partial
 
@@ -41,7 +41,7 @@ workstream_status:
   W06: verified_internal_draft_blocked_dependencies
   W07: blocked_g2
   W08: blocked_pricing_legal_owner
-  W09: resend_selected_code_only_account_domain_pending
+  W09: blocked_resend_full_access_key_required
   W10: verified_live_schema_acl_repaired
   W11: deployed_unconfigured_provider_operations
   W12: verified_live_minimax_structured_triage_owner_dashboard_session_pending

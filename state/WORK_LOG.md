@@ -855,3 +855,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: VERIFIED_LOCAL_CANDIDATE_HELD. The deterministic assistant had one remaining direct overclaim that every inquiry receives named assignment. It now describes the real review-task/due-date state and qualifies assignment/escalation as separate unconfigured work.
 - Verification: public-truth pretests 3/3; focused assistant, footer, homepage, and missed-lead tests 5/5; production build; `git diff --check`.
 - Deployment: intentionally not pushed or deployed under the owner's hold instruction.
+
+### 2026-08-09T15:39:00Z — C1/P0.28_resend_send_only_key_boundary
+- Result: `RESEND_FULL_ACCESS_KEY_REQUIRED`. Commit `b0d5781` deployed successfully, including the raw-body signed webhook route and service-role-only exact-event claim selector. The configured Resend key was then checked once at the webhook-management boundary and explicitly rejected as send-only.
+- Verification: focused notification/webhook/migration tests 19/19; production build; Netlify production deploy `6a789eebb47d2e00072dc2d3` ready; live targeted-function ACL readback (anonymous/authenticated denied, service-role allowed).
+- Safety: no webhook creation/retry, signing secret, provider send, callback, or notification-state mutation occurred. No credential value or provider response payload was persisted.
+- Next exact action: replace only `RESEND_API_KEY` with a full-access key in `.env.local` and the existing Netlify production environment, then resume webhook registration.
