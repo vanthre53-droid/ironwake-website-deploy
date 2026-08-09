@@ -58,7 +58,7 @@ tasks:
   - id: IW-P0-NOTIFY-03
     workstream: W15
     title: "Implement the signature-verified Resend delivery webhook"
-    status: queued
+    status: verified_local
     depends_on: [IW-P0-NOTIFY-02]
     authority_class: A1
     allowed_paths: ["app/api/webhooks/resend/**", "lib/notifications/**", ".env.example", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P4_PROVIDER_PROOF.md", "state/**"]
@@ -69,12 +69,12 @@ tasks:
     evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P4_PROVIDER_PROOF.md"
     rollback_note: "Remove/disable the route; accepted events remain distinct from delivered until a verified callback path exists."
     blockers: []
-    implementation_notes: "One Resend webhook endpoint is available on Free; registration and signing-secret handling remain G4/G5 actions."
+    implementation_notes: "VERIFIED LOCAL 2026-08-09. The bounded server route verifies the raw request body through the current Resend SDK before normalization, accepts only the sealed delivery event set, and records metadata through the service-role provider-event RPC. Focused no-network tests pass 25/25 including forged, stale, replayed, duplicate, unknown-message, out-of-order, delivered, and terminal-failure fixtures; full suite 129/129, 39-route build, audit, validators, diff, and secret scan pass. No secret, registration, provider call, email, live callback, or deployment occurred."
 
   - id: IW-P0-NOTIFY-04
     workstream: W14
     title: "Expose notification failures, attempts, and authorized replay to the owner"
-    status: sealed_pending_dependency
+    status: queued
     depends_on: [IW-P0-NOTIFY-03]
     authority_class: A1
     allowed_paths: ["app/admin/**", "app/api/owner/whoami/**", "app/globals.css", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P4_CRM_AUTHORIZATION.md", "state/**"]
