@@ -26,7 +26,7 @@ Status: `PARTIAL — MINIMAX M3 CONTRACT AND DURABLE FAILURE METADATA VERIFIED L
 ## Remaining boundary
 
 - The MiniMax API key remains server-only and was not read, printed, or stored by this task.
-- Production behavior still matches the pre-repair triage persistence path despite the reported fresh build: it records no provider/error/attempt metadata. Repair commit `3faadd3` must be the exact deployed artifact before the same controlled inquiry can prove MiniMax → structured triage → Supabase → owner dashboard.
+- Netlify readback on 2026-08-09 identifies production deploy `6a786d2b0207453cc9541555`, published at `2026-08-09T12:06:35Z`, with `commit_ref = daafc01a7bf23cf1168bdaac6c285f621f5f3449`. Production behavior therefore correctly matches the pre-repair persistence path: it records no provider/error/attempt metadata. Repair commit `3faadd3` must be the exact deployed artifact before the same controlled inquiry can prove MiniMax → structured triage → Supabase → owner dashboard.
 - No automatic customer reply or owner notification was sent.
 - The deployed owner dashboard does not yet display triage data. The local owner dashboard now exposes provider/model, triage outcome, priority/category, safe status, attempted time, summary, and suggested reply under the existing owner authorization/RLS boundary.
 - Routine AI replies remain drafts until the notification and human-escalation policy is implemented and verified.

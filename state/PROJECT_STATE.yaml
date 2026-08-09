@@ -14,7 +14,7 @@ harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: 83b0b48
 last_verified_task: iw_p0_canonical_pricing_83b0b48
-blocked_on: "P0.4 live verification failed: a controlled production inquiry reached MiniMax but persisted provider_error/invalid output and null durable provider/error/attempt metadata, proving that repair commit 3faadd3 is not the verified runtime artifact. Exact deployment identity plus G5 approval are required before corrected MiniMax or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
+blocked_on: "P0.4 live verification failed on exact Netlify deploy 6a786d2b0207453cc9541555 (commit daafc01, published 2026-08-09T12:06:35Z): a controlled production inquiry reached MiniMax but persisted provider_error/invalid output and null durable provider/error/attempt metadata. Repair commit 3faadd3 is not the runtime artifact; named G5 approval to deploy it is required before corrected MiniMax or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified

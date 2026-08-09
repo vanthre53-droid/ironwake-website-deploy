@@ -741,3 +741,8 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused pricing/public-surface tests 5/5; full suite 143/143; production build command completed successfully; `git diff --check`.
 - Known limitation: the public deployment is not this commit, so source consolidation is local-only until an approved production deployment.
 - Next exact action: obtain exact deployment identity for `3faadd3`, then repeat the bounded MiniMax structured-triage and owner-dashboard proof.
+
+### 2026-08-09T13:20:00Z — M1/P0.4_deployment_identity_readback
+- Result: VERIFIED MISMATCH. Read-only Netlify metadata identifies the latest production deploy as `6a786d2b0207453cc9541555`, published `2026-08-09T12:06:35Z`, with commit `daafc01a7bf23cf1168bdaac6c285f621f5f3449`. It predates local MiniMax repair `3faadd3`.
+- Prevention rule: treat an environment-variable update or a reported build trigger as insufficient. Before production E2E verification, read back the latest deploy ID and commit and require it to contain the intended repair.
+- Next exact action: obtain named G5 approval to deploy the reviewed repair artifact, then rerun one bounded synthetic inquiry and an authenticated owner-dashboard readback.
