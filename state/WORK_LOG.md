@@ -825,3 +825,10 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Classified lesson: Git push success and deployment approval do not establish Netlify write authority. Prevention rule: require a newly created deploy ID and exact commit readback before production E2E testing.
 - Evidence: `reports/evidence/P0_4_RELEASE_DELIVERY_ATTEMPT_58446E2.md`.
 - Next exact action: restore the Netlify deployment API/site-role path or configure a linked build, verify deployment identity for `58446e2`, then perform one bounded MiniMax and authenticated owner-dashboard proof. D-008, MFA/direct-object, backup/restore, and unconfigured transactional-email delivery remain isolated external items.
+
+### 2026-08-09T14:46:00Z — C1/P0.4_deployed_minimax_structured_triage
+- Result: VERIFIED_LIVE. The earlier CLI-upload 404 did not block the existing Git-connected site: Netlify published `58446e2` and then `c2f9663`; current deploy `6a7892639caabf0008a76736` is production `ready`, public, `master`, and plugin-successful.
+- Controlled proof: one owner-authorized synthetic inquiry against current production received the safe generic confirmation. Supabase readback proves complete MiniMax M3 structured triage with provider/model/attempt/category/summary/suggested-reply metadata, no error code, and no human fallback.
+- Targeted deployed boundary checks: public audit and webhook GETs returned `405 Allow: POST` with no-store; anonymous requests to all three owner-only POST routes returned private no-store 401. No authenticated owner session, email, provider fault, deletion, or retention execution occurred.
+- Failure handling remains frozen at the existing 6/6 injected no-network timeout/provider-unavailable/invalid-output proof. No production fault was induced.
+- Remaining exact external actions: real owner MFA enrollment plus authenticated dashboard/direct-object proof; Resend account/domain/secret/webhook configuration and controlled delivery evidence; adult/legal-owner D-008 retention/deletion/backup-restore decision and evidence.

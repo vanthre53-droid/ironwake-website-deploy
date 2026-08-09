@@ -7,14 +7,14 @@ programme_status: PARTIAL
 active_stage: C1
 required_role: C1
 current_phase: P0_SECURITY_ASSURANCE
-current_gate: P0_LOCAL_SECURITY_REVIEW_COMPLETE_EXTERNAL_EVIDENCE_PENDING
-next_exact_action: "Restore a Netlify deployment path with permission to create a production deploy for current origin/master commit 58446e2, verify that exact artifact identity, then run one controlled MiniMax inquiry and authenticated owner-dashboard evidence. Independently await adult/legal-owner D-008 retention/deletion decisions and owner MFA/direct-object/backup-restore evidence."
+current_gate: P0_DEPLOYED_MINIMAX_VERIFIED_OWNER_SESSION_MFA_EVIDENCE_PENDING
+next_exact_action: "Use a real authorized owner browser session, after Supabase MFA enrollment, to verify the deployed /owner triage record and direct-object protections. Independently await Resend account/domain/secret/webhook configuration plus one controlled delivery proof, and adult/legal-owner D-008 retention/deletion/backup-restore decisions."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 58446e2
-last_verified_task: iw_p0_public_api_response_boundary_19e26c8
-blocked_on: "P0.4 live verification remains blocked on the exact Netlify deploy path, not owner approval: G5 is granted and origin/master now equals 58446e2, but two authorised Netlify CLI production-upload attempts (including an explicit site ID) returned HTTP 404 after packaging and created no deploy. Latest production remains deploy 6a786d2b0207453cc9541555 at daafc01, so no corrected MiniMax or owner-dashboard production proof may be attempted yet. Restore a site role/API path that can create the deploy or link the repository build. Resend account/terms/domain/DNS/secret/webhook/send remain separately unconfigured. All exposed Netlify tokens require human revocation and will not be used."
+last_safe_boundary: c2f9663
+last_verified_task: iw_p0_4_deployed_minimax_structured_triage_c2f9663
+blocked_on: "No Netlify deployment blocker remains: existing ironwake-site is connected to the existing GitHub repository and has ready production deploy 6a7892639caabf0008a76736 at c2f9663. The remaining independent external items are: a real owner MFA-enrolled authenticated browser session for dashboard/direct-object proof; Resend account/domain/secret/webhook configuration and controlled delivery evidence; and adult/legal-owner D-008 retention/deletion/backup-restore decisions. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -27,7 +27,7 @@ gates:
   GC3_RELEASE_CANDIDATE_PASS: partial_not_approved
   G2_SCHEMA_AUTH_SERVER_APPROVAL: verified_notification_state_live_owner_session_pending
   G4_EXTERNAL_PROVIDER_APPROVAL: resend_selected_code_only_connection_pending
-  G5_PRODUCTION_DEPLOY_APPROVAL: granted_deploy_api_path_failed
+  G5_PRODUCTION_DEPLOY_APPROVAL: verified_deployed_c2f9663
   REAL_CAPABILITY_LEDGER_VERIFIED: verified
   IRONWAKE_REAL_PRODUCT_COMPLETION: partial
 
@@ -43,15 +43,15 @@ workstream_status:
   W08: blocked_pricing_legal_owner
   W09: resend_selected_code_only_account_domain_pending
   W10: verified_live_schema_acl_repaired
-  W11: verified_local_implementation
-  W12: partial_minimax_local_repair_live_e2e_deploy_pending
-  W13: implemented_live_request_only_booking_schema_local_ui_deploy_pending
-  W14: implemented_live_follow_up_state_local_owner_operations_deploy_pending
-  W15: verified_local_notification_webhook_owner_operations_queued
-  W16: implemented_notes_timeline_local_ui_deploy_pending_follow_up_escalation_missing
+  W11: deployed_unconfigured_provider_operations
+  W12: verified_live_minimax_structured_triage_owner_dashboard_session_pending
+  W13: deployed_request_only_booking_schema_owner_session_pending
+  W14: deployed_follow_up_state_owner_session_pending
+  W15: deployed_notification_webhook_owner_operations_provider_pending
+  W16: deployed_notes_timeline_owner_session_pending_follow_up_escalation_missing
   W17: blocked_real_data
   W18: blocked_scope_legal
   W19: verified_live_privileged_rpc_boundary
   W20: partial_authorization_repaired_mfa_pending
   W21: blocked_release_dependencies
-  W22: deployed_manual_reproducibility_missing
+  W22: verified_git_connected_production_builds_c2f9663
