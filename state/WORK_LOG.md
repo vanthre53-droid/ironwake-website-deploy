@@ -788,3 +788,12 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused dashboard/migration tests 3/3; full suite 158/158; production build completed; `git diff --check`; live function ACL readback proves `prosecdef = true`, `anon_execute = false`, `authenticated_execute = true`, and `service_role_execute = false`.
 - Known limitation: no real consent withdrawal or owner-session interaction was performed, and the local UI is not deployed. This does not create a deletion/anonymization capability.
 - Next exact action: audit the retention/anonymization executor boundary and owner-visible retention status without running deletion or anonymization; retain exact MiniMax deployment proof as separately gated.
+
+### 2026-08-09T15:42:00Z — M1/P0.23_retention_boundary_and_owner_status
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commit: `20a2da7`.
+- Result: PARTIAL / VERIFIED_LIVE_BOUNDARY_LOCAL_STATUS. The owner UI reads `retention_until` and `anonymized_at` but contains no anonymization invocation. It explicitly tells the owner that no automated retention executor is configured. The live retention function is `SECURITY DEFINER`, callable by `service_role` only, and no `pg_cron` relation exists.
+- Verification: live aggregate/ACL readback found zero expired pending inquiries and two historical anonymized inquiries; anonymous/authenticated execute is denied and service-role execute is allowed. Targeted tests 3/3, full suite 158/158, production build, and `git diff --check` passed.
+- Approval/external action: read-only live query and local UI code only. No retention function, deletion, anonymization, schedule, owner session, provider, send, or deployment was invoked.
+- Known limitation: an existing service-role function is not a retention program. A privacy/legal owner must approve the retention/deletion rules before any request/executor/schedule/recovery workflow is implemented or run.
+- Next exact action: prepare a non-destructive owner deletion-request/retention decision packet; do not delete, anonymize, or schedule customer-data processing without named privacy/legal-owner approval.
