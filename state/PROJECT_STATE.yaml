@@ -12,8 +12,8 @@ next_exact_action: "Obtain the named G5 deployment approval for the reviewed P0.
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 542f15b
-last_verified_task: iw_p0_notify_04_owner_notification_operations_542f15b
+last_safe_boundary: 3faadd3
+last_verified_task: iw_p0_ai_04_minimax_triage_reality_3faadd3
 blocked_on: "P0.4 local MiniMax repair and its reviewed additive database migration are verified. The deployed application remains commit daafc01 and returns provider_error for the authorized synthetic inquiry; G5 deployment approval is required before a corrected deployed MiniMax request or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:

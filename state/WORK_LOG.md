@@ -650,3 +650,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused injected tests 7/7; full suite 135/135; production build; `npm audit --omit=dev` 0; diff check; secret-pattern scan; live migration and column readback. Browser automation is NOT_RUN because `agent-browser` is absent; prevention rule: use a supported browser harness for the final owner-UI interaction proof.
 - Known limitation: a successful deployed MiniMax structured result and owner-dashboard interaction are NOT_RUN because this repaired code is not deployed. The production build triggered by the owner still carries commit `daafc01`, not this repair.
 - Next exact action: obtain named G5 approval to deploy the exact reviewed repair commit, then rerun the synthetic inquiry and verify MiniMax → structured triage → Supabase → owner dashboard.
+
+### 2026-08-09T12:19:10Z — M1/P0.4_checkpoint
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Starting commit: `4be90f1`; implementation commit: `3faadd3`.
+- Result: CHECKPOINTED. The P0.4 repair, evidence, and state are committed; only the unrelated owner `.gitignore` change remains uncommitted.
+- Next exact action: obtain named G5 approval to deploy `3faadd3`, then run the one approved synthetic MiniMax end-to-end proof.

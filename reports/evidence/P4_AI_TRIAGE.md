@@ -24,7 +24,7 @@ Status: `PARTIAL — MINIMAX M3 CONTRACT AND DURABLE FAILURE METADATA VERIFIED L
 ## Remaining boundary
 
 - The MiniMax API key remains server-only and was not read, printed, or stored by this task.
-- The current production deployment is commit `daafc01`, while this repair is local and not deployed. A G5 production deployment approval is required before the same synthetic inquiry can prove MiniMax → structured triage → Supabase → owner dashboard.
+- The current production deployment is commit `daafc01`, while repair commit `3faadd3` is local and not deployed. A G5 production deployment approval is required before the same synthetic inquiry can prove MiniMax → structured triage → Supabase → owner dashboard.
 - No automatic customer reply or owner notification was sent.
 - The deployed owner dashboard does not yet display triage data. The local owner dashboard now exposes provider/model, triage outcome, priority/category, safe status, attempted time, summary, and suggested reply under the existing owner authorization/RLS boundary.
 - Routine AI replies remain drafts until the notification and human-escalation policy is implemented and verified.
