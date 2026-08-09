@@ -25,7 +25,12 @@ export async function handleResendWebhook(request, {
   if (declaredLength > MAX_WEBHOOK_BYTES) {
     return response({ received: false, error: 'Webhook payload is too large.' }, 400);
   }
-  const rawBody = await request.text();
+  let rawBody;
+  try {
+    rawBody = await request.text();
+  } catch {
+    return response({ received: false, error: 'Webhook payload is invalid.' }, 400);
+  }
   if (!rawBody || Buffer.byteLength(rawBody, 'utf8') > MAX_WEBHOOK_BYTES) {
     return response({ received: false, error: 'Webhook payload is invalid.' }, 400);
   }

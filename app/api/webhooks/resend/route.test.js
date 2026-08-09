@@ -130,6 +130,23 @@ test('signed malformed payload and database failure return safe retry-aware resp
   assert.deepEqual(await body(databaseFailure), { received: false, error: 'Webhook could not be stored.' });
 });
 
+test('unreadable bodies fail closed before signature verification or storage', async () => {
+  let verified = false;
+  let stored = false;
+  const response = await handleResendWebhook({
+    headers: new Headers({ 'content-length': '10' }),
+    text: async () => { throw new Error('stream read failed'); }
+  }, {
+    env,
+    verify: () => { verified = true; },
+    store: { recordProviderEvent: async () => { stored = true; } }
+  });
+  assert.equal(response.status, 400);
+  assert.deepEqual(await body(response), { received: false, error: 'Webhook payload is invalid.' });
+  assert.equal(verified, false);
+  assert.equal(stored, false);
+});
+
 test('route reads request text and never parses unsigned JSON or exposes secrets', async () => {
   const source = await readFile(new URL('./route.js', import.meta.url), 'utf8');
   assert.match(source, /await request\.text\(\)/);
