@@ -779,3 +779,12 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused export/dashboard tests 3/3; full suite 157/157; production build command completed successfully; `git diff --check`.
 - Known limitation: no owner session has exercised the endpoint and the route is undeployed. The retention anonymizer remains service-role-only with no scheduled executor; consent withdrawal/deletion control remains incomplete.
 - Next exact action: implement a canonical-owner-authorized consent-withdrawal record and audit event without deleting or anonymizing any customer data.
+
+### 2026-08-09T15:30:00Z — M1/P0.22_owner_consent_withdrawal
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commit: `30b6e92`.
+- Approval/external action: the existing G2 authorization for additive single-owner CRM controls was used to apply migration `20260809153000_owner_consent_withdrawal`. The migration adds a function only; no consent, inquiry, notification, or customer record was altered by this task.
+- Result: PARTIAL / VERIFIED_LIVE_SCHEMA_LOCAL_UI. The authenticated-only security-definer RPC rechecks the canonical owner before locking the contact-consent row, is idempotent, records withdrawal, clears the inquiry follow-up, cancels only unsent customer outbox intents, and adds metadata-only audit evidence. The local owner UI reads consent status and requires a deliberate browser confirmation before the sole RPC mutation path.
+- Verification: focused dashboard/migration tests 3/3; full suite 158/158; production build completed; `git diff --check`; live function ACL readback proves `prosecdef = true`, `anon_execute = false`, `authenticated_execute = true`, and `service_role_execute = false`.
+- Known limitation: no real consent withdrawal or owner-session interaction was performed, and the local UI is not deployed. This does not create a deletion/anonymization capability.
+- Next exact action: audit the retention/anonymization executor boundary and owner-visible retention status without running deletion or anonymization; retain exact MiniMax deployment proof as separately gated.
