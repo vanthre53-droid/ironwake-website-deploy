@@ -9,6 +9,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server.js';
+import { parseBearerToken } from '../../../../lib/owner-auth.mjs';
 
 export const runtime = 'nodejs';
 
@@ -19,21 +20,17 @@ function unauthorized(reason) {
 }
 
 export async function POST(request) {
-  const header = request.headers.get('authorization') || '';
-  const match = header.match(/^Bearer\s+(.+)$/i);
-  if (!match) return NextResponse.json({ authorized: false, reason: 'No active session.' }, { status: 401 });
-
-  const token = match[1].trim();
+  const token = parseBearerToken(request.headers.get('authorization'));
+  if (!token) return NextResponse.json({ authorized: false, reason: 'No active session.' }, { status: 401 });
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !anonKey) return NextResponse.json({ authorized: false, reason: 'Auth is not connected.' }, { status: 503 });
 
   const supabase = createClient(url, anonKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
-    global: { headers: { Authorization: `Bearer ${token}` } },
+    auth: { persistSession: false, autoRefreshToken: false }
   });
 
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await supabase.auth.getUser(token);
   if (error || !data?.user) return NextResponse.json({ authorized: false, reason: 'Session is not valid.' }, { status: 401 });
 
   const email = (data.user.email || '').toLowerCase();

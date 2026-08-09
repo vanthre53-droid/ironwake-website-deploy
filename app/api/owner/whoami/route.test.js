@@ -20,7 +20,9 @@ test('whoami route never references service_role or signs its own tokens', async
   assert.doesNotMatch(src, /signInWithPassword/);
   // The route must require the bearer token and call getUser to validate it.
   assert.match(src, /authorization/i);
-  assert.match(src, /auth\.getUser/);
+  assert.match(src, /parseBearerToken/);
+  assert.match(src, /auth\.getUser\(token\)/);
+  assert.doesNotMatch(src, /global:\s*\{\s*headers/);
   // The route must compare against the designated owner email.
   assert.match(src, /ironwakee@gmail\.com/);
   // The route must return 401 for missing/invalid sessions and 403 for
