@@ -4,11 +4,11 @@ schema_version: 6.0.0
 
 programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
-active_stage: C1
-required_role: C1
+active_stage: M1
+required_role: M1
 current_phase: P0_SECURITY_ASSURANCE
-current_gate: P0_OWNER_API_BOUNDARY_LOCAL_VERIFIED
-next_exact_action: "Seal the next bounded deep API-security matrix across every current route, then transfer only the resulting local-only M1 task. Do not deploy, query/mutate production rows, or change retention/deletion behavior."
+current_gate: C1_API_MATRIX_IW_P0_SEC_03_SEALED
+next_exact_action: "Execute sealed IW-P0-SEC-03: make public mutation and signed-webhook response boundaries explicit and testable. Do not deploy, query/mutate production rows, call a provider, or change retention/deletion behavior."
 
 harness: codex
 model: gpt-5.6-terra

@@ -7,6 +7,22 @@ gate: GC1_ARCHITECTURE_APPROVED
 immutable_during_m1: true
 activation: "Active for M1 after G1 approval; execute dependency order and stop at remaining gates."
 tasks:
+  - id: IW-P0-SEC-03
+    workstream: W19
+    title: "Make public mutation and signed-webhook response boundaries explicit"
+    status: ready_for_m1
+    depends_on: [IW-P0-SEC-02]
+    authority_class: A1
+    allowed_paths: ["app/api/audit/**", "app/api/webhooks/resend/**", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/**", "state/**"]
+    source_refs: ["app/api/audit/route.js", "app/api/webhooks/resend/route.js", "reports/SECURITY_PRIVACY_MODEL.md"]
+    requirements: ["Return explicit no-store responses from public mutation and signed-webhook handlers without changing truthful payloads or status semantics", "Return safe 405 plus Allow: POST for common unsupported methods", "Keep audit validation before all database/provider dependencies and webhook raw-body verification before parsing/storage", "Add direct route-contract tests for no-store and method behavior", "Preserve service-role use only on the server and do not make any provider call"]
+    forbidden: ["Do not weaken audit validation or rate limiting", "Do not accept unsigned webhook payloads", "Do not call a provider", "Do not query or mutate production rows", "Do not deploy"]
+    acceptance_commands: ["node --test app/api/audit/route.test.js app/api/webhooks/resend/route.test.js", "npm run test", "npm run build", "git diff --check"]
+    evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P5_SECURITY.md"
+    rollback_note: "Revert only the route-response contract; no durable state or provider event is affected."
+    blockers: []
+    implementation_notes: "Sealed 2026-08-09 after C1 inspected all five route handlers. Audit and webhook validation/storage order is sound, but their mutation/no-cache and unsupported-method behavior relied on framework defaults rather than explicit contracts."
+
   - id: IW-P0-SEC-02
     workstream: W19
     title: "Make owner-only API responses explicitly private and method constrained"
