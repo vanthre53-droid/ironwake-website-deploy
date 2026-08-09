@@ -7,13 +7,13 @@ programme_status: PARTIAL
 active_stage: M1
 required_role: M1
 current_phase: P0_OWNER_CRM_COMPLETENESS
-current_gate: P0_AUDIT_REQUEST_BOUNDARY_VERIFIED
-next_exact_action: "Keep the MiniMax deployment mismatch explicitly open: obtain the exact deployed artifact identity for repair commit 3faadd3, then repeat the controlled inquiry and owner-dashboard readback. Independently, remove duplicated regional pricing presentation without changing approved amounts or public wording. Do not use the exposed Netlify token."
+current_gate: P0_MINIMAX_DEPLOYMENT_IDENTITY_AND_STRUCTURED_SUCCESS_PENDING
+next_exact_action: "Obtain the exact deployed artifact identity for repair commit 3faadd3, then repeat the controlled MiniMax inquiry and authenticated owner-dashboard readback. Keep production configuration unchanged and do not use the exposed Netlify token."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: e6b1a9f
-last_verified_task: iw_p0_audit_request_boundaries_e6b1a9f
+last_safe_boundary: 83b0b48
+last_verified_task: iw_p0_canonical_pricing_83b0b48
 blocked_on: "P0.4 live verification failed: a controlled production inquiry reached MiniMax but persisted provider_error/invalid output and null durable provider/error/attempt metadata, proving that repair commit 3faadd3 is not the verified runtime artifact. Exact deployment identity plus G5 approval are required before corrected MiniMax or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:

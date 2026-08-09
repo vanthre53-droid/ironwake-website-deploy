@@ -733,3 +733,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Failure handling: injected no-network tests for the local repair passed 6/6: MiniMax timeout, provider-unavailable, and invalid-output each fail closed to `needs_human = true` with safe error codes. Production was not deliberately misconfigured or delayed.
 - Classified lesson: a successful provider health check and HTTP-201 intake response do not prove response-schema compatibility or that a requested build contains the repair. Prevention rule: require the exact deploy artifact identity plus one persisted successful structured row with non-null provider/model/attempt metadata before marking P0.4 verified.
 - Next exact action: verify the exact deployment artifact contains `3faadd3`, then repeat the same bounded inquiry and authenticated owner-dashboard readback; meanwhile continue the independent canonical-pricing refactor.
+
+### 2026-08-09T13:19:48Z — M1/P0.17_canonical_pricing_source
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commit: `83b0b48`.
+- Result: VERIFIED_LOCAL. `lib/pricing.mjs` is the sole owner of the approved five offers, Lite/Standard/Pro tiers, and India/international schedules. The public pricing page, system references, homepage, deterministic guide, metadata, and FAQ structured data now derive their amounts from it; no price amount remains duplicated in application sources.
+- Verification: focused pricing/public-surface tests 5/5; full suite 143/143; production build command completed successfully; `git diff --check`.
+- Known limitation: the public deployment is not this commit, so source consolidation is local-only until an approved production deployment.
+- Next exact action: obtain exact deployment identity for `3faadd3`, then repeat the bounded MiniMax structured-triage and owner-dashboard proof.

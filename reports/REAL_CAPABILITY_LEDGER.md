@@ -4,7 +4,7 @@
 - Audit phase: `P0.1 REAL CAPABILITY AUDIT`
 - Audited by: Codex
 - Audited at: 2026-08-09 UTC
-- Repository HEAD at this checkpoint: `e6b1a9f6ebe6ab1ae7facbdb8f8f1b4ce104eb44`
+- Repository HEAD at this checkpoint: `83b0b48e91feed351798f08d0c422cf7036ad26d`
 - Deployed application commit: `daafc01a7bf23cf1168bdaac6c285f621f5f3449`
 - Production: `https://ironwake-site.netlify.app`
 - Rule: this ledger is reconstructed from current source, live provider/database readback, and deployed HTTP behavior. The prior `VERIFIED_COMPLETE` flag and matrix are historical evidence only.
@@ -21,7 +21,7 @@
 | Public website routes | Yes | Yes | Netlify | Yes | Yes | No | Page delivery | Yes | HTTP status | Platform-managed | Yes | `VERIFIED_LIVE` | Current production GETs for `/`, `/pricing`, `/audit`, `/book`, `/owner`, `/admin`, and three system pages return 200. |
 | Repeatable Git-linked production deployment | Internally required | Config only | Netlify + GitHub | No | No | No | Deployment | Partial | Partial | Platform-managed | No | `MISSING` | Netlify project is live, but `getSite` exposes no linked repository settings and Netlify reports zero configured environment-variable names. The current deploy is a manual deploy carrying Git commit metadata, not proof of a reproducible Git-linked build. |
 | Regional pricing presentation | Yes | Yes | No | N/A | N/A | No | No | Yes | N/A | N/A | Yes | `VERIFIED_LIVE` | Production/source contain the locked 5 offers × 3 tiers × India/International schedules. No FX conversion or sixth package exists. |
-| One canonical pricing source | Yes* | No | No | N/A | N/A | No | No | No | No | No | No | `MISSING` | Amounts are duplicated across `PricingPage.js`, `PricingReference.js`, and `SiteAssistant.js`; comments calling them a single source are inaccurate even though current values agree. |
+| One canonical pricing source | Yes* | Yes, local | No | N/A | N/A | No | No | N/A | N/A | N/A | No | `IMPLEMENTED_ONLY` | `lib/pricing.mjs` now owns the approved five offers, three tiers, two regional schedules, Lite-price helpers, and SEO summary. The pricing page, system references, deterministic guide, homepage, and pricing structured data read it; 143 local tests pass. Production still serves an earlier artifact, so the source consolidation is not yet live. |
 | Portfolio demonstration links | Yes | Yes | Vercel per demo | Yes | Yes | No | Remote demo delivery | Yes | HTTP status only | Platform-managed | Yes | `VERIFIED_LIVE` | All nine current Vercel URLs returned HTTP 200 in this audit. This proves reachability only, not clients, outcomes, providers, or uptime. |
 | Supabase CRM persistence core | Yes | Yes | Supabase | Yes | Yes | Yes | No | Partial | API/log error only | No | Yes | `VERIFIED_LIVE` | Live database still contains 38 inquiries, 29 contacts, 36 consents, 36 review tasks, 36 outbox intents, and 44 audit-log rows after the notification migration. RLS remains enabled on the six core private tables; the two new notification evidence tables are also RLS-enabled and empty. |
 | Public audit intake persistence | Yes | Yes | Supabase | Yes | Yes | Yes | No | Partial | Safe 4xx/5xx + server log | Browser retry creates another inquiry | Yes | `VERIFIED_LIVE` | Deployed route rejects invalid input; live rows and the deployed RPC prove durable intake. Full notification/customer workflow is separate and not live. |
