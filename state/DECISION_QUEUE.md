@@ -20,6 +20,8 @@ D-007 state implementation result: `VERIFIED_LIVE` on 2026-08-09 at commit `354c
 
 D-007 worker implementation result: `VERIFIED_LOCAL` on 2026-08-09 at commit `42c5754`; the exact Resend SDK, fail-closed config, escaped templates, bounded shared worker, priority hook, and undeployed schedule entrypoint pass no-network tests and production build/audit. This does not approve or prove a provider key, call, email, webhook registration, schedule deployment, acceptance, or delivery. `IW-P0-NOTIFY-03` is next.
 
+D-007 webhook implementation result: `VERIFIED_LOCAL` on 2026-08-09 at commit `2e6b46e`; raw-body signature verification, sealed event normalization, service-role provider-event recording, safe responses, and replay/out-of-order/failure fixtures pass without network access. This does not approve or prove a signing secret, webhook registration, provider callback, email, delivery, or deployment. `IW-P0-NOTIFY-04` is next.
+
 ## Required decision format
 
 | ID | Priority | Missing fact/decision | Why it blocks | Recommended option | Alternatives/tradeoffs | Cost/risk | Required authority | Affected tasks | Status |

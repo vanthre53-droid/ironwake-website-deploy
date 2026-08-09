@@ -6,15 +6,15 @@ programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
 active_stage: M1
 required_role: M1
-current_phase: P0_NOTIFICATION_WEBHOOK
-current_gate: P0_NOTIFICATION_WORKER_VERIFIED_LOCAL
-next_exact_action: "Execute only IW-P0-NOTIFY-03: implement and test the raw-body signature-verified Resend delivery webhook with deduplication and safe responses, without registering the webhook, configuring secrets, sending email, connecting a provider account, or deploying."
+current_phase: P0_NOTIFICATION_OPERATIONS
+current_gate: P0_NOTIFICATION_WEBHOOK_VERIFIED_LOCAL
+next_exact_action: "Execute only IW-P0-NOTIFY-04: require server whoami authorization, expose durable notification state/attempt metadata to the owner, and permit only authorized non-legacy dead-letter/cancelled replay through owner_retry_notification, without configuring a provider, sending email, registering a webhook, or deploying."
 
 harness: codex
 model: gpt-5.6-sol
-last_safe_boundary: 42c5754
-last_verified_task: iw_p0_notify_02_fail_closed_worker_42c5754
-blocked_on: "No blocker for local signed-webhook code with fixtures. Adult provider account/terms, owned domain/DNS, secret entry, webhook registration, provider connection, live delivery, customer sends, deployment, and later full E2E remain separately gated. All exposed Netlify tokens require human revocation and will not be used."
+last_safe_boundary: 2e6b46e
+last_verified_task: iw_p0_notify_03_signed_webhook_2e6b46e
+blocked_on: "No blocker for local owner notification visibility and authorized replay UI. Adult provider account/terms, owned domain/DNS, secret entry, webhook registration, provider connection, live delivery, customer sends, deployment, and later full E2E remain separately gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -47,7 +47,7 @@ workstream_status:
   W12: failed_live_ai_triage_zero_completed
   W13: verified_live_intake_booking_lifecycle_missing
   W14: failed_live_single_owner_rls_and_mfa
-  W15: verified_local_notification_worker_webhook_queued
+  W15: verified_local_notification_webhook_owner_operations_queued
   W16: missing_follow_up_engine
   W17: blocked_real_data
   W18: blocked_scope_legal

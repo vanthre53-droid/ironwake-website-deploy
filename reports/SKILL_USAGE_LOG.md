@@ -57,3 +57,11 @@
 - Adaptation: re-read the skill fully; used the current SDK's `idempotencyKey` option and email/domain boundaries; adapted from Vercel Marketplace to the existing Netlify scheduled-function runtime; omitted React Email; kept `resend@6.18.1` exact because the skill's `6.9.x` note is stale.
 - Result: local fail-closed configuration, escaped owner/customer templates, eight-second Resend adapter, bounded shared worker, triage priority hook, and undeployed two-minute schedule entrypoint are implemented. Focused no-network tests pass 18/18; full suite, build, and production audit pass.
 - Side effects: installed the exact local SDK and repaired newly disclosed in-range transitive `undici`/`nanoid` advisories. No account, secret, domain, provider call, email, webhook registration, deployment, publication, or spend.
+
+## 2026-08-09 — P0 signed delivery webhook
+
+- Skill: `email` integration skill (reviewed fully for the current notification task).
+- Why: the sealed task requires provider-specific raw-body signature verification, event normalization, delivery-state separation, and replay safety.
+- Actions: followed the skill's signature-first and idempotent callback principles; reconciled its older package notes against installed `resend@6.18.1` SDK source and types; used only local cryptographic fixtures.
+- Result: a bounded server route verifies before normalization, records metadata only through the service-role RPC, and passes forged/stale/replay/out-of-order/delivery/failure tests. Provider registration and live callbacks remain gated.
+- Side effects: local code/tests and existing evidence only. No secret, account, provider call, email, webhook registration, deployment, publication, or spend.

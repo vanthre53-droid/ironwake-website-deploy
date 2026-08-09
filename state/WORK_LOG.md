@@ -619,3 +619,14 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused no-network tests 18/18; full suite 129/129; Next.js production build 39 routes; `npm audit --omit=dev` 0; state/pack validators; `git diff --check`; exposed-token and client-secret-name scans; React Email absent; source syntax checks.
 - Known limitation: no provider was configured or called, so live attempt/provider-event tables remain empty and accepted/delivered states are NOT_RUN. Signed webhook, owner retry UI, MFA, AI, booking lifecycle, follow-up, and reproducible deployment remain open.
 - Next exact action: execute only `IW-P0-NOTIFY-03` with signed raw-body fixtures; do not register a webhook, configure secrets, send email, connect an account, or deploy.
+
+### 2026-08-09T11:25:02Z — M1/IW-P0-NOTIFY-03_signature_verified_resend_webhook
+- CLI/model: Codex / `gpt-5.6-sol` explicitly reported by the active IronWake trace.
+- Starting safe boundary: `42c5754`; implementation commit: `2e6b46e`.
+- Files changed: server-only Resend webhook verification/normalization, bounded API route and fixtures, Supabase provider-event RPC adapter coverage, environment name, capability ledger, and sealed task status.
+- Approval/external action: D-007 and the sealed A1 task authorized local signed-webhook code only. No signing secret, provider account, webhook registration, API call, email, delivery callback, publication, payment, or deployment action occurred.
+- Result: VERIFIED_LOCAL. The route reads a bounded raw body, uses the current Resend SDK to verify the signature before normalization, admits only sent/delivered/delayed/failed/bounced/complained/suppressed events, and sends only event/message identifiers plus type/time through the service-role RPC. Safe 400/401/200/503 responses expose no provider payload or secret.
+- Verification: focused no-network tests 25/25; full suite 129/129; Next.js production build 39 routes including `/api/webhooks/resend`; `npm audit --omit=dev` 0; state validation; `git diff --check`; source/client-bundle secret-name and unsigned-parse/log scans.
+- Classified verification lesson: a redundant Ruby YAML parse was `NOT_RUN` because Ruby is absent; the authoritative repository validator passed. Prevention rule: use `scripts/validate-state.sh` or the available Python YAML reader instead of assuming Ruby exists.
+- Known limitation: local cryptographic fixtures do not prove a registered endpoint or live delivery. Provider/attempt tables remain empty; owner attempt/failure/replay visibility is still incomplete.
+- Next exact action: execute only `IW-P0-NOTIFY-04`; require server whoami authorization, render durable notification operations, and restrict replay to eligible non-legacy events without configuring or calling a provider.
