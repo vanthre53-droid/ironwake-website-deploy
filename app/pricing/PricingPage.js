@@ -4,55 +4,7 @@ import { useState } from 'react';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import { MotionReveal } from '../components/MotionReveal';
-
-// ponytail: canonical pricing from owner-approved offers. Lite/Standard/Pro per offer.
-const offers = [
-  {
-    name: 'Business Leak Audit',
-    desc: 'Written review identifying where your enquiry, booking, or follow-up process loses momentum.',
-    cta: 'Book Diagnostic',
-    india: ['₹799', '₹1,499', '₹2,999'],
-    intl: ['$29', '$59', '$99'],
-    tiers: ['Lite', 'Standard', 'Pro'],
-    recommended: 'Standard',
-  },
-  {
-    name: 'Missed Lead Recovery Setup',
-    desc: 'Automated missed-call callback, instant email notifications, lead logging — no enquiry silently lost.',
-    cta: 'Deploy System',
-    india: ['₹2,200', '₹3,500', '₹5,999'],
-    intl: ['$99', '$149', '$249'],
-    tiers: ['Lite', 'Standard', 'Pro'],
-    recommended: 'Standard',
-  },
-  {
-    name: 'Booking Certainty Starter',
-    desc: 'Separate booking requests from confirmed appointments. CRM, scheduling engine, lead nurture flows.',
-    cta: 'Select System',
-    india: ['₹12,999', '₹24,999', '₹39,999'],
-    intl: ['$199', '$399', '$699'],
-    tiers: ['Lite', 'Standard', 'Pro'],
-    recommended: 'Pro',
-  },
-  {
-    name: 'Trust + Lead Capture Starter',
-    desc: 'Conversion-optimised service website with trust signals, lead capture, and owner attribution.',
-    cta: 'Build Architecture',
-    india: ['₹12,999', '₹18,999', '₹24,999'],
-    intl: ['$499', '$899', '$1,499'],
-    tiers: ['Lite', 'Standard', 'Pro'],
-    recommended: 'Standard',
-  },
-  {
-    name: 'AI Receptionist Starter',
-    desc: '24/7 automated WhatsApp/Web AI agent trained on your specific business knowledge base.',
-    cta: 'Configure Agent',
-    india: ['₹29,999', '₹49,999', '₹79,999'],
-    intl: ['$1,000', '$1,800', '$3,000'],
-    tiers: ['Lite', 'Standard', 'Pro'],
-    recommended: 'Pro',
-  },
-];
+import { PRICING_OFFERS, PRICING_TIERS } from '../../lib/pricing.mjs';
 
 export default function PricingPage() {
   const [region, setRegion] = useState('india');
@@ -71,16 +23,16 @@ export default function PricingPage() {
 
     <MotionReveal stagger><section className="section intro">
       <div className="pricing-offers">
-        {offers.map((offer, idx) => {
+        {PRICING_OFFERS.map((offer, idx) => {
           const prices = region === 'india' ? offer.india : offer.intl;
           return <article key={offer.name} className="pricing-offer">
             <div className="pricing-offer-header">
               <span className="micro">{String(idx + 1).padStart(2, '0')} / offer</span>
               <h3>{offer.name}</h3>
-              <p className="pricing-desc">{offer.desc}</p>
+              <p className="pricing-desc">{offer.description}</p>
             </div>
             <div className="pricing-tiers">
-              {offer.tiers.map((tier, i) => <div key={tier} className={`pricing-tier${tier === offer.recommended ? ' recommended' : ''}`}>
+              {PRICING_TIERS.map((tier, i) => <div key={tier} className={`pricing-tier${tier === offer.recommended ? ' recommended' : ''}`}>
                 {tier === offer.recommended && <span className="pricing-badge">Popular</span>}
                 <span className="pricing-tier-name">{tier}</span>
                 <span className="pricing-amount">{prices[i]}</span>

@@ -1,9 +1,14 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { dualLitePrice, PRICING_OFFERS } from '../../lib/pricing.mjs';
 
 // ponytail: deterministic decision-tree assistant with pricing knowledge; no AI provider required.
 // Upgrade path: wire to /api/chat when a provider is configured.
+const AUDIT_PRICE = dualLitePrice('business-leak-audit');
+const MISSED_LEAD_PRICE = dualLitePrice('missed-lead-recovery');
+const BOOKING_PRICE = dualLitePrice('booking-control');
+const PRICING_OVERVIEW = PRICING_OFFERS.map((offer) => `• ${offer.name.replace(' Setup', '').replace(' Starter', '')} — from ${dualLitePrice(offer.id)}`).join('\n');
 const FLOWS = {
   start: {
     message: "I can help you find where your business might be losing enquiries, or show you our pricing. What would you like?",
@@ -61,16 +66,16 @@ const FLOWS = {
     ]
   },
   missed_calls: {
-    message: "That's exactly what Missed Lead Recovery fixes. It ensures every enquiry is written to a durable record before any notification runs — so a dropped call or unanswered DM can't erase the lead. Setup starts at ₹2,200 / $99.",
+    message: `That's exactly what Missed Lead Recovery fixes. It ensures every enquiry is written to a durable record before any notification runs — so a dropped call or unanswered DM can't erase the lead. Setup starts at ${MISSED_LEAD_PRICE}.`,
     options: [
       { label: 'Show me how it works', action: 'link', href: '/systems/missed-lead-recovery' },
-      { label: 'Book a diagnostic (₹799 / $29)', action: 'link', href: '/audit' },
+      { label: `Book a diagnostic (${AUDIT_PRICE})`, action: 'link', href: '/audit' },
       { label: 'See all pricing', next: 'pricing_overview' },
       { label: 'Start over', next: 'start' }
     ]
   },
   no_followup: {
-    message: "That's a follow-up ownership problem. IronWake assigns every enquiry to a named person with a visible next action — so you can see exactly who owns what and what's overdue. This is part of Booking Certainty, starting at ₹12,999 / $199.",
+    message: `That's a follow-up ownership problem. IronWake assigns every enquiry to a named person with a visible next action — so you can see exactly who owns what and what's overdue. This is part of Booking Certainty, starting at ${BOOKING_PRICE}.`,
     options: [
       { label: 'Show me the system', action: 'link', href: '/systems/missed-lead-recovery' },
       { label: 'See a real demonstration', action: 'link', href: '/work/rapidpulse' },
@@ -79,7 +84,7 @@ const FLOWS = {
     ]
   },
   booking_confusion: {
-    message: "That's a booking certainty problem. IronWake separates booking requests from confirmed appointments so nobody assumes the wrong state. Every booking stays a reviewed request until verified. Starts at ₹12,999 / $199.",
+    message: `That's a booking certainty problem. IronWake separates booking requests from confirmed appointments so nobody assumes the wrong state. Every booking stays a reviewed request until verified. Starts at ${BOOKING_PRICE}.`,
     options: [
       { label: 'Show me Booking Certainty', action: 'link', href: '/systems/booking-control' },
       { label: 'See a demonstration', action: 'link', href: '/work/dentacare-pro' },
@@ -88,7 +93,7 @@ const FLOWS = {
     ]
   },
   not_sure: {
-    message: "That's common — most businesses know leads are slipping but can't pinpoint where. A Business Leak Audit maps exactly where your process loses momentum. It costs ₹799 / $29 and you get a written review.",
+    message: `That's common — most businesses know leads are slipping but can't pinpoint where. A Business Leak Audit maps exactly where your process loses momentum. It costs ${AUDIT_PRICE} and you get a written review.`,
     options: [
       { label: 'Book a diagnostic', action: 'link', href: '/audit' },
       { label: 'See how IronWake works first', next: 'how_it_works' },
@@ -97,7 +102,7 @@ const FLOWS = {
     ]
   },
   recommendation: {
-    message: "Based on what you've described, I'd recommend starting with a Business Leak Audit (₹799 / $29). It identifies the exact point where your process loses momentum, and gives you a written review with the smallest next step to fix it.",
+    message: `Based on what you've described, I'd recommend starting with a Business Leak Audit (${AUDIT_PRICE}). It identifies the exact point where your process loses momentum, and gives you a written review with the smallest next step to fix it.`,
     options: [
       { label: 'Book a diagnostic', action: 'link', href: '/audit' },
       { label: 'See our case studies', action: 'link', href: '/work' },
@@ -106,7 +111,7 @@ const FLOWS = {
     ]
   },
   pricing_overview: {
-    message: "IronWake has five systems, each with Lite / Standard / Pro tiers:\n\n• Business Leak Audit — from ₹799 / $29\n• Missed Lead Recovery — from ₹2,200 / $99\n• Booking Certainty — from ₹12,999 / $199\n• Trust + Lead Capture — from ₹12,999 / $499\n• AI Receptionist — from ₹29,999 / $1,000\n\nEvery engagement starts with the diagnostic.",
+    message: `IronWake has five systems, each with Lite / Standard / Pro tiers:\n\n${PRICING_OVERVIEW}\n\nEvery engagement starts with the diagnostic.`,
     options: [
       { label: 'See full pricing page', action: 'link', href: '/pricing' },
       { label: 'Book a diagnostic', action: 'link', href: '/audit' },
@@ -115,7 +120,7 @@ const FLOWS = {
     ]
   },
   how_it_works: {
-    message: "IronWake maps where your enquiry, booking, or follow-up process loses momentum, then implements the smallest system that makes the next step visible and owned. We start with a Business Leak Audit (₹799 / $29), then scope a bounded solution. No vague promises — just inspectable operational improvements.",
+    message: `IronWake maps where your enquiry, booking, or follow-up process loses momentum, then implements the smallest system that makes the next step visible and owned. We start with a Business Leak Audit (${AUDIT_PRICE}), then scope a bounded solution. No vague promises — just inspectable operational improvements.`,
     options: [
       { label: 'See our systems', action: 'link', href: '/systems' },
       { label: 'See case studies', action: 'link', href: '/work' },
