@@ -9,7 +9,7 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   assert.match(source, /rpc\('submit_audit_inquiry'/);
   assert.doesNotMatch(source, /from\('inquiries'\)\.insert/);
   assert.match(source, /triageInquiry/);
-  assert.match(source, /allowRequest\(requestIdentity\(request\)\)/);
+  assert.match(source, /allowRequest\(requestIdentity\(request(?:, ['"]audit['"])?\)\)/);
   assert.match(source, /status: 429/);
   assert.match(source, /triageStatus/);
   assert.match(source, /triage_needs_human/);
