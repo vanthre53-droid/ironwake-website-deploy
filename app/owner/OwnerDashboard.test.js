@@ -17,7 +17,7 @@ test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter'
   assert.match(source, /lead_stage,next_action,due_at/);
   assert.match(source, /aria-label="Filter by lead stage"/);
   assert.match(source, /STAGES = \[.*'won', 'lost'\]/);
-  assert.match(source, /query\.eq\('lead_stage', stage\)/);
+  assert.match(source, /builder\.eq\('lead_stage', stage\)/);
   assert.match(source, /Next action/);
   assert.match(source, /formatDue/);
   assert.match(source, /Search inquiries/);

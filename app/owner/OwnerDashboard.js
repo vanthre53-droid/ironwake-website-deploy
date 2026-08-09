@@ -19,7 +19,8 @@ function formatDue(due_at) {
 
 export function OwnerDashboard() {
   const [client] = useState(authClient);
-  const [user, setUser] = useState(null);
+  const [session, setSession] = useState(null);
+  const [authorization, setAuthorization] = useState({ checked: false, allowed: false, reason: '' });
   const [inquiries, setInquiries] = useState([]);
   const [stage, setStage] = useState('all');
   const [query, setQuery] = useState('');
@@ -29,20 +30,55 @@ export function OwnerDashboard() {
 
   useEffect(() => {
     if (!client) return;
-    client.auth.getUser().then(({ data }) => setUser(data.user));
-    const { data: listener } = client.auth.onAuthStateChange((_event, session) => setUser(session?.user ?? null));
+    client.auth.getSession().then(({ data }) => setSession(data.session ?? null));
+    const { data: listener } = client.auth.onAuthStateChange((_event, next) => setSession(next ?? null));
     return () => listener.subscription.unsubscribe();
   }, [client]);
 
+  // ponytail: every authorization decision routes through the server-only
+  // /api/owner/whoami endpoint. The dashboard never trusts the client-side
+  // session object alone; the server compares the validated email against
+  // the designated owner address before the dashboard reveals CRM data.
   useEffect(() => {
-    if (!client || !user) return;
-    let query = client.from('inquiries').select('id,business_name,email,lead_stage,next_action,due_at,created_at').order('created_at', { ascending: false }).limit(25);
-    if (stage !== 'all') query = query.eq('lead_stage', stage);
-    query.then(({ data, error }) => {
+    let cancelled = false;
+    async function check() {
+      if (!session?.access_token) {
+        if (!cancelled) setAuthorization({ checked: true, allowed: false, reason: 'Not signed in.' });
+        return;
+      }
+      try {
+        const res = await fetch('/api/owner/whoami', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: `Bearer ${session.access_token}` },
+          body: '{}',
+        });
+        const body = await res.json().catch(() => ({}));
+        if (cancelled) return;
+        if (res.ok && body.authorized) {
+          setAuthorization({ checked: true, allowed: true, reason: '' });
+        } else {
+          setAuthorization({ checked: true, allowed: false, reason: body.reason || 'This account is not the authorized owner.' });
+        }
+      } catch {
+        if (!cancelled) setAuthorization({ checked: true, allowed: false, reason: 'Authorization check failed.' });
+      }
+    }
+    check();
+    return () => { cancelled = true; };
+  }, [session]);
+
+  useEffect(() => {
+    if (!client || !authorization.allowed) { setInquiries([]); return; }
+    let cancelled = false;
+    let builder = client.from('inquiries').select('id,business_name,email,lead_stage,next_action,due_at,created_at').order('created_at', { ascending: false }).limit(25);
+    if (stage !== 'all') builder = builder.eq('lead_stage', stage);
+    builder.then(({ data, error }) => {
+      if (cancelled) return;
       if (error) return setStatus('CRM records are unavailable for this account.');
       setInquiries(data ?? []);
     });
-  }, [client, user, stage]);
+    return () => { cancelled = true; };
+  }, [client, authorization.allowed, stage]);
 
   async function signIn(event) {
     event.preventDefault();
@@ -54,6 +90,7 @@ export function OwnerDashboard() {
 
   async function signOut() {
     await client?.auth.signOut();
+    setAuthorization({ checked: true, allowed: false, reason: 'Not signed in.' });
     setStatus('Signed out.');
   }
 
@@ -73,7 +110,20 @@ export function OwnerDashboard() {
     <section className="owner-card">
       <span className="eyebrow">Private / owner only</span>
       <h1>Owner CRM</h1>
-      {user ? <>
+      {!session ? <>
+        <p>This screen is private. Only the designated owner account can read CRM records.</p>
+        <form className="owner-form" onSubmit={signIn}>
+          <p>Use the owner account. This screen never accepts or exposes service credentials.</p>
+          {!client && <p className="notice" role="status">Owner login is not connected on this preview.</p>}
+          <label>Email<input name="email" type="email" autoComplete="email" required /></label>
+          <label>Password<input name="password" type="password" autoComplete="current-password" required /></label>
+          <button className="button" type="submit" disabled={!client}>Sign in</button>
+        </form>
+      </> : !authorization.allowed ? <>
+        <p>This account is not the authorized owner for the IronWake CRM.</p>
+        <p className="notice" role="status">{authorization.reason || 'Sign in with the designated owner email to continue.'}</p>
+        <button className="button" onClick={signOut}>Sign out</button>
+      </> : <>
         <p>Authenticated session active. CRM records remain protected by database owner policy.</p>
         <div className="dashboard-links"><a href="/admin">Notification status →</a></div>
         <div className="crm-toolbar"><label>Search inquiries<input type="search" value={query} onChange={(event) => setQuery(event.target.value)} /></label><label>Sort<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label><button type="button" className="button secondary" onClick={exportVisible} disabled={!visibleInquiries.length}>Export visible</button></div>
@@ -92,13 +142,7 @@ export function OwnerDashboard() {
           </button></li>) : <li>No accessible inquiries for this filter yet.</li>}
         </ul><aside className="crm-detail" aria-live="polite"><span className="eyebrow">Inquiry detail</span>{selected ? <><h2>{selected.business_name}</h2><p>{selected.email}</p><dl><div><dt>Lead stage</dt><dd>{selected.lead_stage}</dd></div><div><dt>Next action</dt><dd>{selected.next_action || 'Not set'}</dd></div><div><dt>Due date</dt><dd>{formatDue(selected.due_at)}</dd></div><div><dt>Booking request</dt><dd>Not connected</dd></div></dl><div className="crm-detail-note"><strong>Tasks, notes, timeline, retry/dead-letter, and retention actions</strong><p>These private records are available only when the authorized owner schema and account session expose them. This screen never seeds or invents CRM activity.</p></div></> : <p>Select an inquiry to view its available details. Empty lists remain empty until a real authorized record exists.</p>}</aside></div>
         <button className="button" onClick={signOut}>Sign out</button>
-      </> : <form className="owner-form" onSubmit={signIn}>
-        <p>Use the owner account. This screen never accepts or exposes service credentials.</p>
-        {!client && <p className="notice" role="status">Owner login is not connected on this preview.</p>}
-        <label>Email<input name="email" type="email" autoComplete="email" required /></label>
-        <label>Password<input name="password" type="password" autoComplete="current-password" required /></label>
-        <button className="button" type="submit" disabled={!client}>Sign in</button>
-      </form>}
+      </>}
       {status && <p className="notice" role="status">{status}</p>}
     </section>
   </main>;

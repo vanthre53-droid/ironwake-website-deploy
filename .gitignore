@@ -18,3 +18,5 @@
 /graphify-out/
 .open-next
 .dev.vars
+/.netlify/
+/.wrangler/
