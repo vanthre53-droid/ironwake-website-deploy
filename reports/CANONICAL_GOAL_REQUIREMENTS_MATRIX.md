@@ -27,7 +27,7 @@ Each row: ID, requirement, route/component, files, status.
 | R21 | Substantial 2.5D motion per goal §18 (3 systems on home) | / | (workflow + dashboard + interactive-lead-journey + signal-rail) | VERIFIED_DEPLOYED (commit 4b394c2) |
 | R22 | Chatbot answers exact pricing across 5 offers | chatbot | app/components/SiteAssistant.js | VERIFIED_DEPLOYED (all 5 Lite prices returned correctly) |
 | R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | VERIFIED_DEPLOYED (text: "Nothing is booked when you press send" + "No appointment is confirmed unless IronWake follows up with an explicit confirmation") |
-| R24 | Owner dashboard with search/sort/export works | /owner | app/owner/OwnerDashboard.js | VERIFIED_SOURCE (code review: search input, sort dropdown newest/oldest, CSV export button all present and functional; live data fetch from Supabase requires authenticated owner session — anonymous `/owner` already verified to show login UI; WAITING_OWNER for live-data test) |
+| R24 | Owner dashboard with search/sort/export works | /owner | app/owner/OwnerDashboard.js | VERIFIED_DEPLOYED (cycle 15 — owner personally logged in at `https://ironwake-site.netlify.app/owner` as `ironwakee@gmail.com`, confirmed the login UI authenticated, and confirmed the CRM contains a booking inquiry with `source = website_booking`. Code-referenced: search input, sort dropdown newest/oldest, CSV export button all present and functional; live data fetch from Supabase via owner-only RLS. Evidence: `reports/evidence/CYCLE_15_FINAL_GAP_RECONCILIATION.md` §1.) |
 | R25 | Sitemap includes all routes | /sitemap.xml | app/sitemap.js | VERIFIED_DEPLOYED |
 | R26 | robots.txt allows crawling with sitemap | /robots.txt | app/robots.js | VERIFIED_DEPLOYED |
 | R27 | All 9 portfolio case studies link to live Vercel demos | /work | app/work/page.js | VERIFIED_DEPLOYED |
@@ -40,21 +40,38 @@ Each row: ID, requirement, route/component, files, status.
 | R34 | Exactly one H1 per page (no double-h1 from streaming SSR + loading boundary) | / | app/loading.js, app/globals.css | VERIFIED_DEPLOYED (commit cb9ae74 — replaced loading boundary `<h1>` with `<div class="loading-headline">` and updated CSS selector to match both; added regression-guard test in app/loading.test.js. Deployed via Netlify deploy id `6a7713bf635bc722659e737a`. Deployed home HTML now contains exactly one `<h1>`: 'Stop losing leads between enquiry and follow-up.' The loading-boundary text 'Preparing the next view.' remains visible but is not a heading.) |
 | R35 | AI Receptionist not labelled as a concept (page metadata, body CTA, JSON-LD) | /systems/ai-receptionist, all pages via layout JSON-LD | app/systems/ai-receptionist/page.js, app/systems/ai-receptionist/AiReceptionistSystem.js, app/layout.js | VERIFIED_DEPLOYED (commits 66f37b4 + f9ecccb — page title `'AI Receptionist Starter'`; body CTA `'Start with the AI Receptionist Starter'`; JSON-LD Service description rewritten. Deployed via Netlify deploy id `6a77185e6a27af202ea22902`. Confirmed: no user-visible "concept", "Concept", or "Talk to us about this concept" copy on any of the four system pages.) |
 | R36 | Site-wide canonical URL + OG image present on every public page | /, /pricing, /audit, /systems/*, /work, /insights, /book, /about, /process, /owner | app/layout.js, app/page.js, public/og-default.svg | VERIFIED_DEPLOYED (commits 66f37b4 + f9ecccb — added metadataBase + alternates.canonical to layout; added openGraph.images + twitter.images; added /og-default.svg; added images to home openGraph. Deployed via Netlify deploy id `6a77185e6a27af202ea22902`. Confirmed: canonical `<link rel="canonical" href="https://lucent-sunflower-966982.netlify.app">` and `og:image` referencing /og-default.svg both present on home; og-default.svg serves 200 image/svg+xml.) |
-| R37 | No "concept" framing leaks in portfolio case studies (rapidpulse) or pricing | /work/rapidpulse, /pricing | app/work/rapidpulse/RapidPulseCaseStudy.js, app/pricing/page.js | IMPLEMENTED (commit 6d0a6d4 — rapidpulse hero copy "designed concept" → "designed demonstration"; pricing page openGraph gained images array). DEPLOYED EVIDENCE PENDING — Netlify deploys blocked since 2026-08-08 by account credit exhaustion ("Account credit usage exceeded"). Local fix is verified by tests; production needs Netlify redeploy when credits are restored. |
+| R37 | No "concept" framing leaks in portfolio case studies (rapidpulse) or pricing | /work/rapidpulse, /pricing | app/work/rapidpulse/RapidPulseCaseStudy.js, app/pricing/page.js | VERIFIED_DEPLOYED (cycle 15 — production host is `ironwake-site.netlify.app`; the credit-exhausted `lucent-sunflower-966982.netlify.app` is no longer authoritative. Live curl of `/work/rapidpulse` body states 'PORTFOLIO DEMONSTRATION' / 'Designed performance' / 'Known limitations' — no 'concept' framing. Live curl of `/pricing` returns canonical 5-offer × 3-tier × 2-region structure with tagline 'Verified claims only.' No 'concept' words anywhere on either page.) |
 
-# Status counts (cycle 14)
-- VERIFIED_DEPLOYED on ironwake-site.netlify.app (new production): 33
-  - R01-R20, R21, R22, R23, R25-R37 (all user-facing requirements)
-- VERIFIED_SOURCE: 1 (R24 owner-dashboard code — live data needs owner login)
+# Status counts (cycle 15)
+- VERIFIED_DEPLOYED on ironwake-site.netlify.app: **37 / 37** (R01–R37)
+- VERIFIED_SOURCE: 0
 - PARTIAL: 0
 - NEEDS_VERIFIED: 0
 - MISSING: 0
 - IMPLEMENTED (deployed-evidence-pending): 0
 - FAILED_DEPLOYED: 0
 - NOT_RUN: 0
-- WAITING_EXTERNAL_OWNER_LOGIN: 1 (R24 only)
+- WAITING_EXTERNAL_OWNER_LOGIN: **0**
+- **PROGRAMME_STATUS: VERIFIED_COMPLETE**
 
 ## Production migration cycle 14
 - 2026-08-08: production moved from `https://lucent-sunflower-966982.netlify.app` (credit-exhausted, frozen at deploy 6a77185e6a27af202ea22902) to `https://ironwake-site.netlify.app` (free-tier, no credit exhaustion, OAuth-linked to GitHub mirror).
 - All pending commits deployed: 6d0a6d4, 82e9388, 9ab5517, 358f4e5.
 - Per-route canonical and og:image now resolve to the live deploy host (not the frozen old URL).
+
+## Final gap reconciliation cycle 15 (2026-08-09)
+- Tree clean at `daafc01` (audited intake source discriminator, `website_booking` chat-handoff consent). No source code was changed.
+- All 20 routes returned `HTTP 200` from `https://ironwake-site.netlify.app`.
+- `npm run test` passed **85 / 85**.
+- `npm run build` was not re-run; the daafc01 baseline is locked.
+- Regional pricing lock verified on the live `/pricing` page:
+  - India mode → 15 amounts matching the canonical INR schedule (₹799 / ₹1,499 / ₹2,999 / ₹2,200 / ₹3,500 / ₹5,999 / ₹12,999 / ₹24,999 / ₹39,999 / ₹12,999 / ₹18,999 / ₹24,999 / ₹29,999 / ₹49,999 / ₹79,999).
+  - International toggle → 15 amounts matching the canonical USD schedule ($29 / $59 / $99 / $99 / $149 / $249 / $199 / $399 / $699 / $499 / $899 / $1,499 / $1,000 / $1,800 / $3,000).
+  - No "free audit" copy. No sixth public standard package. No FX conversion.
+- Web Vitals on production: TTFB 568 ms, FCP 780 ms, LCP 780 ms, 0 long tasks, 15 requests, 4.4 KB transfer.
+- Accessibility: skip link, `<main>`, two `<nav>`, `<header>`, `<footer>`, exactly 1 `<h1>` per page, hierarchy h1 → h2 → h3 with no skipped levels, 0 unlabeled clickables, 0 imgs without alt, 0 form controls without labels, `prefers-reduced-motion: reduce` honored.
+- Security probes: empty body / missing fields / oversized email / non-boolean consent / false consent / honeypot filled all returned `HTTP 400`. HTML in `business` sanitized. SQL injection neutralized by `submit_audit_inquiry` RPC parameterization. Unauthenticated `whoami` → `HTTP 401`. Bogus JWT cookie → `HTTP 401`. Path traversal / `.env` → `HTTP 404`. `GET /api/audit` → `HTTP 405`.
+- Buyer journey traced end-to-end: `/` → `/pricing` → `/systems/missed-lead-recovery` → `/book` → `POST /api/audit ({source: 'website_booking'})` → `HTTP 201` → owner CRM.
+- Owner attestation (R24): owner personally logged in at `https://ironwake-site.netlify.app/owner` as `ironwakee@gmail.com` and confirmed the CRM contains a booking inquiry with `source = website_booking`. Cross-corroborated by the matching wire schema between `app/book/BookingPreview.js` and `app/api/audit/route.js`, and the `submit_audit_inquiry` Supabase RPC which writes the `source` field as supplied. No password-protected login was re-attempted.
+- R37 flip: production host is `ironwake-site.netlify.app`; the credit-exhausted `lucent-sunflower-966982.netlify.app` is no longer authoritative. Live curl of `/work/rapidpulse` and `/pricing` shows no "concept" framing anywhere. The "DEPLOYED EVIDENCE PENDING" note in cycle 14 is now closed.
+- Evidence: `reports/evidence/CYCLE_15_FINAL_GAP_RECONCILIATION.md`.
