@@ -74,7 +74,7 @@ tasks:
   - id: IW-P0-NOTIFY-04
     workstream: W14
     title: "Expose notification failures, attempts, and authorized replay to the owner"
-    status: queued
+    status: verified_local
     depends_on: [IW-P0-NOTIFY-03]
     authority_class: A1
     allowed_paths: ["app/admin/**", "app/api/owner/whoami/**", "app/globals.css", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P4_CRM_AUTHORIZATION.md", "state/**"]
@@ -85,7 +85,7 @@ tasks:
     evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P4_CRM_AUTHORIZATION.md"
     rollback_note: "Return to read-only status view while preserving all database attempt evidence."
     blockers: []
-    implementation_notes: "This closes the minimum owner failure/retry visibility for email only; broader CRM notes/tasks/follow-up remain separate tasks."
+    implementation_notes: "VERIFIED LOCAL 2026-08-09. The owner notification screen fails closed through the existing server whoami check, then reads only owner-RLS inquiry/outbox/attempt metadata. It renders saved-lead, target/event, queue/attempt, accepted/delivered, provider-message, safe-error, and next-availability fields; only eligible dead-letter/cancelled non-legacy events expose RPC-backed replay. Focused tests 8/8, full suite 133/133, 39-route build, production audit 0, schema-relationship readback, validators, diff, direct-table-write, and secret/client-bundle scans pass. No live owner session/retry, provider action, email, webhook registration, or deployment occurred."
 
   - id: IW-P0-NOTIFY-05
     workstream: W15
