@@ -711,3 +711,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: VERIFIED_LOCAL. The owner-authorized notification dashboard filters its bounded record window by queued, retry-scheduled, dead-letter, or cancelled state. Filtering has no provider side effect.
 - Verification: targeted admin tests 5/5; diff check.
 - Next exact action: audit failure/retry wording and owner visibility against the live outbox; retain G5 deployment proof separately waiting.
+
+### 2026-08-09T14:30:00Z — M1/P0.15_durable_rate_limit
+- Implementation commit: `0280641`.
+- Result: PARTIAL. Live schema has an RLS-protected service-role-only atomic rate-limit function. Local audit route hashes request identity and fails closed if protection storage fails. Public-route proof needs G5 deployment.
+- Verification: targeted audit/limiter tests 3/3; migration apply succeeded; diff check.
+- Next exact action: audit audit-route content-type and safe error handling against the durable rate-limit path.
