@@ -10,7 +10,9 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   assert.doesNotMatch(source, /from\('inquiries'\)\.insert/);
   assert.doesNotMatch(source, /error\.message|error\.details|error\.hint/);
   assert.match(source, /triageInquiry/);
-  assert.match(source, /allowRequest\(requestIdentity\(request(?:, ['"]audit['"])?\)\)/);
+  assert.match(source, /consume_request_rate_limit/);
+  assert.match(source, /createHash\('sha256'\)/);
+  assert.match(source, /p_window_seconds: 900/);
   assert.match(source, /status: 429/);
   assert.match(source, /triageStatus/);
   assert.match(source, /triage_needs_human/);

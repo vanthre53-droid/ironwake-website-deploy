@@ -1,8 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
+import { createHash } from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { parseAuditPayload } from '../../../lib/audit-validation.mjs';
 import { triageInquiry } from '../../../lib/ai-triage.mjs';
-import { allowRequest, requestIdentity } from '../../../lib/request-rate-limit.mjs';
+import { requestIdentity } from '../../../lib/request-rate-limit.mjs';
 import { createSupabaseNotificationStore } from '../../../lib/notifications/supabase-store.mjs';
 import { needsPriorityAlert, runNotificationWorkerBestEffort } from '../../../lib/notifications/worker.mjs';
 
@@ -14,9 +15,6 @@ export async function POST(request) {
   const parsed = parseAuditPayload(body);
   if (!parsed.success) return NextResponse.json({ error: 'Check the required fields and try again.' }, { status: 400 });
   if (parsed.data.website) return NextResponse.json({ received: true }, { status: 202 });
-  // ponytail: process-local abuse brake; replace with a shared store before multi-instance production.
-  if (!allowRequest(requestIdentity(request, 'audit'))) return NextResponse.json({ error: 'You are sending requests too quickly. Please wait a moment and try again.' }, { status: 429 });
-
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   // ponytail: diagnostic in deployed logs — print URL host (no full URL/secret) when vars are missing.
@@ -26,6 +24,10 @@ export async function POST(request) {
   }
 
   const supabase = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
+  const keyHash = createHash('sha256').update(`audit:${requestIdentity(request)}`).digest('hex');
+  const { data: allowed, error: rateLimitError } = await supabase.rpc('consume_request_rate_limit', { p_key_hash: keyHash, p_limit: 5, p_window_seconds: 900 });
+  if (rateLimitError) return NextResponse.json({ error: 'Request protection is temporarily unavailable. Please try again.' }, { status: 503 });
+  if (!allowed) return NextResponse.json({ error: 'You are sending requests too quickly. Please wait a moment and try again.' }, { status: 429 });
   const { data: inquiryId, error } = await supabase.rpc('submit_audit_inquiry', {
     p_business_name: parsed.data.business,
     p_email: parsed.data.email,
