@@ -53,12 +53,18 @@ Each row: ID, requirement, route/component, files, historical/current status.
 - The cycle-15 count of 37/37 is `STALE` and superseded.
 - `IRONWAKE_REAL_PRODUCT_COMPLETION`: `PARTIAL`.
 - Operational status/evidence: `reports/REAL_CAPABILITY_LEDGER.md`.
-- Known failed-live areas: AI triage, owner MFA, single-owner RLS consistency,
-  privileged RPC exposure, and unsupported AI/booking claims.
-- Known missing/implemented-only areas: transactional email, notification
-  processing/retry/dead-letter, provider evidence, booking lifecycle, lead
-  assignment, follow-up execution, complete owner operations, deletion/export,
-  and reproducible Git-linked deployment.
+- Current verified live evidence includes Supabase persistence/RLS boundaries,
+  MiniMax structured triage, a controlled Resend owner-priority delivery with
+  signed callbacks, and the request-only booking state. These facts supersede
+  the historical rows that predate the current production candidate.
+- The current failed-live capability is owner MFA: the designated owner has
+  zero verified factors. Consequently, authenticated dashboard/direct-object,
+  export, retry, note, stage, and follow-up interaction evidence remains
+  `CONNECTED_NOT_VERIFIED`, not successful.
+- Retention/deletion/backup/restore stays legally pending under D-008. Routine
+  customer/owner transactional email remains intentionally inactive until a
+  verified custom sender domain. Netlify production deployment is currently
+  manual-owner authenticated; no Git-linked continuous deployment is claimed.
 
 ## Production migration cycle 14
 - 2026-08-08: production moved from `https://lucent-sunflower-966982.netlify.app` to `https://ironwake-site.netlify.app`. The site is live, but current Netlify readback does not prove a Git-linked repository configuration; the live deploy carries commit metadata for `daafc01` and must be treated as a manual deploy until a linked build is proved.
