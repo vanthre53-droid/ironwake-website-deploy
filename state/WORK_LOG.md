@@ -771,3 +771,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused notification/webhook tests 26/26; full suite 156/156; production build command completed successfully for the route hardening; `git diff --check`.
 - Known limitation: the signed endpoint is unconfigured and undeployed. Fixture checks do not prove a registered callback, provider acceptance, delivery, retry, or owner observation.
 - Next exact action: audit owner CRM export and retention/deletion boundaries without executing a deletion; retain exact MiniMax deployment proof as separately gated.
+
+### 2026-08-09T13:36:00Z — M1/P0.21_owner_authorized_crm_export
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commit: `4e768ae`.
+- Result: VERIFIED_LOCAL. The authorized owner can request a non-cached JSON CRM snapshot through a server route that validates the bearer token with Supabase Auth and reads under owner RLS only. The attachment is bounded to 1,000 rows per included collection and includes CRM, consent, task, outbox, attempt, provider-event, owner-note, and audit metadata. It has no mutation path.
+- Verification: focused export/dashboard tests 3/3; full suite 157/157; production build command completed successfully; `git diff --check`.
+- Known limitation: no owner session has exercised the endpoint and the route is undeployed. The retention anonymizer remains service-role-only with no scheduled executor; consent withdrawal/deletion control remains incomplete.
+- Next exact action: implement a canonical-owner-authorized consent-withdrawal record and audit event without deleting or anonymizing any customer data.
