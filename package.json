@@ -14,6 +14,7 @@
     "test:booking": "node --test lib/audit-validation.test.mjs app/book/BookingPreview.test.js app/owner/OwnerDashboard.test.js supabase/migrations/20260809130000_request_only_booking_lifecycle.test.mjs supabase/migrations/20260809133000_follow_up_task_operations.test.mjs supabase/migrations/20260809140000_owner_notes_and_activity_timeline.test.mjs supabase/migrations/20260809143000_owner_lead_stage_updates.test.mjs",
     "test:interactive-lead-journey": "node --test app/components/InteractiveLeadJourney.test.js",
     "test:workflow-truth": "node --test app/components/WorkflowDemo.test.js",
+    "test:dashboard-demo-truth": "node --test app/components/DashboardDemo.test.js",
     "test:website": "node website/app.test.js"
   },
   "dependencies": {

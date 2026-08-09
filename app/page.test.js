@@ -12,13 +12,16 @@ test('homepage keeps truthful audit CTA and operating path', async () => {
   }
 });
 
-test('homepage signal rail is decorative, labelled, and CSS-only', async () => {
+test('homepage signal rail represents the implemented review-task workflow', async () => {
   const source = await readFile(new URL('./page.js', import.meta.url), 'utf8');
   assert.match(source, /className="signal-rail"/);
-  assert.match(source, /aria-label="Operating flow: inquiry to owner to next action"/);
+  assert.match(source, /aria-label="Operating flow: inquiry to review task to next action"/);
   assert.match(source, /signal-rail-label">Inquiry/);
-  assert.match(source, /signal-rail-label">Owner/);
+  assert.match(source, /signal-rail-label">Review task/);
   assert.match(source, /signal-rail-label">Next action/);
+  assert.match(source, /Due date/);
+  assert.doesNotMatch(source, /assign a named owner/);
+  assert.doesNotMatch(source, /Owner<\/dt><dd>Named/);
   assert.match(source, /<WakeSVG/);
   assert.match(source, /WakeSVG \/>/);
 });

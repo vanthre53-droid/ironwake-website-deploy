@@ -838,3 +838,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused interactive-journey, workflow-demo, homepage, and missed-lead tests 5/5; production build; `git diff --check`.
 - No provider, database, production API, owner session, email, retention, or deployment side effect occurred.
 - Next exact action: deploy this bounded public-truth repair through the existing Git-connected Netlify site and read back the exact artifact before calling the corrected claims live.
+
+### 2026-08-09T15:20:00Z — M1/P0.27_homepage_dashboard_truth_consolidation
+- Result: VERIFIED_LOCAL_CANDIDATE_HELD. A rendered homepage review found remaining named-owner claims and a fictional dashboard illustration presented beside unsupported live-dashboard wording. The local candidate now represents only the implemented review-task/due-date state, marks named assignment as unconnected, and labels all dashboard examples as static demonstrations.
+- Verification: focused interactive-journey, workflow-demo, dashboard-demo, homepage, and missed-lead tests 6/6; production build; `git diff --check`.
+- Deployment: intentionally not pushed or deployed. The owner instructed that no further Netlify deployment occur until the remaining local delta is consolidated.
+- Next exact action: continue the bounded local P0 truth/security delta only; retain the separate MFA, Resend, and D-008 external items.

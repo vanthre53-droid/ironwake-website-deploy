@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 
-// ponytail: demonstration dashboard — not connected to real data
+// ponytail: fictional dashboard illustration — not connected to real data.
 const demoInquiries = [
-  { id: 'IW-2847', business: 'Sharma Plumbing', type: 'Emergency leak', status: 'New', owner: 'R. Kumar', due: 'Today 3pm', age: '12m' },
-  { id: 'IW-2846', business: 'Mehta Dental', type: 'Root canal consult', status: 'In progress', owner: 'S. Patel', due: 'Tomorrow 10am', age: '2h' },
-  { id: 'IW-2845', business: 'Glow Salon', type: 'Bridal package', status: 'Awaiting review', owner: 'A. Singh', due: 'Today 5pm', age: '45m' },
-  { id: 'IW-2844', business: 'QuickFix Electric', type: 'Wiring inspection', status: 'Completed', owner: 'P. Verma', due: 'Done', age: '1d' },
+  { id: 'IW-DEMO-01', business: 'Example home service', type: 'Urgent request', status: 'New', due: 'Illustrative due date', age: 'Illustrative age' },
+  { id: 'IW-DEMO-02', business: 'Example clinic', type: 'Consultation request', status: 'In progress', due: 'Illustrative due date', age: 'Illustrative age' },
+  { id: 'IW-DEMO-03', business: 'Example studio', type: 'Service enquiry', status: 'Awaiting review', due: 'Illustrative due date', age: 'Illustrative age' },
+  { id: 'IW-DEMO-04', business: 'Example local business', type: 'Service request', status: 'Completed', due: 'Illustrative due date', age: 'Illustrative age' },
 ];
 
 const statusColors = {
@@ -22,9 +22,9 @@ export function DashboardDemo() {
   const inquiry = demoInquiries[selected];
 
   return <section className="section">
-    <span className="eyebrow">Owner control</span>
-    <h2>See what the dashboard shows.</h2>
-    <p>Every enquiry has a named owner, a due date, and a visible status. No guessing, no shared-inbox ambiguity.</p>
+    <span className="eyebrow">Dashboard demonstration</span>
+    <h2>See a possible review workflow.</h2>
+    <p>This fictional illustration shows how review state, due date, and next action can be presented. It is not live owner data, and named assignment is not connected on this site.</p>
     <div className="dashboard-demo">
       <div className="dashboard-list">
         {demoInquiries.map((inq, i) => <button key={inq.id} className={`dashboard-row${i === selected ? ' selected' : ''}`} onClick={() => setSelected(i)}>
@@ -42,15 +42,15 @@ export function DashboardDemo() {
         </div>
         <div className="dashboard-detail-fields">
           <div><span>Type</span><strong>{inquiry.type}</strong></div>
-          <div><span>Owner</span><strong>{inquiry.owner}</strong></div>
+          <div><span>Assignment</span><strong>Not connected</strong></div>
           <div><span>Due</span><strong>{inquiry.due}</strong></div>
           <div><span>Age</span><strong>{inquiry.age}</strong></div>
         </div>
         <div className="dashboard-detail-actions">
-          <button className="button" disabled>Assign owner</button>
+          <button className="button" disabled>Named assignment not connected</button>
           <button className="button secondary" disabled>Mark complete</button>
         </div>
-        <p className="dashboard-disclaimer">This is a static demonstration. The live dashboard connects to your Supabase database and shows real enquiry data.</p>
+        <p className="dashboard-disclaimer">This is a static demonstration. The private owner dashboard is deployed separately; a real MFA-authenticated owner-session proof remains pending.</p>
       </div>
     </div>
   </section>;

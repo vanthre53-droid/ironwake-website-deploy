@@ -7,14 +7,14 @@ programme_status: PARTIAL
 active_stage: C1
 required_role: C1
 current_phase: P0_SECURITY_ASSURANCE
-current_gate: P0_DEPLOYED_MINIMAX_VERIFIED_OWNER_SESSION_MFA_EVIDENCE_PENDING
-next_exact_action: "Use a real authorized owner browser session, after Supabase MFA enrollment, to verify the deployed /owner triage record and direct-object protections. Independently await Resend account/domain/secret/webhook configuration plus one controlled delivery proof, and adult/legal-owner D-008 retention/deletion/backup-restore decisions."
+current_gate: P0_CONSOLIDATED_LOCAL_TRUTH_REPAIR_DEPLOYMENT_HELD
+next_exact_action: "Continue only remaining locally executable P0 truth/security corrections and consolidate them in the local candidate. Do not push or deploy until the owner releases the deployment hold; independently await an MFA-enrolled authorized owner browser session, Resend account/domain/secret/webhook configuration, and adult/legal-owner D-008 retention/deletion/backup-restore decisions."
 
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: c2f9663
-last_verified_task: iw_p0_27_public_workflow_truth_source_verified
-blocked_on: "No Netlify deployment blocker remains: existing ironwake-site is connected to the existing GitHub repository and has ready production deploy 6a7892639caabf0008a76736 at c2f9663. The remaining independent external items are: a real owner MFA-enrolled authenticated browser session for dashboard/direct-object proof; Resend account/domain/secret/webhook configuration and controlled delivery evidence; and adult/legal-owner D-008 retention/deletion/backup-restore decisions. All exposed Netlify tokens require human revocation and will not be used."
+last_verified_task: iw_p0_27_public_workflow_and_dashboard_truth_local_candidate
+blocked_on: "No Netlify technical blocker remains, but deployment is explicitly held by the owner while local P0 truth/security repairs are consolidated. The remaining independent external items are: a real owner MFA-enrolled authenticated browser session for dashboard/direct-object proof; Resend account/domain/secret/webhook configuration and controlled delivery evidence; and adult/legal-owner D-008 retention/deletion/backup-restore decisions. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified
