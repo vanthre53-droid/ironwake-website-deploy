@@ -705,3 +705,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: VERIFIED_LOCAL. The owner-only notification dashboard obtains only configured/not-configured plus a safe configuration code from a server endpoint after bearer-token validation. It explicitly says queued events have not been sent when configuration is absent.
 - Verification: targeted tests 6/6; production build; diff check; live outbox aggregate readback found one queued owner and one queued customer event, plus 36 cancelled legacy events.
 - Next exact action: add bounded filtering for notification failure/retry state in the authorized operations dashboard.
+
+### 2026-08-09T14:20:00Z — M1/P0.14_notification_filtering
+- Implementation commit: `8385553`.
+- Result: VERIFIED_LOCAL. The owner-authorized notification dashboard filters its bounded record window by queued, retry-scheduled, dead-letter, or cancelled state. Filtering has no provider side effect.
+- Verification: targeted admin tests 5/5; diff check.
+- Next exact action: audit failure/retry wording and owner visibility against the live outbox; retain G5 deployment proof separately waiting.
