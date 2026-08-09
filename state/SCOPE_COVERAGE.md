@@ -1,5 +1,13 @@
 # W00-W22 Scope Coverage
 
+## 2026-08-09 real-product overlay
+
+The historical rows below are resume material, not current completion. Current
+authority is `reports/REAL_CAPABILITY_LEDGER.md`. W10/W19/W20 have a live
+authorization/RPC failure queued as `IW-P0-SEC-01`; W15 email/notifications,
+W16 follow-up, W14 owner MFA/complete operations, and W22 reproducible deployment
+remain missing, failed live, or implemented-only. No row is release-green.
+
 Current owner: OpenCode M1. G1 architecture is approved; C2 and C3 must independently audit every row. No row is a production completion claim.
 
 | ID | Workstream | Status | Required executor/owner | Evidence | Blocker/next action |

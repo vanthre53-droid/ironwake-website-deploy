@@ -4,6 +4,9 @@ sealed_by: Hermes M2
 sealed_commit: pending_c3
 gate: GC2_REMEDIATION_APPROVED
 immutable_during_m2: true
+current_programme_overlay:
+  status: superseded_for_current_execution
+  reason: "The 2026-08-09 real capability audit found new live security/provider/backend failures after the historical C2 queue. Current implementation is controlled by IW-P0-SEC-01 in state/SEALED_TASK_QUEUE.yaml; a fresh independent C2 audit is still required before closure."
 findings:
   - id: C2-F1
     severity: 2

@@ -565,3 +565,15 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Known limitation: GS1, live owner MFA/recovery, provider proof, legal approval, domain/deployment approval, and an approved production end-to-end test remain blocked human-controlled gates.
 - Ending commit: `ada66f133841a8054ce55ec3a1c0e5a9ad970f5d`.
 - Next exact action: collect the named human-controlled gate evidence before a release approval or deployment attempt.
+
+### 2026-08-09T10:00:00Z — C1/P0.1_real_product_capability_reconstruction
+- CLI: Codex; model not reported.
+- Starting commit: `55767cfc8e4b8b18c7caff71a4d7aca7e17235de`; clean tree; application deploy commit `daafc01`.
+- Files changed: `reports/REAL_CAPABILITY_LEDGER.md`, the superseded canonical matrix, and skill inventory/usage records; continuity handoff follows this report commit.
+- Commands/tests: repository/branch/diff reconstruction; package/config/environment-name-only inspection; API/server/migration/dashboard/public-claim/test-source review; deployed HTTP negative/read checks; Netlify project/deploy/read-only configuration evidence; nine portfolio URL checks; live Supabase table/migration/policy/function ACL/Auth-factor/aggregate status and advisor readback; `git diff --check`. Full test suite intentionally not rerun because no application source changed.
+- Result: PARTIAL. Commit `109c711` replaces inherited fake green with 47 evidence-classified capabilities. Critical live findings are migration/RLS drift, privileged anonymous RPC execution, zero verified MFA factors, 36 queued/unattempted notifications, zero completed AI triage, absent email/booking/follow-up operations, and unsupported public operational copy.
+- Evidence: `reports/REAL_CAPABILITY_LEDGER.md`; `reports/CANONICAL_GOAL_REQUIREMENTS_MATRIX.md`; commit `109c711`.
+- Approval/external action: current owner programme authorized read-only audit and safe in-scope engineering. No row, migration, provider/account state, send, publication, payment, or deployment was changed.
+- Known limitation: provider sends/deployment remain separately gated; fresh independent C2/C3 review has not occurred.
+- Ending commit: `109c711` report boundary; continuity handoff is the next commit.
+- Next exact action: M1 executes only sealed `IW-P0-SEC-01`.

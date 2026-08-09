@@ -2,17 +2,19 @@
 # Work/evidence history remains in state/WORK_LOG.md and state/EVIDENCE_INDEX.md.
 schema_version: 6.0.0
 
-active_stage: C3
-required_role: C3
-current_phase: P5_RELEASE_GATE
-current_gate: GC3_RELEASE_CANDIDATE_PASS
-next_exact_action: "Obtain human-controlled GS1, owner MFA/recovery, provider, legal, domain/deployment, and production end-to-end evidence. Do not deploy, publish, or connect providers without their named approvals."
+programme: IRONWAKE_REAL_PRODUCT_COMPLETION
+programme_status: PARTIAL
+active_stage: M1
+required_role: M1
+current_phase: P0_9_AUTHORIZATION_AND_RPC_REMEDIATION
+current_gate: REAL_CAPABILITY_LEDGER_VERIFIED
+next_exact_action: "Execute only sealed task IW-P0-SEC-01: create and locally test one forward Supabase migration that applies the single-owner predicate to every private table and revokes unintended anon/authenticated execution of privileged SECURITY DEFINER functions; then verify the live migration and advisors before any email or AI work."
 
-harness: hermes
-model: gpt-5.6-terra
-last_safe_boundary: ada66f133841a8054ce55ec3a1c0e5a9ad970f5d
-last_verified_task: c3_local_candidate_ada66f1_2026_08_01
-blocked_on: "GS1 social foundation; live owner authentication/MFA/recovery proof; provider connections; legal approval; domain/deployment approval; and an approved production end-to-end test. Local candidate ada66f1 is technically verified but is not approved for production."
+harness: codex
+model: not_reported
+last_safe_boundary: 109c711
+last_verified_task: p0_1_real_capability_audit_109c711
+blocked_on: "No blocker for the sealed local/live security-hardening task. Transactional-email delivery, live AI repair, customer sends, deployment, and later full E2E remain separately approval/provider gated."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -26,9 +28,11 @@ gates:
   G2_SCHEMA_AUTH_SERVER_APPROVAL: partial_schema_api_rbac_verified_live_owner_session_pending
   G4_EXTERNAL_PROVIDER_APPROVAL: pending
   G5_PRODUCTION_DEPLOY_APPROVAL: pending
+  REAL_CAPABILITY_LEDGER_VERIFIED: verified
+  IRONWAKE_REAL_PRODUCT_COMPLETION: partial
 
 workstream_status:
-  W00: verified_in_progress
+  W00: verified_real_capability_audit
   W01: verified_complete_demo_only
   W02: verified_complete_internal
   W03: verified_human_attestation
@@ -37,17 +41,17 @@ workstream_status:
   W06: verified_internal_draft_blocked_dependencies
   W07: blocked_g2
   W08: blocked_pricing_legal_owner
-  W09: verified_mailbox_send_receive_pending_monitoring
-  W10: verified_complete_current_refresh
+  W09: missing_production_transactional_email
+  W10: failed_live_schema_acl_drift
   W11: verified_local_implementation
-  W12: verified_ai_triage_foundation_pending_runtime_key_and_notifications
-  W13: partial_schema_api_rbac_verified_live_owner_session_pending
-  W14: deferred_provider_approval
-  W15: blocked_offer_owner_approval
-  W16: deferred_legal_owner
+  W12: failed_live_ai_triage_zero_completed
+  W13: verified_live_intake_booking_lifecycle_missing
+  W14: failed_live_single_owner_rls_and_mfa
+  W15: missing_notification_worker_email_and_retry
+  W16: missing_follow_up_engine
   W17: blocked_real_data
   W18: blocked_scope_legal
-  W19: verified_local_noindex_baseline
-  W20: blocked_data_provider_dependencies
+  W19: failed_live_privileged_rpc_exposure
+  W20: security_remediation_queued
   W21: blocked_release_dependencies
-  W22: blocked_production_approval
+  W22: deployed_manual_reproducibility_missing

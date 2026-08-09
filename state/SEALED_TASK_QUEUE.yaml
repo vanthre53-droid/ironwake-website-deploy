@@ -1,11 +1,27 @@
 schema_version: 1
-spec_version: c1-glassmorphism-visual-amendment-v1
-sealed_by: Hermes C1; local-only amendment directed by Revanth Nunna; existing G3 local implementation approval retained
-sealed_commit: pending_checkpoint_commit
+spec_version: c1-real-product-remediation-v1
+sealed_by: Codex C1; current IRONWAKE_REAL_PRODUCT_COMPLETION programme directed by the owner
+sealed_commit: 109c711
 gate: GC1_ARCHITECTURE_APPROVED
 immutable_during_m1: true
 activation: "Active for M1 after G1 approval; execute dependency order and stop at remaining gates."
 tasks:
+  - id: IW-P0-SEC-01
+    workstream: W19
+    title: "Repair live single-owner authorization and privileged RPC exposure"
+    status: queued
+    depends_on: []
+    authority_class: A2
+    allowed_paths: ["supabase/migrations/**", "package.json", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/**", "state/**"]
+    source_refs: ["reports/REAL_CAPABILITY_LEDGER.md", "supabase/migrations/001_create_inquiries.sql", "supabase/migrations/003_owner_crm_core.sql", "supabase/migrations/006_restrict_owner_to_single_email.sql"]
+    requirements: ["Create a new forward migration through the Supabase CLI migration command", "Make public.is_owner require role=owner and the designated owner email", "Replace the inquiries policy so every private table uses the same single-owner predicate", "Revoke PUBLIC, anon, and authenticated execute from submit_audit_inquiry, anonymize_expired_inquiries, and rls_auto_enable", "Grant only the minimum required service_role/postgres execution", "Add migration-content tests to the normal test command", "Apply only after local tests and inspect live migration, policies, ACLs, table counts, and Supabase security advisors"]
+    forbidden: ["Do not read or print credentials", "Do not delete or anonymize any production row", "Do not broaden table grants", "Do not change customer-visible behavior", "Do not start email, AI, calendar, voice, payment, or deployment work in this task"]
+    acceptance_commands: ["node --test supabase/migrations/007_*.test.mjs", "npm run test", "scripts/validate-state.sh", "git diff --check"]
+    evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P0_AUTHORIZATION_RPC_REMEDIATION.md"
+    rollback_note: "Use a forward-only grant/policy repair. If service-role intake fails, restore only service_role execute and retain the stricter owner predicate; never restore anon/authenticated privileged execution."
+    blockers: []
+    implementation_notes: "Current owner instruction authorizes safe security repair and the existing G2 approval covers reviewed forward auth/RLS migrations. Provider sends and deployment remain separate gates."
+
   - id: W00-T01
     workstream: W00
     title: "Maintain source, state, evidence, and continuity control"

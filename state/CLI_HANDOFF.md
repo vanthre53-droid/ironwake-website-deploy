@@ -1,5 +1,15 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex real-product reconstruction
+
+- Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
+- Audit commit: `109c711`.
+- Real source of truth: `reports/REAL_CAPABILITY_LEDGER.md`; the cycle-15 37/37 matrix is superseded.
+- Live critical evidence: migration 006 absent; `is_owner()` and the inquiry policy are role-only; privileged SECURITY DEFINER functions are executable by anon/authenticated; owner has zero verified MFA factors; all 36 outbox rows are queued at zero attempts; AI triage has zero completed rows.
+- Required role: M1.
+- Exact next action: execute only sealed `IW-P0-SEC-01`, verify the forward authorization/RPC repair locally and live, then checkpoint before email or AI work.
+- External boundaries: do not send email, deploy, publish, connect a provider, accept legal terms, spend, or expose credentials in this task.
+
 ## Portable governance migration — 2026-07-30T16:47:23Z
 
 - Root governance is now the uploaded v6 harness-neutral pack: `AGENTS.md`, `CLI-SETUP.md`, `MASTER_EXECUTION_PROMPT.md`, renamed role prompts/docs, v6 `ironwake.execution.yaml`, and validators.
