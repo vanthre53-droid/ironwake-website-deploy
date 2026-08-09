@@ -5,6 +5,12 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+[functions]
+  directory = "netlify/functions"
+
+[functions."notification-worker"]
+  schedule = "*/2 * * * *"
+
 # Security headers (matches next.config.mjs headers() for redundancy)
 [[headers]]
   for = "/*"

@@ -8,11 +8,19 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   assert.match(source, /SUPABASE_SERVICE_ROLE_KEY/);
   assert.match(source, /rpc\('submit_audit_inquiry'/);
   assert.doesNotMatch(source, /from\('inquiries'\)\.insert/);
+  assert.doesNotMatch(source, /error\.message|error\.details|error\.hint/);
   assert.match(source, /triageInquiry/);
   assert.match(source, /allowRequest\(requestIdentity\(request(?:, ['"]audit['"])?\)\)/);
   assert.match(source, /status: 429/);
   assert.match(source, /triageStatus/);
   assert.match(source, /triage_needs_human/);
+  assert.match(source, /createSupabaseNotificationStore/);
+  assert.match(source, /needsPriorityAlert\(triage\)/);
+  assert.match(source, /queuePriority\(inquiryId\)/);
+  assert.match(source, /runNotificationWorkerBestEffort/);
+  assert.match(source, /inquiryId,[\s\S]*?limit: 10/);
+  assert.match(source, /notificationResult\.status === 'worker_error'/);
+  assert.ok(source.indexOf('runNotificationWorkerBestEffort') < source.lastIndexOf('status: 201'));
   assert.match(source, /status: 201/);
   // ponytail: source must be plumbed from payload to RPC so booking and chatbot
   // handoff land as distinct sources in the owner CRM.

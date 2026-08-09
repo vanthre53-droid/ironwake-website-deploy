@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import { parseAuditPayload } from '../../../lib/audit-validation.mjs';
 import { triageInquiry } from '../../../lib/ai-triage.mjs';
 import { allowRequest, requestIdentity } from '../../../lib/request-rate-limit.mjs';
+import { createSupabaseNotificationStore } from '../../../lib/notifications/supabase-store.mjs';
+import { needsPriorityAlert, runNotificationWorkerBestEffort } from '../../../lib/notifications/worker.mjs';
 
 export const runtime = 'nodejs';
 
@@ -31,10 +33,10 @@ export async function POST(request) {
     p_source: parsed.data.source,
   });
   if (error) {
-    // ponytail: log the Supabase error so the deploy logs reveal the real failure (RLS, missing function, bad params). URL host only, no secret.
+    // Keep production diagnostics useful without logging provider details that can echo submitted values.
     let urlHost = 'unknown';
     try { urlHost = new URL(url).host; } catch {}
-    console.error('[audit] submit_audit_inquiry failed', { urlHost, code: error.code, message: error.message, details: error.details, hint: error.hint });
+    console.error('[audit] submit_audit_inquiry failed', { urlHost, code: error.code || 'unknown' });
     return NextResponse.json({ error: 'We could not save this request. Please try again.' }, { status: 502 });
   }
 
@@ -52,6 +54,28 @@ export async function POST(request) {
     triage_model: process.env.AI_MODEL || process.env.OPENAI_MODEL || null,
     triaged_at: triage.status === 'unconfigured' ? null : new Date().toISOString()
   }).eq('id', inquiryId);
+
+  // Notification work is best-effort after the inquiry transaction and triage.
+  // Missing provider configuration claims nothing and consumes no attempt.
+  const notificationStore = createSupabaseNotificationStore(supabase);
+  if (needsPriorityAlert(triage)) {
+    try {
+      await notificationStore.queuePriority(inquiryId);
+    } catch (priorityError) {
+      console.error('[audit] priority notification queue failed', {
+        safeCode: priorityError?.safeCode || 'notification_priority_queue_failed'
+      });
+    }
+  }
+  const notificationResult = await runNotificationWorkerBestEffort({
+    env: process.env,
+    store: notificationStore,
+    inquiryId,
+    limit: 10
+  });
+  if (notificationResult.status === 'worker_error') {
+    console.error('[audit] notification worker failed', { safeCode: notificationResult.safeErrorCode });
+  }
 
   return NextResponse.json({ received: true, message: 'We received your request. We’ll review it and follow up if needed.' }, { status: 201 });
 }

@@ -47,3 +47,13 @@
 - Actions: read the skill fully; checked the current Supabase changelog; scaffolded with the pinned official CLI; reviewed and tested the provider-neutral migration; applied it through the migration surface; verified live counts, constraints, policies, table/function privileges, migration history, and advisors.
 - Result: live migration `20260809104514` verified. The 36 legacy events are safely cancelled; new attempts/provider-event tables are empty; browser roles cannot execute worker/provider functions; owner reads are RLS-protected; core customer counts are unchanged.
 - Side effects: one approved forward schema/state migration and the status-only cancellation of 36 non-addressable legacy event intents. No customer row deletion, provider connection, secret, email, webhook registration, DNS, payment, publication, or deployment.
+
+## 2026-08-09 — P0 notification adapter and worker
+
+- Phase: M1 `IW-P0-NOTIFY-02`
+- Harness/model: Codex / `gpt-5.6-sol`
+- Skill invoked: Vercel email integration skill
+- Why: the sealed task implements Resend request shape, durable idempotency, safe templates, provider-neutral outcomes, and timeout handling.
+- Adaptation: re-read the skill fully; used the current SDK's `idempotencyKey` option and email/domain boundaries; adapted from Vercel Marketplace to the existing Netlify scheduled-function runtime; omitted React Email; kept `resend@6.18.1` exact because the skill's `6.9.x` note is stale.
+- Result: local fail-closed configuration, escaped owner/customer templates, eight-second Resend adapter, bounded shared worker, triage priority hook, and undeployed two-minute schedule entrypoint are implemented. Focused no-network tests pass 18/18; full suite, build, and production audit pass.
+- Side effects: installed the exact local SDK and repaired newly disclosed in-range transitive `undici`/`nanoid` advisories. No account, secret, domain, provider call, email, webhook registration, deployment, publication, or spend.
