@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { createHash } from 'node:crypto';
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server.js';
 import { parseAuditPayload } from '../../../lib/audit-validation.mjs';
 import { triageInquiry } from '../../../lib/ai-triage.mjs';
 import { requestIdentity } from '../../../lib/request-rate-limit.mjs';

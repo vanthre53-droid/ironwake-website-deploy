@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
+import { POST } from './route.js';
 
 test('audit route fails closed and persists the inquiry through the atomic CRM function', async () => {
   const source = await readFile(new URL('./route.js', import.meta.url), 'utf8');
@@ -36,4 +37,16 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   // ponytail: source must be plumbed from payload to RPC so booking and chatbot
   // handoff land as distinct sources in the owner CRM.
   assert.match(source, /p_source: parsed\.data\.source/);
+});
+
+test('audit route rejects non-JSON before any backend dependency', async () => {
+  const response = await POST(new Request('http://localhost/api/audit', { method: 'POST', body: 'name=test', headers: { 'content-type': 'application/x-www-form-urlencoded' } }));
+  assert.equal(response.status, 415);
+  assert.deepEqual(await response.json(), { error: 'Send a JSON request.' });
+});
+
+test('audit route rejects an oversized JSON body before any backend dependency', async () => {
+  const response = await POST(new Request('http://localhost/api/audit', { method: 'POST', body: JSON.stringify({ leak: 'x'.repeat(20_000) }), headers: { 'content-type': 'application/json' } }));
+  assert.equal(response.status, 413);
+  assert.deepEqual(await response.json(), { error: 'Request is too large.' });
 });
