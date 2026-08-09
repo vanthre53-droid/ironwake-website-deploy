@@ -1,6 +1,12 @@
-# Canonical Goal Requirements Matrix — 2026-08-08
+# Canonical Goal Requirements Matrix — historical frontend matrix, superseded 2026-08-09
 
-Each row: ID, requirement, route/component, files, status.
+This matrix is retained as cycle-15 resume evidence. It is not a real-product
+completion matrix and its old `VERIFIED_DEPLOYED` strings do not prove provider,
+database, notification, AI, booking, follow-up, authorization, or delivery
+capabilities. Current operational truth is recorded in
+`reports/REAL_CAPABILITY_LEDGER.md`.
+
+Each row: ID, requirement, route/component, files, historical/current status.
 
 | ID | Requirement | Route/Component | Files | Status |
 |---|---|---|---|---|
@@ -15,9 +21,9 @@ Each row: ID, requirement, route/component, files, status.
 | R09 | PricingReference on each system page | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
 | R10 | 5 canonical offers on /pricing with Lite/Std/Pro India + Intl | /pricing | app/pricing/PricingPage.js | VERIFIED_DEPLOYED (default = India; toggle to Intl works) |
 | R11 | No fabricated metrics or stats | all | app/page.js, app/insights/page.js, app/audit/* | VERIFIED (committed c600bc8 + 3958aa4 + b068ec7 + 7367178) |
-| R12 | Supabase POST /api/audit works on deployed site | /api/audit | supabase/migrations/*, app/api/audit/route.js | VERIFIED_DEPLOYED (2026-08-08 — Supabase project was paused; restored + applied migrations 001–005 to `ipcpthmmcdtshbbsirwj` via Supabase MCP; anonymous POST returned HTTP 201 with row persisted in `public.inquiries`; cleaned up smoke rows) |
+| R12 | Supabase POST /api/audit works on deployed site | /api/audit | supabase/migrations/*, app/api/audit/route.js | `VERIFIED_LIVE` for persistence only. Not a completed workflow: 36/36 notification intents remain queued with zero attempts; no email side effect exists. |
 | R13 | Anonymous /owner shows login, not data | /owner | app/owner/page.js | VERIFIED_DEPLOYED (login UI rendered) |
-| R14 | AI Receptionist reframed from "concept" to real offer with capability/demo/provider/client status | /systems/ai-receptionist | app/systems/ai-receptionist/AiReceptionistSystem.js | VERIFIED_DEPLOYED |
+| R14 | AI Receptionist reframed from "concept" to real offer with capability/demo/provider/client status | /systems/ai-receptionist | app/systems/ai-receptionist/AiReceptionistSystem.js | `FAILED_LIVE`: provider-dependent status is disclosed, but the page also claims local intake, handoff, chat, and an audit-ready call log are built; those operational paths do not exist. |
 | R15 | All 4 systems show their matching canonical offer | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
 | R16 | FAQ mentions all 5 offers | /pricing (schema) | app/pricing/page.js | VERIFIED |
 | R17 | Mobile body ≥16px | all pages | app/globals.css | VERIFIED_DEPLOYED (body = 17px; primary text 15-17px; helper .micro text 9-11px is intentional eyebrow style) |
@@ -26,8 +32,8 @@ Each row: ID, requirement, route/component, files, status.
 | R20 | SEO score ≥95 | all | (need Lighthouse) | PARTIAL — home VERIFIED_DEPLOYED (Lighthouse SEO 100); /pricing SEO 92 deployed (root cause: layout alternates.canonical:'/' inherits homepage on child pages); LOCAL FIXED commit 9ab5517 (alternates.canonical:'./'); build-verified; awaits Netlify redeploy |
 | R21 | Substantial 2.5D motion per goal §18 (3 systems on home) | / | (workflow + dashboard + interactive-lead-journey + signal-rail) | VERIFIED_DEPLOYED (commit 4b394c2) |
 | R22 | Chatbot answers exact pricing across 5 offers | chatbot | app/components/SiteAssistant.js | VERIFIED_DEPLOYED (all 5 Lite prices returned correctly) |
-| R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | VERIFIED_DEPLOYED (text: "Nothing is booked when you press send" + "No appointment is confirmed unless IronWake follows up with an explicit confirmation") |
-| R24 | Owner dashboard with search/sort/export works | /owner | app/owner/OwnerDashboard.js | VERIFIED_DEPLOYED (cycle 15 — owner personally logged in at `https://ironwake-site.netlify.app/owner` as `ironwakee@gmail.com`, confirmed the login UI authenticated, and confirmed the CRM contains a booking inquiry with `source = website_booking`. Code-referenced: search input, sort dropdown newest/oldest, CSV export button all present and functional; live data fetch from Supabase via owner-only RLS. Evidence: `reports/evidence/CYCLE_15_FINAL_GAP_RECONCILIATION.md` §1.) |
+| R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | `FAILED_LIVE` as written: four `website_booking` inquiries exist, but there is no `REQUEST_RECEIVED` or other booking-state field/table. Only source classification is live. |
+| R24 | Owner dashboard with search/sort/export works | /owner | app/owner/OwnerDashboard.js | `CONNECTED_NOT_VERIFIED`: owner login/list was attested; search/sort/export are source-present but not live interaction-proven. The dashboard does not select or display `source`, so the old claim that this UI showed `source = website_booking` is unsupported. |
 | R25 | Sitemap includes all routes | /sitemap.xml | app/sitemap.js | VERIFIED_DEPLOYED |
 | R26 | robots.txt allows crawling with sitemap | /robots.txt | app/robots.js | VERIFIED_DEPLOYED |
 | R27 | All 9 portfolio case studies link to live Vercel demos | /work | app/work/page.js | VERIFIED_DEPLOYED |
@@ -38,24 +44,24 @@ Each row: ID, requirement, route/component, files, status.
 | R32 | InteractiveLeadJourney: 3 channels, animated route | / | app/components/InteractiveLeadJourney.js | VERIFIED_DEPLOYED (commit 4b394c2) |
 | R33 | Sitemap, robots, and JSON-LD point at the live production host | /sitemap.xml /robots.txt /layout.js JSON-LD | app/sitemap.js, app/robots.js, app/layout.js | VERIFIED_DEPLOYED (commit 0195f0a — source fix; deployed via Netlify deploy id `6a7711231746907d5d4a82da` built from master with full `next build`. Deployed sitemap + robots + JSON-LD now reference `https://lucent-sunflower-966982.netlify.app` only; no `ironwake-app.netlify.app` or `ironwake.netlify.app` strings remain on production.) |
 | R34 | Exactly one H1 per page (no double-h1 from streaming SSR + loading boundary) | / | app/loading.js, app/globals.css | VERIFIED_DEPLOYED (commit cb9ae74 — replaced loading boundary `<h1>` with `<div class="loading-headline">` and updated CSS selector to match both; added regression-guard test in app/loading.test.js. Deployed via Netlify deploy id `6a7713bf635bc722659e737a`. Deployed home HTML now contains exactly one `<h1>`: 'Stop losing leads between enquiry and follow-up.' The loading-boundary text 'Preparing the next view.' remains visible but is not a heading.) |
-| R35 | AI Receptionist not labelled as a concept (page metadata, body CTA, JSON-LD) | /systems/ai-receptionist, all pages via layout JSON-LD | app/systems/ai-receptionist/page.js, app/systems/ai-receptionist/AiReceptionistSystem.js, app/layout.js | VERIFIED_DEPLOYED (commits 66f37b4 + f9ecccb — page title `'AI Receptionist Starter'`; body CTA `'Start with the AI Receptionist Starter'`; JSON-LD Service description rewritten. Deployed via Netlify deploy id `6a77185e6a27af202ea22902`. Confirmed: no user-visible "concept", "Concept", or "Talk to us about this concept" copy on any of the four system pages.) |
+| R35 | AI Receptionist not labelled as a concept (page metadata, body CTA, JSON-LD) | /systems/ai-receptionist, all pages via layout JSON-LD | app/systems/ai-receptionist/page.js, app/systems/ai-receptionist/AiReceptionistSystem.js, app/layout.js | `FAILED_LIVE`: removing the concept label upgraded unimplemented local behavior into a real-offer claim without the matching operational evidence. |
 | R36 | Site-wide canonical URL + OG image present on every public page | /, /pricing, /audit, /systems/*, /work, /insights, /book, /about, /process, /owner | app/layout.js, app/page.js, public/og-default.svg | VERIFIED_DEPLOYED (commits 66f37b4 + f9ecccb — added metadataBase + alternates.canonical to layout; added openGraph.images + twitter.images; added /og-default.svg; added images to home openGraph. Deployed via Netlify deploy id `6a77185e6a27af202ea22902`. Confirmed: canonical `<link rel="canonical" href="https://lucent-sunflower-966982.netlify.app">` and `og:image` referencing /og-default.svg both present on home; og-default.svg serves 200 image/svg+xml.) |
 | R37 | No "concept" framing leaks in portfolio case studies (rapidpulse) or pricing | /work/rapidpulse, /pricing | app/work/rapidpulse/RapidPulseCaseStudy.js, app/pricing/page.js | VERIFIED_DEPLOYED (cycle 15 — production host is `ironwake-site.netlify.app`; the credit-exhausted `lucent-sunflower-966982.netlify.app` is no longer authoritative. Live curl of `/work/rapidpulse` body states 'PORTFOLIO DEMONSTRATION' / 'Designed performance' / 'Known limitations' — no 'concept' framing. Live curl of `/pricing` returns canonical 5-offer × 3-tier × 2-region structure with tagline 'Verified claims only.' No 'concept' words anywhere on either page.) |
 
-# Status counts (cycle 15)
-- VERIFIED_DEPLOYED on ironwake-site.netlify.app: **37 / 37** (R01–R37)
-- VERIFIED_SOURCE: 0
-- PARTIAL: 0
-- NEEDS_VERIFIED: 0
-- MISSING: 0
-- IMPLEMENTED (deployed-evidence-pending): 0
-- FAILED_DEPLOYED: 0
-- NOT_RUN: 0
-- WAITING_EXTERNAL_OWNER_LOGIN: **0**
-- **PROGRAMME_STATUS: VERIFIED_COMPLETE**
+# Current status (Codex real-product reconstruction, 2026-08-09)
+
+- The cycle-15 count of 37/37 is `STALE` and superseded.
+- `IRONWAKE_REAL_PRODUCT_COMPLETION`: `PARTIAL`.
+- Operational status/evidence: `reports/REAL_CAPABILITY_LEDGER.md`.
+- Known failed-live areas: AI triage, owner MFA, single-owner RLS consistency,
+  privileged RPC exposure, and unsupported AI/booking claims.
+- Known missing/implemented-only areas: transactional email, notification
+  processing/retry/dead-letter, provider evidence, booking lifecycle, lead
+  assignment, follow-up execution, complete owner operations, deletion/export,
+  and reproducible Git-linked deployment.
 
 ## Production migration cycle 14
-- 2026-08-08: production moved from `https://lucent-sunflower-966982.netlify.app` (credit-exhausted, frozen at deploy 6a77185e6a27af202ea22902) to `https://ironwake-site.netlify.app` (free-tier, no credit exhaustion, OAuth-linked to GitHub mirror).
+- 2026-08-08: production moved from `https://lucent-sunflower-966982.netlify.app` to `https://ironwake-site.netlify.app`. The site is live, but current Netlify readback does not prove a Git-linked repository configuration; the live deploy carries commit metadata for `daafc01` and must be treated as a manual deploy until a linked build is proved.
 - All pending commits deployed: 6d0a6d4, 82e9388, 9ab5517, 358f4e5.
 - Per-route canonical and og:image now resolve to the live deploy host (not the frozen old URL).
 

@@ -1,7 +1,7 @@
 # P0 Skill Inventory
 
-- Audited: 2026-07-26T16:10:00Z
-- Status: discovery complete for immediately relevant candidates; none used or executed
+- Audited: 2026-08-09T10:00:00Z
+- Status: discovery refreshed; the official Supabase skill was selected for the real capability audit
 
 | Name | Path | Purpose | Freshness | Required inputs | Side effects | Compatibility | Chosen phase |
 |---|---|---|---|---|---|---|---|
@@ -11,10 +11,11 @@
 | Handoff | `ironwakeportifolioprojects/.claude/skills/handoff/SKILL.md` | Historical nested-worktree continuity | Unknown | Nested worktree and vault files | Documentation writes | Defer; controller continuity protocol governs this work | None |
 | Agency legacy pack | `AGENCY_V2_2_UPGRADE_PACK.zip:pack/04_HERMES_SKILLS/{fleet-orchestration,portfolio-demo-factory,voice-agent-build,whatsapp-bot-build,demo-personalization-pipeline,webchat-widget,script-generator}/SKILL.md` | Historical implementation runbooks | Historical versions; provider and policy details require current official verification | Approved scope, account and provider data | Several can trigger external/provider work | Adapt or defer; repository law overrides all controller/model references | P2-P4 only after approval |
 | Mixed IronWake skills archive | `ironwake-skills.tar.gz:skills/**/SKILL.md` | Broad historical skill collection | Unknown; includes workflows incompatible with OpenCode-only control | Varies | Some may invoke providers, publishing, or other controllers | Defer pending targeted review and compatibility check | No phase selected |
+| Supabase | `/home/shadowlingo/.codex/plugins/cache/openai-curated-remote/supabase/1.0.0/skills/supabase/SKILL.md` | Current Supabase schema, Auth, RLS, RPC, advisor, and migration guidance | Skill v0.1.2; current changelog checked 2026-08-09 | Connected project ID; no credentials copied | Read-only provider/database inspection in P0; DDL only after a sealed approved task | Selected; repository law remains higher priority | P0.1 audit and later approved remediation |
 
 ## Result
 
-No root-level `SKILL.md`, `.claude/skills/*.md`, `skills/**/INDEX.md`, or `rules/*.md` exists in the controller root. Candidate skills were not invoked, and no third-party script was executed. A targeted skill may be reviewed only after the intended Git root is identified and the relevant phase is unblocked.
+No root-level `SKILL.md`, `.claude/skills/*.md`, `skills/**/INDEX.md`, or `rules/*.md` exists in the controller root. Historical archive skills remain deferred. The official Supabase skill was read in full and used for read-only current-state inspection; no third-party script was executed.
 
 ### Discovery refresh
 
