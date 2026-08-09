@@ -850,3 +850,8 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: public-truth pretests 3/3; focused footer, assistant, homepage, and missed-lead tests 5/5; production build; `git diff --check`.
 - Deployment: intentionally not pushed or deployed under the owner's hold instruction.
 - Next exact action: continue only independent local P0 truth/security work; preserve the separate MFA, Resend, and D-008 external items.
+
+### 2026-08-09T15:35:00Z — M1/P0.27_assistant_follow_up_truth
+- Result: VERIFIED_LOCAL_CANDIDATE_HELD. The deterministic assistant had one remaining direct overclaim that every inquiry receives named assignment. It now describes the real review-task/due-date state and qualifies assignment/escalation as separate unconfigured work.
+- Verification: public-truth pretests 3/3; focused assistant, footer, homepage, and missed-lead tests 5/5; production build; `git diff --check`.
+- Deployment: intentionally not pushed or deployed under the owner's hold instruction.

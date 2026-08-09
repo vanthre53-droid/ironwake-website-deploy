@@ -75,7 +75,7 @@ const FLOWS = {
     ]
   },
   no_followup: {
-    message: `That's a follow-up ownership problem. IronWake assigns every enquiry to a named person with a visible next action — so you can see exactly who owns what and what's overdue. This is part of Booking Certainty, starting at ${BOOKING_PRICE}.`,
+    message: `That's a follow-up discipline problem. The current site records a review task, due date, and next action for a submitted request. Named assignment and escalation require separately configured operational evidence. Booking Certainty starts at ${BOOKING_PRICE}.`,
     options: [
       { label: 'Show me the system', action: 'link', href: '/systems/missed-lead-recovery' },
       { label: 'See a real demonstration', action: 'link', href: '/work/rapidpulse' },

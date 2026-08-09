@@ -14,7 +14,9 @@ test('site assistant is a truthful decision-tree guide', async () => {
   assert.match(source, /handoff_consent/);
   assert.match(source, /consent checkbox/);
   assert.match(source, /Email delivery is not currently configured/);
+  assert.match(source, /Named assignment and escalation require separately configured operational evidence/);
   assert.doesNotMatch(source, /Get an email follow-up/);
+  assert.doesNotMatch(source, /assigns every enquiry to a named person/);
   assert.doesNotMatch(source, /password|payment details|identity documents/i);
   assert.doesNotMatch(source, /fetch\(['"]\/api\//);
 });
