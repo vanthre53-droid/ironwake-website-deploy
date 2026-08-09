@@ -867,3 +867,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: two non-interactive same-surface Netlify CLI production-secret writes failed; names-only production readback confirms `RESEND_WEBHOOK_SECRET` is absent, while local secret-presence readback is true.
 - Safety: no signing secret, API key, endpoint payload, provider message, callback, or personal data was logged or committed. No provider send or notification-state mutation occurred.
 - Next exact action: an authorized Netlify environment write must set the existing local secret as `RESEND_WEBHOOK_SECRET` in production; then redeploy and resume the exact-event test.
+
+### 2026-08-09T22:00:00Z — C1/P0.30_resend_live_signed_delivery_callback
+
+- Result: `VERIFIED_LIVE` for the controlled pre-domain Resend path. The existing webhook was confirmed enabled, pointed at the deployed endpoint, subscribed to the required email events, and matched the stored signing secret without recording either value.
+- Repair and deployment: production Functions received the required Supabase URL/service-role configuration with least-privilege scopes; the current `99ed5d0` candidate was deployed. A valid signed unsupported probe returned 200/ignored, proving raw-body signature verification and non-mutating acknowledgement before the provider test.
+- Verification: focused worker/webhook/store/migration tests passed 20/20. One labelled priority outbox event was processed once through the existing official pre-domain Resend test path. Its exact durable readback reports one attempt, `accepted`, `delivered`, two provider events (`email.sent`, `email.delivered`), and populated `delivered_at`.
+- Safety: no Resend webhook was recreated, no signing secret/key/recipient/payload/provider message ID was logged or committed, and no routine sender configuration was enabled. The custom-domain sender remains required before operational email is claimed.
+- Next exact action: continue only independent MFA owner-session/direct-object evidence and adult/legal-owner D-008 retention/deletion/backup/restore decisions.

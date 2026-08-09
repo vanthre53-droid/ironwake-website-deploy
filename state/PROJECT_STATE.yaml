@@ -7,14 +7,14 @@ programme_status: PARTIAL
 active_stage: C1
 required_role: C1
 current_phase: P0_SECURITY_ASSURANCE
-current_gate: WAITING_EXTERNAL_NETLIFY_SECRET_WRITE
-next_exact_action: "An authorized Netlify environment write must set the already-created RESEND_WEBHOOK_SECRET value from .env.local into existing ironwake-site production secrets. Do not share it in chat or Git. Then redeploy and resume the one exact-event Resend test. Independently await an MFA-enrolled authorized owner browser session and adult/legal-owner D-008 retention/deletion/backup-restore decisions."
+current_gate: WAITING_EXTERNAL_OWNER_MFA_AND_D008
+next_exact_action: "Obtain an MFA-enrolled authorized owner browser session for deployed owner-dashboard/direct-object evidence. Independently obtain the adult/legal-owner D-008 retention, deletion, backup, and restore decisions. The Resend controlled pre-domain delivery/callback gate is verified; do not send routine operational email until the custom sender domain is verified."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: b0d5781
-last_verified_task: iw_p0_29_resend_webhook_registered_netlify_secret_pending
-blocked_on: "The configured full-access Resend key registered the prepared webhook and stored its signing secret in .env.local. Two Netlify CLI production-secret writes failed; names-only readback confirms RESEND_WEBHOOK_SECRET is absent in ironwake-site production. The exact remaining external action is that one secret write, without sharing it in chat or Git. Independent remaining external items are an MFA-enrolled owner browser session and adult/legal-owner D-008 retention/deletion/backup-restore decisions. Exposed Netlify tokens require human revocation and will not be used."
+last_safe_boundary: 99ed5d0
+last_verified_task: iw_p0_30_resend_live_signed_delivery_callback
+blocked_on: "Only independent human/legal evidence remains: an MFA-enrolled authorized owner browser session for deployed dashboard/direct-object proof, and adult/legal-owner D-008 retention/deletion/backup/restore decisions. The controlled pre-domain Resend send, signed callback, persistence, and delivery-state proof is complete."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -26,8 +26,8 @@ gates:
   GM2_REMEDIATION_COMPLETE: partial_c2_f2_deferred
   GC3_RELEASE_CANDIDATE_PASS: partial_not_approved
   G2_SCHEMA_AUTH_SERVER_APPROVAL: verified_notification_state_live_owner_session_pending
-  G4_EXTERNAL_PROVIDER_APPROVAL: waiting_external_netlify_secret_write
-  G5_PRODUCTION_DEPLOY_APPROVAL: verified_deployed_b0d5781
+  G4_EXTERNAL_PROVIDER_APPROVAL: verified_live_resend_pre_domain_test
+  G5_PRODUCTION_DEPLOY_APPROVAL: verified_deployed_99ed5d0
   REAL_CAPABILITY_LEDGER_VERIFIED: verified
   IRONWAKE_REAL_PRODUCT_COMPLETION: partial
 
@@ -41,13 +41,13 @@ workstream_status:
   W06: verified_internal_draft_blocked_dependencies
   W07: blocked_g2
   W08: blocked_pricing_legal_owner
-  W09: waiting_external_netlify_secret_write
+  W09: verified_live_resend_pre_domain_test_sender_domain_pending
   W10: verified_live_schema_acl_repaired
   W11: deployed_unconfigured_provider_operations
   W12: verified_live_minimax_structured_triage_owner_dashboard_session_pending
   W13: deployed_request_only_booking_schema_owner_session_pending
   W14: deployed_follow_up_state_owner_session_pending
-  W15: deployed_notification_webhook_owner_operations_provider_pending
+  W15: verified_live_resend_callback_owner_session_pending
   W16: deployed_notes_timeline_owner_session_pending_follow_up_escalation_missing
   W17: blocked_real_data
   W18: blocked_scope_legal
