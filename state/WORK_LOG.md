@@ -861,3 +861,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused notification/webhook/migration tests 19/19; production build; Netlify production deploy `6a789eebb47d2e00072dc2d3` ready; live targeted-function ACL readback (anonymous/authenticated denied, service-role allowed).
 - Safety: no webhook creation/retry, signing secret, provider send, callback, or notification-state mutation occurred. No credential value or provider response payload was persisted.
 - Next exact action: replace only `RESEND_API_KEY` with a full-access key in `.env.local` and the existing Netlify production environment, then resume webhook registration.
+
+### 2026-08-09T15:50:00Z — C1/P0.29_resend_webhook_registration_netlify_secret_boundary
+- Result: `WAITING_EXTERNAL_NETLIFY_SECRET_WRITE`. The updated full-access key listed zero webhooks, then created exactly the prepared `https://ironwake-site.netlify.app/api/webhooks/resend` endpoint with the implementation’s seven supported event types. Its signing secret was stored in `.env.local` only.
+- Verification: two non-interactive same-surface Netlify CLI production-secret writes failed; names-only production readback confirms `RESEND_WEBHOOK_SECRET` is absent, while local secret-presence readback is true.
+- Safety: no signing secret, API key, endpoint payload, provider message, callback, or personal data was logged or committed. No provider send or notification-state mutation occurred.
+- Next exact action: an authorized Netlify environment write must set the existing local secret as `RESEND_WEBHOOK_SECRET` in production; then redeploy and resume the exact-event test.
