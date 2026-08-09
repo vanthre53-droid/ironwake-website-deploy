@@ -678,3 +678,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: VERIFIED_LOCAL. AI Receptionist copy now describes only future requirements and no operating provider-backed assistant. Missed Lead Recovery copy no longer claims a named assignee, configured delivery, escalation, or an end-to-end private workflow. Site metadata and JSON-LD match those limits.
 - Verification: targeted claim scan; full suite 137/137; production build; `npm audit --omit=dev` 0; diff check.
 - Next exact action: implement canonical-owner-protected notes and an auditable activity timeline in the owner CRM; retain G5 deployment proof as separately waiting.
+
+### 2026-08-09T13:25:00Z — M1/P0.10_owner_notes_and_activity_timeline
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Starting safe boundary: `7c1da11`; implementation commit: `0ea28bb`.
+- Approval/external action: existing G2 permits this reviewed additive CRM migration. It creates private database records only; no note content was written, and no provider, customer message, deployment, payment, or credential action occurred.
+- Result: PARTIAL. Owner notes are private RLS data; their creation crosses only `owner_add_inquiry_note`, which checks the canonical owner predicate and records an audit event containing a note ID but not note content. The local owner UI reads owner-RLS notes/activity and has no direct note-table write.
+- Verification: focused tests 3/3; full suite 138/138; production build; `npm audit --omit=dev` 0; diff check; live table/policy/function-security/role-privilege readback.
+- Next exact action: implement canonical-owner-authorized lead-stage updates with an audit event, without direct browser table writes; retain G5 deployment proof separately waiting.

@@ -1,5 +1,15 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex owner notes and activity timeline
+
+- Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
+- Live schema: RLS-protected `owner_notes`, canonical-owner read policy, and `owner_add_inquiry_note(uuid,text)` are applied. The security-definer RPC rechecks `is_owner()`, limits notes to 1–2,000 trimmed characters, and writes only the new note ID to the audit log.
+- Local `/owner`: shows per-inquiry notes and metadata-only activity, and saves notes only through the RPC. It has no direct note-table insert in browser source.
+- Readback: table/policy exist; the RPC is security-definer; `anon` cannot execute/select; `authenticated` can execute/read only through the canonical RLS predicate.
+- Verification: focused 3/3; full suite 138/138; production build; audit 0; diff check.
+- Implementation commit: `0ea28bb` (`feat: add owner notes and activity timeline`).
+- Required role: M1. Add auditable canonical-owner lead-stage updates next. G5 still gates deployment; do not use an exposed Netlify token.
+
 ## Current handoff — 2026-08-09 Codex public capability-claim correction
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.

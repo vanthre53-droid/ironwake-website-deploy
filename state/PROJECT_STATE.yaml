@@ -7,13 +7,13 @@ programme_status: PARTIAL
 active_stage: M1
 required_role: M1
 current_phase: P0_OWNER_CRM_COMPLETENESS
-current_gate: P0_PUBLIC_CAPABILITY_CLAIMS_QUALIFIED
-next_exact_action: "Implement the smallest independent owner-CRM completeness remediation: owner notes and an auditable activity timeline, protected by the canonical owner policy and exposed only through owner-authorized controls. Keep MiniMax and local UI deployment proof queued behind G5; do not use the exposed Netlify token."
+current_gate: P0_OWNER_NOTES_ACTIVITY_LIVE_SCHEMA_LOCAL_UI_VERIFIED
+next_exact_action: "Implement the next smallest independent owner-CRM remediation: canonical-owner-authorized lead-stage updates with an audit event, avoiding direct browser table writes. Keep MiniMax and local UI deployment proof queued behind G5; do not use the exposed Netlify token."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: acfd046
-last_verified_task: iw_p0_public_claim_truth_acfd046
+last_safe_boundary: 0ea28bb
+last_verified_task: iw_p0_owner_notes_timeline_0ea28bb
 blocked_on: "P0.4 local MiniMax repair and the local owner booking/follow-up UI remain undeployed. The deployed application is commit daafc01 and returns provider_error for the authorized synthetic inquiry; G5 deployment approval is required before corrected MiniMax or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
@@ -48,7 +48,7 @@ workstream_status:
   W13: implemented_live_request_only_booking_schema_local_ui_deploy_pending
   W14: implemented_live_follow_up_state_local_owner_operations_deploy_pending
   W15: verified_local_notification_webhook_owner_operations_queued
-  W16: missing_follow_up_engine
+  W16: implemented_notes_timeline_local_ui_deploy_pending_follow_up_escalation_missing
   W17: blocked_real_data
   W18: blocked_scope_legal
   W19: verified_live_privileged_rpc_boundary
