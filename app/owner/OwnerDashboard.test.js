@@ -29,5 +29,12 @@ test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter'
   assert.match(source, /AI triage/);
   assert.match(source, /Provider \/ model/);
   assert.match(source, /Safe triage status/);
+  assert.match(source, /leak_description,source,booking_status/);
+  assert.match(source, /booking_status \|\| 'Not a booking request'/);
+  assert.match(source, /Request summary/);
+  assert.match(source, /from\('tasks'\)\.select/);
+  assert.match(source, /owner_complete_task/);
+  assert.match(source, /Complete follow-up task/);
+  assert.match(source, /Follow-up task completed and recorded/);
   assert.match(source, /This screen never seeds or invents CRM activity/);
 });

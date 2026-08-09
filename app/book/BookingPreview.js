@@ -16,7 +16,7 @@ export function BookingPreview() {
       const response = await fetch('/api/audit', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...payload, source: 'website_booking' }) });
       const result = await response.json();
       setStatus(response.ok ? 'success' : 'error');
-      setMessage(result.message || result.error || 'Please try again.');
+      setMessage(response.ok ? 'BOOKING REQUEST RECEIVED. IronWake will review the request and reply separately; no appointment is confirmed yet.' : result.error || 'Please try again.');
       if (response.ok) event.currentTarget.reset();
     } catch { setStatus('error'); setMessage('Your request could not be sent. Please try again.'); }
   }

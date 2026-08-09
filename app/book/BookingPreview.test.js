@@ -7,6 +7,8 @@ test('booking preview persists its minimum booking request through the validated
   assert.match(source, /type="date"/);
   assert.match(source, /<select/);
   assert.match(source, /Nothing is booked when you press send/);
+  assert.match(source, /BOOKING REQUEST RECEIVED/);
+  assert.match(source, /no appointment is confirmed yet/i);
   assert.match(source, /fetch\('\/api\/audit'/);
   assert.match(source, /Booking preference:/);
   assert.match(source, /I agree to be contacted about this request/);

@@ -22,11 +22,13 @@ export function OwnerDashboard() {
   const [session, setSession] = useState(null);
   const [authorization, setAuthorization] = useState({ checked: false, allowed: false, reason: '' });
   const [inquiries, setInquiries] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [stage, setStage] = useState('all');
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('newest');
   const [selectedId, setSelectedId] = useState(null);
   const [status, setStatus] = useState('');
+  const [completingTaskId, setCompletingTaskId] = useState(null);
 
   useEffect(() => {
     if (!client) return;
@@ -70,7 +72,7 @@ export function OwnerDashboard() {
   useEffect(() => {
     if (!client || !authorization.allowed) { setInquiries([]); return; }
     let cancelled = false;
-    let builder = client.from('inquiries').select('id,business_name,email,lead_stage,next_action,due_at,created_at,triage_status,triage_priority,triage_category,triage_summary,triage_suggested_reply,triage_provider,triage_model,triage_error_code,triage_attempted_at,triaged_at').order('created_at', { ascending: false }).limit(25);
+    let builder = client.from('inquiries').select('id,business_name,email,leak_description,source,booking_status,lead_stage,next_action,due_at,created_at,triage_status,triage_priority,triage_category,triage_summary,triage_suggested_reply,triage_provider,triage_model,triage_error_code,triage_attempted_at,triaged_at').order('created_at', { ascending: false }).limit(25);
     if (stage !== 'all') builder = builder.eq('lead_stage', stage);
     builder.then(({ data, error }) => {
       if (cancelled) return;
@@ -79,6 +81,18 @@ export function OwnerDashboard() {
     });
     return () => { cancelled = true; };
   }, [client, authorization.allowed, stage]);
+
+  useEffect(() => {
+    if (!client || !authorization.allowed || !inquiries.length) { setTasks([]); return; }
+    let cancelled = false;
+    client.from('tasks').select('id,inquiry_id,category,due_at,completed_at').in('inquiry_id', inquiries.map((inquiry) => inquiry.id)).is('completed_at', null).order('due_at', { ascending: true })
+      .then(({ data, error }) => {
+        if (cancelled) return;
+        if (error) return setStatus('Follow-up tasks are unavailable for this account.');
+        setTasks(data ?? []);
+      });
+    return () => { cancelled = true; };
+  }, [client, authorization.allowed, inquiries]);
 
   async function signIn(event) {
     event.preventDefault();
@@ -96,10 +110,24 @@ export function OwnerDashboard() {
 
   const visibleInquiries = useMemo(() => inquiries.filter((inquiry) => `${inquiry.business_name} ${inquiry.email}`.toLowerCase().includes(query.toLowerCase())).sort((a, b) => sort === 'oldest' ? new Date(a.created_at) - new Date(b.created_at) : new Date(b.created_at) - new Date(a.created_at)), [inquiries, query, sort]);
   const selected = visibleInquiries.find(({ id }) => id === selectedId) || visibleInquiries[0];
+  const selectedTask = selected ? tasks.find((task) => task.inquiry_id === selected.id) : null;
+
+  async function completeTask(task) {
+    if (!client || !authorization.allowed || !task) return;
+    setCompletingTaskId(task.id);
+    const { data, error } = await client.rpc('owner_complete_task', { p_task_id: task.id });
+    setCompletingTaskId(null);
+    if (error || !data) return setStatus('The follow-up task could not be completed.');
+    setTasks((current) => current.filter(({ id }) => id !== task.id));
+    setInquiries((current) => current.map((inquiry) => inquiry.id === task.inquiry_id
+      ? { ...inquiry, next_action: 'Review follow-up outcome', due_at: null }
+      : inquiry));
+    setStatus('Follow-up task completed and recorded.');
+  }
 
   function exportVisible() {
     if (!visibleInquiries.length) return setStatus('There are no visible inquiries to export.');
-    const rows = [['Business', 'Email', 'Stage', 'Next action', 'Due'], ...visibleInquiries.map((item) => [item.business_name, item.email, item.lead_stage, item.next_action || '', item.due_at || ''])];
+    const rows = [['Business', 'Email', 'Source', 'Booking status', 'Stage', 'Next action', 'Due'], ...visibleInquiries.map((item) => [item.business_name, item.email, item.source, item.booking_status || '', item.lead_stage, item.next_action || '', item.due_at || ''])];
     const blob = new Blob([rows.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(',')).join('\n')], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -139,9 +167,11 @@ export function OwnerDashboard() {
               <div><dt>Next action</dt><dd>{inquiry.next_action || 'Not set'}</dd></div>
               <div><dt>Due</dt><dd>{formatDue(inquiry.due_at)}</dd></div>
               <div><dt>Triage</dt><dd>{inquiry.triage_status || 'Pending'}</dd></div>
+              <div><dt>Source</dt><dd>{inquiry.source}</dd></div>
+              {inquiry.booking_status && <div><dt>Booking</dt><dd>{inquiry.booking_status}</dd></div>}
             </dl>
           </button></li>) : <li>No accessible inquiries for this filter yet.</li>}
-        </ul><aside className="crm-detail" aria-live="polite"><span className="eyebrow">Inquiry detail</span>{selected ? <><h2>{selected.business_name}</h2><p>{selected.email}</p><dl><div><dt>Lead stage</dt><dd>{selected.lead_stage}</dd></div><div><dt>Next action</dt><dd>{selected.next_action || 'Not set'}</dd></div><div><dt>Due date</dt><dd>{formatDue(selected.due_at)}</dd></div><div><dt>Booking request</dt><dd>Not connected</dd></div><div><dt>AI triage</dt><dd>{selected.triage_status || 'Pending'}</dd></div><div><dt>Provider / model</dt><dd>{selected.triage_provider && selected.triage_model ? `${selected.triage_provider} / ${selected.triage_model}` : 'Not recorded'}</dd></div><div><dt>Priority / category</dt><dd>{selected.triage_priority || 'normal'} / {selected.triage_category || 'other'}</dd></div><div><dt>Attempted</dt><dd>{formatDue(selected.triage_attempted_at)}</dd></div>{selected.triage_summary && <div><dt>Summary</dt><dd>{selected.triage_summary}</dd></div>}{selected.triage_suggested_reply && <div><dt>Suggested reply</dt><dd>{selected.triage_suggested_reply}</dd></div>}{selected.triage_error_code && <div><dt>Safe triage status</dt><dd>{selected.triage_error_code}</dd></div>}</dl><div className="crm-detail-note"><strong>Tasks, notes, timeline, retry/dead-letter, and retention actions</strong><p>These private records are available only when the authorized owner schema and account session expose them. This screen never seeds or invents CRM activity.</p></div></> : <p>Select an inquiry to view its available details. Empty lists remain empty until a real authorized record exists.</p>}</aside></div>
+        </ul><aside className="crm-detail" aria-live="polite"><span className="eyebrow">Inquiry detail</span>{selected ? <><h2>{selected.business_name}</h2><p>{selected.email}</p><dl><div><dt>Source</dt><dd>{selected.source}</dd></div><div><dt>Lead stage</dt><dd>{selected.lead_stage}</dd></div><div><dt>Next action</dt><dd>{selected.next_action || 'Not set'}</dd></div><div><dt>Due date</dt><dd>{formatDue(selected.due_at)}</dd></div><div><dt>Booking request</dt><dd>{selected.booking_status || 'Not a booking request'}</dd></div><div><dt>Follow-up</dt><dd>{selectedTask ? `${selectedTask.category} due ${formatDue(selectedTask.due_at)}` : 'No open follow-up task'}</dd></div><div><dt>AI triage</dt><dd>{selected.triage_status || 'Pending'}</dd></div><div><dt>Provider / model</dt><dd>{selected.triage_provider && selected.triage_model ? `${selected.triage_provider} / ${selected.triage_model}` : 'Not recorded'}</dd></div><div><dt>Priority / category</dt><dd>{selected.triage_priority || 'normal'} / {selected.triage_category || 'other'}</dd></div><div><dt>Attempted</dt><dd>{formatDue(selected.triage_attempted_at)}</dd></div>{selected.leak_description && <div><dt>Request summary</dt><dd>{selected.leak_description}</dd></div>}{selected.triage_summary && <div><dt>Summary</dt><dd>{selected.triage_summary}</dd></div>}{selected.triage_suggested_reply && <div><dt>Suggested reply</dt><dd>{selected.triage_suggested_reply}</dd></div>}{selected.triage_error_code && <div><dt>Safe triage status</dt><dd>{selected.triage_error_code}</dd></div>}</dl>{selectedTask && <button type="button" className="button secondary" onClick={() => completeTask(selectedTask)} disabled={completingTaskId === selectedTask.id}>{completingTaskId === selectedTask.id ? 'Completing task…' : 'Complete follow-up task'}</button>}<div className="crm-detail-note"><strong>Tasks, notes, timeline, retry/dead-letter, and retention actions</strong><p>These private records are available only when the authorized owner schema and account session expose them. This screen never seeds or invents CRM activity.</p></div></> : <p>Select an inquiry to view its available details. Empty lists remain empty until a real authorized record exists.</p>}</aside></div>
         <button className="button" onClick={signOut}>Sign out</button>
       </>}
       {status && <p className="notice" role="status">{status}</p>}
