@@ -4,11 +4,11 @@ schema_version: 6.0.0
 
 programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
-active_stage: M1
-required_role: M1
+active_stage: C1
+required_role: C1
 current_phase: P0_SECURITY_ASSURANCE
-current_gate: P0_PUBLIC_API_BOUNDARY_LOCAL_VERIFIED
-next_exact_action: "C1 review the remaining deep security evidence gaps (authenticated owner session, direct-object denial, backup/restore, and production artifact mismatch) and seal only the next unblocked local task."
+current_gate: P0_LOCAL_SECURITY_REVIEW_COMPLETE_EXTERNAL_EVIDENCE_PENDING
+next_exact_action: "Await named G5 approval for deployment of the reviewed artifact, then run the controlled production MiniMax inquiry and authenticated owner-dashboard evidence. Independently await adult/legal-owner D-008 retention/deletion decisions and owner MFA/direct-object/backup-restore evidence."
 
 harness: codex
 model: gpt-5.6-terra
