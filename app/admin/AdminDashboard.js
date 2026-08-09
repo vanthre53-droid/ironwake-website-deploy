@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import {
   isRetryableNotification,
@@ -39,6 +39,7 @@ export function AdminDashboard() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [status, setStatus] = useState('');
   const [readiness, setReadiness] = useState(null);
+  const [eventFilter, setEventFilter] = useState('all');
 
   useEffect(() => {
     if (!client) return;
@@ -135,6 +136,8 @@ export function AdminDashboard() {
     setRefreshKey((value) => value + 1);
   }
 
+  const visibleEvents = useMemo(() => events.filter((event) => eventFilter === 'all' || event.status === eventFilter), [events, eventFilter]);
+
   return <main className="shell owner-shell">
     <section className="owner-card operations-card">
       <span className="eyebrow">Private / authorized owner only</span>
@@ -159,9 +162,10 @@ export function AdminDashboard() {
         <p>Saved lead, queue, attempt, provider-acceptance, delivery, failure, and replay state are shown separately. Provider acceptance is not delivery.</p>
         {readiness && !readiness.configured && <p className="notice" role="status">Provider configuration is not ready ({readiness.safeErrorCode}). Queued events have not been sent.</p>}
         {readiness?.configured && <p className="notice" role="status">Provider configuration is present. Provider acceptance and delivery remain separate states.</p>}
+        <label className="crm-toolbar">Filter notification state<select value={eventFilter} onChange={(event) => setEventFilter(event.target.value)}><option value="all">All states</option><option value="queued">Queued</option><option value="retry_scheduled">Retry scheduled</option><option value="dead_letter">Dead letter</option><option value="cancelled">Cancelled</option></select></label>
         <div className="dashboard-links"><a href="/owner">Owner CRM →</a></div>
         {loading ? <p role="status">Loading notification records…</p> : <ul className="record-list notification-records" aria-label="Notification operations">
-          {events.length ? events.map((event) => {
+          {visibleEvents.length ? visibleEvents.map((event) => {
             const attempt = latestNotificationAttempt(event.notification_attempts);
             const safeError = event.safe_error_code || event.last_error_code || attempt?.safe_error_code || 'None';
             const providerMessageId = event.provider_message_id || attempt?.provider_message_id || 'Not assigned';
@@ -191,7 +195,7 @@ export function AdminDashboard() {
                 {retryingId === event.id ? 'Returning to queue…' : 'Retry notification'}
               </button>}
             </article></li>;
-          }) : <li>No accessible notification records yet.</li>}
+          }) : <li>No notification records match this state.</li>}
         </ul>}
         <button className="button" onClick={signOut}>Sign out</button>
       </>}
