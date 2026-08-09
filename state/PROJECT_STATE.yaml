@@ -7,14 +7,14 @@ programme_status: PARTIAL
 active_stage: M1
 required_role: M1
 current_phase: P0_AI_PROVIDER_REALITY
-current_gate: P0_NOTIFICATION_OPERATIONS_VERIFIED_LOCAL
-next_exact_action: "Execute the user-defined P0.4 AI provider reality unit: inspect current AI configuration names/source/deployed failure evidence without exposing secret values, verify the current provider/model/endpoint contract from official sources, and implement the smallest durable local attempt/provider/model/failure contract with injected tests. Do not read or reuse unknown credentials, call an unapproved provider, publish AI claims, or deploy."
+current_gate: P0_MINIMAX_LOCAL_REPAIR_VERIFIED_LIVE_DEPLOY_PENDING
+next_exact_action: "Obtain the named G5 deployment approval for the reviewed P0.4 MiniMax repair commit, deploy only that exact commit, then rerun one authorized synthetic inquiry and verify MiniMax structured triage, durable Supabase fields, and the owner dashboard. Do not use the exposed Netlify token."
 
 harness: codex
-model: gpt-5.6-sol
+model: gpt-5.6-terra
 last_safe_boundary: 542f15b
 last_verified_task: iw_p0_notify_04_owner_notification_operations_542f15b
-blocked_on: "No blocker for local AI status/contract repair. A controlled live AI call requires an explicitly approved provider/account/model and synthetic-data boundary; Resend account/terms/domain/DNS/secret/webhook/send and deployment remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
+blocked_on: "P0.4 local MiniMax repair and its reviewed additive database migration are verified. The deployed application remains commit daafc01 and returns provider_error for the authorized synthetic inquiry; G5 deployment approval is required before a corrected deployed MiniMax request or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -44,7 +44,7 @@ workstream_status:
   W09: resend_selected_code_only_account_domain_pending
   W10: verified_live_schema_acl_repaired
   W11: verified_local_implementation
-  W12: failed_live_ai_triage_zero_completed
+  W12: partial_minimax_local_repair_live_e2e_deploy_pending
   W13: verified_live_intake_booking_lifecycle_missing
   W14: verified_local_notification_operations_owner_mfa_pending
   W15: verified_local_notification_webhook_owner_operations_queued

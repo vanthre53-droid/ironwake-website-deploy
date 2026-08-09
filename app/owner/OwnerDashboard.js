@@ -70,7 +70,7 @@ export function OwnerDashboard() {
   useEffect(() => {
     if (!client || !authorization.allowed) { setInquiries([]); return; }
     let cancelled = false;
-    let builder = client.from('inquiries').select('id,business_name,email,lead_stage,next_action,due_at,created_at').order('created_at', { ascending: false }).limit(25);
+    let builder = client.from('inquiries').select('id,business_name,email,lead_stage,next_action,due_at,created_at,triage_status,triage_priority,triage_category,triage_summary,triage_suggested_reply,triage_provider,triage_model,triage_error_code,triage_attempted_at,triaged_at').order('created_at', { ascending: false }).limit(25);
     if (stage !== 'all') builder = builder.eq('lead_stage', stage);
     builder.then(({ data, error }) => {
       if (cancelled) return;
@@ -138,9 +138,10 @@ export function OwnerDashboard() {
               <div><dt>Stage</dt><dd>{inquiry.lead_stage}</dd></div>
               <div><dt>Next action</dt><dd>{inquiry.next_action || 'Not set'}</dd></div>
               <div><dt>Due</dt><dd>{formatDue(inquiry.due_at)}</dd></div>
+              <div><dt>Triage</dt><dd>{inquiry.triage_status || 'Pending'}</dd></div>
             </dl>
           </button></li>) : <li>No accessible inquiries for this filter yet.</li>}
-        </ul><aside className="crm-detail" aria-live="polite"><span className="eyebrow">Inquiry detail</span>{selected ? <><h2>{selected.business_name}</h2><p>{selected.email}</p><dl><div><dt>Lead stage</dt><dd>{selected.lead_stage}</dd></div><div><dt>Next action</dt><dd>{selected.next_action || 'Not set'}</dd></div><div><dt>Due date</dt><dd>{formatDue(selected.due_at)}</dd></div><div><dt>Booking request</dt><dd>Not connected</dd></div></dl><div className="crm-detail-note"><strong>Tasks, notes, timeline, retry/dead-letter, and retention actions</strong><p>These private records are available only when the authorized owner schema and account session expose them. This screen never seeds or invents CRM activity.</p></div></> : <p>Select an inquiry to view its available details. Empty lists remain empty until a real authorized record exists.</p>}</aside></div>
+        </ul><aside className="crm-detail" aria-live="polite"><span className="eyebrow">Inquiry detail</span>{selected ? <><h2>{selected.business_name}</h2><p>{selected.email}</p><dl><div><dt>Lead stage</dt><dd>{selected.lead_stage}</dd></div><div><dt>Next action</dt><dd>{selected.next_action || 'Not set'}</dd></div><div><dt>Due date</dt><dd>{formatDue(selected.due_at)}</dd></div><div><dt>Booking request</dt><dd>Not connected</dd></div><div><dt>AI triage</dt><dd>{selected.triage_status || 'Pending'}</dd></div><div><dt>Provider / model</dt><dd>{selected.triage_provider && selected.triage_model ? `${selected.triage_provider} / ${selected.triage_model}` : 'Not recorded'}</dd></div><div><dt>Priority / category</dt><dd>{selected.triage_priority || 'normal'} / {selected.triage_category || 'other'}</dd></div><div><dt>Attempted</dt><dd>{formatDue(selected.triage_attempted_at)}</dd></div>{selected.triage_summary && <div><dt>Summary</dt><dd>{selected.triage_summary}</dd></div>}{selected.triage_suggested_reply && <div><dt>Suggested reply</dt><dd>{selected.triage_suggested_reply}</dd></div>}{selected.triage_error_code && <div><dt>Safe triage status</dt><dd>{selected.triage_error_code}</dd></div>}</dl><div className="crm-detail-note"><strong>Tasks, notes, timeline, retry/dead-letter, and retention actions</strong><p>These private records are available only when the authorized owner schema and account session expose them. This screen never seeds or invents CRM activity.</p></div></> : <p>Select an inquiry to view its available details. Empty lists remain empty until a real authorized record exists.</p>}</aside></div>
         <button className="button" onClick={signOut}>Sign out</button>
       </>}
       {status && <p className="notice" role="status">{status}</p>}

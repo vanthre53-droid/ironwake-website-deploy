@@ -14,6 +14,11 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   assert.match(source, /status: 429/);
   assert.match(source, /triageStatus/);
   assert.match(source, /triage_needs_human/);
+  assert.match(source, /triage_provider/);
+  assert.match(source, /triage_error_code/);
+  assert.match(source, /triage_attempted_at/);
+  assert.match(source, /triageStorageError/);
+  assert.match(source, /triage persistence failed/);
   assert.match(source, /createSupabaseNotificationStore/);
   assert.match(source, /needsPriorityAlert\(triage\)/);
   assert.match(source, /queuePriority\(inquiryId\)/);

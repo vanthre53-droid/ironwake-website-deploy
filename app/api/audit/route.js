@@ -44,16 +44,23 @@ export async function POST(request) {
   const triageStatus = triage.status === 'complete'
     ? (triage.needs_human ? 'needs_human' : 'complete')
     : (triage.status === 'unconfigured' ? 'pending' : triage.status);
-  await supabase.from('inquiries').update({
+  const { error: triageStorageError } = await supabase.from('inquiries').update({
     triage_status: triageStatus,
     triage_needs_human: triage.needs_human,
     triage_priority: triage.priority,
     triage_category: triage.category,
     triage_summary: triage.summary,
     triage_suggested_reply: triage.suggested_reply,
-    triage_model: process.env.AI_MODEL || process.env.OPENAI_MODEL || null,
-    triaged_at: triage.status === 'unconfigured' ? null : new Date().toISOString()
+    triage_provider: triage.provider || null,
+    triage_model: triage.model || process.env.AI_MODEL || null,
+    triage_error_code: triage.safe_error_code || null,
+    triage_attempted_at: triage.status === 'unconfigured' ? null : new Date().toISOString(),
+    triaged_at: triage.status === 'complete' ? new Date().toISOString() : null
   }).eq('id', inquiryId);
+  if (triageStorageError) {
+    console.error('[audit] triage persistence failed', { safeCode: triageStorageError.code || 'triage_storage_failed' });
+    return NextResponse.json({ error: 'We received your request but could not complete its private review.' }, { status: 202 });
+  }
 
   // Notification work is best-effort after the inquiry transaction and triage.
   // Missing provider configuration claims nothing and consumes no attempt.

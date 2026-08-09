@@ -1,5 +1,13 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex MiniMax P0.4 checkpoint
+
+- Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
+- Local repair: MiniMax M3 OpenAI-compatible request with documented `reasoning_split`, a bounded response, strict JSON prompt, safe classifications for timeout/rejection/auth/rate-limit/5xx/network/invalid-output, observable triage-storage failure, durable safe provider/error/attempt fields, and private owner triage visibility.
+- Live database: reviewed forward migration `20260809124000_durable_ai_triage_attempts` is applied. The three new metadata columns are present. The one authorized synthetic production inquiry persisted with `triage_status = provider_error` and `triage_model = MiniMax-M3`; no model success can be claimed.
+- Verification: focused tests 7/7; full suite 135/135; production build; `npm audit --omit=dev` 0; diff and credential-pattern scans; official MiniMax API documentation readback; live schema readback. Browser interaction verification is `NOT_RUN` because the configured agent-browser CLI is unavailable.
+- Required role: M1. The current Netlify deployment remains commit `daafc01`, predating this repair. Require named G5 approval before deploying the exact next checkpoint and rerunning the authorized synthetic MiniMax inquiry. Do not use any exposed Netlify token.
+
 ## Current handoff — 2026-08-09 Codex owner notification-operations checkpoint
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
