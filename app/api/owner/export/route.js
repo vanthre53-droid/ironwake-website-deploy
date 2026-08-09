@@ -1,10 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server.js';
-import { parseBearerToken } from '../../../../../lib/owner-auth.mjs';
+import { parseBearerToken } from '../../../../lib/owner-auth.mjs';
 
 export const runtime = 'nodejs';
 const OWNER_EMAIL = 'ironwakee@gmail.com';
 const MAX_ROWS_PER_COLLECTION = 1_000;
+const PRIVATE_RESPONSE_HEADERS = { 'cache-control': 'private, no-store, max-age=0', vary: 'authorization' };
 
 const EXPORTS = [
   ['inquiries', 'id,contact_id,business_name,email,leak_description,source,consented_at,lead_stage,next_action,due_at,booking_status,retention_until,anonymized_at,created_at,updated_at,triage_status,triage_needs_human,triage_priority,triage_category,triage_summary,triage_suggested_reply,triage_provider,triage_model,triage_error_code,triage_attempted_at,triaged_at'],
@@ -19,7 +20,11 @@ const EXPORTS = [
 ];
 
 function unauthorized(reason, status) {
-  return NextResponse.json({ exported: false, reason }, { status });
+  return NextResponse.json({ exported: false, reason }, { status, headers: PRIVATE_RESPONSE_HEADERS });
+}
+
+function methodNotAllowed() {
+  return NextResponse.json({ exported: false, reason: 'Method not allowed.' }, { status: 405, headers: { ...PRIVATE_RESPONSE_HEADERS, allow: 'POST' } });
 }
 
 export async function POST(request) {
@@ -58,9 +63,16 @@ export async function POST(request) {
   return new NextResponse(payload, {
     status: 200,
     headers: {
+      ...PRIVATE_RESPONSE_HEADERS,
       'content-type': 'application/json; charset=utf-8',
       'content-disposition': 'attachment; filename="ironwake-owner-crm-export.json"',
-      'cache-control': 'no-store'
     }
   });
 }
+
+export const GET = methodNotAllowed;
+export const HEAD = methodNotAllowed;
+export const PUT = methodNotAllowed;
+export const PATCH = methodNotAllowed;
+export const DELETE = methodNotAllowed;
+export const OPTIONS = methodNotAllowed;

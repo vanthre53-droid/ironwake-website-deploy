@@ -41,6 +41,17 @@ test('whoami route returns 401 when no Bearer token is supplied', async () => {
   const req = new Request('http://localhost/api/owner/whoami', { method: 'POST', headers: {} });
   const res = await POST(req);
   assert.equal(res.status, 401);
+  assert.equal(res.headers.get('cache-control'), 'private, no-store, max-age=0');
+  assert.equal(res.headers.get('vary'), 'authorization');
   const body = await res.json();
   assert.equal(body.authorized, false);
+});
+
+test('whoami route rejects unsupported methods without exposing authorization data', async () => {
+  const { GET } = await import('../whoami/route.js');
+  const res = await GET(new Request('http://localhost/api/owner/whoami', { method: 'GET' }));
+  assert.equal(res.status, 405);
+  assert.equal(res.headers.get('allow'), 'POST');
+  assert.equal(res.headers.get('cache-control'), 'private, no-store, max-age=0');
+  assert.deepEqual(await res.json(), { authorized: false, reason: 'Method not allowed.' });
 });

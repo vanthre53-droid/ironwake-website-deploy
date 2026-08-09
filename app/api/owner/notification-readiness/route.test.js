@@ -13,3 +13,12 @@ test('notification readiness exposes only safe configuration state to the valida
   assert.match(source, /safeErrorCode/);
   assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY|RESEND_API_KEY/);
 });
+
+test('notification readiness rejects unsupported methods with a private response', async () => {
+  const { GET } = await import('./route.js');
+  const res = await GET(new Request('http://localhost/api/owner/notification-readiness', { method: 'GET' }));
+  assert.equal(res.status, 405);
+  assert.equal(res.headers.get('allow'), 'POST');
+  assert.equal(res.headers.get('cache-control'), 'private, no-store, max-age=0');
+  assert.deepEqual(await res.json(), { authorized: false, reason: 'Method not allowed.' });
+});
