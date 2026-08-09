@@ -26,3 +26,14 @@
 - Actions: used the pinned official Supabase CLI (`2.113.0`) only to scaffold the timestamped migration, reviewed and tested the SQL locally, applied it with the connected Supabase migration surface, then ran split read-only policy/ACL/count/advisor checks.
 - Result: live migration `20260809101715` verified; all six policies use the canonical role-plus-email predicate; browser-role execution is removed from privileged functions; targeted security-advisor findings cleared; customer-table counts unchanged.
 - Side effects: one approved forward authorization migration. No credential readout, customer-row mutation, send, provider connection, publication, payment, or deployment.
+
+## 2026-08-09 — P1 transactional-email architecture
+
+- Phase: C1 provider research and sealed queue
+- Harness/model: Codex / `gpt-5.6-sol` (explicitly reported by the active IronWake trace)
+- Skill invoked: Vercel email integration skill
+- Why: the programme requires a current zero-cost transactional-email choice, idempotent delivery, templates, domain constraints, and provider webhook evidence.
+- Actions: read the skill fully; checked current official Resend pricing, idempotency, testing-domain, webhook, and Next.js guidance; checked Netlify scheduled-function/free-plan controls; compared Brevo; read current npm registry metadata.
+- Adaptation: selected provider-neutral Resend code for the existing Netlify runtime, omitted React Email to avoid an unnecessary dependency, and selected current stable `resend@6.18.1` because the skill's `6.9.x` note is stale.
+- Result: Resend Free is selected for code only; five atomic tasks cover schema, worker/adapter, signed webhook, owner operations, and gated live proof. Account/terms/domain/secret/send/deploy remain blocked behind G4/G5.
+- Side effects: documentation/queue edits only. No account, secret, DNS, provider call, email, webhook registration, deployment, or spend.

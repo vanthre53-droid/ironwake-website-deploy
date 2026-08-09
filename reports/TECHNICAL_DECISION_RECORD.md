@@ -1,7 +1,7 @@
 # P1 Technical Decision Record
 
-- Retrieval date: 2026-07-28
-- Decision status: **recommendations pending G1 approval; no dependency, schema, provider, account, or deployment has changed.**
+- Retrieval date: 2026-07-28; notification architecture refreshed 2026-08-09
+- Decision status: **G1 architecture is approved; Resend Free is selected for code implementation only. Provider account/terms/domain/secret/webhook/send and deployment remain gated.**
 - Current-source status: official documentation readback completed through Composio Search session `word` on 2026-07-28.
 
 ## Recommended baseline
@@ -10,8 +10,8 @@
 |---|---|---|---|
 | Web framework | Next.js App Router + TypeScript strict | Current Next.js production guidance covers performance, security, and release checks; the fetched page reported documentation version 16.2.12, but the implementation must use the supported version approved at build time ([production checklist](https://nextjs.org/docs/app/guides/production-checklist)). | G1: approve major dependency/architecture |
 | Data/auth | Supabase Postgres/Auth with RLS, plus server-side authorization | Official production guidance says to enable RLS on all exposed tables; the RLS guide warns that browser access is only safe when policies and grants are deliberate ([production checklist](https://supabase.com/docs/guides/deployment/going-into-prod), [RLS guidance](https://supabase.com/docs/guides/database/postgres/row-level-security)). | G1 architecture; G2 migration/auth/retention |
-| Hosting | Vercel preview/production workflow, contingent on owner account/budget | Vercel documents separate Local, Preview, and Production environments with environment-specific variables; selection and owner/billing are material external decisions ([Vercel environments](https://vercel.com/docs/deployments/preview-deployments)). | G1 recommendation; G5 deployment |
-| Notifications | Provider-neutral outbox adapters and test doubles; email first only after G4 | No provider success is represented before durable event commit and signed callback. WhatsApp/voice/calendar/payment remain deferred. | G4 per provider |
+| Hosting | Preserve the current Netlify runtime and add a scheduled-function retry entrypoint behind the same provider-neutral worker | Netlify supports scheduled functions on all plans; Free is hard-capped, but the live account plan/usage and Git linkage need readback before enablement ([scheduled functions](https://docs.netlify.com/build/functions/scheduled-functions/), [credit plan](https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/credit-based-pricing-plans/)). | Local code under current programme; G5 enable/deploy |
+| Notifications | Resend Free adapter with database-first owner/customer outbox events, durable attempts, 3-attempt retry/dead letter, signed delivery webhook, and owner replay | Free provides 3,000/month, 100/day, one domain and one webhook. Provider idempotency lasts 24 hours, so database uniqueness remains authoritative ([pricing](https://resend.com/pricing), [idempotency](https://resend.com/docs/dashboard/emails/idempotency-keys)). | Code selection approved; G2 additive migration; G4 connection/send |
 | Analytics/monitoring | Privacy-minimised, consent-aware choice deferred | Domain/consent regions/data owner are unknown. | G1/G4 |
 | Payments | Excluded from first implementation queue unless explicitly approved | Legal owner, KYC, tax, refund and price information are missing. | G1/G4/A4 |
 
@@ -29,6 +29,7 @@
 - Do not migrate from the unverified Firebase snapshot sources or combine Firebase and Supabase. They are portfolio demonstrations, not the IronWake baseline.
 - Do not use the Tailwind CDN/inline-script Stitch architecture.
 - Do not add voice, WhatsApp, calendar, payment, AI knowledge retrieval, or WebGL until the respective scope/provider/consent/operational evidence is approved.
+- Do not use the Resend test domain for customer acknowledgements. It can send only to the account email; an owned verified domain is a hard production prerequisite.
 
 ## Security source baseline
 
@@ -43,3 +44,5 @@ Use OWASP ASVS Level 2-aligned controls and the OWASP API Security Top 10 as ver
 - [Google Search Central](https://developers.google.com/search/docs/fundamentals/get-on-google) and [Core Web Vitals](https://developers.google.com/search/docs/appearance/core-web-vitals) — fetched 2026-07-28; crawlability is not indexing or ranking proof, and the release budgets remain LCP 2.5 seconds, INP 200 milliseconds, and CLS 0.1.
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/) — fetched 2026-07-28; W3C Recommendation dated 2024-12-12.
 - [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) — fetched 2026-07-28; the project provides a basis for testing application security controls, not a certification for IronWake.
+- [Resend pricing](https://resend.com/pricing), [idempotency](https://resend.com/docs/dashboard/emails/idempotency-keys), [webhook events](https://resend.com/docs/webhooks/event-types), [signature verification](https://resend.com/docs/webhooks/verify-webhooks-requests), and [testing-domain restriction](https://resend.com/docs/knowledge-base/403-error-resend-dev-domain) — fetched 2026-08-09.
+- [Netlify Scheduled Functions](https://docs.netlify.com/build/functions/scheduled-functions/) and [Free-plan hard-cap controls](https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/credit-based-pricing-plans/) — fetched 2026-08-09.

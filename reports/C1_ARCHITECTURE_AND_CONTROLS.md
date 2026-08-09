@@ -20,6 +20,10 @@ Store only the minimum first-response data: normalized contact, business context
 
 Commit the inquiry before notifications. Use a transactional outbox, unique idempotency keys, append-only audit events, signed webhook verification, bounded retries, dead letters, redacted structured logs, and tested export/deletion/restore. Notification payloads contain a reference and minimal masked context, never full answers or private notes.
 
+The 2026-08-09 implementation refinement selects Resend Free behind the provider-neutral boundary and the existing Netlify runtime as the scheduled retry executor. Persist separate `owner_new_audit`, `owner_new_booking_request`, `customer_audit_received`, `customer_booking_request_received`, and conditional `owner_priority_alert` events. Each event has one durable identity (`<event_type>:<inquiry_id>`), up to three append-only attempt records, safe error codes, provider message ID, and accepted/delivered/dead-letter timestamps. Existing undifferentiated queued events must be marked `cancelled` as legacy—not sent retroactively—because they do not encode recipient or message semantics.
+
+The audit route may make one best-effort inline worker call only after the database and triage writes; failure never changes the truthful HTTP 201 intake result. A Netlify scheduled function retries due work. Configuration is fail-closed: absent provider/domain/from/recipient settings leave events queued without consuming attempts. Provider acceptance is stored separately from delivery, and only a signature-verified, deduplicated webhook may mark delivery. Owner replay is restricted by the same server authorization and role-plus-email RLS boundary verified in P0.9.
+
 ## State machines
 
 - Inquiry: `received → qualified | needs_information | unsuitable`; qualified can proceed to `consultation_requested | proposal_pending | closed`; active states can become `spam | withdrawn | archived`.

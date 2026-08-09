@@ -60,7 +60,7 @@ Record each separately. `TEST ONLY` is not production approval.
 
 | Provider/capability | Status | Account owner | Test recipient/number | Spend cap | Production allowed? | Approval/date |
 |---|---|---|---|---:|---|---|
-| Transactional email | PENDING | | | | no | |
+| Transactional email | SELECTED_CODE_ONLY_RESEND_FREE; CONNECTION_PENDING | adult/legal account owner pending | `ironwakee@gmail.com` owner proof; approved synthetic customer address only after domain verification | ₹0; Free tier only; no auto-upgrade/overage | no | Current programme + prior Resend test-only direction, 2026-08-09; G4 connection/send still pending |
 | WhatsApp | PENDING | | | | no | |
 | Voice | PENDING | | | | no | |
 | Calendar | PENDING | | | | no | |
@@ -76,6 +76,13 @@ Record each separately. `TEST ONLY` is not production approval.
 - Email pace: one notification per durable inquiry; no bulk outreach, unsolicited messaging, or campaigns.
 - Customer behavior: generic received acknowledgement only until notification/provider readback and the approved workflow prove more.
 - Exclusions: this direction does not by itself mark G4 transactional email approved for production, authorize deployment, or replace the required server-only adapter, idempotency, retry, dead-letter, and delivery evidence.
+
+### Transactional-email architecture direction — 2026-08-09
+
+- Source: current `IRONWAKE_REAL_PRODUCT_COMPLETION` instruction requires current official provider research, selection when none is configured, additive backend implementation, and real evidence without exposing secrets.
+- Selected code provider: Resend Free, limited to provider-adapter implementation and local/test-double verification. Current official limits are 3,000 emails/month, 100/day, one custom domain, and one webhook endpoint.
+- Approved local/live database scope: additive notification-event/attempt/provider-event schema, deterministic idempotency, bounded retry/dead letter, server-only worker, signed-webhook route, and owner failure/retry visibility. The 36 legacy undifferentiated queued events may be marked `cancelled` with a safe legacy reason so they are never sent retroactively.
+- External boundary: an adult/legal owner must accept provider terms and control the account/domain. API key creation, DNS verification, environment changes, webhook registration, deployment, customer email, and production enablement remain G4/G5 controlled actions. The previously authorized one synthetic delivery proof may run only after those gates are recorded.
 
 ## Gate GS1 — Social profiles, content, and acquisition
 

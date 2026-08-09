@@ -28,3 +28,18 @@ The credential owner must revoke or rotate the exposed provider credential in it
 - Supabase anon/service credentials and a Vercel token were pasted again in chat.
 - No secret value was copied into the repository; `.env.local` contains only the public Supabase URL and blank secret fields.
 - Required human action: revoke/rotate the Supabase service-role credential and Vercel token before any provider use. The anon key is public by design but remains blank locally until entered through the approved local mechanism.
+
+## 2026-08-09 — Netlify token exposure and tracked-history remediation
+
+- Classification: `credential-exposure-recovery-required`
+- A Netlify personal access token was pasted into chat. It was not used, tested,
+  copied into environment configuration, or repeated in repository evidence.
+- A separate pre-existing tracked recovery report was found to contain another
+  raw Netlify token. The value was removed and the stale report was replaced by
+  a value-free recovery notice.
+- Required human action: revoke all Netlify tokens previously shared in chat or
+  source. If a future gated deployment needs a replacement, enter it directly
+  through Netlify's encrypted environment/CLI credential flow.
+- Prevention rule: any chat-pasted provider credential is treated as compromised
+  regardless of requested use; run a value-free token-pattern scan before every
+  checkpoint and never record token fragments.

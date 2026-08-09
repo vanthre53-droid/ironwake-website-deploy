@@ -1,7 +1,7 @@
 schema_version: 1
 spec_version: c1-real-product-remediation-v1
 sealed_by: Codex C1; current IRONWAKE_REAL_PRODUCT_COMPLETION programme directed by the owner
-sealed_commit: 109c711
+sealed_commit: pending_current_c1_checkpoint
 gate: GC1_ARCHITECTURE_APPROVED
 immutable_during_m1: true
 activation: "Active for M1 after G1 approval; execute dependency order and stop at remaining gates."
@@ -21,6 +21,86 @@ tasks:
     rollback_note: "Use a forward-only grant/policy repair. If service-role intake fails, restore only service_role execute and retain the stricter owner predicate; never restore anon/authenticated privileged execution."
     blockers: []
     implementation_notes: "VERIFIED 2026-08-09 at commit 6677623. Live migration 20260809101715 applies the role-plus-email predicate to all six private tables; anon/authenticated privileged-function execution is denied; row counts are unchanged; focused tests 5/5, full suite 102/102, production build, policies, ACLs, migrations, and advisors passed. Provider sends and deployment remain separate gates."
+
+  - id: IW-P0-NOTIFY-01
+    workstream: W15
+    title: "Create the durable provider-neutral notification state machine"
+    status: queued
+    depends_on: [IW-P0-SEC-01]
+    authority_class: A2
+    allowed_paths: ["supabase/migrations/**", "package.json", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P2_SCHEMA_AND_RLS.md", "state/**"]
+    source_refs: ["reports/PROVIDER_MATRIX.md", "reports/C1_ARCHITECTURE_AND_CONTROLS.md", "supabase/migrations/003_owner_crm_core.sql", "supabase/migrations/20260809101143_secure_owner_and_privileged_rpcs.sql"]
+    requirements: ["Scaffold one forward migration with the current official Supabase CLI", "Keep legacy inquiry_received as a recognized event type but mark the 36 current queued legacy rows cancelled with safe_error_code=legacy_event_not_addressable so they cannot send retroactively", "Add distinct owner_new_audit, owner_new_booking_request, customer_audit_received, customer_booking_request_received, and owner_priority_alert event types with deterministic event_type:inquiry_id uniqueness", "Add target/provider/message/claim/accepted/delivered/dead-letter timestamps to outbox_events and private notification_attempts plus provider_events tables", "Create canonical owner RLS policies and minimum table/function privileges", "Replace submit_audit_inquiry so every new inquiry atomically queues one owner and one customer event", "Add service-role-only queue_priority_lead_notification, claim_notification_events, finish_notification_attempt, and record_notification_provider_event functions plus an authenticated owner_retry_notification function that internally enforces public.is_owner", "Use FOR UPDATE SKIP LOCKED, a maximum of three attempts, 5-minute then 30-minute retry, provider acceptance distinct from delivery, and deduplicated provider events", "Add migration-content tests to the normal suite", "Apply only after focused/full tests and read back live migration, constraints, functions, policies, privileges, legacy-status counts, new table counts, and advisors"]
+    forbidden: ["Do not send email", "Do not store message bodies or secrets in the database", "Do not delete or anonymize inquiry/customer rows", "Do not broaden browser grants", "Do not process a legacy undifferentiated event", "Do not start UI/provider/webhook code in this task"]
+    acceptance_commands: ["node --test supabase/migrations/*notification*.test.mjs", "npm run test", "scripts/validate-state.sh", "git diff --check"]
+    evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P2_SCHEMA_AND_RLS.md"
+    rollback_note: "Use a forward repair only. If queue functions fail, leave new events queued and revoke their execution; never delete inquiries or re-enable legacy sends."
+    blockers: []
+    implementation_notes: "Current programme explicitly authorizes the additive mandatory-email backend. D-007 approves schema/local code only; all provider account, secret, send, and deploy actions remain gated."
+
+  - id: IW-P0-NOTIFY-02
+    workstream: W15
+    title: "Implement the fail-closed email adapter and notification worker"
+    status: sealed_pending_dependency
+    depends_on: [IW-P0-NOTIFY-01]
+    authority_class: A2
+    allowed_paths: ["lib/notifications/**", "netlify/functions/**", "app/api/audit/route.js", "app/api/audit/route.test.js", ".env.example", "netlify.toml", "package.json", "package-lock.json", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P4_PROVIDER_PROOF.md", "state/**"]
+    source_refs: ["reports/PROVIDER_MATRIX.md", "reports/TECHNICAL_DECISION_RECORD.md", "app/api/audit/route.js"]
+    requirements: ["Install current stable resend@6.18.1 only; do not add React Email", "Expose a provider-neutral adapter result and a Resend implementation with an 8-second timeout and durable idempotency key", "Render escaped plain-text and HTML owner/customer templates with the required fields and exact BOOKING REQUEST RECEIVED wording", "Validate all server-only configuration before claiming events; unconfigured state leaves work queued and consumes no attempt", "Process at most ten events per batch through claim/send/finish RPCs and redact logs", "Call the worker best-effort only after successful persistence and triage; notification failure must never change the truthful 201 intake result", "Queue owner_priority_alert only for high/urgent or needs_human triage", "Add a Netlify scheduled-function entrypoint every two minutes with the same worker; deployment/enablement remains gated", "Test accepted, unconfigured, timeout, retryable, permanent, duplicate, attempt-three/dead-letter, template escaping, and booking wording with injected fakes and no network"]
+    forbidden: ["Do not configure a key", "Do not call Resend in tests", "Do not send email", "Do not claim delivery from API acceptance", "Do not expose recipient or request text in logs", "Do not deploy"]
+    acceptance_commands: ["node --test lib/notifications/*.test.mjs app/api/audit/route.test.js", "npm run test", "npm run build", "npm audit --omit=dev", "git diff --check"]
+    evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P4_PROVIDER_PROOF.md"
+    rollback_note: "Disable EMAIL_PROVIDER and the schedule; persisted work must remain queued and inquiry intake must continue."
+    blockers: []
+    implementation_notes: "The email skill influenced the Resend/idempotency/webhook shape, but its SDK version note was stale; registry readback selected 6.18.1."
+
+  - id: IW-P0-NOTIFY-03
+    workstream: W15
+    title: "Implement the signature-verified Resend delivery webhook"
+    status: sealed_pending_dependency
+    depends_on: [IW-P0-NOTIFY-02]
+    authority_class: A1
+    allowed_paths: ["app/api/webhooks/resend/**", "lib/notifications/**", ".env.example", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P4_PROVIDER_PROOF.md", "state/**"]
+    source_refs: ["reports/PROVIDER_MATRIX.md", "reports/TECHNICAL_DECISION_RECORD.md"]
+    requirements: ["Read and verify the raw request body with RESEND_WEBHOOK_SECRET before parsing", "Normalize only supported sent/delivered/delayed/failed/bounced/complained/suppressed events", "Deduplicate provider event IDs and update delivery state through the service-role RPC", "Return safe 400/401/200 responses without provider payload or secret leakage", "Test valid, forged, replayed, unknown-message, out-of-order, duplicate, delivered, and terminal-failure fixtures locally"]
+    forbidden: ["Do not register a webhook", "Do not accept unsigned JSON", "Do not store raw provider payloads", "Do not deploy"]
+    acceptance_commands: ["node --test app/api/webhooks/resend/*.test.js lib/notifications/*.test.mjs", "npm run test", "npm run build", "git diff --check"]
+    evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P4_PROVIDER_PROOF.md"
+    rollback_note: "Remove/disable the route; accepted events remain distinct from delivered until a verified callback path exists."
+    blockers: []
+    implementation_notes: "One Resend webhook endpoint is available on Free; registration and signing-secret handling remain G4/G5 actions."
+
+  - id: IW-P0-NOTIFY-04
+    workstream: W14
+    title: "Expose notification failures, attempts, and authorized replay to the owner"
+    status: sealed_pending_dependency
+    depends_on: [IW-P0-NOTIFY-03]
+    authority_class: A1
+    allowed_paths: ["app/admin/**", "app/api/owner/whoami/**", "app/globals.css", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P4_CRM_AUTHORIZATION.md", "state/**"]
+    source_refs: ["reports/C1_ARCHITECTURE_AND_CONTROLS.md", "app/admin/AdminDashboard.js", "reports/evidence/P2_AUTH_TESTS.md"]
+    requirements: ["Require the same server whoami authorization check used by the owner CRM before showing operations", "Join outbox events to inquiry source/business/timestamp and attempts without exposing service credentials", "Show saved-lead state, target/event, queued/processing/accepted/delivered/retry/dead-letter state, attempt count/time, provider message ID, safe error, and next availability", "Allow the verified owner to replay only dead-letter/cancelled non-legacy events through owner_retry_notification", "Refresh after replay and keep a safe accessible status message", "Test anonymous/non-owner UI denial contract, render states, and retry restrictions"]
+    forbidden: ["Do not permit retry of legacy events", "Do not permit browser updates outside the owner RPC", "Do not display raw provider payloads or secrets", "Do not claim delivery without callback"]
+    acceptance_commands: ["node --test app/admin/*.test.js app/api/owner/whoami/route.test.js", "npm run test", "npm run build", "git diff --check"]
+    evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P4_CRM_AUTHORIZATION.md"
+    rollback_note: "Return to read-only status view while preserving all database attempt evidence."
+    blockers: []
+    implementation_notes: "This closes the minimum owner failure/retry visibility for email only; broader CRM notes/tasks/follow-up remain separate tasks."
+
+  - id: IW-P0-NOTIFY-05
+    workstream: W15
+    title: "Connect Resend and prove owner/customer delivery plus failure recovery"
+    status: blocked_g4_g5
+    depends_on: [IW-P0-NOTIFY-04]
+    authority_class: A3
+    allowed_paths: ["inputs/APPROVALS.md", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P4_PROVIDER_PROOF.md", "state/**"]
+    source_refs: ["reports/PROVIDER_MATRIX.md", "inputs/APPROVALS.md"]
+    requirements: ["Adult/legal owner accepts Resend terms and owns the account", "Verify an owned sending domain and DNS", "Store RESEND_API_KEY and RESEND_WEBHOOK_SECRET server-side only", "Register the exact signed webhook endpoint", "Verify actual Netlify plan hard cap and environment-name readback", "Obtain G5 deployment approval", "Run only the pre-authorized synthetic audit/booking tests", "Prove owner arrival, customer request-received wording, provider IDs, signed delivered callbacks, one forced failure, retry, no duplicate send, and owner visibility", "Record provider-side and durable database evidence without message-body or secret leakage"]
+    forbidden: ["Do not ask for secrets in chat", "Do not accept terms for the owner", "Do not send to a real customer", "Do not use the testing domain for customer delivery", "Do not enable paid overages or auto-upgrade", "Do not claim delivery from provider acceptance"]
+    acceptance_commands: ["G4/G5 approval readback", "controlled production browser/network/database/provider/mailbox evidence", "npm run test", "npm run build", "scripts/validate-state.sh", "git diff --check"]
+    evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P4_PROVIDER_PROOF.md"
+    rollback_note: "Disable EMAIL_PROVIDER and schedule, revoke API/webhook secrets, remove webhook registration, retain durable evidence, and keep intake operational."
+    blockers: ["Adult/legal provider account and terms", "Owned domain/DNS", "G4 provider connection/send approval", "G5 deployment approval"]
+    implementation_notes: "Missing external prerequisites do not block IW-P0-NOTIFY-01 through 04."
 
   - id: W00-T01
     workstream: W00
