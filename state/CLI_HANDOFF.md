@@ -1,5 +1,12 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex owner lead-stage update
+
+- Live `owner_update_inquiry_stage(uuid,text)` is security-definer, rechecks `is_owner()`, validates allowed stages, writes audit metadata, denies `anon`, and grants only `authenticated` execution.
+- Local `/owner` invokes only that RPC; there is no direct browser inquiry update.
+- Verification: focused 3/3; full suite 139/139; build; audit 0; ACL readback. Implementation `a7d897a`.
+- Next: bounded owner visibility for open/overdue tasks and notification state. Deployment remains G5-gated.
+
 ## Current handoff — 2026-08-09 Codex owner notes and activity timeline
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.

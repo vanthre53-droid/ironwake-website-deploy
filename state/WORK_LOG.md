@@ -686,3 +686,10 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: PARTIAL. Owner notes are private RLS data; their creation crosses only `owner_add_inquiry_note`, which checks the canonical owner predicate and records an audit event containing a note ID but not note content. The local owner UI reads owner-RLS notes/activity and has no direct note-table write.
 - Verification: focused tests 3/3; full suite 138/138; production build; `npm audit --omit=dev` 0; diff check; live table/policy/function-security/role-privilege readback.
 - Next exact action: implement canonical-owner-authorized lead-stage updates with an audit event, without direct browser table writes; retain G5 deployment proof separately waiting.
+
+### 2026-08-09T13:40:00Z — M1/P0.11_owner_lead_stage_updates
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Starting safe boundary: `e1b13dc`; implementation commit: `a7d897a`.
+- Result: PARTIAL. The live canonical-owner checked RPC validates an allowed lead-stage transition, updates one inquiry, and writes only prior/new stage audit metadata. The local UI has no direct inquiry-table update.
+- Verification: focused tests 3/3; full suite 139/139; production build; audit 0; diff check; live function security and role-privilege readback.
+- Next exact action: add bounded owner visibility for overdue/open tasks and notification state without sending messages; retain G5 deployment proof separately waiting.
