@@ -18,6 +18,8 @@ D-007 architecture result: `VERIFIED C1 SEAL` at commit `27db52d`. Resend is sel
 
 D-007 state implementation result: `VERIFIED_LIVE` on 2026-08-09 at commit `354c9cb`; Supabase migration `20260809104514` adds the provider-neutral notification state machine, safely cancels all 36 legacy events, preserves core counts, and leaves attempt/provider-event tables empty. This does not approve or prove a provider connection, email send, webhook, or deployment. `IW-P0-NOTIFY-02` is the next local-only task.
 
+D-007 worker implementation result: `VERIFIED_LOCAL` on 2026-08-09 at commit `42c5754`; the exact Resend SDK, fail-closed config, escaped templates, bounded shared worker, priority hook, and undeployed schedule entrypoint pass no-network tests and production build/audit. This does not approve or prove a provider key, call, email, webhook registration, schedule deployment, acceptance, or delivery. `IW-P0-NOTIFY-03` is next.
+
 ## Required decision format
 
 | ID | Priority | Missing fact/decision | Why it blocks | Recommended option | Alternatives/tradeoffs | Cost/risk | Required authority | Affected tasks | Status |

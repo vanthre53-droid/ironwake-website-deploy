@@ -1,5 +1,14 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex notification-worker checkpoint
+
+- Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
+- Local implementation commit: `42c5754`; live database state remains at migration `20260809104514` with zero attempts/provider events.
+- Implemented locally: exact `resend@6.18.1`, fail-closed server-only config, escaped owner/customer audit/booking/priority templates, eight-second provider-neutral adapter, max-ten claim/send/finish worker, high/urgent/needs-human priority hook, and an undeployed two-minute Netlify schedule entrypoint.
+- Verification: focused no-network tests 18/18; full suite 129/129; Next.js build 39 routes; production dependency audit 0; state/pack/diff checks; exposed-token scan; client-secret-name scan; React Email absent.
+- Required role: M1. Execute only `IW-P0-NOTIFY-03` next: local raw-body signed Resend webhook with safe fixture tests.
+- Boundary: no provider account/key/domain, API call, email, webhook registration, schedule, or deployment occurred. Every exposed Netlify token remains compromised and must be revoked; none will be used.
+
 ## Current handoff — 2026-08-09 Codex notification-state checkpoint
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.

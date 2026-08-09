@@ -6,7 +6,7 @@ gate: GC2_REMEDIATION_APPROVED
 immutable_during_m2: true
 current_programme_overlay:
   status: superseded_for_current_execution
-  reason: "The 2026-08-09 real capability audit found new live security/provider/backend failures after the historical C2 queue. IW-P0-SEC-01 is verified at 6677623 and IW-P0-NOTIFY-01 at 354c9cb. M1 now executes IW-P0-NOTIFY-02 only. A fresh independent C2 audit is still required before closure."
+  reason: "The 2026-08-09 real capability audit found new live security/provider/backend failures after the historical C2 queue. IW-P0-SEC-01 is verified at 6677623, IW-P0-NOTIFY-01 at 354c9cb, and IW-P0-NOTIFY-02 locally at 42c5754. M1 now executes IW-P0-NOTIFY-03 only. A fresh independent C2 audit is still required before closure."
 findings:
   - id: C2-F1
     severity: 2
