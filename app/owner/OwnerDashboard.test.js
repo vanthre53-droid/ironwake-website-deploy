@@ -40,6 +40,10 @@ test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter'
   assert.match(source, /Complete follow-up task/);
   assert.match(source, /Follow-up task completed and recorded/);
   assert.match(source, /from\('owner_notes'\)\.select/);
+  assert.match(source, /from\('consents'\)\.select/);
+  assert.match(source, /owner_withdraw_inquiry_consent/);
+  assert.match(source, /Withdraw contact consent/);
+  assert.match(source, /Contact consent withdrawn/);
   assert.match(source, /from\('audit_logs'\)\.select/);
   assert.match(source, /owner_add_inquiry_note/);
   assert.match(source, /Save owner note/);
