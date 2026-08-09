@@ -9,40 +9,49 @@ import { needsPriorityAlert, runNotificationWorkerBestEffort } from '../../../li
 
 export const runtime = 'nodejs';
 const MAX_AUDIT_BODY_BYTES = 16_384;
+const MUTATION_RESPONSE_HEADERS = { 'cache-control': 'no-store' };
+
+function response(body, status) {
+  return NextResponse.json(body, { status, headers: MUTATION_RESPONSE_HEADERS });
+}
+
+function methodNotAllowed() {
+  return NextResponse.json({ error: 'Method not allowed.' }, { status: 405, headers: { ...MUTATION_RESPONSE_HEADERS, allow: 'POST' } });
+}
 
 export async function POST(request) {
   const mediaType = request.headers.get('content-type')?.split(';', 1)[0]?.trim().toLowerCase();
   if (mediaType !== 'application/json') {
-    return NextResponse.json({ error: 'Send a JSON request.' }, { status: 415 });
+    return response({ error: 'Send a JSON request.' }, 415);
   }
   const contentLength = Number(request.headers.get('content-length') || 0);
   if (Number.isFinite(contentLength) && contentLength > MAX_AUDIT_BODY_BYTES) {
-    return NextResponse.json({ error: 'Request is too large.' }, { status: 413 });
+    return response({ error: 'Request is too large.' }, 413);
   }
   let body;
   try {
     const raw = await request.text();
     if (new TextEncoder().encode(raw).byteLength > MAX_AUDIT_BODY_BYTES) {
-      return NextResponse.json({ error: 'Request is too large.' }, { status: 413 });
+      return response({ error: 'Request is too large.' }, 413);
     }
     body = JSON.parse(raw);
-  } catch { return NextResponse.json({ error: 'Send a valid JSON request.' }, { status: 400 }); }
+  } catch { return response({ error: 'Send a valid JSON request.' }, 400); }
   const parsed = parseAuditPayload(body);
-  if (!parsed.success) return NextResponse.json({ error: 'Check the required fields and try again.' }, { status: 400 });
-  if (parsed.data.website) return NextResponse.json({ received: true }, { status: 202 });
+  if (!parsed.success) return response({ error: 'Check the required fields and try again.' }, 400);
+  if (parsed.data.website) return response({ received: true }, 202);
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   // ponytail: diagnostic in deployed logs — print URL host (no full URL/secret) when vars are missing.
   if (!url || !serviceKey) {
     console.error('[audit] missing env', { hasUrl: Boolean(url), hasServiceKey: Boolean(serviceKey) });
-    return NextResponse.json({ error: 'Intake is not connected yet.' }, { status: 503 });
+    return response({ error: 'Intake is not connected yet.' }, 503);
   }
 
   const supabase = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const keyHash = createHash('sha256').update(`audit:${requestIdentity(request)}`).digest('hex');
   const { data: allowed, error: rateLimitError } = await supabase.rpc('consume_request_rate_limit', { p_key_hash: keyHash, p_limit: 5, p_window_seconds: 900 });
-  if (rateLimitError) return NextResponse.json({ error: 'Request protection is temporarily unavailable. Please try again.' }, { status: 503 });
-  if (!allowed) return NextResponse.json({ error: 'You are sending requests too quickly. Please wait a moment and try again.' }, { status: 429 });
+  if (rateLimitError) return response({ error: 'Request protection is temporarily unavailable. Please try again.' }, 503);
+  if (!allowed) return response({ error: 'You are sending requests too quickly. Please wait a moment and try again.' }, 429);
   const { data: inquiryId, error } = await supabase.rpc('submit_audit_inquiry', {
     p_business_name: parsed.data.business,
     p_email: parsed.data.email,
@@ -54,7 +63,7 @@ export async function POST(request) {
     let urlHost = 'unknown';
     try { urlHost = new URL(url).host; } catch {}
     console.error('[audit] submit_audit_inquiry failed', { urlHost, code: error.code || 'unknown' });
-    return NextResponse.json({ error: 'We could not save this request. Please try again.' }, { status: 502 });
+    return response({ error: 'We could not save this request. Please try again.' }, 502);
   }
 
   const triage = await triageInquiry(parsed.data);
@@ -76,7 +85,7 @@ export async function POST(request) {
   }).eq('id', inquiryId);
   if (triageStorageError) {
     console.error('[audit] triage persistence failed', { safeCode: triageStorageError.code || 'triage_storage_failed' });
-    return NextResponse.json({ error: 'We received your request but could not complete its private review.' }, { status: 202 });
+    return response({ error: 'We received your request but could not complete its private review.' }, 202);
   }
 
   // Notification work is best-effort after the inquiry transaction and triage.
@@ -101,5 +110,12 @@ export async function POST(request) {
     console.error('[audit] notification worker failed', { safeCode: notificationResult.safeErrorCode });
   }
 
-  return NextResponse.json({ received: true, message: 'We received your request. We’ll review it and follow up if needed.' }, { status: 201 });
+  return response({ received: true, message: 'We received your request. We’ll review it and follow up if needed.' }, 201);
 }
+
+export const GET = methodNotAllowed;
+export const HEAD = methodNotAllowed;
+export const PUT = methodNotAllowed;
+export const PATCH = methodNotAllowed;
+export const DELETE = methodNotAllowed;
+export const OPTIONS = methodNotAllowed;

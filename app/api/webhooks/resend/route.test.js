@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { handleResendWebhook } from './route.js';
+import { GET, handleResendWebhook } from './route.js';
 
 const secretBytes = Buffer.from('ironwake-webhook-fixture-secret');
 const webhookSecret = `whsec_${secretBytes.toString('base64')}`;
@@ -153,4 +153,13 @@ test('route reads request text and never parses unsigned JSON or exposes secrets
   assert.doesNotMatch(source, /request\.json\(/);
   assert.match(source, /RESEND_WEBHOOK_SECRET/);
   assert.doesNotMatch(source, /console\./);
+});
+
+test('webhook replies are non-cacheable and unsupported methods are safe', async () => {
+  const disabled = await handleResendWebhook(new Request('https://example.test/api/webhooks/resend', { method: 'POST' }), { env: {} });
+  assert.equal(disabled.headers.get('cache-control'), 'no-store');
+  const response = await GET(new Request('https://example.test/api/webhooks/resend', { method: 'GET' }));
+  assert.equal(response.status, 405);
+  assert.equal(response.headers.get('allow'), 'POST');
+  assert.equal(response.headers.get('cache-control'), 'no-store');
 });

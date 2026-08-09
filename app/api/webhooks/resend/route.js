@@ -6,7 +6,11 @@ export const runtime = 'nodejs';
 const MAX_WEBHOOK_BYTES = 256 * 1024;
 
 function response(body, status) {
-  return Response.json(body, { status });
+  return Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
+}
+
+function methodNotAllowed() {
+  return Response.json({ received: false, error: 'Method not allowed.' }, { status: 405, headers: { 'cache-control': 'no-store', allow: 'POST' } });
 }
 
 export async function handleResendWebhook(request, {
@@ -65,3 +69,10 @@ export async function handleResendWebhook(request, {
 export async function POST(request) {
   return handleResendWebhook(request);
 }
+
+export const GET = methodNotAllowed;
+export const HEAD = methodNotAllowed;
+export const PUT = methodNotAllowed;
+export const PATCH = methodNotAllowed;
+export const DELETE = methodNotAllowed;
+export const OPTIONS = methodNotAllowed;
