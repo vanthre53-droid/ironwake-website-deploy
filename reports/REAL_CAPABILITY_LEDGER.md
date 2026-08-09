@@ -8,6 +8,7 @@
 - Deployed application commit: `daafc01a7bf23cf1168bdaac6c285f621f5f3449`
 - Production: `https://ironwake-site.netlify.app`
 - Rule: this ledger is reconstructed from current source, live provider/database readback, and deployed HTTP behavior. The prior `VERIFIED_COMPLETE` flag and matrix are historical evidence only.
+- Remediation checkpoint: live Supabase migration `20260809101715_secure_owner_and_privileged_rpcs` verified on 2026-08-09; this fixes the two authorization rows below without changing the overall `PARTIAL` verdict.
 
 ## Status vocabulary
 
@@ -46,15 +47,15 @@
 | Live voice / telephony / messaging | Disclosed as pending | No | Voice/telephony/messaging providers | No | No | No | No | No | No | No | No | `INTENTIONALLY_DEFERRED_NOT_PUBLICLY_CLAIMED` | The connected-live limitation is disclosed. Copy must stop short of saying the unimplemented local core is built. |
 | Owner authentication | UI/internal | Yes | Supabase Auth | Yes | Yes | Auth state | Auth session | Owner | Safe 401/403 | Provider-managed | Yes, owner-attested | `VERIFIED_LIVE` | One confirmed authorized-email user exists; deployed `whoami` returns 401 anonymously and validates bearer sessions server-side. |
 | Owner MFA | Internally required and previously claimed complete | No application enforcement | Supabase Auth | No verified factor | No | Auth state | Auth challenge | Owner | Partial | Provider-managed | No | `FAILED_LIVE` | Live `auth.mfa_factors` readback reports zero verified factors for the authorized user, contradicting the previous MFA-complete attestation. |
-| Single-owner RLS authorization | Yes | Partial | Supabase | Misconfigured live | Connected but unsafe | Controls private rows | No | Owner | Advisor warnings | N/A | No | `FAILED_LIVE` | Migration `006` is not applied. Live `is_owner()` checks role only; `inquiries` has its own role-only policy. Single-email authorization is therefore not enforced consistently. |
-| Restricted privileged RPC surface | Internally required | Intended in migration, wrong live ACL | Supabase | Misconfigured live | Exposed | Can create/anonymize records | Destructive DB effect possible | No | Supabase advisors | N/A | No | `FAILED_LIVE` | Live ACL grants `anon` and `authenticated` execute on SECURITY DEFINER `submit_audit_inquiry` and `anonymize_expired_inquiries`; advisors also flag `rls_auto_enable`. This bypasses the app validation/rate-limit boundary and exposes a retention mutation. |
+| Single-owner RLS authorization | Yes | Yes | Supabase | Yes | Yes | Controls private rows | No | Owner | Safe RLS denial | N/A | Yes, policy/ACL readback | `VERIFIED_LIVE` | Live migration `20260809101715` makes `is_owner()` require both `app_metadata.role=owner` and `email=ironwakee@gmail.com`. All six private tables now have one authenticated policy using the canonical predicate for `USING` and `WITH CHECK`. Live owner-session/MFA verification remains a separate failed capability. |
+| Restricted privileged RPC surface | Internally required | Yes | Supabase | Yes | Yes | Server intake/controlled retention | No browser-side effect | No | Live privilege/advisor readback | N/A | Yes | `VERIFIED_LIVE` | Live ACL readback denies `anon` and `authenticated` execution on `submit_audit_inquiry`, `anonymize_expired_inquiries`, and `rls_auto_enable`; service role retains only intake/retention execution and `postgres` retains event-trigger execution. The prior three advisor findings are gone. |
 | Owner CRM list/search/sort/export | Yes* | Yes | Supabase | Yes | Yes | Reads private rows | Browser CSV | Owner | Generic read error | Manual refresh/sign-in | Login/list only | `CONNECTED_NOT_VERIFIED` | Owner login/list was attested. Search/sort/export are client code over at most 25 inquiry rows; no current interaction evidence proves all three. |
 | Owner-visible source/triage/booking/notification detail | Yes | Partial UI fragments | Supabase | Yes | Partial | Reads some tables | No | Partial | Partial | No | No | `IMPLEMENTED_ONLY` | Owner query omits `source`, triage fields, leak/request text, notification state, tasks, notes, and timeline. The old claim that the owner saw `source=website_booking` in this UI is inconsistent with current source. |
 | Lead assignment | Yes | No | No | N/A | N/A | No assignee field | No | No | No | No | No | `MISSING` | No inquiry/task owner column or assignment action exists. “Named owner” is demonstration copy only. |
 | Next action and follow-up task creation | Yes | Partial | Supabase | Yes | Yes | Creates `review_inquiry` task | No | Not joined into owner UI | Overdue state queryable only | No | No | `IMPLEMENTED_ONLY` | 36 incomplete review tasks exist; one is overdue. `inquiries.next_action` and `due_at` are not populated, so the dashboard shows “Not set” / “No due date set.” |
 | Follow-up engine / escalation / completion | Yes | No | Notification provider for alerts | No | No | Schema can store task completion | No | No | No | No | No | `MISSING` | No due-task executor, owner alert, completion action, escalation, or follow-up communication exists. Public “follow-up automatic and visible” language is unsupported. |
 | Owner notes and activity timeline | Yes* | No | Supabase | No | No | Audit table has receive events only | No | No | No | No | No | `MISSING` | The dashboard mentions notes/timeline as unavailable but has no implementation or query. |
-| Retention anonymization | Internally required | Function only | Supabase scheduler/worker | Unsafe ACL; no schedule | No executor | Can anonymize | No | No | Advisor warning only | No | No | `FAILED_LIVE` | Function exists but no schedule/owner action is wired, while anonymous execution is currently granted. |
+| Retention anonymization | Internally required | Function only | Supabase scheduler/worker | Function secured; no schedule | No executor | Can anonymize | No | No | No execution telemetry | No | No | `IMPLEMENTED_ONLY` | The live function is now executable only by `service_role`; no schedule, bounded worker, owner action, or lifecycle evidence is wired. |
 | Data export | Internally required | Partial browser CSV | Supabase | Yes | Yes | Reads at most 25 inquiries | Local browser file | Owner | UI message | Manual | No completeness proof | `IMPLEMENTED_ONLY` | This is a visible-list export, not a complete owner-accessible data export across contacts, consents, tasks, notifications, and audit history. |
 | Deletion / consent withdrawal | Internally required | No owner flow | Supabase | No | No | No controlled side effect | No | No | No | No | No | `MISSING` | No deletion request, consent withdrawal, audit, recovery, or owner UI exists. |
 | Notification operations dashboard | Yes | Read-only list | Supabase | Yes | Yes | Reads outbox rows | No | Owner if RLS admits session | Queued/error code columns | No | No | `IMPLEMENTED_ONLY` | The page can list status/attempt fields but cannot explain or repair the permanently queued events, and it lacks the server `whoami` check used by `/owner`. |
@@ -64,20 +65,19 @@
 | Payments | Explicitly excluded | No | Payment provider | No | No | No | No | No | No | N/A | No | `INTENTIONALLY_DEFERRED_NOT_PUBLICLY_CLAIMED` | Pricing is informational; no checkout or payment-success state is exposed. |
 | Social profile connection | Structured-data/public-profile claim | No operational workflow | Instagram | Historical connection only | Not independently reverified here | No | Profile read/publish would be external | Owner | Partial | N/A | No | `CONNECTED_NOT_VERIFIED` | Production JSON-LD publishes the Instagram URL; this run did not re-authenticate or mutate the account. No social-to-CRM workflow exists. |
 
-## Live database/provider facts that invalidate the old green state
+## Live database/provider facts controlling the current partial state
 
-1. `006_restrict_owner_to_single_email.sql` exists locally but is absent from the live migration list.
-2. Live `public.is_owner()` still checks only `app_metadata.role`; the `inquiries` RLS policy separately checks only that role.
-3. Supabase security advisors report anonymous and authenticated execution of privileged SECURITY DEFINER functions. Live ACL readback confirms it.
-4. All 36 notification intents are `queued` with `attempts = 0`; no provider delivery has happened.
-5. AI triage has zero completed rows: 35 `provider_error`, three `pending`, and no recorded model.
-6. The authorized owner user is confirmed, but has zero verified MFA factors in live Supabase.
-7. The owner dashboard cannot display inquiry `source`, so prior dashboard attestation of `source = website_booking` is not supported by the deployed UI source.
-8. Netlify serves the deployed site, but the project exposes no Git-linked repository settings or configured environment-variable names through the current CLI readback; future reproducible deployment is unproved.
+1. The missing local `006` migration is superseded live by forward migration `20260809101715`; all six owner policies now use the canonical role-plus-email predicate.
+2. The unintended browser-role execution of the three privileged functions is remediated and the corresponding Supabase advisor findings are gone.
+3. All 36 notification intents are `queued` with `attempts = 0`; no provider delivery has happened.
+4. AI triage has zero completed rows: 35 `provider_error`, three `pending`, and no recorded model.
+5. The authorized owner user is confirmed, but has zero verified MFA factors in live Supabase.
+6. The owner dashboard cannot display inquiry `source`, so prior dashboard attestation of `source = website_booking` is not supported by the deployed UI source.
+7. Netlify serves the deployed site, but the project exposes no Git-linked repository settings or configured environment-variable names through the current CLI readback; future reproducible deployment is unproved.
 
 ## Immediate P0 remediation order
 
-1. Revoke unintended privileged RPC execution, apply the single-owner predicate consistently, and verify negative authorization paths.
+1. `COMPLETED 2026-08-09` — revoke unintended privileged RPC execution and apply the single-owner predicate consistently.
 2. Build the provider-neutral notification attempt/outbox worker contract with real owner/customer event types, observable attempts, idempotency, retry, dead-letter, and owner retry controls.
 3. Select/configure the approved zero-cost transactional-email provider only after current official pricing/limits and G4 approval are recorded; then run one controlled delivery proof.
 4. Repair AI provider configuration or remove runtime AI claims; record provider/model and attempt status durably.
@@ -88,4 +88,4 @@
 
 `IRONWAKE_REAL_PRODUCT_COMPLETION = PARTIAL`
 
-The public frontend and Supabase intake core are live. The operational business system is not complete: email, notification execution, retry, provider evidence, AI, booking lifecycle, follow-up, owner operations, MFA, and critical authorization boundaries are either missing, implemented-only, unverified, or failed live.
+The public frontend, Supabase intake core, single-owner RLS predicate, and privileged-function boundary are live. The operational business system is not complete: email, notification execution, retry, provider evidence, AI, booking lifecycle, follow-up, owner operations, and MFA are still missing, implemented-only, unverified, or failed live.

@@ -3,12 +3,12 @@
 // - Calls supabase.auth.getUser(token) to validate the JWT against Supabase Auth.
 // - Returns { authorized: true, email } ONLY if the validated email matches the
 //   designated owner email. Otherwise returns 401/403 with no private data.
-// - Never reads SUPABASE_SERVICE_ROLE_KEY. Never signs its own tokens. The
+// - Never reads privileged server credentials. Never signs its own tokens. The
 //   access token comes from the browser's existing @supabase/supabase-js
 //   session, so refresh is handled by the existing client.
 
 import { createClient } from '@supabase/supabase-js';
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server.js';
 
 export const runtime = 'nodejs';
 
