@@ -37,3 +37,13 @@
 - Adaptation: selected provider-neutral Resend code for the existing Netlify runtime, omitted React Email to avoid an unnecessary dependency, and selected current stable `resend@6.18.1` because the skill's `6.9.x` note is stale.
 - Result: Resend Free is selected for code only; five atomic tasks cover schema, worker/adapter, signed webhook, owner operations, and gated live proof. Account/terms/domain/secret/send/deploy remain blocked behind G4/G5.
 - Side effects: documentation/queue edits only. No account, secret, DNS, provider call, email, webhook registration, deployment, or spend.
+
+## 2026-08-09 — P0 notification state machine
+
+- Phase: M1 `IW-P0-NOTIFY-01`
+- Harness/model: Codex / `gpt-5.6-sol`
+- Skill invoked: official Supabase skill v0.1.2
+- Why: the sealed task required a forward migration, explicit Data API grants, RLS, privileged RPC boundaries, live catalog readback, and post-DDL advisors.
+- Actions: read the skill fully; checked the current Supabase changelog; scaffolded with the pinned official CLI; reviewed and tested the provider-neutral migration; applied it through the migration surface; verified live counts, constraints, policies, table/function privileges, migration history, and advisors.
+- Result: live migration `20260809104514` verified. The 36 legacy events are safely cancelled; new attempts/provider-event tables are empty; browser roles cannot execute worker/provider functions; owner reads are RLS-protected; core customer counts are unchanged.
+- Side effects: one approved forward schema/state migration and the status-only cancellation of 36 non-addressable legacy event intents. No customer row deletion, provider connection, secret, email, webhook registration, DNS, payment, publication, or deployment.

@@ -25,7 +25,7 @@ tasks:
   - id: IW-P0-NOTIFY-01
     workstream: W15
     title: "Create the durable provider-neutral notification state machine"
-    status: queued
+    status: verified_live
     depends_on: [IW-P0-SEC-01]
     authority_class: A2
     allowed_paths: ["supabase/migrations/**", "package.json", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P2_SCHEMA_AND_RLS.md", "state/**"]
@@ -36,12 +36,12 @@ tasks:
     evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P2_SCHEMA_AND_RLS.md"
     rollback_note: "Use a forward repair only. If queue functions fail, leave new events queued and revoke their execution; never delete inquiries or re-enable legacy sends."
     blockers: []
-    implementation_notes: "Current programme explicitly authorizes the additive mandatory-email backend. D-007 approves schema/local code only; all provider account, secret, send, and deploy actions remain gated."
+    implementation_notes: "VERIFIED 2026-08-09. Supabase migration 20260809104514 is live; 36 legacy events are cancelled/non-addressable; core counts are unchanged; new attempt/provider-event tables are empty; RLS, explicit table grants, function ACLs, constraints, migration history, and advisors passed; focused tests 10/10 and full suite 112/112. No email/provider/deploy action occurred."
 
   - id: IW-P0-NOTIFY-02
     workstream: W15
     title: "Implement the fail-closed email adapter and notification worker"
-    status: sealed_pending_dependency
+    status: queued
     depends_on: [IW-P0-NOTIFY-01]
     authority_class: A2
     allowed_paths: ["lib/notifications/**", "netlify/functions/**", "app/api/audit/route.js", "app/api/audit/route.test.js", ".env.example", "netlify.toml", "package.json", "package-lock.json", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/P4_PROVIDER_PROOF.md", "state/**"]
