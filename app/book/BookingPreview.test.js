@@ -12,4 +12,7 @@ test('booking preview persists its minimum booking request through the validated
   assert.match(source, /I agree to be contacted about this request/);
   assert.match(source, /Request this time/);
   assert.doesNotMatch(source, /<iframe/i);
+  // ponytail: booking must arrive at the CRM distinguishable from an audit
+  // so the owner dashboard can route review correctly.
+  assert.match(source, /source: 'website_booking'/);
 });

@@ -13,7 +13,7 @@ export function BookingPreview() {
     const form = new FormData(event.currentTarget);
     const payload = { business: form.get('business'), email: form.get('email'), leak: `Booking preference: ${form.get('date')} / ${form.get('window')}. First-call scope: ${form.get('scope')}`, consent: form.get('consent') === 'on', website: '' };
     try {
-      const response = await fetch('/api/audit', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+      const response = await fetch('/api/audit', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...payload, source: 'website_booking' }) });
       const result = await response.json();
       setStatus(response.ok ? 'success' : 'error');
       setMessage(result.message || result.error || 'Please try again.');

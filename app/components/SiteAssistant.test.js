@@ -9,5 +9,10 @@ test('site assistant is a truthful decision-tree guide', async () => {
   assert.match(source, /not pretending|pre-written|decision tree|guided/i);
   assert.match(source, /audit/i);
   assert.match(source, /\/audit/);
+  // ponytail: handoff must require explicit consent; the assistant must not
+  // POST anywhere (no record without visitor consent).
+  assert.match(source, /handoff_consent/);
+  assert.match(source, /consent checkbox/);
   assert.doesNotMatch(source, /password|payment details|identity documents/i);
+  assert.doesNotMatch(source, /fetch\(['"]\/api\//);
 });

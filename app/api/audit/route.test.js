@@ -14,4 +14,7 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   assert.match(source, /triageStatus/);
   assert.match(source, /triage_needs_human/);
   assert.match(source, /status: 201/);
+  // ponytail: source must be plumbed from payload to RPC so booking and chatbot
+  // handoff land as distinct sources in the owner CRM.
+  assert.match(source, /p_source: parsed\.data\.source/);
 });

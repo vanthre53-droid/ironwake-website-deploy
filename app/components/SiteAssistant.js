@@ -120,7 +120,20 @@ const FLOWS = {
       { label: 'See our systems', action: 'link', href: '/systems' },
       { label: 'See case studies', action: 'link', href: '/work' },
       { label: 'Book a diagnostic', action: 'link', href: '/audit' },
+      { label: 'Get an email follow-up', next: 'handoff_consent' },
       { label: 'See pricing', next: 'pricing_overview' }
+    ]
+  },
+  // ponytail: explicit handoff node so consent-to-record is visible. No lead
+  // is persisted unless the visitor submits the Audit form (which requires a
+  // consent checkbox). The chatbot itself does not POST anywhere.
+  handoff_consent: {
+    message:
+      "If you want IronWake to follow up by email, share your details on the Audit form — your information is only recorded after you tick the consent checkbox. Nothing is stored from this chat alone.",
+    options: [
+      { label: 'Open the Audit form', action: 'link', href: '/audit' },
+      { label: 'See pricing first', next: 'pricing_overview' },
+      { label: 'Start over', next: 'start' }
     ]
   }
 };

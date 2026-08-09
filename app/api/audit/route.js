@@ -28,7 +28,7 @@ export async function POST(request) {
     p_business_name: parsed.data.business,
     p_email: parsed.data.email,
     p_leak_description: parsed.data.leak,
-    p_source: 'website_audit'
+    p_source: parsed.data.source,
   });
   if (error) {
     // ponytail: log the Supabase error so the deploy logs reveal the real failure (RLS, missing function, bad params). URL host only, no secret.
