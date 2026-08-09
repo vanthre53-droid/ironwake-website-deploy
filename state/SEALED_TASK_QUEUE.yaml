@@ -10,7 +10,7 @@ tasks:
   - id: IW-P0-SEC-03
     workstream: W19
     title: "Make public mutation and signed-webhook response boundaries explicit"
-    status: ready_for_m1
+    status: verified_local
     depends_on: [IW-P0-SEC-02]
     authority_class: A1
     allowed_paths: ["app/api/audit/**", "app/api/webhooks/resend/**", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/**", "state/**"]
@@ -21,7 +21,7 @@ tasks:
     evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P5_SECURITY.md"
     rollback_note: "Revert only the route-response contract; no durable state or provider event is affected."
     blockers: []
-    implementation_notes: "Sealed 2026-08-09 after C1 inspected all five route handlers. Audit and webhook validation/storage order is sound, but their mutation/no-cache and unsupported-method behavior relied on framework defaults rather than explicit contracts."
+    implementation_notes: "VERIFIED LOCAL 2026-08-09 at commit 19e26c8. Audit and signed-webhook responses are explicit no-store and common unsupported methods return safe 405/Allow: POST contracts. Existing input validation, rate limiting, raw-body signature verification, and storage order remain unchanged. Focused tests 15/15, full suite 163/163, production build, and diff check passed. No provider, database, or deployment action occurred."
 
   - id: IW-P0-SEC-02
     workstream: W19

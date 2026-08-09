@@ -806,3 +806,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Approval/external action: local code/docs and read-only source inspection only. No provider, token, production database row, deletion/anonymization function, send, deployment, or owner session was used.
 - Known limitation: this is local source evidence. D-008 remains open, and the deployed artifact is still pre-repair `daafc01`; production owner-route and MiniMax proof still require named G5 deployment approval.
 - Next exact action: C1 seals a bounded deep API-security matrix across the current routes, then transfers only the resulting local M1 task.
+
+### 2026-08-09T16:20:00Z — M1/P0.25_public_mutation_response_boundary
+- Implementation commit: `19e26c8`.
+- Result: VERIFIED_LOCAL. Audit and signed-webhook responses now explicitly use `no-store`; common unsupported methods safely return `405 Allow: POST`. Existing validation, rate-limit, raw-body signature, and durable-store order is preserved.
+- Verification: focused route contracts 15/15; full suite 163/163; production build; `git diff --check`.
+- No provider call, production row, deployment, token, deletion/anonymization, or owner session was used. The deployed artifact remains `daafc01`.
