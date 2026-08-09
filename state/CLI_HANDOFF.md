@@ -1,5 +1,14 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex public capability-claim correction
+
+- Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
+- Local public copy no longer presents an AI Receptionist, provider delivery, named assignment, escalation, or end-to-end owner operations as live where those capabilities lack evidence.
+- The AI Receptionist page now describes future provider/handoff requirements; the corner helper is explicitly a deterministic guide. Missed Lead Recovery distinguishes live durable intake from unconfigured provider delivery and unfinished assignment/escalation.
+- Verification: targeted claim scan, full suite 137/137, production build, audit 0, and diff check pass.
+- Implementation commit: `acfd046` (`fix: qualify unsupported public workflow claims`).
+- Required role: M1. Implement owner notes and an auditable activity timeline next. G5 still gates deployment; do not use an exposed Netlify token.
+
 ## Current handoff — 2026-08-09 Codex booking and follow-up checkpoint
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.

@@ -671,3 +671,10 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Implementation commit: `0713b78` (`feat: add request-only booking and follow-up operations`).
 - Result: CHECKPOINTED. Request-only booking and owner-operated follow-up changes are committed; the only unrelated worktree change remains the owner `.gitignore` edit.
 - Next exact action: audit public AI Receptionist/systems copy against real provider state and remove/qualify unsupported operational claims; keep G5 deployment proof separately waiting.
+
+### 2026-08-09T13:05:00Z — M1/P0.8_public_capability_claim_correction
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Starting safe boundary: `fef7141`; implementation commit: `acfd046`.
+- Result: VERIFIED_LOCAL. AI Receptionist copy now describes only future requirements and no operating provider-backed assistant. Missed Lead Recovery copy no longer claims a named assignee, configured delivery, escalation, or an end-to-end private workflow. Site metadata and JSON-LD match those limits.
+- Verification: targeted claim scan; full suite 137/137; production build; `npm audit --omit=dev` 0; diff check.
+- Next exact action: implement canonical-owner-protected notes and an auditable activity timeline in the owner CRM; retain G5 deployment proof as separately waiting.
