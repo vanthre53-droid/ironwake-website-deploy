@@ -577,3 +577,13 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Known limitation: provider sends/deployment remain separately gated; fresh independent C2/C3 review has not occurred.
 - Ending commit: `109c711` report boundary; continuity handoff is the next commit.
 - Next exact action: M1 executes only sealed `IW-P0-SEC-01`.
+
+### 2026-08-09T10:18:22Z — M1/IW-P0-SEC-01_authorization_rpc_hardening
+- CLI: Codex; model not reported.
+- Starting safe boundary: `a6c1428`; implementation commit: `6677623`.
+- Files changed: one CLI-scaffolded forward migration and focused test, the normal test command, a bounded `whoami` ESM/test repair, the real capability ledger, and existing P2 auth evidence. Continuity files follow in a separate handoff checkpoint.
+- Approval/external action: current owner programme plus D-006/G2 authorized the reviewed forward RLS/RPC repair. Supabase migration `20260809101715_secure_owner_and_privileged_rpcs` was applied. No production customer row, credential, provider send/connection, publication, payment, or deployment was changed.
+- Result: VERIFIED_LIVE CONTROL. All six private-table policies use the canonical role-plus-designated-email predicate. `anon`/`authenticated` cannot execute privileged intake, retention, or event-trigger functions; minimum server/database execution remains. Row counts stayed 38 inquiries, 29 contacts, 36 consents, 36 tasks, 36 outbox events, and 44 audit logs. The prior SECURITY DEFINER advisor findings cleared.
+- Verification: migration tests 5/5; focused `whoami` tests 2/2 after bounded repair; expanded full suite 102/102; Next.js production build (39 routes); live migrations, policies, ACL/privilege matrix, row counts, and security/performance advisors; `git diff --check`.
+- Known limitation: owner MFA/recovery/live browser session and direct-object tests remain incomplete; leaked-password protection remains disabled; notification execution, AI, booking/follow-up operations, and reproducible deployment remain open.
+- Next exact action: C1 researches current official zero-cost transactional-email options and seals a provider-neutral local notification/outbox implementation task without connecting a provider or sending email.

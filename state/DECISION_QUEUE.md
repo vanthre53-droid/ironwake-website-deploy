@@ -11,6 +11,8 @@ Only material decisions belong here. Routine reversible engineering follows the 
 | D-005 | Control plane | Governed MCP operating model | Prior documents conflicted over whether Hermes could be used with OpenCode | OpenCode remains the universal execution harness; use Hermes Governed MCP for permitted governance records and Composio MCP for permitted external-app work | Disable either control plane only through a new recorded owner instruction | MCP tool availability does not authorize human-only actions, external mutations, or a model identity | User instruction dated 2026-07-26 | W00-W22 | approved |
 | D-006 | P0.9 | Forward-only live authorization/RPC hardening | Live migration 006 is absent; owner policies are inconsistent; anon/authenticated can execute privileged SECURITY DEFINER functions | Apply the sealed minimal forward migration after focused tests, preserving service-role intake and existing data | Leave live exposure in place or redesign auth/provider architecture first | Current state bypasses the validated API boundary and exposes destructive retention logic | Current owner programme plus existing Surekha Nunna G2 auth/RLS approval | W10/W19/W20 | approved |
 
+D-006 execution result: `VERIFIED_LIVE` on 2026-08-09 at commit `6677623`; Supabase migration `20260809101715` is applied, customer-table counts are unchanged, and the targeted advisor findings are cleared. This does not approve a provider, send, deployment, or MFA bypass.
+
 ## Required decision format
 
 | ID | Priority | Missing fact/decision | Why it blocks | Recommended option | Alternatives/tradeoffs | Cost/risk | Required authority | Affected tasks | Status |

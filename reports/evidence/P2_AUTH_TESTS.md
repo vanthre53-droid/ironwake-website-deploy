@@ -1,8 +1,8 @@
 # P2 Auth Tests
 
-Status: `PARTIAL — OWNER AUTH/MFA ATTESTED; RLS POLICY PATH VERIFIED; LIVE SESSION NOT_RUN`
+Status: `PARTIAL — LIVE RLS/RPC CONTROL VERIFIED; OWNER MFA/SESSION NOT_RUN`
 
-The schema has owner-only RLS policies based on `auth.jwt() -> 'app_metadata' ->> 'role'`. Revanth Nunna attested that the Supabase owner Auth/MFA setup is complete. `/owner` uses only the public Supabase URL/anon key to sign in/out and does not expose a service-role credential.
+The live schema now has owner-only RLS policies based on one canonical role-plus-designated-email predicate. A prior owner Auth/MFA completion attestation is contradicted by the current provider readback of zero verified factors. `/owner` uses only the public Supabase URL/anon key to sign in/out and does not expose a service-role credential.
 
 The wrong-role RLS test returned zero rows across all six private tables. The simulated owner claim could read aggregate records. Anonymous select privilege remains revoked. Migration `005_grant_owner_crm_access.sql` supplies required authenticated table grants while RLS remains the owner boundary.
 
@@ -27,7 +27,7 @@ Live readback verifies:
 - `public.is_owner()` is `SECURITY INVOKER` and requires both `app_metadata.role = owner` and the designated owner email.
 - Each of `inquiries`, `contacts`, `consents`, `tasks`, `outbox_events`, and `audit_logs` has one `authenticated` `ALL` policy whose `USING` and `WITH CHECK` clauses call `(select is_owner())`.
 - `anon` and `authenticated` cannot execute `submit_audit_inquiry`, `anonymize_expired_inquiries`, or `rls_auto_enable`.
-- `service_role` alone retains execution of intake and retention; `postgres` alone retains execution of the event-trigger function. Only `authenticated` can execute the safe RLS predicate.
+- Among application roles, only `service_role` retains execution of intake and retention; `postgres` retains function-owner/database-administration access and event-trigger execution. Only `authenticated` can execute the safe RLS predicate.
 - Supabase's prior anonymous/authenticated `SECURITY DEFINER` advisor findings are gone. The remaining security warning is the separately gated leaked-password-protection setting: [Supabase password protection guidance](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
 - Remaining performance notices are informational missing-FK-index and unused-index findings, outside this security-only task: [Supabase database linter guidance](https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys).
 

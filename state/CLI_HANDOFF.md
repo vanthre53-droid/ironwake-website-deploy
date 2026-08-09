@@ -1,14 +1,15 @@
 # CLI Handoff
 
-## Current handoff — 2026-08-09 Codex real-product reconstruction
+## Current handoff — 2026-08-09 Codex authorization/RPC checkpoint
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
-- Audit commit: `109c711`.
+- Audit commit: `109c711`; implementation commit: `6677623`.
 - Real source of truth: `reports/REAL_CAPABILITY_LEDGER.md`; the cycle-15 37/37 matrix is superseded.
-- Live critical evidence: migration 006 absent; `is_owner()` and the inquiry policy are role-only; privileged SECURITY DEFINER functions are executable by anon/authenticated; owner has zero verified MFA factors; all 36 outbox rows are queued at zero attempts; AI triage has zero completed rows.
-- Required role: M1.
-- Exact next action: execute only sealed `IW-P0-SEC-01`, verify the forward authorization/RPC repair locally and live, then checkpoint before email or AI work.
-- External boundaries: do not send email, deploy, publish, connect a provider, accept legal terms, spend, or expose credentials in this task.
+- Verified security repair: live migration `20260809101715` binds all six private policies to the role-plus-email predicate and denies browser-role execution of privileged intake, retention, and event-trigger functions. Counts remain 38/29/36/36/36/44; focused tests 5/5, full tests 102/102, and the production build pass.
+- Remaining critical evidence: owner has zero verified MFA factors; all 36 outbox rows are queued at zero attempts; AI triage has zero completed rows; booking/follow-up/owner operations and reproducible deployment remain incomplete.
+- Required role: C1.
+- Exact next action: research current official zero-cost transactional-email options and seal the smallest provider-neutral notification/outbox implementation task. No provider connection or send is authorized.
+- External boundaries: do not send email, deploy, publish, connect a provider, accept legal terms, spend, or expose credentials.
 
 ## Portable governance migration — 2026-07-30T16:47:23Z
 

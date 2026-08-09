@@ -3,10 +3,12 @@
 ## 2026-08-09 real-product overlay
 
 The historical rows below are resume material, not current completion. Current
-authority is `reports/REAL_CAPABILITY_LEDGER.md`. W10/W19/W20 have a live
-authorization/RPC failure queued as `IW-P0-SEC-01`; W15 email/notifications,
-W16 follow-up, W14 owner MFA/complete operations, and W22 reproducible deployment
-remain missing, failed live, or implemented-only. No row is release-green.
+authority is `reports/REAL_CAPABILITY_LEDGER.md`. W10/W19's live
+authorization/RPC failure is repaired and verified at `6677623`; W15
+email/notifications, W16 follow-up, W14 owner MFA/complete operations, and W22
+reproducible deployment remain missing, failed live, or implemented-only. No row
+is release-green. C1 now owns current provider research and the next sealed local
+notification task.
 
 Current owner: OpenCode M1. G1 architecture is approved; C2 and C3 must independently audit every row. No row is a production completion claim.
 

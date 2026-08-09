@@ -4,17 +4,17 @@ schema_version: 6.0.0
 
 programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
-active_stage: M1
-required_role: M1
-current_phase: P0_9_AUTHORIZATION_AND_RPC_REMEDIATION
-current_gate: REAL_CAPABILITY_LEDGER_VERIFIED
-next_exact_action: "Execute only sealed task IW-P0-SEC-01: create and locally test one forward Supabase migration that applies the single-owner predicate to every private table and revokes unintended anon/authenticated execution of privileged SECURITY DEFINER functions; then verify the live migration and advisors before any email or AI work."
+active_stage: C1
+required_role: C1
+current_phase: P1_NOTIFICATION_AND_EMAIL_ARCHITECTURE
+current_gate: P0_AUTHORIZATION_RPC_REMEDIATION_VERIFIED
+next_exact_action: "Research current official zero-cost transactional-email options and seal one provider-neutral notification/outbox implementation task covering event types, durable attempts, idempotency, bounded retry, dead-letter, owner observability, and safe local tests; do not connect a provider or send email."
 
 harness: codex
 model: not_reported
-last_safe_boundary: 109c711
-last_verified_task: p0_1_real_capability_audit_109c711
-blocked_on: "No blocker for the sealed local/live security-hardening task. Transactional-email delivery, live AI repair, customer sends, deployment, and later full E2E remain separately approval/provider gated."
+last_safe_boundary: 6677623
+last_verified_task: iw_p0_sec_01_authorization_rpc_hardening_6677623
+blocked_on: "No blocker for current official-provider research and provider-neutral local notification design. Provider selection/connection, live delivery, AI repair, customer sends, deployment, and later full E2E remain separately approval/provider gated."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -42,7 +42,7 @@ workstream_status:
   W07: blocked_g2
   W08: blocked_pricing_legal_owner
   W09: missing_production_transactional_email
-  W10: failed_live_schema_acl_drift
+  W10: verified_live_schema_acl_repaired
   W11: verified_local_implementation
   W12: failed_live_ai_triage_zero_completed
   W13: verified_live_intake_booking_lifecycle_missing
@@ -51,7 +51,7 @@ workstream_status:
   W16: missing_follow_up_engine
   W17: blocked_real_data
   W18: blocked_scope_legal
-  W19: failed_live_privileged_rpc_exposure
-  W20: security_remediation_queued
+  W19: verified_live_privileged_rpc_boundary
+  W20: partial_authorization_repaired_mfa_pending
   W21: blocked_release_dependencies
   W22: deployed_manual_reproducibility_missing
