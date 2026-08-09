@@ -190,6 +190,22 @@ export function OwnerDashboard() {
     link.href = url; link.download = 'ironwake-inquiries.csv'; link.click(); URL.revokeObjectURL(url); setStatus(`Exported ${visibleInquiries.length} visible inquiries.`);
   }
 
+  async function exportSnapshot() {
+    if (!client || !session?.access_token) return setStatus('A current owner session is required before exporting CRM records.');
+    setStatus('Preparing the bounded CRM export…');
+    try {
+      const response = await fetch('/api/owner/export', { method: 'POST', headers: { Authorization: `Bearer ${session.access_token}` } });
+      if (!response.ok) return setStatus('The CRM export could not be prepared.');
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url; link.download = 'ironwake-owner-crm-export.json'; link.click(); URL.revokeObjectURL(url);
+      setStatus('Downloaded a bounded owner CRM export.');
+    } catch {
+      setStatus('The CRM export could not be prepared.');
+    }
+  }
+
   return <main className="shell owner-shell">
     <section className="owner-card">
       <span className="eyebrow">Private / owner only</span>
@@ -210,7 +226,7 @@ export function OwnerDashboard() {
       </> : <>
         <p>Authenticated session active. CRM records remain protected by database owner policy.</p>
         <div className="dashboard-links"><a href="/admin">Notification status →</a></div>
-        <div className="crm-toolbar"><label>Search inquiries<input type="search" value={query} onChange={(event) => setQuery(event.target.value)} /></label><label>Sort<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label><button type="button" className="button secondary" onClick={exportVisible} disabled={!visibleInquiries.length}>Export visible</button></div>
+        <div className="crm-toolbar"><label>Search inquiries<input type="search" value={query} onChange={(event) => setQuery(event.target.value)} /></label><label>Sort<select value={sort} onChange={(event) => setSort(event.target.value)}><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label><button type="button" className="button secondary" onClick={exportVisible} disabled={!visibleInquiries.length}>Export visible</button><button type="button" className="button secondary" onClick={exportSnapshot}>Export CRM snapshot</button></div>
         <div role="group" aria-label="Filter by lead stage" className="stage-filter">
           {STAGES.map((value) => <button type="button" key={value} aria-pressed={stage === value} onClick={() => setStage(value)}>{value.replace('_', ' ')}</button>)}
         </div>

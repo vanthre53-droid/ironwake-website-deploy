@@ -22,6 +22,9 @@ test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter'
   assert.match(source, /formatDue/);
   assert.match(source, /Search inquiries/);
   assert.match(source, /Export visible/);
+  assert.match(source, /Export CRM snapshot/);
+  assert.match(source, /\/api\/owner\/export/);
+  assert.match(source, /session\.access_token/);
   assert.match(source, /Inquiry detail/);
   assert.match(source, /Booking request/);
   assert.match(source, /triage_status,triage_priority,triage_category/);
