@@ -817,3 +817,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Read-only review: the full current API surface is the audit intake, three owner-only routes, and the signed Resend webhook. `npm audit --omit=dev --audit-level=high` reports zero vulnerabilities. Source egress review found only the controlled MiniMax endpoint; no arbitrary outbound URL fetcher/SSRF surface exists.
 - Result: no additional bounded local repair is justified. Remaining evidence requires a G5 deployment of the corrected artifact, an authorized authenticated owner/direct-object session, and adult/legal-owner retention/deletion plus backup/restore decisions/evidence.
 - No repository source, provider, deployment, database, or customer data was changed by this review.
+
+### 2026-08-09T14:43:27Z — C1/P0.4_release_delivery_attempt_58446e2
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Approval/external action: owner granted G5 production deployment; `origin/master` was pushed successfully from `daafc01` to `58446e2` without staging the owner's `.gitignore` edit.
+- Result: `WAITING_EXTERNAL_NETLIFY_DEPLOY_API_OR_PERMISSION`. Netlify site readback has no linked repository/build settings. Two authorised CLI production-upload attempts, including an explicit exact site ID, packaged the application then returned HTTP 404 before a deployment was created. The published deployment remains `6a786d2b0207453cc9541555` at `daafc01`.
+- Classified lesson: Git push success and deployment approval do not establish Netlify write authority. Prevention rule: require a newly created deploy ID and exact commit readback before production E2E testing.
+- Evidence: `reports/evidence/P0_4_RELEASE_DELIVERY_ATTEMPT_58446E2.md`.
+- Next exact action: restore the Netlify deployment API/site-role path or configure a linked build, verify deployment identity for `58446e2`, then perform one bounded MiniMax and authenticated owner-dashboard proof. D-008, MFA/direct-object, backup/restore, and unconfigured transactional-email delivery remain isolated external items.
