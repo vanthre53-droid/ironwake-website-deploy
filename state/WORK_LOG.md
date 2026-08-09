@@ -763,3 +763,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Classified lesson: a global authorization header may be accepted by an SDK but is indirect and easy to misunderstand. Prevention rule: pass the validated bearer token directly to the server-side Auth API and test header ambiguity and length boundaries.
 - Known limitation: the corrected owner routes are local only; direct authenticated owner-session proof remains pending deployment.
 - Next exact action: audit signed Resend webhook request boundaries for method, payload, and safe failure behavior; retain exact MiniMax deployment proof as separately gated.
+
+### 2026-08-09T13:31:00Z — M1/P0.20_signed_webhook_boundary_and_contract_coverage
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commits: `7c2196a` and `27dac73`.
+- Result: VERIFIED_LOCAL. The signed Resend webhook route now converts a failed raw-body read to a generic 400 before signature verification or provider-event storage. The previously omitted notification-readiness and signed-webhook route tests are now mandatory members of the aggregate suite.
+- Verification: focused notification/webhook tests 26/26; full suite 156/156; production build command completed successfully for the route hardening; `git diff --check`.
+- Known limitation: the signed endpoint is unconfigured and undeployed. Fixture checks do not prove a registered callback, provider acceptance, delivery, retry, or owner observation.
+- Next exact action: audit owner CRM export and retention/deletion boundaries without executing a deletion; retain exact MiniMax deployment proof as separately gated.
