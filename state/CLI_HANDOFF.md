@@ -1,5 +1,15 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex booking and follow-up checkpoint
+
+- Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
+- Live schema: forward migrations add `inquiries.booking_status` and an index, backfill four legacy booking rows to `REQUEST_RECEIVED`, backfill open-task due/next-action state for 37 inquiries, and add `owner_complete_task(uuid)`.
+- Local implementation: `/book` explicitly says `BOOKING REQUEST RECEIVED` and never confirms an appointment; `/owner` exposes source, booking status, request summary, triage, linked open task, and owner-RPC completion.
+- Security/readback: `owner_complete_task` is `SECURITY INVOKER`, rechecks `is_owner()`, is denied to `anon`, and is executable only by `authenticated`; no private task write exists in browser source.
+- Verification: focused tests 10/10; full suite 137/137; builds; production audit 0; migration/count/function-ACL readback. The first migration SQL was rejected before execution because of an invalid lateral reference, then corrected and applied.
+- Implementation commit: `0713b78` (`feat: add request-only booking and follow-up operations`).
+- Required role: M1. Audit public AI/provider claims next. MiniMax repair and the new local UI still need named G5 deployment approval before live application E2E can be claimed. Do not use any exposed Netlify token.
+
 ## Current handoff — 2026-08-09 Codex MiniMax P0.4 checkpoint
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.

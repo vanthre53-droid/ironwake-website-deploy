@@ -656,3 +656,18 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Starting commit: `4be90f1`; implementation commit: `3faadd3`.
 - Result: CHECKPOINTED. The P0.4 repair, evidence, and state are committed; only the unrelated owner `.gitignore` change remains uncommitted.
 - Next exact action: obtain named G5 approval to deploy `3faadd3`, then run the one approved synthetic MiniMax end-to-end proof.
+
+### 2026-08-09T12:40:00Z — M1/P0.6-P0.7_request_only_booking_and_follow_up
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Starting safe boundary: `640311b`.
+- Files changed: request-only booking copy and tests; owner CRM booking/source/request/task visibility and task-completion control; two reviewed forward migrations with fixtures; package focused-test entry; capability ledger and continuity state.
+- Approval/external action: existing G2 permits reviewed additive CRM migrations; the user programme directs real request-only booking/follow-up work. Applied migrations add a request-only booking status and owner completion RPC only. No calendar, customer email, owner email, provider call, deployment, payment, or credential entry occurred.
+- Result: PARTIAL. Four existing booking rows now read `REQUEST_RECEIVED`; 37 inquiries have durable next-action/due data. The owner completion function is security-invoker, checks `is_owner()`, writes a completion audit event, denies `anon`, and grants only `authenticated` execution. The local UI is not deployed, and no owner session or delivery provider was exercised.
+- Verification: focused tests 10/10; full suite 137/137; two production builds; `npm audit --omit=dev` 0; diff and secret scan; live migration, booking-state, task-state, function security, and privilege readback. The initial follow-up migration attempt failed with PostgreSQL `42P10` before any changes; it was corrected to a correlated update and then applied.
+- Next exact action: audit public AI Receptionist/systems copy against real provider state and remove/qualify unsupported operational claims; retain G5 deployment proof as a separately waiting external action.
+
+### 2026-08-09T12:50:00Z — M1/P0.6-P0.7_checkpoint
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commit: `0713b78` (`feat: add request-only booking and follow-up operations`).
+- Result: CHECKPOINTED. Request-only booking and owner-operated follow-up changes are committed; the only unrelated worktree change remains the owner `.gitignore` edit.
+- Next exact action: audit public AI Receptionist/systems copy against real provider state and remove/qualify unsupported operational claims; keep G5 deployment proof separately waiting.

@@ -6,15 +6,15 @@ programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
 active_stage: M1
 required_role: M1
-current_phase: P0_AI_PROVIDER_REALITY
-current_gate: P0_MINIMAX_LOCAL_REPAIR_VERIFIED_LIVE_DEPLOY_PENDING
-next_exact_action: "Obtain the named G5 deployment approval for the reviewed P0.4 MiniMax repair commit, deploy only that exact commit, then rerun one authorized synthetic inquiry and verify MiniMax structured triage, durable Supabase fields, and the owner dashboard. Do not use the exposed Netlify token."
+current_phase: P0_BOOKING_AND_FOLLOW_UP_REALITY
+current_gate: P0_BOOKING_FOLLOW_UP_LOCAL_AND_LIVE_SCHEMA_VERIFIED
+next_exact_action: "Inspect the public AI Receptionist and systems copy against the real provider-backed capabilities, remove or qualify any remaining publicly claimed but unconfigured operational behavior, then implement the next smallest independent P0 owner-operations/security remediation. Keep the MiniMax deployment proof queued behind G5 and do not use the exposed Netlify token."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 3faadd3
-last_verified_task: iw_p0_ai_04_minimax_triage_reality_3faadd3
-blocked_on: "P0.4 local MiniMax repair and its reviewed additive database migration are verified. The deployed application remains commit daafc01 and returns provider_error for the authorized synthetic inquiry; G5 deployment approval is required before a corrected deployed MiniMax request or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
+last_safe_boundary: 0713b78
+last_verified_task: iw_p0_booking_follow_up_reality_0713b78
+blocked_on: "P0.4 local MiniMax repair and the local owner booking/follow-up UI remain undeployed. The deployed application is commit daafc01 and returns provider_error for the authorized synthetic inquiry; G5 deployment approval is required before corrected MiniMax or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -45,8 +45,8 @@ workstream_status:
   W10: verified_live_schema_acl_repaired
   W11: verified_local_implementation
   W12: partial_minimax_local_repair_live_e2e_deploy_pending
-  W13: verified_live_intake_booking_lifecycle_missing
-  W14: verified_local_notification_operations_owner_mfa_pending
+  W13: implemented_live_request_only_booking_schema_local_ui_deploy_pending
+  W14: implemented_live_follow_up_state_local_owner_operations_deploy_pending
   W15: verified_local_notification_webhook_owner_operations_queued
   W16: missing_follow_up_engine
   W17: blocked_real_data
