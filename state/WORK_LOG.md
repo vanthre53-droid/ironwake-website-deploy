@@ -693,3 +693,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: PARTIAL. The live canonical-owner checked RPC validates an allowed lead-stage transition, updates one inquiry, and writes only prior/new stage audit metadata. The local UI has no direct inquiry-table update.
 - Verification: focused tests 3/3; full suite 139/139; production build; audit 0; diff check; live function security and role-privilege readback.
 - Next exact action: add bounded owner visibility for overdue/open tasks and notification state without sending messages; retain G5 deployment proof separately waiting.
+
+### 2026-08-09T14:00:00Z — M1/P0.12_owner_task_review_surface
+- Implementation commit: `051e2e1`.
+- Result: VERIFIED_LOCAL. Local `/owner` distinguishes open from overdue tasks within its bounded accessible inquiry window and links to the separate owner-authorized notification operations surface; no provider/send action was added.
+- Verification: targeted owner/admin tests 7/7; production build; diff check.
+- Next exact action: audit notification/retry visibility against the live outbox state and repair any safe local status ambiguity.
