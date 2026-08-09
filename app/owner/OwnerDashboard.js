@@ -17,6 +17,13 @@ function formatDue(due_at) {
   return Number.isNaN(date.getTime()) ? 'No due date set' : date.toLocaleDateString();
 }
 
+function taskDueStatus(dueAt) {
+  if (!dueAt) return 'No due date';
+  const date = new Date(dueAt);
+  if (Number.isNaN(date.getTime())) return 'No due date';
+  return date.getTime() < Date.now() ? 'Overdue' : 'Open';
+}
+
 export function OwnerDashboard() {
   const [client] = useState(authClient);
   const [session, setSession] = useState(null);
@@ -134,6 +141,7 @@ export function OwnerDashboard() {
   const selectedTask = selected ? tasks.find((task) => task.inquiry_id === selected.id) : null;
   const selectedNotes = selected ? notes.filter((note) => note.inquiry_id === selected.id) : [];
   const selectedActivity = selected ? activity.filter((event) => event.inquiry_id === selected.id) : [];
+  const overdueTasks = tasks.filter((task) => taskDueStatus(task.due_at) === 'Overdue');
 
   async function completeTask(task) {
     if (!client || !authorization.allowed || !task) return;
@@ -206,6 +214,7 @@ export function OwnerDashboard() {
         <div role="group" aria-label="Filter by lead stage" className="stage-filter">
           {STAGES.map((value) => <button type="button" key={value} aria-pressed={stage === value} onClick={() => setStage(value)}>{value.replace('_', ' ')}</button>)}
         </div>
+        <section className="crm-detail-note" aria-label="Open follow-up work"><span className="eyebrow">Current CRM window</span><h2>Open follow-up work</h2><p>{tasks.length} open task{tasks.length === 1 ? '' : 's'}; {overdueTasks.length} overdue. Provider notification state is tracked separately in <a href="/admin">Notification operations</a>.</p>{tasks.length ? <ul>{tasks.map((task) => <li key={task.id}><strong>{taskDueStatus(task.due_at)}</strong> · {task.category.replaceAll('_', ' ')} · due {formatDue(task.due_at)}</li>)}</ul> : <p>No open follow-up tasks in the currently accessible inquiry window.</p>}</section>
         <div className="crm-workspace"><ul className="record-list" aria-label="Recent inquiries">
           {visibleInquiries.length ? visibleInquiries.map((inquiry) => <li key={inquiry.id}><button type="button" className={`record-card${selected?.id === inquiry.id ? ' selected' : ''}`} onClick={() => setSelectedId(inquiry.id)}>
             <h3>{inquiry.business_name}</h3>

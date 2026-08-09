@@ -46,5 +46,8 @@ test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter'
   assert.match(source, /Update lead stage/);
   assert.match(source, /Lead stage updated and recorded/);
   assert.doesNotMatch(source, /from\('inquiries'\)\.update/);
+  assert.match(source, /Open follow-up work/);
+  assert.match(source, /Overdue/);
+  assert.match(source, /Notification operations/);
   assert.match(source, /This screen never seeds or invents CRM activity/);
 });
