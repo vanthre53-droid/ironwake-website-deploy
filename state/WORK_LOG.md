@@ -599,3 +599,13 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: state and execution-pack validators; YAML parse; `git diff --check`; no Netlify-token pattern in the worktree.
 - External action: none. No account, terms, DNS, secret, provider call, email, webhook registration, deployment, or spend.
 - Next exact action: M1 executes only `IW-P0-NOTIFY-01`.
+
+### 2026-08-09T10:49:28Z — M1/IW-P0-NOTIFY-01_durable_notification_state
+- CLI/model: Codex / `gpt-5.6-sol` explicitly reported by the active IronWake trace.
+- Starting safe boundary: `27db52d`; implementation commit: `354c9cb`.
+- Files changed: one CLI-scaffolded forward notification migration and focused test, the normal test command, real capability/schema/skill evidence, and the sealed task status. Continuity files follow in a separate handoff checkpoint.
+- Approval/external action: D-007/G2 and the current owner programme authorized the additive provider-neutral state work. Supabase migration `20260809104514_durable_notification_state_machine` was applied. No provider account, terms, secret, email, webhook registration, DNS, schedule, publication, payment, or deployment action occurred.
+- Result: VERIFIED_LIVE STATE. Core counts stayed 38 inquiries, 29 contacts, 36 consents, 36 tasks, 36 outbox events, and 44 audit logs. All 36 undifferentiated legacy events are cancelled with target `legacy`; notification-attempt and provider-event tables are empty. Distinct future owner/customer/priority intent types, bounded claims/retries/dead letters, provider-event deduplication, and owner replay authorization are live.
+- Verification: focused tests 10/10; full suite 112/112; live migration, table/column/constraint, RLS policy, table privilege, function ACL/security-mode/search-path, row-count, and advisor readback; state/pack validators; `git diff --check`; value-free secret-pattern scan.
+- Known limitation: database contracts are not an email worker. No adapter/executor, provider connection, signed HTTP webhook, owner retry UI, MFA, provider acceptance, or delivery proof exists yet. The leaked-password-protection warning and existing task/audit-log foreign-key index notices remain.
+- Next exact action: execute only `IW-P0-NOTIFY-02` locally with injected no-network tests; do not configure a key, send email, connect a provider, or deploy.

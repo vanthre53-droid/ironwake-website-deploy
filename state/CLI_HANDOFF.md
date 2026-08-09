@@ -1,5 +1,15 @@
 # CLI Handoff
 
+## Current handoff — 2026-08-09 Codex notification-state checkpoint
+
+- Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.
+- Implementation commit: `354c9cb`; live Supabase migration: `20260809104514_durable_notification_state_machine`.
+- Verified database state: 38 inquiries, 29 contacts, 36 consents, 36 tasks, 36 outbox events, and 44 audit logs remain. All 36 legacy outbox events are cancelled/non-addressable; `notification_attempts` and `provider_events` are empty.
+- Verified controls: all three notification tables have RLS; anonymous access is denied; authenticated access is owner-policy read-only; worker/provider functions are service-role-only; owner retry rechecks the canonical single-owner predicate and rejects legacy events.
+- Verification: focused tests 10/10, full suite 112/112, live migration/constraints/policies/grants/function ACL/count readback, security/performance advisors, state/pack validators, diff check, and secret-pattern scan passed.
+- Required role: M1. Execute only `IW-P0-NOTIFY-02` next: local fail-closed email adapter/worker and schedule entrypoint with injected no-network tests.
+- Boundary: no email was sent and no provider account, key, webhook, domain, schedule, or deployment was configured. Every exposed Netlify token remains compromised and must be revoked by the owner; none will be used.
+
 ## Current handoff — 2026-08-09 Codex authorization/RPC checkpoint
 
 - Programme: `IRONWAKE_REAL_PRODUCT_COMPLETION`; status `PARTIAL`.

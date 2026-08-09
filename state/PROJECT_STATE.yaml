@@ -6,15 +6,15 @@ programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
 active_stage: M1
 required_role: M1
-current_phase: P0_NOTIFICATION_STATE_MACHINE
-current_gate: P1_NOTIFICATION_ARCHITECTURE_SEALED
-next_exact_action: "Execute only IW-P0-NOTIFY-01: scaffold and test the forward provider-neutral notification-state migration, then apply it live and verify constraints, RLS, function privileges, legacy cancellation counts, table counts, and advisors without sending email."
+current_phase: P0_NOTIFICATION_WORKER
+current_gate: P0_NOTIFICATION_STATE_VERIFIED
+next_exact_action: "Execute only IW-P0-NOTIFY-02: implement and test the fail-closed Resend adapter plus bounded notification worker and local Netlify schedule entrypoint, without configuring a provider key, sending email, connecting an account, registering a webhook, or deploying."
 
 harness: codex
 model: gpt-5.6-sol
-last_safe_boundary: 27db52d
-last_verified_task: p1_notification_architecture_sealed_27db52d
-blocked_on: "No blocker for additive notification schema/state work. Adult provider account/terms, owned domain/DNS, secret entry, provider connection, live delivery, customer sends, deployment, and later full E2E remain separately gated. All exposed Netlify tokens require human revocation and will not be used."
+last_safe_boundary: 354c9cb
+last_verified_task: iw_p0_notify_01_durable_notification_state_354c9cb
+blocked_on: "No blocker for local fail-closed adapter/worker code. Adult provider account/terms, owned domain/DNS, secret entry, provider connection, live delivery, customer sends, deployment, and later full E2E remain separately gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:
   G1_USER_APPROVAL: verified
@@ -25,7 +25,7 @@ gates:
   GC2_REMEDIATION_APPROVED: approved_with_findings
   GM2_REMEDIATION_COMPLETE: partial_c2_f2_deferred
   GC3_RELEASE_CANDIDATE_PASS: partial_not_approved
-  G2_SCHEMA_AUTH_SERVER_APPROVAL: approved_additive_notification_schema_owner_session_pending
+  G2_SCHEMA_AUTH_SERVER_APPROVAL: verified_notification_state_live_owner_session_pending
   G4_EXTERNAL_PROVIDER_APPROVAL: resend_selected_code_only_connection_pending
   G5_PRODUCTION_DEPLOY_APPROVAL: pending
   REAL_CAPABILITY_LEDGER_VERIFIED: verified
@@ -47,7 +47,7 @@ workstream_status:
   W12: failed_live_ai_triage_zero_completed
   W13: verified_live_intake_booking_lifecycle_missing
   W14: failed_live_single_owner_rls_and_mfa
-  W15: architecture_sealed_schema_queued
+  W15: verified_notification_state_worker_queued
   W16: missing_follow_up_engine
   W17: blocked_real_data
   W18: blocked_scope_legal
