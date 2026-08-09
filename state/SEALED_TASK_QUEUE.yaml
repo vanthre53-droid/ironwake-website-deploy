@@ -7,6 +7,22 @@ gate: GC1_ARCHITECTURE_APPROVED
 immutable_during_m1: true
 activation: "Active for M1 after G1 approval; execute dependency order and stop at remaining gates."
 tasks:
+  - id: IW-P0-SEC-02
+    workstream: W19
+    title: "Make owner-only API responses explicitly private and method constrained"
+    status: ready_for_m1
+    depends_on: [IW-P0-SEC-01]
+    authority_class: A1
+    allowed_paths: ["app/api/owner/whoami/**", "app/api/owner/notification-readiness/**", "app/api/owner/export/**", "app/owner/**", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/**", "state/**"]
+    source_refs: ["reports/C1_ARCHITECTURE_AND_CONTROLS.md", "reports/SECURITY_PRIVACY_MODEL.md", "app/api/owner/whoami/route.js", "app/api/owner/notification-readiness/route.js"]
+    requirements: ["Return explicit private no-store cache headers for every success and failure response from the three owner-only routes", "Ensure unsupported methods return a safe 405 with Allow: POST and no private data", "Keep explicit bearer-token validation through Supabase Auth and owner-RLS export reads", "Add route-contract tests for cache headers, method boundaries, and missing bearer behavior", "Keep owner UI behavior unchanged except for safe failures"]
+    forbidden: ["Do not use a service-role credential in browser code", "Do not read or print tokens", "Do not query or mutate production rows", "Do not deploy", "Do not alter retention/deletion behavior"]
+    acceptance_commands: ["node --test app/api/owner/whoami/route.test.js app/api/owner/notification-readiness/route.test.js app/api/owner/export/route.test.js", "npm run test", "npm run build", "git diff --check"]
+    evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P2_AUTH_TESTS.md"
+    rollback_note: "Revert only the route-header/method changes; no durable state is affected."
+    blockers: []
+    implementation_notes: "Sealed 2026-08-09 after route inspection found explicit server bearer validation but inconsistent private cache/method contracts. D-008 retention/deletion policy remains independently open."
+
   - id: IW-P0-SEC-01
     workstream: W19
     title: "Repair live single-owner authorization and privileged RPC exposure"
