@@ -4,16 +4,16 @@ schema_version: 6.0.0
 
 programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
-active_stage: M1
-required_role: M1
-current_phase: P0_OWNER_API_SECURITY
-current_gate: C1_D008_PREPARED_IW_P0_SEC_02_SEALED
-next_exact_action: "Execute sealed IW-P0-SEC-02: make owner-only API responses explicitly private and method constrained, with route-contract tests. Do not deploy, query/mutate production rows, or change retention/deletion behavior."
+active_stage: C1
+required_role: C1
+current_phase: P0_SECURITY_ASSURANCE
+current_gate: P0_OWNER_API_BOUNDARY_LOCAL_VERIFIED
+next_exact_action: "Seal the next bounded deep API-security matrix across every current route, then transfer only the resulting local-only M1 task. Do not deploy, query/mutate production rows, or change retention/deletion behavior."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 20a2da7
-last_verified_task: iw_p0_retention_status_20a2da7
+last_safe_boundary: 0a0b972
+last_verified_task: iw_p0_owner_api_private_boundary_0a0b972
 blocked_on: "P0.4 live verification failed on exact Netlify deploy 6a786d2b0207453cc9541555 (commit daafc01, published 2026-08-09T12:06:35Z): a controlled production inquiry reached MiniMax but persisted provider_error/invalid output and null durable provider/error/attempt metadata. Repair commit 3faadd3 is not the runtime artifact; named G5 approval to deploy it is required before corrected MiniMax or owner-dashboard proof. Resend account/terms/domain/DNS/secret/webhook/send remain separately G4/G5 gated. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:

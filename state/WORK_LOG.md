@@ -797,3 +797,12 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Approval/external action: read-only live query and local UI code only. No retention function, deletion, anonymization, schedule, owner session, provider, send, or deployment was invoked.
 - Known limitation: an existing service-role function is not a retention program. A privacy/legal owner must approve the retention/deletion rules before any request/executor/schedule/recovery workflow is implemented or run.
 - Next exact action: prepare a non-destructive owner deletion-request/retention decision packet; do not delete, anonymize, or schedule customer-data processing without named privacy/legal-owner approval.
+
+### 2026-08-09T16:05:00Z — C1/M1 D-008 retention decision and P0.24 owner API boundary
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- C1 packet commit: `56af603`; M1 implementation commit: `0a0b972`.
+- Result: VERIFIED_LOCAL security boundary. D-008 consolidates the pending adult/legal-owner retention, deletion-request, execution, backup/recovery, processor, and controlled synthetic-test decisions. Separately, the sealed local owner-route task found unresolvable parser imports in notification-readiness and export. The correction makes the three owner-only endpoints explicitly private/no-store and Authorization-varying on success and failure, and returns safe no-data `405 Allow: POST` responses for common unsupported methods.
+- Verification: targeted handler contracts 7/7; full suite 161/161; production build; `git diff --check`. Tests import the repaired readiness/export handlers directly, covering the previously masked resolver error.
+- Approval/external action: local code/docs and read-only source inspection only. No provider, token, production database row, deletion/anonymization function, send, deployment, or owner session was used.
+- Known limitation: this is local source evidence. D-008 remains open, and the deployed artifact is still pre-repair `daafc01`; production owner-route and MiniMax proof still require named G5 deployment approval.
+- Next exact action: C1 seals a bounded deep API-security matrix across the current routes, then transfers only the resulting local M1 task.

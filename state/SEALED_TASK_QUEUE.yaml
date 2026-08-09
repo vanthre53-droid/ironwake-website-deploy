@@ -10,7 +10,7 @@ tasks:
   - id: IW-P0-SEC-02
     workstream: W19
     title: "Make owner-only API responses explicitly private and method constrained"
-    status: ready_for_m1
+    status: verified_local
     depends_on: [IW-P0-SEC-01]
     authority_class: A1
     allowed_paths: ["app/api/owner/whoami/**", "app/api/owner/notification-readiness/**", "app/api/owner/export/**", "app/owner/**", "reports/REAL_CAPABILITY_LEDGER.md", "reports/evidence/**", "state/**"]
@@ -21,7 +21,7 @@ tasks:
     evidence_path: "reports/REAL_CAPABILITY_LEDGER.md; reports/evidence/P2_AUTH_TESTS.md"
     rollback_note: "Revert only the route-header/method changes; no durable state is affected."
     blockers: []
-    implementation_notes: "Sealed 2026-08-09 after route inspection found explicit server bearer validation but inconsistent private cache/method contracts. D-008 retention/deletion policy remains independently open."
+    implementation_notes: "VERIFIED LOCAL 2026-08-09 at commit 0a0b972. All three owner-only routes now use explicit private no-store + Authorization-varying response headers on success and failure, return safe 405/Allow: POST responses for common unsupported methods, and have targeted runtime contracts. Readiness/export parser imports were corrected from an unresolvable parent path. Focused tests 7/7, full suite 161/161, production build, and diff check passed. D-008 retention/deletion policy remains independently open."
 
   - id: IW-P0-SEC-01
     workstream: W19
