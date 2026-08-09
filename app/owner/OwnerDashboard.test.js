@@ -15,6 +15,7 @@ test('owner dashboard uses Supabase auth and does not expose service credentials
 test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter', async () => {
   const source = await readFile(new URL('./OwnerDashboard.js', import.meta.url), 'utf8');
   assert.match(source, /lead_stage,next_action,due_at/);
+  assert.match(source, /retention_until,anonymized_at/);
   assert.match(source, /aria-label="Filter by lead stage"/);
   assert.match(source, /STAGES = \[.*'won', 'lost'\]/);
   assert.match(source, /builder\.eq\('lead_stage', stage\)/);
@@ -44,6 +45,9 @@ test('owner dashboard exposes lead_stage/next_action/due_at with a stage filter'
   assert.match(source, /owner_withdraw_inquiry_consent/);
   assert.match(source, /Withdraw contact consent/);
   assert.match(source, /Contact consent withdrawn/);
+  assert.match(source, /Retention status/);
+  assert.match(source, /No automated retention executor is configured/);
+  assert.doesNotMatch(source, /anonymize_expired_inquiries/);
   assert.match(source, /from\('audit_logs'\)\.select/);
   assert.match(source, /owner_add_inquiry_note/);
   assert.match(source, /Save owner note/);
