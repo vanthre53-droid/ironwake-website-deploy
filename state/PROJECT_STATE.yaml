@@ -13,7 +13,7 @@ next_exact_action: "Use a real authorized owner browser session, after Supabase 
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: c2f9663
-last_verified_task: iw_p0_4_deployed_minimax_structured_triage_c2f9663
+last_verified_task: iw_p0_27_public_workflow_truth_source_verified
 blocked_on: "No Netlify deployment blocker remains: existing ironwake-site is connected to the existing GitHub repository and has ready production deploy 6a7892639caabf0008a76736 at c2f9663. The remaining independent external items are: a real owner MFA-enrolled authenticated browser session for dashboard/direct-object proof; Resend account/domain/secret/webhook configuration and controlled delivery evidence; and adult/legal-owner D-008 retention/deletion/backup-restore decisions. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:

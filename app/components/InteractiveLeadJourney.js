@@ -5,14 +5,14 @@ import { useEffect, useRef, useState } from 'react';
 // ponytail: interactive lead-journey demo. Visitor picks a channel, the path through the system visibly animates.
 const CHANNELS = [
   { id: 'web', label: 'Website form', icon: 'web' },
-  { id: 'call', label: 'Phone call', icon: 'call' },
-  { id: 'message', label: 'WhatsApp / DM', icon: 'message' },
+  { id: 'call', label: 'Phone / missed call — future', icon: 'call' },
+  { id: 'message', label: 'WhatsApp / DM — future', icon: 'message' },
 ];
 
 const ROUTES = {
-  web: ['Landing page', 'Form submit', 'Validation + spam trap', 'Inquiry record saved', 'Email notification queued', 'Owner assigned', 'Acknowledged'],
-  call: ['Phone rings', 'Missed-call detection', 'Auto SMS callback link', 'Inquiry record saved', 'Owner notified via SMS + email', 'Owner returns call', 'Callback logged'],
-  message: ['WhatsApp arrives', 'Disclosure: automated', 'Capture intent + contact', 'Inquiry record saved', 'Owner inbox + email', 'Human handoff available', 'Conversation archived'],
+  web: ['Landing page', 'Form submit', 'Validation + spam trap', 'Inquiry record saved', 'Notification intent queued', 'Review task created', 'Received state shown'],
+  call: ['Demonstration: phone inquiry', 'Future provider: missed-call detection', 'Future provider: callback route', 'Future CRM record', 'Future owner notification', 'Human callback process', 'Future callback log'],
+  message: ['Demonstration: message inquiry', 'Future provider: consent capture', 'Future provider: CRM handoff', 'Future inquiry record', 'Future owner notification', 'Future human handoff', 'Future conversation archive'],
 };
 
 function ChannelIcon({ name }) {
@@ -44,9 +44,9 @@ export function InteractiveLeadJourney() {
 
   return (
     <section className="section interactive-journey" aria-label="Interactive lead journey">
-      <span className="eyebrow">Interactive lead journey</span>
+      <span className="eyebrow">Workflow demonstration</span>
       <h2>Pick how a customer reaches you.</h2>
-      <p>The system route is the same. The path adapts to the channel.</p>
+      <p>Only the website-form route is connected on this site. Phone, SMS, WhatsApp, and DM routes are future workflow examples, not active channels.</p>
 
       <div ref={ref} className="channel-picker" role="radiogroup" aria-label="Lead channel">
         {CHANNELS.map((c) => (
@@ -73,7 +73,7 @@ export function InteractiveLeadJourney() {
         ))}
       </ol>
 
-      <p className="journey-note">Every step is logged. The owner dashboard shows where the lead is in this path and who owns the next action.</p>
+      <p className="journey-note">For a website form, the current system saves the inquiry, creates a review task, and queues notification intent. Provider delivery, named assignment, phone, and messaging operations remain unconnected.</p>
     </section>
   );
 }

@@ -832,3 +832,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Targeted deployed boundary checks: public audit and webhook GETs returned `405 Allow: POST` with no-store; anonymous requests to all three owner-only POST routes returned private no-store 401. No authenticated owner session, email, provider fault, deletion, or retention execution occurred.
 - Failure handling remains frozen at the existing 6/6 injected no-network timeout/provider-unavailable/invalid-output proof. No production fault was induced.
 - Remaining exact external actions: real owner MFA enrollment plus authenticated dashboard/direct-object proof; Resend account/domain/secret/webhook configuration and controlled delivery evidence; adult/legal-owner D-008 retention/deletion/backup-restore decision and evidence.
+
+### 2026-08-09T15:10:00Z — M1/P0.27_public_workflow_truth
+- Result: VERIFIED_LOCAL_PENDING_DEPLOYMENT. The homepage interactive journey incorrectly depicted active phone/SMS/WhatsApp/DM workflows and named owner assignment. The repair now labels phone and messaging as future provider examples, limits the connected route to website-form intake, and describes the real review-task/due-date state without inventing an assignee.
+- Verification: focused interactive-journey, workflow-demo, homepage, and missed-lead tests 5/5; production build; `git diff --check`.
+- No provider, database, production API, owner session, email, retention, or deployment side effect occurred.
+- Next exact action: deploy this bounded public-truth repair through the existing Git-connected Netlify site and read back the exact artifact before calling the corrected claims live.

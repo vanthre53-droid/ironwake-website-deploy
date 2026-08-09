@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 // ponytail: lightweight workflow demo animation using CSS transforms/opacity only.
-// Demonstrates the IronWake operating model visually: enquiry → owner → next action.
+// Demonstrates the current operating model visually: enquiry → review task → next action.
 export function WorkflowDemo({ className = '' }) {
   const ref = useRef(null);
   const [step, setStep] = useState(0);
@@ -30,7 +30,7 @@ export function WorkflowDemo({ className = '' }) {
   }, []);
 
   return (
-    <div ref={ref} className={`workflow-demo ${className}`} role="img" aria-label="Animated workflow: enquiry arrives, owner is assigned, next action becomes visible">
+    <div ref={ref} className={`workflow-demo ${className}`} role="img" aria-label="Animated workflow: enquiry arrives, review task is created, next action becomes visible">
       <div className={`workflow-step ${step >= 1 ? 'active' : ''}`}>
         <div className="workflow-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -56,8 +56,8 @@ export function WorkflowDemo({ className = '' }) {
           </svg>
         </div>
         <div className="workflow-content">
-          <span className="workflow-label">Owner assigned</span>
-          <span className="workflow-detail">Named person, real due date</span>
+          <span className="workflow-label">Review task created</span>
+          <span className="workflow-detail">Due date recorded; no named assignee</span>
         </div>
       </div>
 
@@ -75,7 +75,7 @@ export function WorkflowDemo({ className = '' }) {
         </div>
         <div className="workflow-content">
           <span className="workflow-label">Next action visible</span>
-          <span className="workflow-detail">Owner knows exactly what to do</span>
+          <span className="workflow-detail">Owner review is required</span>
         </div>
       </div>
     </div>
