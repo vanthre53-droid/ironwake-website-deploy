@@ -23,12 +23,16 @@ export function OwnerDashboard() {
   const [authorization, setAuthorization] = useState({ checked: false, allowed: false, reason: '' });
   const [inquiries, setInquiries] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [notes, setNotes] = useState([]);
+  const [activity, setActivity] = useState([]);
   const [stage, setStage] = useState('all');
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('newest');
   const [selectedId, setSelectedId] = useState(null);
   const [status, setStatus] = useState('');
   const [completingTaskId, setCompletingTaskId] = useState(null);
+  const [noteText, setNoteText] = useState('');
+  const [savingNote, setSavingNote] = useState(false);
 
   useEffect(() => {
     if (!client) return;
@@ -94,6 +98,22 @@ export function OwnerDashboard() {
     return () => { cancelled = true; };
   }, [client, authorization.allowed, inquiries]);
 
+  useEffect(() => {
+    if (!client || !authorization.allowed || !inquiries.length) { setNotes([]); setActivity([]); return; }
+    let cancelled = false;
+    const inquiryIds = inquiries.map((inquiry) => inquiry.id);
+    Promise.all([
+      client.from('owner_notes').select('id,inquiry_id,body,created_at').in('inquiry_id', inquiryIds).order('created_at', { ascending: false }),
+      client.from('audit_logs').select('id,inquiry_id,action,actor_type,created_at').in('inquiry_id', inquiryIds).order('created_at', { ascending: false }).limit(100),
+    ]).then(([notesResult, activityResult]) => {
+      if (cancelled) return;
+      if (notesResult.error || activityResult.error) return setStatus('Owner notes or activity are unavailable for this account.');
+      setNotes(notesResult.data ?? []);
+      setActivity(activityResult.data ?? []);
+    });
+    return () => { cancelled = true; };
+  }, [client, authorization.allowed, inquiries]);
+
   async function signIn(event) {
     event.preventDefault();
     if (!client) return setStatus('Owner login is not connected yet.');
@@ -111,6 +131,8 @@ export function OwnerDashboard() {
   const visibleInquiries = useMemo(() => inquiries.filter((inquiry) => `${inquiry.business_name} ${inquiry.email}`.toLowerCase().includes(query.toLowerCase())).sort((a, b) => sort === 'oldest' ? new Date(a.created_at) - new Date(b.created_at) : new Date(b.created_at) - new Date(a.created_at)), [inquiries, query, sort]);
   const selected = visibleInquiries.find(({ id }) => id === selectedId) || visibleInquiries[0];
   const selectedTask = selected ? tasks.find((task) => task.inquiry_id === selected.id) : null;
+  const selectedNotes = selected ? notes.filter((note) => note.inquiry_id === selected.id) : [];
+  const selectedActivity = selected ? activity.filter((event) => event.inquiry_id === selected.id) : [];
 
   async function completeTask(task) {
     if (!client || !authorization.allowed || !task) return;
@@ -123,6 +145,20 @@ export function OwnerDashboard() {
       ? { ...inquiry, next_action: 'Review follow-up outcome', due_at: null }
       : inquiry));
     setStatus('Follow-up task completed and recorded.');
+  }
+
+  async function addNote(event) {
+    event.preventDefault();
+    if (!client || !authorization.allowed || !selected || !noteText.trim()) return;
+    setSavingNote(true);
+    const body = noteText.trim();
+    const { data, error } = await client.rpc('owner_add_inquiry_note', { p_inquiry_id: selected.id, p_body: body });
+    setSavingNote(false);
+    if (error || !data) return setStatus('The owner note could not be recorded.');
+    setNotes((current) => [{ id: data, inquiry_id: selected.id, body, created_at: new Date().toISOString() }, ...current]);
+    setActivity((current) => [{ id: `local-${data}`, inquiry_id: selected.id, action: 'owner_note_added', actor_type: 'owner', created_at: new Date().toISOString() }, ...current]);
+    setNoteText('');
+    setStatus('Owner note recorded.');
   }
 
   function exportVisible() {
@@ -171,7 +207,7 @@ export function OwnerDashboard() {
               {inquiry.booking_status && <div><dt>Booking</dt><dd>{inquiry.booking_status}</dd></div>}
             </dl>
           </button></li>) : <li>No accessible inquiries for this filter yet.</li>}
-        </ul><aside className="crm-detail" aria-live="polite"><span className="eyebrow">Inquiry detail</span>{selected ? <><h2>{selected.business_name}</h2><p>{selected.email}</p><dl><div><dt>Source</dt><dd>{selected.source}</dd></div><div><dt>Lead stage</dt><dd>{selected.lead_stage}</dd></div><div><dt>Next action</dt><dd>{selected.next_action || 'Not set'}</dd></div><div><dt>Due date</dt><dd>{formatDue(selected.due_at)}</dd></div><div><dt>Booking request</dt><dd>{selected.booking_status || 'Not a booking request'}</dd></div><div><dt>Follow-up</dt><dd>{selectedTask ? `${selectedTask.category} due ${formatDue(selectedTask.due_at)}` : 'No open follow-up task'}</dd></div><div><dt>AI triage</dt><dd>{selected.triage_status || 'Pending'}</dd></div><div><dt>Provider / model</dt><dd>{selected.triage_provider && selected.triage_model ? `${selected.triage_provider} / ${selected.triage_model}` : 'Not recorded'}</dd></div><div><dt>Priority / category</dt><dd>{selected.triage_priority || 'normal'} / {selected.triage_category || 'other'}</dd></div><div><dt>Attempted</dt><dd>{formatDue(selected.triage_attempted_at)}</dd></div>{selected.leak_description && <div><dt>Request summary</dt><dd>{selected.leak_description}</dd></div>}{selected.triage_summary && <div><dt>Summary</dt><dd>{selected.triage_summary}</dd></div>}{selected.triage_suggested_reply && <div><dt>Suggested reply</dt><dd>{selected.triage_suggested_reply}</dd></div>}{selected.triage_error_code && <div><dt>Safe triage status</dt><dd>{selected.triage_error_code}</dd></div>}</dl>{selectedTask && <button type="button" className="button secondary" onClick={() => completeTask(selectedTask)} disabled={completingTaskId === selectedTask.id}>{completingTaskId === selectedTask.id ? 'Completing task…' : 'Complete follow-up task'}</button>}<div className="crm-detail-note"><strong>Tasks, notes, timeline, retry/dead-letter, and retention actions</strong><p>These private records are available only when the authorized owner schema and account session expose them. This screen never seeds or invents CRM activity.</p></div></> : <p>Select an inquiry to view its available details. Empty lists remain empty until a real authorized record exists.</p>}</aside></div>
+        </ul><aside className="crm-detail" aria-live="polite"><span className="eyebrow">Inquiry detail</span>{selected ? <><h2>{selected.business_name}</h2><p>{selected.email}</p><dl><div><dt>Source</dt><dd>{selected.source}</dd></div><div><dt>Lead stage</dt><dd>{selected.lead_stage}</dd></div><div><dt>Next action</dt><dd>{selected.next_action || 'Not set'}</dd></div><div><dt>Due date</dt><dd>{formatDue(selected.due_at)}</dd></div><div><dt>Booking request</dt><dd>{selected.booking_status || 'Not a booking request'}</dd></div><div><dt>Follow-up</dt><dd>{selectedTask ? `${selectedTask.category} due ${formatDue(selectedTask.due_at)}` : 'No open follow-up task'}</dd></div><div><dt>AI triage</dt><dd>{selected.triage_status || 'Pending'}</dd></div><div><dt>Provider / model</dt><dd>{selected.triage_provider && selected.triage_model ? `${selected.triage_provider} / ${selected.triage_model}` : 'Not recorded'}</dd></div><div><dt>Priority / category</dt><dd>{selected.triage_priority || 'normal'} / {selected.triage_category || 'other'}</dd></div><div><dt>Attempted</dt><dd>{formatDue(selected.triage_attempted_at)}</dd></div>{selected.leak_description && <div><dt>Request summary</dt><dd>{selected.leak_description}</dd></div>}{selected.triage_summary && <div><dt>Summary</dt><dd>{selected.triage_summary}</dd></div>}{selected.triage_suggested_reply && <div><dt>Suggested reply</dt><dd>{selected.triage_suggested_reply}</dd></div>}{selected.triage_error_code && <div><dt>Safe triage status</dt><dd>{selected.triage_error_code}</dd></div>}</dl>{selectedTask && <button type="button" className="button secondary" onClick={() => completeTask(selectedTask)} disabled={completingTaskId === selectedTask.id}>{completingTaskId === selectedTask.id ? 'Completing task…' : 'Complete follow-up task'}</button>}<section className="crm-detail-note"><strong>Owner notes</strong><p>Notes are private to the authorized owner and are never included in notification payloads.</p><form className="assistant-form" onSubmit={addNote}><label>Add owner note<textarea value={noteText} onChange={(event) => setNoteText(event.target.value)} maxLength="2000" required /></label><button type="submit" className="button secondary" disabled={savingNote || !noteText.trim()}>{savingNote ? 'Saving note…' : 'Save owner note'}</button></form>{selectedNotes.length ? <ul>{selectedNotes.map((note) => <li key={note.id}><p>{note.body}</p><span className="micro">{formatDue(note.created_at)}</span></li>)}</ul> : <p>No owner notes recorded.</p>}</section><section className="crm-detail-note"><strong>Activity timeline</strong>{selectedActivity.length ? <ul>{selectedActivity.map((event) => <li key={event.id}><span>{event.action.replaceAll('_', ' ')}</span><span className="micro">{event.actor_type} · {formatDue(event.created_at)}</span></li>)}</ul> : <p>No recorded activity for this inquiry.</p>}</section><div className="crm-detail-note"><strong>Tasks, notes, timeline, retry/dead-letter, and retention actions</strong><p>These private records are available only when the authorized owner schema and account session expose them. This screen never seeds or invents CRM activity.</p></div></> : <p>Select an inquiry to view its available details. Empty lists remain empty until a real authorized record exists.</p>}</aside></div>
         <button className="button" onClick={signOut}>Sign out</button>
       </>}
       {status && <p className="notice" role="status">{status}</p>}
