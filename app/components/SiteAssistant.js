@@ -120,12 +120,12 @@ const FLOWS = {
     ]
   },
   how_it_works: {
-    message: `IronWake maps where your enquiry, booking, or follow-up process loses momentum, then implements the smallest system that makes the next step visible and owned. We start with a Business Leak Audit (${AUDIT_PRICE}), then scope a bounded solution. No vague promises — just inspectable operational improvements.`,
+    message: `IronWake maps where your enquiry, booking, or follow-up process loses momentum, then scopes the smallest system that makes the next step visible and reviewable. We start with a Business Leak Audit (${AUDIT_PRICE}), then scope a bounded solution. No vague promises — just inspectable operational improvements.`,
     options: [
       { label: 'See our systems', action: 'link', href: '/systems' },
       { label: 'See case studies', action: 'link', href: '/work' },
       { label: 'Book a diagnostic', action: 'link', href: '/audit' },
-      { label: 'Get an email follow-up', next: 'handoff_consent' },
+      { label: 'Submit an audit request', next: 'handoff_consent' },
       { label: 'See pricing', next: 'pricing_overview' }
     ]
   },
@@ -134,7 +134,7 @@ const FLOWS = {
   // consent checkbox). The chatbot itself does not POST anywhere.
   handoff_consent: {
     message:
-      "If you want IronWake to follow up by email, share your details on the Audit form — your information is only recorded after you tick the consent checkbox. Nothing is stored from this chat alone.",
+      "If you want IronWake to review your request, share your details on the Audit form — your information is only recorded after you tick the consent checkbox. Email delivery is not currently configured, and nothing is stored from this chat alone.",
     options: [
       { label: 'Open the Audit form', action: 'link', href: '/audit' },
       { label: 'See pricing first', next: 'pricing_overview' },

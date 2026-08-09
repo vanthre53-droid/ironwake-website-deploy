@@ -13,6 +13,8 @@ test('site assistant is a truthful decision-tree guide', async () => {
   // POST anywhere (no record without visitor consent).
   assert.match(source, /handoff_consent/);
   assert.match(source, /consent checkbox/);
+  assert.match(source, /Email delivery is not currently configured/);
+  assert.doesNotMatch(source, /Get an email follow-up/);
   assert.doesNotMatch(source, /password|payment details|identity documents/i);
   assert.doesNotMatch(source, /fetch\(['"]\/api\//);
 });

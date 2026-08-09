@@ -12,8 +12,8 @@ next_exact_action: "Continue only remaining locally executable P0 truth/security
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: c2f9663
-last_verified_task: iw_p0_27_public_workflow_and_dashboard_truth_local_candidate
+last_safe_boundary: 113b766
+last_verified_task: iw_p0_27_public_operational_claims_local_candidate
 blocked_on: "No Netlify technical blocker remains, but deployment is explicitly held by the owner while local P0 truth/security repairs are consolidated. The remaining independent external items are: a real owner MFA-enrolled authenticated browser session for dashboard/direct-object proof; Resend account/domain/secret/webhook configuration and controlled delivery evidence; and adult/legal-owner D-008 retention/deletion/backup-restore decisions. All exposed Netlify tokens require human revocation and will not be used."
 
 gates:

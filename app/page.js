@@ -10,7 +10,7 @@ const systems = [
   ['01 / inquiry integrity', 'Missed Lead Recovery', 'See where an enquiry stalls and what the next review step should be.', '/systems/missed-lead-recovery'],
   ['02 / booking control', 'Booking Certainty', 'Separate a booking request from a confirmed appointment so nobody assumes the wrong state.', '/systems/booking-control'],
   ['03 / trust layer', 'Trust + Lead Capture', 'Capture enquiries on a conversion-optimised intake that persists first, notifies second.', '/systems/trust-lead-capture'],
-  ['04 / reception layer', 'AI Receptionist', 'A disclosed, human-supervised first response. Capability is built; live telephony waits on a verified provider account.', '/systems/ai-receptionist']
+  ['04 / reception layer', 'AI Receptionist', 'Planning requirements for a disclosed, human-supervised first response. No live receptionist provider is connected.', '/systems/ai-receptionist']
 ];
 
 

@@ -844,3 +844,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused interactive-journey, workflow-demo, dashboard-demo, homepage, and missed-lead tests 6/6; production build; `git diff --check`.
 - Deployment: intentionally not pushed or deployed. The owner instructed that no further Netlify deployment occur until the remaining local delta is consolidated.
 - Next exact action: continue the bounded local P0 truth/security delta only; retain the separate MFA, Resend, and D-008 external items.
+
+### 2026-08-09T15:30:00Z — M1/P0.27_public_operational_claims_consolidation
+- Result: VERIFIED_LOCAL_CANDIDATE_HELD. The same local candidate now removes the remaining direct homepage/footer/assistant overclaims: future AI Receptionist work is no longer called built, named assignment is no longer promised, and the deterministic guide no longer promises unconfigured email follow-up.
+- Verification: public-truth pretests 3/3; focused footer, assistant, homepage, and missed-lead tests 5/5; production build; `git diff --check`.
+- Deployment: intentionally not pushed or deployed under the owner's hold instruction.
+- Next exact action: continue only independent local P0 truth/security work; preserve the separate MFA, Resend, and D-008 external items.

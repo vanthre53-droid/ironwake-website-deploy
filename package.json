@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "pretest": "node --test app/components/InteractiveLeadJourney.test.js app/components/WorkflowDemo.test.js app/components/DashboardDemo.test.js",
     "build:worker": "npx @opennextjs/cloudflare@latest build",
     "preview:worker": "npx @opennextjs/cloudflare@latest preview",
     "deploy:worker": "npx @opennextjs/cloudflare@latest deploy",
