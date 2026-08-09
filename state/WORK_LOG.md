@@ -725,3 +725,11 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused migration test 1/1; full suite 142/142; `git diff --check`.
 - Known limitation: the live Supabase function is present, but the deployed audit route remains at `daafc01`; public multi-instance rate enforcement is not yet proven and needs named G5 deployment approval.
 - Next exact action: remove duplicated regional pricing presentation by extracting one internal canonical source without changing approved amounts or public wording.
+
+### 2026-08-09T13:13:42Z — M1/P0.4_production_minimax_reverification
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Approval/external action: the owner explicitly requested production end-to-end verification. One controlled synthetic inquiry was sent to the public audit endpoint; no credential was read, printed, stored, or changed, and no timeout/error was induced in production.
+- Result: MISMATCH. Production returned HTTP 201 and Supabase persisted the inquiry, but its triage row is `provider_error` with `AI triage returned an invalid result`, model `MiniMax-M3`, and null provider/error-code/attempted-at fields. This proves a MiniMax runtime invocation, not valid structured triage, and does not prove the owner dashboard path.
+- Failure handling: injected no-network tests for the local repair passed 6/6: MiniMax timeout, provider-unavailable, and invalid-output each fail closed to `needs_human = true` with safe error codes. Production was not deliberately misconfigured or delayed.
+- Classified lesson: a successful provider health check and HTTP-201 intake response do not prove response-schema compatibility or that a requested build contains the repair. Prevention rule: require the exact deploy artifact identity plus one persisted successful structured row with non-null provider/model/attempt metadata before marking P0.4 verified.
+- Next exact action: verify the exact deployment artifact contains `3faadd3`, then repeat the same bounded inquiry and authenticated owner-dashboard readback; meanwhile continue the independent canonical-pricing refactor.

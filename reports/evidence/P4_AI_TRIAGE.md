@@ -20,11 +20,13 @@ Status: `PARTIAL — MINIMAX M3 CONTRACT AND DURABLE FAILURE METADATA VERIFIED L
 - `npm audit --omit=dev`: 0 vulnerabilities.
 - Production migration application and live column readback: successful for `triage_provider`, `triage_error_code`, and `triage_attempted_at`.
 - One owner-authorized synthetic production inquiry persisted at 2026-08-09. It records `triage_status = provider_error` and `triage_model = MiniMax-M3`; the deployed application has not yet received this local repair, so its provider/error metadata remains absent and structured triage is not verified.
+- A second controlled production inquiry at `2026-08-09T13:13:42Z` returned HTTP 201 and persisted. Its durable row records `source = website_audit`, `triage_status = provider_error`, `triage_summary = AI triage returned an invalid result.`, and `triage_model = MiniMax-M3`; `triage_provider`, `triage_error_code`, and `triage_attempted_at` are all null. This proves the configured production runtime reaches MiniMax but does **not** prove structured triage or the local durable-failure repair is deployed.
+- The repaired adapter's injected timeout, provider-unavailable, and invalid-output paths passed 6/6 alongside the audit-route tests. They return `provider_error`, `needs_human = true`, and respectively `provider_timeout`, `provider_unavailable`, and `invalid_output`, without a network call or a production configuration mutation.
 
 ## Remaining boundary
 
 - The MiniMax API key remains server-only and was not read, printed, or stored by this task.
-- The current production deployment is commit `daafc01`, while repair commit `3faadd3` is local and not deployed. A G5 production deployment approval is required before the same synthetic inquiry can prove MiniMax → structured triage → Supabase → owner dashboard.
+- Production behavior still matches the pre-repair triage persistence path despite the reported fresh build: it records no provider/error/attempt metadata. Repair commit `3faadd3` must be the exact deployed artifact before the same controlled inquiry can prove MiniMax → structured triage → Supabase → owner dashboard.
 - No automatic customer reply or owner notification was sent.
 - The deployed owner dashboard does not yet display triage data. The local owner dashboard now exposes provider/model, triage outcome, priority/category, safe status, attempted time, summary, and suggested reply under the existing owner authorization/RLS boundary.
 - Routine AI replies remain drafts until the notification and human-escalation policy is implemented and verified.
