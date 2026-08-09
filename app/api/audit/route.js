@@ -11,7 +11,8 @@ export const runtime = 'nodejs';
 const MAX_AUDIT_BODY_BYTES = 16_384;
 
 export async function POST(request) {
-  if (!request.headers.get('content-type')?.toLowerCase().includes('application/json')) {
+  const mediaType = request.headers.get('content-type')?.split(';', 1)[0]?.trim().toLowerCase();
+  if (mediaType !== 'application/json') {
     return NextResponse.json({ error: 'Send a JSON request.' }, { status: 415 });
   }
   const contentLength = Number(request.headers.get('content-length') || 0);

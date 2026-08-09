@@ -45,6 +45,16 @@ test('audit route rejects non-JSON before any backend dependency', async () => {
   assert.deepEqual(await response.json(), { error: 'Send a JSON request.' });
 });
 
+test('audit route rejects lookalike content types and malformed JSON before any backend dependency', async () => {
+  const lookalike = await POST(new Request('http://localhost/api/audit', { method: 'POST', body: '{}', headers: { 'content-type': 'text/application/json' } }));
+  assert.equal(lookalike.status, 415);
+  assert.deepEqual(await lookalike.json(), { error: 'Send a JSON request.' });
+
+  const malformed = await POST(new Request('http://localhost/api/audit', { method: 'POST', body: '{not-json', headers: { 'content-type': 'application/json; charset=utf-8' } }));
+  assert.equal(malformed.status, 400);
+  assert.deepEqual(await malformed.json(), { error: 'Send a valid JSON request.' });
+});
+
 test('audit route rejects an oversized JSON body before any backend dependency', async () => {
   const response = await POST(new Request('http://localhost/api/audit', { method: 'POST', body: JSON.stringify({ leak: 'x'.repeat(20_000) }), headers: { 'content-type': 'application/json' } }));
   assert.equal(response.status, 413);
