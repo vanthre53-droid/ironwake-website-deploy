@@ -754,3 +754,12 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: targeted validation and route-boundary tests 12/12; full suite 145/145; production build command completed successfully; `git diff --check`.
 - Known limitation: production remains commit `daafc01`, so these additional controls are not yet a live claim.
 - Next exact action: audit authenticated owner routes for bearer-token parsing and safe failure boundaries; retain exact MiniMax deployment proof as separately gated.
+
+### 2026-08-09T13:27:18Z — M1/P0.19_owner_bearer_authorization_boundary
+- CLI/model: Codex / `gpt-5.6-terra` explicitly reported by the active IronWake trace.
+- Implementation commit: `55e21ee`.
+- Result: VERIFIED_LOCAL. Both owner-only API routes now parse exactly one bounded bearer token and validate it explicitly with `SupabaseAuth.getUser(token)`; no privileged credentials, browser table writes, or custom-header session inference are used. Missing, ambiguous, control-character, and overlong authorization forms fail closed before Supabase access.
+- Verification: focused bearer/owner-route tests 4/4; full suite 146/146; production build command completed successfully; `git diff --check`.
+- Classified lesson: a global authorization header may be accepted by an SDK but is indirect and easy to misunderstand. Prevention rule: pass the validated bearer token directly to the server-side Auth API and test header ambiguity and length boundaries.
+- Known limitation: the corrected owner routes are local only; direct authenticated owner-session proof remains pending deployment.
+- Next exact action: audit signed Resend webhook request boundaries for method, payload, and safe failure behavior; retain exact MiniMax deployment proof as separately gated.
