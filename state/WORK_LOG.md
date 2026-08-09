@@ -699,3 +699,9 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Result: VERIFIED_LOCAL. Local `/owner` distinguishes open from overdue tasks within its bounded accessible inquiry window and links to the separate owner-authorized notification operations surface; no provider/send action was added.
 - Verification: targeted owner/admin tests 7/7; production build; diff check.
 - Next exact action: audit notification/retry visibility against the live outbox state and repair any safe local status ambiguity.
+
+### 2026-08-09T14:10:00Z — M1/P0.13_notification_readiness
+- Implementation commit: `cf82912`.
+- Result: VERIFIED_LOCAL. The owner-only notification dashboard obtains only configured/not-configured plus a safe configuration code from a server endpoint after bearer-token validation. It explicitly says queued events have not been sent when configuration is absent.
+- Verification: targeted tests 6/6; production build; diff check; live outbox aggregate readback found one queued owner and one queued customer event, plus 36 cancelled legacy events.
+- Next exact action: add bounded filtering for notification failure/retry state in the authorized operations dashboard.
