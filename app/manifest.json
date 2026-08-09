@@ -1,7 +1,7 @@
 {
   "name": "IronWake — Systems that answer",
   "short_name": "IronWake",
-  "description": "Operational systems for service businesses that capture every enquiry, assign ownership, control follow-up, and show business owners exactly what happens next.",
+  "description": "Operational workflow mapping and implementation for service businesses, with provider-dependent capabilities disclosed before activation.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f3ee",

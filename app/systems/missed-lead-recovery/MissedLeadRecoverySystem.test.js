@@ -8,7 +8,8 @@ test('missed lead recovery system stays truthful and interactive', async () => {
   assert.match(source, /useState/);
   assert.match(source, /aria-pressed={active === id}/);
   assert.match(source, /Request a Business Leak Audit/);
-  assert.match(source, /dead-letter/);
+  assert.match(source, /No email or WhatsApp delivery is currently claimed/);
+  assert.match(source, /named assignee is not yet implemented/);
   assert.match(source, /<SiteHeader \/>/);
   assert.match(source, /<SiteFooter \/>/);
   assert.match(source, /PricingReference/);
