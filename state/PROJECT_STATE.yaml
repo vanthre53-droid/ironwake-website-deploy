@@ -13,7 +13,7 @@ next_exact_action: "Complete only the remaining owner TOTP/AAL2 evidence and D-0
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: a84a33e
-last_verified_task: iw_final_consolidated_deploy_targeted_live_verification
+last_verified_task: iw_final_authorized_deploy_targeted_live_verification
 blocked_on: "Owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision remain human-controlled."
 failed_live: []
 waiting_external:
