@@ -8,13 +8,13 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Owner must enroll/verify TOTP and complete one authenticated AAL2 CRM session; then record the separate D-008 adult/legal-owner decision. No further deployment is authorized or needed."
+next_exact_action: "Complete only owner TOTP enrollment/AAL2 CRM evidence and the separate D-008 adult/legal-owner decision; the final consolidated deployment is live and no further deployment is authorized."
 
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: 2c7d1ea
 last_verified_task: iw_controlled_audit_booking_outbox_delivery_e2e_matrix_reconciled
-blocked_on: "Only owner-controlled TOTP enrollment/AAL2 session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain. Auth configuration repair, local verification, Supabase AAL2 migration, and the single authorized production deployment are complete."
+blocked_on: "Only owner-controlled TOTP enrollment/AAL2 session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain. Auth configuration repair, local verification, Supabase AAL2 migration, workflow E2E, and the two authorized production deployments are complete."
 failed_live: []
 waiting_external:
   - WAITING_EXTERNAL_OWNER_MFA_ENROLLMENT_AND_AAL2_SESSION_EVIDENCE
@@ -22,8 +22,8 @@ waiting_external:
 
 new_netlify_release:
   status: DEPLOYED_TARGETED_VERIFICATION
-  production_deploy_count_allowed: 1
-  production_deploys_used_on_new_site: 1
+  production_deploy_count_allowed: 2
+  production_deploys_used_on_new_site: 2
   process_environment: VERIFIED_PRESENT
   required_build_and_functions_env:
     - NEXT_PUBLIC_SITE_URL
@@ -49,16 +49,16 @@ new_netlify_release:
   minimax: VERIFIED_LIVE_STRUCTURED_TRIAGE_AND_FAILURE_HANDLING
   supabase: VERIFIED_SAME_PROJECT_NEW_SITE
   site_url: VERIFIED_NEW_SITE_CANONICAL
-  deploy_id: 6a79498cda82b42dc9adbe7f
+  deploy_id: 6a7971068e00e02ddaf33e68
   production_url: https://ironwake-20260810013623-17343.netlify.app
   deploy_state: ready
-  deployments_since_budget_update: 1
-  second_deployment_reserved: true
+  deployments_since_budget_update: 2
+  second_deployment_reserved: false
   first_failed_build_deploy_id: 6a79491f939f5b9cbe7820d0
   local_release_candidate: PREPARED_RELEASE_CONFIG_GUARD_LOCAL_BUILD_PASS
   held_correction_candidate: ebd20ba
   held_correction_tests: AI_TRIAGE_TARGETED_4_PASS_LOCAL_BUILD_PASS_LOCAL_E2E_COMPLETE
-  production_correction_deploy: COMPLETED_DEPLOYMENT_ONE
+  production_correction_deploy: COMPLETED_DEPLOYMENT_TWO_FINAL_CONSOLIDATED
   post_deploy_verification_queue:
     - Route smoke: home, audit, book, deterministic assistant, owner/login, owner APIs, and webhook method boundary.
     - Canonical host: metadata, sitemap, robots, JSON-LD, and OpenGraph resolve to the new site URL.
