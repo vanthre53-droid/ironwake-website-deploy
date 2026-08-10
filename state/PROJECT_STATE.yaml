@@ -8,16 +8,16 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Complete owner TOTP/AAL2 browser evidence using the live CRM control room, then record the D-008 legal-owner decision. The consolidated CRM UI/MFA repair is live in deploy 6a799cd5518ea9614f2d19e7."
+next_exact_action: "Complete targeted owner AAL2/direct-object/session evidence using the live CRM control room, then record the D-008 legal-owner decision. Verified TOTP enrollment and owner CRM visibility are now evidenced."
 
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: 845775b
 last_verified_task: iw_owner_crm_control_room_live_deployment
-blocked_on: "Owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision remain human-controlled."
+blocked_on: "Owner AAL2/direct-object/session evidence and the adult/legal-owner D-008 decision remain human-controlled."
 failed_live: []
 waiting_external:
-  - WAITING_EXTERNAL_OWNER_MFA_ENROLLMENT_AND_AAL2_SESSION_EVIDENCE
+  - WAITING_EXTERNAL_OWNER_AAL2_DIRECT_OBJECT_AND_SESSION_EVIDENCE
   - WAITING_EXTERNAL_D008_ADULT_LEGAL_OWNER_DECISION
 
 new_netlify_release:
@@ -108,6 +108,6 @@ workstream_status:
   W17: blocked_real_data
   W18: blocked_scope_legal
   W19: verified_live_privileged_rpc_boundary
-  W20: partial_authorization_repaired_mfa_pending
+  W20: partial_authorization_repaired_aal2_direct_object_pending
   W21: blocked_release_dependencies
   W22: deployed_new_netlify_targeted_verification_partial_minimax_timeout
