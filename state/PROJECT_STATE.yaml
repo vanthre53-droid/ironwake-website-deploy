@@ -8,11 +8,11 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Publish the held password-recovery repair `1cdff98` only if the owner authorizes a deployment-budget exception; otherwise complete owner TOTP/AAL2 evidence and D-008 without reopening unrelated work."
+next_exact_action: "The held backend-correction candidate `63a4bc9` is locally verified but cannot be published without an explicit deployment-budget exception; otherwise continue owner TOTP/AAL2 evidence and D-008 without reopening unrelated work."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 3f6216f
+last_safe_boundary: 63a4bc9
 last_verified_task: iw_final_consolidated_deploy_targeted_live_verification
 blocked_on: "Owner password-recovery PKCE repair is locally verified but not live because the authorized two-deployment budget is exhausted; owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision also remain human-controlled."
 failed_live: []
@@ -56,8 +56,8 @@ new_netlify_release:
   second_deployment_reserved: false
   first_failed_build_deploy_id: 6a79491f939f5b9cbe7820d0
   local_release_candidate: PREPARED_RELEASE_CONFIG_GUARD_LOCAL_BUILD_PASS
-  held_correction_candidate: ebd20ba
-  held_correction_tests: AI_TRIAGE_TARGETED_4_PASS_LOCAL_BUILD_PASS_LOCAL_E2E_COMPLETE
+  held_correction_candidate: 63a4bc9
+  held_correction_tests: BACKEND_TARGETED_AND_FULL_TESTS_166_PASS_RELEASE_CONFIG_VALID_BUILD_PASS_AUDIT_ZERO_HIGH_PROD_VULNS
   production_correction_deploy: COMPLETED_DEPLOYMENT_TWO_FINAL_CONSOLIDATED
   post_deploy_verification_queue:
     - Route smoke: home, audit, book, deterministic assistant, owner/login, owner APIs, and webhook method boundary.
