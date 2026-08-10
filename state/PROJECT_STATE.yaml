@@ -8,19 +8,19 @@ active_stage: C1
 required_role: C1
 current_phase: P0_NEW_NETLIFY_FINAL_RELEASE_PREPARATION
 current_gate: PRE_DEPLOY_NEW_NETLIFY_CONFIGURATION
-next_exact_action: "Make NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID, and NETLIFY_SITE_URL available to this Codex process, then verify the existing new site, configure the exact build/functions environment contract, update the existing Resend webhook in place if its target differs, complete local release checks, and reserve exactly one final production deploy. MFA owner evidence and D-008 remain post-deploy/external gates."
+next_exact_action: "Complete the remaining post-deploy live evidence: repair the fixed MiniMax timeout boundary in a future consolidated candidate, then perform owner MFA evidence and record the adult/legal-owner D-008 decision."
 
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: 9a06a94
 last_verified_task: iw_p0_31_current_deployment_evidence_reconciled
-blocked_on: "The new Netlify credentials/site variables were directed as present but are absent from this Codex process, so no new-site inspection, configuration, webhook-target comparison, or final deployment can occur. Independently, MFA owner-session/direct-object evidence and adult/legal-owner D-008 retention/deletion/backup/restore decisions remain human-controlled."
+blocked_on: "Owner MFA enrollment/session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain human-controlled. The deployed candidate also exposes a migration-sensitive MiniMax latency boundary: the fixed 8s request timeout produced provider_timeout on the live route despite direct provider HTTP 200."
 
 new_netlify_release:
-  status: PREPARING
+  status: DEPLOYED_TARGETED_VERIFICATION
   production_deploy_count_allowed: 1
-  production_deploys_used_on_new_site: UNKNOWN_UNINSPECTED
-  process_environment: WAITING_EXTERNAL_NETLIFY_PROCESS_ENV
+  production_deploys_used_on_new_site: 1
+  process_environment: VERIFIED_PRESENT
   required_build_and_functions_env:
     - NEXT_PUBLIC_SITE_URL
     - NEXT_PUBLIC_SUPABASE_URL
@@ -40,10 +40,14 @@ new_netlify_release:
     - SENTRY_DSN
     - NEXT_PUBLIC_SENTRY_DSN
     - SENTRY_ENVIRONMENT
-  resend_webhook: WAITING_FOR_NEW_SITE_URL_COMPARISON
-  minimax: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
-  supabase: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
-  site_url: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
+  resend_webhook: VERIFIED_LIVE_NEW_SITE_SIGNED_CALLBACK
+  minimax: LIVE_PROVIDER_TIMEOUT_REQUIRES_CODE_CORRECTION
+  supabase: VERIFIED_SAME_PROJECT_NEW_SITE
+  site_url: VERIFIED_NEW_SITE_CANONICAL
+  deploy_id: 6a79498cda82b42dc9adbe7f
+  production_url: https://ironwake-20260810013623-17343.netlify.app
+  deploy_state: ready
+  first_failed_build_deploy_id: 6a79491f939f5b9cbe7820d0
   local_release_candidate: PREPARED_RELEASE_CONFIG_GUARD_LOCAL_BUILD_PASS
   post_deploy_verification_queue:
     - Route smoke: home, audit, book, deterministic assistant, owner/login, owner APIs, and webhook method boundary.
@@ -65,7 +69,7 @@ gates:
   GC3_RELEASE_CANDIDATE_PASS: partial_not_approved
   G2_SCHEMA_AUTH_SERVER_APPROVAL: verified_notification_state_live_owner_session_pending
   G4_EXTERNAL_PROVIDER_APPROVAL: verified_live_resend_pre_domain_test
-  G5_PRODUCTION_DEPLOY_APPROVAL: approved_one_final_new_netlify_deploy_pending
+  G5_PRODUCTION_DEPLOY_APPROVAL: verified_one_final_new_netlify_deploy_live
   REAL_CAPABILITY_LEDGER_VERIFIED: verified
   IRONWAKE_REAL_PRODUCT_COMPLETION: partial
 
@@ -92,4 +96,4 @@ workstream_status:
   W19: verified_live_privileged_rpc_boundary
   W20: partial_authorization_repaired_mfa_pending
   W21: blocked_release_dependencies
-  W22: pre_deploy_new_netlify_configuration_pending
+  W22: deployed_new_netlify_targeted_verification_partial_minimax_timeout
