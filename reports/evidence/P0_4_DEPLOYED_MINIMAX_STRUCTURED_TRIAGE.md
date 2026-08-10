@@ -1,10 +1,9 @@
 # P0.4 Deployed MiniMax Structured Triage
 
-**UTC:** 2026-08-09T14:46Z  
-**Result:** `VERIFIED_LIVE`
+**UTC:** 2026-08-10T00:00Z  
+**Result:** `FAILED_LIVE`
 
-- Existing Netlify site `ironwake-site` published current Git commit `c2f9663` as production deploy `6a7892639caabf0008a76736`; it is `ready`, public, branch `master`, and plugin-successful.
-- One owner-authorized, plainly synthetic audit inquiry received the generic public confirmation and was read back through Supabase without exposing its content.
-- Its row is a complete structured MiniMax result: provider `minimax`, model `MiniMax-M3`, non-null attempt time/category/summary/suggested reply, no error code, and no human fallback.
-- Existing injected timeout, provider-unavailable, and invalid-output tests remain the valid no-network failure-handling evidence (6/6); no production provider fault was induced.
-- The remaining unproved edge is a real MFA-enrolled authorized browser session displaying that record in `/owner` and exercising direct-object protections. Service-role database readback is not treated as a substitute.
+- New Netlify site `ironwake-20260810013623-17343.netlify.app` published candidate `7bfee26` as deploy `6a79498cda82b42dc9adbe7f`.
+- Three controlled synthetic inquiries reached the deployed MiniMax boundary and persisted safely, but returned `invalid_output`, `provider_timeout`, and `invalid_output`; no structured completion was stored.
+- Direct MiniMax HTTP 200 with the configured base/model/key confirms provider access. The remaining defect is the deployed adapter’s fixed 8-second timeout/output handling.
+- Local failure-injection tests still cover timeout, provider-unavailable, and invalid-output classification. MFA-enrolled owner-session evidence remains separate and unproved.
