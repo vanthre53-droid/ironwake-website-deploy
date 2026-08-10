@@ -6,8 +6,8 @@ programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
 active_stage: C1
 required_role: C1
-current_phase: P0_NEW_NETLIFY_FINAL_RELEASE_PREPARATION
-current_gate: PRE_DEPLOY_NEW_NETLIFY_CONFIGURATION
+current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
+current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
 next_exact_action: "Hold candidate ebd20ba for the next permitted consolidated production deployment; after publication, run one MiniMax structured-triage verifier, then complete owner MFA evidence and record the adult/legal-owner D-008 decision."
 
 harness: codex
@@ -94,7 +94,7 @@ workstream_status:
   W09: verified_live_resend_pre_domain_test_sender_domain_pending
   W10: verified_live_schema_acl_repaired
   W11: deployed_unconfigured_provider_operations
-  W12: verified_live_minimax_structured_triage_owner_dashboard_session_pending
+  W12: failed_live_minimax_timeout_or_invalid_output_correction_held
   W13: deployed_request_only_booking_schema_owner_session_pending
   W14: deployed_follow_up_state_owner_session_pending
   W15: verified_live_resend_callback_owner_session_pending
