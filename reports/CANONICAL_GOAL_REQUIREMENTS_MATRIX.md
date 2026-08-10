@@ -21,7 +21,7 @@ Each row: ID, requirement, route/component, files, historical/current status.
 | R09 | PricingReference on each system page | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
 | R10 | 5 canonical offers on /pricing with Lite/Std/Pro India + Intl | /pricing | app/pricing/PricingPage.js | VERIFIED_DEPLOYED (default = India; toggle to Intl works) |
 | R11 | No fabricated metrics or stats | all | app/page.js, app/insights/page.js, app/audit/* | VERIFIED (committed c600bc8 + 3958aa4 + b068ec7 + 7367178) |
-| R12 | Supabase POST /api/audit works on deployed site | /api/audit | supabase/migrations/*, app/api/audit/route.js | `VERIFIED_LIVE` for persistence only. Not a completed workflow: 36/36 notification intents remain queued with zero attempts; no email side effect exists. |
+| R12 | Supabase POST /api/audit works on deployed site | /api/audit | supabase/migrations/*, app/api/audit/route.js | `VERIFIED_LIVE`: one labelled production audit returned 201, persisted complete MiniMax triage, created two outbox intents, and both reached delivered state with signed provider events. |
 | R13 | Anonymous /owner shows login, not data | /owner | app/owner/page.js | VERIFIED_DEPLOYED (login UI rendered) |
 | R14 | AI Receptionist reframed from "concept" to real offer with capability/demo/provider/client status | /systems/ai-receptionist | app/systems/ai-receptionist/AiReceptionistSystem.js | `FAILED_LIVE`: provider-dependent status is disclosed, but the page also claims local intake, handoff, chat, and an audit-ready call log are built; those operational paths do not exist. |
 | R15 | All 4 systems show their matching canonical offer | /systems/* | app/components/PricingReference.js | VERIFIED_DEPLOYED |
@@ -32,7 +32,7 @@ Each row: ID, requirement, route/component, files, historical/current status.
 | R20 | SEO score ≥95 | all | (need Lighthouse) | PARTIAL — home VERIFIED_DEPLOYED (Lighthouse SEO 100); /pricing SEO 92 deployed (root cause: layout alternates.canonical:'/' inherits homepage on child pages); LOCAL FIXED commit 9ab5517 (alternates.canonical:'./'); build-verified; awaits Netlify redeploy |
 | R21 | Substantial 2.5D motion per goal §18 (3 systems on home) | / | (workflow + dashboard + interactive-lead-journey + signal-rail) | VERIFIED_DEPLOYED (commit 4b394c2) |
 | R22 | Chatbot answers exact pricing across 5 offers | chatbot | app/components/SiteAssistant.js | VERIFIED_DEPLOYED (all 5 Lite prices returned correctly) |
-| R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | `FAILED_LIVE` as written: four `website_booking` inquiries exist, but there is no `REQUEST_RECEIVED` or other booking-state field/table. Only source classification is live. |
+| R23 | Booking request persists with REQUEST_RECEIVED state, not CONFIRMED | /book | app/book/page.js, app/book/BookingPreview.js | `VERIFIED_LIVE` for request-only flow: one labelled production booking returned 201, persisted `source=website_booking` and `booking_status=REQUEST_RECEIVED`, delivered owner/customer intents, and never claimed confirmation. |
 | R24 | Owner dashboard with search/sort/export works | /owner | app/owner/OwnerDashboard.js | `CONNECTED_NOT_VERIFIED`: owner login/list was attested; search/sort/export are source-present but not live interaction-proven. The dashboard does not select or display `source`, so the old claim that this UI showed `source = website_booking` is unsupported. |
 | R25 | Sitemap includes all routes | /sitemap.xml | app/sitemap.js | VERIFIED_DEPLOYED |
 | R26 | robots.txt allows crawling with sitemap | /robots.txt | app/robots.js | VERIFIED_DEPLOYED |
@@ -57,13 +57,14 @@ Each row: ID, requirement, route/component, files, historical/current status.
   MiniMax structured triage, a controlled Resend owner-priority delivery with
   signed callbacks, and the request-only booking state. These facts supersede
   the historical rows that predate the current production candidate.
-- The current failed-live capability is owner MFA: the designated owner has
+- The current human-gated capability is owner MFA: the designated owner has
   zero verified factors. Consequently, authenticated dashboard/direct-object,
   export, retry, note, stage, and follow-up interaction evidence remains
   `CONNECTED_NOT_VERIFIED`, not successful.
-- Retention/deletion/backup/restore stays legally pending under D-008. Routine
-  customer/owner transactional email remains intentionally inactive until a
-  verified custom sender domain. Netlify production deployment is currently
+- Retention/deletion/backup/restore stays legally pending under D-008. Controlled
+  owner/customer outbox delivery is live on the pre-domain Resend path, while
+  independent customer-mailbox and custom sender-domain evidence remain separate.
+  Netlify production deployment is currently
   manual-owner authenticated; no Git-linked continuous deployment is claimed.
 
 ## Production migration cycle 14
