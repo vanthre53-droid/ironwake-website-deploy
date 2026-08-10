@@ -8,13 +8,13 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "The held backend-correction candidate `a84a33e` is locally verified but cannot be published without an explicit deployment-budget exception; otherwise continue owner TOTP/AAL2 evidence and D-008 without reopening unrelated work."
+next_exact_action: "Complete only the remaining owner TOTP/AAL2 evidence and D-008 legal-owner decision; the corrected candidate is now live."
 
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: a84a33e
 last_verified_task: iw_final_consolidated_deploy_targeted_live_verification
-blocked_on: "Owner password-recovery PKCE repair is locally verified but not live because the authorized two-deployment budget is exhausted; owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision also remain human-controlled."
+blocked_on: "Owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision remain human-controlled."
 failed_live: []
 waiting_external:
   - WAITING_EXTERNAL_OWNER_MFA_ENROLLMENT_AND_AAL2_SESSION_EVIDENCE
@@ -22,8 +22,8 @@ waiting_external:
 
 new_netlify_release:
   status: DEPLOYED_TARGETED_VERIFICATION
-  production_deploy_count_allowed: 2
-  production_deploys_used_on_new_site: 2
+  production_deploy_count_allowed: 3
+  production_deploys_used_on_new_site: 3
   process_environment: VERIFIED_PRESENT
   required_build_and_functions_env:
     - NEXT_PUBLIC_SITE_URL
@@ -49,16 +49,16 @@ new_netlify_release:
   minimax: VERIFIED_LIVE_STRUCTURED_TRIAGE_AND_FAILURE_HANDLING
   supabase: VERIFIED_SAME_PROJECT_NEW_SITE
   site_url: VERIFIED_NEW_SITE_CANONICAL
-  deploy_id: 6a7971068e00e02ddaf33e68
+  deploy_id: 6a797c84939f5b99ac782035
   production_url: https://ironwake-20260810013623-17343.netlify.app
   deploy_state: ready
-  deployments_since_budget_update: 2
+  deployments_since_budget_update: 3
   second_deployment_reserved: false
   first_failed_build_deploy_id: 6a79491f939f5b9cbe7820d0
   local_release_candidate: PREPARED_RELEASE_CONFIG_GUARD_LOCAL_BUILD_PASS
   held_correction_candidate: a84a33e
   held_correction_tests: BACKEND_BOUNDED_WORKER_TARGETED_11_PASS_FULL_166_PASS_RELEASE_CONFIG_VALID_BUILD_PASS
-  production_correction_deploy: COMPLETED_DEPLOYMENT_TWO_FINAL_CONSOLIDATED
+  production_correction_deploy: COMPLETED_DEPLOYMENT_THREE_FINAL_AUTHORIZED
   post_deploy_verification_queue:
     - Route smoke: home, audit, book, deterministic assistant, owner/login, owner APIs, and webhook method boundary.
     - Canonical host: metadata, sitemap, robots, JSON-LD, and OpenGraph resolve to the new site URL.
