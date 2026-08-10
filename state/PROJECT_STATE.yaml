@@ -66,6 +66,7 @@ new_netlify_release:
     - MiniMax: one controlled deployed inquiry proves structured triage and durable provider/model metadata.
     - Resend: one controlled pre-domain delivery proves acceptance, signed webhook callback, provider-event persistence, and delivered outbox state on the new site.
     - Owner MFA, after human enrollment only: AAL2, owner dashboard, owner-only API, anonymous/non-owner/direct-object denial.
+    - Password recovery: production reset route exercises a single-use `token_hash` recovery link and completes password update without localhost redirect.
     - Host-migration security: headers plus malformed/unsupported public API requests without data creation.
 
 gates:
