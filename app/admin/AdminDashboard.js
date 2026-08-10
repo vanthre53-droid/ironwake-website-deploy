@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { getSupabasePublicKey } from '../../lib/supabase-public-key.mjs';
 import {
   isRetryableNotification,
   latestNotificationAttempt,
@@ -10,8 +11,11 @@ import {
 
 function authClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  return url && anonKey ? createClient(url, anonKey) : null;
+  const publicKey = getSupabasePublicKey({
+    publishableKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  });
+  return url && publicKey ? createClient(url, publicKey) : null;
 }
 
 function formatTimestamp(value) {

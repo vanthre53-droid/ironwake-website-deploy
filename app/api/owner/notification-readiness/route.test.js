@@ -7,6 +7,8 @@ test('notification readiness exposes only safe configuration state to the valida
   assert.match(source, /readNotificationConfig/);
   assert.match(source, /parseBearerToken/);
   assert.match(source, /auth\.getUser\(token\)/);
+  assert.match(source, /getAalFromJwt/);
+  assert.match(source, /aal2/);
   assert.doesNotMatch(source, /global:\s*\{\s*headers/);
   assert.match(source, /ironwakee@gmail\.com/);
   assert.match(source, /configured: config\.configured/);

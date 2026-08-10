@@ -2,11 +2,16 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { getSupabasePublicKey } from '../../lib/supabase-public-key.mjs';
+import { classifyAuthError } from '../../lib/owner-auth.mjs';
 
 function authClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  return url && anonKey ? createClient(url, anonKey) : null;
+  const publicKey = getSupabasePublicKey({
+    publishableKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  });
+  return url && publicKey ? createClient(url, publicKey) : null;
 }
 
 const STAGES = ['all', 'new', 'reviewed', 'contacted', 'qualified', 'discovery_booked', 'proposal_sent', 'won', 'lost'];
@@ -28,6 +33,9 @@ export function OwnerDashboard() {
   const [client] = useState(authClient);
   const [session, setSession] = useState(null);
   const [authorization, setAuthorization] = useState({ checked: false, allowed: false, reason: '' });
+  const [mfa, setMfa] = useState({ status: 'idle', factorId: null, challengeId: null, qrCode: '', secret: '', reason: '' });
+  const [mfaCode, setMfaCode] = useState('');
+  const [showRecovery, setShowRecovery] = useState(false);
   const [inquiries, setInquiries] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [notes, setNotes] = useState([]);
@@ -43,6 +51,44 @@ export function OwnerDashboard() {
   const [savingNote, setSavingNote] = useState(false);
   const [savingStage, setSavingStage] = useState(false);
   const [withdrawingConsent, setWithdrawingConsent] = useState(false);
+
+  function authErrorMessage(error) {
+    return {
+      invalid_credentials: 'The owner email or password was not accepted.',
+      configuration_error: 'Owner authentication is misconfigured. No private data was opened.',
+      network_unavailable: 'Authentication is temporarily unavailable. Try again shortly.',
+      mfa_invalid: 'That authenticator code was not accepted. Check the current code and try again.',
+      session_expired: 'Your session expired. Sign in again.',
+    }[classifyAuthError(error)] || 'Owner authentication could not be completed.';
+  }
+
+  async function prepareMfa() {
+    if (!client) return;
+    const { data, error } = await client.auth.mfa.listFactors();
+    if (error) return setMfa({ status: 'error', factorId: null, challengeId: null, qrCode: '', secret: '', reason: authErrorMessage(error) });
+    const verified = data?.totp?.find((factor) => factor.status === 'verified');
+    if (verified) return setMfa({ status: 'challenge_required', factorId: verified.id, challengeId: null, qrCode: '', secret: '', reason: '' });
+    const { data: enrollment, error: enrollError } = await client.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'IronWake owner authenticator' });
+    if (enrollError) return setMfa({ status: 'error', factorId: null, challengeId: null, qrCode: '', secret: '', reason: authErrorMessage(enrollError) });
+    setMfa({ status: 'enroll_pending', factorId: enrollment.id, challengeId: null, qrCode: enrollment.totp?.qr_code || '', secret: enrollment.totp?.secret || '', reason: '' });
+  }
+
+  async function verifyMfa(event) {
+    event.preventDefault();
+    if (!client || !mfa.factorId || !/^\d{6}$/.test(mfaCode)) return setMfa((current) => ({ ...current, reason: 'Enter the current six-digit authenticator code.' }));
+    const { data: challenge, error: challengeError } = await client.auth.mfa.challenge({ factorId: mfa.factorId });
+    if (challengeError) return setMfa((current) => ({ ...current, reason: authErrorMessage(challengeError) }));
+    setMfa((current) => ({ ...current, challengeId: challenge.id }));
+    const { error } = await client.auth.mfa.verify({ factorId: mfa.factorId, challengeId: challenge.id, code: mfaCode });
+    if (error) return setMfa((current) => ({ ...current, reason: authErrorMessage(error) }));
+    setMfaCode('');
+    await client.auth.refreshSession();
+    const { data } = await client.auth.getSession();
+    setSession(data.session ?? null);
+    setAuthorization({ checked: false, allowed: false, reason: '' });
+    setMfa({ status: 'idle', factorId: null, challengeId: null, qrCode: '', secret: '', reason: '' });
+    setStatus('MFA verified. Checking private owner access.');
+  }
 
   useEffect(() => {
     if (!client) return;
@@ -70,8 +116,11 @@ export function OwnerDashboard() {
         });
         const body = await res.json().catch(() => ({}));
         if (cancelled) return;
-        if (res.ok && body.authorized) {
+        if (res.ok && body.authorized && body.aal === 'aal2') {
           setAuthorization({ checked: true, allowed: true, reason: '' });
+        } else if (body.mfaRequired) {
+          setAuthorization({ checked: true, allowed: false, reason: body.reason || 'MFA verification is required.' });
+          if (!mfa.factorId) await prepareMfa();
         } else {
           setAuthorization({ checked: true, allowed: false, reason: body.reason || 'This account is not the authorized owner.' });
         }
@@ -131,12 +180,21 @@ export function OwnerDashboard() {
     if (!client) return setStatus('Owner login is not connected yet.');
     const form = new FormData(event.currentTarget);
     const { error } = await client.auth.signInWithPassword({ email: form.get('email'), password: form.get('password') });
-    setStatus(error ? 'Sign-in failed. Check your credentials and try again.' : 'Signed in.');
+    setStatus(error ? authErrorMessage(error) : 'Signed in. Checking owner and MFA status.');
+  }
+
+  async function requestRecovery(event) {
+    event.preventDefault();
+    if (!client) return setStatus('Owner authentication is not connected.');
+    const form = new FormData(event.currentTarget);
+    const { error } = await client.auth.resetPasswordForEmail(String(form.get('email') || ''), { redirectTo: `${window.location.origin}/owner/reset-password` });
+    setStatus(error ? authErrorMessage(error) : 'If the address is eligible, a password-recovery link has been sent.');
   }
 
   async function signOut() {
     await client?.auth.signOut();
     setAuthorization({ checked: true, allowed: false, reason: 'Not signed in.' });
+    setMfa({ status: 'idle', factorId: null, challengeId: null, qrCode: '', secret: '', reason: '' });
     setStatus('Signed out.');
   }
 
@@ -238,9 +296,10 @@ export function OwnerDashboard() {
           <label>Password<input name="password" type="password" autoComplete="current-password" required /></label>
           <button className="button" type="submit" disabled={!client}>Sign in</button>
         </form>
+        <button type="button" className="button secondary" onClick={() => setShowRecovery((value) => !value)}>{showRecovery ? 'Hide password recovery' : 'Forgot password?'}</button>
+        {showRecovery && <form className="owner-form" onSubmit={requestRecovery}><label>Owner email<input name="email" type="email" autoComplete="email" required /></label><button className="button secondary" type="submit" disabled={!client}>Send recovery link</button><p className="micro">Recovery returns to the production owner reset page; no localhost callback is used.</p></form>}
       </> : !authorization.allowed ? <>
-        <p>This account is not the authorized owner for the IronWake CRM.</p>
-        <p className="notice" role="status">{authorization.reason || 'Sign in with the designated owner email to continue.'}</p>
+        {mfa.status !== 'idle' && mfa.status !== 'error' ? <><p>This owner session is authenticated but private CRM access requires AAL2.</p>{mfa.status === 'enroll_pending' && <section className="crm-detail-note"><h2>Set up authenticator MFA</h2><p>Scan this QR code with your authenticator app, then enter the six-digit code.</p>{mfa.qrCode && <img src={mfa.qrCode} alt="TOTP enrollment QR code" />}<p className="micro">Manual setup secret: <code>{mfa.secret}</code></p></section>}<form className="owner-form" onSubmit={verifyMfa}><label>Authenticator code<input inputMode="numeric" pattern="[0-9]{6}" name="mfaCode" value={mfaCode} onChange={(event) => setMfaCode(event.target.value)} autoComplete="one-time-code" required /></label><button className="button" type="submit">Verify MFA</button></form>{mfa.reason && <p className="notice" role="status">{mfa.reason}</p>}</> : <><p>This account is not the authorized owner for the IronWake CRM.</p><p className="notice" role="status">{mfa.reason || authorization.reason || 'Sign in with the designated owner email to continue.'}</p></>}
         <button className="button" onClick={signOut}>Sign out</button>
       </> : <>
         <p>Authenticated session active. CRM records remain protected by database owner policy.</p>

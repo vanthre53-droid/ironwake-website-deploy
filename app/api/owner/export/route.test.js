@@ -6,6 +6,8 @@ test('owner CRM export validates a bearer session and creates a non-cached bound
   const source = await readFile(new URL('./route.js', import.meta.url), 'utf8');
   assert.match(source, /parseBearerToken/);
   assert.match(source, /auth\.getUser\(token\)/);
+  assert.match(source, /getAalFromJwt/);
+  assert.match(source, /aal2/);
   assert.match(source, /ironwakee@gmail\.com/);
   assert.match(source, /MAX_ROWS_PER_COLLECTION = 1_000/);
   assert.match(source, /content-disposition/);

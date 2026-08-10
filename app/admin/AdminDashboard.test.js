@@ -16,7 +16,7 @@ test('admin operations fail closed through server whoami before private reads', 
   assert.match(source, /authorization\.allowed, refreshKey/);
   assert.match(source, /This account is not authorized to view notification operations/);
   assert.ok(source.indexOf("fetch('/api/owner/whoami'") < source.indexOf("from('outbox_events')"));
-  assert.match(source, /NEXT_PUBLIC_SUPABASE_ANON_KEY/);
+  assert.match(source, /NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY/);
   assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY/);
 });
 

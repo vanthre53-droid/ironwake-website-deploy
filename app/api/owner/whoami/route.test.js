@@ -22,6 +22,8 @@ test('whoami route never references service_role or signs its own tokens', async
   assert.match(src, /authorization/i);
   assert.match(src, /parseBearerToken/);
   assert.match(src, /auth\.getUser\(token\)/);
+  assert.match(src, /getAalFromJwt/);
+  assert.match(src, /aal2/);
   assert.doesNotMatch(src, /global:\s*\{\s*headers/);
   // The route must compare against the designated owner email.
   assert.match(src, /ironwakee@gmail\.com/);

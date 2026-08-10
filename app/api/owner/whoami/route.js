@@ -9,7 +9,8 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server.js';
-import { parseBearerToken } from '../../../../lib/owner-auth.mjs';
+import { getAalFromJwt, parseBearerToken } from '../../../../lib/owner-auth.mjs';
+import { getSupabasePublicKey } from '../../../../lib/supabase-public-key.mjs';
 
 export const runtime = 'nodejs';
 
@@ -32,10 +33,10 @@ export async function POST(request) {
   const token = parseBearerToken(request.headers.get('authorization'));
   if (!token) return privateJson({ authorized: false, reason: 'No active session.' }, { status: 401 });
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !anonKey) return privateJson({ authorized: false, reason: 'Auth is not connected.' }, { status: 503 });
+  const publicKey = getSupabasePublicKey({ publishableKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY });
+  if (!url || !publicKey) return privateJson({ authorized: false, reason: 'Auth is not connected.' }, { status: 503 });
 
-  const supabase = createClient(url, anonKey, {
+  const supabase = createClient(url, publicKey, {
     auth: { persistSession: false, autoRefreshToken: false }
   });
 
@@ -45,7 +46,10 @@ export async function POST(request) {
   const email = (data.user.email || '').toLowerCase();
   if (email !== OWNER_EMAIL) return unauthorized('This account is not the authorized owner.');
 
-  return privateJson({ authorized: true, email });
+  const aal = getAalFromJwt(token) || 'aal1';
+  if (aal !== 'aal2') return privateJson({ authorized: false, mfaRequired: true, aal, reason: 'MFA verification is required before private CRM access.' }, { status: 403 });
+
+  return privateJson({ authorized: true, email, aal: 'aal2' });
 }
 
 export const GET = methodNotAllowed;
