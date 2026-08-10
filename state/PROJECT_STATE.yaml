@@ -15,6 +15,11 @@ model: gpt-5.6-terra
 last_safe_boundary: 9a06a94
 last_verified_task: iw_p0_31_current_deployment_evidence_reconciled
 blocked_on: "Owner MFA enrollment/session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain human-controlled. The deployed candidate also exposes a migration-sensitive MiniMax latency boundary: the fixed 8s request timeout produced provider_timeout on the live route despite direct provider HTTP 200."
+failed_live:
+  - MINIMAX_DEPLOYED_STRUCTURED_TRIAGE_TIMEOUT_OR_INVALID_OUTPUT
+waiting_external:
+  - WAITING_EXTERNAL_OWNER_MFA_ENROLLMENT_AND_AAL2_SESSION_EVIDENCE
+  - WAITING_EXTERNAL_D008_ADULT_LEGAL_OWNER_DECISION
 
 new_netlify_release:
   status: DEPLOYED_TARGETED_VERIFICATION
