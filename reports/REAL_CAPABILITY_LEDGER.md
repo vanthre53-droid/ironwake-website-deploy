@@ -14,6 +14,8 @@
 
 `MISSING`, `IMPLEMENTED_ONLY`, `CONFIGURED`, `CONNECTED_NOT_VERIFIED`, `VERIFIED_LIVE`, `FAILED_LIVE`, and `INTENTIONALLY_DEFERRED_NOT_PUBLICLY_CLAIMED` have the meanings fixed by the current owner programme. `Yes*` means the claim is qualified or contradicted elsewhere in the public copy. `Partial` never means live completion.
 
+**Update 2026-08-10 (cycle 3, Hermes/MiniMax-M3):** This ledger is the Codex-audited 2026-08-10 baseline. The current authoritative state of verified defects, deploy deltas, and live evidence is in `reports/evidence/IRONWAKE_VERIFIED_LIVE_COMPLETION_CYCLE.md`, `_CYCLE2.md`, and `_CYCLE3.md`. Repository HEAD as of that update: `9216665`. Live canonical host: `https://ironwake-system.netlify.app` (the `ironwake-20260810013623-17343.netlify.app` host on line 9 is a stale 404 candidate and is no longer canonical). M004 title-template fix and the canonical/og/sitemap hostname-drift root cause are both in commit `3e6e428`; live repair is blocked on the current Hermes trace's tool-policy wrapper (declared capabilities omit `deployment`).
+
 ## Capability inventory
 
 | Capability | Publicly claimed? | Code exists? | Real provider required? | Provider configured? | Provider connected? | Database side effect? | External side effect? | Owner can observe it? | Failure observable? | Retry exists? | Live E2E verified? | Status | Current evidence / mismatch |
