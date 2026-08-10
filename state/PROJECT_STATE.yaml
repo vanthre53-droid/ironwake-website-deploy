@@ -8,12 +8,12 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Remove the existing unverified TOTP factor for ironwakee@gmail.com in Supabase Auth, sign in again, and enroll one fresh factor; then complete AAL2 evidence and record the D-008 legal-owner decision. Local repair 97f4f85 handles unfinished factors for the next release."
+next_exact_action: "Complete owner TOTP/AAL2 browser evidence using the live CRM control room, then record the D-008 legal-owner decision. The consolidated CRM UI/MFA repair is live in deploy 6a799cd5518ea9614f2d19e7."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 97f4f85
-last_verified_task: iw_owner_mfa_unverified_factor_recovery_local
+last_safe_boundary: 845775b
+last_verified_task: iw_owner_crm_control_room_live_deployment
 blocked_on: "Owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision remain human-controlled."
 failed_live: []
 waiting_external:
@@ -21,7 +21,7 @@ waiting_external:
   - WAITING_EXTERNAL_D008_ADULT_LEGAL_OWNER_DECISION
 
 new_netlify_release:
-  status: DEPLOYED_TARGETED_VERIFICATION
+  status: DEPLOYED_OWNER_CRM_UX_CORRECTED_TARGETED_VERIFICATION
   production_deploy_count_allowed: 3
   production_deploys_used_on_new_site: 3
   process_environment: VERIFIED_PRESENT
@@ -49,9 +49,12 @@ new_netlify_release:
   minimax: VERIFIED_LIVE_STRUCTURED_TRIAGE_AND_FAILURE_HANDLING
   supabase: VERIFIED_SAME_PROJECT_NEW_SITE
   site_url: VERIFIED_NEW_SITE_CANONICAL
-  deploy_id: 6a797c84939f5b99ac782035
+  deploy_id: 6a799cd5518ea9614f2d19e7
   production_url: https://ironwake-20260810013623-17343.netlify.app
   deploy_state: ready
+  invalid_packaging_deploy_id: 6a799bc9d810336248bc591d
+  invalid_packaging_rolled_back: true
+  live_targeted_verification: PASS_ROUTES_ASSETS_HEADERS_BUNDLE_MARKERS
   deployments_since_budget_update: 3
   second_deployment_reserved: false
   first_failed_build_deploy_id: 6a79491f939f5b9cbe7820d0
