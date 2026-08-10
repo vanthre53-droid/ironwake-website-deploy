@@ -22,3 +22,9 @@ test('password recovery exchanges PKCE code and handles PASSWORD_RECOVERY event'
   assert.match(source, /event === 'PASSWORD_RECOVERY'/);
   assert.match(source, /history\.replaceState/);
 });
+
+test('password recovery accepts the supported token-hash recovery link form', () => {
+  assert.match(source, /token_hash/);
+  assert.match(source, /verifyOtp\(\{ token_hash: tokenHash, type: 'recovery' \}\)/);
+  assert.match(source, /tokenType === 'recovery'/);
+});

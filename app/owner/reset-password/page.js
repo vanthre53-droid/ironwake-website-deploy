@@ -40,12 +40,19 @@ export default function ResetPasswordPage() {
       // Supabase password-recovery links may use the PKCE `code` query
       // parameter. Exchange it explicitly before checking the session so the
       // reset form does not race the client URL detector.
-      const code = new URLSearchParams(window.location.search).get('code');
-      if (code) {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+      const tokenHash = params.get('token_hash');
+      const tokenType = params.get('type');
+      if (code || tokenHash) {
         // Remove the single-use code before any async work so it cannot remain
         // in browser history or be copied from the address bar on failure.
         window.history.replaceState({}, document.title, window.location.pathname);
-        const { error } = await client.auth.exchangeCodeForSession(code);
+        const { error } = code
+          ? await client.auth.exchangeCodeForSession(code)
+          : tokenType === 'recovery'
+            ? await client.auth.verifyOtp({ token_hash: tokenHash, type: 'recovery' })
+            : { error: { code: 'invalid_recovery_type' } };
         if (error && active) return setStatus(safeMessage(error));
       }
       const { data, error } = await client.auth.getSession();
