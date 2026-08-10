@@ -875,3 +875,10 @@ Append one entry after every atomic task. Never rewrite history to hide a failur
 - Verification: focused worker/webhook/store/migration tests passed 20/20. One labelled priority outbox event was processed once through the existing official pre-domain Resend test path. Its exact durable readback reports one attempt, `accepted`, `delivered`, two provider events (`email.sent`, `email.delivered`), and populated `delivered_at`.
 - Safety: no Resend webhook was recreated, no signing secret/key/recipient/payload/provider message ID was logged or committed, and no routine sender configuration was enabled. The custom-domain sender remains required before operational email is claimed.
 - Next exact action: continue only independent MFA owner-session/direct-object evidence and adult/legal-owner D-008 retention/deletion/backup/restore decisions.
+
+### 2026-08-10T01:49:00Z — C1/P0.32_new_netlify_release_configuration_guard
+
+- Result: `VERIFIED_LOCAL`. The final-release build now requires a complete intended host/Supabase/MiniMax/Resend/transactional-email contract and reports only missing or invalid variable names. It prevents an accidental fallback to the old Netlify hostname on the new site.
+- Verification: focused release-config, notification-config, and signed-webhook tests passed 16/16. A local optimized build passed with a non-routable candidate host and safe test-only mail addressing; local home/sitemap/robots derived that candidate host, and audit/webhook/owner unsupported methods retained their no-store 405 boundaries.
+- Boundary: this runtime has no `NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID`, or `NETLIFY_SITE_URL`, despite the migration directive. No new-site inspection/configuration, Resend webhook update, push, or production deployment was attempted. The one-production-deploy budget remains unused.
+- Next exact action: inject the existing new-site Netlify variables into this process, then complete site/environment/webhook comparison before freezing and deploying the candidate once.

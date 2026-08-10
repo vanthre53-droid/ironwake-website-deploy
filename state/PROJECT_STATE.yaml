@@ -44,7 +44,7 @@ new_netlify_release:
   minimax: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
   supabase: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
   site_url: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
-  local_release_candidate: NOT_FROZEN
+  local_release_candidate: PREPARED_RELEASE_CONFIG_GUARD_LOCAL_BUILD_PASS
   post_deploy_verification_queue:
     - Route smoke: home, audit, book, deterministic assistant, owner/login, owner APIs, and webhook method boundary.
     - Canonical host: metadata, sitemap, robots, JSON-LD, and OpenGraph resolve to the new site URL.
