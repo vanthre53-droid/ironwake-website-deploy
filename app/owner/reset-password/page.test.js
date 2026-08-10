@@ -16,3 +16,9 @@ test('password recovery validates a live session before rendering the update for
   assert.match(source, /getSession\(\)/);
   assert.match(source, /invalid or expired/);
 });
+
+test('password recovery exchanges PKCE code and handles PASSWORD_RECOVERY event', () => {
+  assert.match(source, /exchangeCodeForSession\(code\)/);
+  assert.match(source, /event === 'PASSWORD_RECOVERY'/);
+  assert.match(source, /history\.replaceState/);
+});

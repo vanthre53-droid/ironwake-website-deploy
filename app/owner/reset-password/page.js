@@ -29,15 +29,35 @@ export default function ResetPasswordPage() {
 
   useEffect(() => {
     if (!client) return setStatus('Password recovery is not connected.');
-    client.auth.getSession().then(({ data, error }) => {
-      if (error || !data.session) return setStatus('This recovery link is invalid or expired. Request a new link.');
-      setSession(data.session);
+    let active = true;
+    const ready = (next) => {
+      if (!active || !next) return false;
+      setSession(next);
       setStatus('Choose a new owner password.');
+      return true;
+    };
+    const initialize = async () => {
+      // Supabase password-recovery links may use the PKCE `code` query
+      // parameter. Exchange it explicitly before checking the session so the
+      // reset form does not race the client URL detector.
+      const code = new URLSearchParams(window.location.search).get('code');
+      if (code) {
+        const { error } = await client.auth.exchangeCodeForSession(code);
+        if (error && active) return setStatus(safeMessage(error));
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      const { data, error } = await client.auth.getSession();
+      if (error || !data.session) {
+        if (active) setStatus('This recovery link is invalid or expired. Request a new link.');
+        return;
+      }
+      ready(data.session);
+    };
+    const { data: listener } = client.auth.onAuthStateChange((event, next) => {
+      if (event === 'PASSWORD_RECOVERY' || next) ready(next);
     });
-    const { data: listener } = client.auth.onAuthStateChange((_event, next) => {
-      if (next) { setSession(next); setStatus('Choose a new owner password.'); }
-    });
-    return () => listener.subscription.unsubscribe();
+    initialize();
+    return () => { active = false; listener.subscription.unsubscribe(); };
   }, [client]);
 
   async function updatePassword(event) {
