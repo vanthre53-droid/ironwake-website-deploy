@@ -8,15 +8,14 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Hold candidate ebd20ba for the next permitted consolidated production deployment; after publication, run one MiniMax structured-triage verifier, then complete owner MFA evidence and record the adult/legal-owner D-008 decision."
+next_exact_action: "Complete only owner MFA/AAL2 authenticated evidence and the adult/legal-owner D-008 decision; deployment #2 remains unused."
 
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: 9a06a94
 last_verified_task: iw_p0_31_current_deployment_evidence_reconciled
 blocked_on: "Owner MFA enrollment/session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain human-controlled. The deployed candidate also exposes a migration-sensitive MiniMax latency boundary: the fixed 8s request timeout produced provider_timeout on the live route despite direct provider HTTP 200."
-failed_live:
-  - MINIMAX_DEPLOYED_STRUCTURED_TRIAGE_TIMEOUT_OR_INVALID_OUTPUT
+failed_live: []
 waiting_external:
   - WAITING_EXTERNAL_OWNER_MFA_ENROLLMENT_AND_AAL2_SESSION_EVIDENCE
   - WAITING_EXTERNAL_D008_ADULT_LEGAL_OWNER_DECISION
@@ -46,17 +45,19 @@ new_netlify_release:
     - NEXT_PUBLIC_SENTRY_DSN
     - SENTRY_ENVIRONMENT
   resend_webhook: VERIFIED_LIVE_NEW_SITE_SIGNED_CALLBACK
-  minimax: LIVE_PROVIDER_TIMEOUT_REQUIRES_CODE_CORRECTION
+  minimax: VERIFIED_LIVE_STRUCTURED_TRIAGE_AND_FAILURE_HANDLING
   supabase: VERIFIED_SAME_PROJECT_NEW_SITE
   site_url: VERIFIED_NEW_SITE_CANONICAL
   deploy_id: 6a79498cda82b42dc9adbe7f
   production_url: https://ironwake-20260810013623-17343.netlify.app
   deploy_state: ready
+  deployments_since_budget_update: 1
+  second_deployment_reserved: true
   first_failed_build_deploy_id: 6a79491f939f5b9cbe7820d0
   local_release_candidate: PREPARED_RELEASE_CONFIG_GUARD_LOCAL_BUILD_PASS
   held_correction_candidate: ebd20ba
   held_correction_tests: AI_TRIAGE_TARGETED_4_PASS_LOCAL_BUILD_PASS_LOCAL_E2E_COMPLETE
-  production_correction_deploy: NOT_PERMITTED_UNDER_ONE_DEPLOY_BUDGET
+  production_correction_deploy: COMPLETED_DEPLOYMENT_ONE
   post_deploy_verification_queue:
     - Route smoke: home, audit, book, deterministic assistant, owner/login, owner APIs, and webhook method boundary.
     - Canonical host: metadata, sitemap, robots, JSON-LD, and OpenGraph resolve to the new site URL.
@@ -94,7 +95,7 @@ workstream_status:
   W09: verified_live_resend_pre_domain_test_sender_domain_pending
   W10: verified_live_schema_acl_repaired
   W11: deployed_unconfigured_provider_operations
-  W12: failed_live_minimax_timeout_or_invalid_output_correction_held
+  W12: verified_live_minimax_structured_triage_with_safe_invalid_output_handling_owner_session_pending
   W13: deployed_request_only_booking_schema_owner_session_pending
   W14: deployed_follow_up_state_owner_session_pending
   W15: verified_live_resend_callback_owner_session_pending
