@@ -8,13 +8,13 @@ import { PricingReference } from '../../components/PricingReference';
 
 const scenarios = [
   ['lost-before-seen', 'Lost before anyone sees it', 'Every inquiry is written to a durable record before any notification attempt runs. A failed email or WhatsApp send cannot erase the original record, and it stays queryable even if every downstream notification fails.'],
-  ['silent-notification-failure', 'A notification fails silently', 'The local notification design distinguishes queued, processing, provider-accepted, and delivered states. No delivery is currently claimed: email and messaging providers are unconfigured, and a failed provider path stays visible rather than becoming a false sent state.'],
+  ['silent-notification-failure', 'A notification fails silently', 'The deployed notification path distinguishes queued, processing, provider-accepted, and delivered states. Controlled owner-email delivery is connected and signed callbacks are recorded; messaging and routine sender-domain delivery remain separate provider-dependent work.'],
   ['no-owner-no-next-step', 'No next step', 'A saved inquiry is not the same as a handled one. The current intake creates a review task and a due date; assignment and escalation remain separate unfinished capabilities.']
 ];
 
 const steps = [
   ['01 / capture', 'Inquiry saved', 'The record is written to the database first, independent of whether any notification succeeds.'],
-  ['02 / notify', 'Notification intent queued', 'A future configured provider may process a queued outbox with bounded retries. No email or WhatsApp delivery is currently claimed.'],
+  ['02 / notify', 'Notification intent queued', 'The configured Resend worker can process queued outbox events with bounded retries. Provider acceptance remains distinct from delivery, and signed callbacks are required before delivery is shown.'],
   ['03 / own', 'Next action recorded', 'A task with a due date keeps the next review visible; a named assignee is not yet implemented.'],
   ['04 / review', 'State stays honest', 'A provider acceptance is never relabelled as delivered without the actual delivery confirmation.']
 ];
@@ -32,8 +32,8 @@ export function MissedLeadRecoverySystem() {
       <h2>What this system delivers.</h2>
       <div className="system-grid">
         <article className="system-card"><span className="micro">Implemented foundation</span><h3>Durable record + review task</h3><p>An inquiry persists before a send attempt, and the current database records a next action and due date. This does not prove a named assignee or a completed follow-up.</p></article>
-        <article className="system-card"><span className="micro">Current site status</span><h3>Request intake is proven; owner-session evidence remains incomplete</h3><p>The public request path creates a durable record. The deployed owner dashboard still needs authorised MFA-session evidence, while provider delivery remains unconfigured.</p></article>
-        <article className="system-card"><span className="micro">Provider status</span><h3>Email and messaging delivery are unconfigured</h3><p>The deployed outbox and retry contracts preserve notification intent safely. No email, WhatsApp message, provider acceptance, delivery callback, or deliverability claim is made.</p></article>
+        <article className="system-card"><span className="micro">Current site status</span><h3>Request intake is proven; owner-session evidence remains incomplete</h3><p>The public request path creates a durable record. The deployed owner dashboard still needs authorised MFA-session evidence; controlled owner-email delivery is connected separately.</p></article>
+        <article className="system-card"><span className="micro">Provider status</span><h3>Controlled owner email is connected</h3><p>Resend accepts the configured owner-alert path and signed delivery callbacks persist provider events. Messaging and routine sender-domain delivery remain unconnected and are not claimed.</p></article>
         <article className="system-card"><span className="micro">Client deployment</span><h3>Requires provider setup and operational evidence</h3><p>A client workflow needs approved provider terms, a configured account, consent rules, assignment/escalation ownership, and verified callback evidence before it can be described as operational.</p></article>
       </div>
     </section></MotionReveal>

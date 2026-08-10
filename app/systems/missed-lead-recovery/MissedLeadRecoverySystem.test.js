@@ -8,9 +8,9 @@ test('missed lead recovery system stays truthful and interactive', async () => {
   assert.match(source, /useState/);
   assert.match(source, /aria-pressed={active === id}/);
   assert.match(source, /Request a Business Leak Audit/);
-  assert.match(source, /No email or WhatsApp delivery is currently claimed/);
+  assert.match(source, /Controlled owner-email delivery is connected/);
   assert.match(source, /owner-session evidence remains incomplete/);
-  assert.match(source, /deployed outbox and retry contracts/);
+  assert.match(source, /configured Resend worker/);
   assert.match(source, /named assignee is not yet implemented/);
   assert.match(source, /<SiteHeader \/>/);
   assert.match(source, /<SiteFooter \/>/);
