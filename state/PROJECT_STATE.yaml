@@ -8,7 +8,7 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Restart the local server and request a fresh recovery email from `/owner`; production already has the equivalent root-relative callback. Then complete owner TOTP/AAL2 evidence and D-008 legal-owner decision."
+next_exact_action: "Request a fresh recovery email from `/owner` and complete the owner TOTP/AAL2 evidence; then record the D-008 legal-owner decision. The corrected local server is running on port 3000 and the stale port-4303 server was removed."
 
 harness: codex
 model: gpt-5.6-terra
