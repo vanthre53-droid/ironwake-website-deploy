@@ -12,8 +12,8 @@ next_exact_action: "Owner must enroll/verify TOTP and complete one authenticated
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 798311f
-last_verified_task: iw_controlled_audit_booking_outbox_delivery_e2e
+last_safe_boundary: 2c7d1ea
+last_verified_task: iw_controlled_audit_booking_outbox_delivery_e2e_matrix_reconciled
 blocked_on: "Only owner-controlled TOTP enrollment/AAL2 session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain. Auth configuration repair, local verification, Supabase AAL2 migration, and the single authorized production deployment are complete."
 failed_live: []
 waiting_external:
