@@ -12,6 +12,8 @@ test('owner dashboard uses Supabase auth and does not expose service credentials
   assert.doesNotMatch(source, /window\.location\.pathname.*owner\/reset-password/);
   assert.match(source, /from\('inquiries'\)\.select/);
   assert.match(source, /NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY/);
+  assert.match(source, /status === 'unverified'/);
+  assert.match(source, /auth\.mfa\.unenroll/);
   assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY/);
 });
 

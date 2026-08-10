@@ -68,6 +68,11 @@ export function OwnerDashboard() {
     if (error) return setMfa({ status: 'error', factorId: null, challengeId: null, qrCode: '', secret: '', reason: authErrorMessage(error) });
     const verified = data?.totp?.find((factor) => factor.status === 'verified');
     if (verified) return setMfa({ status: 'challenge_required', factorId: verified.id, challengeId: null, qrCode: '', secret: '', reason: '' });
+    const unfinished = data?.totp?.find((factor) => factor.status === 'unverified');
+    if (unfinished) {
+      const { error: removeError } = await client.auth.mfa.unenroll({ factorId: unfinished.id });
+      if (removeError) return setMfa({ status: 'error', factorId: null, challengeId: null, qrCode: '', secret: '', reason: authErrorMessage(removeError) });
+    }
     const { data: enrollment, error: enrollError } = await client.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'IronWake owner authenticator' });
     if (enrollError) return setMfa({ status: 'error', factorId: null, challengeId: null, qrCode: '', secret: '', reason: authErrorMessage(enrollError) });
     setMfa({ status: 'enroll_pending', factorId: enrollment.id, challengeId: null, qrCode: enrollment.totp?.qr_code || '', secret: enrollment.totp?.secret || '', reason: '' });
