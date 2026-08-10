@@ -8,13 +8,13 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Complete only owner TOTP enrollment/AAL2 CRM evidence and the separate D-008 adult/legal-owner decision; the final consolidated deployment is live and no further deployment is authorized."
+next_exact_action: "Publish the held password-recovery repair `1cdff98` only if the owner authorizes a deployment-budget exception; otherwise complete owner TOTP/AAL2 evidence and D-008 without reopening unrelated work."
 
 harness: codex
 model: gpt-5.6-terra
 last_safe_boundary: 3f6216f
 last_verified_task: iw_final_consolidated_deploy_targeted_live_verification
-blocked_on: "Only owner-controlled TOTP enrollment/AAL2 session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain. Auth configuration repair, local verification, Supabase AAL2 migration, workflow E2E, and the two authorized production deployments are complete."
+blocked_on: "Owner password-recovery PKCE repair is locally verified but not live because the authorized two-deployment budget is exhausted; owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision also remain human-controlled."
 failed_live: []
 waiting_external:
   - WAITING_EXTERNAL_OWNER_MFA_ENROLLMENT_AND_AAL2_SESSION_EVIDENCE
