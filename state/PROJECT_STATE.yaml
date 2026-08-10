@@ -6,15 +6,53 @@ programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
 active_stage: C1
 required_role: C1
-current_phase: P0_SECURITY_ASSURANCE
-current_gate: WAITING_EXTERNAL_OWNER_MFA_AND_D008
-next_exact_action: "Obtain an MFA-enrolled authorized owner browser session for deployed owner-dashboard/direct-object evidence. Independently obtain the adult/legal-owner D-008 retention, deletion, backup, and restore decisions. The Resend controlled pre-domain delivery/callback gate is verified; do not send routine operational email until the custom sender domain is verified."
+current_phase: P0_NEW_NETLIFY_FINAL_RELEASE_PREPARATION
+current_gate: PRE_DEPLOY_NEW_NETLIFY_CONFIGURATION
+next_exact_action: "Make NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID, and NETLIFY_SITE_URL available to this Codex process, then verify the existing new site, configure the exact build/functions environment contract, update the existing Resend webhook in place if its target differs, complete local release checks, and reserve exactly one final production deploy. MFA owner evidence and D-008 remain post-deploy/external gates."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 99ed5d0
-last_verified_task: iw_p0_30_resend_live_signed_delivery_callback
-blocked_on: "Only independent human/legal evidence remains: an MFA-enrolled authorized owner browser session for deployed dashboard/direct-object proof, and adult/legal-owner D-008 retention/deletion/backup/restore decisions. The controlled pre-domain Resend send, signed callback, persistence, and delivery-state proof is complete."
+last_safe_boundary: 9a06a94
+last_verified_task: iw_p0_31_current_deployment_evidence_reconciled
+blocked_on: "The new Netlify credentials/site variables were directed as present but are absent from this Codex process, so no new-site inspection, configuration, webhook-target comparison, or final deployment can occur. Independently, MFA owner-session/direct-object evidence and adult/legal-owner D-008 retention/deletion/backup/restore decisions remain human-controlled."
+
+new_netlify_release:
+  status: PREPARING
+  production_deploy_count_allowed: 1
+  production_deploys_used_on_new_site: UNKNOWN_UNINSPECTED
+  process_environment: WAITING_EXTERNAL_NETLIFY_PROCESS_ENV
+  required_build_and_functions_env:
+    - NEXT_PUBLIC_SITE_URL
+    - NEXT_PUBLIC_SUPABASE_URL
+    - NEXT_PUBLIC_SUPABASE_ANON_KEY
+  required_functions_env:
+    - SUPABASE_SERVICE_ROLE_KEY
+    - AI_API_BASE
+    - AI_API_KEY
+    - AI_MODEL
+    - EMAIL_PROVIDER
+    - EMAIL_FROM
+    - EMAIL_NOTIFICATION_RECIPIENT
+    - RESEND_API_KEY
+    - RESEND_WEBHOOK_SECRET
+  optional_env_when_configured:
+    - EMAIL_REPLY_TO
+    - SENTRY_DSN
+    - NEXT_PUBLIC_SENTRY_DSN
+    - SENTRY_ENVIRONMENT
+  resend_webhook: WAITING_FOR_NEW_SITE_URL_COMPARISON
+  minimax: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
+  supabase: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
+  site_url: CONFIGURATION_CHECK_PENDING_NEW_SITE_ENV
+  local_release_candidate: NOT_FROZEN
+  post_deploy_verification_queue:
+    - Route smoke: home, audit, book, deterministic assistant, owner/login, owner APIs, and webhook method boundary.
+    - Canonical host: metadata, sitemap, robots, JSON-LD, and OpenGraph resolve to the new site URL.
+    - Supabase: one controlled deployed path reaches the existing IronWake project.
+    - MiniMax: one controlled deployed inquiry proves structured triage and durable provider/model metadata.
+    - Resend: one controlled pre-domain delivery proves acceptance, signed webhook callback, provider-event persistence, and delivered outbox state on the new site.
+    - Owner MFA, after human enrollment only: AAL2, owner dashboard, owner-only API, anonymous/non-owner/direct-object denial.
+    - Host-migration security: headers plus malformed/unsupported public API requests without data creation.
 
 gates:
   G1_USER_APPROVAL: verified
@@ -27,7 +65,7 @@ gates:
   GC3_RELEASE_CANDIDATE_PASS: partial_not_approved
   G2_SCHEMA_AUTH_SERVER_APPROVAL: verified_notification_state_live_owner_session_pending
   G4_EXTERNAL_PROVIDER_APPROVAL: verified_live_resend_pre_domain_test
-  G5_PRODUCTION_DEPLOY_APPROVAL: verified_deployed_99ed5d0
+  G5_PRODUCTION_DEPLOY_APPROVAL: approved_one_final_new_netlify_deploy_pending
   REAL_CAPABILITY_LEDGER_VERIFIED: verified
   IRONWAKE_REAL_PRODUCT_COMPLETION: partial
 
@@ -54,4 +92,4 @@ workstream_status:
   W19: verified_live_privileged_rpc_boundary
   W20: partial_authorization_repaired_mfa_pending
   W21: blocked_release_dependencies
-  W22: verified_git_connected_production_builds_c2f9663
+  W22: pre_deploy_new_netlify_configuration_pending
