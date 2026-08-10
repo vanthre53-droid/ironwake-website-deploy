@@ -8,12 +8,12 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Request a fresh recovery email from `/owner` and complete the owner TOTP/AAL2 evidence; then record the D-008 legal-owner decision. The corrected local server is running on port 3000 and the stale port-4303 server was removed."
+next_exact_action: "Remove the existing unverified TOTP factor for ironwakee@gmail.com in Supabase Auth, sign in again, and enroll one fresh factor; then complete AAL2 evidence and record the D-008 legal-owner decision. Local repair 97f4f85 handles unfinished factors for the next release."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: c532da2
-last_verified_task: iw_recovery_callback_boundary_cleanup
+last_safe_boundary: 97f4f85
+last_verified_task: iw_owner_mfa_unverified_factor_recovery_local
 blocked_on: "Owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision remain human-controlled."
 failed_live: []
 waiting_external:
