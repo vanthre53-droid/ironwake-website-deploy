@@ -100,11 +100,14 @@ export async function POST(request) {
       });
     }
   }
+  // Keep the request path bounded. The durable queue and scheduled worker
+  // process remaining customer/priority events without turning a provider
+  // outage into a serverless function timeout.
   const notificationResult = await runNotificationWorkerBestEffort({
     env: process.env,
     store: notificationStore,
     inquiryId,
-    limit: 10
+    limit: 1
   });
   if (notificationResult.status === 'worker_error') {
     console.error('[audit] notification worker failed', { safeCode: notificationResult.safeErrorCode });

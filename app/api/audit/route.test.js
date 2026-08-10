@@ -30,7 +30,7 @@ test('audit route fails closed and persists the inquiry through the atomic CRM f
   assert.match(source, /needsPriorityAlert\(triage\)/);
   assert.match(source, /queuePriority\(inquiryId\)/);
   assert.match(source, /runNotificationWorkerBestEffort/);
-  assert.match(source, /inquiryId,[\s\S]*?limit: 10/);
+  assert.match(source, /inquiryId,[\s\S]*?limit: 1/);
   assert.match(source, /notificationResult\.status === 'worker_error'/);
   assert.ok(source.indexOf('runNotificationWorkerBestEffort') < source.lastIndexOf('}, 201)'));
   assert.match(source, /We received your request\. We’ll review it and follow up if needed\.' \}, 201\)/);

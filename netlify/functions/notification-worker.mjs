@@ -12,7 +12,9 @@ export async function runScheduledNotificationWorker(env = process.env) {
   return runNotificationWorkerBestEffort({
     env,
     store: createSupabaseNotificationStore(supabase),
-    limit: 10
+    // Two bounded provider calls stay within the scheduled function budget;
+    // queued events remain durable and are picked up on the next invocation.
+    limit: 2
   });
 }
 
