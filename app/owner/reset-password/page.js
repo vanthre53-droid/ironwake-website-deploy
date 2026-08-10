@@ -42,9 +42,11 @@ export default function ResetPasswordPage() {
       // reset form does not race the client URL detector.
       const code = new URLSearchParams(window.location.search).get('code');
       if (code) {
+        // Remove the single-use code before any async work so it cannot remain
+        // in browser history or be copied from the address bar on failure.
+        window.history.replaceState({}, document.title, window.location.pathname);
         const { error } = await client.auth.exchangeCodeForSession(code);
         if (error && active) return setStatus(safeMessage(error));
-        window.history.replaceState({}, document.title, window.location.pathname);
       }
       const { data, error } = await client.auth.getSession();
       if (error || !data.session) {
