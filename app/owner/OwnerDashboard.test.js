@@ -7,6 +7,9 @@ test('owner dashboard uses Supabase auth and does not expose service credentials
   assert.match(source, /'use client'/);
   assert.match(source, /signInWithPassword/);
   assert.match(source, /signOut/);
+  assert.match(source, /resetPasswordForEmail/);
+  assert.match(source, /new URL\('\/owner\/reset-password', window\.location\.origin\)/);
+  assert.doesNotMatch(source, /window\.location\.pathname.*owner\/reset-password/);
   assert.match(source, /from\('inquiries'\)\.select/);
   assert.match(source, /NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY/);
   assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY/);

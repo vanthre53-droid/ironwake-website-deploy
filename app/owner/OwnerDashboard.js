@@ -187,7 +187,10 @@ export function OwnerDashboard() {
     event.preventDefault();
     if (!client) return setStatus('Owner authentication is not connected.');
     const form = new FormData(event.currentTarget);
-    const { error } = await client.auth.resetPasswordForEmail(String(form.get('email') || ''), { redirectTo: `${window.location.origin}/owner/reset-password` });
+    // Resolve from the origin so the recovery callback cannot inherit the
+    // current route (for example `/systems`) from a stale/local page.
+    const redirectTo = new URL('/owner/reset-password', window.location.origin).toString();
+    const { error } = await client.auth.resetPasswordForEmail(String(form.get('email') || ''), { redirectTo });
     setStatus(error ? authErrorMessage(error) : 'If the address is eligible, a password-recovery link has been sent.');
   }
 
