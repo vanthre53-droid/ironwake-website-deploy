@@ -55,7 +55,7 @@ new_netlify_release:
   first_failed_build_deploy_id: 6a79491f939f5b9cbe7820d0
   local_release_candidate: PREPARED_RELEASE_CONFIG_GUARD_LOCAL_BUILD_PASS
   held_correction_candidate: ebd20ba
-  held_correction_tests: AI_TRIAGE_TARGETED_4_PASS
+  held_correction_tests: AI_TRIAGE_TARGETED_4_PASS_LOCAL_BUILD_PASS_LOCAL_E2E_COMPLETE
   production_correction_deploy: NOT_PERMITTED_UNDER_ONE_DEPLOY_BUDGET
   post_deploy_verification_queue:
     - Route smoke: home, audit, book, deterministic assistant, owner/login, owner APIs, and webhook method boundary.
