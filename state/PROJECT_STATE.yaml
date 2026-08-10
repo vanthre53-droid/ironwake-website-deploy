@@ -8,11 +8,11 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Complete only the remaining owner TOTP/AAL2 evidence and D-008 legal-owner decision; the corrected candidate is now live."
+next_exact_action: "Restart the local server and request a fresh recovery email from `/owner`; production already has the equivalent root-relative callback. Then complete owner TOTP/AAL2 evidence and D-008 legal-owner decision."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: a84a33e
+last_safe_boundary: a688c5a
 last_verified_task: iw_final_authorized_deploy_targeted_live_verification
 blocked_on: "Owner TOTP/AAL2 evidence and the adult/legal-owner D-008 decision remain human-controlled."
 failed_live: []

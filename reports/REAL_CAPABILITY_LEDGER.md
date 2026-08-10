@@ -5,7 +5,7 @@
 - Audited by: Codex
 - Audited at: 2026-08-10 UTC
 - Repository source candidate: `11cfb84` (consolidated owner-auth and workflow-truth candidate)
-- Deployed application candidate: `a84a33e`, deploy `6a797c84939f5b99ac782035`.
+- Deployed application candidate: `a84a33e`, deploy `6a797c84939f5b99ac782035`. Local follow-up candidate `a688c5a` hardens recovery URL construction; no deployment was needed because production already uses the same `/owner/reset-password` path.
 - Production: `https://ironwake-20260810013623-17343.netlify.app`
 - Rule: this ledger is reconstructed from current source, live provider/database readback, and deployed HTTP behavior. The prior `VERIFIED_COMPLETE` flag and matrix are historical evidence only.
 - Remediation checkpoints: live Supabase migrations `20260809101715_secure_owner_and_privileged_rpcs`, `20260809104514_durable_notification_state_machine`, `20260809170000_targeted_notification_claim`, and `20260809171000_fix_targeted_notification_claim_ambiguity` are verified on 2026-08-09. The fail-closed Resend adapter/worker, raw-body signature-verified delivery webhook, exact-event test selector, and owner notification operations are deployed. One labelled pre-domain Resend test was accepted, delivered, signature-verified, and durably correlated to its outbox event. Routine domain-sender configuration and authenticated owner-dashboard evidence remain separate; the overall programme remains `PARTIAL`.
