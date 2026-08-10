@@ -8,7 +8,7 @@ const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironwake-
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL),
-  title: { default: 'IronWake — Systems that answer', template: '%s — IronWake' },
+  title: { default: 'IronWake — Systems that answer', template: '%s' },
   description: 'IronWake helps service businesses map and repair leaks across inquiry, booking, follow-up, and reception workflows.',
   // ponytail: indexing enabled for netlify.app; update canonical when ironwake.dev is live.
   robots: { index: true, follow: true },
