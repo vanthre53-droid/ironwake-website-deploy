@@ -8,13 +8,13 @@ active_stage: C1
 required_role: C1
 current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
 current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Complete only owner MFA/AAL2 authenticated evidence and the adult/legal-owner D-008 decision; deployment #2 remains unused."
+next_exact_action: "Owner must enroll/verify TOTP and complete one authenticated AAL2 CRM session; then record the separate D-008 adult/legal-owner decision. No further deployment is authorized or needed."
 
 harness: codex
 model: gpt-5.6-terra
-last_safe_boundary: 9a06a94
-last_verified_task: iw_p0_31_current_deployment_evidence_reconciled
-blocked_on: "Owner MFA enrollment/session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain human-controlled. Deployment #1 and targeted MiniMax failure/success verification are complete; deployment #2 remains unused."
+last_safe_boundary: 798311f
+last_verified_task: iw_owner_auth_publishable_key_aal2_repair_deployed
+blocked_on: "Only owner-controlled TOTP enrollment/AAL2 session evidence and the adult/legal-owner D-008 retention/deletion/backup/restore decision remain. Auth configuration repair, local verification, Supabase AAL2 migration, and the single authorized production deployment are complete."
 failed_live: []
 waiting_external:
   - WAITING_EXTERNAL_OWNER_MFA_ENROLLMENT_AND_AAL2_SESSION_EVIDENCE
@@ -28,7 +28,8 @@ new_netlify_release:
   required_build_and_functions_env:
     - NEXT_PUBLIC_SITE_URL
     - NEXT_PUBLIC_SUPABASE_URL
-    - NEXT_PUBLIC_SUPABASE_ANON_KEY
+    - NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+    - NEXT_PUBLIC_SUPABASE_ANON_KEY (legacy compatibility only)
   required_functions_env:
     - SUPABASE_SERVICE_ROLE_KEY
     - AI_API_BASE
