@@ -14,6 +14,10 @@ test('owner dashboard uses Supabase auth and does not expose service credentials
   assert.match(source, /NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY/);
   assert.match(source, /status === 'unverified'/);
   assert.match(source, /auth\.mfa\.unenroll/);
+  assert.match(source, /crm-owner-card/);
+  assert.match(source, /CRM control room/);
+  assert.match(source, /crm-summary/);
+  assert.match(source, /record-card-top/);
   assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY/);
 });
 
