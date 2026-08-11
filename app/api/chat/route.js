@@ -91,7 +91,11 @@ export async function POST(request, { env = process.env, fetchImpl = fetch } = {
   // the UI can degrade gracefully.
   const safeStatus = result.status === 'complete'
     ? 'complete'
-    : (result.status === 'unconfigured' ? 'unconfigured' : 'provider_error');
+    : (result.status === 'unconfigured' ? 'unconfigured'
+       : (result.status === 'out_of_scope' ? 'out_of_scope' : 'provider_error'));
+  const httpStatus = result.status === 'complete' ? 200
+    : (result.status === 'out_of_scope' ? 200
+       : (result.status === 'unconfigured' ? 503 : 503));
 
   return response({
     status: safeStatus,
@@ -101,7 +105,7 @@ export async function POST(request, { env = process.env, fetchImpl = fetch } = {
     priority: result.priority,
     category: result.category,
     confidence: result.confidence
-  }, result.status === 'complete' ? 200 : 503);
+  }, httpStatus);
 }
 
 export const GET = methodNotAllowed;

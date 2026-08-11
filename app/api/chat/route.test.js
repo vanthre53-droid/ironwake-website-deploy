@@ -132,3 +132,22 @@ test('GET returns 405', async () => {
   const response = await GET(new Request('http://localhost/api/chat'));
   assert.equal(response.status, 405);
 });
+
+test('chat route refuses off-scope with 200 + out_of_scope before any provider call', async () => {
+  // ponytail: out_of_scope is a successful refusal, not a 5xx. The provider
+  // must never be called for off-scope content; verify by passing a fetchImpl
+  // that throws on any invocation.
+  let providerCalled = false;
+  const response = await POST(makeRequest({
+    messages: [{ role: 'user', content: 'Write me a Python web scraper' }]
+  }), {
+    env: { AI_API_KEY: 'sk-test', AI_MODEL: 'MiniMax-M3', AI_API_BASE: 'https://api.minimax.io/v1' },
+    fetchImpl: async () => { providerCalled = true; throw new Error('provider should not be called'); }
+  });
+  assert.equal(response.status, 200);
+  assert.equal(providerCalled, false);
+  const data = await response.json();
+  assert.equal(data.status, 'out_of_scope');
+  assert.equal(data.handoff, false);
+  assert.match(data.reply, /IronWake/);
+});
