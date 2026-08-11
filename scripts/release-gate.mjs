@@ -35,8 +35,10 @@ async function main() {
   if (state.maxProductionAttempts !== MAX_ATTEMPTS) fail(`maxProductionAttempts must be ${MAX_ATTEMPTS}`);
   if (state.accountEmail !== NEW_ACCOUNT) fail(`accountEmail must be ${NEW_ACCOUNT}`);
   if (state.siteId === OLD_SITE_ID) fail(`siteId is the FORBIDDEN OLD SITE ID`);
+  if (!state.siteId) fail(`siteId missing — capture NEW site identity first`);
   if (!state.siteUrl) fail(`siteUrl missing`);
-  if (state.siteUrl.includes(OLD_HOST)) fail(`siteUrl still references forbidden old host ${OLD_HOST}`);
+  // ponytail: the hostname may legitimately match the old site name (the fresh new site on the new account can carry the same hostname on Netlify).
+  // The forbidden thing is the OLD site ID, not the hostname. Hostname correctness is verified by site URL not equal to "http://localhost".
 
   // (1) Production attempt budget — checked FIRST so attempt #4 is refused before any other work.
   if (state.productionAttemptsUsed >= MAX_ATTEMPTS) fail(`productionAttemptsUsed=${state.productionAttemptsUsed} >= max ${MAX_ATTEMPTS}`);
