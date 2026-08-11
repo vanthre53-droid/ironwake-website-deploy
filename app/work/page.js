@@ -13,7 +13,7 @@ const portfolio = [
   { id: 'dentacare', name: 'DentaCare Pro', industry: 'Dental Clinics', tag: 'Front-desk intake flow', url: 'https://manchester-gentle-dental.vercel.app', caseHref: '/work/dentacare-pro' },
   { id: 'aura', name: 'Aura Archives', industry: 'Luxury Retail', tag: 'Bespoke inquiry capture', url: 'https://bluestone-jewellery-prototype.vercel.app', caseHref: '/work/aura-archives' },
   { id: 'luxe', name: 'Luxe Studio', industry: 'Wine & Spirits', tag: 'Booking and studio system', url: 'https://luxe-studio-wine.vercel.app', caseHref: '/work/luxe-studio' },
-  { id: 'bramble', name: 'Bramble Cafe', industry: 'Hospitality', tag: 'Reservation and catering', url: 'https://bramble-cafe.vercel.app', caseHref: '/work/bramble-cafe' },
+  { id: 'bramble', name: 'Bramble Cafe', industry: 'Hospitality', tag: 'Reservation and catering', url: null, externalPending: true, caseHref: '/work/bramble-cafe' },
   { id: 'voltix', name: 'Voltix', industry: 'Electronics', tag: 'Quote and support capture', url: 'https://voltix-fawn.vercel.app', caseHref: '/work/voltix' },
   { id: 'retech', name: 'RE-TECH', industry: 'Technology', tag: 'Service request capture', url: 'https://re-tech-umber.vercel.app', caseHref: '/work/retech' },
   { id: 'atelier', name: 'Atelier Safe', industry: 'Salons & Spas', tag: 'Consultation follow-up ownership', url: 'https://atelier-luxury-salon.vercel.app', caseHref: '/work/atelier' },
@@ -31,7 +31,7 @@ export default function WorkPage() {
     <section className="hero compact">
       <span className="eyebrow">Portfolio</span>
       <h1>Nine businesses. One principle: every enquiry gets an owner.</h1>
-      <p>Each project below is a live demonstration you can open and inspect. These are capability proofs — not client engagements or measured results.</p>
+      <p>Each project below is a live demonstration you can open and inspect. These are capability proofs — not client engagements or measured results. Names like "Harbour Estates", "Aura Archives", and "BlueStone" are fictional themes mapped to prototype URLs; the underlying build is the demonstration.</p>
     </section>
 
     <MotionReveal>
@@ -47,7 +47,11 @@ export default function WorkPage() {
                 <h3>{p.name}</h3>
                 <p>{p.tag}</p>
                 <div className="portfolio-actions">
-                  <a className="button" href={p.url} target="_blank" rel="noopener noreferrer">View live demo →</a>
+                  {p.url ? (
+                    <a className="button" href={p.url} target="_blank" rel="noopener noreferrer">View live demo →</a>
+                  ) : (
+                    <span className="button" aria-disabled="true">External demo pending</span>
+                  )}
                   {p.caseHref && <a className="text-link" href={p.caseHref}>Read case study</a>}
                 </div>
               </div>

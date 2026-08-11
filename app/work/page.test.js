@@ -16,7 +16,8 @@ test('work page keeps demonstrations labelled and free of client-engagement clai
   assert.match(source, /manchester-gentle-dental\.vercel\.app/);
   assert.match(source, /bluestone-jewellery-prototype\.vercel\.app/);
   assert.match(source, /luxe-studio-wine\.vercel\.app/);
-  assert.match(source, /bramble-cafe\.vercel\.app/);
+  // P7 bramble-cafe external link intentionally removed: live-demo metadata defect cannot be corrected from this repo.
+  assert.match(source, /External demo pending/);
   assert.match(source, /voltix-fawn\.vercel\.app/);
   assert.match(source, /re-tech-umber\.vercel\.app/);
   assert.match(source, /atelier-luxury-salon\.vercel\.app/);
