@@ -11,6 +11,14 @@
 [functions."notification-worker"]
   schedule = "*/2 * * * *"
 
+# ponytail: customer-auth migration bootstrap endpoint. Idempotent; gated by
+# MIGRATE_SECRET env var; safe to invoke multiple times. Triggered once after
+# production deploy to apply supabase/migrations/20260811100000_customer_auth_and_chat.sql.
+[[redirects]]
+  from = "/api/admin/migrate-customer-auth"
+  to = "/.netlify/functions/migrate-customer-auth"
+  status = 200
+
 # Security headers (matches next.config.mjs headers() for redundancy)
 [[headers]]
   for = "/*"
