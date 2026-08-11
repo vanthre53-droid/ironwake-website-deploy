@@ -1,18 +1,18 @@
 import { redirect } from 'next/navigation.js';
 import { createServerSupabase } from '../../lib/supabase/clients.mjs';
-import { LoginForm } from './LoginForm';
+import { SignupForm } from './SignupForm';
 
 export const metadata = {
-  title: 'Sign in — IronWake',
-  description: 'Sign in to your IronWake customer account to view your conversations, audit history, and profile.',
+  title: 'Create your IronWake account',
+  description: 'Save your IronWake conversations, track audit and request history, and pick up where you left off.',
   robots: { index: false, follow: false },
 };
 
-export default async function LoginPage() {
+export default async function SignupPage() {
   const supabase = await createServerSupabase();
   if (supabase) {
     const { data: { user } } = await supabase.auth.getUser();
     if (user) redirect('/account');
   }
-  return <LoginForm />;
+  return <SignupForm />;
 }

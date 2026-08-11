@@ -25,3 +25,6 @@
 hermes.db
 kernel.db
 runtime/
+
+# Strix security-run evidence lives outside the release tree.
+strix_runs/

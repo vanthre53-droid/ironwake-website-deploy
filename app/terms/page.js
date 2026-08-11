@@ -3,7 +3,7 @@ import { SiteHeader } from '../components/SiteHeader';
 
 export const metadata = {
   title: 'Terms — IronWake',
-  description: 'How the published setup prices, scope requests, proposals, and provider costs work on this site, and what is not yet an automatic ordering flow.'
+  description: 'How the published setup prices, scope requests, customer accounts, proposals, and provider costs work on this site, and what is not yet an automatic ordering flow.'
 };
 
 export default function TermsPage() {
@@ -12,7 +12,7 @@ export default function TermsPage() {
     <section className="hero compact">
       <span className="eyebrow">IronWake / Terms</span>
       <h1>What these terms cover right now.</h1>
-      <p>This site is a capability demo running in pre-launch mode. The published setup prices are real, the scope request is a real form, but proposals and contracts are handled by email until the first client is onboarded.</p>
+      <p>This site is a capability demo running in pre-launch mode. The published setup prices are real, the scope request is a real form, customer accounts are real, and the chatbot is a real AI — but proposals and contracts are handled by email until the first client is onboarded.</p>
     </section>
 
     <section className="surface">
@@ -24,6 +24,19 @@ export default function TermsPage() {
     <section className="surface">
       <h2>Scope request flow</h2>
       <p>Submitting the audit or booking form sends a real record to our operator queue. We treat it as a request to scope work, not as a binding purchase. No charge is taken on the website today.</p>
+    </section>
+
+    <section className="surface">
+      <h2>Customer accounts</h2>
+      <p>You can create a free IronWake account at <a href="/signup">/signup</a>. The account lets you save Ask IronWake conversations, keep your audit and booking history in one place, and return to either without re-entering your details.</p>
+      <p>Customer accounts are separate from the private operator dashboard. A customer account never grants access to the owner CRM or any internal tooling, even if the same email is ever shared.</p>
+      <p>You can update your display name or sign out at any time from <a href="/account">/account</a>. Password changes are handled by Supabase Auth via <a href="/forgot-password">/forgot-password</a>.</p>
+    </section>
+
+    <section className="surface">
+      <h2>Ask IronWake chatbot</h2>
+      <p>The chatbot on this site is a real AI assistant grounded in the published IronWake knowledge. It is scoped to IronWake business questions; it refuses unrelated coding, hacking, or secret-extraction requests. Conversations with the chatbot are anonymous by default. If you create an account and chat while signed in, your conversation is saved to your account and can be reviewed from <a href="/account">/account</a>.</p>
+      <p>The chatbot is not a deployed receptionist for your business. Building a real AI receptionist for a client requires a separately scoped provider build with its own proposal.</p>
     </section>
 
     <section className="surface">

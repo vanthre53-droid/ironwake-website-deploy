@@ -31,7 +31,7 @@ export default function WorkPage() {
     <section className="hero compact">
       <span className="eyebrow">Portfolio</span>
       <h1>Nine businesses. One principle: every enquiry gets an owner.</h1>
-      <p>Each project below is a live demonstration you can open and inspect. These are capability proofs — not client engagements or measured results. Names like "Harbour Estates", "Aura Archives", and "BlueStone" are fictional themes mapped to prototype URLs; the underlying build is the demonstration.</p>
+      <p>Each project below is a portfolio demonstration. Most have a live external prototype you can open and inspect; a few are still being prepared and are clearly labelled. These are capability proofs — not client engagements or measured results. Names like "Harbour Estates", "Aura Archives", and "BlueStone" are fictional themes mapped to prototype URLs; the underlying build is the demonstration.</p>
     </section>
 
     <MotionReveal>

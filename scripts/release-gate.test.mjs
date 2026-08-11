@@ -42,10 +42,10 @@ test('release gate refuses attempt #4 without invoking netlify', async () => {
   // Required scaffold for the gate checks to PASS except for the budget check.
   await writeFile(join(libDir, 'release-config.mjs'), 'export function validateReleaseConfig(){return {ok:true};}');
 
-  // State file: productionAttemptsUsed = MAX (3). Expect gate abort on budget check BEFORE spawn.
+  // State file: productionAttemptsUsed = MAX (2). Expect gate abort on budget check BEFORE spawn.
   const state = {
-    maxProductionAttempts: 3,
-    productionAttemptsUsed: 3,
+    maxProductionAttempts: 2,
+    productionAttemptsUsed: 2,
     accountEmail: NEW_ACCOUNT,
     siteId: 'fake-new-site-id',
     siteUrl: 'https://fake-new-site.netlify.app',
@@ -93,7 +93,7 @@ test('release gate refuses attempt #4 without invoking netlify', async () => {
   // Gate must exit non-zero.
   assert.notEqual(proc.code, 0, `gate should exit non-zero, got ${proc.code}\nstdout: ${proc.stdout}\nstderr: ${proc.stderr}`);
   // Gate must report budget exhausted.
-  assert.match(proc.stderr, /productionAttemptsUsed=3 >= max 3/, 'should report budget exhausted');
+  assert.match(proc.stderr, /productionAttemptsUsed=2 >= max 2/, 'should report budget exhausted');
   // Verify netlify was never invoked.
   const marker = await stat(markerPath).then(() => true).catch(() => false);
   assert.equal(marker, false, 'netlify must NOT be invoked when budget exhausted');

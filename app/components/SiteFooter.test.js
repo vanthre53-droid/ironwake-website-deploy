@@ -11,4 +11,7 @@ test('site footer keeps the demonstration disclosure and active links', async ()
   assert.match(source, /href="\/terms"/);
   assert.match(source, /href="\/pricing"/);
   assert.match(source, /href="\/insights"/);
+  assert.match(source, /href="\/login">Sign in/);
+  assert.match(source, /href="\/signup">Create account/);
+  assert.match(source, /href="\/chat">Ask IronWake/);
 });

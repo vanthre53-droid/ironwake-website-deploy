@@ -8,5 +8,6 @@ test('owner page is a private, non-indexed metadata wrapper around the dashboard
   assert.match(source, /title:\s*'IronWake'/);
   assert.match(source, /private/i);
   assert.match(source, /<OwnerDashboard \/>/);
+  assert.match(source, /robots:\s*\{\s*index:\s*false/);
   assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY/);
 });

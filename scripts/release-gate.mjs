@@ -12,7 +12,7 @@ const MANIFEST_PATH = join(ROOT, '.ironwake/release/FINAL_RELEASE_MANIFEST.json'
 const NEW_ACCOUNT = 'ganeshsai1822015@gmail.com';
 const OLD_SITE_ID = '1927c0b3-532f-469c-b302-1d96cb9c7367';
 const OLD_HOST = 'ironwake-system.netlify.app';
-const MAX_ATTEMPTS = 3;
+const MAX_ATTEMPTS = 2;
 
 function fail(msg) { console.error(`[release-gate] FAIL: ${msg}`); process.exit(1); }
 function ok(msg) { console.log(`[release-gate] ok: ${msg}`); }

@@ -1,4 +1,6 @@
-import Link from 'next/link';
+import Link from 'next/link.js';
+import { SiteFooter } from '../components/SiteFooter';
+import { SiteHeader } from '../components/SiteHeader';
 
 export const metadata = {
   title: 'Insights — IronWake',
@@ -38,6 +40,7 @@ const articles = [
 
 export default function InsightsPage() {
   return <main className="shell">
+    <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">Insights</span>
       <h1>Operational thinking for service businesses.</h1>
@@ -50,7 +53,7 @@ export default function InsightsPage() {
           <span className="micro">{a.category}</span>
           <h2>{a.title}</h2>
           <p>{a.excerpt}</p>
-          <span className="card-link">Read more →</span>
+          <Link className="card-link" href={`/insights/${a.slug}`}>Read more →</Link>
         </article>)}
       </div>
     </section>
@@ -63,5 +66,6 @@ export default function InsightsPage() {
         <a className="button secondary" href="/pricing">See pricing</a>
       </div>
     </section>
+    <SiteFooter />
   </main>;
 }
