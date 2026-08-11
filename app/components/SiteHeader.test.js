@@ -18,4 +18,5 @@ test('site header exposes every active route through native navigation', async (
   }
   assert.match(source, /href="\/audit">Book Diagnostic/);
   assert.match(source, /<details className="mobile-nav">/);
+  assert.match(source, /href="\/login"[^>]*>Owner Login|href="\/login"/, 'site header must include a /login Owner Login control');
 });

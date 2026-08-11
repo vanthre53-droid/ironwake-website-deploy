@@ -2,12 +2,12 @@ import './globals.css';
 import AssistantWidget from './components/AssistantWidget';
 import { ScrollToTop } from './components/ScrollToTop';
 
-// ponytail: metadataBase lets Next.js auto-generate canonical + og:url + og:image absolute URLs from relative paths. Falls back to the live Netlify host when the env var is unset.
-// ponytail: FALLBACK_SITE_URL drives metadataBase, sitemap, robots, JSON-LD canonical. Override via NEXT_PUBLIC_SITE_URL env var per deploy target.
-const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironwake-system.netlify.app';
+// ponytail: metadataBase lets Next.js auto-generate canonical + og:url + og:image absolute URLs from relative paths. Production MUST set NEXT_PUBLIC_SITE_URL so JSON-LD, sitemap, robots, and canonical all match the live host.
+// ponytail: FALLBACK_SITE_URL drives metadataBase, sitemap, robots, JSON-LD canonical. Empty string in CI; require NEXT_PUBLIC_SITE_URL at production.
+const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || '';
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL || 'http://localhost:3000'),
   title: { default: 'IronWake — Systems that answer', template: '%s' },
   description: 'IronWake helps service businesses map and repair leaks across inquiry, booking, follow-up, and reception workflows.',
   // ponytail: indexing enabled for netlify.app; update canonical when ironwake.dev is live.
@@ -33,14 +33,14 @@ export const viewport = {
 // ponytail: JSON-LD canonical URL uses the same FALLBACK_SITE_URL constant as metadataBase so structured data agrees with sitemap/robots.
 
 export default function RootLayout({ children }) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL || 'http://localhost:3000';
   const jsonLd = { '@context': 'https://schema.org', '@graph': [
     { '@type': 'Organization', name: 'IronWake', url: siteUrl, description: 'IronWake maps operational systems for clearer enquiry, booking, follow-up, and reception handoffs.', founder: { '@type': 'Person', name: 'Revanth Nunna' }, areaServed: 'IN', sameAs: ['https://www.instagram.com/ironwake.dev/'] },
     { '@type': 'WebSite', name: 'IronWake', url: siteUrl },
     { '@type': 'Service', name: 'Business Leak Audit', url: `${siteUrl}/audit`, description: 'A review identifying where your enquiry, booking, or follow-up process loses momentum.' },
     { '@type': 'Service', name: 'Missed Lead Recovery', url: `${siteUrl}/systems/missed-lead-recovery`, description: 'Capture every enquiry to a durable record before any notification runs.' },
     { '@type': 'Service', name: 'Booking Certainty', url: `${siteUrl}/systems/booking-control`, description: 'Separate booking requests from confirmed appointments.' },
-    { '@type': 'Service', name: 'AI Receptionist Planning', url: `${siteUrl}/systems/ai-receptionist`, description: 'Planning requirements for a disclosed, human-supervised first-response build. No phone, chat, DM, or model provider is currently connected.' },
+    { '@type': 'Service', name: 'AI Receptionist Planning', url: `${siteUrl}/systems/ai-receptionist`, description: 'Planning requirements for a disclosed, human-supervised first-response build. The IronWake site assistant is live and model-backed; a client receptionist deployment requires separately scoped provider integration.' },
     { '@type': 'ItemList', name: 'IronWake Systems', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Missed Lead Recovery', url: `${siteUrl}/systems/missed-lead-recovery` },
       { '@type': 'ListItem', position: 2, name: 'Booking Certainty', url: `${siteUrl}/systems/booking-control` },

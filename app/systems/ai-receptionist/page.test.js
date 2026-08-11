@@ -11,5 +11,6 @@ test('ai-receptionist page is a metadata wrapper around the client system view',
 
 test('ai-receptionist metadata states the unconnected provider reality', async () => {
   const source = await readFile(new URL('./page.js', import.meta.url), 'utf8');
-  assert.match(source, /No phone, voice, messaging, or model-backed receptionist is currently connected/);
+  // Site assistant may be live; client AI Receptionist still requires separately-scoped provider deployment.
+  assert.match(source, /client AI Receptionist[\s\S]*separately scoped provider/);
 });

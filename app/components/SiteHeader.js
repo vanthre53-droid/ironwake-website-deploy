@@ -1,4 +1,5 @@
 // ponytail: owner-approved nav order — no architecture change, just link labels/paths.
+// ponytail: Login link is owner-only access (not public signup). See /login.
 const links = [
   ['/', 'Home'],
   ['/work', 'Work'],
@@ -15,12 +16,14 @@ export function SiteHeader() {
     <a className="brand" href="/">IronWake<span>_</span><span className="sr-only">Home</span></a>
     <nav className="desktop-nav" aria-label="Primary navigation">
       {links.slice(1).map(([href, label]) => <a href={href} key={href}>{label}</a>)}
+      <a className="nav-login" href="/login">Login</a>
       <a className="nav-cta" href="/audit">Book Diagnostic</a>
     </nav>
     <details className="mobile-nav">
       <summary>Menu</summary>
       <nav aria-label="Mobile navigation">
         {links.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
+        <a className="nav-login" href="/login">Login</a>
         <a className="nav-cta" href="/audit">Book Diagnostic</a>
       </nav>
     </details>

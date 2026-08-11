@@ -188,7 +188,7 @@ export default function AssistantWidget() {
               Send
             </button>
           </form>
-          <p className="assistant-footnote">No login required. Replies may be imperfect — never share passwords, payment details, or identity documents in chat.</p>
+          <p className="assistant-footnote">No login required. Replies may be imperfect — never share passwords, payment details, or identity documents in chat. <a className="assistant-fullpage" href="/chat">Open full chat →</a></p>
         </section>
       )}
     </div>
