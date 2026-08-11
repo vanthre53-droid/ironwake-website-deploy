@@ -92,7 +92,20 @@ async function main() {
   let scanFound = false;
   for (const target of SOURCE_DIRS) {
     try {
-      const { stdout } = await sh('grep', ['-rEl', '--exclude-dir=node_modules', '--exclude-dir=.next', '--exclude-dir=.git', OLD_HOST, join(ROOT, target)]);
+      // Exclude *.test.* / *.test.mjs because test files legitimately reference forbidden values
+      // in negative-test fixtures (asserting "this host is not in active source"). The previous
+      // hostname-hygiene test (lib/site-url-fallback.test.mjs) is the canonical proof.
+      const { stdout } = await sh('grep', [
+        '-rEl',
+        '--exclude-dir=node_modules',
+        '--exclude-dir=.next',
+        '--exclude-dir=.git',
+        '--exclude=*.test.js',
+        '--exclude=*.test.mjs',
+        '--exclude=*.test.cjs',
+        OLD_HOST,
+        join(ROOT, target)
+      ]);
       if (stdout.trim()) { scanFound = true; console.error(`  forbidden old host in ${target}: ${stdout.trim()}`); }
     } catch (e) {
       // grep exits 1 when no matches — nothing to report
