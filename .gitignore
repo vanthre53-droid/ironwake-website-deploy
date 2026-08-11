@@ -20,3 +20,8 @@
 .dev.vars
 /.netlify/
 /.wrangler/
+
+# local runtime / database artifacts (not source, not part of the release candidate)
+hermes.db
+kernel.db
+runtime/
