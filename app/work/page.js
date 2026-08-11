@@ -15,8 +15,8 @@ const portfolio = [
   { id: 'luxe', name: 'Luxe Studio', industry: 'Wine & Spirits', tag: 'Booking and studio system', url: 'https://luxe-studio-wine.vercel.app', caseHref: '/work/luxe-studio' },
   { id: 'bramble', name: 'Bramble Cafe', industry: 'Hospitality', tag: 'Reservation and catering', url: null, externalPending: true, caseHref: '/work/bramble-cafe' },
   { id: 'voltix', name: 'Voltix', industry: 'Electronics', tag: 'Quote and support capture', url: 'https://voltix-fawn.vercel.app', caseHref: '/work/voltix' },
-  { id: 'retech', name: 'RE-TECH', industry: 'Technology', tag: 'Service request capture', url: 'https://re-tech-umber.vercel.app', caseHref: '/work/retech' },
-  { id: 'atelier', name: 'Atelier Safe', industry: 'Salons & Spas', tag: 'Consultation follow-up ownership', url: 'https://atelier-luxury-salon.vercel.app', caseHref: '/work/atelier' },
+  { id: 'retech', name: 'RE-TECH', industry: 'Technology', tag: 'Service request capture', url: null, externalPending: true, caseHref: '/work/retech' },
+  { id: 'atelier', name: 'Atelier Safe', industry: 'Salons & Spas', tag: 'Consultation follow-up ownership', url: null, externalPending: true, caseHref: '/work/atelier' },
 ];
 
 const caseStudies = [
