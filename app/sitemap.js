@@ -1,5 +1,5 @@
 // ponytail: canonical site URL drives sitemap, robots, and JSON-LD. Falls back to the current Netlify deployment so search engines and crawlers see the live host.
-const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironwake-site.netlify.app';
+const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironwake-system.netlify.app';
 
 export default function sitemap() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL;

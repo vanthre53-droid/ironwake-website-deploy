@@ -4,7 +4,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 
 // ponytail: metadataBase lets Next.js auto-generate canonical + og:url + og:image absolute URLs from relative paths. Falls back to the live Netlify host when the env var is unset.
 // ponytail: FALLBACK_SITE_URL drives metadataBase, sitemap, robots, JSON-LD canonical. Override via NEXT_PUBLIC_SITE_URL env var per deploy target.
-const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironwake-site.netlify.app';
+const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ironwake-system.netlify.app';
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL),

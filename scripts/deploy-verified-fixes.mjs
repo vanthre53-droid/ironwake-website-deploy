@@ -48,7 +48,7 @@ const deploys = [
     label: 'Netlify main site (ironwake-system)',
     url: 'https://ironwake-system.netlify.app',
     siteId: '1927c0b3-532f-469c-b302-1d96cb9c7367',
-    artifacts: ['.next', 'netlify.toml', '.netlify/functions-internal'],
+    artifacts: ['.next', 'netlify.toml'],
     command: 'netlify deploy --prod --dir=.next --message="M004: title template + hostname drift"',
     preCheck: () => existsSync(join(repoRoot, '.next')) && existsSync(join(repoRoot, 'netlify.toml')),
   },

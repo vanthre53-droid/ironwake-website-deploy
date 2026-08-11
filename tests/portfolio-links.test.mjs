@@ -65,8 +65,9 @@ test('portfolio link contract: no P5 placeholder URL is invented', () => {
 });
 
 test('portfolio link contract: no portfolio link references a non-vercel host', () => {
-  // Allow ironwake-site.netlify.app (canonical main host).
+  // Allow the canonical main host and any protected portfolio alias.
   const ALLOWED_HOSTS = new Set([
+    'ironwake-system.netlify.app',
     'ironwake-site.netlify.app',
     ...PROTECTED.map((u) => new URL(u).host),
   ]);
