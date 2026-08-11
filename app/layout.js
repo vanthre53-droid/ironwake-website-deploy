@@ -1,5 +1,4 @@
 import './globals.css';
-import { SiteAssistant } from './components/SiteAssistant';
 import AssistantWidget from './components/AssistantWidget';
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -49,5 +48,5 @@ export default function RootLayout({ children }) {
       { '@type': 'ListItem', position: 4, name: 'AI Receptionist', url: `${siteUrl}/systems/ai-receptionist` }
     ]}
   ]};
-  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to main content</a><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />{children}<AssistantWidget /><SiteAssistant /><ScrollToTop /></body></html>;
+  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to main content</a><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />{children}<AssistantWidget /><ScrollToTop /></body></html>;
 }
