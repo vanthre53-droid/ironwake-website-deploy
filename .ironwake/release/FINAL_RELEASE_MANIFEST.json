@@ -84,9 +84,13 @@
   },
   "buildId": "JFeYZX3bWdTW0bpusPB8R",
   "PRODUCTION_DEPLOY_3": {
+    "ID": "6a7c4e1d377fb59a36ba980e",
     "HEAD": "47495b2fd5b386eee88710540d74396a3e13c664",
+    "TIMESTAMP": "2026-08-12T10:46:00Z",
+    "PHASE": "ABSOLUTE_FINAL_CLOSURE",
     "GOAL": "IRONWAKE_ABSOLUTE_FINAL_CLOSURE",
     "PURPOSE": "Final closure: link Bramble/RE-TECH/Atelier live demos (P7/P9/P10) into IronWake Work page; all 9 portfolio demos verified live; 228/228 canonical tests pass.",
-    "STATUS": "PENDING"
+    "STATUS": "DEPLOYED_LIVE",
+    "URL": "https://ironwake-system.netlify.app"
   }
 }
