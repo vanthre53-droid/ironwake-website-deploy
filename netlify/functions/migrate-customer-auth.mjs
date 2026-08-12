@@ -7,18 +7,25 @@
 // supabase/migrations/20260811100000_customer_auth_and_chat.sql.
 //
 // Triggering:
-//   - GET /api/admin/migrate-customer-auth  with header x-migrate-secret: <SECRET>
+//   - GET or POST /api/admin/migrate-customer-auth  with header x-migrate-secret: <SECRET>
 //   - secret must equal env var MIGRATE_SECRET
-//   - returns { ok: true, applied: [...statements] } on success
+//   - returns { ok: true, applied: 'customer_auth_and_chat' } on success
 //   - returns 401 if secret missing/mismatched
-//   - returns 200 with ok:false + error on db failure (idempotent retries safe)
+//   - returns 503 if db connection fails
+//   - returns 200 with ok:false + error on SQL failure (idempotent retries safe)
 //
-// The function is mounted under netlify.toml at /api/admin/migrate-customer-auth
-// so it can be invoked from outside the Next.js runtime if needed.
+// The function is mounted under netlify.toml at /api/admin/migrate-customer-auth.
+//
+// ponytail: env resolution. Netlify Functions v2 pass (request, context)
+// where context.env holds site env vars, and globalThis.Netlify.env exposes
+// the same data. Older v1 signatures passed env directly. We merge every
+// plausible source so this works regardless of which runtime path the
+// request took.
 
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { lookup } from 'node:dns/promises';
 import pg from 'pg';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -38,23 +45,54 @@ function unauthorized() {
   return jsonResponse({ ok: false, error: 'unauthorized' }, 401);
 }
 
+function resolveEnv(context) {
+  // ponytail: try every plausible source for the deploy env.
+  const merged = {};
+  if (context && typeof context === 'object' && context.env && typeof context.env === 'object') {
+    Object.assign(merged, context.env);
+  }
+  if (typeof globalThis !== 'undefined' && globalThis.Netlify && globalThis.Netlify.env) {
+    try {
+      const e = globalThis.Netlify.env;
+      const obj = (typeof e.toObject === 'function') ? e.toObject() : e;
+      if (obj && typeof obj === 'object') Object.assign(merged, obj);
+    } catch { /* ignore */ }
+  }
+  if (typeof process !== 'undefined' && process.env) Object.assign(merged, process.env);
+  return merged;
+}
+
+async function resolveDbHost(url) {
+  // ponytail: Supabase publishes AAAA-only for direct DB endpoints.
+  // The Lambda / Edge runtime's default DNS resolver sometimes refuses
+  // AAAA lookups (returning ENOTFOUND); we look up AAAA ourselves and pass
+  // the literal IPv6 address into pg.Client. If AAAA fails, return the
+  // hostname and let pg try both families.
+  const host = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  const dbHost = `db.${host}`;
+  try {
+    const r = await lookup(dbHost, { family: 6 });
+    return r.address;
+  } catch {
+    return dbHost;
+  }
+}
+
 async function connectDb(env) {
   const url = env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !serviceKey) {
     return { error: 'Supabase public URL or service-role key missing in env.' };
   }
-  const host = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
-  // ponytail: use IPv6 explicitly. Supabase publishes AAAA-only for its
-  // direct database endpoint. Netlify Functions runtime has working IPv6.
+  const host = await resolveDbHost(url);
   const client = new pg.Client({
-    host: `db.${host}`,
+    host,
     port: 5432,
     user: 'postgres',
     password: serviceKey,
     database: 'postgres',
     ssl: { rejectUnauthorized: false },
-    connectionTimeoutMillis: 15000,
+    connectionTimeoutMillis: 20000,
   });
   try {
     await client.connect();
@@ -64,8 +102,10 @@ async function connectDb(env) {
   }
 }
 
-export default async (request, env = process.env) => {
-  // ponytail: only POST from the owner (or anyone holding the MIGRATE_SECRET).
+export default async (request, context) => {
+  const env = resolveEnv(context);
+
+  // ponytail: only POST/GET from anyone holding the MIGRATE_SECRET.
   const secret = request.headers.get('x-migrate-secret') || '';
   const expected = env.MIGRATE_SECRET || '';
   if (!expected || secret !== expected) return unauthorized();
