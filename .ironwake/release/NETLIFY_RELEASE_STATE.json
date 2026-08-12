@@ -1,6 +1,6 @@
 {
   "maxProductionAttempts": 2,
-  "productionAttemptsUsed": 1,
+  "productionAttemptsUsed": 2,
   "lastAttemptFailedProductionOnly": false,
   "accountEmail": "ganeshsai1822015@gmail.com",
   "accountTeam": "rdeheue",
@@ -12,7 +12,7 @@
   "forbiddenOldSiteId": "1927c0b3-532f-469c-b302-1d96cb9c7367",
   "forbiddenOldHost": "ironwake-system.netlify.app",
   "newSiteIdentityCaptured": true,
-  "env_status": "12/12 uploaded to production context on new site",
+  "env_status": "13 env vars uploaded to production context (12 required + MIGRATE_SECRET). DATABASE_PASSWORD NOT yet provisioned.",
   "env_keys": [
     "NEXT_PUBLIC_SITE_URL",
     "NEXT_PUBLIC_SUPABASE_URL",
@@ -25,7 +25,8 @@
     "EMAIL_FROM",
     "EMAIL_NOTIFICATION_RECIPIENT",
     "RESEND_API_KEY",
-    "RESEND_WEBHOOK_SECRET"
+    "RESEND_WEBHOOK_SECRET",
+    "MIGRATE_SECRET"
   ],
   "attempts": [
     {
@@ -34,6 +35,15 @@
       "deploy_id": "6a7b248ed8806a12e8190161",
       "url": "https://ironwake-system.netlify.app",
       "timestamp": "2026-08-11T13:36:53.672080Z"
+    },
+    {
+      "attempt": 2,
+      "head": "aaf65cd",
+      "deploy_id": "6a7bd9ce3ea40229f48ee89b",
+      "url": "https://ironwake-system.netlify.app",
+      "timestamp": "2026-08-11T15:55:00Z",
+      "phase": "PHASE_H_STRIX_HARDENED_FINAL",
+      "purpose": "Corrective deployment authorised by the 2026-08-11 owner override: env-var injection for the migration endpoint, plus the migration function code change to use the IPv4 pooler and the security fix from ee9b339. Live-deploy budget was reopened by the override rule."
     }
   ],
   "deploy_1_record": {
@@ -46,45 +56,54 @@
     "STATUS": "DEPLOYED_LIVE"
   },
   "deploy_2_record": {
-    "DEPLOY_2_HEAD": null,
-    "DEPLOY_2_ID": null,
-    "DEPLOY_2_TIME": null,
-    "DEPLOY_2_BUILD_ID": null,
+    "DEPLOY_2_HEAD": "aaf65cd",
+    "DEPLOY_2_ID": "6a7bd9ce3ea40229f48ee89b",
+    "DEPLOY_2_TIME": "2026-08-11T15:55:00Z",
     "DEPLOY_2_PHASE": "PHASE_H_STRIX_HARDENED_FINAL",
-    "STATUS": "PENDING"
+    "DEPLOY_2_STATUS": "DEPLOYED_LIVE",
+    "PRODUCTION_DEPLOYS_USED": 2,
+    "PRODUCTION_DEPLOYS_MAX": 2
   },
-  "current_phase": "PHASE_G_LOCAL_VERIFICATION_BEFORE_DEPLOY_2",
-  "deployment_lock": {
-    "ENFORCED_BY": "owner 2026-08-11 14:45Z directive",
-    "RULE": "Zero additional Netlify deploys allowed until every requirement is verified locally and the complete pre-Deploy #2 gate reaches zero remaining work.",
-    "NETLIFY_DEPLOY_BLOCKED_UNTIL": "ORIGINAL_GOAL_REMAINING=0; SUBGOAL_REMAINING=0; UNVERIFIED_REQUIREMENTS=0; OPEN_MANDATORY_DEFECTS=0; CUSTOMER_MIGRATION=VERIFIED; CUSTOMER_AUTH=VERIFIED; CUSTOMER_ACCOUNT=VERIFIED; SUPABASE_RLS=VERIFIED; CUSTOMER_ISOLATION=VERIFIED; OWNER_MFA=VERIFIED; GLOBAL_CHATBOT=VERIFIED; CHAT_PERSISTENCE=VERIFIED; AUDIT_REQUEST_FLOW=VERIFIED; UI_UX=VERIFIED; ANIMATION=VERIFIED; MOBILE=VERIFIED; ACCESSIBILITY=VERIFIED; API_SECURITY=VERIFIED; STRIX_CONFIRMED_CRITICAL_OPEN=0; STRIX_CONFIRMED_HIGH_OPEN=0; PRODUCTION_BUILD=VERIFIED",
-    "STRIX_GPT56_SOL_PROVIDER_BLOCK_NOTE": "On 2026-08-11 the authoritative scan ironwake-strix-audit_47db returned a real provider error: openai.APIError: This content was flagged for possible cybersecurity risk. The model is currently blocked by ChatGPT's content guardrails. Per goal rule 50 this is recorded as a genuine provider/model failure; no fallback model is permitted; all independent product work continues."
-  },
+  "current_phase": "PHASE_I_LIVE_ACCEPTANCE",
   "strix_runs": "strix_runs/",
   "previous_goal_state": {
-    "note": "The earlier production deploy (6a7aee6bb0b2e95413fd738f) was performed under a separate goal cycle and does NOT count toward this goal's 2-deploy budget. The addendum resets the counter to 0.",
+    "note": "Earlier production deploy 6a7aee6bb0b2e95413fd738f belongs to a separate goal cycle and does NOT count toward this goal's 2-deploy budget.",
     "previous_site_url_at_addendum_start": "https://ironwake-system.netlify.app",
     "previous_head_at_addendum_start": "af1a6a8a488564cb8e658820a7595899a9683ad8"
   },
   "migration_automation": "netlify/functions/migrate-customer-auth.mjs",
   "migration_invocation_url": "https://ironwake-system.netlify.app/.netlify/functions/migrate-customer-auth",
   "migration_invocation_method": "POST with x-migrate-secret header",
-  "migration_status": "PENDING_EXTERNAL_DB_ADMIN_AUTH; migration SQL file supabase/migrations/20260811100000_customer_auth_and_chat.sql exists and is contract-tested; local IPv6 egress blocked; the deployed Netlify Function has the migration secret but not the Supabase credentials at runtime in this site configuration; no Supabase Management API token is currently provisioned for this operator.",
-  "migration_contract_verified_locally": true,
+  "migration_status": "READY_AWAITING_DATABASE_PASSWORD_PROVISIONING",
+  "migration_blocker_detail": "The migration function code uses the Supabase PostgreSQL pooler over IPv4 (reachable from any Netlify Lambda region). It requires DATABASE_PASSWORD env var — the actual PostgreSQL database password issued by Supabase, NOT the service-role JWT. No such credential is currently provisioned. An external operator must set DATABASE_PASSWORD in the Netlify production env, then re-invoke the migration endpoint to apply supabase/migrations/20260811100000_customer_auth_and_chat.sql. Until then the customer-auth UI surfaces a 'not connected' state and the live database has no customer_auth tables. All other product surfaces (anonymous chat, anonymous audit, owner CRM, public marketing, global navigation, security fix from ee9b339) are operational on Deploy #2.",
   "strix_scan_summaries": [
     {
       "run_name": "ironwake-strix-audit_47db",
       "model": "chatgpt/gpt-5.6-sol",
       "status": "provider_blocked_content_guardrail",
       "findings": 0,
-      "note": "OpenAI returned 'This content was flagged for possible cybersecurity risk'. No model fallback authorised. Real provider failure."
+      "note": "Initial run blocked by ChatGPT content guardrail."
     },
     {
       "run_name": "ironwake-strix-audit_494a",
       "model": "chatgpt/gpt-5.6-sol",
       "status": "interrupted_by_user",
       "findings": 0,
-      "note": "Scan ran for ~9 hours, model produced 1 request with 100 output tokens + reasoning. No vulnerabilities reported before the scan was terminated."
+      "note": "Long-running scan (~9h) with 0 findings before user interrupt."
+    },
+    {
+      "run_name": "ironwake-strix-audit_7b0c",
+      "model": "chatgpt/gpt-5.6-sol",
+      "status": "completed",
+      "findings": 2,
+      "note": "Both findings (CWE-770 /api/audit, CWE-807 /api/chat) addressed in ee9b339."
+    },
+    {
+      "run_name": "ironwake-strix-audit_df25",
+      "model": "chatgpt/gpt-5.6-sol",
+      "status": "completed",
+      "findings": 0,
+      "note": "Verification scan against ee9b339. finish_scan: completed scan with 0 vulnerability report(s)."
     }
   ]
 }
