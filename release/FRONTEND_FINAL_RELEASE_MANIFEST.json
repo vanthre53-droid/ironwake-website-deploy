@@ -1,7 +1,7 @@
 {
   "AUDIT_NAME": "FINAL_FRONTEND_RECOVERY_2026-08-12",
   "BASELINE_HEAD": "39eb1076057e9a2ae3a975b9686c49c501224c68",
-  "FINAL_HEAD": "cd244f76cb98e1941282a8ae7dae3037abc77313",
+  "FINAL_HEAD": "ad1510114420b7eaf5d0d875033328de0805b6be",
   "BASELINE_BRANCH": "master",
   "BASELINE_STATE": "clean working tree at HEAD 39eb107",
   "AUTHORIZED_NETLIFY_SITE_ID": "ee1810a8-877d-482f-b959-01185aa2a67d",
@@ -92,7 +92,7 @@
     "STRIX_FOCUSED_CUSTOMER_DATA_REVIEW": "NOT_RUN (per goal §23, only run if frontend changes introduced isolation risk; this pass only changed presentation/CSS + added a JS-gated round launcher; source-level verification was used as the focused check)",
     "CANONICAL_TESTS": "PASS (221/221)",
     "PRODUCTION_BUILD": "PASS (clean)",
-    "FINAL_FRONTEND_HEAD": "cd244f76cb98e1941282a8ae7dae3037abc77313"
+    "FINAL_FRONTEND_HEAD": "ad1510114420b7eaf5d0d875033328de0805b6be"
   },
   "DEFECTS_OPEN_BY_SEVERITY": {
     "P0": 0,
