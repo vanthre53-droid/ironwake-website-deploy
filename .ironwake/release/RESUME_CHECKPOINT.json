@@ -1,0 +1,33 @@
+{
+  "FINAL_HEAD": "ee05367",
+  "FIX_COMMIT": "ee9b339",
+  "PRODUCTION_DEPLOYS_USED": 1,
+  "PRODUCTION_DEPLOY_1": {
+    "ID": "6a7b248ed8806a12e8190161",
+    "HEAD": "a2f33b3ded667b901f4b600cfb9433487ce192ce",
+    "URL": "https://ironwake-system.netlify.app",
+    "STATUS": "DEPLOYED_LIVE"
+  },
+  "PRODUCTION_DEPLOY_2": "LOCKED pending external database admin auth for customer-auth migration",
+  "CUSTOMER_MIGRATION_STATUS": "EXTERNALLY_BLOCKED_DATABASE_ADMIN_AUTH",
+  "CUSTOMER_MIGRATION_BLOCKER": "Database administration requires the Supabase-issued database password (NOT the SUPABASE_SERVICE_ROLE_KEY, which is a PostgREST bearer). The local sandbox has no IPv6 egress to db.<ref>.supabase.co. The deployed Netlify Function has the MIGRATE_SECRET in process.env but site env vars (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY) are not visible at the function runtime in this site configuration. The Supabase pooler requires a tenant identifier (project_ref) plus the actual database password; using the service_role JWT as a Postgres password fails authentication. No Supabase Management API token is provisioned. An external operator with the database password must apply supabase/migrations/20260811100000_customer_auth_and_chat.sql against the live Supabase project. The migration SQL is contract-tested locally and is idempotent (CREATE TABLE IF NOT EXISTS + policy-existence guards).",
+  "STRIX_STATUS": "VERIFIED_HARDENED",
+  "STRIX_FINDINGS_OPEN": 0,
+  "STRIX_FINDINGS_REMEDIATED": [
+    {"id": "CWE-770", "name": "Rate-limit bypass in /api/audit via client-controlled forwarded IP headers", "severity": "medium", "fix_commit": "ee9b339"},
+    {"id": "CWE-807", "name": "Rate-Limit Bypass in /api/chat via Client-Supplied Forwarding Headers", "severity": "medium", "fix_commit": "ee9b339"}
+  ],
+  "STRIX_FINAL_SCAN": {
+    "run": "ironwake-strix-audit_df25",
+    "status": "completed",
+    "findings": 0,
+    "summary": "finish_scan: completed scan with 0 vulnerability report(s)",
+    "started_at": "2026-08-12T02:03:49.623422+00:00",
+    "ended_at": "2026-08-12T02:14:07.718336+00:00"
+  },
+  "TEST_RESULT": "218/218 passing",
+  "BUILD_RESULT": "fresh .next clean; all required routes built",
+  "ENV_RESULT": "all 12 required env vars present in production context on site ee1810a8-877d-482f-b959-01185aa2a67d",
+  "NEXT_UNFINISHED_ITEM": "External operator must apply the customer-auth migration SQL against the live Supabase project using a real database password (not the service-role JWT). After the migration succeeds, an external DBA confirms profiles / chat_sessions / chat_messages / inquiries.user_id columns, constraints, indexes, and RLS policies exist and behave correctly. Then a controlled two-customer signup/login/session/persistence/isolation test must be performed against the live database. Then the Strix verification scan result must be re-validated against any post-migration drift. Only then may the owner authorise Deploy #2.",
+  "NEXT_EXECUTABLE_ACTION": "Wait for external operator. No autonomous action available in this sandbox. All independent local work is complete and committed (HEAD ee05367)."
+}
