@@ -64,7 +64,7 @@
   "MIGRATION_BLOCKED_DETAIL": "Database administration requires an external credential (Supabase-issued database password) that is not currently provisioned in any environment file, shell variable, or tool config available to this agent. The Supabase service_role JWT is a PostgREST bearer and cannot authenticate to PostgreSQL directly; using it as a Postgres password either fails authentication or, in the pooler case, requires a tenant identifier that is not present. The local sandbox has no IPv6 egress to reach db.<ref>.supabase.co. No Supabase Management API token is provisioned. Per goal rules, all independent local work continues; Deploy #2 remains locked until every pre-deploy gate is verified and an external operator can apply the database migration.",
   "CUSTOMER_MIGRATION_STATUS": "EXTERNALLY_BLOCKED_DATABASE_ADMIN_AUTH",
   "STRIX_GPT56_SOL_STATUS": "VERIFIED_WORKING",
-  "STRIX_SECURITY_STATUS": "TWO_FINDINGS_REMEDIATED_PENDING_VERIFICATION",
+  "STRIX_SECURITY_STATUS": "VERIFIED_HARDENED",
   "STRIX_LLM": "chatgpt/gpt-5.6-sol",
   "STRIX_REASONING_EFFORT": "high",
   "STRIX_DEDUPE_MODEL": "chatgpt/gpt-5.6-sol",
@@ -72,8 +72,8 @@
   "STRIX_RUNS_RECORDED": [
     "strix_runs/ironwake-strix-audit_47db (provider_blocked_content_guardrail, 0 findings)",
     "strix_runs/ironwake-strix-audit_494a (interrupted_by_user, 0 findings)",
-    "strix_runs/ironwake-strix-audit_7b0c (COMPLETED; 2 confirmed findings — both addressed in ee9b339)",
-    "strix_runs/ironwake-strix-audit_<verify> (verification scan against ee9b339; running)"
+    "strix_runs/ironwake-strix-audit_7b0c (COMPLETED; 2 CONFIRMED MEDIUM findings — CWE-770 /api/audit and CWE-807 /api/chat — both addressed in ee9b339)",
+    "strix_runs/ironwake-strix-audit_df25 (VERIFICATION SCAN against ee9b339; COMPLETED with 0 vulnerability reports — finish_scan: completed scan with 0 vulnerability report(s))"
   ],
   "STRIX_FINDINGS_TRIAGE": [
     {
@@ -81,8 +81,9 @@
       "name": "Rate-limit bypass in /api/audit via client-controlled forwarded IP headers",
       "severity": "medium",
       "cvss": 6.5,
-      "status": "REMEDIATED",
+      "status": "REMEDIATED_AND_VERIFIED",
       "fix_commit": "ee9b339",
+      "verification_scan": "ironwake-strix-audit_df25 (0 findings)",
       "root_cause": "requestIdentity() in lib/request-rate-limit.mjs trusted client-supplied x-forwarded-for / x-real-ip, allowing an attacker to rotate the header per request to mint fresh rate-limit buckets and bypass the durable Supabase-backed rate limiter on /api/audit.",
       "remediation": "requestIdentity() now consults only the trusted platform client-IP header (x-nf-client-connection-ip on Netlify, with client-ip as a secondary). When the platform supplies no client IP, the function returns the sentinel 'unknown' so all such requests share one bucket. Added regression tests in lib/request-rate-limit.test.mjs proving spoofed x-forwarded-for / x-real-ip / cf-connecting-ip values do not mint new buckets. Updated app/api/chat/route.test.js to use the trusted header. 218/218 tests pass."
     },
@@ -91,8 +92,9 @@
       "name": "Rate-Limit Bypass in /api/chat via Client-Supplied Forwarding Headers",
       "severity": "medium",
       "cvss": 5.3,
-      "status": "REMEDIATED",
+      "status": "REMEDIATED_AND_VERIFIED",
       "fix_commit": "ee9b339",
+      "verification_scan": "ironwake-strix-audit_df25 (0 findings)",
       "root_cause": "Same root cause as CWE-770: requestIdentity() trusted attacker-controlled forwarding headers on the public /api/chat endpoint, allowing an attacker to drain the MiniMax budget by rotating x-forwarded-for per request.",
       "remediation": "Same fix as CWE-770: requestIdentity() now uses only the trusted platform client-IP header. Verified the test suite covers both bypass vectors."
     }
@@ -101,7 +103,7 @@
   "STRIX_CONFIRMED_HIGH_OPEN": 0,
   "STRIX_CONFIRMED_MEDIUM_OPEN": 0,
   "COPY_AUDIT_RESULT": "home FAQ rewritten (corner helper is a real AI; accounts are explained); /work hero rewritten to truthful 'portfolio demonstration' wording; /insights links repaired with real detail pages; /privacy + /terms updated for Supabase Auth, profiles, persisted authenticated chat",
-  "DEPLOYMENT_LOCK_NOTE": "Per owner directive 2026-08-11: zero Netlify deploys until every pre-Deploy #2 gate is verified. Deploy #2 remains LOCKED because CUSTOMER_MIGRATION_STATUS=EXTERNALLY_BLOCKED_DATABASE_ADMIN_AUTH — the customer-auth migration cannot be applied from this sandbox. Two Strix CONFIRMED MEDIUM findings were addressed locally (ee9b339). No corrective production deployment is authorised for cosmetic, optional, or unverified speculation per the deployment lock directive.",
+  "DEPLOYMENT_LOCK_NOTE": "Per owner directive 2026-08-11: zero Netlify deploys until every pre-Deploy #2 gate is verified. Deploy #2 remains LOCKED because CUSTOMER_MIGRATION_STATUS=EXTERNALLY_BLOCKED_DATABASE_ADMIN_AUTH — the customer-auth migration cannot be applied from this sandbox. The Strix CONFIRMED MEDIUM findings from run 7b0c were addressed locally (ee9b339) and the verification scan (run df25) reported 0 vulnerabilities. No corrective production deployment is authorised for cosmetic, optional, or unverified speculation per the deployment lock directive.",
   "DEPLOY_2_RECORD": {
     "DEPLOY_2_HEAD": null,
     "DEPLOY_2_ID": null,
