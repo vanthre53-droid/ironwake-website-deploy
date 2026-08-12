@@ -21,7 +21,10 @@ import pg from 'pg';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(here, '..', '..');
-const migrationFile = join(repoRoot, 'supabase', 'migrations', '20260811100000_customer_auth_and_chat.sql');
+const migrationFiles = [
+  '20260811100000_customer_auth_and_chat.sql',
+  '20260812100000_harden_customer_isolation.sql',
+].map((name) => join(repoRoot, 'supabase', 'migrations', name));
 
 const RESPONSE_HEADERS = {
   'content-type': 'application/json',
@@ -34,6 +37,21 @@ function jsonResponse(body, status) {
 
 function unauthorized() {
   return jsonResponse({ ok: false, error: 'unauthorized' }, 401);
+}
+
+async function preflight(client) {
+  const mismatch = await client.query(`
+    select count(*)::int as count
+    from public.chat_messages m
+    join public.chat_sessions s on s.id = m.session_id
+    where m.user_id is distinct from s.user_id
+  `);
+  return {
+    ok: true,
+    preflight: true,
+    crossOwnerMessageCount: mismatch.rows[0].count,
+    safeToApply: mismatch.rows[0].count === 0,
+  };
 }
 
 function resolveEnv(context) {
@@ -92,15 +110,28 @@ export default async (request, context) => {
   if (!expected || secret !== expected) return unauthorized();
 
   const { client, error: connectError } = await connectPooler(env);
-  if (connectError) return jsonResponse({ ok: false, error: connectError }, 503);
+  if (connectError) return jsonResponse({ ok: false, error: 'database_unavailable' }, 503);
 
-  const sql = readFileSync(migrationFile, 'utf8');
   try {
-    await client.query(sql);
+    if (new URL(request.url).searchParams.get('mode') === 'preflight') {
+      const result = await preflight(client);
+      await client.end();
+      return jsonResponse(result, 200);
+    }
+    await client.query('begin');
+    for (const migrationFile of migrationFiles) {
+      await client.query(readFileSync(migrationFile, 'utf8'));
+    }
+    await client.query('commit');
     await client.end();
-    return jsonResponse({ ok: true, applied: 'customer_auth_and_chat' }, 200);
+    return jsonResponse({
+      ok: true,
+      applied: ['customer_auth_and_chat', 'harden_customer_isolation'],
+    }, 200);
   } catch (error) {
+    try { await client.query('rollback'); } catch {}
     try { await client.end(); } catch {}
-    return jsonResponse({ ok: false, error: error.message }, 200);
+    console.error('[migrate-customer-auth] operation failed', { code: error?.code || 'unknown' });
+    return jsonResponse({ ok: false, error: 'migration_failed' }, 500);
   }
 };

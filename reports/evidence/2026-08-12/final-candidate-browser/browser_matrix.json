@@ -1,0 +1,3820 @@
+{
+  "base": "http://127.0.0.1:4304",
+  "browser": {
+    "path": "/home/shadowlingo/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+    "product": "system Chromium (existing Playwright cache)"
+  },
+  "startedAt": "2026-08-12T07:28:26.483Z",
+  "endedAt": "2026-08-12T07:29:54.626Z",
+  "durationMs": 88143,
+  "routes": [
+    "/",
+    "/work",
+    "/systems",
+    "/process",
+    "/pricing",
+    "/insights",
+    "/about",
+    "/audit",
+    "/login",
+    "/signup",
+    "/forgot-password",
+    "/chat",
+    "/owner/login",
+    "/account",
+    "/update-password"
+  ],
+  "widths": [
+    360,
+    390,
+    768,
+    1024,
+    1366,
+    1440
+  ],
+  "summary": {
+    "requested": 90,
+    "records": 90,
+    "screenshots": 90,
+    "overflow": 0,
+    "consoleErrorRecords": 0,
+    "pageErrorRecords": 0,
+    "hydrationIndicatorRecords": 0,
+    "httpStatusDistribution": {
+      "200": 35,
+      "304": 55
+    },
+    "httpErrorRecords": 0
+  },
+  "results": [
+    {
+      "finalUrl": "http://127.0.0.1:4304/",
+      "title": "IronWake — Stop losing leads between enquiry and follow-up",
+      "h1Count": 1,
+      "h1Text": [
+        "Stop losing leads between enquiry and follow-up."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/home-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/work",
+      "title": "Work — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Nine businesses. One principle: every enquiry gets an owner."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/work",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/work-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/systems",
+      "title": "Systems — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Give every enquiry an owner and a next step."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/systems",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/systems-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/process",
+      "title": "Process — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Understand the gap before adding another tool."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/process",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/process-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/pricing",
+      "title": "Pricing — IronWake | 5 Systems, 3 Tiers Each",
+      "h1Count": 1,
+      "h1Text": [
+        "Five systems. Three tiers each. No hidden costs."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/pricing",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/pricing-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/insights",
+      "title": "Insights — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Operational thinking for service businesses."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/insights",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/insights-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/about",
+      "title": "About — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Build trust by making the next action clear."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/about",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/about-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/audit",
+      "title": "Business Leak Audit — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Find the step where an enquiry loses momentum."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/audit",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/audit-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/login",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/login-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/signup",
+      "title": "Create your IronWake account",
+      "h1Count": 1,
+      "h1Text": [
+        "Create your IronWake account."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/signup",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/signup-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/forgot-password",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/forgot-password-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/chat",
+      "title": "Ask IronWake — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Full conversation with the IronWake site assistant."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/chat",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/chat-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/owner/login",
+      "title": "Owner Login — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Owner CRM"
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/owner/login",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/owner-login-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login?next=/account",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/account",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/account-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/update-password",
+      "width": 360,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/update-password-360x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/",
+      "title": "IronWake — Stop losing leads between enquiry and follow-up",
+      "h1Count": 1,
+      "h1Text": [
+        "Stop losing leads between enquiry and follow-up."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/home-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/work",
+      "title": "Work — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Nine businesses. One principle: every enquiry gets an owner."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/work",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/work-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/systems",
+      "title": "Systems — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Give every enquiry an owner and a next step."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/systems",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/systems-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/process",
+      "title": "Process — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Understand the gap before adding another tool."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/process",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/process-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/pricing",
+      "title": "Pricing — IronWake | 5 Systems, 3 Tiers Each",
+      "h1Count": 1,
+      "h1Text": [
+        "Five systems. Three tiers each. No hidden costs."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/pricing",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/pricing-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/insights",
+      "title": "Insights — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Operational thinking for service businesses."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/insights",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/insights-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/about",
+      "title": "About — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Build trust by making the next action clear."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/about",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/about-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/audit",
+      "title": "Business Leak Audit — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Find the step where an enquiry loses momentum."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/audit",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/audit-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/login-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/signup",
+      "title": "Create your IronWake account",
+      "h1Count": 1,
+      "h1Text": [
+        "Create your IronWake account."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/signup",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/signup-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/forgot-password",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/forgot-password-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/chat",
+      "title": "Ask IronWake — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Full conversation with the IronWake site assistant."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/chat",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/chat-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/owner/login",
+      "title": "Owner Login — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Owner CRM"
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/owner/login",
+      "width": 390,
+      "height": 844,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/owner-login-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login?next=/account",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/account",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/account-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/update-password",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/update-password-390x844.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/",
+      "title": "IronWake — Stop losing leads between enquiry and follow-up",
+      "h1Count": 1,
+      "h1Text": [
+        "Stop losing leads between enquiry and follow-up."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/home-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/work",
+      "title": "Work — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Nine businesses. One principle: every enquiry gets an owner."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/work",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/work-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/systems",
+      "title": "Systems — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Give every enquiry an owner and a next step."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/systems",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/systems-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/process",
+      "title": "Process — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Understand the gap before adding another tool."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/process",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/process-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/pricing",
+      "title": "Pricing — IronWake | 5 Systems, 3 Tiers Each",
+      "h1Count": 1,
+      "h1Text": [
+        "Five systems. Three tiers each. No hidden costs."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/pricing",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/pricing-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/insights",
+      "title": "Insights — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Operational thinking for service businesses."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/insights",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/insights-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/about",
+      "title": "About — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Build trust by making the next action clear."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/about",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/about-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/audit",
+      "title": "Business Leak Audit — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Find the step where an enquiry loses momentum."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/audit",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/audit-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/login",
+      "width": 768,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/login-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/signup",
+      "title": "Create your IronWake account",
+      "h1Count": 1,
+      "h1Text": [
+        "Create your IronWake account."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/signup",
+      "width": 768,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/signup-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/forgot-password",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/forgot-password-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/chat",
+      "title": "Ask IronWake — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Full conversation with the IronWake site assistant."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/chat",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/chat-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/owner/login",
+      "title": "Owner Login — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Owner CRM"
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/owner/login",
+      "width": 768,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/owner-login-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login?next=/account",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/account",
+      "width": 768,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/account-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "bodyScrollWidth": 768,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/update-password",
+      "width": 768,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/update-password-768x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/",
+      "title": "IronWake — Stop losing leads between enquiry and follow-up",
+      "h1Count": 1,
+      "h1Text": [
+        "Stop losing leads between enquiry and follow-up."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/home-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/work",
+      "title": "Work — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Nine businesses. One principle: every enquiry gets an owner."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/work",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/work-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/systems",
+      "title": "Systems — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Give every enquiry an owner and a next step."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/systems",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/systems-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/process",
+      "title": "Process — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Understand the gap before adding another tool."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/process",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/process-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/pricing",
+      "title": "Pricing — IronWake | 5 Systems, 3 Tiers Each",
+      "h1Count": 1,
+      "h1Text": [
+        "Five systems. Three tiers each. No hidden costs."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/pricing",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/pricing-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/insights",
+      "title": "Insights — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Operational thinking for service businesses."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/insights",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/insights-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/about",
+      "title": "About — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Build trust by making the next action clear."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/about",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/about-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/audit",
+      "title": "Business Leak Audit — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Find the step where an enquiry loses momentum."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/audit",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/audit-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/login",
+      "width": 1024,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/login-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/signup",
+      "title": "Create your IronWake account",
+      "h1Count": 1,
+      "h1Text": [
+        "Create your IronWake account."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/signup",
+      "width": 1024,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/signup-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/forgot-password",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/forgot-password-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/chat",
+      "title": "Ask IronWake — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Full conversation with the IronWake site assistant."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/chat",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/chat-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/owner/login",
+      "title": "Owner Login — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Owner CRM"
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/owner/login",
+      "width": 1024,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/owner-login-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login?next=/account",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/account",
+      "width": 1024,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/account-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "bodyScrollWidth": 1024,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/update-password",
+      "width": 1024,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/update-password-1024x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/",
+      "title": "IronWake — Stop losing leads between enquiry and follow-up",
+      "h1Count": 1,
+      "h1Text": [
+        "Stop losing leads between enquiry and follow-up."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/home-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/work",
+      "title": "Work — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Nine businesses. One principle: every enquiry gets an owner."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/work",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/work-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/systems",
+      "title": "Systems — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Give every enquiry an owner and a next step."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/systems",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/systems-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/process",
+      "title": "Process — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Understand the gap before adding another tool."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/process",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/process-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/pricing",
+      "title": "Pricing — IronWake | 5 Systems, 3 Tiers Each",
+      "h1Count": 1,
+      "h1Text": [
+        "Five systems. Three tiers each. No hidden costs."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/pricing",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/pricing-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/insights",
+      "title": "Insights — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Operational thinking for service businesses."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/insights",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/insights-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/about",
+      "title": "About — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Build trust by making the next action clear."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/about",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/about-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/audit",
+      "title": "Business Leak Audit — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Find the step where an enquiry loses momentum."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/audit",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/audit-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/login",
+      "width": 1366,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/login-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/signup",
+      "title": "Create your IronWake account",
+      "h1Count": 1,
+      "h1Text": [
+        "Create your IronWake account."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/signup",
+      "width": 1366,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/signup-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/forgot-password",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/forgot-password-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/chat",
+      "title": "Ask IronWake — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Full conversation with the IronWake site assistant."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/chat",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/chat-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/owner/login",
+      "title": "Owner Login — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Owner CRM"
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/owner/login",
+      "width": 1366,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/owner-login-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login?next=/account",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/account",
+      "width": 1366,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/account-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "bodyScrollWidth": 1366,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/update-password",
+      "width": 1366,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/update-password-1366x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/",
+      "title": "IronWake — Stop losing leads between enquiry and follow-up",
+      "h1Count": 1,
+      "h1Text": [
+        "Stop losing leads between enquiry and follow-up."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/home-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/work",
+      "title": "Work — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Nine businesses. One principle: every enquiry gets an owner."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/work",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/work-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/systems",
+      "title": "Systems — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Give every enquiry an owner and a next step."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/systems",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/systems-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/process",
+      "title": "Process — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Understand the gap before adding another tool."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/process",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/process-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/pricing",
+      "title": "Pricing — IronWake | 5 Systems, 3 Tiers Each",
+      "h1Count": 1,
+      "h1Text": [
+        "Five systems. Three tiers each. No hidden costs."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/pricing",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/pricing-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/insights",
+      "title": "Insights — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Operational thinking for service businesses."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/insights",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/insights-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/about",
+      "title": "About — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Build trust by making the next action clear."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/about",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/about-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/audit",
+      "title": "Business Leak Audit — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Find the step where an enquiry loses momentum."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/audit",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/audit-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/login",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/login-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/signup",
+      "title": "Create your IronWake account",
+      "h1Count": 1,
+      "h1Text": [
+        "Create your IronWake account."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/signup",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/signup-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/forgot-password",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/forgot-password-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/chat",
+      "title": "Ask IronWake — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Full conversation with the IronWake site assistant."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/chat",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/chat-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/owner/login",
+      "title": "Owner Login — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Owner CRM"
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/owner/login",
+      "width": 1440,
+      "height": 900,
+      "status": 304,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/owner-login-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/login?next=/account",
+      "title": "Sign in — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Sign in to your IronWake account."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/account",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/account-1440x900.png"
+    },
+    {
+      "finalUrl": "http://127.0.0.1:4304/forgot-password",
+      "title": "Reset your password — IronWake",
+      "h1Count": 1,
+      "h1Text": [
+        "Reset your password."
+      ],
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "overflow": false,
+      "hydrationIndicators": [],
+      "launcherPresent": false,
+      "launcherDescriptor": null,
+      "route": "/update-password",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": [],
+      "navigationError": null,
+      "screenshot": "screenshots/update-password-1440x900.png"
+    }
+  ],
+  "interactive": {
+    "forms": [
+      {
+        "route": "/login",
+        "type": "login",
+        "status": 200,
+        "empty": {
+          "clicked": true,
+          "state": {
+            "url": "http://127.0.0.1:4304/login",
+            "values": [
+              {
+                "name": "$ACTION_REF_1",
+                "type": "hidden",
+                "value": "",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:0",
+                "type": "hidden",
+                "value": "{\"id\":\"60fb3ae79dde459c6f4d3288143ab6c7dc9e9f3647\",\"bound\":\"$@1\"}",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:1",
+                "type": "hidden",
+                "value": "[{}]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_KEY",
+                "type": "hidden",
+                "value": "kca26eca50121bf14f0a517686c199980",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "email",
+                "type": "email",
+                "value": "",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              },
+              {
+                "name": "password",
+                "type": "password",
+                "value": "[redacted:0]",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              }
+            ],
+            "alerts": [
+              "Enter a valid email address."
+            ],
+            "validationText": [
+              "Enter a valid email address."
+            ]
+          }
+        },
+        "invalid": {
+          "clicked": true,
+          "state": {
+            "url": "http://127.0.0.1:4304/login",
+            "values": [
+              {
+                "name": "$ACTION_REF_1",
+                "type": "hidden",
+                "value": "",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:0",
+                "type": "hidden",
+                "value": "{\"id\":\"60fb3ae79dde459c6f4d3288143ab6c7dc9e9f3647\",\"bound\":\"$@1\"}",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:1",
+                "type": "hidden",
+                "value": "[{}]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_KEY",
+                "type": "hidden",
+                "value": "kca26eca50121bf14f0a517686c199980",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "email",
+                "type": "email",
+                "value": "",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              },
+              {
+                "name": "password",
+                "type": "password",
+                "value": "[redacted:0]",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              }
+            ],
+            "alerts": [
+              "Enter a valid email address."
+            ],
+            "validationText": [
+              "Enter a valid email address."
+            ]
+          },
+          "preSubmit": {
+            "values": [
+              {
+                "name": "email",
+                "type": "email",
+                "value": "not-an-email",
+                "checked": false,
+                "valid": false,
+                "message": "Please include an '@' in the email address. 'not-an-email' is missing an '@'."
+              },
+              {
+                "name": "password",
+                "type": "password",
+                "value": "[redacted:1]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              }
+            ]
+          }
+        },
+        "consoleErrors": [],
+        "pageErrors": [],
+        "requestFailures": [
+          "POST http://127.0.0.1:4304/login :: net::ERR_ABORTED"
+        ]
+      },
+      {
+        "route": "/signup",
+        "type": "signup",
+        "status": 200,
+        "empty": {
+          "clicked": true,
+          "state": {
+            "url": "http://127.0.0.1:4304/signup",
+            "values": [
+              {
+                "name": "$ACTION_REF_1",
+                "type": "hidden",
+                "value": "",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:0",
+                "type": "hidden",
+                "value": "{\"id\":\"603f32191fcec28c88c5ebb305ceaebb58dfd2ae78\",\"bound\":\"$@1\"}",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:1",
+                "type": "hidden",
+                "value": "[{}]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_KEY",
+                "type": "hidden",
+                "value": "k37470d3274b8b42f502e765f5cb1e620",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "display_name",
+                "type": "text",
+                "value": "",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              },
+              {
+                "name": "email",
+                "type": "email",
+                "value": "",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              },
+              {
+                "name": "password",
+                "type": "password",
+                "value": "[redacted:0]",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              },
+              {
+                "name": "confirm",
+                "type": "password",
+                "value": "[redacted:0]",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              },
+              {
+                "name": "terms",
+                "type": "checkbox",
+                "value": "yes",
+                "checked": false,
+                "valid": false,
+                "message": "Please check this box if you want to proceed."
+              }
+            ],
+            "alerts": [
+              "Enter a valid email address."
+            ],
+            "validationText": [
+              "Enter a valid email address.",
+              "USE AT LEAST 8 CHARACTERS.",
+              "I agree to the Privacy and Terms."
+            ]
+          }
+        },
+        "invalid": {
+          "clicked": true,
+          "state": {
+            "url": "http://127.0.0.1:4304/signup",
+            "values": [
+              {
+                "name": "$ACTION_REF_1",
+                "type": "hidden",
+                "value": "",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:0",
+                "type": "hidden",
+                "value": "{\"id\":\"603f32191fcec28c88c5ebb305ceaebb58dfd2ae78\",\"bound\":\"$@1\"}",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:1",
+                "type": "hidden",
+                "value": "[{}]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_KEY",
+                "type": "hidden",
+                "value": "k37470d3274b8b42f502e765f5cb1e620",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "display_name",
+                "type": "text",
+                "value": "",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              },
+              {
+                "name": "email",
+                "type": "email",
+                "value": "",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              },
+              {
+                "name": "password",
+                "type": "password",
+                "value": "[redacted:1]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "confirm",
+                "type": "password",
+                "value": "[redacted:1]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "terms",
+                "type": "checkbox",
+                "value": "yes",
+                "checked": false,
+                "valid": false,
+                "message": "Please check this box if you want to proceed."
+              }
+            ],
+            "alerts": [
+              "Enter a valid email address."
+            ],
+            "validationText": [
+              "Enter a valid email address.",
+              "USE AT LEAST 8 CHARACTERS.",
+              "PASSWORDS MATCH.",
+              "I agree to the Privacy and Terms."
+            ]
+          },
+          "preSubmit": {
+            "values": [
+              {
+                "name": "display_name",
+                "type": "text",
+                "value": "x",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "email",
+                "type": "email",
+                "value": "not-an-email",
+                "checked": false,
+                "valid": false,
+                "message": "Please include an '@' in the email address. 'not-an-email' is missing an '@'."
+              },
+              {
+                "name": "password",
+                "type": "password",
+                "value": "[redacted:1]",
+                "checked": false,
+                "valid": false,
+                "message": "Please lengthen this text to 8 characters or more (you are currently using 1 character)."
+              },
+              {
+                "name": "confirm",
+                "type": "password",
+                "value": "[redacted:1]",
+                "checked": false,
+                "valid": false,
+                "message": "Please lengthen this text to 8 characters or more (you are currently using 1 character)."
+              },
+              {
+                "name": "terms",
+                "type": "checkbox",
+                "value": "yes",
+                "checked": false,
+                "valid": false,
+                "message": "Please check this box if you want to proceed."
+              }
+            ]
+          }
+        },
+        "consoleErrors": [],
+        "pageErrors": [],
+        "requestFailures": [
+          "POST http://127.0.0.1:4304/signup :: net::ERR_ABORTED"
+        ]
+      },
+      {
+        "route": "/forgot-password",
+        "type": "forgot-password",
+        "status": 200,
+        "empty": {
+          "clicked": true,
+          "state": {
+            "url": "http://127.0.0.1:4304/forgot-password",
+            "values": [
+              {
+                "name": "$ACTION_REF_1",
+                "type": "hidden",
+                "value": "",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:0",
+                "type": "hidden",
+                "value": "{\"id\":\"60d42c33e00802aab7f44882a0131176ceac160f06\",\"bound\":\"$@1\"}",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:1",
+                "type": "hidden",
+                "value": "[{}]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_KEY",
+                "type": "hidden",
+                "value": "k968f488d8ce05ae64dcaea0abbf4706d",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "email",
+                "type": "email",
+                "value": "",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              }
+            ],
+            "alerts": [
+              "Enter a valid email address."
+            ],
+            "validationText": [
+              "Enter a valid email address."
+            ]
+          }
+        },
+        "invalid": {
+          "clicked": true,
+          "state": {
+            "url": "http://127.0.0.1:4304/forgot-password",
+            "values": [
+              {
+                "name": "$ACTION_REF_1",
+                "type": "hidden",
+                "value": "",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:0",
+                "type": "hidden",
+                "value": "{\"id\":\"60d42c33e00802aab7f44882a0131176ceac160f06\",\"bound\":\"$@1\"}",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_1:1",
+                "type": "hidden",
+                "value": "[{}]",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "$ACTION_KEY",
+                "type": "hidden",
+                "value": "k968f488d8ce05ae64dcaea0abbf4706d",
+                "checked": false,
+                "valid": true,
+                "message": ""
+              },
+              {
+                "name": "email",
+                "type": "email",
+                "value": "",
+                "checked": false,
+                "valid": false,
+                "message": "Please fill out this field."
+              }
+            ],
+            "alerts": [
+              "Enter a valid email address."
+            ],
+            "validationText": [
+              "Enter a valid email address."
+            ]
+          },
+          "preSubmit": {
+            "values": [
+              {
+                "name": "email",
+                "type": "email",
+                "value": "not-an-email",
+                "checked": false,
+                "valid": false,
+                "message": "Please include an '@' in the email address. 'not-an-email' is missing an '@'."
+              }
+            ]
+          }
+        },
+        "consoleErrors": [],
+        "pageErrors": [],
+        "requestFailures": [
+          "POST http://127.0.0.1:4304/forgot-password :: net::ERR_ABORTED"
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "route": "/account",
+        "status": 200,
+        "finalUrl": "http://127.0.0.1:4304/login?next=/account",
+        "redirected": true,
+        "consoleErrors": [],
+        "pageErrors": [],
+        "requestFailures": []
+      },
+      {
+        "route": "/update-password",
+        "status": 200,
+        "finalUrl": "http://127.0.0.1:4304/forgot-password",
+        "redirected": true,
+        "consoleErrors": [],
+        "pageErrors": [],
+        "requestFailures": []
+      }
+    ],
+    "loginKeyboardFocus": {
+      "steps": [
+        {
+          "tag": "A",
+          "id": null,
+          "name": null,
+          "type": null,
+          "text": "SKIP TO MAIN CONTENT",
+          "outline": "rgb(185, 77, 47) solid 3px",
+          "outlineWidth": "3px",
+          "outlineStyle": "solid",
+          "boxShadow": "none",
+          "focusVisible": true,
+          "rect": {
+            "x": 16,
+            "y": -100,
+            "width": 177.65625,
+            "height": 33,
+            "top": -100,
+            "right": 193.65625,
+            "bottom": -67,
+            "left": 16
+          }
+        },
+        {
+          "tag": "A",
+          "id": null,
+          "name": null,
+          "type": null,
+          "text": "IronWake_\nHome",
+          "outline": "rgb(185, 77, 47) solid 3px",
+          "outlineWidth": "3px",
+          "outlineStyle": "solid",
+          "boxShadow": "none",
+          "focusVisible": true,
+          "rect": {
+            "x": 43,
+            "y": 33.5,
+            "width": 97.046875,
+            "height": 22,
+            "top": 33.5,
+            "right": 140.046875,
+            "bottom": 55.5,
+            "left": 43
+          }
+        },
+        {
+          "tag": "SUMMARY",
+          "id": null,
+          "name": null,
+          "type": null,
+          "text": "MENU",
+          "outline": "rgb(185, 77, 47) solid 3px",
+          "outlineWidth": "3px",
+          "outlineStyle": "solid",
+          "boxShadow": "none",
+          "focusVisible": true,
+          "rect": {
+            "x": 326.703125,
+            "y": 22.5,
+            "width": 27.296875,
+            "height": 44,
+            "top": 22.5,
+            "right": 354,
+            "bottom": 66.5,
+            "left": 326.703125
+          }
+        },
+        {
+          "tag": "INPUT",
+          "id": null,
+          "name": "email",
+          "type": "email",
+          "text": "",
+          "outline": "rgb(10, 10, 10) none 3px",
+          "outlineWidth": "3px",
+          "outlineStyle": "none",
+          "boxShadow": "rgba(185, 77, 47, 0.12) 0px 0px 0px 3px",
+          "focusVisible": true,
+          "rect": {
+            "x": 70.59375,
+            "y": 427.15625,
+            "width": 248.8125,
+            "height": 53.265625,
+            "top": 427.15625,
+            "right": 319.40625,
+            "bottom": 480.421875,
+            "left": 70.59375
+          }
+        },
+        {
+          "tag": "INPUT",
+          "id": null,
+          "name": "password",
+          "type": "password",
+          "text": "",
+          "outline": "rgb(10, 10, 10) none 3px",
+          "outlineWidth": "3px",
+          "outlineStyle": "none",
+          "boxShadow": "rgba(185, 77, 47, 0.12) 0px 0px 0px 3px",
+          "focusVisible": true,
+          "rect": {
+            "x": 70.59375,
+            "y": 525.125,
+            "width": 167.34375,
+            "height": 53.265625,
+            "top": 525.125,
+            "right": 237.9375,
+            "bottom": 578.390625,
+            "left": 70.59375
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "name": null,
+          "type": "button",
+          "text": "Show",
+          "outline": "rgb(185, 77, 47) solid 3px",
+          "outlineWidth": "3px",
+          "outlineStyle": "solid",
+          "boxShadow": "none",
+          "focusVisible": true,
+          "rect": {
+            "x": 245.9375,
+            "y": 525.125,
+            "width": 73.46875,
+            "height": 53.265625,
+            "top": 525.125,
+            "right": 319.40625,
+            "bottom": 578.390625,
+            "left": 245.9375
+          }
+        },
+        {
+          "tag": "BUTTON",
+          "id": null,
+          "name": null,
+          "type": "submit",
+          "text": "SIGN IN",
+          "outline": "rgb(185, 77, 47) solid 3px",
+          "outlineWidth": "3px",
+          "outlineStyle": "solid",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+          "focusVisible": true,
+          "rect": {
+            "x": 70.59375,
+            "y": 602.390625,
+            "width": 248.8125,
+            "height": 48,
+            "top": 602.390625,
+            "right": 319.40625,
+            "bottom": 650.390625,
+            "left": 70.59375
+          }
+        },
+        {
+          "tag": "A",
+          "id": null,
+          "name": null,
+          "type": null,
+          "text": "Forgot password",
+          "outline": "rgb(185, 77, 47) solid 3px",
+          "outlineWidth": "3px",
+          "outlineStyle": "solid",
+          "boxShadow": "none",
+          "focusVisible": true,
+          "rect": {
+            "x": 71.859375,
+            "y": 678.390625,
+            "width": 140.234375,
+            "height": 20,
+            "top": 678.390625,
+            "right": 212.09375,
+            "bottom": 698.390625,
+            "left": 71.859375
+          }
+        }
+      ],
+      "visibleFocusCount": 8
+    },
+    "reducedMotion": [
+      {
+        "route": "/",
+        "mediaMatches": true,
+        "title": "IronWake — Stop losing leads between enquiry and follow-up",
+        "h1": [
+          "Stop losing leads between enquiry and follow-up."
+        ],
+        "bodyTextLength": 5642,
+        "visibleElementCount": 341,
+        "animatedElements": [
+          {
+            "tag": "HTML",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "HEAD",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "TITLE",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          }
+        ]
+      },
+      {
+        "route": "/chat",
+        "mediaMatches": true,
+        "title": "Ask IronWake — IronWake",
+        "h1": [
+          "Full conversation with the IronWake site assistant."
+        ],
+        "bodyTextLength": 1139,
+        "visibleElementCount": 79,
+        "animatedElements": [
+          {
+            "tag": "HTML",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "HEAD",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "SCRIPT",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "TITLE",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "META",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "tag": "LINK",
+            "id": "",
+            "cls": "",
+            "animationDuration": "1e-06s",
+            "transitionDuration": "1e-06s",
+            "opacity": "1",
+            "visibility": "visible"
+          }
+        ]
+      }
+    ],
+    "chat": {
+      "status": 304,
+      "controls": [
+        {
+          "i": 0,
+          "tag": "BUTTON",
+          "type": "button",
+          "placeholder": null,
+          "aria": null,
+          "text": "What does IronWake actually do?",
+          "disabled": false
+        },
+        {
+          "i": 1,
+          "tag": "BUTTON",
+          "type": "button",
+          "placeholder": null,
+          "aria": null,
+          "text": "Which offer fits a service business with missed calls?",
+          "disabled": false
+        },
+        {
+          "i": 2,
+          "tag": "BUTTON",
+          "type": "button",
+          "placeholder": null,
+          "aria": null,
+          "text": "How much does RapidPulse cost in India?",
+          "disabled": false
+        },
+        {
+          "i": 3,
+          "tag": "BUTTON",
+          "type": "button",
+          "placeholder": null,
+          "aria": null,
+          "text": "How much does it cost internationally?",
+          "disabled": false
+        },
+        {
+          "i": 4,
+          "tag": "BUTTON",
+          "type": "button",
+          "placeholder": null,
+          "aria": null,
+          "text": "What is the audit flow?",
+          "disabled": false
+        },
+        {
+          "i": 5,
+          "tag": "BUTTON",
+          "type": "button",
+          "placeholder": null,
+          "aria": null,
+          "text": "Can I book a call now?",
+          "disabled": false
+        },
+        {
+          "i": 6,
+          "tag": "TEXTAREA",
+          "type": "textarea",
+          "placeholder": "Ask about IronWake services, pricing, or process…",
+          "aria": null,
+          "text": "",
+          "disabled": false
+        },
+        {
+          "i": 7,
+          "tag": "BUTTON",
+          "type": "submit",
+          "placeholder": null,
+          "aria": null,
+          "text": "SEND",
+          "disabled": true
+        },
+        {
+          "i": 8,
+          "tag": "BUTTON",
+          "type": "button",
+          "placeholder": null,
+          "aria": null,
+          "text": "RETRY LAST",
+          "disabled": true
+        },
+        {
+          "i": 9,
+          "tag": "BUTTON",
+          "type": "button",
+          "placeholder": null,
+          "aria": null,
+          "text": "CLEAR",
+          "disabled": false
+        }
+      ],
+      "inputFound": true,
+      "sent": true,
+      "sendError": null,
+      "apiResponses": [
+        {
+          "url": "http://127.0.0.1:4304/api/chat",
+          "status": 200,
+          "method": "POST",
+          "body": "{\"status\":\"complete\",\"reply\":\"I can't follow that — I'm the IronWake website assistant. I can help with services, pricing, audits, demos, or booking. Want to start with a Business Leak Audit (India from ₹799, International from $29)?\",\"needs_human\":false,\"handoff\":false,\"priority\":\"low\",\"category\":\"other\",\"confidence\":\"high\"}"
+        }
+      ],
+      "finalUrl": "http://127.0.0.1:4304/chat",
+      "bodyText": "SKIP TO MAIN CONTENT\nIronWake_\nHome\nMENU\nASK IRONWAKE\nFull conversation with the IronWake site assistant.\n\nThis assistant answers IronWake business questions. It is not a general coding model and will not run internal tools or expose credentials. Replies are model-backed and run through the same secure server route as the global widget.\n\nNot signed in — chat history is local to this browser. Create an account to save conversations.\n\nYOU\n\nReply with exactly: browser matrix pong\n\nIRONWAKE AI\n\nI can't follow that — I'm the IronWake website assistant. I can help with services, pricing, audits, demos, or booking. Want to start with a Business Leak Audit (India from ₹799, International from $29)?\n\nMessage\nSEND\nRETRY LAST\nCLEAR\n\nFor human follow-up: Book a diagnostic · See pricing · Browse case studies\n\nIronWake\n\nOperational systems for service businesses. Capture every enquiry, record a review task, and make the next action visible.\n\nEXPLORE\nWork\nServices\nAI Systems\nProcess\nSTART HERE\nPricing\nBook Diagnostic\nInsights\nAbout\nACCOUNT\nSign in\nCreate account\nDemonstrations and pending providers are clearly labelled.\nPrivacy\n·\nTerms\n↑",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "requestFailures": []
+    }
+  },
+  "diagnostics": {
+    "launcherCandidates": [
+      {
+        "route": "/",
+        "items": []
+      },
+      {
+        "route": "/chat",
+        "items": []
+      }
+    ],
+    "reducedMotion": [
+      {
+        "route": "/",
+        "durations": {
+          "a:1e-06s|t:1e-06s": 453
+        }
+      },
+      {
+        "route": "/chat",
+        "durations": {
+          "a:1e-06s|t:1e-06s": 143
+        }
+      }
+    ]
+  },
+  "verification": {
+    "jsonRecords": 90,
+    "expectedRecords": 90,
+    "pngCount": 100,
+    "pngValidation": "all PNG files >=5 KB with valid PNG magic bytes"
+  }
+}
