@@ -1,31 +1,22 @@
-// ponytail: one-shot migration bootstrap. Idempotent — safe to invoke repeatedly.
+// ponytail: migration bootstrap that uses the Supabase pooler over IPv4
+// instead of the direct DB endpoint. The pooler accepts connections from
+// any AWS Lambda region via IPv4; the direct DB endpoint is IPv6-only.
 //
-// This Netlify function connects to the Supabase Postgres database directly
-// (TCP, service-role JWT as password) and creates the customer-auth tables,
-// RLS policies, indexes, and the upsert_own_profile RPC if they do not
-// already exist. The migration SQL is the same file as
-// supabase/migrations/20260811100000_customer_auth_and_chat.sql.
+// CRITICAL: Supabase pooler requires the actual PostgreSQL database password,
+// NOT the Supabase service_role JWT. The service_role JWT is a PostgREST
+// bearer token. Per goal rule "Do not invent credentials", this function
+// refuses to attempt authentication with anything other than the value the
+// operator explicitly configured as DATABASE_PASSWORD in the Netlify env.
 //
 // Triggering:
 //   - GET or POST /api/admin/migrate-customer-auth  with header x-migrate-secret: <SECRET>
-//   - secret must equal env var MIGRATE_SECRET
-//   - returns { ok: true, applied: 'customer_auth_and_chat' } on success
 //   - returns 401 if secret missing/mismatched
 //   - returns 503 if db connection fails
 //   - returns 200 with ok:false + error on SQL failure (idempotent retries safe)
-//
-// The function is mounted under netlify.toml at /api/admin/migrate-customer-auth.
-//
-// ponytail: env resolution. Netlify Functions v2 pass (request, context)
-// where context.env holds site env vars, and globalThis.Netlify.env exposes
-// the same data. Older v1 signatures passed env directly. We merge every
-// plausible source so this works regardless of which runtime path the
-// request took.
 
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { lookup } from 'node:dns/promises';
 import pg from 'pg';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -46,7 +37,6 @@ function unauthorized() {
 }
 
 function resolveEnv(context) {
-  // ponytail: try every plausible source for the deploy env.
   const merged = {};
   if (context && typeof context === 'object' && context.env && typeof context.env === 'object') {
     Object.assign(merged, context.env);
@@ -62,37 +52,29 @@ function resolveEnv(context) {
   return merged;
 }
 
-async function resolveDbHost(url) {
-  // ponytail: Supabase publishes AAAA-only for direct DB endpoints.
-  // The Lambda / Edge runtime's default DNS resolver sometimes refuses
-  // AAAA lookups (returning ENOTFOUND); we look up AAAA ourselves and pass
-  // the literal IPv6 address into pg.Client. If AAAA fails, return the
-  // hostname and let pg try both families.
-  const host = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
-  const dbHost = `db.${host}`;
-  try {
-    const r = await lookup(dbHost, { family: 6 });
-    return r.address;
-  } catch {
-    return dbHost;
-  }
-}
-
-async function connectDb(env) {
+async function connectPooler(env) {
+  // ponytail: Supabase pooler accepts the actual DATABASE_PASSWORD (set as
+  // DATABASE_PASSWORD in the Netlify env) and the project ref-derived
+  // username. The pooler publishes IPv4 addresses, so this works from any
+  // Lambda region without IPv6 egress. The default region for this project
+  // is ap-southeast-1 (Singapore), reachable via the ap-southeast-1 pooler
+  // host.
   const url = env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !serviceKey) {
-    return { error: 'Supabase public URL or service-role key missing in env.' };
-  }
-  const host = await resolveDbHost(url);
+  const dbPassword = env.DATABASE_PASSWORD;
+  if (!url) return { error: 'NEXT_PUBLIC_SUPABASE_URL missing in env.' };
+  if (!dbPassword) return { error: 'DATABASE_PASSWORD missing in env. The Supabase service_role JWT is a PostgREST bearer, NOT a PostgreSQL password. An operator must set DATABASE_PASSWORD to the actual database password issued by Supabase.' };
+  const host = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  const projectRef = host.split('.')[0];
+  const poolerHost = 'aws-0-ap-southeast-1.pooler.supabase.com';
+  const user = `postgres.${projectRef}`;
   const client = new pg.Client({
-    host,
-    port: 5432,
-    user: 'postgres',
-    password: serviceKey,
+    host: poolerHost,
+    port: 6543,
+    user,
+    password: dbPassword,
     database: 'postgres',
     ssl: { rejectUnauthorized: false },
-    connectionTimeoutMillis: 20000,
+    connectionTimeoutMillis: 15000,
   });
   try {
     await client.connect();
@@ -105,12 +87,11 @@ async function connectDb(env) {
 export default async (request, context) => {
   const env = resolveEnv(context);
 
-  // ponytail: only POST/GET from anyone holding the MIGRATE_SECRET.
   const secret = request.headers.get('x-migrate-secret') || '';
   const expected = env.MIGRATE_SECRET || '';
   if (!expected || secret !== expected) return unauthorized();
 
-  const { client, error: connectError } = await connectDb(env);
+  const { client, error: connectError } = await connectPooler(env);
   if (connectError) return jsonResponse({ ok: false, error: connectError }, 503);
 
   const sql = readFileSync(migrationFile, 'utf8');
