@@ -1,5 +1,5 @@
 import './globals.css';
-import AssistantWidget from './components/AssistantWidget';
+import CustomerAssistantLauncher from './components/CustomerAssistantLauncher';
 import { ScrollToTop } from './components/ScrollToTop';
 
 // ponytail: metadataBase lets Next.js auto-generate canonical + og:url + og:image absolute URLs from relative paths. Production MUST set NEXT_PUBLIC_SITE_URL so JSON-LD, sitemap, robots, and canonical all match the live host.
@@ -48,5 +48,5 @@ export default function RootLayout({ children }) {
       { '@type': 'ListItem', position: 4, name: 'AI Receptionist', url: `${siteUrl}/systems/ai-receptionist` }
     ]}
   ]};
-  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to main content</a><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />{children}<AssistantWidget /><ScrollToTop /></body></html>;
+  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to main content</a><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />{children}<CustomerAssistantLauncher /><ScrollToTop /></body></html>;
 }

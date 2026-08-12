@@ -9,6 +9,6 @@ test('/chat page exists, renders ChatClient, and is discoverable from AssistantW
   assert.match(source, /ChatClient/);
   assert.match(source, /title:\s*'Ask IronWake/);
   // Global widget must offer the full-page path.
-  const widget = await readFile(new URL('../components/AssistantWidget.js', import.meta.url), 'utf8');
+  const widget = await readFile(new URL('../components/CustomerAssistantLauncher.js', import.meta.url), 'utf8');
   assert.match(widget, /href="\/chat"/);
 });

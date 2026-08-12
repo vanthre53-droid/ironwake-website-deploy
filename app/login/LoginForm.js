@@ -20,7 +20,7 @@ export function LoginForm() {
   return <main className="shell auth-shell">
     <SiteHeader />
     <section className="auth-section">
-      <div className="auth-card" data-mounted={mounted}>
+      <div className={`auth-card${mounted ? ' is-entering' : ''}`} data-mounted={mounted}>
         <span className="eyebrow">Welcome back</span>
         <h1>Sign in to your IronWake account.</h1>
         <p className="auth-lede">Pick up a saved conversation, review past audits, or continue asking IronWake.</p>

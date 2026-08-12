@@ -49,7 +49,7 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
       {configError && <p className="auth-status auth-status-error" role="alert">{configError}</p>}
     </section>
 
-    <section className="section account-grid">
+    <section className={`section account-grid${mounted ? ' is-entering' : ''}`}>
       <article className="account-card">
         <span className="micro">Overview</span>
         <h2>Account</h2>

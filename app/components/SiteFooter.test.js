@@ -13,5 +13,8 @@ test('site footer keeps the demonstration disclosure and active links', async ()
   assert.match(source, /href="\/insights"/);
   assert.match(source, /href="\/login">Sign in/);
   assert.match(source, /href="\/signup">Create account/);
-  assert.match(source, /href="\/chat">Ask IronWake/);
+  // ponytail: footer must NOT expose Ask IronWake for anonymous visitors.
+  // The customer-only round launcher is the canonical entry for authenticated
+  // customers. The /chat route is still reachable via account navigation.
+  assert.doesNotMatch(source, /href="\/chat">Ask IronWake/);
 });

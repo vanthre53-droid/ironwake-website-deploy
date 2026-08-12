@@ -26,7 +26,7 @@ export function SignupForm() {
   return <main className="shell auth-shell">
     <SiteHeader />
     <section className="auth-section">
-      <div className="auth-card" data-mounted={mounted}>
+      <div className={`auth-card${mounted ? ' is-entering' : ''}`} data-mounted={mounted}>
         <span className="eyebrow">Create account</span>
         <h1>Create your IronWake account.</h1>
         <p className="auth-lede">Save your Ask IronWake conversations, track your audit and request history, and pick up where you left off without re-explaining your project.</p>
@@ -74,6 +74,7 @@ export function SignupForm() {
       </div>
       <aside className="auth-aside">
         <span className="micro">Why create an account?</span>
+        <h3>Save your work, pick up where you left off.</h3>
         <ul>
           <li><strong>Save conversations.</strong> Continue any Ask IronWake thread later, with full context.</li>
           <li><strong>Track your history.</strong> See past audits and requests without searching email.</li>
