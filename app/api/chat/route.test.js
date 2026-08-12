@@ -110,12 +110,13 @@ test('chat route returns 503 when provider returns 5xx', async () => {
 test('chat route returns 429 after rate-limit exceeded', async () => {
   const env = { AI_API_KEY: 'sk-test', AI_MODEL: 'MiniMax-M3', AI_API_BASE: 'https://api.minimax.io/v1' };
   // ponytail: rate-limit state is per identity. Send 21 requests from the
-  // same x-forwarded-for IP and verify the 21st is throttled. Distinct IPs
-  // would not exhaust the bucket; the route derives identity from headers,
-  // so we reuse the same header value here.
+  // same trusted client IP and verify the 21st is throttled. Distinct IPs
+  // would not exhaust the bucket; the route derives identity from the
+  // trusted platform header (x-nf-client-connection-ip on Netlify), not
+  // from attacker-supplied x-forwarded-for, so we set that header here.
   const make = () => new Request('http://localhost/api/chat', {
     method: 'POST',
-    headers: { 'content-type': 'application/json', 'x-forwarded-for': '10.0.0.42' },
+    headers: { 'content-type': 'application/json', 'x-nf-client-connection-ip': '10.0.0.42' },
     body: JSON.stringify({ messages: [{ role: 'user', content: 'Hello' }] })
   });
   for (let i = 0; i < 20; i++) {
