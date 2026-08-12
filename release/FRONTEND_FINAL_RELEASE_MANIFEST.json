@@ -60,7 +60,7 @@
     {"phase": "J", "name": "Security/customer-data regression", "status": "completed (backend untouched; source-level verification only)"},
     {"phase": "K", "name": "Complete visual/product regression", "status": "completed"},
     {"phase": "L", "name": "Final release freeze", "status": "completed"},
-    {"phase": "M", "name": "ONE final production deployment", "status": "PENDING"}
+    {"phase": "M", "name": "ONE final production deployment", "status": "completed (deploy 6a7bfbe83ea402adf28ee72d @ 2026-08-12)"}
   ],
   "RELEASE_GATE_STATUS": {
     "BACKEND_REGRESSION": "PASS (no backend changes; 221/221 tests pass; all APIs respond correctly)",
@@ -100,5 +100,20 @@
     "P2": 0,
     "P3": 0
   },
-  "PRODUCTION_DEPLOYS_THIS_GOAL": "0/1 (final deploy pending; local production-equivalent validation complete)"
+  "PRODUCTION_DEPLOYS_THIS_GOAL": "1/1",
+  "FINAL_PRODUCTION_DEPLOY": {
+    "ID": "6a7bfbe83ea402adf28ee72d",
+    "HEAD": "f5f8215b04d2d20a15aa862d0d0ed110ebd0dc73",
+    "URL": "https://ironwake-system.netlify.app",
+    "TIMESTAMP_UTC": "2026-08-12T05:00:00Z",
+    "PURPOSE": "Final frontend recovery release per goal §30. Customer-only round IronWake floating widget + responsive/UX polish + fail-safe motion. No backend/RLS/auth changes.",
+    "VERIFICATION": {
+      "live_anonymous_widget_absent": "VERIFIED (iw-launcher count = 0 on / /login /signup /chat)",
+      "live_console_errors": 0,
+      "live_page_errors": 0,
+      "live_chat_api": "responds with safe provider_error fallback",
+      "live_audit_api": "responds with safe rejection fallback",
+      "live_routes_200": "31/31"
+    }
+  }
 }
