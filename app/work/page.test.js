@@ -16,15 +16,11 @@ test('work page keeps demonstrations labelled and free of client-engagement clai
   assert.match(source, /manchester-gentle-dental\.vercel\.app/);
   assert.match(source, /bluestone-jewellery-prototype\.vercel\.app/);
   assert.match(source, /luxe-studio-wine\.vercel\.app/);
-  // P7 bramble-cafe external link intentionally removed: live-demo metadata defect cannot be corrected from this repo.
-  assert.match(source, /External demo pending/);
+  assert.match(source, /bramble-cafe\.vercel\.app/);
   assert.match(source, /voltix-fawn\.vercel\.app/);
-  // P9 re-tech + P10 atelier external links removed this cycle: live-demo
-  // metadata defects on those production URLs cannot be corrected from this
-  // repository until legitimate Vercel access is restored and dependency
-  // installs are authorized. The URL is preserved in lib/portfolio-urls.mjs
-  // for the cross-repo integrity test.
-  assert.match(source, /externalPending: true/);
+  assert.match(source, /re-tech-umber\.vercel\.app/);
+  assert.match(source, /atelier-luxury-salon\.vercel\.app/);
+  assert.match(source, /External demo pending/);
   assert.match(source, /caseHref/);
   assert.match(source, /View live demo/);
   assert.doesNotMatch(source, /client said|% (faster|reduction|increase)/i);
