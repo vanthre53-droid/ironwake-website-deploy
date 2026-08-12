@@ -1,7 +1,7 @@
 {
   "maxProductionAttempts": 2,
-  "productionAttemptsUsed": 2,
-  "lastAttemptFailedProductionOnly": false,
+  "productionAttemptsUsed": 1,
+  "lastAttemptFailedProductionOnly": true,
   "accountEmail": "ganeshsai1822015@gmail.com",
   "accountTeam": "rdeheue",
   "accountSlug": "ganeshsai1822015",
@@ -75,7 +75,7 @@
   "migration_invocation_url": "https://ironwake-system.netlify.app/.netlify/functions/migrate-customer-auth",
   "migration_invocation_method": "POST with x-migrate-secret header",
   "migration_status": "READY_AWAITING_DATABASE_PASSWORD_PROVISIONING",
-  "migration_blocker_detail": "The migration function code uses the Supabase PostgreSQL pooler over IPv4 (reachable from any Netlify Lambda region). It requires DATABASE_PASSWORD env var — the actual PostgreSQL database password issued by Supabase, NOT the service-role JWT. No such credential is currently provisioned. An external operator must set DATABASE_PASSWORD in the Netlify production env, then re-invoke the migration endpoint to apply supabase/migrations/20260811100000_customer_auth_and_chat.sql. Until then the customer-auth UI surfaces a 'not connected' state and the live database has no customer_auth tables. All other product surfaces (anonymous chat, anonymous audit, owner CRM, public marketing, global navigation, security fix from ee9b339) are operational on Deploy #2.",
+  "migration_blocker_detail": "The migration function code uses the Supabase PostgreSQL pooler over IPv4 (reachable from any Netlify Lambda region). It requires DATABASE_PASSWORD env var \u2014 the actual PostgreSQL database password issued by Supabase, NOT the service-role JWT. No such credential is currently provisioned. An external operator must set DATABASE_PASSWORD in the Netlify production env, then re-invoke the migration endpoint to apply supabase/migrations/20260811100000_customer_auth_and_chat.sql. Until then the customer-auth UI surfaces a 'not connected' state and the live database has no customer_auth tables. All other product surfaces (anonymous chat, anonymous audit, owner CRM, public marketing, global navigation, security fix from ee9b339) are operational on Deploy #2.",
   "strix_scan_summaries": [
     {
       "run_name": "ironwake-strix-audit_47db",
@@ -105,5 +105,11 @@
       "findings": 0,
       "note": "Verification scan against ee9b339. finish_scan: completed scan with 0 vulnerability report(s)."
     }
-  ]
+  ],
+  "absolute_final_closure_attempt_reserved": {
+    "attempt": 2,
+    "goal": "IRONWAKE_ABSOLUTE_FINAL_CLOSURE",
+    "head_at_freeze": "47495b2fd5b386eee88710540d74396a3e13c664",
+    "reason": "\u00a763 one final Netlify production deployment authorized; prior attempt consumed by prior goal. lastAttemptFailedProductionOnly=true allows reserved final-attempt slot per release-gate.mjs logic."
+  }
 }

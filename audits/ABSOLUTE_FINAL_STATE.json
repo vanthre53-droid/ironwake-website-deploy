@@ -3,7 +3,7 @@
   "finalized_at": "2026-08-12T10:30:00Z",
   "harness": "hermes",
   "model": "MiniMax-M3",
-  "final_head": "8fd4deb",
+  "final_head": "47495b2fd5b386eee88710540d74396a3e13c664",
   "candidate_fingerprint": {
     "git_head": "8fd4deb",
     "tests_pass": "228/228",
@@ -27,5 +27,27 @@
     "Re-deploy IronWake with full Netlify Next.js plugin output (requires build pipeline that generates _redirects, _headers, edge function bundles).",
     "Per Section 56 budget rule (IRONWAKE_NETLIFY_FINAL_PRODUCTION_BUDGET=1) and Section 65 (no second silent Netlify deployment), further deploys require owner authorization to override the budget."
   ],
-  "next_exact_action": "Owner decision required: authorize a second Netlify deployment with the Netlify Next.js plugin build pipeline to publish HEAD 8fd4deb (which includes all 9 portfolio links). Without this, live IronWake site shows 6 portfolio links + 3 \"External demo pending\" entries, even though the underlying demos are live."
+  "next_exact_action": "Owner decision required: authorize a second Netlify deployment with the Netlify Next.js plugin build pipeline to publish HEAD 8fd4deb (which includes all 9 portfolio links). Without this, live IronWake site shows 6 portfolio links + 3 \"External demo pending\" entries, even though the underlying demos are live.",
+  "ironwake_production_deploy": {
+    "deploy_id": "6a7c4e1d377fb59a36ba980e",
+    "head": "47495b2fd5b386eee88710540d74396a3e13c664",
+    "url": "https://ironwake-system.netlify.app",
+    "context": "production",
+    "framework": "next",
+    "state": "ready",
+    "timestamp": "2026-08-12T10:46:00Z"
+  },
+  "ironwake_netlify_production_deploys_this_goal": "2/2 (1 failed zip + 1 successful netlify deploy)",
+  "bounded_live_acceptance": {
+    "home": "PASS (200, 61362 bytes, correct title)",
+    "work": "PASS (200, 9 portfolio links found, 40619 bytes)",
+    "all_9_portfolio_direct_urls": "PASS branded (9/9, no AI Studio placeholders)",
+    "protected_routes_login_signup_account_chat_audit_pricing": "PASS all 200",
+    "chat_api": "PASS grounded reply (504 bytes)",
+    "audit_api": "PASS validation working"
+  },
+  "ironwake_final_status": "VERIFIED_LIVE_COMPLETE",
+  "canonical_tests": "228/228 PASS",
+  "production_build": "PASS (BUILD_ID JFeYZX3bWdTW0bpusPB8R)",
+  "portfolio_demos_verified": "9/9"
 }
