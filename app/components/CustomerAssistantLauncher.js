@@ -82,22 +82,24 @@ export default function CustomerAssistantLauncher() {
     const client = createBrowserSupabase();
     if (!client) { setAuth({ loaded: true, signedIn: false, userId: null, kind: null }); return; }
     let cancelled = false;
+    const classify = (user) => {
+      if (!user) return null;
+      // Prefer explicit role metadata; fall back to owner email list.
+      const explicit = user.app_metadata?.ironwake_role || user.user_metadata?.ironwake_role;
+      if (explicit === 'owner' || explicit === 'customer') return explicit;
+      const ownerEmail = (typeof user.email === 'string' ? user.email : '').toLowerCase();
+      if (ownerEmail === 'ironwakee@gmail.com' || ownerEmail.endsWith('@ironwake.dev')) return 'owner';
+      return 'customer';
+    };
     client.auth.getSession().then(({ data }) => {
       if (cancelled) return;
       const user = data?.session?.user;
-      // owner sessions have a metadata flag set by the server action.
-      const kind = user?.app_metadata?.ironwake_role
-        || user?.user_metadata?.ironwake_role
-        || (user ? 'customer' : null);
-      setAuth({ loaded: true, signedIn: Boolean(user), userId: user?.id || null, kind });
+      setAuth({ loaded: true, signedIn: Boolean(user), userId: user?.id || null, kind: classify(user) });
     }).catch(() => { if (!cancelled) setAuth({ loaded: true, signedIn: false, userId: null, kind: null }); });
     const { data: sub } = client.auth.onAuthStateChange((_event, next) => {
       if (cancelled) return;
       const user = next?.user;
-      const kind = user?.app_metadata?.ironwake_role
-        || user?.user_metadata?.ironwake_role
-        || (user ? 'customer' : null);
-      setAuth({ loaded: true, signedIn: Boolean(user), userId: user?.id || null, kind });
+      setAuth({ loaded: true, signedIn: Boolean(user), userId: user?.id || null, kind: classify(user) });
     });
     return () => { cancelled = true; sub?.subscription?.unsubscribe(); };
   }, []);

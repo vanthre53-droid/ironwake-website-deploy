@@ -31,6 +31,9 @@ test('customer launcher gates on authenticated customer session only', async () 
   assert.match(source, /createBrowserSupabase/);
   // must gate on kind === 'customer' before rendering
   assert.match(source, /kind\s*===\s*['"`]customer['"`]/);
+  // must classify users and refuse to render for owners
+  assert.match(source, /classify/);
+  assert.match(source, /ironwakee@gmail\.com/);
   // anonymous / owner must produce no UI
   assert.match(source, /showLauncher/);
   // widget must explicitly render null when not a customer

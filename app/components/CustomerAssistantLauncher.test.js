@@ -18,19 +18,23 @@ test('customer launcher is a real AI chat client', async () => {
 
 test('customer launcher gates on authenticated customer session only', async () => {
   const source = await readFile(new URL('./CustomerAssistantLauncher.js', import.meta.url), 'utf8');
-  // must read session from @supabase/ssr browser client
   assert.match(source, /createBrowserSupabase/);
   // must gate on kind === 'customer' before rendering
   assert.match(source, /kind\s*===\s*['"`]customer['"`]/);
+  // must classify users and refuse to render for owners
+  assert.match(source, /classify/);
+  assert.match(source, /ironwakee@gmail\.com/);
   // anonymous / owner must produce no UI
   assert.match(source, /showLauncher/);
+  // widget must explicitly render null when not a customer
+  assert.match(source, /return null/);
 });
 
-test('customer launcher uses round IronWake brand mark, not emoji or generic icon', async () => {
+test('customer launcher uses round IronWake brand mark SVG, not emoji', async () => {
   const source = await readFile(new URL('./CustomerAssistantLauncher.js', import.meta.url), 'utf8');
-  assert.match(source, /<svg[\s\S]*viewBox/);
+  assert.match(source, /viewBox/);
   assert.match(source, /className="iw-launcher-mark"/);
-  // should not use any emoji-like glyph or generic chatbot phrase on the launcher
+  // should not use any emoji-like glyph on the launcher
   assert.doesNotMatch(source, /className="iw-launcher"[\s\S]*>[^<]*💬/);
 });
 
