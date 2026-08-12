@@ -49,5 +49,22 @@
   "ironwake_final_status": "VERIFIED_LIVE_COMPLETE",
   "canonical_tests": "228/228 PASS",
   "production_build": "PASS (BUILD_ID JFeYZX3bWdTW0bpusPB8R)",
-  "portfolio_demos_verified": "9/9"
+  "portfolio_demos_verified": "9/9",
+  "hostname_migration": {
+    "goal": "IRONWAKE_HOSTNAME_MIGRATION",
+    "old_host": "https://ironwake-system.netlify.app",
+    "new_host": "https://ironwake.netlify.app",
+    "attempt_date": "2026-08-12",
+    "authorized_netlify_site_id": "ee1810a8-877d-482f-b959-01185aa2a67d",
+    "source_change_applied": "c046093 (tests/portfolio-links.test.mjs: ALLOWED_HOSTS adds ironwake.netlify.app)",
+    "netlify_env_var_to_change": "NEXT_PUBLIC_SITE_URL",
+    "blocker": "EXTERNAL_PROVIDER_ACCOUNT_RESTRICTION",
+    "blocker_evidence": [
+      "PATCH site {\"name\":\"ironwake\"} -> 422 subdomain must be unique (ironwake already managed by another Netlify team)",
+      "POST dns_zones -> 422 netlify.app subdomain already managed by Netlify DNS on another team",
+      "GET https://ironwake.netlify.app/ -> HTTP 200 but serves content from a different team (x-nextjs-date Fri, 07 Aug 2026)"
+    ],
+    "resolution_required": "External: owner of other Netlify team releases the ironwake subdomain; OR Netlify support reassigns; OR switch to custom domain. This is outside the scope of autonomous migration.",
+    "ironwake_hostname_migration_status": "BLOCKED_ON_EXTERNAL_PROVIDER_HOSTNAME_OWNERSHIP"
+  }
 }
