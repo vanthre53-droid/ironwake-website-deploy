@@ -4,6 +4,11 @@ import { POST, GET } from './route.js';
 
 // ponytail: cover the public-chat server route with deterministic, isolated
 // tests. No real network calls; fetchImpl is replaced with a fake per test.
+// ponytail: isolate from any AI_* keys inherited from the shell / .env.local
+// so "missing key" tests behave identically in every environment.
+for (const k of ['AI_API_KEY', 'AI_MODEL', 'AI_API_BASE', 'AI_CHAT_TIMEOUT_MS']) {
+  if (process.env[k] !== undefined) process.env[k] = '';
+}
 
 function makeRequest(body, { contentType = 'application/json', contentLength } = {}) {
   const headers = { 'content-type': contentType };
