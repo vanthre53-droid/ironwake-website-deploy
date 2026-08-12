@@ -151,20 +151,23 @@ export default function ChatClient() {
         signal: controller.signal
       });
       const data = await response.json().catch(() => ({}));
+      // ponytail: the route always preserves `reply` (even on 503 provider_error /
+      // unconfigured) so the user sees the safe fallback message. Only the
+      // 429 rate-limit response omits `reply`. Render `reply` whenever it is
+      // present, regardless of HTTP status — that way a degraded provider
+      // still produces a visible assistant bubble.
+      const reply = safeReply(data);
       if (response.status === 429) {
         setStatusMessage('You are sending messages too quickly. Please wait a moment.');
+      } else if (reply) {
+        setMessages((m) => [...m, { role: 'assistant', content: reply.reply }]);
+        if (reply.handoff) setHandoff(true);
+        setStatusMessage(statusLabel(data.status));
+        replyText = reply.reply;
       } else if (response.status >= 400) {
         setStatusMessage(statusLabel(data.status) || 'Assistant is unavailable. Try again shortly.');
       } else {
-        const reply = safeReply(data);
-        if (reply) {
-          setMessages((m) => [...m, { role: 'assistant', content: reply.reply }]);
-          if (reply.handoff) setHandoff(true);
-          setStatusMessage(statusLabel(data.status));
-          replyText = reply.reply;
-        } else {
-          setStatusMessage('Assistant returned an unexpected response.');
-        }
+        setStatusMessage('Assistant returned an unexpected response.');
       }
     } catch (error) {
       if (error?.name !== 'AbortError') {

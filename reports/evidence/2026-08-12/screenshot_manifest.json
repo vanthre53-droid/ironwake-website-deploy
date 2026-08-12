@@ -1,0 +1,263 @@
+{
+  "base": "http://127.0.0.1:4303",
+  "generatedAt": "2026-08-12T05:32:23.347Z",
+  "browser": {
+    "product": "chrome",
+    "executablePath": "/home/shadowlingo/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+    "version": "Chrome for Testing 149"
+  },
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "routes": [
+    "/",
+    "/work",
+    "/systems",
+    "/process",
+    "/pricing",
+    "/insights",
+    "/about",
+    "/audit",
+    "/login",
+    "/signup",
+    "/chat"
+  ],
+  "totals": {
+    "requested": 22,
+    "captured": 22,
+    "failed": 0,
+    "skipped": 0,
+    "totalConsoleErrors": 0
+  },
+  "results": [
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "file": "home-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 2794
+    },
+    {
+      "route": "/work",
+      "viewport": "desktop",
+      "file": "work-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1863
+    },
+    {
+      "route": "/systems",
+      "viewport": "desktop",
+      "file": "systems-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1946
+    },
+    {
+      "route": "/process",
+      "viewport": "desktop",
+      "file": "process-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1740
+    },
+    {
+      "route": "/pricing",
+      "viewport": "desktop",
+      "file": "pricing-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 2043
+    },
+    {
+      "route": "/insights",
+      "viewport": "desktop",
+      "file": "insights-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1744
+    },
+    {
+      "route": "/about",
+      "viewport": "desktop",
+      "file": "about-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1669
+    },
+    {
+      "route": "/audit",
+      "viewport": "desktop",
+      "file": "audit-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1680
+    },
+    {
+      "route": "/login",
+      "viewport": "desktop",
+      "file": "login-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 2004
+    },
+    {
+      "route": "/signup",
+      "viewport": "desktop",
+      "file": "signup-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 2024
+    },
+    {
+      "route": "/chat",
+      "viewport": "desktop",
+      "file": "chat-desktop.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1792
+    },
+    {
+      "route": "/",
+      "viewport": "mobile",
+      "file": "home-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 2012
+    },
+    {
+      "route": "/work",
+      "viewport": "mobile",
+      "file": "work-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1906
+    },
+    {
+      "route": "/systems",
+      "viewport": "mobile",
+      "file": "systems-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1798
+    },
+    {
+      "route": "/process",
+      "viewport": "mobile",
+      "file": "process-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1675
+    },
+    {
+      "route": "/pricing",
+      "viewport": "mobile",
+      "file": "pricing-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 2042
+    },
+    {
+      "route": "/insights",
+      "viewport": "mobile",
+      "file": "insights-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1624
+    },
+    {
+      "route": "/about",
+      "viewport": "mobile",
+      "file": "about-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1667
+    },
+    {
+      "route": "/audit",
+      "viewport": "mobile",
+      "file": "audit-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1671
+    },
+    {
+      "route": "/login",
+      "viewport": "mobile",
+      "file": "login-mobile.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1961
+    },
+    {
+      "route": "/signup",
+      "viewport": "mobile",
+      "file": "signup-mobile.png",
+      "status": 200,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1960
+    },
+    {
+      "route": "/chat",
+      "viewport": "mobile",
+      "file": "chat-mobile.png",
+      "status": 304,
+      "consoleErrors": 0,
+      "skipped": false,
+      "error": null,
+      "durationMs": 1642
+    }
+  ]
+}

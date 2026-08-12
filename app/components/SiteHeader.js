@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { createBrowserSupabase } from '../../lib/supabase/clients.mjs';
+import { SkeletonNavAuth } from './Skeleton.js';
 
 // ponytail: owner-approved nav order — no architecture change, just link labels/paths.
 // ponytail: customer auth controls (Sign in / Create account) live here in the
 // anonymous state. Once a customer signs in, those are replaced with My account
 // and Sign out. Owner navigation stays out of the public header.
+// ponytail: during auth hydration the nav-auth slot shows a stable-width
+// skeleton pill so the header does NOT flash between anonymous controls and
+// customer controls while getSession() is resolving.
 const links = [
   ['/', 'Home'],
   ['/work', 'Work'],
@@ -49,7 +53,7 @@ export function SiteHeader() {
     <a className="brand" href="/">IronWake<span>_</span><span className="sr-only">Home</span></a>
     <nav className="desktop-nav" aria-label="Primary navigation">
       {links.slice(1).map(([href, label]) => <a href={href} key={href}>{label}</a>)}
-      {!state.loaded && <span className="nav-link-placeholder" aria-hidden="true">·</span>}
+      {!state.loaded && <SkeletonNavAuth width={168} ariaLabel="Loading account controls" />}
       {state.loaded && !signedIn && <>
         <a className="nav-login" href="/login">Sign in</a>
         <a className="nav-signup" href="/signup">Create account</a>
@@ -64,7 +68,7 @@ export function SiteHeader() {
       <summary>Menu</summary>
       <nav aria-label="Mobile navigation">
         {links.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
-        {!state.loaded && <span className="nav-link-placeholder" aria-hidden="true">·</span>}
+        {!state.loaded && <SkeletonNavAuth width={120} ariaLabel="Loading account controls" />}
         {state.loaded && !signedIn && <>
           <a className="nav-login" href="/login">Sign in</a>
           <a className="nav-signup" href="/signup">Create account</a>

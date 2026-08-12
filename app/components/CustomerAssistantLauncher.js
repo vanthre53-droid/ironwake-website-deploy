@@ -147,19 +147,22 @@ export default function CustomerAssistantLauncher() {
         signal: controller.signal
       });
       const data = await response.json().catch(() => ({}));
+      // ponytail: /api/chat always preserves `reply` in the response body even
+      // on 503 provider_error / unconfigured. Render the safe reply whenever
+      // present, regardless of HTTP status — that way a degraded provider still
+      // produces a visible assistant bubble. Only the 429 rate-limit response
+      // omits `reply`.
+      const reply = safeReply(data);
       if (response.status === 429) {
         setStatusMessage('You are sending messages too quickly. Please wait a moment.');
+      } else if (reply) {
+        setMessages((m) => [...m, { role: 'assistant', content: reply.reply }]);
+        if (reply.handoff) setHandoff(true);
+        setStatusMessage(statusLabel(data.status));
       } else if (response.status >= 400) {
         setStatusMessage(statusLabel(data.status) || 'Assistant is unavailable. Try again shortly.');
       } else {
-        const reply = safeReply(data);
-        if (reply) {
-          setMessages((m) => [...m, { role: 'assistant', content: reply.reply }]);
-          if (reply.handoff) setHandoff(true);
-          setStatusMessage(statusLabel(data.status));
-        } else {
-          setStatusMessage('Assistant returned an unexpected response.');
-        }
+        setStatusMessage('Assistant returned an unexpected response.');
       }
     } catch (error) {
       if (error?.name !== 'AbortError') {
