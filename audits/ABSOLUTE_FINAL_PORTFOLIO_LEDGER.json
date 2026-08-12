@@ -1,0 +1,45 @@
+{
+  "goal": "IRONWAKE_ABSOLUTE_FINAL_CLOSURE",
+  "date": "2026-08-12",
+  "harness": "hermes",
+  "model": "MiniMax-M3",
+  "final_head": "8fd4deb",
+  "previous_baseline": "92283a6",
+  "final_ironwake_netlify_deployments_this_goal": "1/1 (attempted; failed; restored prior deploy)",
+  "vercel_portfolio_deployments_this_goal": "4 (Atelier, RE-TECH, Bramble attempt, Bramble successful)",
+  "live_state": {
+    "ironwake_main_url": "https://ironwake-system.netlify.app",
+    "ironwake_published_deploy_id": "6a7c30548b118e0590096506",
+    "ironwake_published_deploy_state": "ready (restored from pre-goal state)",
+    "ironwake_work_page_portfolio_links_shown": 6,
+    "ironwake_work_page_portfolio_links_in_source": 9,
+    "portfolio_demo_status": {
+      "P1_rapidpulse_vercel_app": "live branded",
+      "P2_bristol_architectural_vercel_app": "live branded",
+      "P3_manchester_gentle_dental_vercel_app": "live branded",
+      "P4_bluestone_jewellery_prototype_vercel_app": "live branded",
+      "P6_luxe_studio_wine_vercel_app": "live branded",
+      "P7_bramble_cafe_vercel_app": "live branded (deploy dpl_AS3mxYuKZGY32tuhzVzik6YAfyfZ)",
+      "P8_voltix_fawn_vercel_app": "live branded",
+      "P9_re_tech_umber_vercel_app": "live branded (deploy dpl_MWyiZkUAx53RaBrLeNSg93yRt31B)",
+      "P10_atelier_luxury_salon_vercel_app": "live branded (deploy dpl_CohygYCpWan41FxcikaVGZwNpuHd)"
+    }
+  },
+  "gate_results": {
+    "portfolio_demos_verified": "9/9 on direct Vercel URLs",
+    "ironwake_work_page_links_to_all_9": "PASS in source (HEAD 8fd4deb); NOT live due to deploy restore",
+    "canonical_tests": "228/228 PASS",
+    "production_build": "PASS (clean)",
+    "chat_api": "PASS (grounded reply)",
+    "ironwake_main_deploy_status": "PREVIOUS_DEPLOY_ACTIVE_BUT_PORTFOLIO_LINKS_OUTDATED"
+  },
+  "mismatches": [
+    "IronWake source HEAD 8fd4deb has 9 portfolio links. Live site deploy 6a7c30548b118e0590096506 has 6 portfolio links + 3 externalPending. The new HEAD was never deployed successfully.",
+    "My Netlify production deploy attempt failed (404 page) because the zip upload lacked the Netlify Next.js plugin runtime (_redirects/_headers/edge-function bundles). Restored previous deploy."
+  ],
+  "remaining_gaps": [
+    "IronWake Work page live UI still shows 6 portfolio links with 3 marked \"External demo pending\" until updated source is deployed via Netlify build pipeline.",
+    "Per Section 65, second Netlify deployment not authorized without evidence the previous attempt was unrecoverable. Per Section 56, IRONWAKE_NETLIFY_FINAL_PRODUCTION_BUDGET=1 has been consumed."
+  ],
+  "verdict": "PARTIAL: portfolio demos fully verified and live; IronWake site itself NOT fully updated to reflect them. Local production build and tests pass; live site is restored to a working but pre-update deploy."
+}

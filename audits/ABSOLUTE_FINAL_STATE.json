@@ -1,0 +1,31 @@
+{
+  "goal": "IRONWAKE_ABSOLUTE_FINAL_CLOSURE",
+  "finalized_at": "2026-08-12T10:30:00Z",
+  "harness": "hermes",
+  "model": "MiniMax-M3",
+  "final_head": "8fd4deb",
+  "candidate_fingerprint": {
+    "git_head": "8fd4deb",
+    "tests_pass": "228/228",
+    "build_pass": true,
+    "pre_existing_netlify_deploy_id": "6a7c30548b118e0590096506",
+    "pre_existing_netlify_deploy_url": "https://ironwake-system.netlify.app"
+  },
+  "completed_phases": [
+    "PHASE 1: preflight + baseline (HEAD 92283a6, 218 tests pass before fix)",
+    "PHASE 2: Bramble Vercel deploy (prj_PkjGhx4dGSbvn0o2KjYzWSkjO48t -> dpl_AS3mxYuKZGY32tuhzVzik6YAfyfZ)",
+    "PHASE 3: RE-TECH Vercel deploy (prj_yANKiB7j3LediWegEyRsbFPlds4v -> dpl_MWyiZkUAx53RaBrLeNSg93yRt31B)",
+    "PHASE 4: Atelier Vercel deploy (prj_wk41MMApEp2OheWPElWdyudC2gXt -> dpl_CohygYCpWan41FxcikaVGZwNpuHd)",
+    "PHASE 5: 9/9 portfolio demos verified via direct Vercel URLs (all branded, no AI Studio placeholder)",
+    "PHASE 6: IronWake source updated to link Bramble/RE-TECH/Atelier (app/work/page.js, app/work/page.test.js, lib/portfolio-urls.mjs)",
+    "PHASE 7: fresh npm run build passes",
+    "PHASE 8: 228/228 canonical tests pass post-portfolio-update",
+    "PHASE 9: Netlify production deploy attempted; zip upload succeeded as deploy 6a7c49ed18abb833753670dc but lacked Next.js Netlify plugin runtime (no _redirects/edge-function bundles) -> 404 on all routes",
+    "PHASE 10: previous production deploy 6a7c30548b118e0590096506 restored to keep site live"
+  ],
+  "remaining_work": [
+    "Re-deploy IronWake with full Netlify Next.js plugin output (requires build pipeline that generates _redirects, _headers, edge function bundles).",
+    "Per Section 56 budget rule (IRONWAKE_NETLIFY_FINAL_PRODUCTION_BUDGET=1) and Section 65 (no second silent Netlify deployment), further deploys require owner authorization to override the budget."
+  ],
+  "next_exact_action": "Owner decision required: authorize a second Netlify deployment with the Netlify Next.js plugin build pipeline to publish HEAD 8fd4deb (which includes all 9 portfolio links). Without this, live IronWake site shows 6 portfolio links + 3 \"External demo pending\" entries, even though the underlying demos are live."
+}
