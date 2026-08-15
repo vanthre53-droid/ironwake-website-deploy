@@ -21,7 +21,7 @@ export const config = {
   ],
 };
 
-export async function proxy(request) {
+export async function middleware(request) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   let response = NextResponse.next({ request: { headers: request.headers } });
