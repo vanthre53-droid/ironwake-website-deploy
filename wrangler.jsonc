@@ -16,5 +16,19 @@
       "binding": "WORKER_SELF_REFERENCE",
       "service": "ironwake"
     }
+  ],
+  "placement": {
+    "mode": "smart"
+  },
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "ironwake.dev",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.ironwake.dev",
+      "custom_domain": true
+    }
   ]
 }
