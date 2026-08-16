@@ -67,7 +67,7 @@ export function WakeSVG() {
   }, []);
 
   return (
-    <figure ref={ref} className="wake-figure" aria-label="IronWake operating wake: attention to measurement">
+    <figure ref={ref} className="glass wake-figure" aria-label="IronWake operating wake: attention to measurement">
       <svg className="wake-svg" viewBox="0 0 720 260" role="img" aria-label="The Wake — IronWake operating model from attention to measurement">
         <defs>
           <linearGradient id="wake-path" x1="0" y1="0" x2="1" y2="0">
