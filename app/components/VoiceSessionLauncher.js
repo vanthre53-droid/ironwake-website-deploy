@@ -208,7 +208,10 @@ export default function VoiceSessionLauncher({ endpoint = '/api/voice/session', 
       {unavailable && (
         <p className="voice-error" role="status">Voice is currently unavailable. Email ironwake.dev@gmail.com to book a slot.</p>
       )}
-      <p className="voice-state" data-state={state} aria-live="polite">
+      <p className="voice-state" data-state={state} aria-live="polite" aria-atomic="true">
+        {(state === STATES.LISTENING || state === STATES.AGENT_SPEAKING || state === STATES.CONNECTING) && (
+          <span className="voice-state-indicator" aria-hidden="true" />
+        )}{' '}
         {state === STATES.LISTENING ? 'Listening' : state === STATES.AGENT_SPEAKING ? 'Assistant speaking' : state === STATES.CONNECTING ? 'Connecting' : ''}
       </p>
     </div>

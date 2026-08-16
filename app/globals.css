@@ -1280,3 +1280,11 @@ button, input, textarea { font: inherit; }
 .cookie-banner-actions .btn-secondary{background:transparent;color:var(--white);border-color:rgba(255,255,255,.24)}
 @media (prefers-reduced-motion: reduce){.cookie-banner{transition:none}}
 
+/* Voice session state indicator */
+.voice-state-indicator{width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--stone-deep);vertical-align:middle;transition:background-color .2s ease}
+.voice-session .voice-state[data-state="listening"] .voice-state-indicator{background:var(--aqua);box-shadow:0 0 0 0 var(--aqua);animation:voice-pulse 1.6s ease-in-out infinite}
+.voice-session .voice-state[data-state="agent_speaking"] .voice-state-indicator{background:var(--copper);animation:voice-pulse 1s ease-in-out infinite}
+.voice-session .voice-state[data-state="connecting"] .voice-state-indicator{background:var(--graphite);animation:voice-pulse 1.2s ease-in-out infinite}
+@keyframes voice-pulse{0%,100%{box-shadow:0 0 0 0 currentColor;opacity:1}50%{box-shadow:0 0 0 8px transparent;opacity:.75}}
+@media (prefers-reduced-motion: reduce){.voice-session .voice-state-indicator{animation:none !important;box-shadow:none !important}}
+
