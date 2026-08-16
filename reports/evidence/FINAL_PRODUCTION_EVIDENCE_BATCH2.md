@@ -15,9 +15,10 @@ WORKER_NAME=ironwake
 WORKER_VERSION=deploy ab871095 (last observed live)
 WORKER_COMPRESSED_SIZE=~2739.93 KiB (preflight observation)
 CLOUDFLARE_PLAN_READBACK=Cloudflare account id `a69a2283338c8cb0173157ea929e3123` in vault is INVALID — Workers API still authorized for the existing `ironwake` Worker.
-DEPLOY_BUDGET_TOTAL=4
+|DEPLOY_BUDGET_TOTAL=4
 DEPLOY_BUDGET_USED=1
 DEPLOY_BUDGET_REMAINING=3
+|SOURCE_HEAD_AFTER=f70c8a4 (post-trim: edge runtime + Web Crypto swap; bundle still 3223.80 KiB / 15081.46 KiB — Node shim pulled in by pre-existing chat/audit routes; Workers Paid upgrade remains the only deploy path without dropping framework surface)
 
 ## Architecture drift
 
