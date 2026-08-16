@@ -4,10 +4,10 @@ const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || PRODUCTION_CANONIC
 
 export default function robots() {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
+    rules: [
+      { userAgent: '*', allow: '/', disallow: ['/account', '/owner', '/api/'] },
+    ],
     sitemap: `${FALLBACK_SITE_URL}/sitemap.xml`,
+    host: FALLBACK_SITE_URL,
   };
 }
