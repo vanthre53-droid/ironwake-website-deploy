@@ -25,8 +25,8 @@ export const dynamic = 'force-dynamic';
 // state, never a fake waveform).
 export async function POST(request) {
   const identity = requestIdentity(request);
-  const budget = allowRequest({ route: 'voice-session', identity, limit: 5, windowMs: 60_000 });
-  if (!budget.allowed) {
+  const budget = allowRequest(`voice-session:${identity}`, { limit: 5, windowMs: 60_000 });
+  if (!budget) {
     return Response.json(
       { ok: false, safeErrorCode: 'rate_limited' },
       { status: 429, headers: { 'retry-after': String(Math.ceil((budget.resetMs || 60_000) / 1000)) } }

@@ -27,8 +27,8 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
   const identity = requestIdentity(request);
-  const budget = allowRequest({ route: 'meta-data-deletion', identity, limit: 30, windowMs: 60_000 });
-  if (!budget.allowed) return Response.json({ ok: false, safeErrorCode: 'rate_limited' }, { status: 429 });
+  const budget = allowRequest(`meta-data-deletion:${identity}`, { limit: 30, windowMs: 60_000 });
+  if (!budget) return Response.json({ ok: false, safeErrorCode: 'rate_limited' }, { status: 429 });
 
   let body;
   try {

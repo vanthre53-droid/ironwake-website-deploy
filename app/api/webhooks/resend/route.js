@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { createSupabaseNotificationStore } from '../../../../lib/notifications/supabase-store.mjs';
 import { normalizeResendWebhook, verifyResendWebhook, webhookHeaders } from '../../../../lib/notifications/resend-webhook.mjs';
+import { allowRequest, requestIdentity } from '../../../../lib/request-rate-limit.mjs';
 
 export const runtime = 'nodejs';
 const MAX_WEBHOOK_BYTES = 256 * 1024;
@@ -18,6 +19,11 @@ export async function handleResendWebhook(request, {
   verify = verifyResendWebhook,
   store: injectedStore
 } = {}) {
+  const identity = requestIdentity(request);
+  const budget = allowRequest(`resend-webhook:${identity}`, { limit: 600, windowMs: 60_000 });
+  if (!budget) {
+    return response({ received: false, error: 'Too many requests' }, 429);
+  }
   const webhookSecret = String(env.RESEND_WEBHOOK_SECRET || '').trim();
   const url = env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;

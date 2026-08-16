@@ -18,6 +18,7 @@ import {
   normalizeRetellEvent,
   SUPPORTED_EVENTS,
 } from '../../../../lib/notifications/retell-webhook.mjs';
+import { allowRequest, requestIdentity } from '../../../../lib/request-rate-limit.mjs';
 
 export const runtime = 'nodejs';
 const MAX_WEBHOOK_BYTES = 512 * 1024;
@@ -81,6 +82,11 @@ export async function handleRetellWebhook(request, {
   store: injectedStore,
   supabase: injectedSupabase,
 } = {}) {
+  const identity = requestIdentity(request);
+  const budget = allowRequest(`retell-webhook:${identity}`, { limit: 600, windowMs: 60_000 });
+  if (!budget) {
+    return json({ received: false, error: "Too many requests" }, 429);
+  }
   const webhookSecret = String(env.RETELL_WEBHOOK_API_KEY || env.RETELL_API_KEY || '').trim();
   const url = env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY;

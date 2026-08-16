@@ -35,8 +35,8 @@ export async function GET(request) {
 
 export async function POST(request) {
   const identity = requestIdentity(request);
-  const budget = allowRequest({ route: 'meta-whatsapp-webhook', identity, limit: 600, windowMs: 60_000 });
-  if (!budget.allowed) {
+  const budget = allowRequest(`meta-whatsapp-webhook:${identity}`, { limit: 600, windowMs: 60_000 });
+  if (!budget) {
     return new Response('Too many requests', { status: 429 });
   }
 
