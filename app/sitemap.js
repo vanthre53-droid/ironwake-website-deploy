@@ -48,9 +48,9 @@ const STATIC_ROUTES = [
   { path: '/insights/ai-receptionist-honest-assessment', priority: 0.6, file: 'app/insights/ai-receptionist-honest-assessment/page.js' },
   { path: '/audit', priority: 0.8, file: 'app/audit/page.js' },
   { path: '/book', priority: 0.8, file: 'app/book/page.js' },
-  { path: '/login', priority: 0.3, file: 'app/login/page.js' },
-  { path: '/signup', priority: 0.3, file: 'app/signup/page.js' },
-  { path: '/forgot-password', priority: 0.3, file: 'app/forgot-password/page.js' },
+  // ponytail: /login, /signup, /forgot-password opt out of indexing via
+  // page-level robots: { index: false }. They MUST therefore not appear in
+  // the public sitemap. Sitemap audit (scripts/sitemap-audit.mjs) enforces.
   { path: '/privacy', priority: 0.3, file: 'app/privacy/page.js' },
   { path: '/terms', priority: 0.3, file: 'app/terms/page.js' },
 ];
