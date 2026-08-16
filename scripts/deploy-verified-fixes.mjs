@@ -1,24 +1,26 @@
 #!/usr/bin/env node
-// ponytail: pre-staged deploy script for the 4 verified live defects.
-// Encapsulates the mapping proof (Section 7) so a deployment-capable
-// Hermes trace can run all 4 deploys idempotently. Dry-run by default.
-// This file DOES NOT deploy. It only prints the deploy commands and
-// verifies the pre-built artifacts exist locally.
+// ponytail: pre-staged deploy script for the verified external portfolio
+// demos. IronWake's own production deploys run through the OpenNext
+// Cloudflare Worker pipeline (see scripts/cloudflare-deploy.mjs +
+// worker-entry.js + wrangler.jsonc). This file no longer contains the
+// old netlify-main entry because the obsolete Netlify main hosting is forbidden as active architecture
 //
-// The 4 deploys:
-//   1. Netlify main site → ironwake-system (id 1927c0b3-...)
-//      Source: HEAD source + .netlify/ build output (from `netlify build`)
-//      Fixes: M004 title template (27 routes) + M004 hostname drift
-//             (canonical/og/sitemap/robots all share FALLBACK_SITE_URL).
-//   2. Vercel P7 (bramble-cafe) → https://bramble-cafe.vercel.app
+// Encapsulates the mapping proof (Section 7) so a deployment-capable
+// Hermes trace can run all deploys idempotently. Dry-run by default.
+// This file DOES NOT deploy. It only prints the deploy commands and
+// verifies the pre-built artifacts exist locally. Pass `--apply` to
+// actually shell out to the deploy commands.
+//
+// The deploys:
+//   1. Vercel P7 (bramble-cafe) → https://bramble-cafe.vercel.app
 //      Source: ironwakeportifolioprojects/bramble---smooth-edition/dist
 //      Build: vite build + esbuild server.cjs (pre-built in folder)
 //      Fix: <title> "My Google AI Studio App" → "Bramble — Smooth Edition"
-//   3. Vercel P9 (re-tech) → https://re-tech-umber.vercel.app
+//   2. Vercel P9 (re-tech) → https://re-tech-umber.vercel.app
 //      Source: ironwakeportifolioprojects/re-tech.zip (extracted to /tmp)
 //      Build: vite build (Vercel-detected default)
 //      Fix: <title> → "RE-TECH — Premium Refurbished Laptops"
-//   4. Vercel P10 (atelier-luxury-salon) → https://atelier-luxury-salon.vercel.app
+//   3. Vercel P10 (atelier-luxury-salon) → https://atelier-luxury-salon.vercel.app
 //      Source: ironwakeportifolioprojects/atelier-luxury-salon/dist
 //      Build: vite build + esbuild server.js (pre-built in folder)
 //      Fix: <title> → "Atelier — Luxury Salon"
@@ -44,17 +46,8 @@ const APPLY = process.argv.includes('--apply');
 
 const deploys = [
   {
-    id: 'netlify-main',
-    label: 'Netlify main site (ironwake-system)',
-    url: 'https://ironwake-system.netlify.app',
-    siteId: '1927c0b3-532f-469c-b302-1d96cb9c7367',
-    artifacts: ['.next', 'netlify.toml'],
-    command: 'netlify deploy --prod --dir=.next --message="M004: title template + hostname drift"',
-    preCheck: () => existsSync(join(repoRoot, '.next')) && existsSync(join(repoRoot, 'netlify.toml')),
-  },
-  {
-    id: 'vercel-p7-bramble',
     label: 'Vercel P7 (bramble-cafe)',
+    id: 'vercel-p7-bramble',
     url: 'https://bramble-cafe.vercel.app',
     projectName: 'bramble-cafe',
     artifacts: ['ironwakeportifolioprojects/bramble---smooth-edition/dist/index.html'],
@@ -108,11 +101,11 @@ for (const d of deploys) {
 
 console.log('\n' + '═'.repeat(72));
 if (!allReady) {
-  console.log(' RESULT: missing artifacts — run `netlify build` and rebuild portfolios first.');
+  console.log(' RESULT: missing artifacts — rebuild the portfolio `dist/` directories before deploying.');
   process.exit(1);
 }
 if (!APPLY) {
   console.log(' RESULT: dry-run OK. Re-run with --apply to deploy.');
   process.exit(0);
 }
-console.log(' RESULT: all 4 deploys attempted. Verify protected URLs and grep live titles.');
+console.log(' RESULT: all deploys attempted. Verify protected URLs and grep live titles.');

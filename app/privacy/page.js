@@ -24,7 +24,7 @@ export default function PrivacyPage() {
         <li><strong>Customer account (optional)</strong> — when you create an IronWake account at <a href="/signup">/signup</a> we collect your email, password (hashed by Supabase Auth, never stored in plain text on our side), and display name. We store your Supabase user id.</li>
         <li><strong>Authenticated chat history</strong> — if you are signed in and chat through Ask IronWake, we persist your conversation in Supabase so it appears in <a href="/account">/account</a>. Each row is tied to your user id via row-level security; you can only see your own history.</li>
         <li><strong>Linked audit/booking history</strong> — if you submit an audit or booking while signed in, the row is tagged with your user id so it appears in <a href="/account">/account</a> without re-entering your email.</li>
-        <li><strong>Server logs</strong> — request path, status code, IP, and user agent. Kept by Netlify for a short rolling window for security and abuse response.</li>
+        <li><strong>Server logs</strong> — request path, status code, IP, and user agent. Kept by Cloudflare Workers for a short rolling window for security and abuse response.</li>
       </ul>
       <p>We do not run third-party advertising trackers. We do not sell or rent your data.</p>
     </section>
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
         <li><strong>Anonymous chat</strong> messages are not persisted; they live only inside your browser session and the rate-limiter window.</li>
         <li><strong>Authenticated chat history</strong> is stored in the same Supabase database (tables <code>chat_sessions</code> and <code>chat_messages</code>) and scoped to your account.</li>
         <li><strong>Emails sent to ironwake.dev@gmail.com</strong> are stored in Google's Gmail on the ironwakee account.</li>
-        <li><strong>Static site assets</strong> are served by Netlify from their global CDN. Netlify retains short-lived access logs for the deployed site.</li>
+        <li><strong>Static site assets</strong> are served by Cloudflare Workers from their global network. Cloudflare retains short-lived access logs for the deployed site.</li>
       </ul>
     </section>
 
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
         <li>Customer accounts remain until you delete them. You can request deletion at any time by writing to the address below.</li>
         <li>Authenticated chat history is kept with your account and is deleted with the account.</li>
         <li>Anonymous chat sessions are not retained beyond the browser session.</li>
-        <li>Server logs are kept by Netlify on their standard rolling window for the deployed site.</li>
+        <li>Server logs are kept by Cloudflare on their standard rolling window for the deployed site.</li>
       </ul>
     </section>
 

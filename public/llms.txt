@@ -8,29 +8,29 @@ IronWake is a systems practice for service businesses. We map where your enquiry
 
 ## Key pages
 
-- **Homepage**: https://ironwake.netlify.app/ — Overview of IronWake systems, workflow demonstration, case studies, FAQ
-- **Systems**: https://ironwake.netlify.app/systems — Core operational systems (Missed Lead Recovery, Booking Certainty, Trust & Lead Capture, AI Receptionist)
-- **Work**: https://ironwake.netlify.app/work — Portfolio demonstrations with signal architecture, interface demos, acceptance tests
-- **Pricing**: https://ironwake.netlify.app/pricing — India and International pricing with 6 outcome-based tiers
-- **Industries**: https://ironwake.netlify.app/industries — Industry-specific solutions (Home Services, Dental Clinics, Salons & Spas)
-- **Process**: https://ironwake.netlify.app/process — How IronWake works (audit → ownership → systems → verification)
-- **About**: https://ironwake.netlify.app/about — Founder, operating standard, verification labels
-- **Insights**: https://ironwake.netlify.app/insights — Operational insights for service businesses
-- **Audit**: https://ironwake.netlify.app/audit — Request a free Business Leak Audit
-- **Book**: https://ironwake.netlify.app/book — Request a call
+- **Homepage**: https://ironwake.dev/ — Overview of IronWake systems, workflow demonstration, case studies, FAQ
+- **Systems**: https://ironwake.dev/systems — Core operational systems (Missed Lead Recovery, Booking Certainty, Trust & Lead Capture, AI Receptionist)
+- **Work**: https://ironwake.dev/work — Portfolio demonstrations with signal architecture, interface demos, acceptance tests
+- **Pricing**: https://ironwake.dev/pricing — India and International pricing with 6 outcome-based tiers
+- **Industries**: https://ironwake.dev/industries — Industry-specific solutions (Home Services, Dental Clinics, Salons & Spas)
+- **Process**: https://ironwake.dev/process — How IronWake works (audit → ownership → systems → verification)
+- **About**: https://ironwake.dev/about — Founder, operating standard, verification labels
+- **Insights**: https://ironwake.dev/insights — Operational insights for service businesses
+- **Audit**: https://ironwake.dev/audit — Request a free Business Leak Audit
+- **Book**: https://ironwake.dev/book — Request a call
 
 ## Systems
 
-1. **Missed Lead Recovery** — https://ironwake.netlify.app/systems/missed-lead-recovery — Capture every enquiry to a durable record before any notification runs
-2. **Booking Certainty** — https://ironwake.netlify.app/systems/booking-control — Separate booking requests from confirmed appointments
-3. **Trust & Lead Capture** — https://ironwake.netlify.app/systems/trust-lead-capture — Validate and record every public form submission
-4. **AI Receptionist** — https://ironwake.netlify.app/systems/ai-receptionist — Disclosed, human-supervised reception concept
+1. **Missed Lead Recovery** — https://ironwake.dev/systems/missed-lead-recovery — Capture every enquiry to a durable record before any notification runs
+2. **Booking Certainty** — https://ironwake.dev/systems/booking-control — Separate booking requests from confirmed appointments
+3. **Trust & Lead Capture** — https://ironwake.dev/systems/trust-lead-capture — Validate and record every public form submission
+4. **AI Receptionist** — https://ironwake.dev/systems/ai-receptionist — Disclosed, human-supervised reception concept
 
 ## Case studies
 
-- **RapidPulse Response** — https://ironwake.netlify.app/work/rapidpulse — Emergency dispatch workflow demonstration
-- **DentaCare Intake** — https://ironwake.netlify.app/work/dentacare-pro — Clinic intake workflow demonstration
-- **Atelier Safe** — https://ironwake.netlify.app/work/atelier — Consultation follow-up demonstration
+- **RapidPulse Response** — https://ironwake.dev/work/rapidpulse — Emergency dispatch workflow demonstration
+- **DentaCare Intake** — https://ironwake.dev/work/dentacare-pro — Clinic intake workflow demonstration
+- **Atelier Safe** — https://ironwake.dev/work/atelier — Consultation follow-up demonstration
 
 ## Pricing (India)
 
@@ -43,14 +43,13 @@ IronWake is a systems practice for service businesses. We map where your enquiry
 
 ## Contact
 
-- Audit request: https://ironwake.netlify.app/audit
-- Booking request: https://ironwake.netlify.app/book
+- Audit request: https://ironwake.dev/audit
+- Booking request: https://ironwake.dev/book
 - Email: ironwake.dev@gmail.com
 - WhatsApp: 9397880223
 - Instagram: @ironwake.dev
 
 ## Technical
 
-- Built with Next.js 16, deployed on Netlify
-- Source: https://github.com/ironwake/ironwake (private)
-- Sitemap: https://ironwake.netlify.app/sitemap.xml
+- Built with Next.js, deployed on Cloudflare Workers (OpenNext)
+- Sitemap: https://ironwake.dev/sitemap.xml

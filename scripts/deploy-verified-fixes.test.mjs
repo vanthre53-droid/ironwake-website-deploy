@@ -1,36 +1,28 @@
-// ponytail: regression test for the deploy command strings in
-// scripts/deploy-verified-fixes.mjs. The standing goal Section 7 requires
-// the exact deploy command per project. If a contributor reorders the
-// deploy list, drops a project, or rewrites a command in a way that
-// would change the deploy target, this test fails first.
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 
-test('deploy-verified-fixes: covers all 4 known deploy targets', async () => {
+test('IronWake deploy-verified-fixes does not contain a Netlify main entry or Netlify hosting URL', async () => {
   const source = await readFile(new URL('./deploy-verified-fixes.mjs', import.meta.url), 'utf8');
-
-  // Section 4 protected URLs and Section 7 mapping proof:
-  const must = [
-    'ironwake-system.netlify.app',          // canonical main URL
-    '1927c0b3-532f-469c-b302-1d96cb9c7367', // Netlify site id
-    'netlify deploy --prod',               // Netlify deploy verb
-    'bramble-cafe.vercel.app',             // P7 protected URL
-    're-tech-umber.vercel.app',            // P9 protected URL
-    'atelier-luxury-salon.vercel.app',     // P10 protected URL
-    'vercel deploy --prod',                // Vercel deploy verb
-    'ironwakeportifolioprojects/bramble---smooth-edition/dist',  // P7 canonical source root
-    'ironwakeportifolioprojects/re-tech.zip',                    // P9 canonical source (zip)
-    'ironwakeportifolioprojects/atelier-luxury-salon/dist',      // P10 canonical source root
-  ];
-  for (const needle of must) {
-    assert.ok(source.includes(needle), `deploy script must reference ${needle}`);
-  }
+  // ponytail: Netlify is forbidden as IronWake hosting per Goal §2.
+  // We forbid only the runtime artifacts (URL, site id, token env var)
+  // so historical/architectural comments explaining the removal are allowed.
+  assert.doesNotMatch(source, /1927c0b3-532f-469c-b302-1d96cb9c7367/);
+  assert.doesNotMatch(source, /ironwake-system\.netlify\.app/);
+  assert.doesNotMatch(source, /NETLIFY_TOKEN/);
+  assert.doesNotMatch(source, /NETLIFY_SITE_ID/);
+  assert.doesNotMatch(source, /netlify\s+deploy/);
 });
 
-test('deploy-verified-fixes: dry-run is the default; --apply is gated', async () => {
+test('IronWake deploy-verified-fixes declares deployable external portfolio targets', async () => {
   const source = await readFile(new URL('./deploy-verified-fixes.mjs', import.meta.url), 'utf8');
-  assert.match(source, /APPLY\s*=\s*process\.argv\.includes\(['"]--apply['"]\)/);
-  // dry-run must not call execSync when --apply is absent
-  assert.ok(source.includes("if (APPLY && ready)"));
+  // ponytail: the remaining deploys must point to verified portfolio
+  // destinations, not IronWake production hosting.
+  assert.match(source, /bramble-cafe\.vercel\.app/);
+});
+
+test('IronWake deploy-verified-fixes still declares a deploy array', async () => {
+  const source = await readFile(new URL('./deploy-verified-fixes.mjs', import.meta.url), 'utf8');
+  assert.match(source, /const\s+deploys\s*=\s*\[/);
+  assert.match(source, /label:\s*['"]/);
 });

@@ -1,18 +1,20 @@
 #!/usr/bin/env node
-// ponytail: deterministic release gate — single entry point for ALL production deploys.
-// ponytail: every check either PASSes or aborts the deploy. Counter increments BEFORE netlify deploy is invoked, so a failed deploy still burns an attempt.
-// ponytail: never bypass. Never invoke `netlify deploy --prod` directly. If governance blocks, use the owner-authorized capability activation.
+// ponytail: deterministic release gate — single entry point for ALL
+// Cloudflare Worker production deploys. Every check either PASSes or
+// aborts the deploy. Counter increments BEFORE wrangler deploy is
+// invoked, so a failed deploy still burns an attempt.
+// ponytail: never bypass. Never invoke `npx wrangler deploy` directly.
+// Use scripts/cloudflare-deploy.mjs which runs this gate first.
 import { spawn } from 'node:child_process';
 import { readFile, writeFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const ROOT = process.cwd();
-const STATE_PATH = join(ROOT, '.ironwake/release/NETLIFY_RELEASE_STATE.json');
+const STATE_PATH = join(ROOT, '.ironwake/release/CLOUDFLARE_DEPLOY_LEDGER.json');
 const MANIFEST_PATH = join(ROOT, '.ironwake/release/FINAL_RELEASE_MANIFEST.json');
-const NEW_ACCOUNT = 'ganeshsai1822015@gmail.com';
-const OLD_SITE_ID = '1927c0b3-532f-469c-b302-1d96cb9c7367';
-const OLD_HOST = 'ironwake-system.netlify.app';
-const MAX_ATTEMPTS = 2;
+const CANONICAL_ORIGIN = 'https://ironwake.dev';
+const WORKER_NAME = 'ironwake';
+const MAX_ATTEMPTS = 4;
 
 function fail(msg) { console.error(`[release-gate] FAIL: ${msg}`); process.exit(1); }
 function ok(msg) { console.log(`[release-gate] ok: ${msg}`); }
@@ -28,19 +30,14 @@ async function sh(cmd, args, opts = {}) {
 }
 
 async function main() {
-  // Load state
+  // Load deploy ledger
   let state;
   try { state = JSON.parse(await readFile(STATE_PATH, 'utf8')); }
-  catch { fail(`cannot read release state at ${STATE_PATH} — run site creation first`); }
+  catch { fail(`cannot read deploy ledger at ${STATE_PATH}`); }
   if (state.maxProductionAttempts !== MAX_ATTEMPTS) fail(`maxProductionAttempts must be ${MAX_ATTEMPTS}`);
-  if (state.accountEmail !== NEW_ACCOUNT) fail(`accountEmail must be ${NEW_ACCOUNT}`);
-  if (state.siteId === OLD_SITE_ID) fail(`siteId is the FORBIDDEN OLD SITE ID`);
-  if (!state.siteId) fail(`siteId missing — capture NEW site identity first`);
-  if (!state.siteUrl) fail(`siteUrl missing`);
-  // ponytail: the hostname may legitimately match the old site name (the fresh new site on the new account can carry the same hostname on Netlify).
-  // The forbidden thing is the OLD site ID, not the hostname. Hostname correctness is verified by site URL not equal to "http://localhost".
-
-  // (1) Production attempt budget — checked FIRST so attempt #4 is refused before any other work.
+  if (state.workerName !== WORKER_NAME) fail(`workerName must be ${WORKER_NAME}`);
+  if (!state.canonicalOrigin) fail(`canonicalOrigin missing`);
+  // ponytail: (1) production attempt budget — checked FIRST so attempt #4 is refused before any other work.
   if (state.productionAttemptsUsed >= MAX_ATTEMPTS) fail(`productionAttemptsUsed=${state.productionAttemptsUsed} >= max ${MAX_ATTEMPTS}`);
   if (state.productionAttemptsUsed === MAX_ATTEMPTS - 1 && !state.lastAttemptFailedProductionOnly) fail(`attempt #${MAX_ATTEMPTS} reserved for verified production-only blocker; lastAttemptFailedProductionOnly missing`);
   ok(`attempt budget: ${state.productionAttemptsUsed} of ${MAX_ATTEMPTS} used`);
@@ -62,7 +59,7 @@ async function main() {
     ok(`HEAD matches frozen release ${manifest.HEAD}`);
   } catch (e) { fail(`git rev-parse failed: ${e.message}`); }
 
-  // (4) no stale .next (we deleted it before the build, then rebuilt)
+  // (4) Next.js build artifact present
   try {
     const s = await stat(join(ROOT, '.next/BUILD_ID'));
     const buildId = (await readFile(join(ROOT, '.next/BUILD_ID'), 'utf8')).trim();
@@ -70,10 +67,14 @@ async function main() {
     ok(`.next/BUILD_ID = ${buildId}`);
   } catch { fail(`.next missing — run fresh build before gate`); }
 
-  // (5) route manifest contains critical routes
+  // (5) OpenNext Worker bundle present
+  try {
+    await stat(join(ROOT, '.open-next/worker.js'));
+    ok('.open-next/worker.js present');
+  } catch { fail(`.open-next/worker.js missing — run opennextjs-cloudflare build first`); }
+
+  // (6) route sources present
   const requiredRoutes = ['/chat', '/login', '/audit', '/work'];
-  const routesFile = JSON.parse(await readFile(join(ROOT, '.next/app-build-manifest.json'), 'utf8').catch(() => '{}'));
-  // Next.js doesn't ship a per-route manifest by default; fall back to a route scan via app/ source list.
   for (const route of requiredRoutes) {
     const file = join(ROOT, `app${route}/page.js`);
     try { await stat(file); ok(`route source present: ${route}`); }
@@ -81,40 +82,36 @@ async function main() {
   }
   ok(`all critical route sources present`);
 
-  // (6) forbidden hostname hygiene (last-mile) — scope to ACTIVE SOURCE only.
-  // The hostname string legitimately appears in: .netlify deploy blobs (base64 path fragments),
-  // .ironwake state files, the owner-pasted bootstrap authorization, and the legacy historical
-  // scripts/deploy-verified-fixes.mjs (which is intentionally left in place but never executed).
-  // The gate's purpose is to verify active source code does not hardcode the old host, so scan
-  // only app/, lib/, and tests/. The legacy scripts/ folder is exempted from hostname hygiene
-  // because it contains non-runnable historical context.
-  const SOURCE_DIRS = ['app', 'lib', 'tests'];
+  // (7) forbidden hostname hygiene (active source only)
+  const SOURCE_DIRS = ['app', 'lib', 'tests', 'middleware.js'];
+  const FORBIDDEN_HOSTS = [
+    'ironwake-system.netlify.app',
+    'ironwake.netlify.app',
+    'ironwake-site.netlify.app',
+    'localhost:3000',
+  ];
   let scanFound = false;
   for (const target of SOURCE_DIRS) {
     try {
-      // Exclude *.test.* / *.test.mjs because test files legitimately reference forbidden values
-      // in negative-test fixtures (asserting "this host is not in active source"). The previous
-      // hostname-hygiene test (lib/site-url-fallback.test.mjs) is the canonical proof.
       const { stdout } = await sh('grep', [
         '-rEl',
         '--exclude-dir=node_modules',
         '--exclude-dir=.next',
+        '--exclude-dir=.open-next',
         '--exclude-dir=.git',
         '--exclude=*.test.js',
         '--exclude=*.test.mjs',
         '--exclude=*.test.cjs',
-        OLD_HOST,
+        ...FORBIDDEN_HOSTS.flatMap(h => ['-e', h]),
         join(ROOT, target)
       ]);
-      if (stdout.trim()) { scanFound = true; console.error(`  forbidden old host in ${target}: ${stdout.trim()}`); }
-    } catch (e) {
-      // grep exits 1 when no matches — nothing to report
-    }
+      if (stdout.trim()) { scanFound = true; console.error(`  forbidden host in ${target}: ${stdout.trim()}`); }
+    } catch (e) { /* grep exits 1 — no matches */ }
   }
-  if (scanFound) fail(`forbidden old host ${OLD_HOST} still appears in active source above`);
-  ok('no forbidden old hostname in active source');
+  if (scanFound) fail(`forbidden host still appears in active source above`);
+  ok('no forbidden hostname in active source');
 
-  // (7) release-config env present
+  // (8) release-config env present
   try {
     const { validateReleaseConfig } = await import(join(ROOT, 'lib/release-config.mjs'));
     const result = validateReleaseConfig(process.env);
@@ -122,24 +119,24 @@ async function main() {
     ok('release-config validation passed');
   } catch (e) { fail(`release-config check failed: ${e.message}`); }
 
-  // ALL CHECKS PASSED — increment counter BEFORE invoking netlify deploy
+  // ALL CHECKS PASSED — increment counter BEFORE invoking wrangler deploy
   state.productionAttemptsUsed += 1;
   const attemptNumber = state.productionAttemptsUsed;
   await writeFile(STATE_PATH, JSON.stringify(state, null, 2));
   ok(`counter incremented to ${attemptNumber}`);
 
-  // Invoke netlify deploy --prod
-  const args = ['deploy', '--prod', '--site', state.siteId, '--message', `release ${manifest.HEAD} attempt ${attemptNumber}`];
-  console.log(`[release-gate] running: netlify ${args.join(' ')}`);
+  // Invoke wrangler deploy (lockfile-pinned local binary)
+  const args = ['deploy', '--config', 'wrangler.jsonc'];
+  console.log(`[release-gate] running: ./node_modules/.bin/wrangler ${args.join(' ')}`);
   const code = await new Promise((resolve) => {
-    const proc = spawn('netlify', args, { stdio: 'inherit' });
+    const proc = spawn('./node_modules/.bin/wrangler', args, { stdio: 'inherit', cwd: ROOT });
     proc.on('close', resolve);
   });
   if (code !== 0) {
-    console.error(`[release-gate] netlify deploy exited ${code} — attempt ${attemptNumber} counted (used).`);
+    console.error(`[release-gate] wrangler deploy exited ${code} — attempt ${attemptNumber} counted (used).`);
     process.exit(code);
   }
-  ok(`netlify deploy --prod attempt ${attemptNumber} succeeded`);
+  ok(`wrangler deploy attempt ${attemptNumber} succeeded`);
 }
 
 main().catch(e => { console.error('[release-gate] uncaught:', e); process.exit(1); });

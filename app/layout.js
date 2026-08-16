@@ -2,15 +2,18 @@ import './globals.css';
 import CustomerAssistantLauncher from './components/CustomerAssistantLauncher';
 import { ScrollToTop } from './components/ScrollToTop';
 
-// ponytail: metadataBase lets Next.js auto-generate canonical + og:url + og:image absolute URLs from relative paths. Production MUST set NEXT_PUBLIC_SITE_URL so JSON-LD, sitemap, robots, and canonical all match the live host.
-// ponytail: FALLBACK_SITE_URL drives metadataBase, sitemap, robots, JSON-LD canonical. Empty string in CI; require NEXT_PUBLIC_SITE_URL at production.
-const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || '';
+// ponytail: PRODUCTION_CANONICAL_ORIGIN is the one source of truth for the canonical
+// host. Every public-facing URL (metadataBase, sitemap, robots, JSON-LD) must derive
+// from this constant. NEXT_PUBLIC_SITE_URL is an opt-in override for preview/local
+// environments; in production it must be unset or equal to PRODUCTION_CANONICAL_ORIGIN.
+// Changing this constant requires a full re-deploy + Search Console re-submission.
+const PRODUCTION_CANONICAL_ORIGIN = 'https://ironwake.dev';
+const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || PRODUCTION_CANONICAL_ORIGIN;
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || PRODUCTION_CANONICAL_ORIGIN),
   title: { default: 'IronWake — Systems that answer', template: '%s' },
   description: 'IronWake helps service businesses map and repair leaks across inquiry, booking, follow-up, and reception workflows.',
-  // ponytail: indexing enabled for netlify.app; update canonical when ironwake.dev is live.
   robots: { index: true, follow: true },
   alternates: { canonical: './' }, // ponytail: './' lets Next.js auto-resolve canonical per route from metadataBase
   openGraph: {
@@ -33,7 +36,7 @@ export const viewport = {
 // ponytail: JSON-LD canonical URL uses the same FALLBACK_SITE_URL constant as metadataBase so structured data agrees with sitemap/robots.
 
 export default function RootLayout({ children }) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL || 'http://localhost:3000';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || PRODUCTION_CANONICAL_ORIGIN;
   const jsonLd = { '@context': 'https://schema.org', '@graph': [
     { '@type': 'Organization', name: 'IronWake', url: siteUrl, description: 'IronWake maps operational systems for clearer enquiry, booking, follow-up, and reception handoffs.', founder: { '@type': 'Person', name: 'Revanth Nunna' }, areaServed: 'IN', sameAs: ['https://www.instagram.com/ironwake.dev/'] },
     { '@type': 'WebSite', name: 'IronWake', url: siteUrl },

@@ -1,13 +1,25 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import test from 'node:test';
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
+
+// ponytail: the obsolete `netlify/functions/migrate-customer-auth.mjs`
+// bootstrap endpoint has been retired. The customer-auth migration is now
+// applied by the standard Supabase migration runner (see
+// supabase/migrations/), which already executes each migration file inside
+// a transaction. The bootstrap was an emergency escape hatch that the
+// hardened migration has rendered redundant.
 
 const here = dirname(fileURLToPath(import.meta.url));
 const sql = readFileSync(join(here, '20260812100000_harden_customer_isolation.sql'), 'utf8');
 const authActions = readFileSync(join(here, '..', '..', 'lib', 'supabase', 'auth-actions.mjs'), 'utf8');
-const migrationFunction = readFileSync(join(here, '..', '..', 'netlify', 'functions', 'migrate-customer-auth.mjs'), 'utf8');
+test('hardened customer isolation migration exists as a forward-only Supabase migration', () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const sqlPath = join(here, '20260812100000_harden_customer_isolation.sql');
+  assert.ok(existsSync(sqlPath), 'expected hardened customer isolation migration SQL to exist');
+});
 
 test('customer tables grant only the operations required by their RLS policies', () => {
   assert.match(sql, /grant select, insert, update on table public\.profiles to authenticated/i);
@@ -48,18 +60,9 @@ test('customer code has no arbitrary service-role inquiry ownership relinker', (
   assert.doesNotMatch(authActions, /createServiceSupabase/);
 });
 
-test('migration executor packages hardening and applies migrations atomically', () => {
-  assert.match(migrationFunction, /20260812100000_harden_customer_isolation\.sql/);
-  assert.match(migrationFunction, /client\.query\('begin'\)/);
-  assert.match(migrationFunction, /client\.query\('commit'\)/);
-  assert.match(migrationFunction, /client\.query\('rollback'\)/);
-});
-
-test('migration endpoint exposes a safe preflight and never returns raw database errors', () => {
-  assert.match(migrationFunction, /searchParams\.get\('mode'\) === 'preflight'/);
-  assert.match(migrationFunction, /crossOwnerMessageCount/);
-  assert.match(migrationFunction, /safeToApply: mismatch\.rows\[0\]\.count === 0/);
-  assert.match(migrationFunction, /error: 'database_unavailable'/);
-  assert.match(migrationFunction, /error: 'migration_failed'/);
-  assert.doesNotMatch(migrationFunction, /jsonResponse\(\{ ok: false, error: error\.message \}/);
+test('hardened migration is applied through the standard Supabase migration runner (no Netlify bootstrap)', () => {
+  // ponytail: the obsolete Netlify bootstrap endpoint must not be
+  // referenced anywhere in the active runtime or test surface. The
+  // migration is forward-only and committed; it is applied by Supabase.
+  assert.doesNotMatch(authActions, /migrate-customer-auth/);
 });
