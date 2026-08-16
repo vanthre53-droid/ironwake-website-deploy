@@ -1,9 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
-import { randomUUID } from 'node:crypto';
+// ponytail: drop `runtime = 'nodejs'` to keep this route on the default
+// edge runtime and avoid bundling the Node.js compat shim (which
+// pushed the Worker over the Free plan 3 MiB limit in the previous
+// deploy). `crypto.randomUUID()` is available on the edge via the
+// Web Crypto API in both Next.js edge runtime and Cloudflare Workers.
 import { allowRequest, requestIdentity } from '../../../lib/request-rate-limit.mjs';
 
 export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
 
 // ponytail: Meta Data Deletion Request callback.
 //
@@ -37,7 +40,7 @@ export async function POST(request) {
   const signedRequest = typeof body?.signed_request === 'string' ? body.signed_request : '';
   if (!signedRequest) return Response.json({ ok: false, safeErrorCode: 'missing_signed_request' }, { status: 400 });
 
-  const confirmationCode = `ironwake-del-${randomUUID()}`;
+  const confirmationCode = `ironwake-del-${crypto.randomUUID()}`;
   await recordDeletionRequest({ confirmationCode, signedRequest });
 
   return Response.json({

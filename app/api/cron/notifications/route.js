@@ -1,7 +1,6 @@
 import { runCronInvocation } from '../../../../lib/notifications/cron-handler.mjs';
 
 export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
 
 // ponytail: Cloudflare Cron Trigger target. The Cloudflare Worker
 // `scheduled` handler self-fetches this URL on the configured cron

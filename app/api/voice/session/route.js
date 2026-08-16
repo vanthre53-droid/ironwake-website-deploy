@@ -3,7 +3,6 @@ import { allowRequest, requestIdentity } from '../../../../lib/request-rate-limi
 import { getServerOrigin } from '../../../../lib/site-origin.mjs';
 
 export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
 
 // ponytail: Retell web-call session bootstrap.
 //

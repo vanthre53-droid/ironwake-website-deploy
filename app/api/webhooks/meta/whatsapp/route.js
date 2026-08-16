@@ -3,7 +3,6 @@ import { createClient } from '@supabase/supabase-js';
 import { allowRequest, requestIdentity } from '../../../../../lib/request-rate-limit.mjs';
 
 export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
 
 // ponytail: Meta WhatsApp Cloud API webhook.
 //
@@ -45,7 +44,7 @@ export async function POST(request) {
   const signatureHeader = request.headers.get(META_SIGNATURE_HEADER) || '';
   const appSecret = process.env.META_APP_SECRET;
 
-  const verification = verifyMetaSignature({ rawBody, signatureHeader, appSecret });
+  const verification = await verifyMetaSignature({ rawBody, signatureHeader, appSecret });
   if (!verification.ok) {
     return Response.json({ ok: false, safeErrorCode: verification.reason }, { status: 401 });
   }
