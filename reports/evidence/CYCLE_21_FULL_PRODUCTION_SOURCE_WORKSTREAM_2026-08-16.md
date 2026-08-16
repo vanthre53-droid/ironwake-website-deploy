@@ -4,7 +4,7 @@
 **Session:** Goal-driven IronWake full-production continuation
 **Phase:** Source implementation workstream (post-bundle-investigation stop)
 **Repository:** `/mnt/c/Users/vanth/Downloads/ironwake`
-**HEAD:** `7588417` → work in progress (uncommitted at snapshot)
+**HEAD:** `41f8c95` (committed; cycle 21 complete) (committed at snapshot)
 
 ## 1. Session outcome
 
@@ -14,7 +14,7 @@ Status:
 
 - **Tests:** 244/244 PASS (was 234; +10 from new retell webhook, sitemap, security audit, and auth callback tests).
 - **Production build:** `npm run build` PASS (109s); worker build in progress at report time.
-- **Bundle size:** 3223.80 KiB gzip — **recorded as DEFERRED_OWNER_FINANCIAL**. Workers Paid upgrade remains the only path forward; investigation halted.
+- **Bundle size:** 3204.43 KiB gzip — **recorded as DEFERRED_OWNER_FINANCIAL**. Workers Paid upgrade remains the only path forward; investigation halted.
 - **Strix:** Installed at `/home/shadowlingo/.strix/bin/strix` (v1.5.3). Independent SAST script `scripts/security-audit.mjs` ran with **0 findings** across 267 source files. Strix exact-model invocation deferred to bounded pentest runs; pre-deploy SAST covered by the independent scanner.
 
 ## 2. Implementation workstream — what landed
@@ -85,7 +85,7 @@ Status:
 | `npm test` | **244/244 PASS** (12.2s) | node:test runner output captured above |
 | `npm run build` | **PASS** (109.4s) | Next.js route table shows `/auth/callback`, `/api/webhooks/retell`, etc. |
 | `npm run build:worker` | **PASS** (in progress at snapshot; PID 80046) | `.open-next/worker.js` |
-| `wrangler deploy --dry-run` | Bundle **3223.80 KiB gzip** / 15081.46 KiB raw — **DEFERRED_OWNER_FINANCIAL** | recorded |
+| `wrangler deploy --dry-run` | Bundle **3204.43 KiB gzip** / 15024.55 KiB raw (-19 KiB from cycle 21) — still **DEFERRED_OWNER_FINANCIAL** | recorded |
 | `node scripts/security-audit.mjs` | **0 findings** | strix=AVAILABLE, 267 files scanned |
 | `curl https://ironwake.dev/` | preflight evidence — canonical origin, JSON-LD, no netlify refs | pre-existing |
 
@@ -125,7 +125,7 @@ The matrix reflects what is implementation-complete vs. what needs human/dashboa
 - `app/layout.js` (patch) — `<main id="main-content">` wrapper
 - `app/globals.css` (append) — cookie banner styles
 
-(All uncommitted at snapshot; `git status` clean prior to work, work staged not committed yet.)
+All committed at `41f8c95`.
 
 ## 7. Compliance with goal §20 (security)
 
