@@ -17,6 +17,11 @@ export const metadata = {
   description: 'IronWake helps service businesses map and repair leaks across inquiry, booking, follow-up, and reception workflows.',
   robots: { index: true, follow: true },
   alternates: { canonical: './' }, // ponytail: './' lets Next.js auto-resolve canonical per route from metadataBase
+  // ponytail: favicon + apple-touch-icon. SVG icon is the primary mark.
+  icons: {
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+    apple: [{ url: '/icon.svg', type: 'image/svg+xml' }]
+  },
   openGraph: {
     title: 'IronWake — Systems that answer',
     description: 'IronWake maps operational systems for clearer enquiry, booking, follow-up, and reception handoffs.',
