@@ -1,8 +1,8 @@
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Privacy — IronWake',
   description: 'What IronWake collects when you submit an audit request, chat with the assistant, or create a customer account; where it is stored; and how to reach us about your data.',

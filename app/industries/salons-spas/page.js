@@ -1,8 +1,8 @@
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
-import { canonicalUrl } from '../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Salons & Spas — IronWake Industries',
   description: 'How trust-lead-capture and booking-control apply to consultation-led salons and spas, where follow-up after the first enquiry decides the booking.',

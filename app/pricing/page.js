@@ -1,8 +1,8 @@
 import PricingPage from './PricingPage';
 import { dualLitePrice, litePriceSummary } from '../../lib/pricing.mjs';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 const auditLitePrice = dualLitePrice('business-leak-audit', '/');
 
 export const metadata = {

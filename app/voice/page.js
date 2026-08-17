@@ -2,8 +2,8 @@ import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import VoiceSessionLauncher from '../components/VoiceSessionLauncher';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const dynamic = 'force-static';
 export const revalidate = 3600;
 

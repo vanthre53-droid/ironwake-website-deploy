@@ -2,8 +2,8 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Request scope — IronWake',
   description: 'How IronWake scopes a systems engagement before any price, provider cost, timeline, or support boundary is represented as agreed.',

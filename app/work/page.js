@@ -2,8 +2,8 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Work — IronWake',
   description: 'Portfolio demonstrations from IronWake, labelled and scoped as capability proof rather than client engagements.',

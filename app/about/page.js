@@ -2,8 +2,8 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'About — IronWake',
   description: 'IronWake is a founder-led systems practice for service businesses, built around labelled, verified claims instead of theatre.',

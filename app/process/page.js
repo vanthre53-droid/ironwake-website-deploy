@@ -2,8 +2,8 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Process — IronWake',
   description: 'The map, fix, test, document method IronWake uses to turn a missed-inquiry gap into verified operating work.',

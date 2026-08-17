@@ -2,8 +2,8 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Industries — IronWake',
   description: 'How IronWake’s inquiry, booking, and follow-up systems map to specific industries. Only industries with original, reviewed content are listed here.',

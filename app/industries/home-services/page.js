@@ -1,8 +1,8 @@
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
-import { canonicalUrl } from '../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Home Services — IronWake Industries',
   description: 'How missed-lead-recovery and booking-control apply to emergency and home-service businesses, where a missed call during a job can lose the next one.',

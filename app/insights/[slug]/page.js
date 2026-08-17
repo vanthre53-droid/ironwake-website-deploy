@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation.js';
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
-import { canonicalUrl } from '../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { canonicalUrl } from '../../../lib/seo.mjs';
 // ponytail: insight articles live in a single source-of-truth array. The
 // detail page is generated for every slug; unknown slugs return 404 so
 // search engines never index dead links.
@@ -77,24 +77,6 @@ export function generateMetadata({ params }) {
       siteName: 'IronWake',
       images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: article.title }]
     }
-  };
-}
-
-export async function generateMetadata({ params }) {
-  const slug = params.slug;
-  const article = ARTICLES.find((a) => a.slug === slug);
-  if (!article) return { title: "Insight not found" };
-  return {
-    title: article.title + " — IronWake",
-    description: article.excerpt,
-    alternates: { canonical: canonicalUrl("/insights/" + slug) },
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      type: "article",
-      url: canonicalUrl("/insights/" + slug),
-      publishedTime: article.date,
-    },
   };
 }
 

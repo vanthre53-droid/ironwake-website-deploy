@@ -6,8 +6,8 @@ import { InteractiveLeadJourney } from './components/InteractiveLeadJourney';
 import { WakeSVG } from './components/WakeSVG';
 import { dualLitePrice } from '../lib/pricing.mjs';
 
-import { organizationLd, breadcrumbLd } from 'lib/seo.mjs';
-import { canonicalUrl } from 'lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 const systems = [
   ['01 / inquiry integrity', 'Missed Lead Recovery', 'See where an enquiry stalls and what the next review step should be.', '/systems/missed-lead-recovery'],
   ['02 / booking control', 'Booking Certainty', 'Separate a booking request from a confirmed appointment so nobody assumes the wrong state.', '/systems/booking-control'],

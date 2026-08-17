@@ -3,8 +3,8 @@ import { SiteHeader } from '../components/SiteHeader';
 import { BookingPreview } from './BookingPreview';
 import { MotionReveal } from '../components/MotionReveal';
 
-import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
-import { canonicalUrl } from '../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Book — IronWake',
   description: 'Scheduling is not yet connected at IronWake. This page explains the current state and the working request path.',
