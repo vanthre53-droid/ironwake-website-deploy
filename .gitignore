@@ -33,4 +33,4 @@ strix_runs/
 /reports/evidence/**/*.png
 .hermes/
 .worktrees/
-C:\Users\vanth\AppData\Local\lighthouse.*
+lighthouse.*/
