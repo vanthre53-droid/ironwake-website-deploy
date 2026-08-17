@@ -1,9 +1,12 @@
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'Systems — IronWake',
-  description: 'How IronWake structures inquiry, booking, follow-up, and reception work, and what remains request-only until a provider is connected.'
+  description: 'How IronWake structures inquiry, booking, follow-up, and reception work, and what remains request-only until a provider is connected.',
+  alternates: { canonical: canonicalUrl("/systems") },
 };
 
 const systems = [
@@ -15,6 +18,12 @@ const systems = [
 
 export default function SystemsPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Systems", path: "/systems" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact"><span className="eyebrow">IronWake systems</span><h1>Give every enquiry an owner and a next step.</h1><p>Choose the part of your workflow that is hardest to see. Each page shows how that handoff works, what is already proven, and what still needs a provider.</p><a className="button" href="/audit">Find my workflow leak</a></section>
     <section className="section intro"><span className="eyebrow">Choose a system</span><h2>Start where customers are waiting.</h2><div className="system-grid">{systems.map(([label, title, text, state, href, icon]) => <a href={href} key={href}><article className="system-card"><span className="system-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d={icon} /></svg></span><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p><span className="card-link">{state} →</span></article></a>)}</div></section>

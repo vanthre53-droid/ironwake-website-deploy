@@ -2,9 +2,12 @@ import Link from 'next/link.js';
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'Insights — IronWake',
   description: 'Operational insights for service businesses: lead recovery, booking control, follow-up automation, and workflow improvement.',
+  alternates: { canonical: canonicalUrl("/insights") },
 };
 
 const articles = [
@@ -40,6 +43,12 @@ const articles = [
 
 export default function InsightsPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Insights", path: "/insights" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">Insights</span>

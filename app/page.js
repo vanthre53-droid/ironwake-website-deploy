@@ -6,6 +6,8 @@ import { InteractiveLeadJourney } from './components/InteractiveLeadJourney';
 import { WakeSVG } from './components/WakeSVG';
 import { dualLitePrice } from '../lib/pricing.mjs';
 
+import { organizationLd, breadcrumbLd } from 'lib/seo.mjs';
+import { canonicalUrl } from 'lib/seo.mjs';
 const systems = [
   ['01 / inquiry integrity', 'Missed Lead Recovery', 'See where an enquiry stalls and what the next review step should be.', '/systems/missed-lead-recovery'],
   ['02 / booking control', 'Booking Certainty', 'Separate a booking request from a confirmed appointment so nobody assumes the wrong state.', '/systems/booking-control'],
@@ -32,6 +34,11 @@ export function generateMetadata() {
 export default function Home() {
   const auditLitePrice = dualLitePrice('business-leak-audit');
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+          { name: "Home", path: "/" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero"><span className="eyebrow">Systems practice for service businesses</span><h1>Stop losing leads between enquiry and follow-up.</h1><p>IronWake maps where your enquiry, booking, or follow-up process loses momentum, then builds the smallest operational system that makes the next step visible and reviewable. Starts with a {auditLitePrice} diagnostic.</p><WakeSVG /><div className="signal-rail" role="group" aria-label="Operating flow: inquiry to review task to next action"><div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Inquiry</span></div><div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Review task</span></div><div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Next action</span></div></div><div className="hero-actions"><a className="button" href="/audit">Book Diagnostic</a><a className="button secondary" href="/pricing">See pricing</a></div><aside className="status-card" aria-label="Operating status"><span className="micro">The operating rule</span><dl><div><dt>Enquiry</dt><dd>Recorded</dd></div><div><dt>Review task</dt><dd>Due date</dd></div><div><dt>Next step</dt><dd>Visible</dd></div></dl></aside></section>
     <MotionReveal stagger><section className="section intro"><span className="eyebrow">Choose the problem</span><h2>Start with the handoff that is costing attention.</h2><div className="system-grid">{systems.map(([label, title, text, href]) => <a className="system-card" href={href} key={title}><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p><span className="card-link">Open this system <span aria-hidden="true">→</span></span></a>)}</div></section></MotionReveal>

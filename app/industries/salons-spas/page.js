@@ -1,9 +1,12 @@
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Salons & Spas — IronWake Industries',
-  description: 'How trust-lead-capture and booking-control apply to consultation-led salons and spas, where follow-up after the first enquiry decides the booking.'
+  description: 'How trust-lead-capture and booking-control apply to consultation-led salons and spas, where follow-up after the first enquiry decides the booking.',
+  alternates: { canonical: canonicalUrl("/industries/salons-spas") },
 };
 
 const leaks = [
@@ -19,6 +22,13 @@ const systems = [
 
 export default function SalonsSpasPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Industries", path: "/industries" },
+              { name: "Salons and Spas", path: "/industries/salons-spas" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact"><span className="eyebrow">Industries / Salons & Spas</span><h1>A consultation request is only useful if someone owns the follow-up.</h1><p>Consultation-led businesses lose bookings when follow-up after a first enquiry is inconsistent. This page describes the operational pattern, not a booking-calendar or payment integration IronWake does not yet offer.</p></section>
     <section className="section intro"><span className="eyebrow">Where the leak usually is</span><h2>Three moments a request gets lost.</h2><div className="industry-grid">{leaks.map(([label, title, text]) => <article className="industry-card" key={title}><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>

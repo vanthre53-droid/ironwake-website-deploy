@@ -1,9 +1,12 @@
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Dental & Private Clinics — IronWake Industries',
-  description: 'Administrative front-desk intake and booking patterns for dental and private clinics. Not a clinical, diagnostic, or compliance service.'
+  description: 'Administrative front-desk intake and booking patterns for dental and private clinics. Not a clinical, diagnostic, or compliance service.',
+  alternates: { canonical: canonicalUrl("/industries/dental-clinics") },
 };
 
 const leaks = [
@@ -19,6 +22,13 @@ const systems = [
 
 export default function DentalClinicsPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Industries", path: "/industries" },
+              { name: "Dental Clinics", path: "/industries/dental-clinics" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact"><span className="eyebrow">Industries / Dental & Private Clinics</span><h1>Front-desk and intake operations — not a clinical service.</h1><p>This page describes administrative reception and intake workflow only. It is not medical, diagnostic, legal, or compliance advice, and IronWake does not provide clinical services or claim regulatory compliance on a clinic’s behalf without a separate, reviewed engagement.</p></section>
     <section className="section intro"><span className="eyebrow">Where the leak usually is</span><h2>Three moments a request gets lost.</h2><div className="industry-grid">{leaks.map(([label, title, text]) => <article className="industry-card" key={title}><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>

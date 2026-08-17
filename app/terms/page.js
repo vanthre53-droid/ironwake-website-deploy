@@ -1,13 +1,22 @@
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'Terms — IronWake',
-  description: 'How the published setup prices, scope requests, customer accounts, proposals, and provider costs work on this site, and what is not yet an automatic ordering flow.'
+  description: 'How the published setup prices, scope requests, customer accounts, proposals, and provider costs work on this site, and what is not yet an automatic ordering flow.',
+  alternates: { canonical: canonicalUrl("/terms") },
 };
 
 export default function TermsPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Terms", path: "/terms" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">IronWake / Terms</span>

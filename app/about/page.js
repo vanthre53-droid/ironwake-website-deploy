@@ -2,9 +2,12 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'About — IronWake',
-  description: 'IronWake is a founder-led systems practice for service businesses, built around labelled, verified claims instead of theatre.'
+  description: 'IronWake is a founder-led systems practice for service businesses, built around labelled, verified claims instead of theatre.',
+  alternates: { canonical: canonicalUrl("/about") },
 };
 
 const labels = [
@@ -15,6 +18,12 @@ const labels = [
 
 export default function AboutPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "About", path: "/about" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact"><span className="eyebrow">About IronWake</span><h1>Build trust by making the next action clear.</h1><p>IronWake is a founder-led systems practice for service businesses. The work begins with one real enquiry or booking handoff and improves it without hiding uncertainty behind software.</p><a className="button" href="/audit">Show me where the gap is</a></section>
     <MotionReveal><section className="section founder"><div className="founder-mark">IRONWAKE<br />SYSTEMS PRACTICE</div><div><span className="eyebrow">Founder</span><h2>Revanth Nunna</h2><p>IronWake is founder-led. The practice starts by making one business-critical handoff visible — an inquiry, a booking, a follow-up — and making the next action for it clear and owned, before adding any new tool or claim.</p><span className="micro">Founder, IronWake</span></div></section></MotionReveal>

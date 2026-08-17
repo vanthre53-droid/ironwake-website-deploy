@@ -1,13 +1,22 @@
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'Privacy — IronWake',
-  description: 'What IronWake collects when you submit an audit request, chat with the assistant, or create a customer account; where it is stored; and how to reach us about your data.'
+  description: 'What IronWake collects when you submit an audit request, chat with the assistant, or create a customer account; where it is stored; and how to reach us about your data.',
+  alternates: { canonical: canonicalUrl("/privacy") },
 };
 
 export default function PrivacyPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Privacy", path: "/privacy" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">IronWake / Privacy</span>

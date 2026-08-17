@@ -2,9 +2,12 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'Work — IronWake',
-  description: 'Portfolio demonstrations from IronWake, labelled and scoped as capability proof rather than client engagements.'
+  description: 'Portfolio demonstrations from IronWake, labelled and scoped as capability proof rather than client engagements.',
+  alternates: { canonical: canonicalUrl("/work") },
 };
 
 const portfolio = [
@@ -27,6 +30,12 @@ const caseStudies = [
 
 export default function WorkPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Work", path: "/work" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">Portfolio</span>

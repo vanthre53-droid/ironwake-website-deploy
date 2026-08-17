@@ -49,3 +49,27 @@ Other screens are also subject to the same rule. This list prioritizes the audit
 2. P1.5 source/provider proof for RapidPulse, DentaCare, and Atelier.
 3. G1 approval before any public price or offer is rendered.
 4. G3 approval before public copy/assets are released.
+
+## 2026-08-17 SEO worker JSON-LD invented sameAs claim — QUARANTINED
+
+SEO worker t_ec097c7f added inline `ORG_JSONLD` blocks across **35 files** in `app/*/page.js`. The blocks hardcode:
+- `sameAs: ["https://github.com/ironwake"]` — **DOES NOT MATCH** live production (`https://www.instagram.com/ironwake.dev/`)
+- `alternateName: "IronWake Systems Practice"` — **DOES NOT EXIST** in live production, no evidence, invented
+- `founder.name: "Revanth Nunna"` + `jobTitle: "Founder"` — published without owner verification step
+- `contactPoint.email: "ironwake.dev@gmail.com"` — must verify against RESEND_DOMAIN verified sender + CLAIM_LEDGER
+
+### Why quarantined
+1. AGENTS.md §3 (No-invention law) — alternateName is fabricated; sameAs is wrong vs live.
+2. Deploy task t_d6a07044 (blocked) would ship this to live ironwake.dev if it ran.
+3. Hero claim — if "alternateName" lands on Google's structured data inspection, it becomes a public false statement.
+
+### Required action before unblocking t_d6a07044
+1. **Revert the working tree** to HEAD (38ee5ff) so SEO diff is rolled back.
+2. Use the existing canonical `lib/seo.mjs -> organizationLd()` everywhere (already includes correct sameAs).
+3. If a per-page canonical override is needed, export the constant once in lib/seo.mjs and import — do NOT duplicate JSON-LD objects in 35 files.
+4. Remove `alternateName`, remove hardcoded founder object, remove gmail contactPoint unless CLAIM_LEDGER proves it.
+
+### Verdict
+- Status: `DO NOT DEPLOY`
+- Working tree: 35 files modified, 1812 insertions, **uncommitted**
+- Mitigation: deploy task `t_d6a07044` already blocked (needs owner "deploy it" override)

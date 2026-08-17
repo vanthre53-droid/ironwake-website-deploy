@@ -2,9 +2,12 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'Industries — IronWake',
-  description: 'How IronWake’s inquiry, booking, and follow-up systems map to specific industries. Only industries with original, reviewed content are listed here.'
+  description: 'How IronWake’s inquiry, booking, and follow-up systems map to specific industries. Only industries with original, reviewed content are listed here.',
+  alternates: { canonical: canonicalUrl("/industries") },
 };
 
 const industries = [
@@ -15,6 +18,12 @@ const industries = [
 
 export default function IndustriesPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Industries", path: "/industries" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact"><span className="eyebrow">Industries</span><h1>Find the enquiry gap that matches your business.</h1><p>Each guide starts with a familiar customer journey, shows where ownership usually breaks, and links to the systems that address it.</p></section>
     <MotionReveal><section className="section intro"><span className="eyebrow">Choose your industry</span><h2>Start with the workflow you recognise.</h2><div className="industry-grid">{industries.map(([href, label, title, text]) => <a href={href} key={href}><article className="industry-card"><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p><span className="card-link">View industry guide →</span></article></a>)}</div></section></MotionReveal>

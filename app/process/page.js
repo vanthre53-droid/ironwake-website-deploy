@@ -2,9 +2,12 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'Process — IronWake',
-  description: 'The map, fix, test, document method IronWake uses to turn a missed-inquiry gap into verified operating work.'
+  description: 'The map, fix, test, document method IronWake uses to turn a missed-inquiry gap into verified operating work.',
+  alternates: { canonical: canonicalUrl("/process") },
 };
 
 const stages = [
@@ -16,6 +19,12 @@ const stages = [
 
 export default function ProcessPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Process", path: "/process" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact"><span className="eyebrow">How IronWake works</span><h1>Understand the gap before adding another tool.</h1><p>Map the handoff, fix the smallest useful part, test the real state, and document what can be trusted.</p><a className="button" href="/audit">Start with my workflow</a></section>
     <MotionReveal><section className="journey"><span className="eyebrow">The four-step method</span><h2>One clear decision at each stage.</h2><div className="journey-grid">{stages.map(([label, title, text]) => <article key={title}><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section></MotionReveal>

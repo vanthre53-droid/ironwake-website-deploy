@@ -1,6 +1,8 @@
 import PricingPage from './PricingPage';
 import { dualLitePrice, litePriceSummary } from '../../lib/pricing.mjs';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 const auditLitePrice = dualLitePrice('business-leak-audit', '/');
 
 export const metadata = {
@@ -13,10 +15,16 @@ export const metadata = {
     url: './',
     images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'IronWake pricing — five operational systems, three tiers each' }]
   },
+  alternates: { canonical: canonicalUrl("/pricing") },
 };
 
 export default function Page() {
   return <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Pricing", path: "/pricing" },
+      ])) }} />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',

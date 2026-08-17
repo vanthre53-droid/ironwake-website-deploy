@@ -1,9 +1,12 @@
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Home Services — IronWake Industries',
-  description: 'How missed-lead-recovery and booking-control apply to emergency and home-service businesses, where a missed call during a job can lose the next one.'
+  description: 'How missed-lead-recovery and booking-control apply to emergency and home-service businesses, where a missed call during a job can lose the next one.',
+  alternates: { canonical: canonicalUrl("/industries/home-services") },
 };
 
 const leaks = [
@@ -19,6 +22,13 @@ const systems = [
 
 export default function HomeServicesPage() {
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Industries", path: "/industries" },
+              { name: "Home Services", path: "/industries/home-services" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact"><span className="eyebrow">Industries / Home Services</span><h1>An unanswered call should not be the end of the lead.</h1><p>Home-service and emergency-adjacent businesses lose work when a call, text, or form goes unanswered during an active job. This page describes the operational pattern, not a telephony or dispatch integration IronWake does not yet offer.</p></section>
     <section className="section intro"><span className="eyebrow">Where the leak usually is</span><h2>Three moments a request gets lost.</h2><div className="industry-grid">{leaks.map(([label, title, text]) => <article className="industry-card" key={title}><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>

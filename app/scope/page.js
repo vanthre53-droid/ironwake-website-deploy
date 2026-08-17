@@ -2,9 +2,12 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const metadata = {
   title: 'Request scope — IronWake',
-  description: 'How IronWake scopes a systems engagement before any price, provider cost, timeline, or support boundary is represented as agreed.'
+  description: 'How IronWake scopes a systems engagement before any price, provider cost, timeline, or support boundary is represented as agreed.',
+  alternates: { canonical: canonicalUrl("/scope") },
 };
 
 const shapes = [
@@ -15,6 +18,12 @@ const shapes = [
 
 export default function ScopePage() {
   return <main className="shell scope-page">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Scope", path: "/scope" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero scope-hero"><span className="eyebrow">Choose the next step</span><h1>Define the problem before choosing the build.</h1><p>Start with the operating gap, then agree the work, limits, provider costs, and acceptance checks in writing. No generic package or invented price.</p><a className="button" href="/audit">Start with a leak audit</a></section>
     <MotionReveal><section className="scope-shapes"><span className="eyebrow">Engagement shapes</span><div>{shapes.map(([title, includes, excludes], index) => <article key={title}><span className="scope-index">0{index + 1}</span><h2>{title}</h2><p>{includes}</p><small>Boundary — {excludes}</small></article>)}</div></section></MotionReveal>

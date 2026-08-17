@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation.js';
 import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 // ponytail: insight articles live in a single source-of-truth array. The
 // detail page is generated for every slug; unknown slugs return 404 so
 // search engines never index dead links.
@@ -78,10 +80,35 @@ export function generateMetadata({ params }) {
   };
 }
 
+export async function generateMetadata({ params }) {
+  const slug = params.slug;
+  const article = ARTICLES.find((a) => a.slug === slug);
+  if (!article) return { title: "Insight not found" };
+  return {
+    title: article.title + " — IronWake",
+    description: article.excerpt,
+    alternates: { canonical: canonicalUrl("/insights/" + slug) },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      type: "article",
+      url: canonicalUrl("/insights/" + slug),
+      publishedTime: article.date,
+    },
+  };
+}
+
 export default function InsightArticlePage({ params }) {
   const article = ARTICLES.find((a) => a.slug === params.slug);
   if (!article) notFound();
   return <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Insights", path: "/insights" },
+              { name: "Article", path: "/insights/[slug]" },
+        ])) }} />
+
     <SiteHeader />
     <section className="hero compact">
       <span className="eyebrow">{article.category} · {article.date}</span>

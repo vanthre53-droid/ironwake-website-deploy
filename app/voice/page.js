@@ -2,6 +2,8 @@ import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import VoiceSessionLauncher from '../components/VoiceSessionLauncher';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+import { canonicalUrl } from '../lib/seo.mjs';
 export const dynamic = 'force-static';
 export const revalidate = 3600;
 
@@ -10,7 +12,8 @@ export function generateMetadata() {
     title: 'Live voice assistant — IronWake',
     description:
       'A disclosed, consent-first browser voice session against the published IronWake assistant. No microphone activation until you tap start.',
-    robots: { index: false, follow: true }
+    robots: { index: false, follow: true },
+    alternates: { canonical: canonicalUrl("/voice") }
   };
 }
 
@@ -22,6 +25,12 @@ export function generateMetadata() {
 export default function VoicePage() {
   return (
     <main className="shell">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Voice Demo", path: "/voice" },
+        ])) }} />
+
       <SiteHeader />
       <section className="section voice-page">
         <span className="eyebrow">Live voice assistant</span>
