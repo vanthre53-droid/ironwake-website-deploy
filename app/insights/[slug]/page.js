@@ -71,6 +71,7 @@ export function generateMetadata({ params }) {
       title: `${article.title} — IronWake`,
       description: article.excerpt,
       type: 'article',
+      url: './',
       siteName: 'IronWake',
       images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: article.title }]
     }

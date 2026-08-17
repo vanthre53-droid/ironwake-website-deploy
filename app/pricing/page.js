@@ -10,6 +10,7 @@ export const metadata = {
     title: 'Pricing — IronWake',
     description: 'Five operational systems with Lite/Standard/Pro tiers. India and international pricing.',
     type: 'website',
+    url: './',
     images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'IronWake pricing — five operational systems, three tiers each' }]
   },
 };

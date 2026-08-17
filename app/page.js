@@ -22,6 +22,7 @@ export function generateMetadata() {
       title: 'IronWake — Stop losing leads between enquiry and follow-up',
       description: 'Operational systems for service businesses. Capture every enquiry, create a review task, and make the next action visible.',
       type: 'website',
+      url: './',
       siteName: 'IronWake',
       images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'IronWake — Stop losing leads between enquiry and follow-up' }]
     },
