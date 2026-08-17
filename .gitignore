@@ -31,3 +31,6 @@ strix_runs/
 
 # Local screenshot evidence from visual audits is kept in-tree but not committed.
 /reports/evidence/**/*.png
+.hermes/
+.worktrees/
+C:\Users\vanth\AppData\Local\lighthouse.*
