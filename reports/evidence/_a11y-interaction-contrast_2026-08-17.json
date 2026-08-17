@@ -1,0 +1,173 @@
+{
+  "scannedAt": "2026-08-17T11:36:19.467Z",
+  "cssFile": "app/globals.css",
+  "controlBaseRulesDetected": 15,
+  "interactionStateOverridesDetected": 14,
+  "pairsWithResolvableHex": 14,
+  "pairsUnresolvable": 0,
+  "failingNormalTextCount": 0,
+  "passingNormalTextCount": 14,
+  "passingLargeTextCount": 14,
+  "focusVisibleRing": {
+    "outline": "3px solid var(--copper)",
+    "offset": "4px"
+  },
+  "failing": [],
+  "unresolvable": [],
+  "all": [
+    {
+      "baseSelector": ".button",
+      "state": "hover",
+      "fgRaw": "var(--white)",
+      "bgRaw": "var(--copper-dark)",
+      "fgHex": "#fff",
+      "bgHex": "#a33d20",
+      "ratio": 6.47,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".nav-cta",
+      "state": "hover",
+      "fgRaw": "var(--white)",
+      "bgRaw": "var(--copper-dark)",
+      "fgHex": "#fff",
+      "bgHex": "#a33d20",
+      "ratio": 6.47,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".button.ghost",
+      "state": "hover",
+      "fgRaw": "var(--copper-dark)",
+      "bgRaw": "var(--stone)",
+      "fgHex": "#a33d20",
+      "bgHex": "#edeae3",
+      "ratio": 5.39,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".button.destructive",
+      "state": "hover",
+      "fgRaw": "var(--white)",
+      "bgRaw": "#8d1414",
+      "fgHex": "#fff",
+      "bgHex": "#8d1414",
+      "ratio": 9.36,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".button.ghost",
+      "state": "active",
+      "fgRaw": "var(--ink)",
+      "bgRaw": "var(--stone-deep)",
+      "fgHex": "#0a0a0a",
+      "bgHex": "#e4e2dd",
+      "ratio": 15.29,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".button",
+      "state": "disabled",
+      "fgRaw": "var(--white)",
+      "bgRaw": "var(--action)",
+      "fgHex": "#fff",
+      "bgHex": "#b94d2f",
+      "ratio": 5.04,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".nav-cta",
+      "state": "disabled",
+      "fgRaw": "var(--white)",
+      "bgRaw": "var(--action)",
+      "fgHex": "#fff",
+      "bgHex": "#b94d2f",
+      "ratio": 5.04,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".button",
+      "state": "disabled",
+      "fgRaw": "var(--white)",
+      "bgRaw": "var(--action)",
+      "fgHex": "#fff",
+      "bgHex": "#b94d2f",
+      "ratio": 5.04,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".nav-cta",
+      "state": "disabled",
+      "fgRaw": "var(--white)",
+      "bgRaw": "var(--action)",
+      "fgHex": "#fff",
+      "bgHex": "#b94d2f",
+      "ratio": 5.04,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".button.ghost",
+      "state": "disabled",
+      "fgRaw": "var(--graphite)",
+      "bgRaw": "transparent",
+      "fgHex": "#444748",
+      "bgHex": "#ffffff",
+      "ratio": 9.37,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".button.destructive",
+      "state": "disabled",
+      "fgRaw": "var(--white)",
+      "bgRaw": "var(--graphite)",
+      "fgHex": "#fff",
+      "bgHex": "#444748",
+      "ratio": 9.37,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".stage-filter button",
+      "state": "hover",
+      "fgRaw": "var(--ink)",
+      "bgRaw": "transparent",
+      "fgHex": "#0a0a0a",
+      "bgHex": "#ffffff",
+      "ratio": 19.8,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".assistant-trigger",
+      "state": "hover",
+      "fgRaw": "#f6fbfb",
+      "bgRaw": "var(--aqua)",
+      "fgHex": "#f6fbfb",
+      "bgHex": "#1e7582",
+      "ratio": 5.13,
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "baseSelector": ".chat-option",
+      "state": "hover",
+      "fgRaw": "var(--ink)",
+      "bgRaw": "var(--stone)",
+      "fgHex": "#0a0a0a",
+      "bgHex": "#edeae3",
+      "ratio": 16.48,
+      "passAA_normal": true,
+      "passAA_large": true
+    }
+  ]
+}

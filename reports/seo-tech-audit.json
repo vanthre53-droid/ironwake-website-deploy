@@ -1,0 +1,413 @@
+{
+  "when": "2026-08-17T12:26:12.222Z",
+  "publicPagesAudited": 31,
+  "passes": [
+    {
+      "check": "jsonld-organization",
+      "detail": "/about has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/about has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/about has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/audit has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/book has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/book has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/book has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/industries/dental-clinics has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/industries/dental-clinics has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/industries/dental-clinics has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/industries/home-services has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/industries/home-services has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/industries/home-services has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/industries has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/industries has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/industries has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/industries/salons-spas has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/industries/salons-spas has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/industries/salons-spas has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/insights/:slug has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/insights/:slug has BreadcrumbList (factory)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/insights has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/insights has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/insights has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/page.js has Organization (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/page.js has canonical (openGraph.url)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/pricing has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/privacy has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/privacy has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/privacy has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/process has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/process has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/process has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/scope has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/scope has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/scope has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/systems/ai-receptionist has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/systems/booking-control has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/systems/missed-lead-recovery has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/systems has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/systems has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/systems has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/systems/trust-lead-capture has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/terms has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/terms has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/terms has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/voice has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/voice has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/atelier has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/aura-archives has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/bramble-cafe has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/dentacare-pro has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/harbour-estates has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/luxe-studio has canonical (alternates.canonical)"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "/work has Organization (factory)"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "/work has BreadcrumbList (factory)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/rapidpulse has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/retech has canonical (alternates.canonical)"
+    },
+    {
+      "check": "canonical",
+      "detail": "/work/voltix has canonical (alternates.canonical)"
+    },
+    {
+      "check": "sitemap-parity",
+      "detail": "app/sitemap.js and public/sitemap.xml agree on 33 URLs"
+    },
+    {
+      "check": "binary-asset",
+      "detail": "app/favicon.ico (1556 bytes) is a valid ICO"
+    },
+    {
+      "check": "binary-asset",
+      "detail": "app/apple-icon.png (3148 bytes) is a valid PNG"
+    },
+    {
+      "check": "binary-asset",
+      "detail": "public/logo.png (13533 bytes) is a valid PNG"
+    },
+    {
+      "check": "binary-asset",
+      "detail": "public/sitemap.xml (6192 bytes) is a valid XML"
+    },
+    {
+      "check": "canonical-origin",
+      "detail": "lib/seo.mjs ↔ lib/site-origin.mjs references https://ironwake.dev"
+    },
+    {
+      "check": "canonical-origin",
+      "detail": "app/sitemap.js references https://ironwake.dev"
+    },
+    {
+      "check": "canonical-origin",
+      "detail": "app/robots.js references https://ironwake.dev"
+    }
+  ],
+  "failures": [
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /audit"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /audit"
+    },
+    {
+      "check": "canonical",
+      "detail": "Missing canonical / metadataBase / openGraph.url on /insights/:slug"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /page.js"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /pricing"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /pricing"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /systems/ai-receptionist"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /systems/ai-receptionist"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /systems/booking-control"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /systems/booking-control"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /systems/missed-lead-recovery"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /systems/missed-lead-recovery"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /systems/trust-lead-capture"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /systems/trust-lead-capture"
+    },
+    {
+      "check": "canonical",
+      "detail": "Missing canonical / metadataBase / openGraph.url on /voice"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/atelier"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/atelier"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/aura-archives"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/aura-archives"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/bramble-cafe"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/bramble-cafe"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/dentacare-pro"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/dentacare-pro"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/harbour-estates"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/harbour-estates"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/luxe-studio"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/luxe-studio"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/rapidpulse"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/rapidpulse"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/retech"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/retech"
+    },
+    {
+      "check": "jsonld-organization",
+      "detail": "Missing Organization JSON-LD on /work/voltix"
+    },
+    {
+      "check": "jsonld-breadcrumb",
+      "detail": "Missing BreadcrumbList JSON-LD on /work/voltix"
+    }
+  ],
+  "warnings": []
+}

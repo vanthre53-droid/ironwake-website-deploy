@@ -1,0 +1,38 @@
+{
+    "agent_id": "agent_13eaebbdebd0cdf962680d26d7",
+    "channel": "voice",
+    "last_modification_timestamp": 1786961937729,
+    "agent_name": "IronWake AI Receptionist",
+    "response_engine": {
+        "type": "conversation-flow",
+        "version": 4,
+        "conversation_flow_id": "conversation_flow_a9fa10e52c2d"
+    },
+    "webhook_url": "https://ironwake.dev/api/webhooks/retell",
+    "language": "en-IN",
+    "data_storage_setting": "everything",
+    "opt_in_signed_url": false,
+    "version": 4,
+    "base_version": 3,
+    "assigned_tags": [],
+    "is_published": false,
+    "post_call_analysis_model": "gpt-4.1",
+    "pii_config": {
+        "mode": "post_call",
+        "categories": []
+    },
+    "handbook_config": {
+        "default_personality": true,
+        "ai_disclosure": true
+    },
+    "voice_id": "11labs-Amritanshu",
+    "max_call_duration_ms": 3600000,
+    "interruption_sensitivity": 0.9,
+    "allow_user_dtmf": true,
+    "user_dtmf_options": {},
+    "webhook_events": [
+        "call_started",
+        "call_ended",
+        "call_analyzed"
+    ]
+}

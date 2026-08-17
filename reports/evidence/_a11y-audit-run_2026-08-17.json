@@ -1,0 +1,983 @@
+{
+  "scannedAt": "2026-08-17T11:31:28.312Z",
+  "filesScanned": 25,
+  "pageFilesAudited": 43,
+  "motionFilesDetected": 5,
+  "motionFilesWithReduce": 5,
+  "issueCount": 0,
+  "warningCount": 0,
+  "issues": [],
+  "details": [],
+  "keyboard_navigation_matrix": {
+    "pages": [
+      {
+        "page": "app/about/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 1,
+          "accessible": 1
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/account/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/admin/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/audit/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/auth/callback/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/auth/confirm/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/book/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/chat/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/forgot-password/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/industries/dental-clinics/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 3,
+          "accessible": 3
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/industries/home-services/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 3,
+          "accessible": 3
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/industries/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 2,
+          "accessible": 2
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/industries/salons-spas/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 3,
+          "accessible": 3
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/insights/[slug]/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 1,
+          "accessible": 1
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/insights/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 2,
+          "accessible": 2
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/login/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/owner/login/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/owner/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/owner/reset-password/page.js",
+        "buttons": {
+          "total": 1,
+          "accessible": 1
+        },
+        "anchors": {
+          "total": 1,
+          "accessible": 1
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 2,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 9,
+          "accessible": 9
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/pricing/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/privacy/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 5,
+          "accessible": 5
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/process/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 1,
+          "accessible": 1
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/scope/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 1,
+          "accessible": 1
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/signup/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/systems/ai-receptionist/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/systems/booking-control/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/systems/missed-lead-recovery/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/systems/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 2,
+          "accessible": 2
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/systems/trust-lead-capture/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/terms/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 6,
+          "accessible": 6
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/update-password/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/voice/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 2,
+          "accessible": 2
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/work/atelier/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/work/aura-archives/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/work/bramble-cafe/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/work/dentacare-pro/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/work/harbour-estates/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/work/luxe-studio/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/work/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 6,
+          "accessible": 6
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 1
+      },
+      {
+        "page": "app/work/rapidpulse/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/work/retech/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      },
+      {
+        "page": "app/work/voltix/page.js",
+        "buttons": {
+          "total": 0,
+          "accessible": 0
+        },
+        "anchors": {
+          "total": 0,
+          "accessible": 0
+        },
+        "images": {
+          "total": 0,
+          "accessible": 0
+        },
+        "inputs": {
+          "total": 0,
+          "accessible": 0
+        },
+        "h1Count": 0
+      }
+    ]
+  },
+  "focus_visible_audit": {
+    "cssFilesChecked": [
+      "app/globals.css"
+    ],
+    "cssHasFocusVisible": true
+  },
+  "reduced_motion_compliance": {
+    "motionFiles": 5,
+    "motionFilesWithReduce": 5,
+    "ratio": 1,
+    "files": [
+      "app/components/MotionReveal.js",
+      "app/components/MotionReveal.test.js",
+      "app/components/StepPipeline.js",
+      "app/components/WakeSVG.js",
+      "app/components/WorkflowDemo.js"
+    ]
+  },
+  "color_contrast_audit": {
+    "source": "reports/contrast-audit.json",
+    "pairs": 8,
+    "failingPairs": 0,
+    "failingDetails": []
+  },
+  "axe_core_findings": {
+    "ran": true,
+    "reportPath": "/mnt/c/Users/vanth/Downloads/ironwake/reports/axe-report.json",
+    "generatedAt": "2026-08-17T10:54:39.100Z",
+    "tool": "@axe-core/puppeteer",
+    "toolVersion": "4.10.2",
+    "routesAudited": [
+      "https://ironwake.dev/",
+      "https://ironwake.dev/pricing",
+      "https://ironwake.dev/systems/ai-receptionist",
+      "https://ironwake.dev/work",
+      "https://ironwake.dev/login"
+    ],
+    "routesSucceeded": 5,
+    "routesFailed": 0,
+    "totalViolations": 0,
+    "impactCounts": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0
+    },
+    "incompleteRules": [
+      "color-contrast"
+    ],
+    "passCountAvg": 22.8,
+    "routes": [
+      {
+        "url": "https://ironwake.dev/",
+        "status": "ok",
+        "violations": 0,
+        "passes": 25,
+        "incomplete": 1,
+        "incompleteIds": [
+          "color-contrast"
+        ],
+        "error": null
+      },
+      {
+        "url": "https://ironwake.dev/pricing",
+        "status": "ok",
+        "violations": 0,
+        "passes": 20,
+        "incomplete": 1,
+        "incompleteIds": [
+          "color-contrast"
+        ],
+        "error": null
+      },
+      {
+        "url": "https://ironwake.dev/systems/ai-receptionist",
+        "status": "ok",
+        "violations": 0,
+        "passes": 21,
+        "incomplete": 1,
+        "incompleteIds": [
+          "color-contrast"
+        ],
+        "error": null
+      },
+      {
+        "url": "https://ironwake.dev/work",
+        "status": "ok",
+        "violations": 0,
+        "passes": 21,
+        "incomplete": 1,
+        "incompleteIds": [
+          "color-contrast"
+        ],
+        "error": null
+      },
+      {
+        "url": "https://ironwake.dev/login",
+        "status": "ok",
+        "violations": 0,
+        "passes": 27,
+        "incomplete": 1,
+        "incompleteIds": [
+          "color-contrast"
+        ],
+        "error": null
+      }
+    ]
+  }
+}
