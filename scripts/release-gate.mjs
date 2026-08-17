@@ -64,8 +64,10 @@ async function main() {
   catch { fail(`cannot read FINAL_RELEASE_MANIFEST.json — run freeze first`); }
   try {
     const { stdout } = await sh('git', ['rev-parse', 'HEAD'], { cwd: ROOT });
-    if (stdout.trim() !== manifest.HEAD) fail(`HEAD ${stdout.trim()} != frozen ${manifest.HEAD}`);
-    ok(`HEAD matches frozen release ${manifest.HEAD}`);
+    // ponytail: accept either manifest.HEAD (legacy) or manifest.FINAL_HEAD (current).
+    const frozen = manifest.HEAD ?? manifest.FINAL_HEAD;
+    if (stdout.trim() !== frozen) fail(`HEAD ${stdout.trim()} != frozen ${frozen}`);
+    ok(`HEAD matches frozen release ${frozen}`);
   } catch (e) { fail(`git rev-parse failed: ${e.message}`); }
 
   // (4) Next.js build artifact present
