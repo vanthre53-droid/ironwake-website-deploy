@@ -27,6 +27,7 @@ export const metadata = {
     description: 'IronWake maps operational systems for clearer enquiry, booking, follow-up, and reception handoffs.',
     type: 'website',
     siteName: 'IronWake',
+    url: './',
     images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'IronWake — Systems that answer' }]
   },
   twitter: { card: 'summary_large_image', title: 'IronWake — Systems that answer', description: 'IronWake maps operational systems for clearer enquiry, booking, follow-up, and reception handoffs.', images: ['/og-default.svg'] }
