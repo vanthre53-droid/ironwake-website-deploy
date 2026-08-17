@@ -1,0 +1,13 @@
+{
+  "scope": "ui-visual-audit",
+  "timestamp": "2026-08-17T10:32:24.108Z",
+  "issueCount": 0,
+  "issues": [],
+  "checks": {
+    "buttonStates": true,
+    "buttonVariants": true,
+    "cookieBannerHygiene": true,
+    "glassReducedMotion": true,
+    "googleControlReachable": true
+  }
+}
