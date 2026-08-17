@@ -113,6 +113,7 @@ async function main() {
         '--exclude=*.test.js',
         '--exclude=*.test.mjs',
         '--exclude=*.test.cjs',
+        '--exclude=*allowlist*',  // ponytail: policy definition files reference forbidden hosts literally.
         ...FORBIDDEN_HOSTS.flatMap(h => ['-e', h]),
         join(ROOT, target)
       ]);
