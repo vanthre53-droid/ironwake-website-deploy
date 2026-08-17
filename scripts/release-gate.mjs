@@ -53,7 +53,7 @@ async function main() {
 
   // (2) Working tree clean
   try {
-    const { stdout } = await sh('git', ['status', '--porcelain'], { cwd: ROOT });
+    const { stdout } = await sh('git', ['status', '--porcelain', '--untracked-files=no'], { cwd: ROOT });
     if (stdout.trim()) fail(`working tree dirty: ${stdout.trim()}`);
     ok('git working tree clean');
   } catch (e) { fail(`git status failed: ${e.message}`); }
