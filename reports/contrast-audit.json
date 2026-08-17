@@ -1,0 +1,79 @@
+{
+  "scannedAt": "2026-08-17T10:48:47.984Z",
+  "pairs": [
+    {
+      "fg": "--ink",
+      "bg": "--paper",
+      "fgHex": "#0a0a0a",
+      "bgHex": "#f5f3ee",
+      "ratio": "17.85",
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "fg": "--graphite",
+      "bg": "--paper",
+      "fgHex": "#444748",
+      "bgHex": "#f5f3ee",
+      "ratio": "8.45",
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "fg": "--copper",
+      "bg": "--paper",
+      "fgHex": "#b94d2f",
+      "bgHex": "#f5f3ee",
+      "ratio": "4.55",
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "fg": "--copper-dark",
+      "bg": "--paper",
+      "fgHex": "#a33d20",
+      "bgHex": "#f5f3ee",
+      "ratio": "5.83",
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "fg": "--aqua",
+      "bg": "--paper",
+      "fgHex": "#1e7582",
+      "bgHex": "#f5f3ee",
+      "ratio": "4.83",
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "fg": "--ink",
+      "bg": "--surface",
+      "fgHex": "#0a0a0a",
+      "bgHex": "#ffffff",
+      "ratio": "19.80",
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "fg": "--graphite",
+      "bg": "--surface",
+      "fgHex": "#444748",
+      "bgHex": "#ffffff",
+      "ratio": "9.37",
+      "passAA_normal": true,
+      "passAA_large": true
+    },
+    {
+      "fg": "--copper",
+      "bg": "--surface",
+      "fgHex": "#b94d2f",
+      "bgHex": "#ffffff",
+      "ratio": "5.04",
+      "passAA_normal": true,
+      "passAA_large": true
+    }
+  ],
+  "issueCount": 0,
+  "issues": []
+}

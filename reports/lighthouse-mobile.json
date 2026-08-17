@@ -1,0 +1,219 @@
+{
+  "tool": "lighthouse",
+  "toolVersion": "12.2.1",
+  "formFactor": "mobile",
+  "origin": "https://ironwake.dev",
+  "generatedAt": "2026-08-17T10:57:40.524Z",
+  "routesAudited": 5,
+  "averages": {
+    "performance": 87,
+    "accessibility": 100,
+    "bestPractices": 93,
+    "seo": 93,
+    "lcpMs": 3492,
+    "fcpMs": 1662,
+    "tbtMs": 181,
+    "cls": 0
+  },
+  "results": [
+    {
+      "url": "https://ironwake.dev/",
+      "formFactor": "mobile",
+      "fetchedAt": "2026-08-17T10:56:09.607Z",
+      "finalUrl": "https://ironwake.dev/",
+      "statusCode": 200,
+      "scores": {
+        "performance": 84,
+        "accessibility": 100,
+        "bestPractices": 93,
+        "seo": 100
+      },
+      "coreWebVitals": {
+        "fcpMs": 1580,
+        "lcpMs": 3301,
+        "tbtMs": 312,
+        "cls": 0,
+        "siMs": 3321
+      },
+      "opportunities": [
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "savingsMs": 900
+        },
+        {
+          "id": "server-response-time",
+          "title": "Reduce initial server response time",
+          "score": 0,
+          "savingsMs": 888
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "savingsMs": 150
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "url": "https://ironwake.dev/pricing",
+      "formFactor": "mobile",
+      "fetchedAt": "2026-08-17T10:56:33.534Z",
+      "finalUrl": "https://ironwake.dev/pricing",
+      "statusCode": 200,
+      "scores": {
+        "performance": 88,
+        "accessibility": 98,
+        "bestPractices": 93,
+        "seo": 100
+      },
+      "coreWebVitals": {
+        "fcpMs": 1822,
+        "lcpMs": 3515,
+        "tbtMs": 146,
+        "cls": 0,
+        "siMs": 1822
+      },
+      "opportunities": [
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "savingsMs": 900
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "savingsMs": 250
+        },
+        {
+          "id": "server-response-time",
+          "title": "Initial server response time was short",
+          "score": 1,
+          "savingsMs": 118
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "url": "https://ironwake.dev/systems/ai-receptionist",
+      "formFactor": "mobile",
+      "fetchedAt": "2026-08-17T10:56:51.385Z",
+      "finalUrl": "https://ironwake.dev/systems/ai-receptionist",
+      "statusCode": 200,
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "bestPractices": 93,
+        "seo": 100
+      },
+      "coreWebVitals": {
+        "fcpMs": 1637,
+        "lcpMs": 3339,
+        "tbtMs": 139,
+        "cls": 0,
+        "siMs": 1637
+      },
+      "opportunities": [
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "savingsMs": 900
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "savingsMs": 250
+        },
+        {
+          "id": "server-response-time",
+          "title": "Initial server response time was short",
+          "score": 1,
+          "savingsMs": 140
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "url": "https://ironwake.dev/work",
+      "formFactor": "mobile",
+      "fetchedAt": "2026-08-17T10:57:08.141Z",
+      "finalUrl": "https://ironwake.dev/work",
+      "statusCode": 200,
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "bestPractices": 93,
+        "seo": 100
+      },
+      "coreWebVitals": {
+        "fcpMs": 1627,
+        "lcpMs": 3397,
+        "tbtMs": 147,
+        "cls": 0,
+        "siMs": 1627
+      },
+      "opportunities": [
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "savingsMs": 970
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "savingsMs": 250
+        },
+        {
+          "id": "server-response-time",
+          "title": "Initial server response time was short",
+          "score": 1,
+          "savingsMs": 114
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "url": "https://ironwake.dev/login",
+      "formFactor": "mobile",
+      "fetchedAt": "2026-08-17T10:57:26.178Z",
+      "finalUrl": "https://ironwake.dev/login",
+      "statusCode": 200,
+      "scores": {
+        "performance": 85,
+        "accessibility": 100,
+        "bestPractices": 93,
+        "seo": 66
+      },
+      "coreWebVitals": {
+        "fcpMs": 1643,
+        "lcpMs": 3906,
+        "tbtMs": 163,
+        "cls": 0,
+        "siMs": 1643
+      },
+      "opportunities": [
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "savingsMs": 810
+        },
+        {
+          "id": "server-response-time",
+          "title": "Initial server response time was short",
+          "score": 1,
+          "savingsMs": 334
+        }
+      ],
+      "warnings": []
+    }
+  ]
+}
