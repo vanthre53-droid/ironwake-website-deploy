@@ -1,5 +1,5 @@
 {
-  "FINAL_HEAD": "cc86c291fa5d1a1924321e15e1f84d54572beaa0",
+  "FINAL_HEAD": "dc719469eb20e097c03e9bff0083ccad6d3a1f52",
   "FROZEN_FOR_V13_DEPLOY": "2026-08-18",
   "V13_NOTE": "V14 batch amendment: pricing toggle selector fix (aria-pressed now drives actual price swap), MOST POPULAR badge per Dialzara pattern, dental vertical landing page + ROI calculator, Retell receptionist core (prompt/knowledge/golden), Meta WhatsApp Business Profile + OAuth. Frozen for v14 production deploy attempt #12.",
   "DEPLOY_BUDGET": {
@@ -90,9 +90,9 @@
     "PRODUCTION_BUILD": "VERIFIED (fresh .next clean, all required routes built)",
     "STRIX_SECURITY": "VERIFIED_HARDENED (0 findings, 2 medium findings remediated and re-verified)"
   },
-  "buildId": "Yxptn_P9d1Dbtr6Sh74er",
-  "timestamp": "2026-08-18T15:55:00Z",
-  "deploy_head": "cc86c291fa5d1a1924321e15e1f84d54572beaa0",
+  "buildId": "OoX0jLP-erR3mVvsDpIiN",
+  "timestamp": "2026-08-18T16:34:50Z",
+  "deploy_head": "dc719469eb20e097c03e9bff0083ccad6d3a1f52",
   "PRODUCTION_DEPLOY_3": {
     "ID": "6a7c4e1d377fb59a36ba980e",
     "HEAD": "47495b2fd5b386eee88710540d74396a3e13c664",
