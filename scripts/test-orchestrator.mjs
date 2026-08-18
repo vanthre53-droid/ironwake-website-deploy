@@ -27,7 +27,7 @@ function classifyTier(relPath) {
   if (ENV_FILES.has(relPath)) return 'ENVIRONMENT';
   const parts = relPath.split('/');
   if (parts[0] === 'app' && parts[1] === 'api') return 'INTEGRATION';
-  if (parts[0] === 'app' && (parts[1] === 'components' || parts.some(p => p === 'page.js' || p === 'route.js') || parts.length >= 3)) {
+  if (parts[0] === 'app' && (parts[1] === 'components' || parts.some(p => p === 'page.js' || p === 'route.js' || /(page|route|layout).test.[mc]?[jt]sx?$/.test(p)) || parts.length >= 3)) {
     // app/components/* or app/**/*.test.js (React/server components/pages)
     if (parts[0] === 'app' && parts[1] === 'components') return 'COMPONENT';
     if (parts[0] === 'app') return 'COMPONENT';
@@ -254,8 +254,7 @@ async function main() {
   process.exit(logicBlocks ? 1 : 0);
 }
 
-main().catch(e => { console.error('[orchestrator] uncaught:', e); process.exit(2); });
-
 // ponytail: only auto-run when invoked as the CLI entry point — importable
-// from tests without firing side effects.
-if (IS_CLI) main().catch(e => { console.error('[orchestrator] uncaught:', e); process.exit(2); });
+// from tests without firing side effects. Honor ORCHESTRATOR_NO_AUTO so the
+// test runner can probe the module without triggering real test runs.
+if (IS_CLI && !process.env.ORCHESTRATOR_NO_AUTO) main().catch(e => { console.error('[orchestrator] uncaught:', e); process.exit(2); });
