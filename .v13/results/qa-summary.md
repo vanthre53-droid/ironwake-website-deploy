@@ -1,7 +1,7 @@
 # Stage 6 — Browser QA Summary
 
-**Generated**: 2026-08-18T09:37:12.397Z
-**Base URL**: http://localhost:3737
+**Generated**: 2026-08-18T09:58:52.380Z
+**Base URL**: https://ironwake.dev
 
 ## Counts
 

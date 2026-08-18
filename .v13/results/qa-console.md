@@ -1,7 +1,7 @@
 # Browser QA — Console Errors & Warnings
 
-**Generated**: 2026-08-18T09:37:12.396Z
-**Base URL**: http://localhost:3737
+**Generated**: 2026-08-18T09:58:52.379Z
+**Base URL**: https://ironwake.dev
 **Viewports tested**: 1920, 1440, 1366, 1280, 1024, 430, 390, 360, 320
 **Routes tested**: /, /pricing, /audit
 **Total console events captured**: 27
