@@ -2,8 +2,22 @@
 
 **Last updated**: 2026-08-18 (live) — truth-only, no inflation.
 
+## WAVE-2 STATUS (this hour, 02:30-03:00Z)
+
+- Wave 5 (deleg_9bdd1a6a, 8 tasks) COMPLETE — 7 hr + 1 design-task; all real work verified
+  - CF env fix DONE LIVE: `ironwake.dev` robots/sitemap/canonical/og:url now emit correct origin
+  - Retell: 19/19 tests pass, real SDK installed (retell-client-js-sdk v2.0.8)
+  - Formal state machine: `.v13/MACHINE.{json,schema.json,yaml}` 19 states, 21 transitions
+  - DAG: `state/states.{md,yaml}` 84 nodes
+  - FILE_OWNERSHIP: 274 rows populated in TODO.md
+  - AGENT_OBSERVABILITY: 18 rows, 8 live + 10 blocked
+- Wave 6 (deleg_bcfe2aa8, 8 tasks) RUNNING — selftest + dry-run + live-acceptance + Ruflo MCP
+- Bundle: 1.6MB (target < 1MB) — over by 60%
+- Build: passes
+- Test: 301/309 pass, 8 fail (pre-existing source-grep drift)
+
 ## GLOBAL_STATE
-**CURRENT = BOOTSTRAPPING** → target **FULLY_VERIFIED**.
+**CURRENT = READY_FOR_DRY_RUN** → target **FULLY_VERIFIED**.
 
 Allowed state transitions (strict):
 - `BOOTSTRAPPING` → `DESIGN_LOCKED` → `ROUTE_AUDITED` → `ROUTING_OK` → `AUTH_OK` →
