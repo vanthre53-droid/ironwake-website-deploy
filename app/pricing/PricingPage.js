@@ -69,7 +69,7 @@ export default function PricingPage() {
           </p>
           <div className="pricing-hero-actions">
             <Link className="button" href="/audit">Book Diagnostic</Link>
-            <Link className="button secondary" href="/services">Browse Services</Link>
+            <Link className="button secondary" href="/systems">Browse Systems</Link>
           </div>
         </section>
 
