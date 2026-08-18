@@ -91,8 +91,8 @@
     "STRIX_SECURITY": "VERIFIED_HARDENED (0 findings, 2 medium findings remediated and re-verified)"
   },
   "buildId": "KCHDFNeqNBBEBRPB3ItF-",
-  "timestamp": "2026-08-18T19:04:00Z",
-  "deploy_head": "a9346823538015b31d295e218b24bccd4ce13216",
+  "timestamp": "2026-08-18T19:08:00Z",
+  "deploy_head": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
   "PRODUCTION_DEPLOY_3": {
     "ID": "6a7c4e1d377fb59a36ba980e",
     "HEAD": "47495b2fd5b386eee88710540d74396a3e13c664",
@@ -104,6 +104,11 @@
     "URL": "https://ironwake-system.netlify.app"
   },
   "PHASE": "PHASE_FINAL_CLOUDFLARE_PRODUCTION_CONSOLIDATED",
-  "STATUS": "READY_FOR_FINAL_DEPLOY",
-  "FROZEN_FOR_V14_DEPLOY": "2026-08-18"
+  "STATUS": "DEPLOYED_LIVE_V14_BATCH",
+  "FROZEN_FOR_V14_DEPLOY": "2026-08-18",
+  "V14_BATCH_DEPLOY_ID": "46279ef8-402f-4f1d-a129-989f368fee92",
+  "V14_BATCH_DEPLOYED_HEAD": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
+  "V14_BATCH_DEPLOYED_AT": "2026-08-18T19:08:00Z",
+  "V14_BATCH_REMAINING_DEPLOYS": 4,
+  "V14_BATCH_NOTE": "Real Cloudflare deploy via release-gate attempt #10. PWA manifest + IndexNow endpoint + home mobile CSS fix + 6 new tests shipped. Live verified at https://ironwake.dev (200), /manifest.webmanifest (200), /.well-known/indexnow-key.txt (200)."
 }

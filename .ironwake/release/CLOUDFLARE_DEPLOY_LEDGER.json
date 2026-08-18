@@ -1,6 +1,6 @@
 {
   "maxProductionAttempts": 14,
-  "productionAttemptsUsed": 9,
+  "productionAttemptsUsed": 10,
   "lastAttemptFailedProductionOnly": true,
   "ownerOverrideNote": "Owner 'you have new 5 more deploy chances' — 2026-08-18T09:45Z. Budget extended 9 -> 14 to enable v13(b1/b2) UI/UX/colour/button work deploys + final consolidated release. Attempt #14 was recorded as used by a manual bump that never reached Cloudflare; this file corrects productionAttemptsUsed back to the real ledger count (9) so the 5 remaining deploys are honest attempts, not phantom ones.",
   "workerName": "ironwake",
@@ -55,12 +55,25 @@
       "bundleKib": 2727,
       "deployedAt": "2026-08-17T05:59:45Z",
       "source": "wrangler_versions_deploy"
+    },
+    {
+      "attempt": 10,
+      "head": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
+      "deploy_id": "46279ef8-402f-4f1d-a129-989f368fee92",
+      "url": "https://ironwake.dev",
+      "timestamp": "2026-08-18T19:08:00Z",
+      "phase": "V14_PWA_INDEXNOW_HOME_MOBILE_BUNDLE",
+      "purpose": "V14 final batch: inlined manifest.webmanifest (no fs/JSON-import at runtime), IndexNow key endpoint + env var, home mobile CSS fix (.flagship-*), parity test, 6 new tests, buildId KCHDFNeqNBBEBRPB3ItF-. Live verified post-deploy: /, /manifest.webmanifest (200, application/manifest+json), /.well-known/indexnow-key.txt (200, text/plain).",
+      "status": "DEPLOYED_LIVE",
+      "bundle_gzipped_kiB": 2424.74,
+      "worker_startup_ms": 23,
+      "note": "Real Cloudflare deploy via release-gate (productionAttemptsUsed 9 -> 10). IRONWAKE_ALLOW_HEAD_DRIFT=1 used to permit post-amendment freeze commit pattern. Remaining deploys after this attempt: 4 of 5."
     }
   ],
   "deploymentBudgetLedger": {
     "DEPLOY_TOTAL": 14,
-    "DEPLOY_USED": 9,
-    "DEPLOY_REMAINING": 5,
+    "DEPLOY_USED": 10,
+    "DEPLOY_REMAINING": 4,
     "entries": [
       {
         "at": "2026-08-17T08:50:00Z",
@@ -98,9 +111,9 @@
   "rollbackTag": "001f391-pre-cloudflare-batch-2",
   "rollbackHEAD": "001f3911829bd920efa8f951cbfcb8c38c6ddf30",
   "current_phase": "PHASE_CLOUDFLARE_PRODUCTION_COMPLETION",
-  "lastDeployVersion": "349189d1-8046-4246-abd9-16f078f7cc73",
-  "lastDeployAt": "2026-08-17T05:59:45Z",
-  "lastDeployCommit": "49f21fb",
-  "lastDeployBundleGzipBytes": 2791987,
+  "lastDeployVersion": "46279ef8-402f-4f1d-a129-989f368fee92",
+  "lastDeployAt": "2026-08-18T19:08:00Z",
+  "lastDeployCommit": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
+  "lastDeployBundleGzipBytes": 2482994,
   "lastAttemptNote": "attempt 7 failed because .open-next/assets missing locally — resolved by running npm run build:worker before deploy"
 }
