@@ -1,0 +1,356 @@
+{
+  "generatedAt": "2026-08-18T03:43:51.763Z",
+  "baseUrl": "https://ironwake.dev",
+  "host": "ironwake.dev",
+  "overall": "FAIL",
+  "counts": {
+    "FAIL": 3,
+    "PASS": 6,
+    "SKIP": 1
+  },
+  "total": 10,
+  "steps": [
+    {
+      "id": "01",
+      "name": "Homepage HTML + brand metadata",
+      "url": "https://ironwake.dev/",
+      "status": "FAIL",
+      "bytes": 61456,
+      "contentType": "text/html; charset=utf-8",
+      "durationMs": 639,
+      "startedAt": "2026-08-18T03:43:41.009Z",
+      "checks": [
+        {
+          "label": "title contains \"IronWake\"",
+          "pass": true,
+          "detail": "<title>IronWake — Stop losing leads between enquiry and follow-up</title>"
+        },
+        {
+          "label": "nav contains \"IronWake Devs\"",
+          "pass": false,
+          "detail": ""
+        },
+        {
+          "label": "Systems link present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "no netlify.app fallback",
+          "pass": true,
+          "detail": "netlify.app string present in HTML"
+        },
+        {
+          "label": "meta description present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "canonical = https://ironwake.dev",
+          "pass": true,
+          "detail": "canonical: https://ironwake.dev"
+        },
+        {
+          "label": "og:url = https://ironwake.dev",
+          "pass": true,
+          "detail": "og:url: https://ironwake.dev"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 61456
+      }
+    },
+    {
+      "id": "02",
+      "name": "robots.txt shape",
+      "url": "https://ironwake.dev/robots.txt",
+      "status": "PASS",
+      "bytes": 145,
+      "contentType": "text/plain",
+      "durationMs": 101,
+      "startedAt": "2026-08-18T03:43:41.649Z",
+      "checks": [
+        {
+          "label": "User-Agent: * present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "Host: https://ironwake.dev present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "Sitemap: https://ironwake.dev/sitemap.xml present",
+          "pass": true,
+          "detail": ""
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "text/plain",
+        "bytes": 145
+      }
+    },
+    {
+      "id": "03",
+      "name": "Sitemap validity",
+      "url": "https://ironwake.dev/sitemap.xml",
+      "status": "PASS",
+      "bytes": 6192,
+      "contentType": "application/xml",
+      "durationMs": 86,
+      "startedAt": "2026-08-18T03:43:41.750Z",
+      "checks": [
+        {
+          "label": "XML tag balance <url>…</url>",
+          "pass": true,
+          "detail": "opens=33 closes=33"
+        },
+        {
+          "label": "at least 20 <loc> entries",
+          "pass": true,
+          "detail": "count=33"
+        },
+        {
+          "label": "all URLs start with https://ironwake.dev",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "no netlify.app URLs",
+          "pass": true,
+          "detail": ""
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/xml",
+        "bytes": 6192
+      }
+    },
+    {
+      "id": "04",
+      "name": "5 random sitemap routes all return 200",
+      "url": "/industries/salons-spas, /work/rapidpulse, /systems/missed-lead-recovery, /industries/dental-clinics, /systems",
+      "status": "PASS",
+      "bytes": 0,
+      "contentType": "",
+      "durationMs": 604,
+      "startedAt": "2026-08-18T03:43:41.836Z",
+      "checks": [
+        {
+          "label": "/industries/salons-spas → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/work/rapidpulse → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/systems/missed-lead-recovery → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/industries/dental-clinics → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/systems → 200",
+          "pass": true,
+          "detail": "got 200"
+        }
+      ],
+      "error": null,
+      "response": {
+        "probes": [
+          {
+            "route": "/industries/salons-spas",
+            "status": 200,
+            "bytes": 28836,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/work/rapidpulse",
+            "status": 200,
+            "bytes": 25812,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/systems/missed-lead-recovery",
+            "status": 200,
+            "bytes": 25121,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/industries/dental-clinics",
+            "status": 200,
+            "bytes": 29040,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/systems",
+            "status": 200,
+            "bytes": 31002,
+            "contentType": "text/html; charset=utf-8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "05",
+      "name": "POST /api/chat (public, no auth)",
+      "url": "https://ironwake.dev/api/chat",
+      "status": "PASS",
+      "bytes": 272,
+      "contentType": "application/json",
+      "durationMs": 3213,
+      "startedAt": "2026-08-18T03:43:42.440Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "reply is a non-empty string",
+          "pass": true,
+          "detail": "reply=Pong. I'm here — the IronWake website assistant. I can help with services, pricing, audits, portfolio demos, or booking."
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 272
+      }
+    },
+    {
+      "id": "06",
+      "name": "POST /api/audit (fake client, returns UUID)",
+      "url": "https://ironwake.dev/api/audit",
+      "status": "PASS",
+      "bytes": 98,
+      "contentType": "application/json",
+      "durationMs": 4173,
+      "startedAt": "2026-08-18T03:43:45.653Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "response carries a UUID or received=true ack",
+          "pass": true,
+          "detail": "candidate=undefined received=true"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 201,
+        "contentType": "application/json",
+        "bytes": 98
+      }
+    },
+    {
+      "id": "07",
+      "name": "POST /api/voice/session (route is POST, not GET)",
+      "url": "https://ironwake.dev/api/voice/session",
+      "status": "PASS",
+      "bytes": 386,
+      "contentType": "application/json",
+      "durationMs": 1705,
+      "startedAt": "2026-08-18T03:43:49.826Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "ok=true",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "accessToken present",
+          "pass": true,
+          "detail": "accessToken=eyJhbGciOiJIUzI1NiJ9…"
+        },
+        {
+          "label": "callId present",
+          "pass": true,
+          "detail": "callId=call_448c643be69ce1f…"
+        },
+        {
+          "label": "no webhook URL expected (SDK uses accessToken directly)",
+          "pass": true,
+          "detail": "voice route is token-based, not webhook-based"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 386
+      }
+    },
+    {
+      "id": "08",
+      "name": "apple-icon.svg content-type",
+      "url": "https://ironwake.dev/apple-icon.svg",
+      "status": "FAIL",
+      "bytes": 19260,
+      "contentType": "text/html; charset=utf-8",
+      "durationMs": 115,
+      "startedAt": "2026-08-18T03:43:51.531Z",
+      "checks": [],
+      "error": "expected 200, got 404",
+      "response": {
+        "status": 404,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 19260
+      }
+    },
+    {
+      "id": "09",
+      "name": "manifest.webmanifest JSON",
+      "url": "https://ironwake.dev/manifest.webmanifest",
+      "status": "FAIL",
+      "bytes": 19290,
+      "contentType": "text/html; charset=utf-8",
+      "durationMs": 103,
+      "startedAt": "2026-08-18T03:43:51.646Z",
+      "checks": [],
+      "error": "expected 200, got 404",
+      "response": {
+        "status": 404,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 19290
+      }
+    },
+    {
+      "id": "10",
+      "name": "axe-core WCAG scan (6 routes)",
+      "url": "https://ironwake.dev/, https://ironwake.dev/pricing, https://ironwake.dev/systems, https://ironwake.dev/work, https://ironwake.dev/scope, https://ironwake.dev/contact",
+      "status": "SKIP",
+      "bytes": 0,
+      "contentType": "",
+      "durationMs": 1,
+      "startedAt": "2026-08-18T03:43:51.749Z",
+      "checks": [],
+      "error": null,
+      "response": null
+    }
+  ]
+}
