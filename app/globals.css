@@ -878,7 +878,22 @@ button, input, textarea { font: inherit; }
 .auth-strength[data-match="match"] { color: #1f5e2c; }
 .auth-terms { display: flex; gap: .5rem; align-items: flex-start; font-size: .9rem; color: var(--ink-soft); }
 .auth-terms a { color: var(--ink); text-decoration: underline; }
-.auth-submit { width: 100%; margin-top: .5rem; }
+.auth-submit {
+  width: 100%;
+  margin-top: .5rem;
+  background: var(--copper-dark);
+  color: var(--white);
+  border-color: var(--copper-dark);
+}
+.auth-submit:hover, .auth-submit:focus-visible {
+  background: var(--copper);
+  border-color: var(--copper);
+}
+.auth-submit:disabled {
+  background: var(--copper-dark);
+  color: var(--white);
+  opacity: .7;
+}
 .auth-switch { margin-top: 1.5rem; text-align: center; color: var(--ink-soft); }
 .auth-switch a { color: var(--ink); text-decoration: underline; font-weight: 500; }
 .auth-aside { padding: 1.75rem 1.5rem; color: var(--ink-soft); font-size: .95rem; align-self: stretch; display: flex; flex-direction: column; gap: .75rem; min-width: 0; }
