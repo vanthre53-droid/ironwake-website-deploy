@@ -32,6 +32,9 @@ export function canonicalHostRedirect(request) {
   // the original path, query, and fragment via a clean location header.
   const host = request.nextUrl.hostname?.toLowerCase();
   if (!host || host === APEX_HOST) return null;
+  // Localhost is the dev/CI bypass host — never 308 it to the apex so
+  // Lighthouse audits and local previews can exercise the build directly.
+  if (host === 'localhost' || host === '127.0.0.1') return null;
   const dest = new URL(request.nextUrl.pathname, APEX_ORIGIN);
   dest.search = request.nextUrl.search;
   return NextResponse.redirect(dest, 308);
