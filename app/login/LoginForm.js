@@ -3,7 +3,6 @@
 import { useActionState, useState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
 import { signInAction, signInWithGoogleAction } from '../../lib/supabase/auth-actions.mjs';
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 function SubmitButton() {
@@ -86,6 +85,5 @@ export function LoginForm() {
         </ul>
       </aside>
     </section>
-    <SiteFooter />
   </main>;
 }

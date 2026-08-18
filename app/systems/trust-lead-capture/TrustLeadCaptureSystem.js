@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 import { PricingReference } from '../../components/PricingReference';
@@ -40,6 +39,5 @@ export function TrustLeadCaptureSystem() {
     </section></MotionReveal>
     <PricingReference offerId="trust-lead-capture" />
     <MotionReveal><section className="section"><span className="eyebrow">Next step</span><h2>Have your own lead-capture path reviewed.</h2><a className="button" href="/audit">Request a Business Leak Audit</a></section></MotionReveal>
-    <SiteFooter />
   </main>;
 }

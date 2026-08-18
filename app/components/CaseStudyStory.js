@@ -1,6 +1,5 @@
 'use client';
 
-import { SiteFooter } from './SiteFooter';
 import { SiteHeader } from './SiteHeader';
 import { MotionReveal } from './MotionReveal';
 
@@ -150,7 +149,6 @@ export function CaseStudyStory({
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

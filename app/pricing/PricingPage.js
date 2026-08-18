@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { PRICING_OFFERS, PRICING_TIERS } from '../../lib/pricing.mjs';
 import { SiteHeader } from '../components/SiteHeader';
-import { SiteFooter } from '../components/SiteFooter';
 import PricingRegionToggle from './PricingRegionToggle';
 
 // Tier clarity — short, declarative descriptions of what each tier includes.
@@ -207,7 +206,6 @@ export default function PricingPage() {
           <Link className="button secondary" href="/scope">Read the operating scope</Link>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

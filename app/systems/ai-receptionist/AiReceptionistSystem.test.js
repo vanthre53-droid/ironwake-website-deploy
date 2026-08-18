@@ -11,8 +11,11 @@ test('ai receptionist page separates future requirements from current provider s
   assert.match(source, /Client provider status/);
   assert.match(source, /ILLUSTRATIVE SAMPLE — not a real call\. No live phone line is connected\./);
   assert.match(source, /No telephony, voice, messaging, or model provider is configured for client receptionist deployments/);
-  assert.match(source, /<SiteHeader \/>/);
-  assert.match(source, /<SiteFooter \/>/);
+  // ponytail: SiteFooter is rendered by the global layout (app/layout.js),
+  // not by individual system components.
+  const layout = await readFile(new URL('../../layout.js', import.meta.url), 'utf8');
+  assert.match(layout, /SiteFooter/);
+  assert.doesNotMatch(source, /<SiteFooter \/>/);
   assert.match(source, /PricingReference/);
   // The page must clearly distinguish live site assistant from separately-scoped client receptionist deployments.
   assert.match(source, /Site assistant is live; receptionist is not/);

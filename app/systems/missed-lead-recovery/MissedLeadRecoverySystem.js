@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 import { PricingReference } from '../../components/PricingReference';
@@ -39,6 +38,5 @@ export function MissedLeadRecoverySystem() {
     </section></MotionReveal>
     <PricingReference offerId="missed-lead-recovery" />
     <MotionReveal><section className="section"><span className="eyebrow">Next step</span><h2>See it applied to your own inquiry path.</h2><a className="button" href="/audit">Request a Business Leak Audit</a></section></MotionReveal>
-    <SiteFooter />
   </main>;
 }

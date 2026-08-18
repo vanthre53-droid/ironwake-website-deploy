@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 import { PricingReference } from '../../components/PricingReference';
@@ -38,6 +37,5 @@ export function AiReceptionistSystem() {
     <MotionReveal><section className="section"><span className="eyebrow">Illustrative only</span><h2>What a disclosed first response could sound like.</h2><button type="button" className="button secondary" aria-expanded={showSample} onClick={() => setShowSample(!showSample)}>{showSample ? 'Hide sample transcript' : 'Show sample transcript'}</button>{showSample && <div className="disclosure-box" role="region" aria-label="Illustrative sample transcript"><p><strong>ILLUSTRATIVE SAMPLE — not a real call. No live phone line is connected.</strong></p>{transcript.map(([speaker, line], index) => <p key={index}><span className="micro">{speaker}</span> {line}</p>)}</div>}</section></MotionReveal>
     <PricingReference offerId="ai-receptionist" />
     <MotionReveal><section className="section"><span className="eyebrow">Next step</span><h2>Map the reception gap before selecting a provider.</h2><a className="button" href="/audit">Request a reception workflow audit</a></section></MotionReveal>
-    <SiteFooter />
   </main>;
 }

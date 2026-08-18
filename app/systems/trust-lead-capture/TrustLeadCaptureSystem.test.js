@@ -8,8 +8,11 @@ test('trust lead capture system documents real validation and credential handlin
   assert.match(source, /useState/);
   assert.match(source, /Hidden trap field/);
   assert.match(source, /No service-role key in the browser/);
-  assert.match(source, /<SiteHeader \/>/);
-  assert.match(source, /<SiteFooter \/>/);
+  // ponytail: SiteFooter is rendered by the global layout (app/layout.js),
+  // not by individual system components.
+  const layout = await readFile(new URL('../../layout.js', import.meta.url), 'utf8');
+  assert.match(layout, /SiteFooter/);
+  assert.doesNotMatch(source, /<SiteFooter \/>/);
   assert.match(source, /PricingReference/);
   assert.match(source, /Capability vs status/);
   assert.doesNotMatch(source, /military-grade|100% secure/i);

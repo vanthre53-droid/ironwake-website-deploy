@@ -1,6 +1,5 @@
 'use client';
 
-import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 import { StepPipeline } from '../../components/StepPipeline';
@@ -100,6 +99,5 @@ export function AtelierCaseStudy() {
         <a className="button secondary" href="/work">Back to work</a>
       </div>
     </section>
-    <SiteFooter />
   </main>;
 }

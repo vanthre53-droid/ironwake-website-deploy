@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link.js';
 import { SiteHeader } from '../components/SiteHeader';
-import { SiteFooter } from '../components/SiteFooter';
 import { createBrowserSupabase } from '../../lib/supabase/clients.mjs';
 
 // ponytail: dedicated /chat page reuses /api/chat (same server route as the global widget).
@@ -263,6 +262,5 @@ export default function ChatClient() {
       <p id="chat-status" className="chat-status" role="status">{statusMessage || (handoff ? 'Human handoff requested — reach the team at ironwake.dev@gmail.com or use the audit form.' : ' ')}</p>
       <p className="chat-handoff">For human follow-up: <a href="/audit">Book a diagnostic</a> · <a href="/pricing">See pricing</a> · <a href="/work">Browse case studies</a></p>
     </section>
-    <SiteFooter />
   </main>;
 }

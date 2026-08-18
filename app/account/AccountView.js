@@ -4,7 +4,6 @@ import { useActionState, useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import Link from 'next/link.js';
 import { signOutAction, updateProfileAction } from '../../lib/supabase/auth-actions.mjs';
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 function SaveButton() {
@@ -119,6 +118,5 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
       </article>
     </section>
 
-    <SiteFooter />
   </main>;
 }

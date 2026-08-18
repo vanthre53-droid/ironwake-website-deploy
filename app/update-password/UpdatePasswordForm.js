@@ -3,7 +3,6 @@
 import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { updatePasswordAction } from '../../lib/supabase/auth-actions.mjs';
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 function SubmitButton() {
@@ -46,6 +45,5 @@ export function UpdatePasswordForm() {
         </form>
       </div>
     </section>
-    <SiteFooter />
   </main>;
 }

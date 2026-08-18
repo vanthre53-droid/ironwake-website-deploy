@@ -3,7 +3,6 @@
 import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { forgotPasswordAction } from '../../lib/supabase/auth-actions.mjs';
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 function SubmitButton() {
@@ -32,6 +31,5 @@ export function ForgotPasswordForm() {
         <p className="auth-switch"><a href="/login">Back to sign in</a></p>
       </div>
     </section>
-    <SiteFooter />
   </main>;
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 import { PricingReference } from '../../components/PricingReference';
@@ -41,6 +40,5 @@ export function BookingControlSystem() {
     </section></MotionReveal>
     <PricingReference offerId="booking-control" />
     <MotionReveal><section className="section"><span className="eyebrow">Next step</span><h2>Review your own booking handoff.</h2><a className="button" href="/audit">Request a Business Leak Audit</a></section></MotionReveal>
-    <SiteFooter />
   </main>;
 }

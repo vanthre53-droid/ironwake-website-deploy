@@ -3,7 +3,6 @@
 import { useActionState, useState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
 import { signUpAction, signInWithGoogleAction } from '../../lib/supabase/auth-actions.mjs';
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 function SubmitButton() {
@@ -111,6 +110,5 @@ export function SignupForm() {
         <p className="auth-aside-note">IronWake accounts are for customers. They never grant access to the private owner dashboard.</p>
       </aside>
     </section>
-    <SiteFooter />
   </main>;
 }
