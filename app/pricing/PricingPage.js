@@ -3,6 +3,7 @@ import { PRICING_OFFERS, PRICING_TIERS } from '../../lib/pricing.mjs';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import { AuditForm } from '../audit/AuditForm';
+import PricingRegionToggle from './PricingRegionToggle';
 
 // Tier clarity — short, declarative descriptions of what each tier includes.
 // These are derived directly from the canonical offer matrix (lib/pricing.mjs)
@@ -85,22 +86,42 @@ export default function PricingPage() {
           ))}
         </section>
 
-        <section className="pricing-grid">
-          {PRICING_OFFERS.map((offer, index) => (
-            <article key={offer.id} className={`pricing-card${offer.recommended === 'Standard' ? ' recommended' : ''}`}>
-              {offer.recommended === 'Standard' && <span className="pricing-badge">Recommended</span>}
-              <h3>{offer.name}</h3>
-              <p className="pricing-desc">{offer.description}</p>
-              <div className="pricing-card-pricing" data-region="india">
-                {recommendedByRegion(offer.india).Lite}
-              </div>
-              <div className="pricing-card-pricing" data-region="intl" hidden>
-                {recommendedByRegion(offer.intl).Lite}
-              </div>
-              <span className="pricing-tier-name">{offer.recommended} tier</span>
-              <Link className="button" href="/audit">{offer.cta}</Link>
-            </article>
-          ))}
+        <section className="pricing-grid-section" aria-label="Offer price matrix">
+          <div className="pricing-grid-header">
+            <div>
+              <span className="eyebrow">Offer matrix</span>
+              <h2>Choose the offer. Pick the smallest tier that resolves the leak.</h2>
+            </div>
+            <PricingRegionToggle />
+          </div>
+
+          <div className="pricing-grid">
+            {PRICING_OFFERS.map((offer) => {
+              const tiersByRegion = { india: offer.india, intl: offer.intl };
+              return (
+                <article key={offer.id} className={`pricing-card${offer.recommended === 'Standard' ? ' recommended' : ''}`}>
+                  {offer.recommended === 'Standard' && <span className="pricing-badge">Recommended</span>}
+                  <h3>{offer.name}</h3>
+                  <p className="pricing-desc">{offer.description}</p>
+                  <ul className="pricing-tier-list" aria-label={`${offer.name} tier prices`}>
+                    {PRICING_TIERS.map((tier, idx) => (
+                      <li
+                        key={tier}
+                        className={`pricing-tier-row${tier === offer.recommended ? ' recommended' : ''}`}
+                        data-region="wrap"
+                      >
+                        <span className="pricing-tier-row-label">{tier}</span>
+                        <span className="pricing-tier-row-price" data-region="india">{tiersByRegion.india[idx]}</span>
+                        <span className="pricing-tier-row-price" data-region="intl" hidden>{tiersByRegion.intl[idx]}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="pricing-tier-name">{offer.recommended} tier recommended</span>
+                  <Link className="button" href="/audit">{offer.cta}</Link>
+                </article>
+              );
+            })}
+          </div>
         </section>
 
         <section className="pricing-guide">
