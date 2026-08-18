@@ -41,6 +41,29 @@ create table if not exists public.meta_opt_outs (
 create index if not exists meta_opt_outs_wa_from_idx
   on public.meta_opt_outs (wa_from, created_at desc);
 
+-- ponytail: enable RLS on all three tables. Even though service_role
+-- bypasses RLS, the schema audit (`scripts/supabase-audit.mjs`) requires
+-- it and a future least-privilege policy becomes possible without a
+-- schema migration. The handlers still use service role, so the
+-- insert paths are unaffected.
+alter table public.webhook_dedup          enable row level security;
+alter table public.meta_deletion_requests enable row level security;
+alter table public.meta_opt_outs          enable row level security;
+
+-- ponytail: refuse everything for anon/authenticated. The handlers
+-- authenticate via the service-role key (which bypasses RLS), so this
+-- is purely a defence-in-depth posture — the public PostgREST endpoint
+-- never exposes these tables.
+drop policy if exists "deny all" on public.webhook_dedup;
+create policy "deny all" on public.webhook_dedup
+  for all to anon, authenticated using (false) with check (false);
+drop policy if exists "deny all" on public.meta_deletion_requests;
+create policy "deny all" on public.meta_deletion_requests
+  for all to anon, authenticated using (false) with check (false);
+drop policy if exists "deny all" on public.meta_opt_outs;
+create policy "deny all" on public.meta_opt_outs
+  for all to anon, authenticated using (false) with check (false);
+
 -- ponytail: no grants to anon / authenticated. Both tables are
 -- service-role only — the dashboard reads them via owner RPCs that
 -- join through other secure views, never directly.
