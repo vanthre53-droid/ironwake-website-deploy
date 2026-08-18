@@ -350,22 +350,100 @@ Baseline screenshots saved to /home/shadowlingo/ironwake-baseline/ for full rout
 
 ---
 
-## P7 — CHATBOT
-P8 — RETELL
-P9 — WHATSAPP
-P10 — GOOGLE AUTH / SUPABASE / BACKEND
-P11 — SEO
-P12 — PERFORMANCE
-P13 — ACCESSIBILITY
-P14 — SECURITY
-P15 — COMPETITOR REALITY LOOP
-P16 — RELEASE
+## P7 — CHATBOT (🟢 VERIFIED LIVE end-to-end)
+- [x] /chat page loads (200, h1 "Full conversation with the IronWake site assistant.")
+- [x] POST /api/chat returns real grounded reply (200, JSON, complete status)
+- [x] Reply contains specific pricing ("India ₹799 / International $29")
+- [x] /chat page has textarea + 6 sample-question buttons + Send + Retry last + Clear
+- [x] Real send flow works end-to-end ("Business Leak Audit include?" → 3-tier reply with CTAs)
+- [x] Streaming indicator present (bot actively typing visible)
+- [x] Speaker labels ("YOU" / "IRONWAKE AI") rendered
+- [x] Footer disclaimer "Not signed in — chat history is local to this browser"
 
-(All open; will continue after P1-P6.)
+## P8 — RETELL (🟡 library only, no real provider)
+- [x] lib/retell/*.js — 14 golden tests pass
+- [ ] Real Retell dashboard config (requires API key)
+- [ ] Live call test (requires phone number + account)
+- CSP whitelists `https://*.retell.ai https://*.retellai.com` + `wss://*.retellai.com`
+
+## P9 — WHATSAPP (🟡 library only, no Meta asset)
+- [x] lib/whatsapp/* — 47 tests pass
+- [x] lib/whatsapp/business-profile.js — 26 tests pass (WA2 subagent)
+- [x] app/api/webhooks/whatsapp/route.js — signature verify + parse
+- [x] supabase/migrations/20260818_whatsapp_events.sql — created
+- [ ] Real Meta WABA connection (requires WABA ID + access token from Meta)
+- [ ] Real webhook delivery test (requires public URL w/ valid TLS)
+- Footer correctly labels "WhatsApp — future" (honest, not faked)
+
+## P10 — BACKEND (🟡 pending)
+- [ ] Real Google OAuth callback test (requires Google OAuth client)
+- [ ] Real Supabase RLS test (requires Supabase project + anon key)
+- [ ] lib/supabase/* — code exists, no live DB connection verified
+
+## P11 — SEO (🟡 mostly live, missing GSC submission)
+- [x] /sitemap.xml — 200, 33 URLs, real lastmod
+- [x] /robots.txt — 200
+- [x] /llms.txt — 200 (LLM-readable site manifest)
+- [x] JSON-LD on home — 5 blocks (Organization + WebSite + 4 Services + ItemList + BreadcrumbList + FAQ)
+- [x] JSON-LD on pricing — 2 blocks
+- [x] Open Graph + Twitter Card meta tags (verified in HEAD)
+- [ ] Google Search Console real submit (requires GSC creds)
+- [ ] IndexNow key (.well-known/indexnow-key.txt) — 404, needs registration
+- [ ] /manifest.webmanifest — **returns 500** (FIXED locally in commit 67d9a75, ships in next deploy)
+
+## P12 — PERFORMANCE (🟡 pending)
+- [ ] Real Lighthouse audit (script hangs — pre-existing env issue, see /home/shadowlingo/.ironwake-lighthouse/audit.sh)
+- [ ] LCP / INP / CLS measurements — pending
+- Cache-Control: s-maxage=31536000 + x-nextjs-prerender: 1 (good edge caching)
+- HTML sizes: home 77414, pricing 79460 (reasonable)
+
+## P13 — ACCESSIBILITY (🟡 pending)
+- [ ] Real axe scan
+- [x] aria-pressed on region toggle
+- [x] Persistent labels on form fields (verified at /chat textarea)
+- [x] Keyboard handlers on region toggle (Arrow/Home/End)
+- [x] focus-visible copper ring
+- [ ] Skip-to-main-content link (per HTML output: present)
+
+## P14 — SECURITY (🟢 HEADERS VERIFIED)
+- [x] HSTS: `max-age=31536000; includeSubDomains`
+- [x] CSP: strict default-src 'self', whitelisted Retell+Supabase, frame-ancestors 'none'
+- [x] X-Frame-Options: DENY
+- [x] X-Content-Type-Options: nosniff
+- [x] Permissions-Policy: camera=(), microphone=(), geolocation=()
+- [x] Referrer-Policy: strict-origin-when-cross-origin
+- [x] form-action 'self' in CSP
+- [x] object-src 'none' in CSP
+- [x] base-uri 'self' in CSP
+
+## P15 — COMPETITOR (🟢 BENCHMARK CAPTURED)
+- [x] v14-competitor-benchmark.md committed (02f3a29)
+- [x] 7 wins, 6 gaps identified vs Dialzara + My AI Front Desk
+- [x] All gap fixes deferred (require external evidence per no-invention law)
+
+## P16 — RELEASE (🟡 BLOCKED — budget = 0)
+- [ ] Deploy attempt #14 (final, 14/14 budget used) — BLOCKED on budget restoration
+- Local-only work committed: 4 commits ahead of production
+- Orphan-card CSS fix + home-mobile CSS + manifest.webmanifest fix + EXECUTION_CHECKLIST + v14-competitor-benchmark.md
+
+---
+
+## Live state (current)
+- Production HEAD: 67ad3c4 (toggle + MOST POPULAR + dental)
+- Local HEAD: 02f3a29 (5 commits ahead, all local-only)
+- Production URL: https://ironwake.dev (Cloudflare Worker, x-opennext: 1)
+- Bundle: 12094.08 KiB / gzip 2424.93 KiB
+
+## Status legend
+- 🟢 VERIFIED with real browser/probe/header evidence
+- 🟡 BLOCKED on external (provider, KYC, OAuth, deploy budget, owner)
+- ☐ NOT_RUN / open
 
 ---
 
 ## Immediate next step
-Move to **P1 Global Design System**: button + form rebuild with copper accent, warm palette preservation, no monospace abuse, no document-like UI. Then P2 global nav (mobile menu polish), then P3 homepage.
+Restore deploy budget (1 attempt minimum) so the 5-commits-ahead local work ships. Then continue P8-P15 provider/benchmark work.
 
-GLOBAL_STATE = EXECUTING
+GLOBAL_STATE = EXECUTE_LOCAL_ONLY (deploy budget = 0)
+PRODUCTION_HEAD = 67ad3c4
+LOCAL_HEAD = 02f3a29 (5 commits ahead)
