@@ -24,6 +24,11 @@ export function FlagshipHero({ auditLitePrice }) {
             <a className="button" href="/audit">Book Diagnostic</a>
             <a className="button secondary" href="/pricing">See pricing</a>
           </div>
+          <div className="signal-rail" role="group" aria-label="Operating flow: inquiry to review task to next action">
+            <div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Inquiry</span></div>
+            <div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Review task</span></div>
+            <div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Next action</span></div>
+          </div>
           <p className="flagship-meta">
             Starts at {auditLitePrice}. No provider status claimed without proof.
           </p>
@@ -72,6 +77,11 @@ export function FlagshipHero({ auditLitePrice }) {
             <li><strong>Visible</strong> to the operator, not buried in DMs.</li>
             <li><strong>Reversible</strong> — every state change is logged.</li>
           </ul>
+          <dl className="flagship-card-dl">
+            <div><dt>Enquiry</dt><dd>Recorded</dd></div>
+            <div><dt>Review task</dt><dd>Due date</dd></div>
+            <div><dt>Next step</dt><dd>Visible</dd></div>
+          </dl>
         </article>
       </RevealSection>
 
