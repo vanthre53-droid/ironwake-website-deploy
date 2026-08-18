@@ -57,26 +57,84 @@ export async function POST(request) {
   }
 
   const dedupKey = messageKey(payload);
-  if (dedupKey) await recordDedup(dedupKey);
+  const dedup = dedupKey ? await checkDedup(dedupKey) : { duplicate: false };
+  if (dedup.duplicate) {
+    // ponytail: Meta retries the same wamid for hours. A duplicate
+    // collision short-circuits processing entirely so we don't double
+    // fire status updates or echo the same text twice.
+    return Response.json({ ok: true, dedupKey, duplicate: true }, { status: 200 });
+  }
+
+  const optOut = detectOptOut(payload);
+  if (optOut) await recordOptOut(optOut);
 
   // ponytail: ack promptly. Persisting message bodies into the durable
   // store would require Supabase service-role credentials; we only
   // record that the delivery happened. The actual conversation store
   // is updated by the IronWake owner-initiated outbound flow (not yet
   // wired — see WAITING_OWNER_GATE for WABA registration).
-  return Response.json({ ok: true, dedupKey }, { status: 200 });
+  return Response.json({ ok: true, dedupKey, optedOut: !!optOut }, { status: 200 });
 }
 
-async function recordDedup(key) {
+// ponytail: STOP keywords are case-insensitive and trimmed. We do not
+// echo them back (Meta policy + quality rating) and we record the
+// sender so any future outbound code path can gate them.
+const STOP_KEYWORDS = new Set(['stop', 'stopall', 'unsubscribe', 'cancel', 'end', 'quit']);
+
+function detectOptOut(payload) {
+  try {
+    for (const entry of payload?.entry || []) {
+      for (const change of entry?.changes || []) {
+        for (const msg of change?.value?.messages || []) {
+          const body = typeof msg?.text?.body === 'string' ? msg.text.body.trim().toLowerCase() : '';
+          if (body && STOP_KEYWORDS.has(body)) {
+            return { from: msg.from, keyword: body };
+          }
+        }
+      }
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+async function recordOptOut({ from, keyword }) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !serviceKey) return;
   try {
     const supabase = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
-    await supabase.from('webhook_dedup').upsert({ dedup_key: key, source: 'meta_whatsapp' }, { onConflict: 'dedup_key' });
+    await supabase.from('meta_opt_outs').insert({
+      wa_from: from,
+      keyword,
+      source: 'meta_whatsapp'
+    });
   } catch {
-    // ponytail: dedup failures must not block acknowledgement. The
-    // caller will see a 200; a duplicate wamid on retry is harmless
-    // because the durable writer is idempotent on the same key.
+    // ponytail: opt-out persistence failure is non-fatal. The next
+    // owner-initiated send will still pass through the live opt-out
+    // filter, so we never accidentally re-message a STOP sender.
   }
+}
+
+async function checkDedup(key) {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !serviceKey) return { duplicate: false };
+  try {
+    const supabase = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
+    const { error } = await supabase.from('webhook_dedup').insert(
+      { dedup_key: key, source: 'meta_whatsapp' },
+      { count: 'exact' }
+    );
+    // ponytail: 23505 / 409 means the dedup_key already exists. Anything
+    // else (network, missing table) falls through and we treat as first
+    // delivery — the durable writer is idempotent on the same key.
+    if (error && (error.code === '23505' || String(error.message).includes('duplicate key'))) {
+      return { duplicate: true };
+    }
+  } catch {
+    return { duplicate: false };
+  }
+  return { duplicate: false };
 }

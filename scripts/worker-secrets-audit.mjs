@@ -42,7 +42,9 @@ const REQUIRED = [
   'AI_API_KEY',
   'AI_API_BASE',
   'AI_MODEL',
-  'NEXT_PUBLIC_SITE_URL',
+  // ponytail: NEXT_PUBLIC_SITE_URL is a `var`, not a secret. The audit
+  // queries `wrangler secret list` which only returns secrets, so this
+  // entry would always fail. See comment above.
 ];
 
 const present = new Set();
@@ -62,6 +64,12 @@ if (wranglerResult.status === 0 && wranglerResult.stdout.trim().startsWith('['))
     // ponytail: malformed JSON falls through to vault
   }
 }
+
+// ponytail: NEXT_PUBLIC_SITE_URL is a `var` (not a secret) because the
+// client bundle needs it. `wrangler secret list` only returns secrets,
+// so it never sees vars. The audit therefore only checks secrets; the
+// `vars` block (NEXT_PUBLIC_SITE_URL, NEXT_PUBLIC_SUPABASE_URL, etc.) is
+// verified separately by the build audit + the deployed bundle grep.
 
 if (present.size === 0) {
   source = 'vault';

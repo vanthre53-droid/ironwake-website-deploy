@@ -1,105 +1,101 @@
 'use client';
 
-import { SiteFooter } from '../../components/SiteFooter';
-import { SiteHeader } from '../../components/SiteHeader';
-import { MotionReveal } from '../../components/MotionReveal';
-import { StepPipeline } from '../../components/StepPipeline';
+import { CaseStudyStory } from '../../components/CaseStudyStory';
 
-// ponytail: demonstration data — not from a real clinic
-const intakeSteps = [
-  { icon: '📞', label: 'Enquiry', desc: 'Form, phone, or walk-in' },
-  { icon: '📋', label: 'Intake', desc: 'Validated record created' },
-  { icon: '🔍', label: 'Review', desc: 'Staff reviews request' },
-  { icon: '📅', label: 'Booking', desc: 'Request becomes slot' },
-  { icon: '✅', label: 'Follow-up', desc: 'Next action tracked' },
+// ponytail: portfolio demonstration — designed scenario, not a DentaCare Pro customer.
+// Story arc: a private-clinic intake -> symptom capture -> consultation ownership -> review-task follow-up.
+
+const steps = [
+  {
+    num: '01',
+    title: 'Patient inquiry lands',
+    text:
+      'A visitor hits the page with a private-clinic concern. The form is short — symptom band, contact detail, and a free-text note. They are not asked to log an account or remember a reference.',
+  },
+  {
+    num: '02',
+    title: 'Inquiry logged',
+    text:
+      'The submission is written to a durable record with consent and source. A review-task follow-up is assigned to the named front-desk owner with a first-response window measured in hours, not days.',
+  },
+  {
+    num: '03',
+    title: 'Front-desk owner notified',
+    text:
+      'The named owner receives the inquiry with the full context — symptom, contact detail, note. They reply as the person responsible for the first touch, not as "the practice".',
+  },
+  {
+    num: '04',
+    title: 'Outcome visible',
+    text:
+      'A private dashboard lists every inquiry by status. Anything past its first-response window surfaces before the caller has quietly booked elsewhere.',
+  },
 ];
 
-const acceptanceTests = [
-  { metric: 'Form completion', value: '<45s', note: 'Average time from open to submit' },
-  { metric: 'Validation coverage', value: '100%', note: 'All required fields enforced client + server' },
-  { metric: 'Spam trap', value: '0 false positives', note: 'Hidden field catches automated submissions' },
-  { metric: 'Data persistence', value: 'Before notification', note: 'Record saved before any email/SMS attempt' },
+const features = [
+  [
+    'Symptom-banded inquiry capture',
+    'A focused form captures symptom band and the minimum contact detail for the first reply. Anything else is opt-in, with consent recorded.',
+  ],
+  [
+    'Named front-desk ownership',
+    'Every inquiry is assigned to the named front-desk owner — not to a shared inbox. The dashboard names who is responsible and when a reply is due.',
+  ],
+  [
+    'Stale-inquiry alerts',
+    'Inquiries without a response inside the target window are surfaced automatically. No private-clinic lead is left waiting for a callback that "should have happened".',
+  ],
+  [
+    'Source-of-truth intake',
+    'Each submission is durable and reviewable. The follow-up task carries the same context as the form, so the front-desk owner never starts from a blank page.',
+  ],
+];
+
+const refuses = [
+  [
+    'No clinical advice or triage',
+    'The intake captures a symptom band and writes a durable record. It does not diagnose, prescribe, or triage urgency.',
+  ],
+  [
+    'No calendar or booking system',
+    'A private-clinic inquiry is not the same as a booked appointment. The demonstration does not pretend to schedule a slot or hold a clinical calendar.',
+  ],
+  [
+    'No payments, no deposits',
+    'No payment intent is created, no deposit is taken, no invoice is issued. The intake ends at a review-task follow-up owned by a named human.',
+  ],
 ];
 
 export function DentaCareCaseStudy() {
-  return <main className="shell case-study dentacare-case">
-    <SiteHeader />
-    <section className="hero compact">
-      <span className="eyebrow">Work / DentaCare Intake</span>
-      <span className="status-pill">DEMONSTRATION</span>
-      <h1>Clinic intake that never loses a patient request.</h1>
-      <p>DentaCare demonstrates a front-desk intake flow that captures every enquiry to a durable record, validates required fields, and turns requests into reviewed bookings — without a live clinic-management connection.</p>
-    </section>
-
-    <MotionReveal>
-      <section className="section">
-        <span className="eyebrow">Intake flow</span>
-        <h2>From enquiry to reviewed booking.</h2>
-        <StepPipeline steps={intakeSteps} ariaLabel="DentaCare intake pipeline" />
-      </section>
-    </MotionReveal>
-
-    <MotionReveal>
-      <section className="section">
-        <span className="eyebrow">Interface demonstration</span>
-        <h2>What the clinic dashboard shows.</h2>
-        <div className="demo-dashboard">
-          <div className="demo-header">
-            <span className="micro">DEMONSTRATION — NOT A LIVE CLINIC</span>
-            <span className="demo-status">Active intake: #DEN-2847</span>
-          </div>
-          <div className="demo-body">
-            <div className="demo-field"><span>Patient</span><strong>A. Sharma</strong></div>
-            <div className="demo-field"><span>Request type</span><strong>Root canal consultation</strong></div>
-            <div className="demo-field"><span>Preferred window</span><strong>Tomorrow 2-4pm</strong></div>
-            <div className="demo-field"><span>Status</span><strong className="demo-highlight">Awaiting review</strong></div>
-            <div className="demo-intent">
-              <span>Patient note</span>
-              <p>"I've had persistent pain in my lower left molar for 3 days. It gets worse when I drink cold water. I'd like to see someone as soon as possible."</p>
-            </div>
-            <div className="demo-match">
-              <span>Consent: <strong>✓ Given</strong></span>
-              <span>Spam trap: <strong>Clean</strong></span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </MotionReveal>
-
-    <MotionReveal>
-      <section className="section">
-        <span className="eyebrow">Acceptance tests</span>
-        <h2>Designed performance benchmarks.</h2>
-        <div className="acceptance-grid">
-          {acceptanceTests.map(t => <div key={t.metric} className="acceptance-card">
-            <span className="acceptance-value">{t.value}</span>
-            <span className="acceptance-metric">{t.metric}</span>
-            <span className="acceptance-note">{t.note}</span>
-          </div>)}
-        </div>
-        <p className="acceptance-disclaimer">These are designed benchmarks from the demonstration architecture, not from a deployed clinic system.</p>
-      </section>
-    </MotionReveal>
-
-    <section className="section disclosure">
-      <div>
-        <span className="eyebrow">What remains unproven</span>
-        <h2>Known limitations.</h2>
-        <p>No live clinic-management system is connected. Calendar integration, payment processing, and patient record management are not demonstrated. The intake form operates independently as a standalone workflow.</p>
-      </div>
-      <div className="disclosure-box">
-        <span className="status-pill">AWAITING VERIFICATION</span> This project does not represent a client relationship. It demonstrates intake workflow architecture only — no clinical claims, no patient data beyond the form.
-      </div>
-    </section>
-
-    <section className="section">
-      <span className="eyebrow">Next step</span>
-      <h2>Request a clinic intake review.</h2>
-      <div className="hero-actions">
-        <a className="button" href="/audit">Audit my clinic flow</a>
-        <a className="button secondary" href="/work">Back to work</a>
-      </div>
-    </section>
-    <SiteFooter />
-  </main>;
+  return (
+    <CaseStudyStory
+      slug="dentacare-pro"
+      name="DentaCare Intake"
+      breadcrumb="Work / DentaCare Intake"
+      headline="Routing a private-clinic inquiry to a named front-desk owner — before the caller books elsewhere."
+      standfirst="A private-clinic intake demonstration: symptom-banded inquiry capture with named first-touch ownership and a review-task follow-up, with no clinical advice or booking system implied."
+      artLabel="Abstract local visual for the DentaCare Intake demonstration"
+      context="A small private-clinic practice receives inquiries where the buying signal is a single concern that does not move — a missing tooth, a chipped crown, a long-standing sensitivity. The demonstration models one practice's path from a generic contact form where every message looks the same and is replied to in arrival order, to a tier-routed intake where the named front-desk owner sees the right inquiry before the caller has booked the next practice down the road."
+      problem={{
+        heading: 'When every inquiry looks the same in the inbox, the urgent ones are treated like the rest.',
+        text:
+          'In the modelled practice, a private-clinic concern lands in the same queue as a routine checkup question. Both are replied to in arrival order. The private-clinic caller has already booked the next practice down the road before anyone reads the second paragraph.',
+        symptoms: [
+          'shared inbox treats a private-clinic concern and a checkup question as the same item',
+          'symptom context is buried in the prose of a long email, so the front-desk often only learns the concern on the call back',
+          'no record of what was promised to whom, so two front-desk shifts quote the same treatment differently in the same week',
+          'after the caller has booked elsewhere, the practice has no structured reason to write back, so the lead is lost for the next concern too',
+        ],
+      }}
+      approach={{
+        heading: 'Capture the symptom band on the form, not in the follow-up call.',
+        text:
+          'Every private-clinic inquiry captures the symptom band and the contact detail a front-desk owner actually needs. The intake names the front-desk owner for that day and starts a first-response clock measured in hours. Stale inquiries surface before the day has moved past the brief, so drift is visible long before it becomes a lost consultation.',
+      }}
+      steps={steps}
+      features={features}
+      refuses={refuses}
+      unproven="The private-clinic intake pipeline is a designed demonstration; the clinical calendar, the patient record system, and the payment integrations are not connected. There is no measurement of consultation conversion, response-time improvement, or recovered lost bookings — only that the named-first-touch ownership structure is sound."
+    />
+  );
 }

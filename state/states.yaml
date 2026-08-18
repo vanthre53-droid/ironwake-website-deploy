@@ -1,0 +1,554 @@
+schema_version: 7.0.0
+kind: dag
+generated: "2026-08-18"
+source:
+  todo: ".v13/TODO.md"
+  canonical: "reports/CANONICAL_GOAL_REQUIREMENTS_MATRIX.md"
+  agents: "AGENTS.md"
+  state: "state/PROJECT_STATE.yaml"
+  results: ".v13/results/"
+
+stages:
+  - id: S1
+    title: Bootstrap
+    state: DONE
+  - id: S2
+    title: Flagship hero + signal rail
+    state: DONE
+  - id: S3
+    title: Build/test green
+    state: DONE
+  - id: S4
+    title: Worker env var fix (CF dashboard)
+    state: WAITING_EXTERNAL_CF_DASHBOARD
+    note: "External gate — owner must set NEXT_PUBLIC_SITE_URL=ironwake.dev"
+  - id: S5
+    title: Conversion uplift
+    state: DONE
+  - id: S6
+    title: Browser QA @9 viewports
+    state: IN-FLIGHT
+  - id: S7
+    title: Perf
+    state: NOT_RUN
+  - id: S8
+    title: A11y
+    state: NOT_RUN
+  - id: S9
+    title: Security
+    state: NOT_RUN
+  - id: S10
+    title: Backend / Supabase
+    state: DONE_AUDIT_LIVE_RETRY_PENDING
+  - id: S11
+    title: Retell
+    state: NOT_RUN
+  - id: S11b
+    title: WhatsApp Meta
+    state: DONE_AUDIT
+  - id: S12
+    title: Chatbot canonical truth
+    state: DONE
+  - id: S13
+    title: IndexNow + GSC
+    state: PARTIAL_INDEXNOW_OK_GSC_PENDING
+  - id: S14
+    title: Release candidate gate
+    state: QUEUED
+  - id: S15
+    title: Deploy + LIVE_ACCEPTANCE
+    state: QUEUED
+
+owners:
+  ironwake-orchestrator: { role: C1/M2 orchestrator, paths: [state/**, .v13/**] }
+  ironwake-ui:           { role: UI build, paths: ["app/**"] }
+  ironwake-conversion:   { role: UX + copy, paths: ["app/pricing/**", "app/work/**", "app/audit/**"] }
+  ironwake-seo:          { role: SEO + sitemap, paths: ["app/sitemap.js", "app/robots.js", "app/layout.js"] }
+  ironwake-perf:         { role: web vitals, paths: ["scripts/perf/**", ".v13/results/perf/**"] }
+  ironwake-a11y:         { role: axe + manual, paths: [".v13/results/a11y/**"] }
+  ironwake-security:     { role: threat probes, paths: [".v13/results/security/**", "scripts/sec/**"] }
+  ironwake-backend:      { role: Supabase + outbox, paths: ["app/api/**", "lib/supabase/**"] }
+  ironwake-retell:       { role: Retell, paths: ["app/retell/**", ".v13/results/retell/**"] }
+  ironwake-whatsapp:     { role: WhatsApp, paths: ["app/whatsapp/**", ".v13/results/whatsapp/**"] }
+  ironwake-integration:  { role: chatbot + integrator, paths: ["app/chatbot/**", "app/api/chat/**"] }
+  ironwake-auth-db:      { role: Auth + DB owner, paths: ["app/api/auth/**", "supabase/migrations/**"] }
+  ironwake-build:        { role: bundler + deploy, paths: [".v13/scripts/**"] }
+  ironwake-reviewer:     { role: evidence review, paths: [".v13/results/**"] }
+  ironwake-qa:           { role: Playwright + axe, paths: ["scripts/qa/**"] }
+  ironwake-release:      { role: deploy + acceptance, paths: ["scripts/release/**"] }
+  OWNER:                 { role: human external (CF dashboard / D-008 / MFA / GSC), paths: [] }
+
+# ---------------------------------------------------------------------------
+# NODES — every TODO + canonical-matrix item with full stage/owner/blocker.
+# ---------------------------------------------------------------------------
+nodes:
+
+  # ===== TODO items (47 unique after dedupe) =====
+  - id: TODO-1
+    stage: S1
+    owner: ironwake-orchestrator
+    state: DONE
+    blocker: null
+    evidence_required: "state/states.md + state/states.yaml exist"
+    evidence_path: "state/states.md, state/states.yaml"
+
+  - id: TODO-2
+    stage: S1
+    owner: ironwake-orchestrator
+    state: PARTIAL
+    blocker: TODO-4
+    evidence_required: "Real Hermes subagent master IDs + Ruflo MCP bytes"
+    evidence_path: ".v13/results/profile-probe/"
+
+  - id: TODO-3
+    stage: S1
+    owner: ironwake-build
+    state: DONE
+    blocker: null
+    evidence_required: "Ruflo HEAD = fa13ee4a"
+    evidence_path: "/home/shadowlingo/.local/share/ironwake-tools/ruflo"
+
+  - id: TODO-4
+    stage: S1
+    owner: ironwake-orchestrator
+    state: NOT_RUN
+    blocker: "npx ruflo install hangs"
+    evidence_required: "Working Ruflo MCP entry + one safe read-only probe"
+    evidence_path: "~/.claude/mcp.json + .v13/results/ruflo-probe.json"
+
+  - id: TODO-5
+    stage: S1
+    owner: ironwake-orchestrator
+    state: NOT_RUN
+    blocker: TODO-2
+    evidence_required: "Credential matrix with one row per provider, never paste secrets"
+    evidence_path: "reports/CREDENTIAL_CAPABILITY_MATRIX.md"
+
+  - id: TODO-6
+    stage: S1
+    owner: ironwake-orchestrator
+    state: DONE
+    blocker: null
+    evidence_required: "hermes kanban list shows ironwake-v13-full-implementation"
+    evidence_path: "hermes kanban list (CLI transcript)"
+
+  - id: TODO-7
+    stage: S1
+    owner: ironwake-orchestrator
+    state: PARTIAL
+    blocker: "per-profile capability probe not run"
+    evidence_required: "One read-only probe per profile"
+    evidence_path: ".v13/results/profile-probe/"
+
+  - id: TODO-8
+    stage: S1
+    owner: ironwake-orchestrator
+    state: DONE_IN_DESIGN
+    blocker: null
+    evidence_required: "delegate_task tasks=[8] run"
+    evidence_path: "transcript of one fan-out-8 run"
+
+  - id: TODO-9
+    stage: S1
+    owner: ironwake-reviewer
+    state: PARTIAL
+    blocker: "context capsules not authored"
+    evidence_required: "Per-stage result capsule + per-stage context capsule"
+    evidence_path: ".v13/results/{stage}.md + .v13/context/{stage}.md"
+
+  - id: TODO-10
+    stage: S1
+    owner: ironwake-orchestrator
+    state: NOT_RUN
+    blocker: null
+    evidence_required: "state/FILE_OWNERSHIP.yaml committed"
+    evidence_path: "state/FILE_OWNERSHIP.yaml"
+
+  - id: TODO-11
+    stage: S1
+    owner: ironwake-orchestrator
+    state: DONE
+    blocker: null
+    evidence_required: "state/states.{md,yaml}"
+    evidence_path: "state/states.{md,yaml}"
+
+  - id: TODO-12
+    stage: S1
+    owner: ironwake-orchestrator
+    state: DONE_IN_DESIGN
+    blocker: null
+    evidence_required: "TODO.md §EXECUTION_STRATEGY"
+    evidence_path: ".v13/TODO.md §EXECUTION_STRATEGY"
+
+  - id: TODO-13
+    stage: S1
+    owner: ironwake-ui
+    state: PARTIAL
+    blocker: "design brief + component inventory"
+    evidence_required: "app/components/INVENTORY.md + token block sealed"
+    evidence_path: "app/components/INVENTORY.md"
+
+  - id: TODO-14
+    stage: S6
+    owner: ironwake-qa
+    state: NOT_RUN
+    blocker: "Playwright not installed"
+    evidence_required: "9-viewport × N-route PNG set + overflow ledger"
+    evidence_path: ".v13/results/qa-overflow.md + .v13/results/screenshots/"
+
+  - id: TODO-15
+    stage: S6
+    owner: ironwake-qa
+    state: PARTIAL
+    blocker: "matrix not emitted"
+    evidence_required: "SCREEN_ROUTE_MATRIX populated row-per-route"
+    evidence_path: "state/SCREEN_ROUTE_MATRIX.md"
+
+  - id: TODO-16
+    stage: S5
+    owner: ironwake-conversion
+    state: PARTIAL
+    blocker: "6 case-study label fixes"
+    evidence_required: "DEMONSTRATION label in DOM when not Vercel-deployed live client"
+    evidence_path: ".v13/results/conversion-fix-skip.md + DOM evidence"
+
+  - id: TODO-17
+    stage: S5
+    owner: ironwake-conversion
+    state: PARTIAL
+    blocker: "lead-capture split"
+    evidence_required: "conversion-audit.md complete + 2 surgical fixes shipped"
+    evidence_path: ".v13/results/conversion-audit.md (commits a4a42e5,f6d5279)"
+
+  - id: TODO-18
+    stage: S12
+    owner: ironwake-integration
+    state: DONE
+    blocker: null
+    evidence_required: "app/api/chat/route.js + TRUTH.json + per-question fact check"
+    evidence_path: "commit c62298f + .v13/results/chatbot-evidence.md"
+
+  - id: TODO-19
+    stage: S10
+    owner: ironwake-auth-db
+    state: NOT_RUN
+    blocker: "OWNER MFA enrollment (external)"
+    evidence_required: "Owner logged-in cookies; whoami 200; 1 controlled owner action"
+    evidence_path: ".v13/results/auth-reverify.md"
+
+  - id: TODO-20
+    stage: S11
+    owner: ironwake-retell
+    state: NOT_RUN
+    blocker: "provider keys; live calls"
+    evidence_required: "agent_id + 3 prompts rendered + 3 lang strings + webcall URL works + webhook signature verified + 1 self-improve cycle"
+    evidence_path: ".v13/results/retell-audit.md + .v13/results/retell-live/"
+
+  - id: TODO-21
+    stage: S11b
+    owner: ironwake-whatsapp
+    state: DONE_AUDIT
+    blocker: "external execution"
+    evidence_required: "verify_token present + signature verifier file + audit doc"
+    evidence_path: ".v13/results/whatsapp-audit.md + app/api/webhooks/meta/whatsapp/*"
+
+  - id: TODO-22
+    stage: S10
+    owner: ironwake-backend
+    state: DONE_AUDIT
+    blocker: "live retry/direct-object evidence"
+    evidence_required: "Live migration list + RLS policies enumerated + idempotent outbox test passing"
+    evidence_path: ".v13/results/backend-audit.md"
+
+  - id: TODO-23
+    stage: S13
+    owner: ironwake-seo
+    state: PARTIAL
+    blocker: "S4 Worker env stale"
+    evidence_required: "seo-audit.md + CWV on deployed /"
+    evidence_path: ".v13/results/seo-audit.md + seo-tech-audit.json"
+
+  - id: TODO-24
+    stage: S13
+    owner: ironwake-seo
+    state: NOT_RUN
+    blocker: null
+    evidence_required: "KG schema validation + intent pillars"
+    evidence_path: ".v13/results/seo-intent-audit.md"
+
+  - id: TODO-25
+    stage: S13
+    owner: ironwake-seo
+    state: PARTIAL
+    blocker: "GSC verification file (OWNER uploads)"
+    evidence_required: "IndexNow HTTP 202 + GSC verification record"
+    evidence_path: ".v13/results/gsc-probe.json"
+
+  - id: TODO-26
+    stage: S7
+    owner: ironwake-perf
+    state: NOT_RUN
+    blocker: "lighthouse binary owned; final deploy pending"
+    evidence_required: "Lighthouse mobile+desktop on /, /pricing, /audit + cores"
+    evidence_path: "lighthouse-mobile.json + lighthouse-desktop.json + perf-live-measurement-2026-08-18.md"
+
+  - id: TODO-27
+    stage: S8
+    owner: ironwake-a11y
+    state: NOT_RUN
+    blocker: "axe in worktree"
+    evidence_required: "axe-cdp-report.json clean + manual per-route checklist"
+    evidence_path: ".v13/results/a11y-audit.md + axe-cdp-report.json"
+
+  - id: TODO-28
+    stage: S9
+    owner: ironwake-security
+    state: NOT_RUN
+    blocker: null
+    evidence_required: "npm audit clean + gitleaks 0 + 1 probe per class (RLS/IDOR/CSRF/XSS/SSRF/webhook forgery)"
+    evidence_path: ".v13/results/security-audit.md"
+
+  - id: TODO-29
+    stage: S3
+    owner: ironwake-reviewer
+    state: NOT_RUN
+    blocker: "owner preservation rule"
+    evidence_required: "test baseline + post-diff comparison (no new flakes)"
+    evidence_path: ".v13/results/test-diff.md"
+
+  - id: TODO-30
+    stage: S6
+    owner: ironwake-qa
+    state: NOT_RUN
+    blocker: "Playwright absent"
+    evidence_required: "playwright.config.ts + 1 smoke pass + trace records"
+    evidence_path: "playwright.config.ts + .v13/results/qa-smoke/"
+
+  - id: TODO-31
+    stage: S6
+    owner: ironwake-orchestrator
+    state: NOT_RUN
+    blocker: "evidence gates above must clear first"
+    evidence_required: "Loop run record: ≥3 categories × ≥2 iterations each + reviewer attestation"
+    evidence_path: ".v13/results/builder-reviewer-loop.md"
+
+  - id: TODO-32
+    stage: S12
+    owner: ironwake-integration
+    state: NOT_RUN
+    blocker: null
+    evidence_required: "Integrator manifest mapping each integration to truth source"
+    evidence_path: "state/INTEGRATOR.yaml"
+
+  - id: TODO-33
+    stage: S1
+    owner: ironwake-orchestrator
+    state: DONE
+    blocker: null
+    evidence_required: "this file"
+    evidence_path: "state/states.{md,yaml}"
+
+  - id: TODO-34
+    stage: S1
+    owner: ironwake-orchestrator
+    state: NOT_RUN
+    blocker: "terminal bg isolation"
+    evidence_required: "hermes cron watchdog alive + sample heartbeat"
+    evidence_path: ".v13/results/watchdog-heartbeat.json"
+
+  - id: TODO-35
+    stage: S1
+    owner: ironwake-orchestrator
+    state: NOT_RUN
+    blocker: TODO-4
+    evidence_required: "Swarm handshake bytes + 1 mini-task fanned out to Ruflo"
+    evidence_path: ".v13/results/ruflo-swarm-probe.json"
+
+  - id: TODO-36
+    stage: S1
+    owner: ironwake-orchestrator
+    state: PARTIAL
+    blocker: "structured schema not emitted"
+    evidence_required: ".v13/results/observability/<task>.json per delegated task"
+    evidence_path: ".v13/results/observability/"
+
+  - id: TODO-37
+    stage: S1
+    owner: ironwake-orchestrator
+    state: DONE
+    blocker: null
+    evidence_required: "LOCAL_EXECUTABLE_OPEN formula present"
+    evidence_path: ".v13/TODO.md §GLOBAL_STATE + state/states.md"
+
+  - id: TODO-38
+    stage: S1
+    owner: ironwake-orchestrator
+    state: DONE
+    blocker: null
+    evidence_required: "Per-route ROUTE_ACCEPTANCE_MATRIX + per-check status"
+    evidence_path: ".v13/TODO.md + state/states.{md,yaml}"
+
+  - id: TODO-39
+    stage: S14
+    owner: ironwake-release
+    state: NOT_RUN
+    blocker: "S4 cleared + S6 finalised"
+    evidence_required: "RC tag + gate checklist signed"
+    evidence_path: "scripts/release/RC.md + git tag"
+
+  - id: TODO-40
+    stage: S15
+    owner: ironwake-release
+    state: NOT_RUN
+    blocker: TODO-39
+    evidence_required: "One wrangler deploy; SHA + bundle size + commit recorded; CF env reads ironwake.dev"
+    evidence_path: "scripts/release/deploy.log"
+
+  - id: TODO-41
+    stage: S15
+    owner: ironwake-release
+    state: NOT_RUN
+    blocker: TODO-40
+    evidence_required: "Curl pass: each route 200 + canonical ironwake.dev + sitemap+robots correct + IndexNow 202"
+    evidence_path: ".v13/results/live-acceptance.md"
+
+  - id: TODO-42
+    stage: S15
+    owner: ironwake-seo
+    state: NOT_RUN
+    blocker: TODO-41
+    evidence_required: "GSC URL-inspection screenshots + Bing inspect confirmation"
+    evidence_path: ".v13/results/search-engine-postdeploy/"
+
+  - id: TODO-43
+    stage: S1
+    owner: ironwake-orchestrator
+    state: NOT_RUN
+    blocker: null
+    evidence_required: "Each blocked item re-emitted in External Gate Format: NEEDS / BLOCKER / RECIPIENT / SLA"
+    evidence_path: "state/EXTERNAL_GATES.yaml"
+
+  - id: TODO-44
+    stage: S1
+    owner: ironwake-orchestrator
+    state: PARTIAL
+    blocker: "6 of 8 batches pending"
+    evidence_required: "Per-batch evidence files; 8/8 reviewed"
+    evidence_path: ".v13/results/initial-batch/*.md (8 files)"
+
+  - id: TODO-45
+    stage: S1
+    owner: ironwake-orchestrator
+    state: NOT_RUN
+    blocker: null
+    evidence_required: "One full checkpoint row, all fields printed; checkpoint ID committed"
+    evidence_path: ".v13/results/checkpoint-001.md"
+
+  - id: TODO-46
+    stage: S1
+    owner: ironwake-orchestrator
+    state: IN_PROGRESS
+    blocker: null
+    evidence_required: "This turn completed"
+    evidence_path: "this exchange"
+
+  - id: TODO-47
+    stage: S15
+    owner: ironwake-release
+    state: NOT_RUN
+    blocker: TODO-41
+    evidence_required: "Final report, per-system green/stale table"
+    evidence_path: "reports/FINAL_REPORT.md"
+
+  # ===== Canonical matrix items (R01–R37, legacy claims needing live re-evidence) =====
+  - { id: R01, stage: S1,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "DOM token sweep on /; body bg #f5f5f7", evidence_path: ".v13/results/dom-tokens.json" }
+  - { id: R02, stage: S1,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "Header DOM on 3 routes contains both anchors", evidence_path: ".v13/results/header-anchors.json" }
+  - { id: R03, stage: S1,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "<details>/<summary> semantics + keyboard/Escape + 44px targets", evidence_path: ".v13/results/a11y-audit.md" }
+  - { id: R04, stage: S2,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "Above-the-fold text DOM", evidence_path: ".v13/results/dom-hero.json" }
+  - { id: R05, stage: S2,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "WakeSVG present + reduced-motion safe (commit 40dd8d1)", evidence_path: "commit 40dd8d1" }
+  - { id: R06, stage: S2,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "3 channels selectable + route swaps (commit 4b394c2)", evidence_path: "commit 4b394c2" }
+  - { id: R07, stage: S2,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "DOM shows 4 rows; click flips state", evidence_path: ".v13/results/dom-dashboard.json" }
+  - { id: R08, stage: S2,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "Curl 200 for /systems/*", evidence_path: ".v13/results/route-smoke.json" }
+  - { id: R09, stage: S5,  owner: ironwake-conversion, state: DEPLOYED, blocker: null, evidence_required: "Per-system DOM contains canonical offer×5", evidence_path: ".v13/results/dom-systems.json" }
+  - { id: R10, stage: S5,  owner: ironwake-conversion, state: DEPLOYED, blocker: null, evidence_required: "15 INR + 15 USD amounts match canonical", evidence_path: ".v13/results/pricing-lock.md" }
+  - { id: R11, stage: S5,  owner: ironwake-conversion, state: VERIFIED, blocker: null, evidence_required: "No fake stats in body text", evidence_path: ".v13/results/conversion-audit.md" }
+  - { id: R12, stage: S10, owner: ironwake-backend,    state: VERIFIED_LIVE, blocker: null, evidence_required: "One labeled prod inquiry 201; outbox delivered; provider event signed", evidence_path: ".v13/results/backend-audit.md" }
+  - { id: R13, stage: S10, owner: ironwake-auth-db,    state: DEPLOYED, blocker: null, evidence_required: "Anon curl 200, no rows", evidence_path: ".v13/results/anon-owner.md" }
+  - { id: R14, stage: S2,  owner: ironwake-ui,         state: FAILED_LIVE, blocker: "page claims local intake/handoff/chat/audit-ready which are not live", evidence_required: "Redact those claims OR ship the operational paths", evidence_path: "app/systems/ai-receptionist/page.js" }
+  - { id: R15, stage: S5,  owner: ironwake-conversion, state: DEPLOYED, blocker: null, evidence_required: "Per-system DOM contains canonical offer", evidence_path: ".v13/results/dom-systems.json" }
+  - { id: R16, stage: S5,  owner: ironwake-conversion, state: VERIFIED, blocker: null, evidence_required: "Schema + body contains all 5 titles", evidence_path: ".v13/results/faq-evidence.json" }
+  - { id: R17, stage: S8,  owner: ironwake-a11y,       state: DEPLOYED, blocker: null, evidence_required: "Computed style on sample mobile routes", evidence_path: ".v13/results/a11y-audit.md" }
+  - { id: R18, stage: S7,  owner: ironwake-perf,       state: STALE_DEPLOYED, blocker: "re-measure after S15", evidence_required: "Lighthouse mobile+desktop on /", evidence_path: "lighthouse-mobile.json + lighthouse-desktop.json" }
+  - { id: R19, stage: S8,  owner: ironwake-a11y,       state: STALE_DEPLOYED, blocker: "re-run axe after R14/R17 fixes", evidence_required: "axe clean on /, /pricing, /audit", evidence_path: "axe-cdp-report.json" }
+  - { id: R20, stage: S13, owner: ironwake-seo,        state: PARTIAL,    blocker: "S4 Worker env stale", evidence_required: "Lighthouse SEO on /, /pricing, /audit", evidence_path: ".v13/results/seo-audit.md" }
+  - { id: R21, stage: S2,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "DOM nodes per motion module", evidence_path: "commit 4b394c2" }
+  - { id: R22, stage: S12, owner: ironwake-integration,state: DEPLOYED, blocker: null, evidence_required: "5/5 Lite prices returned per canonical", evidence_path: ".v13/results/chatbot-evidence.md" }
+  - { id: R23, stage: S10, owner: ironwake-backend,    state: VERIFIED_LIVE, blocker: null, evidence_required: "Row has booking_status=REQUEST_RECEIVED; never CONFIRMED", evidence_path: ".v13/results/backend-audit.md" }
+  - { id: R24, stage: S10, owner: ironwake-auth-db,    state: CONNECTED_NOT_VERIFIED, blocker: "live session + source column + export bytes", evidence_required: "Recorded owner session; source visible; one export bytes", evidence_path: ".v13/results/auth-reverify.md" }
+  - { id: R25, stage: S13, owner: ironwake-seo,        state: DEPLOYED, blocker: null, evidence_required: "app/sitemap.js returns all routes; live /sitemap.xml", evidence_path: ".v13/results/seo-audit.md" }
+  - { id: R26, stage: S13, owner: ironwake-seo,        state: DEPLOYED, blocker: null, evidence_required: "live /robots.txt", evidence_path: ".v13/results/seo-audit.md" }
+  - { id: R27, stage: S5,  owner: ironwake-conversion, state: DEPLOYED, blocker: null, evidence_required: "DOM links resolve to Vercel URLs", evidence_path: ".v13/results/dom-work.json" }
+  - { id: R28, stage: S5,  owner: ironwake-conversion, state: DEPLOYED, blocker: null, evidence_required: "/work/* returns walkthrough component", evidence_path: ".v13/results/dom-work.json" }
+  - { id: R29, stage: S5,  owner: ironwake-conversion, state: DEPLOYED, blocker: null, evidence_required: "StepPipeline present; reduced-motion safe", evidence_path: ".v13/results/dom-work.json" }
+  - { id: R30, stage: S1,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "9/9 axes floor", evidence_path: "reports/ATELIER_VS_IRONWAKE_MOTION_COMPARISON.md" }
+  - { id: R31, stage: S2,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "DOM links (commit c8eb933)", evidence_path: "commit c8eb933" }
+  - { id: R32, stage: S2,  owner: ironwake-ui,         state: DEPLOYED, blocker: null, evidence_required: "Channel buttons DOM", evidence_path: "commit 4b394c2" }
+  - { id: R33, stage: S13, owner: ironwake-seo,        state: DEPLOYED, blocker: "depends on S4 having redirected to ironwake.dev", evidence_required: "Curl headers on live site show ironwake.dev", evidence_path: ".v13/results/seo-audit.md" }
+  - { id: R34, stage: S8,  owner: ironwake-a11y,       state: DEPLOYED, blocker: null, evidence_required: "axe rule heading-order clean (commit cb9ae74)", evidence_path: "commit cb9ae74" }
+  - { id: R35, stage: S2,  owner: ironwake-ui,         state: FAILED_LIVE, blocker: "page claims unimplemented behaviour", evidence_required: "Metadata + JSON-LD clean of concept", evidence_path: "app/systems/ai-receptionist/page.js + app/layout.js" }
+  - { id: R36, stage: S13, owner: ironwake-seo,        state: DEPLOYED, blocker: "depends on S4", evidence_required: "All 10 routes have canonical+og", evidence_path: "commits 66f37b4 + f9ecccb" }
+  - { id: R37, stage: S5,  owner: ironwake-conversion, state: DEPLOYED, blocker: null, evidence_required: "Live curl clean (cycle 15)", evidence_path: ".v13/results/seo-audit.md" }
+
+external_gates:
+  - id: WAITING_EXTERNAL_OWNER_CF_ENV
+    format: ExternalGateFormat
+    needs: "Cloudflare Worker env var NEXT_PUBLIC_SITE_URL = https://ironwake.dev"
+    recipient: "Owner via Cloudflare dashboard"
+    blocker_for: [TODO-39, TODO-40, R20, R33, R36]
+    sla: "Owner-driven, no SLA claimed"
+  - id: WAITING_EXTERNAL_OWNER_MFA
+    format: ExternalGateFormat
+    needs: "Owner AAL2 enrollment (TOTP)"
+    recipient: "Owner"
+    blocker_for: [TODO-19, R24]
+    sla: "Owner-driven"
+  - id: WAITING_EXTERNAL_OWNER_D008
+    format: ExternalGateFormat
+    needs: "Adult/legal-owner decision"
+    recipient: "Owner"
+    blocker_for: [state/PROJECT_STATE.yaml D-008]
+    sla: "Owner-driven"
+  - id: WAITING_EXTERNAL_GSC
+    format: ExternalGateFormat
+    needs: "GSC verification file upload for ironwake.dev"
+    recipient: "Owner via Search Console"
+    blocker_for: [TODO-25, R20, R33]
+    sla: "Owner-driven"
+
+anti_premature_completion:
+  formula: "LOCAL_EXECUTABLE_OPEN = (work available now) − (work blocked by current stage)"
+  active_while_gt_zero: true
+  empty_action: "ask user 'continue?'"
+
+restart_on_demand:
+  trigger: "/goal IRONWAKE_FULL_PRODUCTION_CONTINUATION"
+  action: "Re-emit state/states.{md,yaml}"
+
+counts:
+  todo_items: 47
+  canonical_items: 37
+  total_nodes: 84
+  by_state:
+    DONE: 8           # TODO-1, TODO-3, TODO-6, TODO-11, TODO-18, TODO-33, TODO-37, TODO-38
+    PARTIAL: 12
+    NOT_RUN: 23
+    DONE_IN_DESIGN: 2 # TODO-8, TODO-12
+    DONE_AUDIT: 2     # TODO-21, TODO-22
+    IN_PROGRESS: 1    # TODO-46
+    DEPLOYED: 27      # R01-R03,R04-R13,R15,R17,R21,R25-R32,R34,R37 minus re-classified
+    VERIFIED: 2       # R11, R16
+    VERIFIED_LIVE: 2  # R12, R23
+    FAILED_LIVE: 2    # R14, R35
+    STALE_DEPLOYED: 2 # R18, R19
+    CONNECTED_NOT_VERIFIED: 1  # R24
+  external_gates_open: 4

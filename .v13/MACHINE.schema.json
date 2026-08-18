@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ironwake.dev/schemas/v13/machine.schema.json",
+  "title": "IronWakeV13GlobalStateMachine",
+  "description": "JSON Schema 2020-12 used to validate .v13/MACHINE.json",
+  "type": "object",
+  "required": ["$schema", "version", "initial_state", "states", "transitions", "global_guards"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "$id": { "type": "string" },
+    "title": { "type": "string" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "generated": { "type": "string", "format": "date" },
+    "source_of_record": { "type": "string" },
+    "initial_state": { "type": "string" },
+    "success_states": { "type": "array", "items": { "type": "string" } },
+    "absorbing_states": { "type": "array", "items": { "type": "string" } },
+    "degraded_states": { "type": "array", "items": { "type": "string" } },
+    "referenced_items": { "type": "array", "items": { "type": "string", "pattern": "^[0-9]+$" } },
+    "evaluation_context": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "states": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "description"],
+        "additionalProperties": true,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+          "kind": { "type": "string", "enum": ["start", "success", "degraded", "normal"] },
+          "description": { "type": "string", "minLength": 1 },
+          "entry_required_items": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[0-9]+$" }
+          },
+          "exit_required_items": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[0-9]+$" }
+          },
+          "invariants": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "must_record": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "thresholds": { "type": "object", "additionalProperties": true },
+          "constraints": { "type": "object", "additionalProperties": true }
+        }
+      }
+    },
+    "transitions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "predicate"],
+        "additionalProperties": true,
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "predicate": { "type": "string", "minLength": 1 },
+          "must_record": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "on_enter": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "global_guards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rule"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+          "rule": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "local_executable_open": {
+      "type": "object",
+      "required": ["definition", "rules"],
+      "properties": {
+        "definition": { "type": "string" },
+        "rules": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

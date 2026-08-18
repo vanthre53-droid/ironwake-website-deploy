@@ -44,18 +44,29 @@ function labelFor(code) {
   return SAFE_LABELS[code] || 'Voice could not start. Try again shortly.';
 }
 
+// ponytail: the official Retell browser SDK is published as
+// `retell-client-js-sdk` (no @ scope). It exports a default
+// `RetellWebClient` constructor compatible with the `startCall` API
+// documented at https://docs.retellai.com/make-calls/web-call.
+
+// ponytail: the package name is loaded with a runtime-only `import()` so
+// the missing-dependency path is observable to the UI (returns null,
+// not a crash). If the package is removed from package.json again, the
+// UI returns a clear `sdk_unavailable` state instead of crashing.
+//
+// ponytail: microbundle's ESM build wraps the real constructor on the
+// module namespace's `RetellWebClient` export AND ALSO exports a
+// namespace-shaped `default` object (`{ RetellWebClient }`). Naive
+// `mod.default ?? mod.RetellWebClient` picks the unusable object and
+// `new` throws → user sees "Voice is currently unavailable" when the SDK
+// is fine. Resolve the ctor explicitly via `.RetellWebClient`.
 async function loadRetellSdk() {
-  // ponytail: avoid a hard dependency on @retell/client-js-sdk. The
-  // bundler cannot statically resolve packages that are not in the
-  // package.json, so the module name is hidden behind a runtime-only
-  // variable and loaded with new Function to defeat the static analyzer.
-  // If the package is missing, the UI returns a clear `sdk_unavailable`
-  // state instead of crashing.
   try {
-    const pkg = '@retell/' + 'client-js-sdk';
+    const pkg = 'retell-client-js-sdk';
     const importer = new Function('p', 'return import(p)');
     const mod = await importer(pkg);
-    return mod?.default || mod?.RetellWebClient || null;
+    const ctor = mod?.RetellWebClient || mod?.default?.RetellWebClient || null;
+    return typeof ctor === 'function' ? ctor : null;
   } catch {
     return null;
   }

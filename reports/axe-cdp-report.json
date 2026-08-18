@@ -1,0 +1,141 @@
+{
+  "tool": "axe-core",
+  "toolVersion": "4.10.3",
+  "runner": "scripts/axe-cdp-run.mjs (chromium + raw CDP via ws)",
+  "chromiumBinary": "/home/shadowlingo/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+  "startedAt": "2026-08-18T02:43:24.601Z",
+  "completedAt": "2026-08-18T02:43:45.391Z",
+  "routesAudited": [
+    "https://ironwake.dev/",
+    "https://ironwake.dev/pricing",
+    "https://ironwake.dev/systems/ai-receptionist",
+    "https://ironwake.dev/work",
+    "https://ironwake.dev/login"
+  ],
+  "routesSucceeded": 5,
+  "routesFailed": 0,
+  "totalViolations": 0,
+  "impactCounts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "results": [
+    {
+      "url": "https://ironwake.dev/",
+      "testedAt": "2026-08-18T02:43:30.725Z",
+      "navMs": 4862,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 25,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 89
+        }
+      ],
+      "violations": []
+    },
+    {
+      "url": "https://ironwake.dev/pricing",
+      "testedAt": "2026-08-18T02:43:34.447Z",
+      "navMs": 3053,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 20,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 44
+        }
+      ],
+      "violations": []
+    },
+    {
+      "url": "https://ironwake.dev/systems/ai-receptionist",
+      "testedAt": "2026-08-18T02:43:38.031Z",
+      "navMs": 3053,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 21,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 18
+        }
+      ],
+      "violations": []
+    },
+    {
+      "url": "https://ironwake.dev/work",
+      "testedAt": "2026-08-18T02:43:41.850Z",
+      "navMs": 3253,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 21,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 15
+        }
+      ],
+      "violations": []
+    },
+    {
+      "url": "https://ironwake.dev/login",
+      "testedAt": "2026-08-18T02:43:45.367Z",
+      "navMs": 3052,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 27,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 14
+        }
+      ],
+      "violations": []
+    }
+  ]
+}

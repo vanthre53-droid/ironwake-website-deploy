@@ -1,0 +1,141 @@
+{
+  "tool": "axe-core",
+  "toolVersion": "4.13.0",
+  "runner": "scripts/axe-cdp-run.mjs (chromium + raw CDP via ws)",
+  "chromiumBinary": "/home/shadowlingo/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+  "startedAt": "2026-08-18T02:26:34.846Z",
+  "completedAt": "2026-08-18T02:26:59.462Z",
+  "routesAudited": [
+    "https://ironwake.netlify.app/",
+    "https://ironwake.netlify.app/pricing",
+    "https://ironwake.netlify.app/systems/ai-receptionist",
+    "https://ironwake.netlify.app/work",
+    "https://ironwake.netlify.app/login"
+  ],
+  "routesSucceeded": 5,
+  "routesFailed": 0,
+  "totalViolations": 0,
+  "impactCounts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0
+  },
+  "results": [
+    {
+      "url": "https://ironwake.netlify.app/",
+      "testedAt": "2026-08-18T02:26:38.918Z",
+      "navMs": 3454,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 25,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 87
+        }
+      ],
+      "violations": []
+    },
+    {
+      "url": "https://ironwake.netlify.app/pricing",
+      "testedAt": "2026-08-18T02:26:46.889Z",
+      "navMs": 7592,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 20,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 42
+        }
+      ],
+      "violations": []
+    },
+    {
+      "url": "https://ironwake.netlify.app/systems/ai-receptionist",
+      "testedAt": "2026-08-18T02:26:51.218Z",
+      "navMs": 4010,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 20,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 16
+        }
+      ],
+      "violations": []
+    },
+    {
+      "url": "https://ironwake.netlify.app/work",
+      "testedAt": "2026-08-18T02:26:55.144Z",
+      "navMs": 3559,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 20,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 13
+        }
+      ],
+      "violations": []
+    },
+    {
+      "url": "https://ironwake.netlify.app/login",
+      "testedAt": "2026-08-18T02:26:59.445Z",
+      "navMs": 4011,
+      "violationCount": 0,
+      "incompleteCount": 1,
+      "passCount": 26,
+      "impactCounts": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 11
+        }
+      ],
+      "violations": []
+    }
+  ]
+}

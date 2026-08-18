@@ -1348,3 +1348,138 @@ button, input, textarea { font: inherit; }
 @keyframes voice-pulse{0%,100%{box-shadow:0 0 0 0 currentColor;opacity:1}50%{box-shadow:0 0 0 8px transparent;opacity:.75}}
 @media (prefers-reduced-motion: reduce){.voice-session .voice-state-indicator{animation:none !important;box-shadow:none !important}}
 
+/* ---------------------------------------------------------------------------
+ * ponytail: motion design system — spring easings, scroll-driven primitives,
+ * pointer-reactive helpers. Everything here is gated by prefers-reduced-motion
+ * so it disappears for users who have asked for less motion. All custom
+ * properties use linear() so the curve has acceleration + deceleration —
+ * a hallmark of spring physics — not a fixed duration ease with a slow tail.
+ *
+ * The two curves used:
+ *   --ease-spring      — smooth, settles with a tiny over-rhythm (small UI)
+ *   --ease-spring-snap — punchier, overshoots more (button-press / arrival)
+ *   --ease-fluid       — drift motion (ambient, parallax, scroll-bound)
+ *
+ * These are cubic-bezier-wise equivalent to ease-out, but the linear() syntax
+ * carries more fidelity across the timeline and matches how an actual
+ * spring decays. The Tailwind "ios" curve is the same family.
+ * ------------------------------------------------------------------------- */
+:root {
+  --ease-spring: linear(0, 0.005, 0.025, 0.07, 0.14, 0.225, 0.32, 0.42, 0.52, 0.615, 0.7, 0.775, 0.84, 0.89, 0.93, 0.96, 0.98, 0.995, 1);
+  --ease-spring-snap: linear(0, 0.01, 0.04, 0.12, 0.32, 0.62, 0.86, 0.98, 1, 0.96, 0.99, 1);
+  --ease-fluid: linear(0, 0.04, 0.16, 0.32, 0.5, 0.68, 0.84, 0.95, 1);
+  --motion-duration: 540ms;
+  --motion-duration-fast: 320ms;
+  --motion-duration-slow: 880ms;
+}
+
+/* ponytail: motion-reveal upgrade — replace the static cubic-bezier with the
+   spring linear() curve so the entrance has natural acceleration and a small
+   settle. Filter is kept (saturate). The default reveal still respects
+   prefers-reduced-motion via the .no-motion class set by the component. */
+.motion-reveal { transform: none; filter: none; transition: transform var(--motion-duration) var(--ease-spring), filter var(--motion-duration) var(--ease-spring); }
+.motion-reveal:not(.is-visible):not(.no-motion) { transform: translateY(22px); filter: saturate(.9); }
+
+/* ponytail: scroll-progress bar — thin copper rail above the sticky header
+   that grows as the page is scrolled. The component writes a CSS
+   custom property --scroll-progress in [0,1] on the root <body>. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  background: transparent;
+  --scroll-progress: 0;
+}
+.scroll-progress::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--copper), var(--aqua));
+  transform-origin: left center;
+  transform: scaleX(var(--scroll-progress));
+  transition: transform 120ms linear;
+  will-change: transform;
+}
+
+/* ponytail: scroll-parallax — components opt in by registering a *-parallax
+   element and writing --scroll-y to translateY(). Used by the hero WakeSVG and
+   the status-card on the homepage. The transform is gated to motion-OK
+   containers so touch + reduced-motion users see no shift. */
+.parallax-host { position: relative; overflow: hidden; }
+.parallax-host [data-parallax] { will-change: transform; transform: translate3d(0, var(--scroll-y, 0px), 0); }
+
+/* ponytail: pointer-tilt — desktop-only sugar. The component writes
+   --tilt-x and --tilt-y in [-1,1] on hover/move. The component sets the
+   .no-pointer class on touch + reduced-motion, and the hover is purely
+   visual (no input capture, no event preventDefault). */
+.tilt-host { transform-style: preserve-3d; transition: transform var(--motion-duration-fast) var(--ease-spring); }
+.tilt-host:hover { transform: perspective(900px) rotateX(calc(var(--tilt-y, 0) * 4deg)) rotateY(calc(var(--tilt-x, 0) * 4deg)) translateZ(0); }
+.tilt-host > [data-tilt-near] { transform: translateZ(28px); transition: transform var(--motion-duration-fast) var(--ease-spring); }
+.tilt-host:hover > [data-tilt-near] { transform: translateZ(48px); }
+
+/* ponytail: magnetic hover — subtle x/y follow behind a CTA so the button
+   appears to lean toward the cursor. The component reads pointer position
+   and clamps to a small radius; presence on touch is suppressed. */
+.magnetic-host { transition: transform var(--motion-duration-fast) var(--ease-spring); }
+.magnetic-host:hover { transform: translate3d(calc(var(--mag-x, 0px) * 0.5), calc(var(--mag-y, 0px) * 0.5), 0); }
+
+/* ponytail: idle ambient — adds a faint floor-light gradient to a hero so
+   the eye has somewhere to land. Static on touch, slight drift on desktop. */
+.ambient-host { position: relative; isolation: isolate; }
+.ambient-host::before {
+  content: "";
+  position: absolute;
+  inset: -10% -5%;
+  z-index: -1;
+  background: radial-gradient(60% 40% at 50% 0%, rgb(30 117 130 / .16), transparent 70%),
+              radial-gradient(40% 30% at 80% 30%, rgb(182 73 47 / .12), transparent 70%);
+  filter: blur(8px);
+  opacity: .8;
+  pointer-events: none;
+  transition: opacity var(--motion-duration-slow) var(--ease-spring);
+}
+
+/* ponytail: master reduced-motion override. This block MUST stay last so it
+   wins specificity. It disables every transition/animation that the motion
+   system introduces, and converts .is-visible initial states to the final
+   state so content is fully visible without any of the timeline. */
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal { transform: none !important; filter: none !important; transition: none !important; }
+  .motion-reveal:not(.is-visible) { transform: none !important; opacity: 1 !important; }
+  .motion-reveal.stagger.is-visible > * { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .scroll-progress::after { transition: none !important; }
+  .parallax-host [data-parallax] { transform: none !important; }
+  .tilt-host, .tilt-host:hover,
+  .tilt-host > [data-tilt-near], .tilt-host:hover > [data-tilt-near] { transform: none !important; }
+  .tilt-host { transition: none !important; }
+  .magnetic-host, .magnetic-host:hover { transform: none !important; transition: none !important; }
+  .ambient-host::before { transition: none !important; opacity: .55; }
+  .hero > * { animation: none !important; }
+  .signal-rail-dot, .signal-rail-pulse { animation: none !important; }
+  .signal-rail-pulse { display: none !important; }
+  .loading-line { animation: none !important; opacity: .8; }
+  .assistant-panel { animation: none !important; }
+  .voice-state-indicator { animation: none !important; box-shadow: none !important; }
+  .reveal-on-scroll { transform: none !important; opacity: 1 !important; transition: none !important; }
+}
+
+/* ponytail: pointer-coarse (touch) override — kill tilt/magnet on devices
+   without a precise pointer. Touch users never see hover-tilt. */
+@media (hover: none), (pointer: coarse) {
+  .tilt-host:hover, .tilt-host:hover > [data-tilt-near] { transform: none; }
+  .magnetic-host:hover { transform: none; }
+  .tilt-host, .magnetic-host { transition: none; }
+}
+
+/* ponytail: reduce-transparency override for the parallax / ambient scenery,
+   keeps the layout intact but removes the runtime blur cost. */
+@media (prefers-reduced-transparency: reduce) {
+  .ambient-host::before { opacity: .35; filter: none; }
+  .scroll-progress::after { opacity: .55; }
+}
+
