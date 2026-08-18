@@ -1642,6 +1642,27 @@ button, input, textarea { font: inherit; }
   padding-right: 0.05em;
   animation: copper-drift 14s ease-in-out infinite alternate;
 }
+/* ponytail: flagship-actions never had layout; without flex-wrap the 4 hero CTAs
+   cramped into a single horizontal row on 360-430 mobile. Add flex+gap so they
+   wrap cleanly with full-width tap targets. Also stage the visual centerpiece
+   responsively so it doesn't push content below the fold on phones. */
+.flagship-hero { display: grid; gap: 24px; }
+.flagship-intro { display: grid; gap: 18px; }
+.flagship-intro-copy { display: grid; gap: 14px; }
+.flagship-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.flagship-actions .button { min-height: 44px; flex: 1 1 auto; justify-content: center; }
+.flagship-meta { display: inline-flex; flex-wrap: wrap; gap: 6px 12px; margin: 0; color: var(--graphite); font: 500 13px/1.5 var(--body); }
+.flagship-beat { display: grid; gap: 16px; margin: 28px 0; }
+.flagship-centerpiece { display: grid; gap: 12px; }
+.flagship-frame { display: grid; gap: 14px; }
+.flagship-frame-tag { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.flagship-frame-meta { color: var(--graphite); font: 500 12px var(--body); }
+.flagship-frame-visual { display: grid; gap: 14px; }
+.flagship-card-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.flagship-card-dl { display: grid; gap: 10px; margin: 14px 0 0; }
+@media (max-width: 760px) {
+  .flagship-actions .button { flex: 1 1 100%; }
+}
 @keyframes copper-drift {
   from { background-position: 0% 50%; }
   to   { background-position: 100% 50%; }
