@@ -1777,3 +1777,102 @@ button, input, textarea { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .pricing-region-btn { transition: none; }
 }
+
+/* === v13 WhatsApp launcher FAB (additive) === */
+.wa-fab-group {
+  position: fixed;
+  right: clamp(16px, 2.5vw, 28px);
+  bottom: clamp(16px, 2.5vw, 28px);
+  z-index: 80;
+  display: grid;
+  grid-template-areas: "menu" "fab";
+  gap: 12px;
+  justify-items: end;
+  pointer-events: none;
+}
+.wa-fab-group > * { pointer-events: auto; }
+.wa-fab-menu {
+  grid-area: menu;
+  max-width: 280px;
+  background: var(--color-surface, #fbfaf6);
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 18px 48px -22px rgba(10, 10, 10, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.wa-fab-menu__title {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-ink, #0a0a0a);
+}
+.wa-fab-menu__body {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-graphite, #444748);
+}
+.wa-fab-menu__cta {
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #25d366;
+  color: #0a0a0a;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.wa-fab-menu__cta:hover { background: #1ebe5b; }
+.wa-fab,
+.wa-fab-group > a.wa-fab,
+.wa-fab-group > button.wa-fab {
+  grid-area: fab;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #0a0a0a;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(10, 10, 10, 0.18);
+  box-shadow: 0 14px 36px -16px rgba(10, 10, 10, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  font-family: inherit;
+}
+.wa-fab:hover { background: #1ebe5b; transform: translateY(-1px); }
+.wa-fab__label { line-height: 1; }
+.wa-fab--pending {
+  background: #edeae3;
+  color: #444748;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+.wa-fab--pending:hover { background: #edeae3; transform: none; }
+.wa-fab__close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(10, 10, 10, 0.18);
+  background: #fbfaf6;
+  color: #0a0a0a;
+  font-size: 14px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 6px 18px -8px rgba(10, 10, 10, 0.3);
+}
+@media (max-width: 480px) {
+  .wa-fab__label { display: none; }
+  .wa-fab, .wa-fab--pending { padding: 12px; }
+  .wa-fab-menu { max-width: min(280px, calc(100vw - 32px)); }
+}
