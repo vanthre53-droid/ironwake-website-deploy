@@ -59,16 +59,27 @@ export default function PricingPage() {
       <SiteHeader />
       <main className="page pricing-page">
         <section className="pricing-hero">
-          <span className="eyebrow">Pricing</span>
-          <h1>Five leak categories. Three sizes. One truth standard.</h1>
-          <p className="section-lede">
-            Published offer tiers for the five leak categories IronWake fixes. Every offer lists a
-            recommended tier; pick the smallest scope that resolves the diagnosed leak. Start with the
-            Business Leak Audit unless you already know what to build.
-          </p>
-          <div className="pricing-hero-actions">
-            <Link className="button" href="/audit">Book Diagnostic</Link>
-            <Link className="button secondary" href="/systems">Browse Systems</Link>
+          <div className="pricing-hero-inner">
+            <span className="eyebrow">Pricing</span>
+            <h1>Five leak categories. Three sizes. One truth standard.</h1>
+            <p className="section-lede">
+              Published offer tiers for the five leak categories IronWake fixes. Every offer lists a
+              recommended tier; pick the smallest scope that resolves the diagnosed leak. Start with the
+              Business Leak Audit unless you already know what to build.
+            </p>
+            <div className="pricing-hero-actions">
+              <Link className="button" href="/audit">Book Diagnostic</Link>
+              <Link className="button secondary" href="/systems">Browse Systems</Link>
+            </div>
+            <ul className="pricing-hero-trust" aria-label="Pricing trust">
+              <li><span className="dot" aria-hidden="true" />Verified scope, no live FX</li>
+              <li><span className="dot" aria-hidden="true" />Both regions, fixed tier sizes</li>
+              <li><span className="dot" aria-hidden="true" />Audit-first — nothing changes until confirmed</li>
+            </ul>
+            <div className="pricing-hero-toggle">
+              <span className="pricing-hero-toggle-label">Region</span>
+              <PricingRegionToggle />
+            </div>
           </div>
         </section>
 
@@ -87,8 +98,11 @@ export default function PricingPage() {
             <div>
               <span className="eyebrow">Offer matrix</span>
               <h2>Choose the offer. Pick the smallest tier that resolves the leak.</h2>
+              <p className="section-lede">
+                Pricing reflects the selected region above. Recommended tier is the smallest scope that
+                closes the diagnosed leak; pick larger sizes only when you can name the missing capability.
+              </p>
             </div>
-            <PricingRegionToggle />
           </div>
 
           <div className="pricing-grid">
