@@ -1,4 +1,3 @@
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
@@ -120,6 +119,5 @@ export default function WorkPage() {
         <a className="button secondary" href="/scope">Request scope</a>
       </div>
     </section>
-    <SiteFooter />
   </main>;
 }

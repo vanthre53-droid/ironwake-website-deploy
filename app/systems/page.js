@@ -1,4 +1,3 @@
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
@@ -28,6 +27,5 @@ export default function SystemsPage() {
     <section className="hero compact"><span className="eyebrow">IronWake systems</span><h1>Give every enquiry an owner and a next step.</h1><p>Choose the part of your workflow that is hardest to see. Each page shows how that handoff works, what is already proven, and what still needs a provider.</p><a className="button" href="/audit">Find my workflow leak</a></section>
     <section className="section intro"><span className="eyebrow">Choose a system</span><h2>Start where customers are waiting.</h2><div className="system-grid">{systems.map(([label, title, text, state, href, icon]) => <a href={href} key={href}><article className="system-card"><span className="system-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d={icon} /></svg></span><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p><span className="card-link">{state} →</span></article></a>)}</div></section>
     <section className="section disclosure"><div><span className="eyebrow">Reading the labels</span><h3>Verified, request-only, and not-yet-built are different things.</h3><p>IronWake does not describe a planned category as though it were connected, and does not describe a request-only flow as though it were a live confirmation.</p></div><div className="disclosure-box">A system is only called live once its database record, notification path, and (where relevant) signed provider callback are verified. Until then it is labelled request-only, pending, or a future category — never presented as delivered.</div></section>
-    <SiteFooter />
   </main>;
 }

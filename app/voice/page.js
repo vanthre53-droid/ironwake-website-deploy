@@ -1,5 +1,4 @@
 import { SiteHeader } from '../components/SiteHeader';
-import { SiteFooter } from '../components/SiteFooter';
 import VoiceSessionLauncher from '../components/VoiceSessionLauncher';
 
 import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
@@ -46,7 +45,6 @@ export default function VoicePage() {
           <a href="mailto:ironwake.dev@gmail.com">email ironwake.dev@gmail.com</a>.
         </p>
       </section>
-      <SiteFooter />
     </main>
   );
 }

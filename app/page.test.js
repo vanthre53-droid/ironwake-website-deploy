@@ -11,7 +11,10 @@ test('homepage keeps truthful audit CTA and operating path', async () => {
   assert.match(combined, /The enquiry arrived/);
   assert.match(page, /No live receptionist provider is connected/);
   assert.doesNotMatch(page, /Capability is built; live telephony/);
-  assert.match(page, /<SiteFooter \/>/);
+  // ponytail: SiteFooter is now in the global layout (app/layout.js), not per-page.
+  const layout = await readFile(new URL('./layout.js', import.meta.url), 'utf8');
+  assert.match(layout, /SiteFooter/);
+  assert.doesNotMatch(page, /<SiteFooter \/>/);
   for (const href of ['/systems/missed-lead-recovery', '/systems/booking-control', '/systems/ai-receptionist', '/work/rapidpulse', '/work/dentacare-pro', '/work/atelier', '/industries/home-services', '/industries/dental-clinics', '/industries/salons-spas']) {
     assert.ok(page.includes(href), `homepage should expose ${href}`);
   }

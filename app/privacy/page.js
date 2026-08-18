@@ -1,4 +1,3 @@
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
@@ -78,6 +77,5 @@ export default function PrivacyPage() {
       <p>This page is operated by the same person who runs the demonstrations on this site. There is no separate legal entity registered behind it yet — that will be added before the first paying client is onboarded.</p>
     </section>
 
-    <SiteFooter />
   </main>;
 }

@@ -1,4 +1,3 @@
-import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
 import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
@@ -35,6 +34,5 @@ export default function HomeServicesPage() {
     <section className="section"><span className="eyebrow">Relevant systems</span><h2>What actually addresses this today.</h2><div className="system-grid">{systems.map(([href, title, text]) => <a href={href} key={href}><article className="system-card"><h3>{title}</h3><p>{text}</p><span className="card-link">Explore this system →</span></article></a>)}</div></section>
     <section className="section disclosure"><div><span className="eyebrow">Related demonstration</span><h3>RapidPulse Response</h3><p>A portfolio demonstration of inquiry-to-response ownership for an emergency-service scenario.</p></div><div className="disclosure-box">This is a capability demonstration, not a client result. It does not integrate with a real dispatch, telephony, or CRM platform. <a href="/work/rapidpulse">View the demonstration →</a></div></section>
     <section className="section"><span className="eyebrow">Next step</span><h2>Have your own call-to-callback path reviewed.</h2><a className="button" href="/audit">Request a Business Leak Audit</a></section>
-    <SiteFooter />
   </main>;
 }

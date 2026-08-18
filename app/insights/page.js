@@ -1,5 +1,4 @@
 import Link from 'next/link.js';
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
@@ -75,6 +74,5 @@ export default function InsightsPage() {
         <a className="button secondary" href="/pricing">See pricing</a>
       </div>
     </section>
-    <SiteFooter />
   </main>;
 }

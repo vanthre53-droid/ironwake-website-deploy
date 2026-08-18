@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation.js';
 import Link from 'next/link.js';
-import { SiteFooter } from '../../components/SiteFooter';
 import { SiteHeader } from '../../components/SiteHeader';
 
 import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
@@ -110,7 +109,6 @@ export default function InsightArticlePage({ params }) {
             <Link className="button secondary" href="/insights">All insights</Link>
           </div>
         </section>
-        <SiteFooter />
       </main>
     </>
   );

@@ -11,7 +11,10 @@ test('systems page explains categories without implying a live provider connecti
   assert.match(source, /Request-only; provider pending/);
   assert.match(source, /Not yet built/);
   assert.match(source, /export const metadata/);
-  assert.match(source, /<SiteFooter \/>/);
+  // ponytail: SiteFooter is now in the global layout (app/layout.js), not per-page.
+  const layout = await readFile(new URL('../layout.js', import.meta.url), 'utf8');
+  assert.match(layout, /SiteFooter/);
+  assert.doesNotMatch(source, /<SiteFooter \/>/);
   assert.match(source, /\/systems\/missed-lead-recovery/);
   assert.match(source, /\/systems\/booking-control/);
   assert.match(source, /\/systems\/trust-lead-capture/);

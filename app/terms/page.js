@@ -1,4 +1,3 @@
-import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 
 import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
@@ -68,6 +67,5 @@ export default function TermsPage() {
       <p>This site is operated by the founder of IronWake. No separate legal entity is registered behind it yet; that will be added before the first paying client is onboarded. The current operator contact is <a href="mailto:ironwake.dev@gmail.com">ironwake.dev@gmail.com</a>.</p>
     </section>
 
-    <SiteFooter />
   </main>;
 }
