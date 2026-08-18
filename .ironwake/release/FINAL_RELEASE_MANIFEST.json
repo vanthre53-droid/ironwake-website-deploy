@@ -1,5 +1,5 @@
 {
-  "FINAL_HEAD": "bdbf2ecf2db63d1e09d74dff42a7e0a925b56211",
+  "FINAL_HEAD": "8ab33c9c4def2450621169b7e4bc1b0287b96b92",
   "FROZEN_FOR_V13_DEPLOY": "2026-08-18",
   "V13_NOTE": "V13 batch 1 + batch 2 + stage 6 QA = pricing clean (no AuditForm), 3+2 grid, brand-copper active toggle, padded form fields (no underline-only), readable nav typography, apex-redirect-safe QA. Frozen for v13 production deploy attempt #10.",
   "DEPLOY_BUDGET": {
@@ -92,7 +92,7 @@
   },
   "buildId": "ZljeTuIu_gevihcbB1LVS",
     "timestamp": "2026-08-18T09:45:00Z",
-    "deploy_head": "bdbf2ecf2db63d1e09d74dff42a7e0a925b56211",
+    "deploy_head": "8ab33c9c4def2450621169b7e4bc1b0287b96b92",
   "PRODUCTION_DEPLOY_3": {
     "ID": "6a7c4e1d377fb59a36ba980e",
     "HEAD": "47495b2fd5b386eee88710540d74396a3e13c664",
