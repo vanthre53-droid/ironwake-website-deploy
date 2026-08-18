@@ -55,11 +55,11 @@ export function SiteHeader() {
       {links.slice(1).map(([href, label]) => <a href={href} key={href}>{label}</a>)}
       {!state.loaded && <SkeletonNavAuth width={168} ariaLabel="Loading account controls" />}
       {state.loaded && !signedIn && <>
-        <a className="nav-login" href="/login">Sign in</a>
-        <a className="nav-signup" href="/signup">Create account</a>
+        <a className="nav-login" style={{ borderColor: 'var(--copper)', color: 'var(--copper)' }} href="/login">Sign in</a>
+        <a className="nav-signup" style={{ background: 'var(--copper)', borderColor: 'var(--copper)' }} href="/signup">Create account</a>
       </>}
       {state.loaded && signedIn && <>
-        <a className="nav-login" href="/account">My account</a>
+        <a className="nav-login" style={{ borderColor: 'var(--copper)', color: 'var(--copper)' }} href="/account">My account</a>
         <button type="button" className="nav-signout" onClick={signOut}>Sign out</button>
       </>}
       <a className="nav-cta" href="/audit">Book Diagnostic</a>
@@ -70,11 +70,11 @@ export function SiteHeader() {
         {links.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
         {!state.loaded && <SkeletonNavAuth width={120} ariaLabel="Loading account controls" />}
         {state.loaded && !signedIn && <>
-          <a className="nav-login" href="/login">Sign in</a>
-          <a className="nav-signup" href="/signup">Create account</a>
+          <a className="nav-login" style={{ borderColor: 'var(--copper)', color: 'var(--copper)' }} href="/login">Sign in</a>
+          <a className="nav-signup" style={{ background: 'var(--copper)', borderColor: 'var(--copper)' }} href="/signup">Create account</a>
         </>}
         {state.loaded && signedIn && <>
-          <a className="nav-login" href="/account">My account</a>
+          <a className="nav-login" style={{ borderColor: 'var(--copper)', color: 'var(--copper)' }} href="/account">My account</a>
           <button type="button" className="nav-signout" onClick={signOut}>Sign out</button>
         </>}
         <a className="nav-cta" href="/audit">Book Diagnostic</a>
