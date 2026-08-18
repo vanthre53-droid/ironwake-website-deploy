@@ -11,24 +11,41 @@ export function FlagshipHero({ auditLitePrice }) {
     <section className="flagship-hero" aria-label="IronWake operating story">
       <RevealSection stage={0} className="flagship-intro">
         <div className="flagship-intro-copy">
-          <span className="eyebrow">Systems practice for service businesses</span>
+          <span className="eyebrow">IronWake // operational systems practice</span>
           <h1 className="flagship-headline">
-            Stop losing leads between enquiry and follow-up.
+            The enquiry arrived. <span className="flagship-headline-accent">Where did it go?</span>
           </h1>
           <p className="flagship-lede">
-            IronWake maps where your enquiry, booking, or follow-up process loses
-            momentum, then builds the smallest operational system that makes the
-            next step visible and reviewable.
+            IronWake maps the handoff between enquiry, booking, and follow-up so
+            a missed request never ends as a silent week. Smallest system that
+            makes the next action visible — published, reviewed, verifiable.
           </p>
           <div className="flagship-actions">
-            <a className="button" href="/audit">Book Diagnostic</a>
+            <a className="button" href="/audit">Map my leak</a>
             <a className="button secondary" href="/pricing">See pricing</a>
           </div>
-          <div className="signal-rail" role="group" aria-label="Operating flow: inquiry to review task to next action">
-            <div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Inquiry</span></div>
-            <div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Review task</span></div>
-            <div className="signal-rail-node"><span className="signal-rail-dot" aria-hidden="true" /><span className="signal-rail-label">Next action</span></div>
-          </div>
+          <ul className="outcome-strip" aria-label="What IronWake delivers">
+            <li>
+              <span className="outcome-strip-tag">Outcome</span>
+              <strong>Captured</strong>
+              <span className="outcome-strip-note">Inquiry before reply</span>
+            </li>
+            <li>
+              <span className="outcome-strip-tag">Outcome</span>
+              <strong>Reviewed</strong>
+              <span className="outcome-strip-note">Task before promise</span>
+            </li>
+            <li>
+              <span className="outcome-strip-tag">Outcome</span>
+              <strong>Visible</strong>
+              <span className="outcome-strip-note">Next action, owned</span>
+            </li>
+            <li>
+              <span className="outcome-strip-tag">Outcome</span>
+              <strong>Verified</strong>
+              <span className="outcome-strip-note">Claimed only with proof</span>
+            </li>
+          </ul>
           <p className="flagship-meta">
             Starts at {auditLitePrice}. No provider status claimed without proof.
           </p>
@@ -95,7 +112,7 @@ export function FlagshipHero({ auditLitePrice }) {
             outcomes are never asserted without proof.
           </p>
           <div className="flagship-actions">
-            <a className="button" href="/audit">Book Diagnostic</a>
+            <a className="button" href="/audit">Map my leak</a>
             <a className="button secondary" href="/process">See process</a>
           </div>
         </article>

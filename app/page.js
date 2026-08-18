@@ -18,15 +18,15 @@ const systems = [
 
 export function generateMetadata() {
   return {
-    title: 'IronWake — Stop losing leads between enquiry and follow-up',
+    title: 'IronWake — The enquiry arrived. Where did it go?',
     description: 'IronWake builds operational systems that capture enquiries, make the next review step visible, and control follow-up without overstating provider status.',
     openGraph: {
-      title: 'IronWake — Stop losing leads between enquiry and follow-up',
+      title: 'IronWake — The enquiry arrived. Where did it go?',
       description: 'Operational systems for service businesses. Capture every enquiry, create a review task, and make the next action visible.',
       type: 'website',
       url: './',
       siteName: 'IronWake',
-      images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'IronWake — Stop losing leads between enquiry and follow-up' }]
+      images: [{ url: '/og-default.svg', width: 1200, height: 630, alt: 'IronWake — The enquiry arrived. Where did it go?' }]
     },
   };
 }

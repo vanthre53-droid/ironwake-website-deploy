@@ -7,8 +7,8 @@ test('homepage keeps truthful audit CTA and operating path', async () => {
   const page = await readFile(new URL('./page.js', import.meta.url), 'utf8');
   const hero = await readFile(new URL('./components/FlagshipHero.js', import.meta.url), 'utf8');
   const combined = page + hero;
-  assert.match(combined, /Book Diagnostic/);
-  assert.match(combined, /Stop losing leads between enquiry and follow-up/);
+  assert.match(combined, /Map my leak/);
+  assert.match(combined, /The enquiry arrived/);
   assert.match(page, /No live receptionist provider is connected/);
   assert.doesNotMatch(page, /Capability is built; live telephony/);
   assert.match(page, /<SiteFooter \/>/);
@@ -17,16 +17,19 @@ test('homepage keeps truthful audit CTA and operating path', async () => {
   }
 });
 
-test('homepage signal rail represents the implemented review-task workflow', async () => {
-  // ponytail: signal-rail markup now lives in <FlagshipHero/>; check both files.
+test('homepage outcome strip represents the implemented review-task workflow', async () => {
+  // ponytail: v13 outcome-strip replaces the previous signal-rail markup in <FlagshipHero/>.
+  // The .signal-rail CSS class remains as decorative infrastructure for future use.
   const page = await readFile(new URL('./page.js', import.meta.url), 'utf8');
   const hero = await readFile(new URL('./components/FlagshipHero.js', import.meta.url), 'utf8');
   const combined = page + hero;
-  assert.match(combined, /className="signal-rail"/);
-  assert.match(combined, /aria-label="Operating flow: inquiry to review task to next action"/);
-  assert.match(combined, /signal-rail-label">Inquiry/);
-  assert.match(combined, /signal-rail-label">Review task/);
-  assert.match(combined, /signal-rail-label">Next action/);
+  assert.match(combined, /className="outcome-strip"/);
+  assert.match(combined, /aria-label="What IronWake delivers"/);
+  assert.match(combined, /outcome-strip-tag">Outcome/);
+  assert.match(combined, /<strong>Captured<\/strong>/);
+  assert.match(combined, /<strong>Reviewed<\/strong>/);
+  assert.match(combined, /<strong>Visible<\/strong>/);
+  assert.match(combined, /<strong>Verified<\/strong>/);
   assert.match(combined, /Due date/);
   assert.doesNotMatch(combined, /assign a named owner/);
   assert.doesNotMatch(combined, /Owner<\/dt><dd>Named/);
