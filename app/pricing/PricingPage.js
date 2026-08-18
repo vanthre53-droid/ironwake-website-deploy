@@ -108,9 +108,15 @@ export default function PricingPage() {
           <div className="pricing-grid">
             {PRICING_OFFERS.map((offer) => {
               const tiersByRegion = { india: offer.india, intl: offer.intl };
+              const isPopular = offer.popular === true;
               return (
-                <article key={offer.id} className={`pricing-card${offer.recommended === 'Standard' ? ' recommended' : ''}`}>
-                  {offer.recommended === 'Standard' && <span className="pricing-badge">Recommended</span>}
+                <article
+                  key={offer.id}
+                  className={`pricing-card${isPopular ? ' popular' : ''}`}
+                  data-popular={isPopular ? 'true' : 'false'}
+                  aria-label={isPopular ? `${offer.name} — most popular offer` : offer.name}
+                >
+                  {isPopular && <span className="pricing-badge">Most popular</span>}
                   <h3>{offer.name}</h3>
                   <p className="pricing-desc">{offer.description}</p>
                   <ul className="pricing-tier-list" aria-label={`${offer.name} tier prices`}>

@@ -73,3 +73,26 @@ test('PricingPage has audit CTA strip', () => {
   assert.match(src, /audit-cta-strip/);
   assert.match(src, /Book Diagnostic/);
 });
+
+test('PricingPage shows exactly one "Most popular" badge in the grid (Dialzara pattern)', () => {
+  // The Dialzara / My AI Front Desk competitor pattern is a single, intentional
+  // "MOST POPULAR" treatment on exactly ONE offer card (the middle of five).
+  // The top-of-card .pricing-badge must therefore render exactly once.
+  const badges = src.match(/<span className="pricing-badge">Most popular<\/span>/g) || [];
+  assert.equal(badges.length, 1, 'expected exactly one "Most popular" badge in the rendered grid');
+  // The card-level treatment reads from offer.popular (a single boolean), not
+  // from the per-offer recommended tier — so the badge is independent of the
+  // per-tier row tag (which legitimately varies per offer).
+  assert.match(src, /offer\.popular === true/);
+  assert.doesNotMatch(src, /pricing-badge">Recommended</);
+  // The popular card carries a .popular class, NOT a .recommended class.
+  assert.match(src, /pricing-card\$\{isPopular \? ' popular' : ''\}/);
+  assert.doesNotMatch(src, /pricing-card.*recommended/);
+});
+
+test('PricingPage popular card has an a11y label that names the badge', () => {
+  // Screen readers should be able to identify the popular card without
+  // depending on the visual ribbon.
+  assert.match(src, /aria-label=\{isPopular \? `\$\{offer\.name\} — most popular offer` : offer\.name\}/);
+  assert.match(src, /data-popular=\{isPopular \? 'true' : 'false'\}/);
+});
