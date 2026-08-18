@@ -1,7 +1,7 @@
 {
-  "FINAL_HEAD": "2b1a7f56c52600caf809906e1466c1c879065e0a",
+  "FINAL_HEAD": "9c8ba3e61671980cdd891309d839d009c7489857",
   "FROZEN_FOR_V13_DEPLOY": "2026-08-18",
-  "V13_NOTE": "V13 batch 1+2+3+4 live at HEAD 2b1a7f5. Batch 4: readable form labels (13px display, mixed case); .audit-shell; .audit-form__intro/head; .notice-success; .field-error; .audit-form__busy copper spinner; .audit-success full state. Frozen for v13 production deploy attempt #12.",
+  "V13_NOTE": "V14 batch: footer-global, footer-dedupe, qa-gate (Lighthouse 13.4.1), seo-gate (101/101), middleware localhost bypass, Retell canonical prompt, 348/348 tests passing. Frozen for v14 production deploy attempt #11.",
   "DEPLOY_BUDGET": {
     "MAX": 14,
     "USED": 9,
@@ -90,9 +90,9 @@
     "PRODUCTION_BUILD": "VERIFIED (fresh .next clean, all required routes built)",
     "STRIX_SECURITY": "VERIFIED_HARDENED (0 findings, 2 medium findings remediated and re-verified)"
   },
-  "buildId": "UcJw3Vbz7o8OIEZbQFMnM",
-      "timestamp": "2026-08-18T10:18:00Z",
-      "deploy_head": "2b1a7f56c52600caf809906e1466c1c879065e0a",
+  "buildId": "dddj3J2ncCxk7_r7hwm6O",
+  "timestamp": "2026-08-18T10:18:00Z",
+  "deploy_head": "2b1a7f56c52600caf809906e1466c1c879065e0a",
   "PRODUCTION_DEPLOY_3": {
     "ID": "6a7c4e1d377fb59a36ba980e",
     "HEAD": "47495b2fd5b386eee88710540d74396a3e13c664",
@@ -104,5 +104,6 @@
     "URL": "https://ironwake-system.netlify.app"
   },
   "PHASE": "PHASE_FINAL_CLOUDFLARE_PRODUCTION_CONSOLIDATED",
-  "STATUS": "READY_FOR_FINAL_DEPLOY"
+  "STATUS": "READY_FOR_FINAL_DEPLOY",
+  "FROZEN_FOR_V14_DEPLOY": "2026-08-18"
 }
