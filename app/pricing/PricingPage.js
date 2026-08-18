@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { PRICING_OFFERS, PRICING_TIERS } from '../../lib/pricing.mjs';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
-import { AuditForm } from '../audit/AuditForm';
 import PricingRegionToggle from './PricingRegionToggle';
 
 // Tier clarity — short, declarative descriptions of what each tier includes.
@@ -73,8 +72,6 @@ export default function PricingPage() {
             <Link className="button secondary" href="/systems">Browse Systems</Link>
           </div>
         </section>
-
-        <AuditForm />
 
         <section className="pricing-tiers" aria-label="Tier scope overview">
           {PRICING_TIERS.map((tier) => (
