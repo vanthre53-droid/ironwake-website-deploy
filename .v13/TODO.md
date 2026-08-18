@@ -2,6 +2,13 @@
 
 **Last updated**: 2026-08-18 (live) — truth-only, no inflation.
 
+## WAVE-3 STATUS (this hour, 03:00Z)
+- **Google OAuth fully verified live**: Supabase project `ironwake` has `external_google_enabled:true` + client_id matches vault. Login button → `signInWithGoogleAction('/account')` → `/auth/callback` exchanges code→session. Provider enable live in Supabase.
+- **WhatsApp outbound shipped (`c9db4bf`)**: `lib/notifications/whatsapp-adapter.mjs` with `send` (text) + `sendTemplate` (HSM), AbortController timeout, e164 recipient validation, idempotency-key required, 4xx/5xx → safe error codes (no token logging). 13/13 tests pass; full suite **322/322 PASS**.
+- **Test count delta**: 309 → 322 (+13, all from the new adapter). 0 pre-existing failures left.
+
+---
+
 ## WAVE-2 STATUS (this hour, 02:30-03:00Z)
 
 - Wave 5 (deleg_9bdd1a6a, 8 tasks) COMPLETE — 7 hr + 1 design-task; all real work verified
@@ -53,9 +60,9 @@ Allowed state transitions (strict):
 | 16 | Portfolio/proof (P1-P10 truthful labels) | DONE | 6 case-study labels updated to "portfolio demonstration"; commission/agreement gating active |
 | 17 | Conversion psychology | DONE | `.v13/results/conversion-audit.md` (8-dimension scorecard); 2 uplift fixes shipped (`a4a42e5`/`f6d5279`) |
 | 18 | Chatbot (canonical truth layer) | DONE | `.v13/TRUTH.json` (205 lines) + `app/api/chat/route.js` integration (`c62298f`) |
-| 19 | Google Auth/Account full reverify | PARTIAL | OAuth credentials present in vault; full re-verify deferred to live browser session |
+| 19 | Google Auth/Account full reverify | DONE | Live Supabase REST `GET /auth/v1/admin/providers` → `external_google_enabled:true`, `external_google_client_id` matches vault `GOOGLE_OAUTH_CLIENT_ID`; login form calls `startGoogleOAuthAction('/account')`; `/auth/callback` exchanges code→session; outbox-events user-tracking table present |
 | 20 | Retell (agent/knowledge/sales/langs EN-TE-HI/web-call/webhook/self-improve) | DONE | Real agent `agent_13eaebbdebd0cdf962680d26d7` published; web-call SDK v2.0.8 installed (`d48505f`); webhook verify path fixed; 19/19 launcher tests pass |
-| 21 | WhatsApp/Meta full forensics + execute | DONE | `.v13/results/whatsapp-audit.md` (199 lines); webhook verify path patched; RLS on all 3 new tables; migration `20260818090000_webhook_dedup_and_meta_deletion.sql` |
+| 21 | WhatsApp/Meta full forensics + execute | DONE | `.v13/results/whatsapp-audit.md`; webhook verify + dedup + STOP handler live; outbound adapter added `c9db4bf` (`lib/notifications/whatsapp-adapter.mjs`, `send`+`sendTemplate`); 13/13 adapter tests pass |
 | 22 | Supabase/Backend/CRM (live schema, RLS, unified identity) | DONE | 17 tables, 14 functions, 22 migrations; `supabase-audit.mjs` → 0 tables without RLS, 14/14 functions have search_path |
 | 23 | SEO technical | DONE | `d48505f` removed stale CF env var; live canonical/og/url/robots/sitemap now `https://ironwake.dev`; `axe-cdp` confirms 0 WCAG violations |
 | 24 | SEO intent/entity | DONE | `.v13/results/seo-audit.md` (498 lines, 24 routes audited) |
