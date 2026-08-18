@@ -1,11 +1,6 @@
-import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
+import manifest from '../manifest.json';
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const manifest = JSON.parse(
-  await readFile(path.join(HERE, '..', 'manifest.json'), 'utf8')
-);
+export const dynamic = 'force-static';
 
 export function GET() {
   return new Response(JSON.stringify(manifest), {
