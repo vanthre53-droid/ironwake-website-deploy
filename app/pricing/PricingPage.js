@@ -152,6 +152,7 @@ export default function PricingPage() {
           <div className="disclosure-box">
             No countdown, no &ldquo;only N left&rdquo;, no urgency language. Each card shows the recommended tier; the audit CTA points to a written review, not a booking.
           </div>
+          <Link className="button secondary" href="/scope">Read the operating scope</Link>
         </section>
       </main>
       <SiteFooter />
