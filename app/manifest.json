@@ -8,7 +8,7 @@
   "theme_color": "#f5f3ee",
   "icons": [
     { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "/apple-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/apple-icon.svg", "sizes": "180x180", "type": "image/svg+xml", "purpose": "any maskable" },
     { "src": "/og-default.svg", "sizes": "1200x630", "type": "image/svg+xml", "purpose": "any" }
   ]
 }

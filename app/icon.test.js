@@ -25,5 +25,5 @@ test('app manifest.json declares the canonical site name and IronWake icon paths
   assert.ok(Array.isArray(json.icons) && json.icons.length >= 1);
   const srcs = json.icons.map((i) => i.src);
   assert.ok(srcs.includes('/icon.svg'));
-  assert.ok(srcs.includes('/apple-icon.png'));
+  assert.ok(srcs.includes('/apple-icon.svg'));
 });
