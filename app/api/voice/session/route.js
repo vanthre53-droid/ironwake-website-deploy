@@ -1,8 +1,27 @@
-import { createWebCall } from '../../../../lib/retell-server.mjs';
+import { createWebCall, retellConfigured, retellUnconfiguredResult } from '../../../../lib/retell-server.mjs';
 import { allowRequest, requestIdentity } from '../../../../lib/request-rate-limit.mjs';
 import { getServerOrigin } from '../../../../lib/site-origin.mjs';
 
 export const dynamic = 'force-dynamic';
+
+// ponytail: explicit marker the UI checks for to show the truthful
+// "voice not yet wired" state. Surfaced whenever RETELL_API_KEY or
+// RETELL_AGENT_ID is missing.
+const PROVIDER_PENDING_MARKER = 'RETELL_PROVIDER_PENDING';
+
+function pendingResponse(safe) {
+  return Response.json(
+    {
+      ok: false,
+      provider: 'retell',
+      status: 'unconfigured',
+      marker: PROVIDER_PENDING_MARKER,
+      safeErrorCode: safe?.safeErrorCode || 'retell_unconfigured',
+      message: 'Voice receptionist is wired but the Retell provider is not yet provisioned. Set RETELL_API_KEY and RETELL_AGENT_ID to enable live calls.'
+    },
+    { status: safe?.httpStatus || 503 }
+  );
+}
 
 // ponytail: Retell web-call session bootstrap.
 //
@@ -24,6 +43,13 @@ export const dynamic = 'force-dynamic';
 // the provider is unconfigured; the UI shows a truthful unavailable
 // state, never a fake waveform).
 export async function POST(request) {
+  // ponytail: short-circuit on missing provider credentials before touching
+  // the rate limiter — no point burning a token budget when there's nothing
+  // to call upstream.
+  if (!retellConfigured(process.env)) {
+    return pendingResponse(retellUnconfiguredResult());
+  }
+
   const identity = requestIdentity(request);
   const budget = allowRequest(`voice-session:${identity}`, { limit: 5, windowMs: 60_000 });
   if (!budget) {
@@ -39,14 +65,18 @@ export async function POST(request) {
   });
 
   if (!result.ok) {
+    if (result.safeErrorCode === 'retell_unconfigured') {
+      return pendingResponse(result);
+    }
     return Response.json(
-      { ok: false, safeErrorCode: result.safeErrorCode },
+      { ok: false, provider: 'retell', safeErrorCode: result.safeErrorCode, marker: null },
       { status: result.httpStatus || 503 }
     );
   }
 
   return Response.json({
     ok: true,
+    provider: 'retell',
     accessToken: result.accessToken,
     callId: result.callId,
     expiresInSeconds: result.expiresInSeconds || 30,
@@ -55,5 +85,20 @@ export async function POST(request) {
 }
 
 export async function GET() {
-  return Response.json({ ok: false, safeErrorCode: 'method_not_allowed' }, { status: 405 });
+  // ponytail: provider-readiness probe. Mirrors the marker contract above so
+  // the UI can decide whether to show the live-call UI, the audit form, or
+  // the truthful "voice is wired but the provider is pending" state.
+  if (!retellConfigured(process.env)) {
+    return pendingResponse(retellUnconfiguredResult());
+  }
+  return Response.json(
+    {
+      ok: true,
+      provider: 'retell',
+      status: 'ready',
+      marker: null,
+      agentId: process.env.RETELL_AGENT_ID
+    },
+    { status: 200 }
+  );
 }

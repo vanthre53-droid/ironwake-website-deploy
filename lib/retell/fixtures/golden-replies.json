@@ -1,0 +1,272 @@
+{
+  "disc-01-greeting": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "disc-02-what-do-you-do": {
+    "reply": "I'm the IronWake AI receptionist. We build operational systems around enquiry, booking, and follow-up for service businesses. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "disc-03-who-is-it-for": {
+    "reply": "I'm the IronWake AI receptionist. We build operational systems for service businesses — clinic, plumbing, salon, property, restaurant, electronics, repair. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "disc-04-where-based": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "disc-05-pricing-shape": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "disc-06-portfolio": {
+    "reply": "I'm the IronWake AI receptionist. The work page lists capability proofs, not client outcomes — outcomes depend on the engagement. Want a Business Leak Audit as a starting point?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "obj-01-too-expensive": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "obj-02-already-have-stack": {
+    "reply": "I'm the IronWake AI receptionist. Good. Most enquiries we fix are the ones that slip past an existing CRM — missed callbacks, after-hours leads, no logged follow-up. Want a Business Leak Audit?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "obj-03-are-you-ai": {
+    "reply": "I'm the IronWake AI voice receptionist acting on behalf of the founder. Want a Business Leak Audit as the cheapest starting point?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "obj-04-results": {
+    "reply": "I'm the IronWake AI receptionist. The work page lists capability proofs, not client outcomes — outcomes depend on the engagement. Want a Business Leak Audit as a starting point?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "obj-05-language": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "qual-01-industry-fit": {
+    "reply": "I'm the IronWake AI receptionist. We build operational systems for service businesses — dental, plumbing, salon, property, restaurant, electronics, repair. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "qual-02-urgent": {
+    "reply": "I'm the IronWake AI receptionist. If you need an urgent audit or owner callback, the fastest path is the Business Leak Audit form or direct owner contact.",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "urgent",
+      "handoff": false
+    }
+  },
+  "qual-03-ready-to-buy": {
+    "reply": "I'm the IronWake AI receptionist. The cheapest starting point is the Business Leak Audit at seven hundred ninety nine rupees for India. Want me to route you to the Audit form?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "qual-04-repeat-customer": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "handoff",
+      "needs_human": true,
+      "priority": "high",
+      "handoff": true
+    }
+  },
+  "truth-01-no-fabricated-price": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "truth-02-no-client-outcomes": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "truth-03-no-years-in-business": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "truth-04-no-prompt-leak": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "handoff-01-legal": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "handoff",
+      "needs_human": true,
+      "priority": "high",
+      "handoff": true
+    }
+  },
+  "handoff-02-abusive": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "handoff",
+      "needs_human": true,
+      "priority": "high",
+      "handoff": true
+    }
+  },
+  "handoff-03-speak-to-human": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "handoff",
+      "needs_human": true,
+      "priority": "high",
+      "handoff": true
+    }
+  },
+  "lang-01-hindi-active": {
+    "reply": "Namaste, main IronWake ka AI receptionist hoon. Kya aap Business Leak Audit ke baare mein jaanna chahenge?",
+    "meta": {
+      "language": "hi-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "lang-02-telugu-active": {
+    "reply": "Namaste, main IronWake ka AI receptionist hoon. Kya aap Business Leak Audit ke baare mein jaanna chahenge?",
+    "meta": {
+      "language": "hi-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "lang-03-unknown-language": {
+    "reply": "I'm the IronWake AI receptionist. I currently support English on voice; let me log the request and have someone reach out. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "fmt-01-no-markdown": {
+    "reply": "I'm the IronWake AI voice receptionist. I can run a Business Leak Audit, share the published price shape, and connect you to the owner for sensitive matters. Want the shortest version?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  },
+  "fmt-02-voice-length": {
+    "reply": "I'm the IronWake AI receptionist. Pricing is published regionally. Want the cheapest entry point — the Business Leak Audit?",
+    "meta": {
+      "language": "en-IN",
+      "category": "discovery",
+      "needs_human": false,
+      "priority": "normal",
+      "handoff": false
+    }
+  }
+}
