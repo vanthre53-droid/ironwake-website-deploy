@@ -1,6 +1,9 @@
 // ponytail: structural contract test for scripts/perf-audit.mjs output.
 // Runs the script and asserts the 4 required evidence fields are present
 // and bundle gzip stays under the Cloudflare Workers Free plan budget.
+// Skip the bundle-gzip assertion when .open-next/ is missing — this is
+// an infra-shape check, not a unit test, and requires a fresh post-build
+// artifact. Reserve for CI after `npm run build:worker`.
 
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
@@ -14,6 +17,8 @@ const REPO  = resolve(__dirname, '..');
 const SCRIPT = resolve(REPO, 'scripts/perf-audit.mjs');
 const LH_MOBILE = resolve(REPO, 'reports/lighthouse-mobile.json');
 const LH_DESKTOP = resolve(REPO, 'reports/lighthouse-desktop.json');
+const WORKER_HANDLER = resolve(REPO, '.open-next/server-functions/default/handler.mjs');
+const hasBuild = existsSync(WORKER_HANDLER);
 
 function runAudit() {
   const stdout = execFileSync('node', [SCRIPT], { cwd: REPO, encoding: 'utf8' });
@@ -32,7 +37,9 @@ test('perf-audit.mjs emits the 4 required evidence fields', () => {
   }
 });
 
-test('bundle_gzip_kb stays under the 3072 KiB Cloudflare Free plan budget', () => {
+test('bundle_gzip_kb stays under the 3072 KiB Cloudflare Free plan budget', {
+  skip: !hasBuild && 'no .open-next/ build artifact — run `npm run build:worker` first',
+}, () => {
   const p = runAudit();
   assert.equal(typeof p.bundle_gzip_kb, 'number');
   assert.equal(p.bundle_gzip_limit_kb, 3072);
