@@ -1,7 +1,7 @@
 {
-  "FINAL_HEAD": "9c8ba3e61671980cdd891309d839d009c7489857",
+  "FINAL_HEAD": "cc86c291fa5d1a1924321e15e1f84d54572beaa0",
   "FROZEN_FOR_V13_DEPLOY": "2026-08-18",
-  "V13_NOTE": "V14 batch: footer-global, footer-dedupe, qa-gate (Lighthouse 13.4.1), seo-gate (101/101), middleware localhost bypass, Retell canonical prompt, 348/348 tests passing. Frozen for v14 production deploy attempt #11.",
+  "V13_NOTE": "V14 batch amendment: pricing toggle selector fix (aria-pressed now drives actual price swap), MOST POPULAR badge per Dialzara pattern, dental vertical landing page + ROI calculator, Retell receptionist core (prompt/knowledge/golden), Meta WhatsApp Business Profile + OAuth. Frozen for v14 production deploy attempt #12.",
   "DEPLOY_BUDGET": {
     "MAX": 14,
     "USED": 9,
@@ -90,9 +90,9 @@
     "PRODUCTION_BUILD": "VERIFIED (fresh .next clean, all required routes built)",
     "STRIX_SECURITY": "VERIFIED_HARDENED (0 findings, 2 medium findings remediated and re-verified)"
   },
-  "buildId": "dddj3J2ncCxk7_r7hwm6O",
-  "timestamp": "2026-08-18T10:18:00Z",
-  "deploy_head": "2b1a7f56c52600caf809906e1466c1c879065e0a",
+  "buildId": "Yxptn_P9d1Dbtr6Sh74er",
+  "timestamp": "2026-08-18T15:55:00Z",
+  "deploy_head": "cc86c291fa5d1a1924321e15e1f84d54572beaa0",
   "PRODUCTION_DEPLOY_3": {
     "ID": "6a7c4e1d377fb59a36ba980e",
     "HEAD": "47495b2fd5b386eee88710540d74396a3e13c664",
