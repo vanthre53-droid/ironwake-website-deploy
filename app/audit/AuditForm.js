@@ -2,8 +2,30 @@
 // ponytail: every public write path lands on /api/audit. AuditForm is the audit
 // intake; BookingPreview reuses the same endpoint with source='website_booking'.
 
-import { useId, useMemo, useRef, useState } from 'react';
+import { useId, useMemo, useRef, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { submitAudit } from './submit-audit.mjs';
+
+// ponytail: pricing tier rows deep-link into /audit?offer=&tier=. The allow-list
+// here mirrors lib/audit-validation.mjs so the form cannot suggest a tier the
+// server would discard.
+const PRICING_OFFERS = [
+  { id: 'recovery-retainer', name: 'Recovery Retainer' },
+  { id: 'growth-retainer', name: 'Growth Retainer' },
+  { id: 'foundation-build', name: 'Foundation Build' },
+  { id: 'sprint-fix', name: 'Sprint Fix' }
+];
+const PRICING_TIERS = ['lite', 'standard', 'pro'];
+const TIER_LABEL = { lite: 'Lite', standard: 'Standard', pro: 'Pro' };
+
+function resolveOffer(offerId) {
+  return PRICING_OFFERS.find((o) => o.id === offerId);
+}
+function resolveTier(tier) {
+  const key = (tier || '').toLowerCase();
+  return PRICING_TIERS.includes(key) ? key : null;
+}
 
 // Ponytail: validation mirrors lib/audit-validation.mjs (server zod schema) so
 // the client never wastes a round-trip on values the server rejects. Field
@@ -54,7 +76,32 @@ function FieldError({ id, children }) {
 }
 
 export function AuditForm() {
+  // ponytail: useSearchParams forces the component to be a Suspense boundary.
+  // We hoist the boundary so the form still renders during client transitions.
+  return (
+    <Suspense fallback={<AuditFormSkeleton />}>
+      <AuditFormInner />
+    </Suspense>
+  );
+}
+
+function AuditFormSkeleton() {
+  return (
+    <section className="audit-shell">
+      <article className="audit-form" aria-busy="true">
+        <header className="audit-form__head">
+          <span className="eyebrow">Business Leak Audit</span>
+          <h2>Tell IronWake where the leaks are.</h2>
+        </header>
+        <p className="audit-form__intro">Loading the audit form…</p>
+      </article>
+    </section>
+  );
+}
+
+function AuditFormInner() {
   const formId = useId();
+  const searchParams = useSearchParams();
   const ids = useMemo(
     () => ({
       business: `${formId}-business`,
@@ -76,6 +123,19 @@ export function AuditForm() {
   const [touched, setTouched] = useState({});
   const formRef = useRef(null);
 
+  // ponytail: the offer + tier the visitor selected on /pricing. Server is
+  // still the source of truth — these are advisory and the allow-list in
+  // lib/audit-validation.mjs is what actually decides what survives.
+  const rawOffer = searchParams?.get('offer');
+  const rawTier = searchParams?.get('tier');
+  const offerMatch = resolveOffer(rawOffer);
+  const tierMatch = resolveTier(rawTier);
+  const selectedOffer = offerMatch || null;
+  const selectedTier = tierMatch && offerMatch ? tierMatch : null;
+  const selectedLabel = selectedOffer && selectedTier
+    ? `${selectedOffer.name} · ${TIER_LABEL[selectedTier]} tier`
+    : null;
+
   const markTouched = (name) =>
     setTouched((prev) => (prev[name] ? prev : { ...prev, [name]: true }));
 
@@ -93,7 +153,11 @@ export function AuditForm() {
       email: String(data.get('email') ?? ''),
       leak: String(data.get('leak') ?? ''),
       consent: data.get('consent') === 'on',
-      website: String(data.get('website') ?? '')
+      website: String(data.get('website') ?? ''),
+      // ponytail: forward the offer + tier the visitor selected on /pricing.
+      // Empty strings collapse to undefined so the schema treats them as absent.
+      offer: selectedOffer?.id || undefined,
+      tier: selectedTier || undefined
     };
     const nextErrors = validate(values);
     setErrors(nextErrors);
@@ -161,7 +225,7 @@ export function AuditForm() {
 
   return (
     <section className="audit-shell">
-      <article className="audit-form" aria-describedby={`${ids.status}`}>
+      <article className="audit-form" data-offer-tier={selectedLabel || 'none'}>
         <form
           ref={formRef}
           onSubmit={handleSubmit}
@@ -170,7 +234,31 @@ export function AuditForm() {
             if (name) markTouched(name);
           }}
           noValidate
+          aria-describedby={selectedLabel ? `${formId}-selected` : `${ids.status}`}
         >
+          {selectedLabel ? (
+            <div
+              id={`${formId}-selected`}
+              className="audit-form__context-banner"
+              role="status"
+            >
+              <span className="audit-form__context-eyebrow">Pre-filled from Pricing</span>
+              <strong className="audit-form__context-title">{selectedLabel}</strong>
+              <p className="audit-form__context-body">
+                We&rsquo;ll review this against your leak description and reply
+                with what we can deliver for this tier. You can refine either below.
+              </p>
+              <input type="hidden" name="offer" value={selectedOffer.id} />
+              <input type="hidden" name="tier" value={selectedTier} />
+              <Link
+                href="/pricing"
+                className="audit-form__context-clear"
+                aria-label="Clear pre-filled offer and tier"
+              >
+                Change offer
+              </Link>
+            </div>
+          ) : null}
           <header className="audit-form__head">
             <span className="eyebrow">Business Leak Audit</span>
             <h2>Tell IronWake where the leaks are.</h2>

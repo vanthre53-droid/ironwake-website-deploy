@@ -101,20 +101,54 @@ export default function PricingPage() {
                   <h3>{offer.name}</h3>
                   <p className="pricing-desc">{offer.description}</p>
                   <ul className="pricing-tier-list" aria-label={`${offer.name} tier prices`}>
-                    {PRICING_TIERS.map((tier, idx) => (
-                      <li
-                        key={tier}
-                        className={`pricing-tier-row${tier === offer.recommended ? ' recommended' : ''}`}
-                        data-region="wrap"
-                      >
-                        <span className="pricing-tier-row-label">{tier}</span>
-                        <span className="pricing-tier-row-price" data-region="india">{tiersByRegion.india[idx]}</span>
-                        <span className="pricing-tier-row-price" data-region="intl" hidden>{tiersByRegion.intl[idx]}</span>
-                      </li>
-                    ))}
+                    {PRICING_TIERS.map((tier, idx) => {
+                      const tierKey = tier.toLowerCase();
+                      const isRecommended = tier === offer.recommended;
+                      return (
+                        <li
+                          key={tier}
+                          className={`pricing-tier-row${isRecommended ? ' recommended' : ''}`}
+                          data-region="wrap"
+                        >
+                          <Link
+                            className="pricing-tier-row-anchor"
+                            href={`/audit?offer=${encodeURIComponent(offer.id)}&tier=${encodeURIComponent(tierKey)}`}
+                            aria-label={`Select ${tier} tier of ${offer.name} and start a Business Leak Audit`}
+                          >
+                            <span className="pricing-tier-row-label">
+                              <span className="pricing-tier-row-name">{tier}</span>
+                              {isRecommended && (
+                                <span className="pricing-tier-row-tag" aria-hidden="true">
+                                  Recommended
+                                </span>
+                              )}
+                            </span>
+                            <span className="pricing-tier-row-price-block">
+                              <span className="pricing-tier-row-price" data-region="india">
+                                {tiersByRegion.india[idx]}
+                              </span>
+                              <span className="pricing-tier-row-price" data-region="intl" hidden>
+                                {tiersByRegion.intl[idx]}
+                              </span>
+                              <span
+                                className="pricing-tier-row-cta"
+                                aria-hidden="true"
+                              >
+                                Select
+                              </span>
+                            </span>
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                   <span className="pricing-tier-name">{offer.recommended} tier recommended</span>
-                  <Link className="button" href="/audit">{offer.cta}</Link>
+                  <Link
+                    className="button pricing-offer-cta"
+                    href={`/audit?offer=${encodeURIComponent(offer.id)}&tier=${encodeURIComponent(offer.recommended.toLowerCase())}`}
+                  >
+                    {offer.cta}
+                  </Link>
                 </article>
               );
             })}

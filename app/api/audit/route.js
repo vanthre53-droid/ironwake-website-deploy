@@ -66,6 +66,26 @@ export async function POST(request) {
     return response({ error: 'We could not save this request. Please try again.' }, 502);
   }
 
+  // ponytail: persist pricing offer + tier (from /audit?offer=&tier=) into the
+  // inquiry's audit log metadata so the owner CRM can read it without needing
+  // a DB migration. Best-effort — missing metadata is non-blocking.
+  if (parsed.data.offer || parsed.data.tier) {
+    const metadata = {};
+    if (parsed.data.offer) metadata.pricing_offer = parsed.data.offer;
+    if (parsed.data.tier) metadata.pricing_tier = parsed.data.tier;
+    const { error: metaError } = await supabase.from('audit_logs').insert({
+      inquiry_id: inquiryId,
+      action: 'pricing_intent_recorded',
+      actor_type: 'visitor',
+      metadata
+    });
+    if (metaError) {
+      console.error('[audit] pricing intent metadata failed', {
+        safeCode: metaError.code || 'pricing_intent_metadata_failed'
+      });
+    }
+  }
+
   const triage = await triageInquiry(parsed.data);
   const triageStatus = triage.status === 'complete'
     ? (triage.needs_human ? 'needs_human' : 'complete')

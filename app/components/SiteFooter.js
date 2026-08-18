@@ -1,41 +1,89 @@
-// ponytail: site footer. "Ask IronWake" link is exposed to authenticated
-// customers only via the floating round launcher; public/owner visitors see
-// a single Sign in / Create account entry. Keep navigation restrained.
-// ponytail v13: footer-grid layout (no global-css regressions); adds a
-// clearly-labelled DEMONSTRATION chip on the operating language column.
-export function SiteFooter() {
-  return <footer className="footer">
-    <div className="footer-grid">
-      <div>
-        <strong>IronWake</strong>
-        <p>Operational systems for service businesses. Capture every enquiry, record a review task, and make the next action visible.</p>
-        <span className="footer-mark">Founded 2024 · IronWake Systems Practice</span>
-      </div>
-      <div>
-        <span className="micro">Explore</span>
-        <a href="/work">Work</a>
-        <a href="/systems">Services</a>
-        <a href="/systems/ai-receptionist">AI Systems</a>
-        <a href="/process">Process</a>
-      </div>
-      <div>
-        <span className="micro">Start here</span>
-        <a href="/pricing">Pricing</a>
-        <a href="/audit">Map my leak</a>
-        <a href="/insights">Insights</a>
-        <a href="/about">About</a>
-      </div>
-      <div>
-        <span className="micro">Account</span>
-        <a href="/login">Sign in</a>
-        <a href="/signup">Create account</a>
-      </div>
-      <div>
-        <span className="micro">Operating language</span>
-        <span className="footer-mark">DEMONSTRATION</span>
-        <a href="/scope">Scope &amp; disclosures</a>
-      </div>
-      <div className="footer-note">Demonstrations and pending providers are clearly labelled. <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></div>
+// ponytail: site footer.
+// v14 — fully rebuilt chrome (owner complaint: "the bottom of every page is so
+// messy and unprofessional"). Single semantic <footer> with three rows:
+//   1. brand mark + tagline + DEMONSTRATION chip
+//   2. navigation grid (Explore / Start / Account / Legal)
+//   3. legal/status row (copyright + privacy/terms links)
+// No bracket placeholders.  No fake social proof.  No fabricated metrics.
+
+const NAV_EXPLORE = [
+  { href: '/work', label: 'Work' },
+  { href: '/systems', label: 'Services' },
+  { href: '/systems/ai-receptionist', label: 'AI Systems' },
+  { href: '/process', label: 'Process' },
+];
+
+const NAV_START = [
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/audit', label: 'Map my leak' },
+  { href: '/insights', label: 'Insights' },
+  { href: '/about', label: 'About' },
+];
+
+const NAV_ACCOUNT = [
+  { href: '/login', label: 'Sign in' },
+  { href: '/signup', label: 'Create account' },
+];
+
+const NAV_LEGAL = [
+  { href: '/privacy', label: 'Privacy' },
+  { href: '/terms', label: 'Terms' },
+  { href: '/scope', label: 'Scope & disclosures' },
+];
+
+function FooterNavColumn({ heading, links }) {
+  return (
+    <div className="footer-col">
+      <h4 className="footer-col-head">{heading}</h4>
+      <ul className="footer-col-list">
+        {links.map((l) => (
+          <li key={l.href}>
+            <a href={l.href} className="footer-link">{l.label}</a>
+          </li>
+        ))}
+      </ul>
     </div>
-  </footer>;
+  );
+}
+
+export function SiteFooter() {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="site-footer" aria-labelledby="site-footer-heading">
+      <h2 id="site-footer-heading" className="sr-only">Site footer</h2>
+      <div className="site-footer-inner">
+        <div className="footer-brand">
+          <a href="/" className="footer-brand-mark">
+            <span className="footer-brand-name">IronWake</span>
+            <span className="footer-brand-tagline">Operational systems for service businesses</span>
+          </a>
+          <p className="footer-brand-desc">
+            Capture every enquiry, record a review task, and make the next
+            action visible. Demonstrations and pending providers are clearly labelled.
+          </p>
+          <span className="footer-chip" aria-label="Site status">
+            <span className="footer-chip-dot" aria-hidden="true" />
+            DEMONSTRATION
+          </span>
+        </div>
+
+        <nav className="footer-nav" aria-label="Footer navigation">
+          <FooterNavColumn heading="Explore" links={NAV_EXPLORE} />
+          <FooterNavColumn heading="Start here" links={NAV_START} />
+          <FooterNavColumn heading="Account" links={NAV_ACCOUNT} />
+          <FooterNavColumn heading="Legal" links={NAV_LEGAL} />
+        </nav>
+
+        <div className="footer-meta">
+          <p className="footer-meta-copyright">
+            © {year} IronWake Systems Practice. All rights reserved.
+          </p>
+          <p className="footer-meta-note">
+            Demonstration build. Prices are published offer tiers. No booking,
+            quote, or provider connection is implied until scope is confirmed.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
 }

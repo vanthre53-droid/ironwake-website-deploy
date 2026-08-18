@@ -7,14 +7,16 @@ test('site footer keeps the demonstration disclosure and active links', async ()
   assert.match(source, /Demonstrations and pending providers are clearly labelled/);
   assert.match(source, /record a review task/);
   assert.doesNotMatch(source, /assign a named owner/);
-  assert.match(source, /href="\/privacy"/);
-  assert.match(source, /href="\/terms"/);
-  assert.match(source, /href="\/pricing"/);
-  assert.match(source, /href="\/insights"/);
-  assert.match(source, /href="\/login">Sign in/);
-  assert.match(source, /href="\/signup">Create account/);
+  // Navigation entries must reach every required surface (v14 uses a
+  // NAV_* constants table that renders anchors at runtime).
+  assert.match(source, /href: '\/privacy'/);
+  assert.match(source, /href: '\/terms'/);
+  assert.match(source, /href: '\/pricing'/);
+  assert.match(source, /href: '\/insights'/);
+  assert.match(source, /href: '\/login',\s*label: 'Sign in'/);
+  assert.match(source, /href: '\/signup',\s*label: 'Create account'/);
   // ponytail: footer must NOT expose Ask IronWake for anonymous visitors.
   // The customer-only round launcher is the canonical entry for authenticated
   // customers. The /chat route is still reachable via account navigation.
-  assert.doesNotMatch(source, /href="\/chat">Ask IronWake/);
+  assert.doesNotMatch(source, /href: '\/chat',\s*label: 'Ask IronWake'/);
 });
