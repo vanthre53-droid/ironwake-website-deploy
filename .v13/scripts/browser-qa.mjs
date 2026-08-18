@@ -47,6 +47,22 @@ async function main() {
         ignoreHTTPSErrors: true,
       });
 
+      // Intercept any redirects to the apex (ironwake.dev) and rewrite the URL
+      // back to the local dev origin. Playwright follows redirects by default;
+      // this undoes what middleware.js did when it saw host !== apex.
+      await ctx.route('**/*', async (route) => {
+        const req = route.request();
+        const u = new URL(req.url());
+        if (u.hostname === 'ironwake.dev' || u.hostname.endsWith('.ironwake.dev')) {
+          const local = new URL(req.url());
+          local.protocol = 'http:';
+          local.host = BASE.replace(/^https?:\/\//, '');
+          await route.continue({ url: local.toString() });
+        } else {
+          await route.continue();
+        }
+      });
+
       for (const route of ROUTES) {
         const page = await ctx.newPage();
         const consoleEvents = [];

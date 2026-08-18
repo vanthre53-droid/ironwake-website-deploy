@@ -1,7 +1,7 @@
 # Browser QA — Viewport Overflow (Horizontal Scroll)
 
-**Generated**: 2026-08-18T02:09:04.320Z
-**Base URL**: http://localhost:3000
+**Generated**: 2026-08-18T09:37:12.397Z
+**Base URL**: http://localhost:3737
 
 **Summary**: 0 of 27 page loads had horizontal overflow (>1px).
 
@@ -27,14 +27,14 @@ No horizontal overflow detected at any viewport.
 | 1024 | /pricing | 1024 | 1024 | no |
 | 1024 | /audit | 1024 | 1024 | no |
 | 430 | / | 430 | 430 | no |
-| 430 | /pricing | 430 | 430 | no |
+| 430 | /pricing | 431 | 430 | no |
 | 430 | /audit | 430 | 430 | no |
 | 390 | / | 390 | 390 | no |
-| 390 | /pricing | 390 | 390 | no |
+| 390 | /pricing | 391 | 390 | no |
 | 390 | /audit | 390 | 390 | no |
 | 360 | / | 360 | 360 | no |
-| 360 | /pricing | 360 | 360 | no |
+| 360 | /pricing | 361 | 360 | no |
 | 360 | /audit | 360 | 360 | no |
 | 320 | / | 320 | 320 | no |
-| 320 | /pricing | 320 | 320 | no |
+| 320 | /pricing | 321 | 320 | no |
 | 320 | /audit | 320 | 320 | no |
