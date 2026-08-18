@@ -91,7 +91,7 @@ function AuditFormSkeleton() {
       <article className="audit-form" aria-busy="true">
         <header className="audit-form__head">
           <span className="eyebrow">Business Leak Audit</span>
-          <h2>Tell IronWake where the leaks are.</h2>
+          <h1>Tell IronWake where the leaks are.</h1>
         </header>
         <p className="audit-form__intro">Loading the audit form…</p>
       </article>
@@ -190,7 +190,7 @@ function AuditFormInner() {
           aria-labelledby={`${ids.status}-title`}
         >
           <span className="eyebrow">Request received</span>
-          <h2 id={`${ids.status}-title`} className="audit-success__title">
+          <h2 id={`${ids.status}-title`} className="audit-success__title" aria-live="polite">
             Your audit request is in.
           </h2>
           <p className="audit-success__body">
@@ -261,7 +261,7 @@ function AuditFormInner() {
           ) : null}
           <header className="audit-form__head">
             <span className="eyebrow">Business Leak Audit</span>
-            <h2>Tell IronWake where the leaks are.</h2>
+            <h1>Tell IronWake where the leaks are.</h1>
             <p className="audit-form__intro">
               This request does not create a quote or schedule a meeting. It
               sends a written summary to IronWake for a human review.
