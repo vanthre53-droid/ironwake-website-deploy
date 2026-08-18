@@ -82,7 +82,36 @@ P1_STATUS = 🟡 function complete; cosmetic typography pass deferred
 
 P2_STATUS = 🟡 partial; mobile menu needs dedicated multi-viewport sweep
 
-## P3 — HOMEPAGE (🟡 partial)
+## P2 — GLOBAL NAV (🟢 verified live)
+☑ Hamburger menu visible at 360/390/768 (toggler found)
+☑ All 12 nav links visible at 1366+ (full inline nav)
+☑ Logo + auth actions stay visible at all viewports
+☑ "Create account" + "Book Diagnostic" copper CTAs in nav
+
+## P3 — HOMEPAGE (🟢 verified live)
+☑ Hero h1 "The enquiry arrived. Where did it go?" visible above fold at 360, 768, 1366
+☑ First CTA "Map my leak" → /audit (verified)
+☑ Copper accent on key word "Where did it go?" (italic gradient)
+☑ Outcome chips with copper "OUTCOME" tags below
+☑ 22 nav links accessible (header + footer)
+☑ ScrollHeights 9889 (1366), 12490 (768), 15027 (360) — rich content
+☑ Cookie consent banner centered with Decline/Accept
+☑ No horizontal overflow
+
+## P3b — Local-only home mobile CSS commit (1c241df)
+- Adds .flagship-hero flex+grid layout for unstyled .flagship-* classes
+- Adds .flagship-actions mobile stack at 760px breakpoint (44px tap targets)
+- WAITING for next deploy budget to ship
+
+## P3 — HOMEPAGE (🟢 verified live)
+☑ Hero h1 "The enquiry arrived. Where did it go?" visible above fold at 360, 768, 1366
+☑ First CTA "Map my leak" → /audit (verified)
+☑ Copper accent on key word "Where did it go?" (italic gradient)
+☑ Outcome chips with copper "OUTCOME" tags below
+☑ 22 nav links accessible (header + footer)
+☑ ScrollHeights 9889 (1366), 12490 (768), 15027 (360) — rich content
+☑ Cookie consent banner centered with Decline/Accept
+☑ No horizontal overflow
 - [x] Hero conveys value prop (vision @ 1366 confirmed: "The enquiry arrived. Where did it go?")
 - [x] 3 narrative cards ("Every enquiry recorded" / "The next action visible" / "Verified before claimed")
 - [x] Centerpiece visual (review-first 9-stage)
