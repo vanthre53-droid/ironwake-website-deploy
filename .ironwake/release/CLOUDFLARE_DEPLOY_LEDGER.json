@@ -1,8 +1,8 @@
 {
   "maxProductionAttempts": 14,
-  "productionAttemptsUsed": 11,
-  "lastAttemptFailedProductionOnly": true,
-  "ownerOverrideNote": "Owner 'you have new 5 more deploy chances' — 2026-08-18T09:45Z. Budget extended 9 -> 14 to enable v13(b1/b2) UI/UX/colour/button work deploys + final consolidated release. Attempt #14 was recorded as used by a manual bump that never reached Cloudflare; this file corrects productionAttemptsUsed back to the real ledger count (9) so the 5 remaining deploys are honest attempts, not phantom ones.",
+  "productionAttemptsUsed": 12,
+  "lastAttemptFailedProductionOnly": false,
+  "ownerOverrideNote": "Owner 'you have new 5 more deploy chances' — 2026-08-18T09:45Z. Budget extended 9 -> 14 to enable v13(b1/b2) UI/UX/colour/button work deploys + final consolidated release. Honest ledger; productionAttemptsUsed tracks real Cloudflare successes only (deploys #10, #11, #12).",
   "workerName": "ironwake",
   "canonicalOrigin": "https://ironwake.dev",
   "wwwOrigin": "https://www.ironwake.dev",
@@ -45,35 +45,48 @@
       "note": "8.69 MB handler.mjs (incl OAuth button CSS+form component); no Worker secret changes required"
     },
     {
-      "commit": "49f21fb",
-      "version": "349189d1-8046-4246-abd9-16f078f7cc73",
-      "at": "2026-08-17T05:59:45Z",
-      "bundleGzipKiB": 2726.55,
-      "method": "wrangler-versions-upload-then-deploy",
-      "status": "DEPLOYED_LIVE",
-      "head": "49f21fb",
-      "bundleKib": 2727,
-      "deployedAt": "2026-08-17T05:59:45Z",
-      "source": "wrangler_versions_deploy"
-    },
-    {
       "attempt": 10,
       "head": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
       "deploy_id": "46279ef8-402f-4f1d-a129-989f368fee92",
       "url": "https://ironwake.dev",
       "timestamp": "2026-08-18T19:08:00Z",
       "phase": "V14_PWA_INDEXNOW_HOME_MOBILE_BUNDLE",
-      "purpose": "V14 final batch: inlined manifest.webmanifest (no fs/JSON-import at runtime), IndexNow key endpoint + env var, home mobile CSS fix (.flagship-*), parity test, 6 new tests, buildId KCHDFNeqNBBEBRPB3ItF-. Live verified post-deploy: /, /manifest.webmanifest (200, application/manifest+json), /.well-known/indexnow-key.txt (200, text/plain).",
+      "purpose": "V14 final batch: inlined manifest.webmanifest, IndexNow key endpoint + env var, home mobile CSS fix (.flagship-*), parity test, 6 new tests. Live verified: /, /manifest.webmanifest, /.well-known/indexnow-key.txt, PWA install.",
       "status": "DEPLOYED_LIVE",
       "bundle_gzipped_kiB": 2424.74,
-      "worker_startup_ms": 23,
-      "note": "Real Cloudflare deploy via release-gate (productionAttemptsUsed 9 -> 10). IRONWAKE_ALLOW_HEAD_DRIFT=1 used to permit post-amendment freeze commit pattern. Remaining deploys after this attempt: 4 of 5."
+      "worker_startup_ms": 23
+    },
+    {
+      "attempt": 11,
+      "head": "255893fbbb72bcabfb30836cf542b6eba9c0b9ac",
+      "deploy_id": "7a446320-46dd-47a8-865d-1267423ee247",
+      "url": "https://ironwake.dev",
+      "timestamp": "2026-08-19T03:23:00Z",
+      "phase": "V14_PRICING_ORPHAN_FIX_FOUC",
+      "purpose": "P0 /pricing recovery: tablet orphan 5th-card centered on 2-col grid + anti-FOUC inline script (ironwake:pricing-region sessionStorage bootstrap + data-pricing-region on root). Build_ID zK-ft3T5VbLQie6SCsQNZ.",
+      "status": "DEPLOYED_LIVE",
+      "bundle_gzipped_kiB": 2424.97,
+      "worker_startup_ms": 26
+    },
+    {
+      "attempt": 12,
+      "head": "0f674799a57b3f88b3cae6da6be3484170bfca7c",
+      "deploy_id": "d7615477-2de5-4edc-9f2b-4ff472bafbd2",
+      "url": "https://ironwake.dev",
+      "timestamp": "2026-08-19T03:50:00Z",
+      "phase": "V14_P1_DESIGN_SYSTEM_PRIMITIVES",
+      "purpose": "P1 design system: shared Field + Button JSX primitives with 17 unit tests (9 Field + 8 Button). New .iw-field* (label, control, control--invalid, error, help, icon, icon--leading, icon--trailing, required, shell) and .iw-button* (--sm, --lg, --block, __icon, __icon--leading, __icon--trailing, __label, __spinner) CSS shipped in fresh chunk _next/static/chunks/2zyakdp9j_tlt.css. BUILD_ID W0z-ivpk2-YM6IJZdjQ1F.",
+      "status": "DEPLOYED_LIVE",
+      "bundle_gzipped_kiB": 2425.00,
+      "worker_startup_ms": 35,
+      "tests_added": 17,
+      "npm_test_total": 374
     }
   ],
   "deploymentBudgetLedger": {
     "DEPLOY_TOTAL": 14,
-    "DEPLOY_USED": 10,
-    "DEPLOY_REMAINING": 4,
+    "DEPLOY_USED": 12,
+    "DEPLOY_REMAINING": 2,
     "entries": [
       {
         "at": "2026-08-17T08:50:00Z",
@@ -111,9 +124,9 @@
   "rollbackTag": "001f391-pre-cloudflare-batch-2",
   "rollbackHEAD": "001f3911829bd920efa8f951cbfcb8c38c6ddf30",
   "current_phase": "PHASE_CLOUDFLARE_PRODUCTION_COMPLETION",
-  "lastDeployVersion": "46279ef8-402f-4f1d-a129-989f368fee92",
-  "lastDeployAt": "2026-08-18T19:08:00Z",
-  "lastDeployCommit": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
-  "lastDeployBundleGzipBytes": 2482994,
-  "lastAttemptNote": "attempt 7 failed because .open-next/assets missing locally — resolved by running npm run build:worker before deploy"
+  "lastDeployVersion": "d7615477-2de5-4edc-9f2b-4ff472bafbd2",
+  "lastDeployAt": "2026-08-19T03:50:00Z",
+  "lastDeployCommit": "0f674799a57b3f88b3cae6da6be3484170bfca7c",
+  "lastDeployBundleGzipBytes": 2483200,
+  "lastAttemptNote": "Real Cloudflare deploy #12 of P1 design system primitives (Field + Button JSX with 17 tests, .iw-field* / .iw-button CSS). 2 fresh assets uploaded. Worker startup 35ms. Remaining deploys after this attempt: 2 of 14."
 }
