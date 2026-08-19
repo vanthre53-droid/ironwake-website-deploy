@@ -887,12 +887,36 @@ button, input, textarea { font: inherit; }
 .pricing-toggle button.active { background: var(--copper); color: var(--white); box-shadow: 0 6px 16px -8px rgb(185 77 47 / .55), 0 1px 0 rgb(255 255 255 / .25) inset; }
 .pricing-toggle button:focus-visible { outline: 3px solid var(--copper); outline-offset: 3px; }
 .pricing-hero { padding: 64px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 28px; background: linear-gradient(180deg, color-mix(in oklab, var(--copper) 7%, var(--white)) 0%, var(--white) 70%); }
-.pricing-hero-inner { max-width: 1180px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: 28px 36px; align-items: start; }
-.pricing-hero-inner > .eyebrow { grid-column: 1 / -1; background: var(--surface); border: 1px solid var(--rule); padding: 6px 12px; border-radius: 999px; justify-self: flex-start; }
-.pricing-hero-inner > h1 { grid-column: 1 / 2; font: 600 clamp(32px, 4.4vw, 52px)/1.05 var(--display); letter-spacing: -.022em; color: var(--ink); margin: 6px 0; }
-.pricing-hero-inner > .section-lede { grid-column: 1 / 2; max-width: 64ch; color: var(--graphite); font-size: 17px; line-height: 1.55; margin: 0; }
-.pricing-hero-inner > .pricing-hero-actions { grid-column: 1 / 2; display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
-.pricing-hero-inner > .pricing-hero-region { grid-column: 2 / 3; grid-row: 1 / span 4; align-self: stretch; }
+/* v17 single-column hero. Region toggle integrates after CTAs as a compact
+   inline switch, not a floating right-side card. Eliminates the giant dead
+   gap between hero copy and the toggle. */
+.pricing-hero-inner {
+  max-width: 1180px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.pricing-hero-inner > h1 {
+  font: 600 clamp(32px, 4.4vw, 52px)/1.05 var(--display);
+  letter-spacing: -.022em;
+  color: var(--ink);
+  margin: 6px 0 0;
+  max-width: 22ch;
+}
+.pricing-hero-inner > .section-lede {
+  max-width: 64ch;
+  color: var(--graphite);
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0;
+}
+.pricing-hero-inner > .pricing-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.pricing-hero-actions + .pricing-hero-toggle { margin-top: 4px; }
 .pricing-hero-trust { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 18px 26px; color: var(--graphite); font: 500 13px/1.4 var(--body); }
 .pricing-hero-trust li { display: inline-flex; align-items: center; gap: 8px; }
 .pricing-hero-trust .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--copper); box-shadow: 0 0 0 3px color-mix(in oklab, var(--copper) 22%, transparent); display: inline-block; }
@@ -915,20 +939,28 @@ button, input, textarea { font: inherit; }
    sits in the centre and is visually elevated + scaled). Bottom row has
    2 cards, centred — never an awkward 4+1 orphan. Glass surface, sharp
    radii, generous spacing, clear tier rows. */
+/* v17: 5-card balanced grid. Wide desktop (>=1100): 3 cols → row 1 = 3 cards,
+   row 2 = 2 cards (the last — the popular card — is elevated). At <1100 the
+   grid collapses to 2 columns and the popular card drops back into the
+   natural flow. Mobile = 1 column. No orphan single card ever sits alone in a
+   dead zone. */
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
   align-items: stretch;
 }
+/* All cards flow naturally in the 3-col grid. Row 1: 3 cards.
+   Row 2: 2 cards aligned left within the same 3-col template.
+   No special positioning for last-child at this breakpoint. */
 .pricing-card {
-  grid-column: span 2;
   border: 1px solid var(--rule);
   border-radius: 18px;
   background: var(--white);
-  padding: 28px 24px;
+  padding: 26px 22px 24px;
   display: flex;
   flex-direction: column;
+  gap: 14px;
   transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s ease, box-shadow .35s ease;
   position: relative;
   box-shadow: 0 1px 0 rgb(28 26 23 / .02), 0 14px 30px -22px rgb(28 26 23 / .12);
@@ -939,20 +971,24 @@ button, input, textarea { font: inherit; }
   transform: translateY(-6px);
   box-shadow: 0 22px 46px -24px rgb(185 77 47 / .38), 0 8px 18px -10px rgb(28 26 23 / .18);
 }
-/* The popular card (3rd) spans columns 3-4 of the top row and is elevated. */
+/* The popular card is elevated and colour-accented. On its own row or shared
+   row it never orphans — it stays the strongest card on the page. */
 .pricing-card.popular {
-  grid-column: 3 / span 2;
   border: 1.5px solid var(--copper);
-  background: linear-gradient(180deg, color-mix(in oklab, var(--copper) 5%, var(--white)) 0%, var(--white) 100%);
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 30px 50px -28px rgb(185 77 47 / .45), 0 0 0 6px color-mix(in oklab, var(--copper) 8%, transparent);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--copper) 6%, var(--white)) 0%, var(--white) 100%);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 30px 50px -28px rgb(185 77 47 / .45), 0 0 0 5px color-mix(in oklab, var(--copper) 8%, transparent);
   z-index: 2;
 }
 .pricing-card.popular:hover {
-  transform: translateY(-14px) scale(1.02);
+  transform: translateY(-10px) scale(1.01);
 }
 .pricing-card.popular h3 { font-size: 24px; }
 .pricing-card.popular .pricing-card-price-anchor-value { font-size: 30px; }
+@media (max-width: 720px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-card.popular { transform: none; }
+}
 .pricing-badge {
   position: absolute;
   top: -14px;
@@ -1010,7 +1046,7 @@ button, input, textarea { font: inherit; }
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 14px;
+  padding: 10px 14px;
   text-decoration: none;
   color: inherit;
   border-radius: 12px;
@@ -1055,10 +1091,16 @@ button, input, textarea { font: inherit; }
 }
 
 @media (max-width: 1180px) {
-  .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .pricing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
   .pricing-card { grid-column: auto; }
-  .pricing-card.popular { grid-column: 1 / -1; transform: none; order: -1; }
+  /* keep popular in natural flow; do not promote to first row at this breakpoint */
+  .pricing-card.popular { grid-column: auto; transform: translateY(-4px) scale(1.005); order: 0; }
   .pricing-guide { grid-template-columns: repeat(2, 1fr); }
+}
+/* v17 pricing responsive — tablet between desktop and mobile. */
+@media (min-width: 861px) and (max-width: 1099px) {
+  .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .pricing-card:last-child:not(.popular) { grid-column: 1 / -1; max-width: 540px; margin-inline: auto; width: 100%; grid-row: auto; }
 }
 @media (max-width: 860px) {
   .pricing-hero-inner { grid-template-columns: 1fr; gap: 18px; }
@@ -1069,6 +1111,7 @@ button, input, textarea { font: inherit; }
   .pricing-hero-inner > .pricing-hero-region { grid-column: 1 / -1; grid-row: auto; }
   .pricing-grid { grid-template-columns: 1fr; gap: 14px; }
   .pricing-card.popular { grid-column: auto; transform: none; }
+  .pricing-card:last-child:not(.popular) { grid-column: auto; max-width: none; }
   .pricing-guide { grid-template-columns: 1fr; }
 }
 @media (max-width: 580px) { .pricing-grid { grid-template-columns: 1fr; } .pricing-hero { padding: 36px 0 18px; } .pricing-hero h1 { font-size: 32px; } }
@@ -3002,4 +3045,245 @@ button, input, textarea { font: inherit; }
   border-radius: 6px;
   font: 500 11px/1.4 var(--mono);
   color: var(--ink);
+}
+
+
+/* ponytail: v17 polish — soft stone wash used by operations-card facts.
+   Declared next to the design-token block. We define it locally so existing
+   rules (which reference --stone-soft) keep working without retriggering
+   every line above this comment. */
+:root { --stone-soft: rgb(237 234 227 / .6); --ivory: #f8f5ee; }
+
+/* ponytail: v17 polish — FloatingActions coordinator + chooser surface.
+   Apple-quality layout: desktop column anchor at fixed bottom-right; on
+   mobile a compact bottom sheet replaces the column. Siblings collapse
+   while one child is open so they don't pile up behind a chat / wa panel. */
+.iw-fab-stack {
+  position: fixed;
+  z-index: 70;
+  right: clamp(16px, 2.4vw, 28px);
+  bottom: clamp(16px, 2.4vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  pointer-events: none;
+  /* visual breathing room */
+  font-family: var(--body);
+}
+.iw-fab-stack > * { pointer-events: auto; }
+.iw-fab-stack__children {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  transition: opacity .18s ease, transform .2s ease;
+}
+.iw-fab-stack__children[data-stack-hidden="true"] {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+.iw-fab-stack__anchor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform .25s ease;
+}
+.iw-fab-stack--has-open .iw-fab-stack__anchor {
+  transform: translateY(2px);
+}
+.iw-fab-stack__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 18px 0 14px;
+  min-height: 50px;
+  background: var(--copper);
+  color: var(--white);
+  font: 600 14px/1 var(--display);
+  letter-spacing: -.005em;
+  cursor: pointer;
+  box-shadow: 0 10px 28px -12px rgb(185 77 47 / .55), 0 4px 10px -4px rgb(16 35 44 / .18);
+  transition: background .18s ease, transform .2s ease, box-shadow .2s ease;
+}
+.iw-fab-stack__trigger:hover,
+.iw-fab-stack__trigger:focus-visible {
+  background: var(--copper-dark);
+  transform: translateY(-2px);
+}
+.iw-fab-stack__trigger-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / .14);
+  color: var(--white);
+}
+.iw-fab-stack__trigger-label { white-space: nowrap; }
+
+/* chooser — premium bottom-right card with copper accent */
+.iw-fab-chooser {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  align-items: end;
+  justify-items: end;
+  z-index: 80;
+  animation: iw-fab-fade .22s ease;
+}
+@keyframes iw-fab-fade { from { opacity: 0 } to { opacity: 1 } }
+.iw-fab-chooser__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(16 35 44 / .35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.iw-fab-chooser__panel {
+  position: relative;
+  width: min(380px, calc(100vw - 32px));
+  margin: clamp(16px, 3vw, 28px);
+  display: grid;
+  gap: 12px;
+  padding: 26px 26px 22px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgb(255 255 255 / .98), rgb(248 245 238 / .94));
+  border: 1px solid rgb(255 255 255 / .8);
+  box-shadow: 0 24px 56px -24px rgb(16 35 44 / .25), 0 6px 16px -6px rgb(16 35 44 / .12);
+  animation: iw-fab-rise .24s cubic-bezier(.2, .75, .25, 1);
+}
+@keyframes iw-fab-rise {
+  from { opacity: 0; transform: translateY(12px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.iw-fab-chooser__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  font-size: 18px;
+  color: var(--graphite);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: border-color .15s ease, color .15s ease;
+}
+.iw-fab-chooser__close:hover { border-color: var(--copper); color: var(--copper); }
+.iw-fab-chooser__eyebrow {
+  margin: 0;
+  font: 600 11px/1 var(--display);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.iw-fab-chooser__title {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.iw-fab-chooser__lede {
+  margin: 0;
+  font: 400 14px/1.55 var(--body);
+  color: var(--graphite);
+}
+.iw-fab-chooser__list {
+  display: grid;
+  gap: 10px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.iw-fab-chooser__item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.iw-fab-chooser__item:hover,
+.iw-fab-chooser__item:focus-visible {
+  border-color: var(--copper);
+  background: var(--stone-soft);
+  transform: translateY(-1px);
+}
+.iw-fab-chooser__item-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgb(185 77 47 / .08);
+  font-size: 20px;
+}
+.iw-fab-chooser__item-body { display: grid; gap: 3px; }
+.iw-fab-chooser__item-title {
+  font: 600 15px/1.2 var(--display);
+  letter-spacing: -.005em;
+  color: var(--ink);
+}
+.iw-fab-chooser__item-sub {
+  font: 400 12px/1.4 var(--body);
+  color: var(--graphite);
+}
+
+/* ponytail: when a child is open we hide the stack trigger so the FAB
+   itself does not stack on top of the chat/WA surface */
+.iw-fab-stack--has-open .iw-fab-stack__anchor {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+/* ponytail: v17 — owner form lede now wraps consistent prose width */
+.owner-form__lede { font: 400 14px/1.55 var(--body); color: var(--graphite); }
+
+/* ponytail: v17 — the floating WhatsApp launcher (wa-fab-group) was
+   previously independent; now it is positioned inside .iw-fab-stack so we
+   strip its own fixed positioning to avoid double anchors. */
+.iw-fab-stack .wa-fab-group { position: static; bottom: auto; right: auto; }
+
+/* ponytail: v17 — the assistant trigger that we host in the stack
+   should not duplicate its own brand-coloured CTA, since the chooser
+   trigger is the single primary entry. Hide the trigger visually,
+   keep it in DOM so the panel toggle behaviour still works for users
+   who reach the surface via keyboard focus or /chat route. */
+.iw-fab-stack--has-open .iw-fab-stack__children { display: none; }
+
+@media (max-width: 640px) {
+  .iw-fab-stack {
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    align-items: stretch;
+  }
+  .iw-fab-stack__anchor { justify-content: center; }
+  .iw-fab-stack__children {
+    width: 100%;
+    align-items: stretch;
+  }
+  .iw-fab-stack__child { width: 100%; }
+  .iw-fab-chooser__panel {
+    width: calc(100vw - 24px);
+    margin: 12px;
+  }
 }

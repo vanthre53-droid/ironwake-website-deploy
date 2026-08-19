@@ -176,7 +176,6 @@ export default function PricingPage() {
                       );
                     })}
                   </ul>
-                  <span className="pricing-tier-name">{offer.recommended} tier recommended</span>
                   <Link
                     className="button pricing-offer-cta"
                     href={`/audit?offer=${encodeURIComponent(offer.id)}&tier=${encodeURIComponent(offer.recommended.toLowerCase())}`}
