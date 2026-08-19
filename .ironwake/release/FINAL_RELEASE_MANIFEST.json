@@ -1,10 +1,10 @@
 {
-  "FINAL_HEAD": "255893fbbb72bcabfb30836cf542b6eba9c0b9ac",
+  "FINAL_HEAD": "0f67479",
   "FROZEN_FOR_V13_DEPLOY": "2026-08-19",
   "V13_NOTE": "V14 batch amendment: pricing toggle selector fix (aria-pressed now drives actual price swap), MOST POPULAR badge per Dialzara pattern, dental vertical landing page + ROI calculator, Retell receptionist core (prompt/knowledge/golden), Meta WhatsApp Business Profile + OAuth. Frozen for v14 production deploy attempt #12.",
   "DEPLOY_BUDGET": {
     "MAX": 14,
-    "USED": 9,
+    "USED": 10,
     "REMAINING": 5,
     "OVERRIDE_AUTHORITY": "owner-direct-message 2026-08-18T09:45Z '5 more deploy chances'"
   },
@@ -90,9 +90,9 @@
     "PRODUCTION_BUILD": "VERIFIED (fresh .next clean, all required routes built)",
     "STRIX_SECURITY": "VERIFIED_HARDENED (0 findings, 2 medium findings remediated and re-verified)"
   },
-  "buildId": "zK-ft3T5VbLQie6SCsQNZ",
-  "timestamp": "2026-08-19T03:23:00Z",
-  "deploy_head": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
+  "buildId": "W0z-ivpk2-YM6IJZdjQ1F",
+  "timestamp": "2026-08-19T03:48:00Z",
+  "deploy_head": "0f674799a57b3f88b3cae6da6be3484170bfca7c",
   "PRODUCTION_DEPLOY_3": {
     "ID": "6a7c4e1d377fb59a36ba980e",
     "HEAD": "47495b2fd5b386eee88710540d74396a3e13c664",
@@ -106,7 +106,7 @@
   "PHASE": "PHASE_FINAL_CLOUDFLARE_PRODUCTION_CONSOLIDATED",
   "STATUS": "DEPLOYED_LIVE_V14_BATCH",
   "FROZEN_FOR_V14_DEPLOY": "2026-08-18",
-  "V14_BATCH_DEPLOY_ID": "46279ef8-402f-4f1d-a129-989f368fee92",
+  "V14_BATCH_DEPLOY_ID": "PENDING_DEPLOY_12",
   "V14_BATCH_DEPLOYED_HEAD": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
   "V14_BATCH_DEPLOYED_AT": "2026-08-18T19:08:00Z",
   "V14_BATCH_REMAINING_DEPLOYS": 4,
