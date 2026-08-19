@@ -90,7 +90,7 @@
     "PRODUCTION_BUILD": "VERIFIED (fresh .next clean, all required routes built)",
     "STRIX_SECURITY": "VERIFIED_HARDENED (0 findings, 2 medium findings remediated and re-verified)"
   },
-  "buildId": "zK-ft3T5VbLQie6SCsQNZ-",
+  "buildId": "zK-ft3T5VbLQie6SCsQNZ",
   "timestamp": "2026-08-19T03:23:00Z",
   "deploy_head": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
   "PRODUCTION_DEPLOY_3": {
