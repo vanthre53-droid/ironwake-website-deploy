@@ -1,6 +1,6 @@
 import { AtelierCaseStudy } from './AtelierCaseStudy';
 
-import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd, creativeWorkLd } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Atelier Safe — IronWake Work',
@@ -13,9 +13,16 @@ export default function AtelierPage() {
     <>
       <AtelierCaseStudy />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkLd({
+              name: 'Atelier Safe — capability demonstration',
+              description: 'A portfolio demonstration of consultation-request handling for appointment-led businesses. Capability proof only, not a client engagement.',
+              path: '/work/atelier',
+              keywords: ['portfolio','capability demonstration','appointment intake','IronWake'],
+            })) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
                     { name: "Home", path: "/" },
-                    { name: "atelier", path: "/work/atelier" },
+                    { name: "Work", path: "/work" },
+                    { name: "Atelier", path: "/work/atelier" },
             ])) }} />
     </>
   );

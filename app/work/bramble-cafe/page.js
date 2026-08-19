@@ -1,6 +1,7 @@
 import { BrambleCafeCaseStudy } from './BrambleCafeCaseStudy';
 
-import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd, creativeWorkLd } from '../../../lib/seo.mjs';
+import { canonicalUrl } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Bramble Cafe — IronWake Work',
@@ -13,6 +14,12 @@ export default function BrambleCafePage() {
     <>
       <BrambleCafeCaseStudy />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkLd({
+              name: 'Bramble Cafe — capability demonstration',
+              description: 'A portfolio demonstration of reservation-style intake handling. Capability proof only, not a client engagement.',
+              path: '/work/bramble-cafe',
+              keywords: ['reservations, intake, IronWake portfolio'],
+            })) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
                     { name: "Home", path: "/" },
                     { name: "bramble-cafe", path: "/work/bramble-cafe" },

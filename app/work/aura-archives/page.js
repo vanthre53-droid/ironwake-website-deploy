@@ -1,6 +1,7 @@
 import { AuraArchivesCaseStudy } from './AuraArchivesCaseStudy';
 
-import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd, creativeWorkLd } from '../../../lib/seo.mjs';
+import { canonicalUrl } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Aura Archives — IronWake Work',
@@ -13,6 +14,12 @@ export default function AuraArchivesPage() {
     <>
       <AuraArchivesCaseStudy />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkLd({
+              name: 'Aura Archives — capability demonstration',
+              description: 'A portfolio demonstration of enquiry-persistence for a curation-style business. Capability proof only, not a client engagement.',
+              path: '/work/aura-archives',
+              keywords: ['enquiry persistence, curation, IronWake portfolio'],
+            })) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
                     { name: "Home", path: "/" },
                     { name: "aura-archives", path: "/work/aura-archives" },

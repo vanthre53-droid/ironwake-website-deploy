@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation.js';
 import Link from 'next/link.js';
 import { SiteHeader } from '../../components/SiteHeader';
 
-import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd, articleLd } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
 // ponytail: insight articles live in a single source-of-truth array. The
 // detail page is generated for every slug; unknown slugs return 404 so
@@ -86,10 +86,18 @@ export default function InsightArticlePage({ params }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd({
+        headline: article.title,
+        description: article.excerpt,
+        slug: params.slug,
+        datePublished: article.date,
+        inLanguage: 'en',
+        articleSection: article.category,
+      })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
         { name: 'Home', path: '/' },
         { name: 'Insights', path: '/insights' },
-        { name: 'Article', path: '/insights/[slug]' },
+        { name: article.title, path: `/insights/${params.slug}` },
       ])) }} />
       <main className="shell">
         <SiteHeader />

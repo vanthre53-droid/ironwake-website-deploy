@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { getSupabasePublicKey } from '../../lib/supabase-public-key.mjs';
+import Button from '../components/ui/Button';
+import Field from '../components/ui/Field';
 import {
   isRetryableNotification,
   latestNotificationAttempt,
@@ -44,6 +46,7 @@ export function AdminDashboard() {
   const [status, setStatus] = useState('');
   const [readiness, setReadiness] = useState(null);
   const [eventFilter, setEventFilter] = useState('all');
+  const [signInSubmitting, setSignInSubmitting] = useState(false);
 
   useEffect(() => {
     if (!client) return;
@@ -111,9 +114,12 @@ export function AdminDashboard() {
 
   async function signIn(event) {
     event.preventDefault();
-    if (!client) return setStatus('Owner login is not connected yet.');
+    if (!client) { setStatus('Owner login is not connected yet.'); return; }
+    if (signInSubmitting) return;
+    setSignInSubmitting(true);
     const form = new FormData(event.currentTarget);
     const { error } = await client.auth.signInWithPassword({ email: form.get('email'), password: form.get('password') });
+    setSignInSubmitting(false);
     setStatus(error ? 'Sign-in failed. Check your credentials and try again.' : 'Signed in. Verifying owner access.');
   }
 
@@ -142,66 +148,123 @@ export function AdminDashboard() {
 
   const visibleEvents = useMemo(() => events.filter((event) => eventFilter === 'all' || event.status === eventFilter), [events, eventFilter]);
 
+  // ponytail: (v17 polish) — promoted owner-only screen to a proper two-column
+  // shell with constrained max-width, lede paragraph wrapped in
+  // .reading-width, and notification facts laid out as a soft grid without
+  // horizontal lines (no document / PDF-style rules).
+
   return <main className="shell owner-shell">
     <section className="owner-card operations-card">
       <span className="eyebrow">Private / authorized owner only</span>
       <h1>Notification operations</h1>
+
       {!session ? <>
-        <p>This screen is private. Only the designated owner account can read or retry notification records.</p>
+        <p className="reading-width">
+          This screen is private. Only the designated owner account can read or retry notification records.
+        </p>
         <form className="owner-form" onSubmit={signIn}>
-          <p>Use the owner account. This screen never accepts or exposes service credentials.</p>
+          <p className="reading-width owner-form__lede">
+            Sign in with the owner account. This screen never accepts or exposes service credentials.
+          </p>
           {!client && <p className="notice" role="status">Owner login is not connected on this preview.</p>}
-          <label>Email<input name="email" type="email" autoComplete="email" required /></label>
-          <label>Password<input name="password" type="password" autoComplete="current-password" required /></label>
-          <button className="button" type="submit" disabled={!client}>Sign in</button>
+          <Field
+            id="owner-signin-email"
+            name="email"
+            type="email"
+            label="Owner email"
+            autoComplete="email"
+            required
+          />
+          <Field
+            id="owner-signin-password"
+            name="password"
+            type="password"
+            label="Owner password"
+            autoComplete="current-password"
+            required
+          />
+          <Button type="submit" disabled={!client} loading={signInSubmitting}>
+            Sign in
+          </Button>
         </form>
       </> : !authorization.checked ? <>
-        <p role="status">Verifying the designated owner session…</p>
-        <button className="button" onClick={signOut}>Sign out</button>
+        <p className="reading-width" role="status">Verifying the designated owner session…</p>
+        <Button variant="secondary" onClick={signOut}>Sign out</Button>
       </> : !authorization.allowed ? <>
-        <p>This account is not authorized to view notification operations.</p>
+        <p className="reading-width">This account is not authorized to view notification operations.</p>
         <p className="notice" role="status">{authorization.reason || 'Sign in with the designated owner email to continue.'}</p>
-        <button className="button" onClick={signOut}>Sign out</button>
+        <Button variant="secondary" onClick={signOut}>Sign out</Button>
       </> : <>
-        <p>Saved lead, queue, attempt, provider-acceptance, delivery, failure, and replay state are shown separately. Provider acceptance is not delivery.</p>
+        <p className="reading-width">
+          Saved lead, queue, attempt, provider-acceptance, delivery, failure, and replay state are shown separately. Provider acceptance is not delivery.
+        </p>
         {readiness && !readiness.configured && <p className="notice" role="status">Provider configuration is not ready ({readiness.safeErrorCode}). Queued events have not been sent.</p>}
         {readiness?.configured && <p className="notice" role="status">Provider configuration is present. Provider acceptance and delivery remain separate states.</p>}
-        <label className="crm-toolbar">Filter notification state<select value={eventFilter} onChange={(event) => setEventFilter(event.target.value)}><option value="all">All states</option><option value="queued">Queued</option><option value="retry_scheduled">Retry scheduled</option><option value="dead_letter">Dead letter</option><option value="cancelled">Cancelled</option></select></label>
-        <div className="dashboard-links"><a href="/owner">Owner CRM →</a></div>
+        <label className="crm-toolbar">
+          Filter notification state
+          <select value={eventFilter} onChange={(event) => setEventFilter(event.target.value)}>
+            <option value="all">All states</option>
+            <option value="queued">Queued</option>
+            <option value="retry_scheduled">Retry scheduled</option>
+            <option value="dead_letter">Dead letter</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </label>
+        <div className="dashboard-links">
+          <Button as="a" href="/owner" variant="secondary" size="sm" trailingIcon={<span aria-hidden="true">→</span>}>
+            Open Owner CRM
+          </Button>
+        </div>
         {loading ? <p role="status">Loading notification records…</p> : <ul className="record-list notification-records" aria-label="Notification operations">
           {visibleEvents.length ? visibleEvents.map((event) => {
             const attempt = latestNotificationAttempt(event.notification_attempts);
             const safeError = event.safe_error_code || event.last_error_code || attempt?.safe_error_code || 'None';
             const providerMessageId = event.provider_message_id || attempt?.provider_message_id || 'Not assigned';
-            return <li key={event.id}><article>
-              <header className="notification-record-header">
-                <div><span className="eyebrow">{event.target_type} notification</span><h3>{event.event_type}</h3></div>
-                <span className="status-pill">{event.status}</span>
-              </header>
-              <p>{notificationStatusDescription(event.status)}</p>
-              <dl>
-                <div><dt>Saved lead</dt><dd>{event.inquiry_id ? 'Persisted inquiry' : 'Unknown'}</dd></div>
-                <div><dt>Business</dt><dd>{event.inquiry?.business_name || 'Not available'}</dd></div>
-                <div><dt>Source</dt><dd>{event.inquiry?.source || 'Not available'}</dd></div>
-                <div><dt>Inquiry received</dt><dd>{formatTimestamp(event.inquiry?.created_at)}</dd></div>
-                <div><dt>Target / event</dt><dd>{event.target_type} / {event.event_type}</dd></div>
-                <div><dt>Attempts / retry cycle</dt><dd>{event.attempts} / {event.retry_cycle}</dd></div>
-                <div><dt>Latest attempt</dt><dd>{attempt ? `#${attempt.attempt_number} ${attempt.status}` : 'No attempt yet'}</dd></div>
-                <div><dt>Attempt time</dt><dd>{formatTimestamp(attempt?.finished_at || attempt?.started_at || event.last_attempt_at)}</dd></div>
-                <div><dt>Provider message ID</dt><dd className="break-value">{providerMessageId}</dd></div>
-                <div><dt>Provider accepted</dt><dd>{formatTimestamp(event.accepted_at)}</dd></div>
-                <div><dt>Delivered callback</dt><dd>{formatTimestamp(event.delivered_at)}</dd></div>
-                <div><dt>Safe error</dt><dd>{safeError}</dd></div>
-                <div><dt>Next available</dt><dd>{formatTimestamp(event.available_at)}</dd></div>
-                <div><dt>Event created</dt><dd>{formatTimestamp(event.created_at)}</dd></div>
-              </dl>
-              {isRetryableNotification(event) && <button type="button" className="button secondary" disabled={retryingId === event.id} onClick={() => retryNotification(event)}>
-                {retryingId === event.id ? 'Returning to queue…' : 'Retry notification'}
-              </button>}
-            </article></li>;
-          }) : <li>No notification records match this state.</li>}
+            return <li key={event.id}>
+              <article className="notification-record">
+                <header className="notification-record-header">
+                  <div className="notification-record-header__title">
+                    <span className="eyebrow">{event.target_type} notification</span>
+                    <h3>{event.event_type}</h3>
+                  </div>
+                  <span className="status-pill">{event.status}</span>
+                </header>
+                <p className="notification-record__lede">{notificationStatusDescription(event.status)}</p>
+                <dl className="notification-record__facts">
+                  <div><dt>Saved lead</dt><dd>{event.inquiry_id ? 'Persisted inquiry' : 'Unknown'}</dd></div>
+                  <div><dt>Business</dt><dd>{event.inquiry?.business_name || 'Not available'}</dd></div>
+                  <div><dt>Source</dt><dd>{event.inquiry?.source || 'Not available'}</dd></div>
+                  <div><dt>Inquiry received</dt><dd>{formatTimestamp(event.inquiry?.created_at)}</dd></div>
+                  <div><dt>Target / event</dt><dd>{event.target_type} / {event.event_type}</dd></div>
+                  <div><dt>Attempts / retry cycle</dt><dd>{event.attempts} / {event.retry_cycle}</dd></div>
+                  <div><dt>Latest attempt</dt><dd>{attempt ? `#${attempt.attempt_number} ${attempt.status}` : 'No attempt yet'}</dd></div>
+                  <div><dt>Attempt time</dt><dd>{formatTimestamp(attempt?.finished_at || attempt?.started_at || event.last_attempt_at)}</dd></div>
+                  <div><dt>Provider message ID</dt><dd className="break-value">{providerMessageId}</dd></div>
+                  <div><dt>Provider accepted</dt><dd>{formatTimestamp(event.accepted_at)}</dd></div>
+                  <div><dt>Delivered callback</dt><dd>{formatTimestamp(event.delivered_at)}</dd></div>
+                  <div><dt>Safe error</dt><dd>{safeError}</dd></div>
+                  <div><dt>Next available</dt><dd>{formatTimestamp(event.available_at)}</dd></div>
+                  <div><dt>Event created</dt><dd>{formatTimestamp(event.created_at)}</dd></div>
+                </dl>
+                {isRetryableNotification(event) && (
+                  <div className="notification-record__actions">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      loading={retryingId === event.id}
+                      onClick={() => retryNotification(event)}
+                    >
+                      {retryingId === event.id ? 'Returning to queue…' : 'Retry notification'}
+                    </Button>
+                  </div>
+                )}
+              </article>
+            </li>;
+          }) : <li className="notification-records__empty">No notification records match this state.</li>}
         </ul>}
-        <button className="button" onClick={signOut}>Sign out</button>
+        <div className="operations-card__footer">
+          <Button variant="ghost" onClick={signOut}>Sign out</Button>
+        </div>
       </>}
       {status && <p className="notice" role="status">{status}</p>}
     </section>

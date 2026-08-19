@@ -39,7 +39,7 @@ export default function WorkPage() {
     <section className="hero compact">
       <span className="eyebrow">Portfolio</span>
       <h1>Nine businesses. One principle: every enquiry gets an owner.</h1>
-      <p>Each project below is a portfolio demonstration. Most have a live external prototype you can open and inspect; a few are still being prepared and are clearly labelled. These are capability proofs — not client engagements or measured results. Names like "Harbour Estates", "Aura Archives", and "BlueStone" are fictional themes mapped to prototype URLs; the underlying build is the demonstration.</p>
+      <p className="reading-width">Each project below is a portfolio demonstration. Most have a live external prototype you can open and inspect; a few are still being prepared and are clearly labelled. These are capability proofs — not client engagements or measured results. Names like "Harbour Estates", "Aura Archives", and "BlueStone" are fictional themes mapped to prototype URLs; the underlying build is the demonstration.</p>
     </section>
 
     <MotionReveal>
@@ -105,7 +105,7 @@ export default function WorkPage() {
       <div>
         <span className="eyebrow">Proof status</span>
         <h3>What evidence exists today.</h3>
-        <p>Each project above has a verified source snapshot and a read-only public URL check. Neither establishes a client relationship, provider success, uptime, or a measurable outcome.</p>
+        <p className="reading-width">Each project above has a verified source snapshot and a read-only public URL check. Neither establishes a client relationship, provider success, uptime, or a measurable outcome.</p>
       </div>
       <div className="disclosure-box">
         Allowed wording for all projects: <strong>PORTFOLIO DEMONSTRATION — capability proof; not a client engagement.</strong> No testimonial, metric, benchmark, or provider callback is attached to this work, and none will be added without reproducible evidence and named approval.

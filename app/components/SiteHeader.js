@@ -103,7 +103,7 @@ export function SiteHeader() {
     }
   }
 
-  return <header className="header">
+  return <header ref={rootRef} className="header">
     <a className="brand" href="/">IronWake<span aria-hidden="true">_</span><span className="sr-only">Home</span></a>
     <nav className="desktop-nav" aria-label="Primary navigation">
       {links.slice(1).map(([href, label]) => <a href={href} key={href}>{label}</a>)}

@@ -1,6 +1,7 @@
 import { HarbourEstatesCaseStudy } from './HarbourEstatesCaseStudy';
 
-import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd, creativeWorkLd } from '../../../lib/seo.mjs';
+import { canonicalUrl } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Harbour Estates — IronWake Work',
@@ -13,6 +14,12 @@ export default function HarbourEstatesPage() {
     <>
       <HarbourEstatesCaseStudy />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkLd({
+              name: 'Harbour Estates — capability demonstration',
+              description: 'A portfolio demonstration of long-cycle enquiry handling. Capability proof only, not a client engagement.',
+              path: '/work/harbour-estates',
+              keywords: ['long-cycle enquiry, sales, IronWake portfolio'],
+            })) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
                     { name: "Home", path: "/" },
                     { name: "harbour-estates", path: "/work/harbour-estates" },

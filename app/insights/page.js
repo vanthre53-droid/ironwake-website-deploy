@@ -52,11 +52,11 @@ export default function InsightsPage() {
     <section className="hero compact">
       <span className="eyebrow">Insights</span>
       <h1>Operational thinking for service businesses.</h1>
-      <p>Practical insights on lead recovery, booking control, follow-up automation, and workflow improvement. No hype, no vague promises — just what works and what does not.</p>
+      <p className="reading-width">Practical insights on lead recovery, booking control, follow-up automation, and workflow improvement. No hype, no vague promises — just what works and what does not.</p>
     </section>
 
     <section className="section intro">
-      <div className="insights-grid">
+      <div className="grid-3 insights-grid">
         {articles.map(a => <article key={a.slug} className="insight-card">
           <span className="micro">{a.category}</span>
           <h2>{a.title}</h2>

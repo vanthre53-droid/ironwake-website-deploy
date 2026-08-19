@@ -182,8 +182,8 @@ button, input, textarea { font: inherit; }
 .button:hover, .button:focus-visible, .nav-cta:hover, .nav-cta:focus-visible { background: var(--copper-dark); border-color: var(--copper-dark); transform: translateY(-3px); box-shadow: 0 8px 24px -8px rgb(185 77 47 / .3), 0 12px 26px -16px rgb(16 35 44 / .8); }
 .btn-primary { background: var(--action); color: var(--white); }
 .btn-primary:hover, .btn-primary:focus-visible { background: var(--copper-dark); transform: translateY(-3px); box-shadow: 0 8px 24px -8px rgb(185 77 47 / .3), 0 12px 26px -16px rgb(16 35 44 / .8); }
-.btn-secondary { background: transparent; color: var(--ink); border-color: var(--rule); }
-.btn-secondary:hover, .btn-secondary:focus-visible { background: var(--surface-strong); border-color: var(--copper); color: var(--copper-dark); }
+.btn-secondary { background: color-mix(in oklab, var(--paper, #f5f3ee) 70%, var(--white)); color: var(--copper-dark); border-color: color-mix(in oklab, var(--copper, #b94d2f) 38%, transparent); }
+.btn-secondary:hover, .btn-secondary:focus-visible { background: color-mix(in oklab, var(--copper, #b94d2f) 8%, var(--paper, #f5f3ee)); border-color: var(--copper); color: var(--copper-dark); }
 .btn:disabled, .button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 /* ponytail: complete button state matrix — primary / secondary / ghost / destructive
    with explicit hover, active (pressed), focus-visible (keyboard ring), and disabled.
@@ -237,42 +237,11 @@ button, input, textarea { font: inherit; }
 .iw-button--md { /* inherits base .button sizing */ }
 .iw-button--lg { min-height: 56px; padding: 18px 26px; font-size: 15px; }
 .iw-button--block { display: flex; width: 100%; }
-/* ponytail: BEM variant aliases. Mirror .button.* so consumers can pick
-   the contract they prefer. Primary maps to base .button (copper fill).
-   Secondary = warm-light surface + copper border (no black). */
-.iw-button--primary { background: var(--action); border-color: transparent; }
-.iw-button--primary:hover, .iw-button--primary:focus-visible {
-  background: var(--copper-dark); border-color: var(--copper-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px -8px rgb(185 77 47 / .3), 0 12px 26px -16px rgb(16 35 44 / .8);
-}
-.iw-button--primary:focus-visible { outline: 3px solid var(--copper); outline-offset: 4px; }
-.iw-button--primary:disabled, .iw-button--primary[aria-busy="true"] {
-  opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; background: var(--action);
-}
-.iw-button--secondary {
-  border: 1px solid color-mix(in oklab, var(--copper, #b94d2f) 38%, transparent);
-  background: color-mix(in oklab, var(--paper, #f5f3ee) 70%, var(--white));
-  color: var(--copper-dark);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / .55);
-}
-.iw-button--secondary:hover, .iw-button--secondary:focus-visible {
-  background: color-mix(in oklab, var(--copper, #b94d2f) 8%, var(--paper, #f5f3ee));
-  border-color: var(--copper);
-  color: var(--copper-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 22px -10px rgb(185 77 47 / .25), inset 0 1px 0 rgb(255 255 255 / .55);
-}
-.iw-button--ghost {
-  background: transparent; border-color: transparent; color: var(--copper-dark);
-}
-.iw-button--ghost:hover, .iw-button--ghost:focus-visible {
-  background: color-mix(in oklab, var(--paper, #f5f3ee) 55%, transparent);
-  border-color: color-mix(in oklab, var(--copper, #b94d2f) 22%, transparent);
-  color: var(--copper-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px -10px rgb(16 35 44 / .18);
-}
+/* ponytail: BEM variant aliases. Primary = base .button. Secondary/ghost
+   share the .button.secondary / .button.ghost rules via the selector-list
+   below. Only destructive needs an extra disabled rule. */
+.button.secondary, .iw-button--secondary { /* shared rules live in .button.secondary */ }
+.button.ghost, .iw-button--ghost { /* shared rules live in .button.ghost */ }
 .iw-button--destructive { background: var(--notice-error); border-color: var(--notice-error); color: var(--white); }
 .iw-button--destructive:hover, .iw-button--destructive:focus-visible {
   background: #8d1414; border-color: #8d1414; transform: translateY(-2px);
@@ -456,9 +425,22 @@ button, input, textarea { font: inherit; }
    - .reading-width      → 64ch for long prose (lede, intro, FAQ answers)
    - .card-content-width → 56ch for card bodies (h3 + paragraph + meta)
    - .hero-heading-width → 18ch for the hero H1 (controls word wrap)        */
-.reading-width { max-width: 64ch; }
-.card-content-width { max-width: 56ch; }
+.reading-width { max-width: var(--reading-width, 64ch); }
+.card-content-width { max-width: var(--card-content-width, 56ch); }
+.narrow-reading-width { max-width: 48ch; }
 .hero-heading-width { max-width: 18ch; }
+
+/* === v17 additive density tokens ===
+   - .page-max wraps any block in the same horizontal constraint as .shell but
+     stays composable for nested layouts (cards in columns, inner side rails).
+   - .grid-3 / .grid-2 / .grid-1 are responsive card rails — 3-up at desktop,
+     2-up at tablet, 1-up at phone. Use instead of bespoke grid markup.      */
+.page-max { max-width: var(--page-max, 76rem); margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2.5rem); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 28px); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 28px); }
+.grid-1 { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 2.4vw, 28px); }
+@media (max-width: 960px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
 
 /* === v16 .section vertical rhythm (additive, no existing rules touched) ===
    The old .section padding was 88px top/bottom on every section, which made
@@ -658,8 +640,8 @@ button, input, textarea { font: inherit; }
 .stage-filter button:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }.stage-filter button[aria-pressed="true"] { background: var(--copper); border-color: var(--copper); color: var(--white); }
 .record-list { display: grid; gap: 10px; margin-top: 12px; padding: 0; list-style: none; }.record-list article { border: 1px solid var(--rule); background: var(--surface); padding: 14px 16px; transition: transform .25s ease, box-shadow .25s ease; }.record-list h3 { margin: 0 0 8px; font: 600 15px var(--display); }.record-list dl { display: grid; gap: 5px; margin: 10px 0 0; }.record-list dl div { display: flex; justify-content: space-between; gap: 10px; border: 0; padding: 0; font: 10px var(--mono); }.record-list dt { color: var(--graphite); text-transform: uppercase; letter-spacing: .06em; }.record-list dd { margin: 0; color: var(--ink); text-align: right; }
 .status-pill { display: inline-block; border: 1px solid var(--rule); border-radius: 999px; padding: 3px 10px; font: 600 13px/1.2 var(--body); color: var(--copper-dark); }
-.operations-card { width: min(960px, 100%); }.notification-records { margin-block: 24px; }.notification-records article { border-radius: 12px; padding: 20px; }.notification-records article > p { margin: 8px 0 16px; font-size: 13px; }.notification-record-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }.notification-record-header h3 { margin-top: 5px; }.notification-records dl { grid-template-columns: 1fr 1fr; gap: 8px 24px; }.notification-records dl div { align-items: baseline; border-top: 1px solid var(--rule); padding-top: 7px; }.notification-records .button { margin-top: 16px; }.break-value { overflow-wrap: anywhere; }
-@media (max-width: 640px) { .operations-card { padding: 22px; }.notification-record-header { align-items: stretch; flex-direction: column; }.notification-record-header .status-pill { align-self: flex-start; }.notification-records dl { grid-template-columns: 1fr; }.notification-records dl div { align-items: flex-start; flex-direction: column; }.notification-records dd { text-align: left; } }
+.operations-card { width: min(960px, 100%); padding: clamp(28px, 4vw, 44px); display: grid; gap: 22px; }.notification-records { margin-block: 8px 0; }.notification-records article { border-radius: 14px; padding: 22px; background: var(--surface); border: 1px solid var(--rule); display: grid; gap: 14px; }.notification-record { gap: 14px; }.notification-record__lede { margin: 0; font-size: 14px; color: var(--graphite); line-height: 1.55; }.notification-record-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }.notification-record-header__title { display: grid; gap: 6px; }.notification-record-header h3 { margin: 0; font-size: 22px; letter-spacing: -.02em; }.notification-record__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin: 4px 0 0; padding: 0; }.notification-record__facts div { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 10px; background: var(--stone-soft); border: 1px solid var(--rule); } /* v17 polish: no document-style horizontal rule; facts sit inside soft tiles with brand spacing. */ .notification-record__facts dt { color: var(--graphite); text-transform: uppercase; letter-spacing: .08em; font: 600 11px/1.2 var(--mono); } .notification-record__facts dd { margin: 0; color: var(--ink); font: 500 14px/1.45 var(--body); text-align: left; } .notification-record__actions { display: flex; gap: 10px; margin-top: 4px; } .notification-records__empty { padding: 18px 22px; border: 1px dashed var(--rule); border-radius: 12px; background: var(--stone-soft); color: var(--graphite); font-size: 13px; } .operations-card__footer { display: flex; justify-content: flex-end; padding-top: 8px; border-top: 1px solid var(--rule); } .break-value { overflow-wrap: anywhere; }
+@media (max-width: 640px) { .operations-card { padding: 22px; gap: 18px; }.notification-record-header { align-items: stretch; flex-direction: column; }.notification-record-header .status-pill { align-self: flex-start; }.notification-record__facts { grid-template-columns: 1fr; gap: 10px; } }
 .embed-placeholder { min-height: 240px; border: 1px dashed var(--rule); background: var(--surface); display: grid; place-items: center; text-align: center; padding: 30px; color: var(--graphite); transition: transform .25s ease, box-shadow .25s ease; }.embed-placeholder strong { display: block; margin-bottom: 8px; color: var(--ink); font: 400 21px var(--display); }.embed-placeholder p { margin: 0; max-width: 380px; font-size: 12px; }
 
 .scope-hero { min-height: 450px; padding-top: 92px; }.scope-shapes { margin: 58px -40px 0; padding: 70px 40px; background: rgb(16 35 44 / .94); color: #eff8f8; }.scope-shapes > div { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 28px; border-top: 1px solid rgb(255 255 255 / .2); }.scope-shapes article { min-height: 290px; padding: 28px 26px; border-right: 1px solid rgb(255 255 255 / .2); display: grid; align-content: start; gap: 14px; }.scope-shapes article:first-child { padding-left: 0; }.scope-shapes article:last-child { border-right: 0; }.scope-shapes h2 { margin: 0; font-size: 34px; letter-spacing: -.04em; }.scope-shapes p { max-width: 280px; margin: 0; color: rgb(239 248 248 / .76); }.scope-shapes small { color: #a9d9d5; text-transform: none; letter-spacing: 0; font: 11px/1.55 var(--body); }.scope-index { color: #ed8b6d; font: 10px var(--mono); letter-spacing: .12em; }
