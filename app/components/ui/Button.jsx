@@ -1,16 +1,15 @@
 /**
  * Button — single source of truth for ALL buttons on IronWake.
  *
- * Wraps the existing .button / .button.secondary / .button.ghost /
- * .button.destructive CSS primitives defined in globals.css. Adds
- * loading state (aria-busy + spinner), keyboard Enter/Space semantics,
+ * Wraps the shared .button / .iw-button primitives defined in globals.css.
+ * Adds loading state (aria-busy + spinner), keyboard Enter/Space semantics,
  * focus management, and an icon slot. Suppresses native button click
  * while busy to prevent double-submits.
  *
- * Variants:
+ * Variants (copper-first brand — no black-dominant CTAs):
  *   - "primary"     (default) — copper fill, white text, lift on hover
- *   - "secondary"   — outlined ink border, transparent fill
- *   - "ghost"       — no border, surface on hover
+ *   - "secondary"   — warm-light surface + copper border (premium outline)
+ *   - "ghost"       — copper text, paper-warm hover wash
  *   - "destructive" — error red fill, white text
  *
  * Sizes:
@@ -63,12 +62,15 @@ export default function Button({
     [isInactive, onClick]
   );
 
-  // "primary" maps to the base .button class; the others add a modifier.
-  const variantClass = safeVariant === 'primary' ? '' : safeVariant;
+  // Always emit the BEM variant modifier so CSS can rely on either contract
+  // (.button.secondary or .iw-button--secondary). Primary maps to base
+  // .button (copper fill) AND keeps .iw-button--primary for explicit opt-in.
+  const variantClass = `iw-button--${safeVariant}`;
   const composedClass = [
     'button',
-    variantClass,
+    safeVariant !== 'primary' ? safeVariant : '',
     `iw-button--${safeSize}`,
+    variantClass,
     block ? 'iw-button--block' : '',
     leadingIcon ? 'iw-button--has-leading' : '',
     trailingIcon ? 'iw-button--has-trailing' : '',
