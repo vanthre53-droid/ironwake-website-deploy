@@ -81,15 +81,12 @@ export default function PricingPage() {
               <Link className="button" href="/audit">Book Diagnostic</Link>
               <Link className="button secondary" href="/systems">Browse Systems</Link>
             </div>
-            <ul className="pricing-hero-trust" aria-label="Pricing trust">
-              <li><span className="dot" aria-hidden="true" />Verified scope, no live FX</li>
-              <li><span className="dot" aria-hidden="true" />Both regions, fixed tier sizes</li>
-              <li><span className="dot" aria-hidden="true" />Audit-first — nothing changes until confirmed</li>
-            </ul>
-            <div className="pricing-hero-toggle">
-              <span className="pricing-hero-toggle-label">Region</span>
-              <PricingRegionToggle />
-            </div>
+          </div>
+          <div className="pricing-hero-region" aria-label="Region selector">
+            <PricingRegionToggle />
+            <p className="pricing-hero-region-help">
+              India uses fixed INR. International uses fixed USD. No live FX.
+            </p>
           </div>
         </section>
 
@@ -102,6 +99,12 @@ export default function PricingPage() {
             </article>
           ))}
         </section>
+
+        <ul className="pricing-hero-trust" aria-label="Pricing trust">
+          <li><span className="dot" aria-hidden="true" />Verified scope, no live FX</li>
+          <li><span className="dot" aria-hidden="true" />Both regions, fixed tier sizes</li>
+          <li><span className="dot" aria-hidden="true" />Audit-first — nothing changes until confirmed</li>
+        </ul>
 
         <section className="pricing-grid-section" aria-label="Offer price matrix">
           <div className="pricing-grid-header">
@@ -129,6 +132,15 @@ export default function PricingPage() {
                   {isPopular && <span className="pricing-badge">Most popular</span>}
                   <h3>{offer.name}</h3>
                   <p className="pricing-desc">{offer.description}</p>
+                  <div className="pricing-card-price-anchor" aria-label={`Lead price for ${offer.name}`}>
+                    <span className="pricing-card-price-anchor-label">From</span>
+                    <span className="pricing-card-price-anchor-value" data-region="india" data-price-role="lead">
+                      {offer.india[0]}
+                    </span>
+                    <span className="pricing-card-price-anchor-value" data-region="intl" data-price-role="lead" hidden>
+                      {offer.intl[0]}
+                    </span>
+                  </div>
                   <ul className="pricing-tier-list" aria-label={`${offer.name} tier prices`}>
                     {PRICING_TIERS.map((tier, idx) => {
                       const tierKey = tier.toLowerCase();
@@ -146,11 +158,6 @@ export default function PricingPage() {
                           >
                             <span className="pricing-tier-row-label">
                               <span className="pricing-tier-row-name">{tier}</span>
-                              {isRecommended && (
-                                <span className="pricing-tier-row-tag" aria-hidden="true">
-                                  Recommended
-                                </span>
-                              )}
                             </span>
                             <span className="pricing-tier-row-price-block">
                               <span className="pricing-tier-row-price" data-region="india">
@@ -167,6 +174,11 @@ export default function PricingPage() {
                               </span>
                             </span>
                           </Link>
+                          {isRecommended && (
+                            <span className="pricing-tier-row-tag" aria-hidden="true">
+                              Recommended
+                            </span>
+                          )}
                         </li>
                       );
                     })}
