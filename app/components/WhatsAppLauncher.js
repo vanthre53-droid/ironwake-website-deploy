@@ -20,20 +20,35 @@ const PREFILL =
   'Hi IronWake — I would like to learn more about your AI receptionist systems.';
 
 export default function WhatsAppLauncher() {
+  // Server-rendered fallback so the FAB is visible immediately on first paint
+  // (search engines, no-JS clients, slow connections). The client effect then
+  // upgrades href/text after hydration if a real number is configured.
+  const [href, setHref] = useState(hasRealNumber ? `https://wa.me/${NUMBER.replace(/^\+/, '')}?text=${encodeURIComponent(PREFILL)}` : '/contact');
+  const [label, setLabel] = useState(
+    hasRealNumber
+      ? 'Open IronWake on WhatsApp'
+      : 'WhatsApp — contact IronWake (real channel pending)',
+  );
+  const [target, setTarget] = useState(hasRealNumber ? '_blank' : undefined);
+  const [rel, setRel] = useState(hasRealNumber ? 'noopener noreferrer' : undefined);
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const href = hasRealNumber
-    ? `https://wa.me/${NUMBER.replace(/^\+/, '')}?text=${encodeURIComponent(PREFILL)}`
-    : '/contact';
-  const label = hasRealNumber
-    ? 'Open IronWake on WhatsApp'
-    : 'WhatsApp — contact IronWake (real channel pending)';
   const badge = hasRealNumber ? 'Live' : 'Pending number';
-  const target = hasRealNumber ? '_blank' : undefined;
-  const rel = hasRealNumber ? 'noopener noreferrer' : undefined;
 
-  if (!mounted) return null;
+  useEffect(() => {
+    setMounted(true);
+    // Re-check env at hydration in case it changed (e.g. config rolled).
+    if (hasRealNumber) {
+      setHref(`https://wa.me/${NUMBER.replace(/^\+/, '')}?text=${encodeURIComponent(PREFILL)}`);
+      setLabel('Open IronWake on WhatsApp');
+      setTarget('_blank');
+      setRel('noopener noreferrer');
+    } else {
+      setHref('/contact');
+      setLabel('WhatsApp — contact IronWake (real channel pending)');
+      setTarget(undefined);
+      setRel(undefined);
+    }
+  }, []);
 
   return (
     <a
