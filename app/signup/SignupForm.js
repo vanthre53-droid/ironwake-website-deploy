@@ -8,22 +8,24 @@ import Field from '../components/ui/Field.jsx';
 import Button from '../components/ui/Button.jsx';
 import { GoogleIcon } from '../components/ui/GoogleIcon.jsx';
 
-function SubmitButton() {
+function EmailSubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" variant="primary" loading={pending} block className="auth-submit">
-      {pending ? 'Creating account…' : 'Create account'}
+    <Button type="submit" variant="secondary" loading={pending} block className="auth-submit">
+      {pending ? 'Creating account…' : 'Create account with email'}
     </Button>
   );
 }
 
 function GoogleButton() {
   const [pending, setPending] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   return (
     <Button
       type="button"
-      variant="secondary"
+      variant="primary"
       loading={pending}
+      disabled={unavailable}
       block
       leadingIcon={<GoogleIcon />}
       className="button-google auth-google"
@@ -31,7 +33,10 @@ function GoogleButton() {
         setPending(true);
         const res = await signInWithGoogleAction('/account');
         setPending(false);
-        if (res?.error) alert(res.error);
+        if (res?.error) {
+          setUnavailable(true);
+          alert(res.error);
+        }
       }}
     >
       {pending ? 'Opening Google…' : 'Continue with Google'}
@@ -43,16 +48,29 @@ export function SignupForm() {
   const [state, action] = useActionState(signUpAction, {});
   const [showPw, setShowPw] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [terms, setTerms] = useState(false);
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
 
   const pwStrength = mounted ? (password.length >= 12 && /[A-Z]/.test(password) && /[0-9]/.test(password) ? 'strong' : password.length >= 8 ? 'ok' : 'weak') : 'idle';
   const match = mounted ? (confirm.length > 0 && password === confirm ? 'match' : confirm.length > 0 ? 'mismatch' : 'idle') : 'idle';
+  const emailValid = mounted ? /.+@.+\..+/.test(email.trim()) : true;
 
   const pwMessage = pwStrength === 'idle' ? ' ' : pwStrength === 'weak' ? 'Use at least 8 characters.' : pwStrength === 'ok' ? 'OK — consider mixing case and digits.' : 'Strong.';
   const matchMessage = match === 'idle' ? ' ' : match === 'mismatch' ? 'Passwords do not match.' : 'Passwords match.';
+  const nameError = mounted && displayName.length > 0 && displayName.trim().length < 2 ? 'Enter at least 2 characters.' : null;
+  const emailError = mounted && email.length > 0 && !emailValid ? 'Enter a valid email address.' : null;
+  const formReady = mounted ? (
+    displayName.trim().length >= 2 &&
+    emailValid &&
+    password.length >= 8 &&
+    password === confirm &&
+    terms
+  ) : true;
 
   return <main className="shell auth-shell">
     <SiteHeader />
@@ -78,6 +96,9 @@ export function SignupForm() {
             maxLength={80}
             autoComplete="name"
             placeholder="Your name"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            error={nameError}
             className="auth-field"
           />
           <Field
@@ -90,6 +111,9 @@ export function SignupForm() {
             autoComplete="email"
             placeholder="you@example.com"
             inputMode="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            error={emailError}
             className="auth-field"
           />
           <Field
@@ -128,6 +152,7 @@ export function SignupForm() {
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
             help={matchMessage}
+            error={match === 'mismatch' ? 'Passwords do not match.' : null}
             className="auth-field"
             suffix={
               <button
@@ -141,10 +166,20 @@ export function SignupForm() {
             }
           />
           <label className="auth-terms">
-            <input type="checkbox" name="terms" value="yes" required />
+            <input
+              type="checkbox"
+              name="terms"
+              value="yes"
+              required
+              checked={terms}
+              onChange={(e) => setTerms(e.target.checked)}
+            />
             <span>I agree to the <a href="/privacy">Privacy</a> and <a href="/terms">Terms</a>.</span>
           </label>
-          <SubmitButton />
+          <noscript>
+            <p className="iw-field__help">JavaScript is disabled — the form will submit without inline validation.</p>
+          </noscript>
+          <EmailSubmitButton disabled={!formReady} />
         </form>
 
         <p className="auth-switch">Already have an account? <a href="/login">Sign in</a></p>

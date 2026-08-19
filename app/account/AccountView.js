@@ -5,14 +5,24 @@ import { useFormStatus } from 'react-dom';
 import Link from 'next/link.js';
 import { signOutAction, updateProfileAction } from '../../lib/supabase/auth-actions.mjs';
 import { SiteHeader } from '../components/SiteHeader';
+import Field from '../components/ui/Field.jsx';
+import Button from '../components/ui/Button.jsx';
 
-function SaveButton() {
+function SaveButton({ disabled }) {
   const { pending } = useFormStatus();
-  return <button type="submit" className="button" disabled={pending} aria-busy={pending}>{pending ? 'Saving…' : 'Save profile'}</button>;
+  return (
+    <Button type="submit" variant="primary" loading={pending} disabled={disabled || pending} block className="auth-submit">
+      {pending ? 'Saving…' : 'Save profile'}
+    </Button>
+  );
 }
 
 function SignOutButton() {
-  return <button type="submit" className="button secondary" formAction={signOutAction}>Sign out</button>;
+  return (
+    <Button type="submit" variant="secondary" formAction={signOutAction} className="auth-submit">
+      Sign out
+    </Button>
+  );
 }
 
 function formatDate(value) {
@@ -24,14 +34,30 @@ function formatDate(value) {
 
 function ProfileForm({ initialDisplayName }) {
   const [state, action] = useActionState(updateProfileAction, {});
+  const [name, setName] = useState(initialDisplayName || '');
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const nameValid = mounted ? name.trim().length >= 2 : true;
+  const nameError = mounted && name.length > 0 && !nameValid ? 'Enter at least 2 characters.' : null;
+  const dirty = name !== (initialDisplayName || '');
+  const ready = dirty && nameValid;
   return <form action={action} className="auth-form">
-    <label className="auth-field">
-      <span>Display name</span>
-      <input type="text" name="display_name" required maxLength={80} defaultValue={initialDisplayName || ''} />
-    </label>
+    <Field
+      id="account-display-name"
+      name="display_name"
+      label="Display name"
+      required
+      maxLength={80}
+      autoComplete="name"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      error={nameError}
+      help="This is the name we use to greet you on the website and in your account."
+      className="auth-field"
+    />
     {state?.error && <p className="auth-status auth-status-error" role="alert">{state.error}</p>}
     {state?.ok && <p className="auth-status auth-status-ok" role="status">{state.ok}</p>}
-    <SaveButton />
+    <SaveButton disabled={!ready} />
   </form>;
 }
 
@@ -68,7 +94,7 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
         {(!sessions || sessions.length === 0) ? (
           <div className="account-empty">
             <p>No conversations yet.</p>
-            <Link className="button" href="/chat">Start a conversation</Link>
+            <Button as="a" href="/chat" variant="primary" block>Start a conversation</Button>
           </div>
         ) : (
           <ul className="account-list">
@@ -89,7 +115,7 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
         {(!inquiries || inquiries.length === 0) ? (
           <div className="account-empty">
             <p>No audit or booking requests linked to your account yet.</p>
-            <Link className="button secondary" href="/audit">Request a Business Leak Audit</Link>
+            <Button as="a" href="/audit" variant="secondary" block>Request a Business Leak Audit</Button>
           </div>
         ) : (
           <ul className="account-list">
@@ -104,7 +130,6 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
       <article className="account-card">
         <span className="micro">Profile</span>
         <h2>Display name</h2>
-        <p>This is the name we use to greet you on the website and in your account.</p>
         <ProfileForm initialDisplayName={profile?.display_name || ''} />
       </article>
 
@@ -113,7 +138,7 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
         <h2>Password</h2>
         <p>Your password is managed by Supabase Auth. Reset it any time — we never see the value.</p>
         <div className="account-actions">
-          <Link className="button secondary" href="/forgot-password">Reset password</Link>
+          <Button as="a" href="/forgot-password" variant="secondary">Reset password</Button>
         </div>
       </article>
     </section>

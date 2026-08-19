@@ -2,7 +2,6 @@ import { LuxeStudioCaseStudy } from './LuxeStudioCaseStudy';
 
 import { organizationLd, breadcrumbLd, creativeWorkLd } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
-import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Luxe Studio — IronWake Work',
   description: 'A portfolio demonstration of booking and studio-system capture for experience-led businesses. Capability proof only, not a client engagement or a measured outcome.',
@@ -22,8 +21,8 @@ export default function LuxeStudioPage() {
             })) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
                     { name: "Home", path: "/" },
-                    { name: "luxe-studio", path: "/work/luxe-studio" },
-            ])) }} />
+                    { name: "Work", path: "/work" },
+                    { name: "Luxe Studio", path: "/work/luxe-studio" }])) }} />
     </>
   );
 }

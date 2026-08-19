@@ -2,7 +2,6 @@ import { VoltixCaseStudy } from './VoltixCaseStudy';
 
 import { organizationLd, breadcrumbLd, creativeWorkLd } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
-import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Voltix — IronWake Work',
   description: 'A portfolio demonstration of quote and support-request capture for electronics businesses. Capability proof only, not a client engagement or a measured outcome.',
@@ -22,8 +21,8 @@ export default function VoltixPage() {
             })) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
                     { name: "Home", path: "/" },
-                    { name: "voltix", path: "/work/voltix" },
-            ])) }} />
+                    { name: "Work", path: "/work" },
+                    { name: "Voltix", path: "/work/voltix" }])) }} />
     </>
   );
 }

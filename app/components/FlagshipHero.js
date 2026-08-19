@@ -19,9 +19,9 @@ export function FlagshipHero({ auditLitePrice }) {
             The enquiry arrived. <span className="flagship-headline-accent">Where did it go?</span>
           </h1>
           <p className="flagship-lede card-content-width">
-            IronWake maps the handoff between enquiry, booking, and follow-up so
-            a missed request never ends as a silent week. Smallest system that
-            makes the next action visible — published, reviewed, verifiable.
+            IronWake maps the handoff between enquiry, booking, and follow-up —
+            smallest system that makes the next action visible. Published,
+            reviewed, verifiable.
           </p>
           <div className="flagship-actions">
             <a className="button" href="/audit">Map my leak</a>
@@ -72,8 +72,8 @@ export function FlagshipHero({ auditLitePrice }) {
           <span className="micro">01 / Capture</span>
           <h2 className="flagship-card-title">Every enquiry, recorded.</h2>
           <p>
-            Inquiry, call, walk-in, form — captured into one reviewable intake
-            before it can be forgotten or mis-routed.
+            Inquiry, call, walk-in, or form — one reviewable intake before it
+            can be forgotten or mis-routed.
           </p>
           <ul className="flagship-card-list">
             <li><strong>Persistent</strong> first, notification second.</li>
@@ -88,9 +88,8 @@ export function FlagshipHero({ auditLitePrice }) {
           <span className="micro">02 / Review</span>
           <h2 className="flagship-card-title">The next action is visible.</h2>
           <p>
-            A review task is opened the moment the enquiry arrives. The next
-            step has an owner, a due state, and a documented outcome — not a
-            promise.
+            A review task opens the moment the enquiry arrives. The next step
+            has an owner, a due state, and a documented outcome — not a promise.
           </p>
           <ul className="flagship-card-list">
             <li><strong>Due state</strong> instead of vague follow-up.</li>

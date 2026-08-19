@@ -2,7 +2,6 @@ import { AuraArchivesCaseStudy } from './AuraArchivesCaseStudy';
 
 import { organizationLd, breadcrumbLd, creativeWorkLd } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
-import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'Aura Archives — IronWake Work',
   description: 'A portfolio demonstration of bespoke-inquiry capture for luxury retail. Capability proof only, not a client engagement or a measured outcome.',
@@ -22,8 +21,8 @@ export default function AuraArchivesPage() {
             })) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
                     { name: "Home", path: "/" },
-                    { name: "aura-archives", path: "/work/aura-archives" },
-            ])) }} />
+                    { name: "Work", path: "/work" },
+                    { name: "Aura Archives", path: "/work/aura-archives" }])) }} />
     </>
   );
 }

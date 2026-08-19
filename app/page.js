@@ -8,14 +8,16 @@ import { dualLitePrice } from '../lib/pricing.mjs';
 import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
 import { canonicalUrl } from '../lib/seo.mjs';
 
-// ponytail: v16 — micro labels ("01 / category") removed from card markup.
-// The canonical ordering and naming are preserved in the data arrays so
-// internal links and copy audits still match the v13 source of truth.
+// ponytail: v17 — homepage density refresh. Card bodies tightened, redundant
+// "Founder, IronWake" micro label dropped below h2 "Revanth Nunna" (the eyebrow
+// already labels this section). The canonical "01 / Category" micro labels in
+// the progress-list and journey-grid are kept because the enumeration IS the
+// hierarchy there.
 const systems = [
   ['Missed Lead Recovery', 'See where an enquiry stalls and what the next review step should be.', '/systems/missed-lead-recovery'],
   ['Booking Certainty', 'Separate a booking request from a confirmed appointment so nobody assumes the wrong state.', '/systems/booking-control'],
-  ['Trust + Lead Capture', 'Capture enquiries on a conversion-optimised intake that persists first, notifies second.', '/systems/trust-lead-capture'],
-  ['AI Receptionist', 'Planning requirements for a disclosed, human-supervised first response. No live receptionist provider is connected.', '/systems/ai-receptionist']
+  ['Trust + Lead Capture', 'Conversion-optimised intake that persists first, notifies second.', '/systems/trust-lead-capture'],
+  ['AI Receptionist', 'Planning requirements for a disclosed, human-supervised first response. No live receptionist connected.', '/systems/ai-receptionist']
 ];
 
 const caseStack = [
@@ -24,9 +26,9 @@ const caseStack = [
 ];
 
 const industries = [
-  ['Home Services', 'Keep missed calls and urgent requests from ending without a documented callback plan.', '/industries/home-services'],
-  ['Dental & Private Clinics', 'Keep phone, walk-in, and online requests in one reviewable intake path.', '/industries/dental-clinics'],
-  ['Salons & Spas', 'Make sure consultation interest receives a clear follow-up before it cools.', '/industries/salons-spas'],
+  ['Home Services', 'Stop missed calls and urgent requests ending without a documented callback plan.', '/industries/home-services'],
+  ['Dental & Private Clinics', 'Phone, walk-in, and online requests in one reviewable intake path.', '/industries/dental-clinics'],
+  ['Salons & Spas', 'Consultation interest receives a clear follow-up before it cools.', '/industries/salons-spas'],
 ];
 
 export function generateMetadata() {
@@ -155,8 +157,8 @@ export default function Home() {
     <DashboardDemo />
     <InteractiveLeadJourney />
 
-    {/* Industry grid — v16: lede added, micro labels removed, body width
-        capped so cards don't dump paragraphs into wide boxes. */}
+    {/* Industry grid — v17: lede kept concise, body widths already capped
+        via .card-content-width so cards don't dump paragraphs into wide boxes. */}
     <MotionReveal stagger>
       <section className="section">
         <span className="eyebrow">Choose your industry</span>
@@ -226,7 +228,6 @@ export default function Home() {
         <span className="eyebrow">Founder</span>
         <h2>Revanth Nunna</h2>
         <p className="reading-width">IronWake is a founder-led systems practice for service businesses. The work begins with one real enquiry or booking handoff and improves it without hiding uncertainty behind software.</p>
-        <span className="micro">Founder, IronWake</span>
       </div>
     </section>
   </main>;

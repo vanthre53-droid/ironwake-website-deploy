@@ -2,7 +2,6 @@ import { RetechCaseStudy } from './RetechCaseStudy';
 
 import { organizationLd, breadcrumbLd, creativeWorkLd } from '../../../lib/seo.mjs';
 import { canonicalUrl } from '../../../lib/seo.mjs';
-import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
   title: 'RE-TECH — IronWake Work',
   description: 'A portfolio demonstration of repair intake and tracking for service businesses. Capability proof only, not a client engagement or a measured outcome.',
@@ -22,8 +21,8 @@ export default function RETECHPage() {
             })) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
                     { name: "Home", path: "/" },
-                    { name: "retech", path: "/work/retech" },
-            ])) }} />
+                    { name: "Work", path: "/work" },
+                    { name: "Retell Retech", path: "/work/retech" }])) }} />
     </>
   );
 }
