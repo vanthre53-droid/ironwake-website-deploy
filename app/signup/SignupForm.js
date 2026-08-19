@@ -4,34 +4,39 @@ import { useActionState, useState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
 import { signUpAction, signInWithGoogleAction } from '../../lib/supabase/auth-actions.mjs';
 import { SiteHeader } from '../components/SiteHeader';
+import Field from '../components/ui/Field.jsx';
+import Button from '../components/ui/Button.jsx';
+import { GoogleIcon } from '../components/ui/GoogleIcon.jsx';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
-  return <button type="submit" className="button auth-submit" disabled={pending} aria-busy={pending}>{pending ? 'Creating account…' : 'Create account'}</button>;
+  return (
+    <Button type="submit" variant="primary" loading={pending} block className="auth-submit">
+      {pending ? 'Creating account…' : 'Create account'}
+    </Button>
+  );
 }
 
 function GoogleButton() {
   const [pending, setPending] = useState(false);
-  return <button
-    type="button"
-    className="button button-google auth-google"
-    disabled={pending}
-    aria-busy={pending}
-    onClick={async () => {
-      setPending(true);
-      const res = await signInWithGoogleAction('/account');
-      setPending(false);
-      if (res?.error) alert(res.error);
-    }}
-  >
-    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
-      <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.49h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.71-1.57 2.68-3.88 2.68-6.63z"/>
-      <path fill="#34A853" d="M9 18c2.43 0 4.47-.81 5.96-2.18l-2.92-2.26c-.81.54-1.85.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18z"/>
-      <path fill="#FBBC05" d="M3.96 10.71a5.41 5.41 0 0 1 0-3.43V4.95H.96a9 9 0 0 0 0 8.08l3-2.32z"/>
-      <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.59A9 9 0 0 0 .96 4.95l3 2.32C4.67 5.16 6.65 3.58 9 3.58z"/>
-    </svg>
-    {pending ? 'Opening Google…' : 'Continue with Google'}
-  </button>;
+  return (
+    <Button
+      type="button"
+      variant="secondary"
+      loading={pending}
+      block
+      leadingIcon={<GoogleIcon />}
+      className="button-google auth-google"
+      onClick={async () => {
+        setPending(true);
+        const res = await signInWithGoogleAction('/account');
+        setPending(false);
+        if (res?.error) alert(res.error);
+      }}
+    >
+      {pending ? 'Opening Google…' : 'Continue with Google'}
+    </Button>
+  );
 }
 
 export function SignupForm() {
@@ -45,6 +50,9 @@ export function SignupForm() {
 
   const pwStrength = mounted ? (password.length >= 12 && /[A-Z]/.test(password) && /[0-9]/.test(password) ? 'strong' : password.length >= 8 ? 'ok' : 'weak') : 'idle';
   const match = mounted ? (confirm.length > 0 && password === confirm ? 'match' : confirm.length > 0 ? 'mismatch' : 'idle') : 'idle';
+
+  const pwMessage = pwStrength === 'idle' ? ' ' : pwStrength === 'weak' ? 'Use at least 8 characters.' : pwStrength === 'ok' ? 'OK — consider mixing case and digits.' : 'Strong.';
+  const matchMessage = match === 'idle' ? ' ' : match === 'mismatch' ? 'Passwords do not match.' : 'Passwords match.';
 
   return <main className="shell auth-shell">
     <SiteHeader />
@@ -62,34 +70,76 @@ export function SignupForm() {
         <div className="auth-divider" role="separator" aria-label="or use email to sign up"><span>or sign up with email</span></div>
 
         <form action={action} className="auth-form" noValidate>
-          <label className="auth-field">
-            <span>Display name</span>
-            <input type="text" name="display_name" required maxLength={80} autoComplete="name" placeholder="Your name" />
-          </label>
-          <label className="auth-field">
-            <span>Email</span>
-            <input type="email" name="email" required maxLength={254} autoComplete="email" placeholder="you@example.com" />
-          </label>
-          <label className="auth-field">
-            <span>Password</span>
-            <div className="auth-input-row">
-              <input type={showPw ? 'text' : 'password'} name="password" required minLength={8} maxLength={200} autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} aria-describedby="pw-strength" />
-              <button type="button" className="auth-pw-toggle" onClick={() => setShowPw((v) => !v)} aria-label={showPw ? 'Hide password' : 'Show password'}>{showPw ? 'Hide' : 'Show'}</button>
-            </div>
-            <small id="pw-strength" data-strength={pwStrength} className="auth-strength">
-              {pwStrength === 'idle' ? ' ' : pwStrength === 'weak' ? 'Use at least 8 characters.' : pwStrength === 'ok' ? 'OK — consider mixing case and digits.' : 'Strong.'}
-            </small>
-          </label>
-          <label className="auth-field">
-            <span>Confirm password</span>
-            <div className="auth-input-row">
-              <input type={showConfirm ? 'text' : 'password'} name="confirm" required minLength={8} maxLength={200} autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)} aria-describedby="pw-match" />
-              <button type="button" className="auth-pw-toggle" onClick={() => setShowConfirm((v) => !v)} aria-label={showConfirm ? 'Hide confirmation' : 'Show confirmation'}>{showConfirm ? 'Hide' : 'Show'}</button>
-            </div>
-            <small id="pw-match" data-match={match} className="auth-strength">
-              {match === 'idle' ? ' ' : match === 'mismatch' ? 'Passwords do not match.' : 'Passwords match.'}
-            </small>
-          </label>
+          <Field
+            id="signup-display-name"
+            name="display_name"
+            label="Display name"
+            required
+            maxLength={80}
+            autoComplete="name"
+            placeholder="Your name"
+            className="auth-field"
+          />
+          <Field
+            id="signup-email"
+            name="email"
+            type="email"
+            label="Email"
+            required
+            maxLength={254}
+            autoComplete="email"
+            placeholder="you@example.com"
+            inputMode="email"
+            className="auth-field"
+          />
+          <Field
+            id="signup-password"
+            name="password"
+            type={showPw ? 'text' : 'password'}
+            label="Password"
+            required
+            minLength={8}
+            maxLength={200}
+            autoComplete="new-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            help={pwMessage}
+            className="auth-field"
+            suffix={
+              <button
+                type="button"
+                className="iw-field__pw-toggle"
+                onClick={() => setShowPw((v) => !v)}
+                aria-label={showPw ? 'Hide password' : 'Show password'}
+              >
+                {showPw ? 'Hide' : 'Show'}
+              </button>
+            }
+          />
+          <Field
+            id="signup-confirm"
+            name="confirm"
+            type={showConfirm ? 'text' : 'password'}
+            label="Confirm password"
+            required
+            minLength={8}
+            maxLength={200}
+            autoComplete="new-password"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+            help={matchMessage}
+            className="auth-field"
+            suffix={
+              <button
+                type="button"
+                className="iw-field__pw-toggle"
+                onClick={() => setShowConfirm((v) => !v)}
+                aria-label={showConfirm ? 'Hide confirmation' : 'Show confirmation'}
+              >
+                {showConfirm ? 'Hide' : 'Show'}
+              </button>
+            }
+          />
           <label className="auth-terms">
             <input type="checkbox" name="terms" value="yes" required />
             <span>I agree to the <a href="/privacy">Privacy</a> and <a href="/terms">Terms</a>.</span>

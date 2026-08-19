@@ -405,6 +405,18 @@ button, input, textarea { font: inherit; }
 .iw-field__icon { display: inline-flex; align-items: center; padding: 0 12px; color: var(--graphite); pointer-events: none; }
 .iw-field__icon--leading { padding-right: 0; border-right: 1px solid transparent; }
 .iw-field__icon--trailing { padding-left: 0; border-left: 1px solid transparent; }
+.iw-field__pw-toggle {
+  display: inline-flex; align-items: center;
+  background: transparent; border: 0; border-left: 1px solid var(--rule);
+  padding: 0 14px; cursor: pointer;
+  font: 500 13px/1 var(--display); letter-spacing: .04em;
+  color: var(--graphite); transition: color .15s ease;
+}
+.iw-field__pw-toggle:hover, .iw-field__pw-toggle:focus-visible { color: var(--copper-dark); }
+.iw-field__pw-toggle:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; border-radius: 4px; }
+.iw-field--invalid .iw-field__pw-toggle { color: var(--notice-error); }
+.iw-field__shell--input { display: flex; align-items: stretch; }
+.iw-field__shell--input > .iw-field__control { flex: 1; min-width: 0; border-right: 0; }
 .iw-field__help { font: 400 12px/1.45 var(--body); color: var(--graphite); }
 .iw-field__error { font: 500 12px/1.4 var(--display); color: var(--notice-error); }
 .iw-field--disabled .iw-field__label { opacity: .6; }

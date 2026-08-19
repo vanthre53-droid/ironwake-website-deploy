@@ -4,10 +4,16 @@ import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { forgotPasswordAction } from '../../lib/supabase/auth-actions.mjs';
 import { SiteHeader } from '../components/SiteHeader';
+import Field from '../components/ui/Field.jsx';
+import Button from '../components/ui/Button.jsx';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
-  return <button type="submit" className="button auth-submit" disabled={pending} aria-busy={pending}>{pending ? 'Sending link…' : 'Send recovery link'}</button>;
+  return (
+    <Button type="submit" variant="primary" loading={pending} block className="auth-submit">
+      {pending ? 'Sending link…' : 'Send recovery link'}
+    </Button>
+  );
 }
 
 export function ForgotPasswordForm() {
@@ -22,10 +28,17 @@ export function ForgotPasswordForm() {
         {state?.error && <p className="auth-status auth-status-error" role="alert">{state.error}</p>}
         {state?.ok && <p className="auth-status auth-status-ok" role="status">{state.ok}</p>}
         <form action={action} className="auth-form" noValidate>
-          <label className="auth-field">
-            <span>Email</span>
-            <input type="email" name="email" required maxLength={254} autoComplete="email" placeholder="you@example.com" />
-          </label>
+          <Field
+            id="forgot-email"
+            name="email"
+            type="email"
+            label="Email"
+            required
+            maxLength={254}
+            autoComplete="email"
+            placeholder="you@example.com"
+            inputMode="email"
+          />
           <SubmitButton />
         </form>
         <p className="auth-switch"><a href="/login">Back to sign in</a></p>

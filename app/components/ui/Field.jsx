@@ -20,6 +20,9 @@
  *           and the error is wired to aria-describedby
  *   - help: string|ReactNode|null — rendered with id={`${id}-help`} when no error
  *   - leadingIcon / trailingIcon: optional ReactNode rendered inside the control
+ *   - suffix: optional ReactNode (e.g. show/hide password button) appended
+ *     AFTER the control inside .iw-field__shell. Pass the toggle as a real
+ *     <button type="button"> with className="iw-field__pw-toggle".
  *   - multiline: when true, renders <textarea> instead of <input>
  *   - as="input"|"textarea"|"select": overrides the element (advanced)
  */
@@ -51,6 +54,7 @@ export default function Field({
   error,
   leadingIcon,
   trailingIcon,
+  suffix,
   multiline = false,
   as,
   rows,
@@ -164,6 +168,7 @@ export default function Field({
             {trailingIcon}
           </span>
         ) : null}
+        {suffix}
       </div>
       {hasError ? (
         <div id={errorId} className="iw-field__error" role="alert">
