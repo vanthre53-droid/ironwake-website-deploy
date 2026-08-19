@@ -1,7 +1,6 @@
 {
-  "FINAL_HEAD": "0f67479",
+  "FINAL_HEAD": "d17253131d26ff5f4ff93fd5aa4b4db95a01fbe5",
   "FROZEN_FOR_V13_DEPLOY": "2026-08-19",
-  "V13_NOTE": "V14 batch amendment: pricing toggle selector fix (aria-pressed now drives actual price swap), MOST POPULAR badge per Dialzara pattern, dental vertical landing page + ROI calculator, Retell receptionist core (prompt/knowledge/golden), Meta WhatsApp Business Profile + OAuth. Frozen for v14 production deploy attempt #12.",
   "DEPLOY_BUDGET": {
     "MAX": 14,
     "USED": 10,
@@ -90,8 +89,8 @@
     "PRODUCTION_BUILD": "VERIFIED (fresh .next clean, all required routes built)",
     "STRIX_SECURITY": "VERIFIED_HARDENED (0 findings, 2 medium findings remediated and re-verified)"
   },
-  "buildId": "W0z-ivpk2-YM6IJZdjQ1F",
-  "timestamp": "2026-08-19T03:48:00Z",
+  "buildId": "tkiO3F5PVlbE0SyKUbGn0",
+  "timestamp": "2026-08-19T03:55:00Z",
   "deploy_head": "0f674799a57b3f88b3cae6da6be3484170bfca7c",
   "PRODUCTION_DEPLOY_3": {
     "ID": "6a7c4e1d377fb59a36ba980e",
@@ -106,9 +105,9 @@
   "PHASE": "PHASE_FINAL_CLOUDFLARE_PRODUCTION_CONSOLIDATED",
   "STATUS": "DEPLOYED_LIVE_V14_BATCH",
   "FROZEN_FOR_V14_DEPLOY": "2026-08-18",
-  "V14_BATCH_DEPLOY_ID": "d7615477-2de5-4edc-9f2b-4ff472bafbd2",
-  "V14_BATCH_DEPLOYED_HEAD": "d389a8554fa11fe9d50c582093ecae2e036c8e74",
-  "V14_BATCH_DEPLOYED_AT": "2026-08-18T19:08:00Z",
+  "V14_BATCH_DEPLOY_ID": "PENDING_DEPLOY_13",
+  "V14_BATCH_DEPLOYED_HEAD": "0f674799a57b3f88b3cae6da6be3484170bfca7c",
+  "V14_BATCH_DEPLOYED_AT": "2026-08-19T03:50:00Z",
   "V14_BATCH_REMAINING_DEPLOYS": 4,
   "V14_BATCH_NOTE": "Real Cloudflare deploy via release-gate attempt #10. PWA manifest + IndexNow endpoint + home mobile CSS fix + 6 new tests shipped. Live verified at https://ironwake.dev (200), /manifest.webmanifest (200), /.well-known/indexnow-key.txt (200)."
 }
