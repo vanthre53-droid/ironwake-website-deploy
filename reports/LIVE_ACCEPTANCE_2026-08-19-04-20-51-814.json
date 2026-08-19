@@ -1,0 +1,377 @@
+{
+  "generatedAt": "2026-08-19T04:20:51.819Z",
+  "baseUrl": "https://ironwake.dev",
+  "host": "ironwake.dev",
+  "overall": "FAIL",
+  "counts": {
+    "FAIL": 2,
+    "PASS": 7,
+    "SKIP": 1
+  },
+  "total": 10,
+  "steps": [
+    {
+      "id": "01",
+      "name": "Homepage HTML + brand metadata",
+      "url": "https://ironwake.dev/",
+      "status": "FAIL",
+      "bytes": 77414,
+      "contentType": "text/html; charset=utf-8",
+      "durationMs": 1998,
+      "startedAt": "2026-08-19T04:20:39.177Z",
+      "checks": [
+        {
+          "label": "title contains \"IronWake\"",
+          "pass": true,
+          "detail": "<title>IronWake — The enquiry arrived. Where did it go?</title>"
+        },
+        {
+          "label": "nav contains \"IronWake Devs\"",
+          "pass": false,
+          "detail": ""
+        },
+        {
+          "label": "Systems link present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "no netlify.app fallback",
+          "pass": true,
+          "detail": "netlify.app string present in HTML"
+        },
+        {
+          "label": "meta description present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "canonical = https://ironwake.dev",
+          "pass": true,
+          "detail": "canonical: https://ironwake.dev"
+        },
+        {
+          "label": "og:url = https://ironwake.dev",
+          "pass": true,
+          "detail": "og:url: https://ironwake.dev"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 77414
+      }
+    },
+    {
+      "id": "02",
+      "name": "robots.txt shape",
+      "url": "https://ironwake.dev/robots.txt",
+      "status": "PASS",
+      "bytes": 247,
+      "contentType": "text/plain",
+      "durationMs": 177,
+      "startedAt": "2026-08-19T04:20:41.175Z",
+      "checks": [
+        {
+          "label": "User-Agent: * present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "Host: https://ironwake.dev present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "Sitemap: https://ironwake.dev/sitemap.xml present",
+          "pass": true,
+          "detail": ""
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "text/plain",
+        "bytes": 247
+      }
+    },
+    {
+      "id": "03",
+      "name": "Sitemap validity",
+      "url": "https://ironwake.dev/sitemap.xml",
+      "status": "PASS",
+      "bytes": 6192,
+      "contentType": "application/xml",
+      "durationMs": 143,
+      "startedAt": "2026-08-19T04:20:41.352Z",
+      "checks": [
+        {
+          "label": "XML tag balance <url>…</url>",
+          "pass": true,
+          "detail": "opens=33 closes=33"
+        },
+        {
+          "label": "at least 20 <loc> entries",
+          "pass": true,
+          "detail": "count=33"
+        },
+        {
+          "label": "all URLs start with https://ironwake.dev",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "no netlify.app URLs",
+          "pass": true,
+          "detail": ""
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/xml",
+        "bytes": 6192
+      }
+    },
+    {
+      "id": "04",
+      "name": "5 random sitemap routes all return 200",
+      "url": "/terms, /work/bramble-cafe, /industries/home-services, /work, /systems",
+      "status": "PASS",
+      "bytes": 0,
+      "contentType": "",
+      "durationMs": 1472,
+      "startedAt": "2026-08-19T04:20:41.495Z",
+      "checks": [
+        {
+          "label": "/terms → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/work/bramble-cafe → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/industries/home-services → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/work → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/systems → 200",
+          "pass": true,
+          "detail": "got 200"
+        }
+      ],
+      "error": null,
+      "response": {
+        "probes": [
+          {
+            "route": "/terms",
+            "status": 200,
+            "bytes": 36699,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/work/bramble-cafe",
+            "status": 200,
+            "bytes": 37088,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/industries/home-services",
+            "status": 200,
+            "bytes": 35748,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/work",
+            "status": 200,
+            "bytes": 48714,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/systems",
+            "status": 200,
+            "bytes": 37571,
+            "contentType": "text/html; charset=utf-8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "05",
+      "name": "POST /api/chat (public, no auth)",
+      "url": "https://ironwake.dev/api/chat",
+      "status": "PASS",
+      "bytes": 240,
+      "contentType": "application/json",
+      "durationMs": 3330,
+      "startedAt": "2026-08-19T04:20:42.967Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "reply is a non-empty string",
+          "pass": true,
+          "detail": "reply=Pong — IronWake here. I help with service enquiries, pricing, audit, demos, and booking. What can I help with?"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 240
+      }
+    },
+    {
+      "id": "06",
+      "name": "POST /api/audit (fake client, returns UUID)",
+      "url": "https://ironwake.dev/api/audit",
+      "status": "PASS",
+      "bytes": 98,
+      "contentType": "application/json",
+      "durationMs": 3462,
+      "startedAt": "2026-08-19T04:20:46.297Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "response carries a UUID or received=true ack",
+          "pass": true,
+          "detail": "candidate=undefined received=true"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 201,
+        "contentType": "application/json",
+        "bytes": 98
+      }
+    },
+    {
+      "id": "07",
+      "name": "POST /api/voice/session (route is POST, not GET)",
+      "url": "https://ironwake.dev/api/voice/session",
+      "status": "PASS",
+      "bytes": 406,
+      "contentType": "application/json",
+      "durationMs": 1526,
+      "startedAt": "2026-08-19T04:20:49.759Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "ok=true",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "accessToken present",
+          "pass": true,
+          "detail": "accessToken=eyJhbGciOiJIUzI1NiJ9…"
+        },
+        {
+          "label": "callId present",
+          "pass": true,
+          "detail": "callId=call_2fcb9b38e133255…"
+        },
+        {
+          "label": "no webhook URL expected (SDK uses accessToken directly)",
+          "pass": true,
+          "detail": "voice route is token-based, not webhook-based"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 406
+      }
+    },
+    {
+      "id": "08",
+      "name": "apple-icon.svg content-type",
+      "url": "https://ironwake.dev/apple-icon.svg",
+      "status": "FAIL",
+      "bytes": 25605,
+      "contentType": "text/html; charset=utf-8",
+      "durationMs": 348,
+      "startedAt": "2026-08-19T04:20:51.285Z",
+      "checks": [],
+      "error": "expected 200, got 404",
+      "response": {
+        "status": 404,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 25605
+      }
+    },
+    {
+      "id": "09",
+      "name": "manifest.webmanifest JSON",
+      "url": "https://ironwake.dev/manifest.webmanifest",
+      "status": "PASS",
+      "bytes": 572,
+      "contentType": "application/manifest+json",
+      "durationMs": 181,
+      "startedAt": "2026-08-19T04:20:51.633Z",
+      "checks": [
+        {
+          "label": "content-type is manifest JSON",
+          "pass": true,
+          "detail": "got \"application/manifest+json\""
+        },
+        {
+          "label": "parses as JSON",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "name field present",
+          "pass": true,
+          "detail": "name=IronWake — Systems that answer"
+        },
+        {
+          "label": "start_url field present",
+          "pass": true,
+          "detail": "start_url=/ scope=undefined"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/manifest+json",
+        "bytes": 572
+      }
+    },
+    {
+      "id": "10",
+      "name": "axe-core WCAG scan (6 routes)",
+      "url": "https://ironwake.dev/, https://ironwake.dev/pricing, https://ironwake.dev/systems, https://ironwake.dev/work, https://ironwake.dev/scope, https://ironwake.dev/contact",
+      "status": "SKIP",
+      "bytes": 0,
+      "contentType": "",
+      "durationMs": 0,
+      "startedAt": "2026-08-19T04:20:51.814Z",
+      "checks": [],
+      "error": null,
+      "response": null
+    }
+  ]
+}

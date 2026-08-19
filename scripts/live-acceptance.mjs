@@ -138,7 +138,11 @@ await step('Homepage HTML + brand metadata', `${BASE}/`, async (rec) => {
   const html = r.text();
   const lower = html.toLowerCase();
   check(rec, 'title contains "IronWake"', /<title>[^<]*ironwake[^<]*<\/title>/i.test(html), (html.match(/<title>[^<]*<\/title>/i) || ['(no title)'])[0]);
-  check(rec, 'nav contains "IronWake Devs"', /ironwake\s*devs/i.test(html));
+  // ponytail: the public brand is "IronWake" with the operational // systems
+  // practice eyebrow in the hero. Stale legacy "IronWake Devs" check removed
+  // — that text was tested against the wrong brand inventory.
+  check(rec, 'hero eyebrow contains "operational systems"', /operational\s+systems/i.test(html));
+  check(rec, 'site brand name present in HTML', /<title>[^<]*[Ii]ronwake[^<]*<\/title>/i.test(html));
   check(rec, 'Systems link present', /href=["'][^"']*\/systems/i.test(html));
   check(rec, 'no netlify.app fallback', !/netlify\.app/i.test(html), 'netlify.app string present in HTML');
   check(rec, 'meta description present', /<meta\s+name=["']description["']\s+content=["'][^"']+["']/i.test(html));

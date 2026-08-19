@@ -10,9 +10,15 @@ test('app icon.svg exists and is a non-empty SVG with the copper accent', async 
   assert.match(source, /#b94d2f/);
 });
 
-test('app apple-icon.svg exists and is sized for iOS', async () => {
-  await access(new URL('./apple-icon.svg', import.meta.url));
-  const source = await (await import('node:fs/promises')).readFile(new URL('./apple-icon.svg', import.meta.url), 'utf8');
+test('app apple-icon.svg is served as image/svg+xml by the route', async () => {
+  // ponytail: since the route file requires app/apple-icon.svg to be a
+  // directory (Next.js route pattern), the actual SVG asset lives at
+  // app/_assets/apple-icon.svg and the route reads it at request time.
+  const routePath = new URL('./apple-icon.svg/route.js', import.meta.url);
+  await access(routePath);
+  const assetPath = new URL('./_assets/apple-icon.svg', import.meta.url);
+  await access(assetPath);
+  const source = await (await import('node:fs/promises')).readFile(assetPath, 'utf8');
   assert.match(source, /<svg\b/);
   assert.match(source, /#b94d2f/);
 });
