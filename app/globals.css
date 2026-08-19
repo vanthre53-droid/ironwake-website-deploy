@@ -956,12 +956,17 @@ button, input, textarea { font: inherit; }
 .chat-history button[disabled] { opacity: .5; cursor: not-allowed; }
 .chat-history-date { color: var(--ink-soft); font-size: .85rem; }
 
-/* ponytail: customer auth + account styles. Light-first, premium, Apple-minimal.
-   Honors prefers-reduced-motion for entrance + state animations. */
-.nav-signup { margin-left: .5rem; padding: .35rem .8rem; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); font-size: .85rem; background: var(--ink); color: var(--white); }
-.nav-signup:hover { background: var(--copper); border-color: var(--copper); }
+.nav-login { margin-left: .75rem; padding: .35rem .8rem; border: 1px solid var(--copper); border-radius: 999px; color: var(--copper); background: transparent; font-size: .85rem; transition: background .25s ease, color .25s ease, border-color .25s ease; }
+.nav-login:hover, .nav-login:focus-visible { background: var(--copper); color: var(--white); }
+.nav-signup { margin-left: .5rem; padding: .35rem .8rem; border: 1px solid var(--copper); border-radius: 999px; color: var(--white); font-size: .85rem; background: var(--copper); transition: background .25s ease, border-color .25s ease, transform .25s ease; }
+.nav-signup:hover, .nav-signup:focus-visible { background: var(--copper-deep); border-color: var(--copper-deep); }
 .nav-signout { margin-left: .5rem; padding: .35rem .8rem; border: 1px solid var(--stone); border-radius: 999px; color: var(--ink-soft); font-size: .85rem; background: transparent; cursor: pointer; font: inherit; }
-.nav-signout:hover { background: var(--stone-soft); color: var(--ink); }
+.nav-signout:hover, .nav-signout:focus-visible { background: var(--stone-soft); color: var(--ink); }
+.nav-auth:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+
+/* Mobile nav state syncs with controlled open prop */
+.mobile-nav > nav { padding: 8px 0; }
+.mobile-nav.mobile-nav--open > summary { color: var(--copper); }
 .nav-link-placeholder { margin-left: .75rem; color: var(--ink-soft); font-size: .85rem; }
 @media (max-width: 720px) { .nav-signup, .nav-signout, .nav-link-placeholder { display: inline-block; } }
 .auth-shell { background: var(--paper); }

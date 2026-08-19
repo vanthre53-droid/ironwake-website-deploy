@@ -1,16 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createBrowserSupabase } from '../../lib/supabase/clients.mjs';
 import { SkeletonNavAuth } from './Skeleton.js';
 
-// ponytail: owner-approved nav order — no architecture change, just link labels/paths.
-// ponytail: customer auth controls (Sign in / Create account) live here in the
-// anonymous state. Once a customer signs in, those are replaced with My account
-// and Sign out. Owner navigation stays out of the public header.
-// ponytail: during auth hydration the nav-auth slot shows a stable-width
-// skeleton pill so the header does NOT flash between anonymous controls and
-// customer controls while getSession() is resolving.
+// Owner-approved nav order. Customer auth controls live here. Once signed
+// in, they become My account + Sign out. Owner nav stays out of public header.
 const links = [
   ['/', 'Home'],
   ['/work', 'Work'],
@@ -23,14 +18,14 @@ const links = [
 ];
 
 function signOut() {
-  // ponytail: best-effort client-side sign out so the header can flip immediately.
-  // The server-side cookies are cleared by the signOutAction invoked from /account.
   const client = createBrowserSupabase();
   if (client) client.auth.signOut().catch(() => {});
 }
 
 export function SiteHeader() {
   const [state, setState] = useState({ loaded: false, signedIn: false });
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const detailsRef = useRef(null);
 
   useEffect(() => {
     const client = createBrowserSupabase();
@@ -47,35 +42,77 @@ export function SiteHeader() {
     return () => { cancelled = true; sub?.subscription?.unsubscribe(); };
   }, []);
 
+  // Mobile menu: Escape closes, click outside closes, route close on link tap.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    function onKey(e) {
+      if (e.key === 'Escape') { setMobileOpen(false); detailsRef.current?.removeAttribute('open'); }
+    }
+    function onClick(e) {
+      if (!detailsRef.current) return;
+      if (!detailsRef.current.contains(e.target)) {
+        setMobileOpen(false);
+        detailsRef.current.removeAttribute('open');
+      }
+    }
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onClick);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClick);
+    };
+  }, [mobileOpen]);
+
   const signedIn = state.loaded && state.signedIn;
 
+  function closeMobile() {
+    setMobileOpen(false);
+    detailsRef.current?.removeAttribute('open');
+  }
+
+  function toggleMobile(e) {
+    e.preventDefault();
+    setMobileOpen((v) => {
+      const next = !v;
+      if (detailsRef.current) {
+        if (next) detailsRef.current.setAttribute('open', '');
+        else detailsRef.current.removeAttribute('open');
+      }
+      return next;
+    });
+  }
+
   return <header className="header">
-    <a className="brand" href="/">IronWake<span>_</span><span className="sr-only">Home</span></a>
+    <a className="brand" href="/">IronWake<span aria-hidden="true">_</span><span className="sr-only">Home</span></a>
     <nav className="desktop-nav" aria-label="Primary navigation">
       {links.slice(1).map(([href, label]) => <a href={href} key={href}>{label}</a>)}
       {!state.loaded && <SkeletonNavAuth width={168} ariaLabel="Loading account controls" />}
       {state.loaded && !signedIn && <>
-        <a className="nav-login" style={{ borderColor: 'var(--copper)', color: 'var(--copper)' }} href="/login">Sign in</a>
-        <a className="nav-signup" style={{ background: 'var(--copper)', borderColor: 'var(--copper)' }} href="/signup">Create account</a>
+        <a className="nav-login nav-auth nav-auth--login" href="/login">Sign in</a>
+        <a className="nav-signup nav-auth nav-auth--signup" href="/signup">Create account</a>
       </>}
       {state.loaded && signedIn && <>
-        <a className="nav-login" style={{ borderColor: 'var(--copper)', color: 'var(--copper)' }} href="/account">My account</a>
-        <button type="button" className="nav-signout" onClick={signOut}>Sign out</button>
+        <a className="nav-login nav-auth nav-auth--login" href="/account">My account</a>
+        <button type="button" className="nav-signout nav-auth nav-auth--signout" onClick={signOut}>Sign out</button>
       </>}
       <a className="nav-cta" href="/audit">Book Diagnostic</a>
     </nav>
-    <details className="mobile-nav">
-      <summary>Menu</summary>
-      <nav aria-label="Mobile navigation">
+    <details
+      ref={detailsRef}
+      className={`mobile-nav${mobileOpen ? ' mobile-nav--open' : ''}`}
+      onToggle={(e) => setMobileOpen(e.currentTarget.open)}
+    >
+      <summary onClick={toggleMobile} aria-label="Open menu">Menu</summary>
+      <nav aria-label="Mobile navigation" onClick={closeMobile}>
         {links.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
         {!state.loaded && <SkeletonNavAuth width={120} ariaLabel="Loading account controls" />}
         {state.loaded && !signedIn && <>
-          <a className="nav-login" style={{ borderColor: 'var(--copper)', color: 'var(--copper)' }} href="/login">Sign in</a>
-          <a className="nav-signup" style={{ background: 'var(--copper)', borderColor: 'var(--copper)' }} href="/signup">Create account</a>
+          <a className="nav-login nav-auth nav-auth--login" href="/login">Sign in</a>
+          <a className="nav-signup nav-auth nav-auth--signup" href="/signup">Create account</a>
         </>}
         {state.loaded && signedIn && <>
-          <a className="nav-login" style={{ borderColor: 'var(--copper)', color: 'var(--copper)' }} href="/account">My account</a>
-          <button type="button" className="nav-signout" onClick={signOut}>Sign out</button>
+          <a className="nav-login nav-auth nav-auth--login" href="/account">My account</a>
+          <button type="button" className="nav-signout nav-auth nav-auth--signout" onClick={signOut}>Sign out</button>
         </>}
         <a className="nav-cta" href="/audit">Book Diagnostic</a>
       </nav>
