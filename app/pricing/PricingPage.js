@@ -56,19 +56,11 @@ const FAQS = Object.freeze([
 ]);
 
 export default function PricingPage() {
-  const recommendedByRegion = (region) => {
-    const [lite, standard, pro] = region;
-    return { Lite: lite, Standard: standard, Pro: pro };
-  };
-
-  const indiaPricing = PRICING_OFFERS.map((offer) => offer.india);
-  const intlPricing = PRICING_OFFERS.map((offer) => offer.intl);
-
   return (
     <>
       <SiteHeader />
       <main className="page pricing-page">
-        <section className="pricing-hero">
+        <section className="pricing-hero" aria-label="Pricing introduction">
           <div className="pricing-hero-inner">
             <span className="eyebrow">Pricing</span>
             <h1>Five leak categories. Three sizes. One truth standard.</h1>
@@ -81,30 +73,30 @@ export default function PricingPage() {
               <Link className="button" href="/audit">Book Diagnostic</Link>
               <Link className="button secondary" href="/systems">Browse Systems</Link>
             </div>
-          </div>
-          <div className="pricing-hero-region" aria-label="Region selector">
-            <PricingRegionToggle />
-            <p className="pricing-hero-region-help">
-              India uses fixed INR. International uses fixed USD. No live FX.
-            </p>
+            <div className="pricing-hero-region" aria-label="Region selector">
+              <span className="pricing-hero-region-label">Show prices in</span>
+              <PricingRegionToggle />
+              <p className="pricing-hero-region-help">
+                India uses fixed INR. International uses fixed USD. No live FX.
+              </p>
+            </div>
+            <ul className="pricing-hero-trust" aria-label="Pricing trust">
+              <li><span className="dot" aria-hidden="true" />Verified scope, no live FX</li>
+              <li><span className="dot" aria-hidden="true" />Both regions, fixed tier sizes</li>
+              <li><span className="dot" aria-hidden="true" />Audit-first — nothing changes until confirmed</li>
+            </ul>
           </div>
         </section>
 
         <section className="pricing-tiers" aria-label="Tier scope overview">
           {PRICING_TIERS.map((tier) => (
             <article key={tier} className={`pricing-tier${tier === 'Standard' ? ' recommended' : ''}`}>
-              <span className="pricing-tier-name">{tier}</span>
               <span className="pricing-tier-pillar">{TIER_PILLAR[tier]}</span>
+              <span className="pricing-tier-name">{tier}</span>
               <p className="pricing-tier-desc">{TIER_CLARITY[tier]}</p>
             </article>
           ))}
         </section>
-
-        <ul className="pricing-hero-trust" aria-label="Pricing trust">
-          <li><span className="dot" aria-hidden="true" />Verified scope, no live FX</li>
-          <li><span className="dot" aria-hidden="true" />Both regions, fixed tier sizes</li>
-          <li><span className="dot" aria-hidden="true" />Audit-first — nothing changes until confirmed</li>
-        </ul>
 
         <section className="pricing-grid-section" aria-label="Offer price matrix">
           <div className="pricing-grid-header">
@@ -120,7 +112,6 @@ export default function PricingPage() {
 
           <div className="pricing-grid">
             {PRICING_OFFERS.map((offer) => {
-              const tiersByRegion = { india: offer.india, intl: offer.intl };
               const isPopular = offer.popular === true;
               return (
                 <article
@@ -130,8 +121,10 @@ export default function PricingPage() {
                   aria-label={isPopular ? `${offer.name} — most popular offer` : offer.name}
                 >
                   {isPopular && <span className="pricing-badge">Most popular</span>}
-                  <h3>{offer.name}</h3>
-                  <p className="pricing-desc">{offer.description}</p>
+                  <header className="pricing-card-head">
+                    <h3>{offer.name}</h3>
+                    <p className="pricing-desc">{offer.description}</p>
+                  </header>
                   <div className="pricing-card-price-anchor" aria-label={`Lead price for ${offer.name}`}>
                     <span className="pricing-card-price-anchor-label">From</span>
                     <span className="pricing-card-price-anchor-value" data-region="india" data-price-role="lead">
@@ -161,10 +154,10 @@ export default function PricingPage() {
                             </span>
                             <span className="pricing-tier-row-price-block">
                               <span className="pricing-tier-row-price" data-region="india">
-                                {tiersByRegion.india[idx]}
+                                {offer.india[idx]}
                               </span>
                               <span className="pricing-tier-row-price" data-region="intl" hidden>
-                                {tiersByRegion.intl[idx]}
+                                {offer.intl[idx]}
                               </span>
                               <span
                                 className="pricing-tier-row-cta"
@@ -196,7 +189,7 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section className="pricing-guide">
+        <section className="pricing-guide" aria-label="Tier guide">
           <article>
             <p className="pricing-volume">Lite — single deliverable</p>
             <h3>Know before you build</h3>

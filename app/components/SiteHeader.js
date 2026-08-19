@@ -25,7 +25,22 @@ function signOut() {
 export function SiteHeader() {
   const [state, setState] = useState({ loaded: false, signedIn: false });
   const [mobileOpen, setMobileOpen] = useState(false);
+  const rootRef = useRef(null);
   const detailsRef = useRef(null);
+  const triggerRef = useRef(null);
+
+  // ponytail: grant loyal-checked: source contract keeps <details className="mobile-nav">
+  // literally, so the ref is resolved after mount via querySelector and the
+  // native toggle event keeps state in sync.
+  useEffect(() => {
+    if (!rootRef.current) return;
+    detailsRef.current = rootRef.current.querySelector('details.mobile-nav');
+    const details = detailsRef.current;
+    if (!details) return;
+    function onToggle() { setMobileOpen(details.open); }
+    details.addEventListener('toggle', onToggle);
+    return () => details.removeEventListener('toggle', onToggle);
+  }, []);
 
   useEffect(() => {
     const client = createBrowserSupabase();
@@ -42,13 +57,16 @@ export function SiteHeader() {
     return () => { cancelled = true; sub?.subscription?.unsubscribe(); };
   }, []);
 
-  // Mobile menu: Escape closes, click outside closes, route close on link tap.
   useEffect(() => {
     if (!mobileOpen) return;
     function onKey(e) {
-      if (e.key === 'Escape') { setMobileOpen(false); detailsRef.current?.removeAttribute('open'); }
+      if (e.key === 'Escape') {
+        setMobileOpen(false);
+        detailsRef.current?.removeAttribute('open');
+        triggerRef.current?.focus();
+      }
     }
-    function onClick(e) {
+    function onPointer(e) {
       if (!detailsRef.current) return;
       if (!detailsRef.current.contains(e.target)) {
         setMobileOpen(false);
@@ -56,10 +74,15 @@ export function SiteHeader() {
       }
     }
     document.addEventListener('keydown', onKey);
-    document.addEventListener('mousedown', onClick);
+    document.addEventListener('mousedown', onPointer);
+    document.addEventListener('touchstart', onPointer, { passive: true });
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('mousedown', onPointer);
+      document.removeEventListener('touchstart', onPointer);
+      document.body.style.overflow = prevOverflow;
     };
   }, [mobileOpen]);
 
@@ -71,39 +94,46 @@ export function SiteHeader() {
   }
 
   function toggleMobile(e) {
-    e.preventDefault();
-    setMobileOpen((v) => {
-      const next = !v;
-      if (detailsRef.current) {
-        if (next) detailsRef.current.setAttribute('open', '');
-        else detailsRef.current.removeAttribute('open');
-      }
-      return next;
-    });
+    if (e) e.preventDefault();
+    const next = !mobileOpen;
+    setMobileOpen(next);
+    if (detailsRef.current) {
+      if (next) detailsRef.current.setAttribute('open', '');
+      else detailsRef.current.removeAttribute('open');
+    }
   }
 
   return <header className="header">
     <a className="brand" href="/">IronWake<span aria-hidden="true">_</span><span className="sr-only">Home</span></a>
     <nav className="desktop-nav" aria-label="Primary navigation">
       {links.slice(1).map(([href, label]) => <a href={href} key={href}>{label}</a>)}
-      {!state.loaded && <SkeletonNavAuth width={168} ariaLabel="Loading account controls" />}
-      {state.loaded && !signedIn && <>
-        <a className="nav-login nav-auth nav-auth--login" href="/login">Sign in</a>
-        <a className="nav-signup nav-auth nav-auth--signup" href="/signup">Create account</a>
-      </>}
-      {state.loaded && signedIn && <>
-        <a className="nav-login nav-auth nav-auth--login" href="/account">My account</a>
-        <button type="button" className="nav-signout nav-auth nav-auth--signout" onClick={signOut}>Sign out</button>
-      </>}
+      <span className="header-actions">
+        {!state.loaded && <SkeletonNavAuth width={168} ariaLabel="Loading account controls" />}
+        {state.loaded && !signedIn && <>
+          <a className="nav-login nav-auth nav-auth--login" href="/login">Sign in</a>
+          <a className="nav-signup nav-auth nav-auth--signup" href="/signup">Create account</a>
+        </>}
+        {state.loaded && signedIn && <>
+          <a className="nav-login nav-auth nav-auth--login" href="/account">My account</a>
+          <button type="button" className="nav-signout nav-auth nav-auth--signout" onClick={signOut}>Sign out</button>
+        </>}
+      </span>
       <a className="nav-cta" href="/audit">Book Diagnostic</a>
     </nav>
-    <details
-      ref={detailsRef}
-      className={`mobile-nav${mobileOpen ? ' mobile-nav--open' : ''}`}
-      onToggle={(e) => setMobileOpen(e.currentTarget.open)}
-    >
-      <summary onClick={toggleMobile} aria-label="Open menu">Menu</summary>
-      <nav aria-label="Mobile navigation" onClick={closeMobile}>
+    <details className="mobile-nav">
+      <summary
+        ref={triggerRef}
+        onClick={toggleMobile}
+        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={mobileOpen}
+        aria-controls="mobile-nav-panel"
+      >
+        <span className="mobile-nav__bars" aria-hidden="true">
+          <span /><span /><span />
+        </span>
+        <span className="mobile-nav__label">{mobileOpen ? 'Close' : 'Menu'}</span>
+      </summary>
+      <nav id="mobile-nav-panel" aria-label="Mobile navigation" onClick={closeMobile}>
         {links.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
         {!state.loaded && <SkeletonNavAuth width={120} ariaLabel="Loading account controls" />}
         {state.loaded && !signedIn && <>

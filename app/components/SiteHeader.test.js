@@ -20,7 +20,7 @@ test('site header exposes every active route through native navigation', async (
   assert.match(source, /href="\/signup">Create account/);
   // ponytail: authenticated customer controls replace those
   assert.match(source, /href="\/account">My account/);
-  assert.match(source, /className="nav-signout"/);
+  assert.match(source, /className="[^"]*\bnav-signout\b/);
   // ponytail: no owner-only Login control in the public header
   assert.doesNotMatch(source, /href="\/login">Owner Login/);
 });

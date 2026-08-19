@@ -62,15 +62,14 @@ export default function Button({
     [isInactive, onClick]
   );
 
-  // Always emit the BEM variant modifier so CSS can rely on either contract
-  // (.button.secondary or .iw-button--secondary). Primary maps to base
-  // .button (copper fill) AND keeps .iw-button--primary for explicit opt-in.
-  const variantClass = `iw-button--${safeVariant}`;
+  // Primary maps to base .button (copper fill). Other variants layer both
+  // the legacy .button.{variant} class and the explicit BEM modifier so
+  // CSS can rely on either contract.
   const composedClass = [
     'button',
     safeVariant !== 'primary' ? safeVariant : '',
+    `iw-button--${safeVariant}`,
     `iw-button--${safeSize}`,
-    variantClass,
     block ? 'iw-button--block' : '',
     leadingIcon ? 'iw-button--has-leading' : '',
     trailingIcon ? 'iw-button--has-trailing' : '',

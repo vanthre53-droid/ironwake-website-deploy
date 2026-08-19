@@ -12,10 +12,13 @@ export function FlagshipHero({ auditLitePrice }) {
       <RevealSection stage={0} className="flagship-intro">
         <div className="flagship-intro-copy">
           <span className="eyebrow">IronWake // operational systems practice</span>
-          <h1 className="flagship-headline">
+          {/* v16: hero-heading-width (18ch) controls the H1 word wrap so the
+              two-line statement stays balanced on 1366px instead of pulling
+              wide and losing rhythm.                                              */}
+          <h1 className="flagship-headline hero-heading-width">
             The enquiry arrived. <span className="flagship-headline-accent">Where did it go?</span>
           </h1>
-          <p className="flagship-lede">
+          <p className="flagship-lede card-content-width">
             IronWake maps the handoff between enquiry, booking, and follow-up so
             a missed request never ends as a silent week. Smallest system that
             makes the next action visible — published, reviewed, verifiable.
