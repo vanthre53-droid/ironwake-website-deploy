@@ -4,6 +4,8 @@ import { DashboardDemo } from '../components/DashboardDemo';
 import { MotionReveal } from '../components/MotionReveal';
 import { JsonLd } from '../components/JsonLd';
 
+import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
+
 import { getHomepageJsonLd } from './seo/homepage';
 
 // ponytail: site copy that powers the homepage. Single source of truth so
@@ -262,6 +264,8 @@ export default function HomePage() {
           </div>
         </MotionReveal>
       </main>
+      <JsonLd data={organizationLd()} />
+      <JsonLd data={breadcrumbLd([{ name: 'Home', url: '/' }])} />
       <JsonLd data={getHomepageJsonLd({ auditLitePrice: PRICING.auditLitePrice })} />
     </>
   );

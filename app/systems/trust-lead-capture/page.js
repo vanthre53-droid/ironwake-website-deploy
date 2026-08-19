@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { TrustLeadCaptureSystem } from './TrustLeadCaptureSystem';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
 
 export const metadata = {
   title: 'Trust and Lead Capture — IronWake Systems',
@@ -15,5 +16,11 @@ export const metadata = {
 };
 
 export default function TrustLeadCapturePage() {
-  return <TrustLeadCaptureSystem />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: 'Home', url: '/' }, { name: 'Systems', url: '/systems' }, { name: 'Trust and Lead Capture', url: '/systems/trust-lead-capture' }])) }} />
+      <TrustLeadCaptureSystem />
+    </>
+  );
 }

@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { MotionReveal } from '../components/MotionReveal';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
 
 // ponytail: Industries index v13.
 // Every metric on this page ties back to a verified IronWake pipeline or is
@@ -51,6 +53,12 @@ const INDUSTRIES = [
 
 export default function IndustriesPage() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+        { name: 'Home', path: '/' },
+        { name: 'Industries', path: '/industries' },
+      ])) }} />
     <main className="shell" aria-labelledby="industries-hero-heading">
       <section className="hero compact industries-hero">
         <span className="eyebrow">Industries</span>
@@ -108,5 +116,6 @@ export default function IndustriesPage() {
         </section>
       </MotionReveal>
     </main>
+    </>
   );
 }

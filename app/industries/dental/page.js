@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { MotionReveal } from '../../components/MotionReveal';
 import { RoiCalculator } from './RoiCalculator';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
+import { canonicalUrl } from '../../../lib/seo.mjs';
 
 // ponytail: Dental industry landing page (v13 polish).
 // Stays non-clinical and non-diagnostic. The calculator is a real client island
@@ -35,6 +37,13 @@ const RELATED = [
 
 export default function DentalIndustryPage() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
+        { name: 'Home', path: '/' },
+        { name: 'Industries', path: '/industries' },
+        { name: 'Dental', path: '/industries/dental' },
+      ])) }} />
     <main className="shell" aria-labelledby="dental-hero-heading">
       <section className="hero compact dental-hero">
         <span className="eyebrow">Industries / Dental</span>
@@ -126,5 +135,6 @@ export default function DentalIndustryPage() {
         </section>
       </MotionReveal>
     </main>
+    </>
   );
 }

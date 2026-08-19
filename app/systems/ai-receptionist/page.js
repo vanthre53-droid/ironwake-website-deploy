@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { AiReceptionistSystem } from './AiReceptionistSystem';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
 
 export const metadata = {
   // ponytail: site assistant may be live; client AI Receptionist still requires separately scoped provider deployment.
@@ -16,5 +17,11 @@ export const metadata = {
 };
 
 export default function AiReceptionistPage() {
-  return <AiReceptionistSystem />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: 'Home', url: '/' }, { name: 'Systems', url: '/systems' }, { name: 'AI Receptionist Planning', url: '/systems/ai-receptionist' }])) }} />
+      <AiReceptionistSystem />
+    </>
+  );
 }

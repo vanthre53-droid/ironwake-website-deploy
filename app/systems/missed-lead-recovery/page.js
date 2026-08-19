@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { MissedLeadRecoverySystem } from './MissedLeadRecoverySystem';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
 
 export const metadata = {
   title: 'Missed Lead Recovery — IronWake Systems',
@@ -15,5 +16,11 @@ export const metadata = {
 };
 
 export default function MissedLeadRecoveryPage() {
-  return <MissedLeadRecoverySystem />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: 'Home', url: '/' }, { name: 'Systems', url: '/systems' }, { name: 'Missed Lead Recovery', url: '/systems/missed-lead-recovery' }])) }} />
+      <MissedLeadRecoverySystem />
+    </>
+  );
 }

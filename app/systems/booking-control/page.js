@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { BookingControlSystem } from './BookingControlSystem';
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
 
 export const metadata = {
   title: 'Booking Certainty — IronWake Systems',
@@ -15,5 +16,11 @@ export const metadata = {
 };
 
 export default function BookingControlPage() {
-  return <BookingControlSystem />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: 'Home', url: '/' }, { name: 'Systems', url: '/systems' }, { name: 'Booking Certainty', url: '/systems/booking-control' }])) }} />
+      <BookingControlSystem />
+    </>
+  );
 }

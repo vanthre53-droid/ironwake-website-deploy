@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { MotionReveal } from '../../components/MotionReveal';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 // ponytail: Dental clinics industry page (v13 polish).
 // Non-clinical, non-diagnostic, non-compliance. Only describes the IronWake
@@ -39,6 +40,9 @@ const RELATED = [
 
 export default function DentalClinicsIndustryPage() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: 'Home', url: '/' }, { name: 'Industries', url: '/industries' }, { name: 'Dental Clinics', url: '/industries/dental-clinics' }])) }} />
     <main className="shell" aria-labelledby="dc-hero-heading">
       <section className="hero compact dc-hero">
         <span className="eyebrow">Industries / Dental clinics</span>
@@ -133,5 +137,6 @@ export default function DentalClinicsIndustryPage() {
         </section>
       </MotionReveal>
     </main>
+    </>
   );
 }
