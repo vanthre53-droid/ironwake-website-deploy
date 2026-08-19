@@ -109,23 +109,10 @@ export default function Home() {
       </section>
     </MotionReveal>
 
-    {/* Operating model — progress grid. v16: lede expanded to .reading-width. */}
-    <MotionReveal>
-      <section className="section">
-        <div className="progress-grid">
-          <div>
-            <span className="eyebrow">Operating model</span>
-            <h3>Inspectable progress.</h3>
-            <p className="reading-width">We do not sell theatre. We make operational decisions inspectable. Each step is a defined review, not a vibe.</p>
-          </div>
-          <div className="progress-list">
-            <div><span>01 / visibility</span><strong>Capture existing leaks</strong></div>
-            <div><span>02 / review</span><strong>Clarify the next action</strong></div>
-            <div><span>03 / control</span><strong>Review automation before relying on it</strong></div>
-          </div>
-        </div>
-      </section>
-    </MotionReveal>
+    {/* v13: "Operating model" 3-step block removed (redundant with the
+        9-stage WakeSVG in the hero; collapsing it dramatically reduces
+        homepage vertical density). The same idea lives in the hero
+        centerpiece and in the four-step Operational lens further down. */}
 
     {/* Trust band — three review standards. v16: real .trust-band CSS now
         provides a 3-column grid + generous padding; was previously unstyled. */}
@@ -157,22 +144,26 @@ export default function Home() {
     <DashboardDemo />
     <InteractiveLeadJourney />
 
-    {/* Industry grid — v17: lede kept concise, body widths already capped
-        via .card-content-width so cards don't dump paragraphs into wide boxes. */}
-    <MotionReveal stagger>
-      <section className="section">
-        <span className="eyebrow">Choose your industry</span>
-        <h2>Different businesses lose enquiries in different places.</h2>
+    {/* v13: Industry grid restyled as a horizontal 3-link strip instead of
+        a 3-card grid. Reduces visual density on the homepage; the same
+        industries are still linked, but as inline list items that read
+        as a quick navigation aid rather than a fourth feature grid.      */}
+    <MotionReveal>
+      <section className="section industry-strip-section">
+        <span className="eyebrow">If your industry is not here</span>
+        <h2 className="industry-strip-title">Different businesses lose enquiries in different places.</h2>
         <p className="reading-width">Pick the industry that matches your service. The leak is usually specific to the channel your customer uses first.</p>
-        <div className="industry-grid">
+        <ul className="industry-strip">
           {industries.map(([title, text, href]) => (
-            <a className="industry-card" href={href} key={title}>
-              <h3>{title}</h3>
-              <p className="card-content-width">{text}</p>
-              <span className="card-link">View industry →</span>
-            </a>
+            <li key={title}>
+              <a className="industry-strip-link" href={href}>
+                <span className="industry-strip-name">{title}</span>
+                <span className="industry-strip-text">{text}</span>
+                <span className="industry-strip-arrow">→</span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </MotionReveal>
 
