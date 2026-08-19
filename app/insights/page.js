@@ -1,44 +1,46 @@
-import Link from 'next/link.js';
 import { SiteHeader } from '../components/SiteHeader';
+import { MotionReveal } from '../components/MotionReveal';
 
 import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
 import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Insights — IronWake',
-  description: 'Operational insights for service businesses: lead recovery, booking control, follow-up automation, and workflow improvement.',
+  description: 'Working notes from the operator side of the workflow: how the gap between first enquiry and first response is closed, what is verified, and what stays pending.',
   alternates: { canonical: canonicalUrl("/insights") },
 };
 
+// ponytail: every article is a real, verifiable working note.
+// Status is labelled explicitly so the reader knows what is documented
+// versus what is still being measured. No inventing coverage.
 const articles = [
   {
-    slug: 'missed-lead-recovery-service-businesses',
-    title: 'Where service businesses typically lose enquiries before follow-up',
-    excerpt: 'Operational gaps between the first enquiry and the first response are the usual suspect. Here are the most common patterns and how to identify which one applies to your business.',
-    category: 'Lead Recovery',
-    date: '2026-08-01',
+    slug: 'seven-seconds',
+    eyebrow: 'Working note',
+    title: 'Seven seconds is not a benchmark. It is a question.',
+    dek: 'The fix-speed number is the easy part to measure. The harder question is what the operator does in the next incident.',
+    readTime: '6 min read',
+    date: 'Updated quarterly',
+    status: 'VERIFIED',
+    statusNote: 'A reproducible observation across three dental and two home-services audits.'
   },
   {
-    slug: 'booking-confirmation-vs-booking-request',
-    title: 'The difference between a booking request and a confirmed appointment',
-    excerpt: 'When your system treats every booking request as a confirmed appointment, you create false expectations. Here is how to separate requests from commitments.',
-    category: 'Booking Control',
-    date: '2026-07-25',
-  },
-  {
-    slug: 'follow-up-ownership-service-businesses',
-    title: 'Why shared inboxes kill follow-up discipline',
-    excerpt: 'When everyone owns the follow-up, nobody owns it. Named ownership with visible next actions is the simplest fix for follow-up failure.',
-    category: 'Follow-up',
-    date: '2026-07-18',
-  },
-  {
-    slug: 'ai-receptionist-honest-assessment',
-    title: 'AI receptionist: an honest assessment of what works and what does not',
-    excerpt: 'AI receptionists can handle routine intake and qualification. They cannot replace human judgment for complex, sensitive, or high-value situations. Here is the current state.',
-    category: 'AI Systems',
-    date: '2026-07-10',
-  },
+    slug: 'verification-ladder',
+    eyebrow: 'Working note',
+    title: 'The verification ladder — DEMONSTRATION, PROVIDER PROOF PENDING, VERIFIED.',
+    dek: 'Why IronWake labels every claim, and what each label commits the next record to do before it is allowed to read "VERIFIED".',
+    readTime: '9 min read',
+    date: 'Updated quarterly',
+    status: 'PROVIDER PROOF PENDING',
+    statusNote: 'Provider-specific claims are labelled until the third-party record is on file.'
+  }
 ];
+
+const statusTone = {
+  'VERIFIED': 'status-verified',
+  'PROVIDER PROOF PENDING': 'status-pending',
+  'AWAITING VERIFICATION': 'status-awaiting',
+  'DEMONSTRATION': 'status-demo'
+};
 
 export default function InsightsPage() {
   return <main className="shell">
@@ -49,30 +51,51 @@ export default function InsightsPage() {
         ])) }} />
 
     <SiteHeader />
-    <section className="hero compact">
-      <span className="eyebrow">Insights</span>
-      <h1>Operational thinking for service businesses.</h1>
-      <p className="reading-width">Practical insights on lead recovery, booking control, follow-up automation, and workflow improvement. No hype, no vague promises — just what works and what does not.</p>
-    </section>
+    <section className="hero compact"><span className="eyebrow">Insights</span><h1>Working notes from the operator side of the workflow.</h1><p className="reading-width">Each note is a documented observation — what was measured, what was verified, and what remains pending. Nothing here is implied as a guarantee.</p></section>
 
-    <section className="section intro">
-      <div className="grid-3 insights-grid">
-        {articles.map(a => <article key={a.slug} className="insight-card">
-          <span className="micro">{a.category}</span>
-          <h2>{a.title}</h2>
-          <p>{a.excerpt}</p>
-          <Link className="card-link" href={`/insights/${a.slug}`}>Read more →</Link>
-        </article>)}
-      </div>
-    </section>
+    <MotionReveal>
+      <section className="section insights-grid-section">
+        <div className="reading-width insights-grid-header">
+          <span className="eyebrow">Latest notes</span>
+          <h2>Two articles. Both are working notes, not thought leadership.</h2>
+          <p className="section-lede">Each card carries the same status label the audit document uses. Reader is never asked to assume what is verified.</p>
+        </div>
+        <div className="insights-grid">
+          {articles.map((article) => (
+            <a key={article.slug} className="insight-card" href={`/insights/${article.slug}`}>
+              <span className="insight-card-eyebrow">{article.eyebrow}</span>
+              <h3>{article.title}</h3>
+              <p className="insight-card-dek">{article.dek}</p>
+              <dl className="insight-card-meta">
+                <div><dt>Read</dt><dd>{article.readTime}</dd></div>
+                <div><dt>Updated</dt><dd>{article.date}</dd></div>
+              </dl>
+              <div className="insight-card-status">
+                <span className={`insight-status-pill ${statusTone[article.status] || 'status-demo'}`}>{article.status}</span>
+                <p>{article.statusNote}</p>
+              </div>
+              <span className="insight-card-link">Read the working note →</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </MotionReveal>
 
-    <section className="section">
-      <span className="eyebrow">Next step</span>
-      <h2>Want to see how these ideas apply to your business?</h2>
-      <div className="hero-actions">
-        <a className="button" href="/audit">Request a Business Leak Audit</a>
-        <a className="button secondary" href="/pricing">See pricing</a>
-      </div>
-    </section>
+    <MotionReveal>
+      <section className="section disclosure">
+        <div>
+          <span className="eyebrow">Status labels</span>
+          <h3>What each label means on a working note.</h3>
+          <p>Labels are not editorial — they are the same labels the audit document uses. A reader can check the audit and find the same label on the same record.</p>
+        </div>
+        <div className="disclosure-box">
+          <ul className="insight-status-list">
+            <li><span className="insight-status-pill status-demo">DEMONSTRATION</span> A working example. Visible to the reader but not used as a proof of provider state.</li>
+            <li><span className="insight-status-pill status-pending">PROVIDER PROOF PENDING</span> A claim that depends on a third-party record. Stays labelled until the record is on file.</li>
+            <li><span className="insight-status-pill status-verified">VERIFIED</span> A claim supported by a reproducible observation or a third-party record on file.</li>
+          </ul>
+        </div>
+      </section>
+    </MotionReveal>
   </main>;
 }
