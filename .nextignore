@@ -1,0 +1,16 @@
+# Next.js ignore file — Turbopack/webpack will not bundle or hash files in these paths.
+# Keeps large evidence/screenshot assets from breaking the build with OOM.
+
+/reports/
+/.opencode/
+/graphify-out/
+/.ironwake/
+/.workers/
+/.worktrees/
+/.tmp/
+/coverage/
+/.next/
+/node_modules/
+*.log
+*.tmp
+*.bak
