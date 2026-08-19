@@ -1,6 +1,6 @@
 {
   "maxProductionAttempts": 14,
-  "productionAttemptsUsed": 10,
+  "productionAttemptsUsed": 11,
   "lastAttemptFailedProductionOnly": true,
   "ownerOverrideNote": "Owner 'you have new 5 more deploy chances' — 2026-08-18T09:45Z. Budget extended 9 -> 14 to enable v13(b1/b2) UI/UX/colour/button work deploys + final consolidated release. Attempt #14 was recorded as used by a manual bump that never reached Cloudflare; this file corrects productionAttemptsUsed back to the real ledger count (9) so the 5 remaining deploys are honest attempts, not phantom ones.",
   "workerName": "ironwake",
