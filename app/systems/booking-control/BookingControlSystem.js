@@ -1,44 +1,160 @@
 'use client';
-
 import { useState } from 'react';
-import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 import { PricingReference } from '../../components/PricingReference';
 
-const states = [
-  ['requested', 'Requested', 'A visitor submits a booking request. Nothing is confirmed yet: this is a request, not a hold on a calendar.'],
-  ['checking', 'Checking availability', 'The request is being checked against a provider calendar. No slot is held or promised at this stage.'],
-  ['confirmed', 'Confirmed', 'Only a provider or owner confirmation moves a request here. Form submission alone can never reach this state.'],
-  ['needs-alternative', 'Needs alternative', 'The requested slot could not be held, and an alternative is being sought instead of failing silently.'],
-  ['provider-failed', 'Provider failed', 'The calendar provider could not be reached. This is shown honestly rather than presented as a successful booking.']
+const STATES = [
+  {
+    id: 'requested',
+    label: 'Requested',
+    description: 'Customer submitted the form. No provider has acknowledged the slot.',
+    proof: 'Form submission alone can never reach this state.',
+    confirmed: false,
+  },
+  {
+    id: 'confirmed',
+    label: 'Confirmed',
+    description:
+      'Provider (calendar, scheduling, or receptionist) has acknowledged the slot and returned a confirmation token.',
+    proof: 'Provider acknowledgement is required.',
+    confirmed: true,
+  },
+  {
+    id: 'disputed',
+    label: 'Disputed',
+    description:
+      'The customer or operator has flagged the slot. The system marks it for review instead of silently confirming.',
+    proof: 'Operator acknowledgement is required to clear.',
+    confirmed: false,
+  },
 ];
 
-const after = [
-  ['05 / after', 'Completed', 'The appointment happened as scheduled.'],
-  ['06 / after', 'Cancelled', 'The visitor or the business cancelled the confirmed slot.'],
-  ['07 / after', 'Rescheduled', 'The confirmed slot moved to a new time, tracked as a state change, not a new unrelated record.'],
-  ['08 / after', 'No-show', 'The confirmed slot passed without the visitor attending.']
+const CAPABILITIES = [
+  'Separate *requested* and *confirmed* slot states on every booking record.',
+  'Reject form-submission-only bookings from being labelled as confirmed.',
+  'Surface the booking state in the operator dashboard and the customer reply.',
+  'Log provider acknowledgement with the actual confirmation token.',
 ];
 
 export function BookingControlSystem() {
-  const [active, setActive] = useState(states[0][0]);
-  const current = states.find(([id]) => id === active);
-  return <main className="shell">
-    <SiteHeader />
-    <section className="hero compact"><span className="eyebrow">Systems / Booking Certainty</span><h1>A booking request and a confirmed slot are not the same state.</h1><p>This system maps the handoff from a booking request to a named next action and owner, and separates request-only intake from real provider confirmation. Capability, demo status, and provider status are listed below.</p></section>
-    <MotionReveal><section className="section intro"><span className="eyebrow">Step through the states</span><h2>Only a real confirmation reaches Confirmed.</h2><div role="group" aria-label="Booking states" className="stage-filter">{states.map(([id, label]) => <button type="button" key={id} aria-pressed={active === id} onClick={() => setActive(id)}>{label}</button>)}</div><div className="disclosure-box" role="status">{current[2]}</div></section></MotionReveal>
-    <MotionReveal><section className="journey"><span className="eyebrow">After a confirmation</span><h2>What a confirmed slot can become.</h2><div className="journey-grid">{after.map(([label, title, text]) => <article key={title}><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section></MotionReveal>
-    <MotionReveal><section className="section">
-      <span className="eyebrow">Capability vs status</span>
-      <h2>What this system delivers.</h2>
-      <div className="system-grid">
-        <article className="system-card"><span className="micro">Capability</span><h3>Request → review → confirmation state machine</h3><p>Five pre-confirmation states and four post-confirmation states. The transition into Confirmed only happens after a real provider or owner action.</p></article>
-        <article className="system-card"><span className="micro">Demo status</span><h3>Request-only UI works on this site today</h3><p>The booking request form records preference and starts a reviewed intake path. Confirmation is explicitly pending until a provider or owner approves.</p></article>
-        <article className="system-card"><span className="micro">Provider status</span><h3>Calendar provider connection pending</h3><p>A verified calendar provider is required before Confirmed state can fire. Cal.com, Google Calendar, or similar would be the integration target.</p></article>
-        <article className="system-card"><span className="micro">Client deployment</span><h3>Capability ready; provider-dependent part awaits account</h3><p>The implementation is built. Production confirmation for any specific business waits for the matching calendar provider account to be linked and verified.</p></article>
-      </div>
-    </section></MotionReveal>
-    <PricingReference offerId="booking-control" />
-    <MotionReveal><section className="section"><span className="eyebrow">Next step</span><h2>Review your own booking handoff.</h2><a className="button" href="/audit">Request a Business Leak Audit</a></section></MotionReveal>
-  </main>;
+  const [active, setActive] = useState('requested');
+
+  return (
+    <main className="shell" aria-labelledby="bc-hero-heading">
+      <section className="hero compact bc-hero">
+        <span className="eyebrow">Systems / Booking Certainty</span>
+        <h1 id="bc-hero-heading">Booking Certainty — keep requested and confirmed honestly separate.</h1>
+        <p className="reading-width">
+          Most booking systems silently confirm when the form submits. IronWake keeps the
+          gap visible: requested means requested, confirmed means a provider acknowledged
+          it. Nothing in between is described as confirmed.
+        </p>
+        <div className="hero-actions">
+          <a className="button" href="/audit">Request a Business Leak Audit</a>
+          <a className="button ghost" href="#states">See the three states</a>
+          <a className="button ghost" href="/pricing">View pricing</a>
+        </div>
+      </section>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="bc-what-heading">
+          <span className="eyebrow">What it does</span>
+          <h2 id="bc-what-heading">Three slot states, kept apart.</h2>
+          <p className="reading-width">
+            A booking record is one of three things: requested, confirmed, or disputed.
+            Each transition is logged with the evidence that produced it. Form submission
+            is never enough to reach the confirmed state.
+          </p>
+          <div className="bc-state-tabs" role="tablist" aria-label="Booking slot states">
+            {STATES.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                role="tab"
+                aria-pressed={active === s.id}
+                className={`bc-state-tab ${active === s.id ? 'is-active' : ''} ${s.confirmed ? 'is-confirmed' : ''}`}
+                onClick={() => setActive(s.id)}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+          <div className="bc-state-display" id="states" role="region" aria-live="polite">
+            {STATES.filter((s) => s.id === active).map((s) => (
+              <article key={s.id} className="bc-state-card">
+                <span className="micro">{s.confirmed ? 'confirmed' : 'pending'}</span>
+                <h3>{s.label}</h3>
+                <p>{s.description}</p>
+                <p className="bc-state-proof">{s.proof}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="bc-how-heading">
+          <span className="eyebrow">How it works</span>
+          <h2 id="bc-how-heading">Capability versus status.</h2>
+          <p className="reading-width">
+            The capability list below is what the system is built to do. The status
+            column tells you which of those capabilities are wired to a verified
+            provider today.
+          </p>
+          <div className="bc-capability-grid" role="list">
+            {CAPABILITIES.map((cap, i) => (
+              <article key={cap} className="bc-capability" role="listitem">
+                <span className="micro">0{i + 1} / capability</span>
+                <h3>{cap}</h3>
+                <p>Each capability is documented in the audit; none is described as
+                  live without provider evidence.</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="bc-outcomes-heading">
+          <span className="eyebrow">Outcomes</span>
+          <h2 id="bc-outcomes-heading">What changes for the operator.</h2>
+          <p className="reading-width">
+            Operators stop chasing phantom bookings. The dashboard shows the actual state
+            of every slot. No fabricated metrics, no fake no-show rates.
+          </p>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="bc-fit-heading">
+          <span className="eyebrow">Industry fit</span>
+          <h2 id="bc-fit-heading">Where this system is scoped.</h2>
+          <div className="system-grid" role="list">
+            <a className="system-card" href="/industries/dental-clinics" role="listitem">
+              <span className="micro">01 / dental clinics</span>
+              <h3>Dental clinics</h3>
+              <p>Slot control without promising instant confirmation.</p>
+            </a>
+            <a className="system-card" href="/industries/salons-spas" role="listitem">
+              <span className="micro">02 / salons and spas</span>
+              <h3>Salons and spas</h3>
+              <p>Same-day and next-day slot tracking for small service teams.</p>
+            </a>
+          </div>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="bc-pricing-heading">
+          <span className="eyebrow">Pricing reference</span>
+          <h2 id="bc-pricing-heading">Engagement tier and next step.</h2>
+          <PricingReference systemId="booking-control" />
+          <div className="hero-actions">
+            <a className="button" href="/audit">Request a Business Leak Audit</a>
+            <a className="button ghost" href="/pricing">View pricing</a>
+          </div>
+        </section>
+      </MotionReveal>
+    </main>
+  );
 }

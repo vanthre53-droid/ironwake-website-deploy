@@ -1,22 +1,19 @@
+import { Metadata } from 'next';
 import { AiReceptionistSystem } from './AiReceptionistSystem';
 
-import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
-import { canonicalUrl } from '../../../lib/seo.mjs';
 export const metadata = {
-  title: 'AI Receptionist Planning',
-  description: 'Requirements for a disclosed, human-supervised AI receptionist build. The IronWake site assistant is live and model-backed; client AI Receptionist deployments require a separately scoped provider build per client.',
-  alternates: { canonical: canonicalUrl("/systems/ai-receptionist") },
+  title: 'AI Receptionist Planning — IronWake Systems',
+  description:
+    'AI Receptionist system planning — what it would do, what is currently live on this site, and why the client receptionist is not yet a deployed provider.',
+  alternates: { canonical: '/systems/ai-receptionist' },
+  openGraph: {
+    title: 'AI Receptionist Planning — IronWake',
+    description:
+      'Plan view of an AI receptionist system: capability vs status, live site assistant, and the separately-scoped provider work.',
+    url: '/systems/ai-receptionist',
+  },
 };
 
 export default function AiReceptionistPage() {
-  return (
-    <>
-      <AiReceptionistSystem />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
-                    { name: "Home", path: "/" },
-                    { name: "ai-receptionist", path: "/systems/ai-receptionist" },
-            ])) }} />
-    </>
-  );
+  return <AiReceptionistSystem />;
 }

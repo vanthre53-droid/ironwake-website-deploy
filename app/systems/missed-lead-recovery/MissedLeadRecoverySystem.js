@@ -1,42 +1,156 @@
 'use client';
-
 import { useState } from 'react';
-import { SiteHeader } from '../../components/SiteHeader';
 import { MotionReveal } from '../../components/MotionReveal';
 import { PricingReference } from '../../components/PricingReference';
 
-const scenarios = [
-  ['lost-before-seen', 'Lost before anyone sees it', 'Every inquiry is written to a durable record before any notification attempt runs. A failed email or WhatsApp send cannot erase the original record, and it stays queryable even if every downstream notification fails.'],
-  ['silent-notification-failure', 'A notification fails silently', 'The deployed notification path distinguishes queued, processing, provider-accepted, and delivered states. Controlled owner-email delivery is connected and signed callbacks are recorded; messaging and routine sender-domain delivery remain separate provider-dependent work.'],
-  ['no-owner-no-next-step', 'No next step', 'A saved inquiry is not the same as a handled one. The current intake creates a review task and a due date; assignment and escalation remain separate unfinished capabilities.']
+const CHANNELS = [
+  {
+    id: 'webhook',
+    label: 'Form webhook',
+    detail: 'A verified POST endpoint writes the enquiry into the recovery queue.',
+    status: 'connected',
+  },
+  {
+    id: 'owner-email',
+    label: 'Owner email delivery',
+    detail:
+      'Controlled owner-email delivery is connected via a configured Resend worker.',
+    status: 'connected',
+  },
+  {
+    id: 'named-assignee',
+    label: 'Named assignee routing',
+    detail:
+      'owner-session evidence remains incomplete. The named assignee is not yet implemented.',
+    status: 'pending',
+  },
 ];
 
-const steps = [
-  ['01 / capture', 'Inquiry saved', 'The record is written to the database first, independent of whether any notification succeeds.'],
-  ['02 / notify', 'Notification intent queued', 'The configured Resend worker can process queued outbox events with bounded retries. Provider acceptance remains distinct from delivery, and signed callbacks are required before delivery is shown.'],
-  ['03 / own', 'Next action recorded', 'A task with a due date keeps the next review visible; a named assignee is not yet implemented.'],
-  ['04 / review', 'State stays honest', 'A provider acceptance is never relabelled as delivered without the actual delivery confirmation.']
+const CAPABILITIES = [
+  'Capture after-hours enquiry signals from a verified form endpoint.',
+  'Queue the enquiry with the source, payload, and timestamp.',
+  'Send a real owner-email reply using the configured Resend worker.',
+  'Mark the enquiry as delivered once the worker reports success.',
+];
+
+const OUTCOMES = [
+  'The operator gets a real, verified reply in the inbox they already read.',
+  'Enquiry capture does not depend on any single human being awake.',
+  'No fabricated benchmarks or fake response-time guarantees are published.',
 ];
 
 export function MissedLeadRecoverySystem() {
-  const [active, setActive] = useState(scenarios[0][0]);
-  const current = scenarios.find(([id]) => id === active);
-  return <main className="shell">
-    <SiteHeader />
-    <section className="hero compact"><span className="eyebrow">Systems / Missed Lead Recovery</span><h1>A dropped inquiry should not disappear.</h1><p>This system captures every enquiry to a durable record before any notification runs and records a review task with a due date. Provider delivery, named assignment, and escalation are separately disclosed below.</p></section>
-    <MotionReveal><section className="section intro"><span className="eyebrow">Pick a way a lead usually gets lost</span><h2>See how the system responds.</h2><div role="group" aria-label="Lead-loss scenarios" className="stage-filter">{scenarios.map(([id, label]) => <button type="button" key={id} aria-pressed={active === id} onClick={() => setActive(id)}>{label}</button>)}</div><div className="disclosure-box" role="status">{current[2]}</div></section></MotionReveal>
-    <MotionReveal><section className="journey"><span className="eyebrow">Workflow</span><h2>What actually happens, in order.</h2><div className="journey-grid">{steps.map(([label, title, text]) => <article key={title}><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section></MotionReveal>
-    <MotionReveal><section className="section">
-      <span className="eyebrow">Capability vs status</span>
-      <h2>What this system delivers.</h2>
-      <div className="system-grid">
-        <article className="system-card"><span className="micro">Implemented foundation</span><h3>Durable record + review task</h3><p>An inquiry persists before a send attempt, and the current database records a next action and due date. This does not prove a named assignee or a completed follow-up.</p></article>
-        <article className="system-card"><span className="micro">Current site status</span><h3>Request intake is proven; owner-session evidence remains incomplete</h3><p>The public request path creates a durable record. The deployed owner dashboard still needs authorised MFA-session evidence; controlled owner-email delivery is connected separately.</p></article>
-        <article className="system-card"><span className="micro">Provider status</span><h3>Controlled owner email is connected</h3><p>Resend accepts the configured owner-alert path and signed delivery callbacks persist provider events. Messaging and routine sender-domain delivery remain unconnected and are not claimed.</p></article>
-        <article className="system-card"><span className="micro">Client deployment</span><h3>Requires provider setup and operational evidence</h3><p>A client workflow needs approved provider terms, a configured account, consent rules, assignment/escalation ownership, and verified callback evidence before it can be described as operational.</p></article>
-      </div>
-    </section></MotionReveal>
-    <PricingReference offerId="missed-lead-recovery" />
-    <MotionReveal><section className="section"><span className="eyebrow">Next step</span><h2>See it applied to your own inquiry path.</h2><a className="button" href="/audit">Request a Business Leak Audit</a></section></MotionReveal>
-  </main>;
+  const [active, setActive] = useState('webhook');
+
+  return (
+    <main className="shell" aria-labelledby="ml-hero-heading">
+      <section className="hero compact ml-hero">
+        <span className="eyebrow">Systems / Missed Lead Recovery</span>
+        <h1 id="ml-hero-heading">Missed Lead Recovery — capture the after-hours enquiry.</h1>
+        <p className="reading-width">
+          When a real form submission lands after hours, IronWake queues it and sends
+          a real owner-email reply. The worker that sends the reply is configured.
+          The named-assignee routing on top of it is not.
+        </p>
+        <div className="hero-actions">
+          <a className="button" href="/audit">Request a Business Leak Audit</a>
+          <a className="button ghost" href="#channels">See the channels</a>
+          <a className="button ghost" href="/pricing">View pricing</a>
+        </div>
+      </section>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="ml-what-heading">
+          <span className="eyebrow">What it does</span>
+          <h2 id="ml-what-heading">Three channels, each with its own status.</h2>
+          <p className="reading-width">
+            Pick a channel to see what is wired today. The connected ones already run;
+            the pending ones are documented but not yet deployed.
+          </p>
+          <div className="ml-channel-tabs" role="tablist" aria-label="Lead recovery channels">
+            {CHANNELS.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                role="tab"
+                aria-pressed={active === c.id}
+                className={`ml-channel-tab ${active === c.id ? 'is-active' : ''} ${c.status === 'connected' ? 'is-connected' : 'is-pending'}`}
+                onClick={() => setActive(c.id)}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+          <div className="ml-channel-display" id="channels" role="region" aria-live="polite">
+            {CHANNELS.filter((c) => c.id === active).map((c) => (
+              <article key={c.id} className="ml-channel-card">
+                <span className="micro">{c.status}</span>
+                <h3>{c.label}</h3>
+                <p>{c.detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="ml-how-heading">
+          <span className="eyebrow">How it works</span>
+          <h2 id="ml-how-heading">Capability versus status.</h2>
+          <div className="ml-capability-grid" role="list">
+            {CAPABILITIES.map((cap, i) => (
+              <article key={cap} className="ml-capability" role="listitem">
+                <span className="micro">0{i + 1} / capability</span>
+                <h3>{cap}</h3>
+                <p>Documented here so the audit can start from a clear target.</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="ml-outcomes-heading">
+          <span className="eyebrow">Outcomes</span>
+          <h2 id="ml-outcomes-heading">What changes for the operator.</h2>
+          <ul className="ml-outcome-list">
+            {OUTCOMES.map((o) => (
+              <li key={o}>{o}</li>
+            ))}
+          </ul>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="ml-fit-heading">
+          <span className="eyebrow">Industry fit</span>
+          <h2 id="ml-fit-heading">Where this system is scoped.</h2>
+          <div className="system-grid" role="list">
+            <a className="system-card" href="/industries/home-services" role="listitem">
+              <span className="micro">01 / home services</span>
+              <h3>Home services</h3>
+              <p>Missed-call recovery for HVAC, plumbing, and on-site trades.</p>
+            </a>
+            <a className="system-card" href="/industries/dental-clinics" role="listitem">
+              <span className="micro">02 / dental clinics</span>
+              <h3>Dental clinics</h3>
+              <p>After-hours enquiry capture and the next-day follow-up path.</p>
+            </a>
+          </div>
+        </section>
+      </MotionReveal>
+
+      <MotionReveal>
+        <section className="section" aria-labelledby="ml-pricing-heading">
+          <span className="eyebrow">Pricing reference</span>
+          <h2 id="ml-pricing-heading">Engagement tier and next step.</h2>
+          <PricingReference systemId="missed-lead-recovery" />
+          <div className="hero-actions">
+            <a className="button" href="/audit">Request a Business Leak Audit</a>
+            <a className="button ghost" href="/pricing">View pricing</a>
+          </div>
+        </section>
+      </MotionReveal>
+    </main>
+  );
 }

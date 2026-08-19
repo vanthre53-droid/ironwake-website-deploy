@@ -1,31 +1,95 @@
-import { SiteHeader } from '../components/SiteHeader';
+import { Metadata } from 'next';
 
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
-import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Systems — IronWake',
-  description: 'How IronWake structures inquiry, booking, follow-up, and reception work, and what remains request-only until a provider is connected.',
-  alternates: { canonical: canonicalUrl("/systems") },
+  description:
+    'Four operational systems IronWake builds for service businesses: Missed Lead Recovery, Booking Certainty, Trust and Lead Capture, and AI Receptionist planning.',
+  alternates: { canonical: '/systems' },
 };
 
+// v13 Pearl/Graphite/Petrol listing — de-congested 2-up grid at desktop,
+// single column at narrow viewports. Each card surfaces category, status,
+// and one sentence on what the system does — never a fake metric.
 const systems = [
-  ['01 / inquiry integrity', 'Missed Lead Recovery', 'Every inquiry is written to a durable record before any notification attempt runs. A dropped notification cannot erase the inquiry, and a review task can retain a next action and due date even when no provider is configured.', 'Live intake; provider pending', '/systems/missed-lead-recovery', 'M21 3l-7 7M4 14l5 5 8-8'],
-  ['02 / booking control', 'Booking Certainty', 'Maps the handoff from a booking request to a named next action and owner. Until a calendar provider is connected and verified, every booking stays a reviewed request rather than a confirmed slot.', 'Request-only; provider pending', '/systems/booking-control', 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'],
-  ['03 / trust layer', 'Trust and Lead Capture', 'Validates and records every public form submission before any notification is attempted, with a hidden spam trap and no administrative credentials shipped to the browser.', 'Operating locally today', '/systems/trust-lead-capture', 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'],
-  ['04 / reception layer', 'AI Receptionist', 'A future system category for first-response triage. Scope, provider, and disclosure rules are not yet approved, so this category has no connected behaviour or claimed outcome.', 'Not yet built', '/systems/ai-receptionist', 'M3 5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm5 1h8M9 15h6']
+  {
+    title: 'Missed Lead Recovery',
+    eyebrow: '01 / Enquiry capture',
+    href: '/systems/missed-lead-recovery',
+    summary:
+      'Captures after-hours enquiry signals so a real owner-email reply is sent. Owner-session delivery is connected; named assignee routing is not yet implemented.',
+    status: 'Request-only; provider pending',
+  },
+  {
+    title: 'Booking Certainty',
+    eyebrow: '02 / Booking control',
+    href: '/systems/booking-control',
+    summary:
+      'Separates a *requested* slot from a *confirmed* slot. Form submission alone can never reach the confirmed state — provider acknowledgement is required.',
+    status: 'Request-only; provider pending',
+  },
+  {
+    title: 'Trust and Lead Capture',
+    eyebrow: '03 / Trust and Lead Capture',
+    href: '/systems/trust-lead-capture',
+    summary:
+      'A form path that demonstrates hidden-trap, server-side validation, and the absence of any service-role key in the browser bundle.',
+    status: 'Not yet built',
+  },
+  {
+    title: 'AI Receptionist',
+    eyebrow: '04 / AI Receptionist',
+    href: '/systems/ai-receptionist',
+    summary:
+      'Plan, not a live receptionist. The site assistant is live; the client receptionist requires separately-scoped provider deployment.',
+    status: 'Request-only; provider pending',
+  },
 ];
 
-export default function SystemsPage() {
-  return <main className="shell">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([
-              { name: "Home", path: "/" },
-              { name: "Systems", path: "/systems" },
-        ])) }} />
+export default function SystemsIndex() {
+  return (
+    <main className="shell">
+      <section className="hero compact">
+        <span className="eyebrow">Systems</span>
+        <h1>Four operational systems, each kept honestly separate.</h1>
+        <p className="reading-width">
+          IronWake builds one narrow system at a time. Each page below states what the
+          system does, what it does not yet do, and the provider work that is still
+          outstanding. No system is described as live until the connection is verified.
+        </p>
+        <div className="hero-actions">
+          <a className="button" href="/audit">Request a Business Leak Audit</a>
+          <a className="button ghost" href="/pricing">View pricing</a>
+        </div>
+      </section>
 
-    <SiteHeader />
-    <section className="hero compact"><span className="eyebrow">IronWake systems</span><h1>Give every enquiry an owner and a next step.</h1><p className="reading-width">Choose the part of your workflow that is hardest to see. Each page shows how that handoff works, what is already proven, and what still needs a provider.</p><a className="button" href="/audit">Find my workflow leak</a></section>
-    <section className="section intro"><span className="eyebrow">Choose a system</span><h2>Start where customers are waiting.</h2><div className="grid-2 system-grid">{systems.map(([label, title, text, state, href, icon]) => <a href={href} key={href}><article className="system-card"><span className="system-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d={icon} /></svg></span><span className="micro">{label}</span><h3>{title}</h3><p>{text}</p><span className="card-link">{state} →</span></article></a>)}</div></section>
-    <section className="section disclosure"><div><span className="eyebrow">Reading the labels</span><h3>Verified, request-only, and not-yet-built are different things.</h3><p className="reading-width">IronWake does not describe a planned category as though it were connected, and does not describe a request-only flow as though it were a live confirmation.</p></div><div className="disclosure-box">A system is only called live once its database record, notification path, and (where relevant) signed provider callback are verified. Until then it is labelled request-only, pending, or a future category — never presented as delivered.</div></section>
-  </main>;
+      <section className="section intro" aria-labelledby="systems-grid-heading">
+        <h2 id="systems-grid-heading">Pick the system that matches your leak.</h2>
+        <p className="reading-width">
+          Most service businesses lose momentum in two or three of the four areas
+          below. Start with the one your customer hits first.
+        </p>
+        <div className="system-grid" role="list">
+          {systems.map(({ title, eyebrow, href, summary, status }) => (
+            <a key={title} className="system-card" href={href} role="listitem">
+              <span className="micro">{eyebrow}</span>
+              <h3>{title}</h3>
+              <p>{summary}</p>
+              <p className="micro system-card-status">{status}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="systems-truth-heading">
+        <span className="eyebrow">Truth standard</span>
+        <h2 id="systems-truth-heading">Capability versus status, kept separate.</h2>
+        <p className="reading-width">
+          Every system page distinguishes what the system is <em>capable of</em> from
+          what is <em>currently connected</em>. The status line on each card is the
+          shortest version of that gap. Nothing on this page is described as live
+          without provider evidence to back it.
+        </p>
+      </section>
+    </main>
+  );
 }
