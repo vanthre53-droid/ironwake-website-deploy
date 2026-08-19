@@ -2542,3 +2542,115 @@ button, input, textarea { font: inherit; }
   font: 400 12px/1.65 var(--mono);
   color: var(--graphite);
 }
+
+/* WhatsApp conversation starter overlay */
+.wa-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: end center;
+  padding: 16px;
+}
+@media (min-width: 720px) { .wa-overlay { place-items: center; } }
+.wa-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 23, 18, .55);
+  backdrop-filter: blur(2px);
+}
+.wa-overlay__panel {
+  position: relative;
+  z-index: 1;
+  width: min(420px, 100%);
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 24px 60px rgba(28, 23, 18, .22);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.wa-overlay__close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--graphite);
+  cursor: pointer;
+}
+.wa-overlay__close:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
+}
+.wa-overlay__title {
+  margin: 0;
+  font: 600 20px/1.25 var(--display);
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.wa-overlay__lede {
+  margin: 0;
+  font: 400 13px/1.55 var(--sans);
+  color: var(--graphite);
+}
+.wa-overlay__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wa-overlay__label {
+  font: 500 12px/1.3 var(--mono);
+  color: var(--graphite);
+  letter-spacing: .02em;
+}
+.wa-overlay__input {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: 500 15px/1.3 var(--mono);
+  color: var(--ink);
+  background: var(--ivory);
+  width: 100%;
+  box-sizing: border-box;
+}
+.wa-overlay__input:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
+  border-color: var(--copper);
+}
+.wa-overlay__input[aria-invalid="true"] {
+  border-color: #b03a2e;
+}
+.wa-overlay__submit {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: var(--copper);
+  color: var(--white);
+  font: 600 14px/1 var(--display);
+  cursor: pointer;
+  letter-spacing: -.005em;
+}
+.wa-overlay__submit:hover { background: #a04327; }
+.wa-overlay__submit:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+.wa-overlay__submit:disabled { background: var(--graphite); cursor: progress; }
+.wa-overlay__status {
+  margin: 4px 2px 0;
+  font: 400 12px/1.55 var(--mono);
+  color: var(--graphite);
+}
+.wa-overlay__status code {
+  background: var(--ivory);
+  padding: 1px 6px;
+  border-radius: 6px;
+  font: 500 11px/1.4 var(--mono);
+  color: var(--ink);
+}
