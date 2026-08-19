@@ -65,6 +65,9 @@ export default function IndustriesPage() {
         <div className="hero-actions">
           <a className="button" href="/audit">Request a Business Leak Audit</a>
           <a className="button ghost" href="#industries">See the industries</a>
+          <a className="button ghost" href="/industries/home-services">Home services</a>
+          <a className="button ghost" href="/industries/dental-clinics">Dental clinics</a>
+          <a className="button ghost" href="/industries/salons-spas">Salons and spas</a>
           <a className="button ghost" href="/pricing">View pricing</a>
         </div>
       </section>

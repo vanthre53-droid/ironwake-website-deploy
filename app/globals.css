@@ -95,6 +95,28 @@
  --card-pad: clamp(18px, 2vw, 28px);
  --card-pad-lg: clamp(22px, 2.4vw, 34px);
 
+ /* ponytail: v18 — explicit section rhythm tokens. Every homepage section
+    binds to these four variables so the visual cadence is intentional, not
+    accidental. Apple principle: hierarchy before lines, spacing before
+    decoration.
+
+      TOP_SPACE    — air above the eyebrow / first element of a section.
+      BOTTOM_SPACE — air below the last element of a section (to next one).
+      HEADING_TO_BODY — air between the h2 and the paragraph below it.
+      BODY_TO_ACTION — air between the body paragraph and a CTA row.
+
+    Sections that want a calmer beat use the loose values; sections that want
+    a tighter beat override with the tight values. All clamp() so the rhythm
+    breathes across 1366 → 1920 viewports without per-breakpoint overrides. */
+ --space-section-top-loose:    clamp(112px, 12vw, 168px);
+ --space-section-bottom-loose: clamp(112px, 12vw, 168px);
+ --space-section-top-tight:    clamp(72px, 8vw, 104px);
+ --space-section-bottom-tight: clamp(72px, 8vw, 104px);
+
+ --space-heading-to-body: clamp(20px, 2.4vw, 28px);
+ --space-body-to-action: clamp(36px, 4vw, 56px);
+ --space-after-eyebrow:  14px;
+
  /* ponytail: local fallbacks until approved font files are supplied; do not ship remote font/CDN dependencies. */
  --display: Newsreader, "Liberation Serif", Georgia, serif;
  --body: Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -561,21 +583,39 @@ button, input, textarea { font: inherit; }
 @media (max-width: 960px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 680px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
 
-/* === v16 .section vertical rhythm (additive, no existing rules touched) ===
-   The old .section padding was 88px top/bottom on every section, which made
-   the homepage feel stacked and congested. New scale uses a clamp so 1366px
-   viewports get comfortable rhythm without blowing up on tall screens.
-   py:  clamp(72px, 9vw, 112px)  — was 88px
-   intro spacing: 50px from heading to grid (was 32px)                       */
-.section { padding-block: clamp(96px, 11vw, 144px); }
-.section h2 { margin: 14px 0 clamp(40px, 4.5vw, 64px); font-size: clamp(31px, 3.5vw, 51px); line-height: 1; letter-spacing: -.045em; }
-.section h2:not(.eyebrow + h2) + p,
-.section h2:not(.eyebrow + h2) + .reading-width + .system-grid,
-.section h2 + .reading-width { margin-top: clamp(20px, 2.5vw, 28px); }
-.section .eyebrow { display: inline-block; margin-bottom: 14px; }
+/* === v18 section rhythm (additive, no existing rules touched)
+   .section           — default TOP/BOTTOM = loose (~120-168px)
+   .section--tight    — alternate rhythm = tight (~72-104px)
+   The h2 → p gap uses HEADING_TO_BODY (clamp 20-28px).
+   The p → .actions gap uses BODY_TO_ACTION (clamp 36-56px).
+   These four tokens are the single source of truth for section cadence.    */
+.section {
+  padding-top:    var(--space-section-top-loose);
+  padding-bottom: var(--space-section-bottom-loose);
+  border-top: 1px solid var(--rule);
+}
+.section--tight {
+  padding-top:    var(--space-section-top-tight);
+  padding-bottom: var(--space-section-bottom-tight);
+}
+.section h2 {
+  margin: var(--space-after-eyebrow) 0 var(--space-heading-to-body);
+  font-size: clamp(31px, 3.5vw, 51px);
+  line-height: 1; letter-spacing: -.045em;
+}
+.section .eyebrow { display: inline-block; margin-bottom: var(--space-after-eyebrow); }
+.section .reading-width,
+.section .lede { margin: 0 0 var(--space-body-to-action); }
 /* ponytail: v13 — first section under the hero gets a slightly smaller top
    padding so the user lands in the content, not in another full-height gap. */
-.section.first-after-hero { padding-top: clamp(56px, 7vw, 96px); }
+.section.first-after-hero {
+  padding-top: clamp(56px, 7vw, 96px);
+}
+/* ponytail: v18 — rhythm helpers consumed by page.js. Every homepage
+   section is wrapped with one of these so its TOP_SPACE / BOTTOM_SPACE
+   come from the named token, never from ad-hoc CSS. */
+.section-rhythm-loose > :first-child { margin-top: 0; }
+.section-rhythm-tight > :first-child { margin-top: 0; }
 
 /* === v16 trust-band (additive — .trust-band/trust-grid/trust-lede/trust-meta
    were used in markup but had no CSS, so they inherited generic article styles

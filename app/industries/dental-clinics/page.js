@@ -47,8 +47,7 @@ export default function DentalClinicsIndustryPage() {
         </h1>
         <p className="reading-width">
           Lead capture, after-hours enquiry handling, and the audit trail owners
-          need for first-time patient consent. Not a clinical, diagnostic, or
-          compliance service.
+          need for first-time patient consent. Not a clinical, diagnostic, or compliance service.
         </p>
         <div className="hero-actions">
           <a className="button" href="/audit">Request a Business Leak Audit</a>
@@ -63,8 +62,7 @@ export default function DentalClinicsIndustryPage() {
           <span className="eyebrow">Scope</span>
           <h2 id="dc-scope-heading">Where IronWake stops.</h2>
           <p className="reading-width">
-            This page describes intake architecture only. IronWake is not medical,
-            diagnostic, legal, or compliance advice — and never substitutes for
+            This page describes intake architecture only. IronWake is not medical, diagnostic, legal, or compliance advice — and never substitutes for
             the clinical judgment of a licensed dentist.
           </p>
         </section>

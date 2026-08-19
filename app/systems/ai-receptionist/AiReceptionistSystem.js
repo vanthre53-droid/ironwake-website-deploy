@@ -43,7 +43,7 @@ export function AiReceptionistSystem() {
         </p>
         <div className="hero-actions">
           <a className="button" href="/audit">Request a reception workflow audit</a>
-          <a className="button ghost" href="#capability-status">Capability versus status</a>
+          <a className="button ghost" href="#capability-status">Capability vs status</a>
           <a className="button ghost" href="/pricing">View pricing</a>
         </div>
       </section>
@@ -51,7 +51,7 @@ export function AiReceptionistSystem() {
       <MotionReveal>
         <section className="section" id="capability-status" aria-labelledby="capability-heading">
           <span className="eyebrow">What it would do</span>
-          <h2 id="capability-heading">Capability versus status.</h2>
+          <h2 id="capability-heading">Capability vs status.</h2>
           <p className="reading-width">
             The four capabilities below describe what an AI receptionist is built to do
             for a service business. The status section after each capability states
