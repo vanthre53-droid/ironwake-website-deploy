@@ -9,7 +9,7 @@ test('homepage keeps truthful audit CTA and operating path', async () => {
   const combined = page + hero;
   assert.match(combined, /Map my leak/);
   assert.match(combined, /The enquiry arrived/);
-  assert.match(page, /No live receptionist provider is connected/);
+  assert.match(page, /No live receptionist connected/);
   assert.doesNotMatch(page, /Capability is built; live telephony/);
   // ponytail: SiteFooter is now in the global layout (app/layout.js), not per-page.
   const layout = await readFile(new URL('./layout.js', import.meta.url), 'utf8');
