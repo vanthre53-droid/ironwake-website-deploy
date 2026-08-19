@@ -134,8 +134,10 @@ export default function WhatsAppLauncher() {
     ? 'Open IronWake on WhatsApp'
     : providerOk
     ? 'Start a WhatsApp conversation with IronWake'
-    : 'WhatsApp — contact IronWake (real channel pending)';
-  const badge = hasRealNumber ? 'Live' : providerChecked && providerOk ? 'Live API' : 'Pending number';
+    : 'Contact IronWake on WhatsApp';
+  const badge = hasRealNumber ? 'Live' : providerOk ? 'Live API' : 'Message us';
+  // Never expose internal setup state to users — surface a clean brand CTA at all times.
+  const showLiveStyling = hasRealNumber || providerOk;
 
   return (
     <>
@@ -144,7 +146,7 @@ export default function WhatsAppLauncher() {
         onClick={handleFabClick}
         target={directLink ? '_blank' : undefined}
         rel={directLink ? 'noopener noreferrer' : undefined}
-        className={`wa-fab ${hasRealNumber || (providerChecked && providerOk) ? 'wa-fab--live' : 'wa-fab--fallback'}`}
+        className={`wa-fab ${showLiveStyling ? 'wa-fab--live' : 'wa-fab--neutral'}`}
         aria-label={label}
         title={label}
       >

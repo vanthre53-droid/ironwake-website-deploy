@@ -1,0 +1,336 @@
+{
+  "generatedAt": "2026-08-19T05:26:16.081Z",
+  "baseUrl": "https://ironwake.dev",
+  "host": "ironwake.dev",
+  "overall": "FAIL",
+  "counts": {
+    "FAIL": 3,
+    "PASS": 7
+  },
+  "total": 10,
+  "steps": [
+    {
+      "id": "01",
+      "name": "Homepage HTML + brand metadata",
+      "url": "https://ironwake.dev/",
+      "status": "FAIL",
+      "bytes": 0,
+      "contentType": "",
+      "durationMs": 30004,
+      "startedAt": "2026-08-19T05:25:30.952Z",
+      "checks": [],
+      "error": "This operation was aborted",
+      "response": null
+    },
+    {
+      "id": "02",
+      "name": "robots.txt shape",
+      "url": "https://ironwake.dev/robots.txt",
+      "status": "PASS",
+      "bytes": 247,
+      "contentType": "text/plain",
+      "durationMs": 963,
+      "startedAt": "2026-08-19T05:26:00.956Z",
+      "checks": [
+        {
+          "label": "User-Agent: * present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "Host: https://ironwake.dev present",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "Sitemap: https://ironwake.dev/sitemap.xml present",
+          "pass": true,
+          "detail": ""
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "text/plain",
+        "bytes": 247
+      }
+    },
+    {
+      "id": "03",
+      "name": "Sitemap validity",
+      "url": "https://ironwake.dev/sitemap.xml",
+      "status": "PASS",
+      "bytes": 6192,
+      "contentType": "application/xml",
+      "durationMs": 98,
+      "startedAt": "2026-08-19T05:26:01.919Z",
+      "checks": [
+        {
+          "label": "XML tag balance <url>…</url>",
+          "pass": true,
+          "detail": "opens=33 closes=33"
+        },
+        {
+          "label": "at least 20 <loc> entries",
+          "pass": true,
+          "detail": "count=33"
+        },
+        {
+          "label": "all URLs start with https://ironwake.dev",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "no netlify.app URLs",
+          "pass": true,
+          "detail": ""
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/xml",
+        "bytes": 6192
+      }
+    },
+    {
+      "id": "04",
+      "name": "5 random sitemap routes all return 200",
+      "url": "/pricing, /industries/dental-clinics, /work/voltix, /systems/ai-receptionist, /insights",
+      "status": "PASS",
+      "bytes": 0,
+      "contentType": "",
+      "durationMs": 1780,
+      "startedAt": "2026-08-19T05:26:02.017Z",
+      "checks": [
+        {
+          "label": "/pricing → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/industries/dental-clinics → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/work/voltix → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/systems/ai-receptionist → 200",
+          "pass": true,
+          "detail": "got 200"
+        },
+        {
+          "label": "/insights → 200",
+          "pass": true,
+          "detail": "got 200"
+        }
+      ],
+      "error": null,
+      "response": {
+        "probes": [
+          {
+            "route": "/pricing",
+            "status": 200,
+            "bytes": 81117,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/industries/dental-clinics",
+            "status": 200,
+            "bytes": 35925,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/work/voltix",
+            "status": 200,
+            "bytes": 36575,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/systems/ai-receptionist",
+            "status": 200,
+            "bytes": 33153,
+            "contentType": "text/html; charset=utf-8"
+          },
+          {
+            "route": "/insights",
+            "status": 200,
+            "bytes": 33897,
+            "contentType": "text/html; charset=utf-8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "05",
+      "name": "POST /api/chat (public, no auth)",
+      "url": "https://ironwake.dev/api/chat",
+      "status": "PASS",
+      "bytes": 342,
+      "contentType": "application/json",
+      "durationMs": 5561,
+      "startedAt": "2026-08-19T05:26:03.797Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "reply is a non-empty string",
+          "pass": true,
+          "detail": "reply=Hi — IronWake assistant here. We build operational systems for service businesses: lead capture, booking, follow-up, and"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 342
+      }
+    },
+    {
+      "id": "06",
+      "name": "POST /api/audit (fake client, returns UUID)",
+      "url": "https://ironwake.dev/api/audit",
+      "status": "PASS",
+      "bytes": 98,
+      "contentType": "application/json",
+      "durationMs": 4549,
+      "startedAt": "2026-08-19T05:26:09.359Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "response carries a UUID or received=true ack",
+          "pass": true,
+          "detail": "candidate=undefined received=true"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 201,
+        "contentType": "application/json",
+        "bytes": 98
+      }
+    },
+    {
+      "id": "07",
+      "name": "POST /api/voice/session (route is POST, not GET)",
+      "url": "https://ironwake.dev/api/voice/session",
+      "status": "PASS",
+      "bytes": 406,
+      "contentType": "application/json",
+      "durationMs": 1428,
+      "startedAt": "2026-08-19T05:26:13.908Z",
+      "checks": [
+        {
+          "label": "response is JSON object",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "ok=true",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "accessToken present",
+          "pass": true,
+          "detail": "accessToken=eyJhbGciOiJIUzI1NiJ9…"
+        },
+        {
+          "label": "callId present",
+          "pass": true,
+          "detail": "callId=call_8eef343634b66b6…"
+        },
+        {
+          "label": "no webhook URL expected (SDK uses accessToken directly)",
+          "pass": true,
+          "detail": "voice route is token-based, not webhook-based"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 406
+      }
+    },
+    {
+      "id": "08",
+      "name": "apple-icon.svg content-type",
+      "url": "https://ironwake.dev/apple-icon.svg",
+      "status": "FAIL",
+      "bytes": 25605,
+      "contentType": "text/html; charset=utf-8",
+      "durationMs": 180,
+      "startedAt": "2026-08-19T05:26:15.336Z",
+      "checks": [],
+      "error": "expected 200, got 404",
+      "response": {
+        "status": 404,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 25605
+      }
+    },
+    {
+      "id": "09",
+      "name": "manifest.webmanifest JSON",
+      "url": "https://ironwake.dev/manifest.webmanifest",
+      "status": "PASS",
+      "bytes": 572,
+      "contentType": "application/manifest+json",
+      "durationMs": 159,
+      "startedAt": "2026-08-19T05:26:15.516Z",
+      "checks": [
+        {
+          "label": "content-type is manifest JSON",
+          "pass": true,
+          "detail": "got \"application/manifest+json\""
+        },
+        {
+          "label": "parses as JSON",
+          "pass": true,
+          "detail": ""
+        },
+        {
+          "label": "name field present",
+          "pass": true,
+          "detail": "name=IronWake — Systems that answer"
+        },
+        {
+          "label": "start_url field present",
+          "pass": true,
+          "detail": "start_url=/ scope=undefined"
+        }
+      ],
+      "error": null,
+      "response": {
+        "status": 200,
+        "contentType": "application/manifest+json",
+        "bytes": 572
+      }
+    },
+    {
+      "id": "10",
+      "name": "axe-core WCAG scan (6 routes)",
+      "url": "https://ironwake.dev/, https://ironwake.dev/pricing, https://ironwake.dev/systems, https://ironwake.dev/work, https://ironwake.dev/scope, https://ironwake.dev/contact",
+      "status": "FAIL",
+      "bytes": 0,
+      "contentType": "",
+      "durationMs": 400,
+      "startedAt": "2026-08-19T05:26:15.675Z",
+      "checks": [],
+      "error": "Could not find Chrome (ver. 127.0.6533.88). This can occur if either\n 1. you did not perform an installation before running the script (e.g. `npx puppeteer browsers install chrome`) or\n 2. your cache path is incorrectly configured (which is: /home/shadowlingo/.cache/puppeteer).\nFor (2), check out our guide on configuring puppeteer at https://pptr.dev/guides/configuration.",
+      "response": null
+    }
+  ]
+}

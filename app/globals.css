@@ -737,15 +737,63 @@ button, input, textarea { font: inherit; }
 .pricing-card-price-anchor-label { font: 600 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--graphite); }
 .pricing-card-price-anchor-value { font: 600 26px/1.1 var(--display); color: var(--ink); letter-spacing: -.018em; }
 .pricing-card-price-anchor-value[hidden] { display: none; }
-/* ponytail: balanced 5-card grid (no orphan). Every card spans 1 of 5
-   equal columns on desktop, 1 of 3 on tablet, 1 of 2 on laptop-sm, and
-   full width on mobile. The 5th card is no longer pinned to a half-row. */
-.pricing-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; }
-.pricing-card { grid-column: auto; border: 1px solid var(--rule); border-radius: 14px; background: var(--white); padding: 26px 22px; display: flex; flex-direction: column; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; position: relative; box-shadow: 0 1px 0 rgb(28 26 23 / .02); }
-.pricing-card:hover { border-color: var(--copper); transform: translateY(-4px); box-shadow: 0 14px 36px -22px rgb(185 77 47 / .35); }
-.pricing-card.popular { border: 2px solid var(--copper); box-shadow: 0 18px 40px -24px rgb(185 77 47 / .45); transform: translateY(-4px); }
-.pricing-card.popular:hover { transform: translateY(-6px); }
-.pricing-badge { position: absolute; top: -1px; right: 16px; background: var(--copper); color: var(--white); padding: 5px 12px; font: 600 11px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; border-radius: 0 0 8px 8px; box-shadow: 0 6px 14px -8px rgb(185 77 47 / .6); }
+/* v15: Premium 3+2 pricing grid. Top row has 3 cards (the popular offer
+   sits in the centre and is visually elevated + scaled). Bottom row has
+   2 cards, centred — never an awkward 4+1 orphan. Glass surface, sharp
+   radii, generous spacing, clear tier rows. */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+.pricing-card {
+  grid-column: span 2;
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  background: var(--white);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s ease, box-shadow .35s ease;
+  position: relative;
+  box-shadow: 0 1px 0 rgb(28 26 23 / .02), 0 14px 30px -22px rgb(28 26 23 / .12);
+  backdrop-filter: blur(6px);
+}
+.pricing-card:hover {
+  border-color: var(--copper);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 46px -24px rgb(185 77 47 / .38), 0 8px 18px -10px rgb(28 26 23 / .18);
+}
+/* The popular card (3rd) spans columns 3-4 of the top row and is elevated. */
+.pricing-card.popular {
+  grid-column: 3 / span 2;
+  border: 1.5px solid var(--copper);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--copper) 5%, var(--white)) 0%, var(--white) 100%);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 50px -28px rgb(185 77 47 / .45), 0 0 0 6px color-mix(in oklab, var(--copper) 8%, transparent);
+  z-index: 2;
+}
+.pricing-card.popular:hover {
+  transform: translateY(-14px) scale(1.02);
+}
+.pricing-card.popular h3 { font-size: 24px; }
+.pricing-card.popular .pricing-card-price-anchor-value { font-size: 30px; }
+.pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--copper);
+  color: var(--white);
+  padding: 7px 16px;
+  font: 600 11px/1.4 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px -8px rgb(185 77 47 / .55);
+  white-space: nowrap;
+}
 .pricing-card h3 { margin: 10px 0; font: 600 22px/1.25 var(--display); color: var(--ink); letter-spacing: -.01em; }
 .pricing-amount { font: 400 38px/1 var(--display); color: var(--ink); margin: 12px 0 6px; letter-spacing: -.02em; }
 .pricing-range { font: 400 18px/1 var(--display); color: var(--graphite); }
@@ -757,8 +805,87 @@ button, input, textarea { font: inherit; }
 .pricing-guide h3 { margin: 0 0 8px; font: 600 18px/1.3 var(--display); color: var(--ink); }
 .pricing-volume { font: 600 12px/1.4 var(--mono); color: var(--copper); margin: 0 0 12px; text-transform: uppercase; letter-spacing: .08em; }
 .pricing-guide p:last-child { color: var(--graphite); font-size: 14px; line-height: 1.6; margin: 0; }
-@media (max-width: 1180px) { .pricing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .pricing-card, .pricing-card:nth-child(4), .pricing-card:nth-child(5) { grid-column: auto; } .pricing-guide { grid-template-columns: repeat(2, 1fr); } }
-/* Stack hero copy + region selector on narrow screens so the toggle is reachable. */
+
+/* v15: Tier rows inside pricing cards — generous padding, visible hierarchy. */
+.pricing-tier-list {
+  list-style: none;
+  margin: 8px 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pricing-tier-row {
+  position: relative;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--white);
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.pricing-tier-row:hover {
+  border-color: var(--copper);
+  background: color-mix(in oklab, var(--copper) 4%, var(--white));
+  transform: translateX(2px);
+}
+.pricing-tier-row.recommended {
+  border-color: var(--copper);
+  background: color-mix(in oklab, var(--copper) 6%, var(--white));
+}
+.pricing-tier-row-anchor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+}
+.pricing-tier-row-name {
+  font: 600 13px/1.2 var(--display);
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+.pricing-tier-row-price-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pricing-tier-row-price {
+  font: 700 15px/1.1 var(--display);
+  color: var(--ink);
+  letter-spacing: -.005em;
+}
+.pricing-tier-row-price[hidden] { display: none; }
+.pricing-tier-row-cta {
+  font: 600 11px/1.2 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--copper-dark);
+  padding: 4px 8px;
+  border: 1px solid color-mix(in oklab, var(--copper) 35%, transparent);
+  border-radius: 999px;
+  background: var(--white);
+}
+.pricing-tier-row-tag {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  background: var(--copper);
+  color: var(--white);
+  font: 600 9px/1.2 var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+@media (max-width: 1180px) {
+  .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .pricing-card { grid-column: auto; }
+  .pricing-card.popular { grid-column: 1 / -1; transform: none; order: -1; }
+  .pricing-guide { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 860px) {
   .pricing-hero-inner { grid-template-columns: 1fr; gap: 18px; }
   .pricing-hero-inner > .eyebrow,
@@ -766,10 +893,11 @@ button, input, textarea { font: inherit; }
   .pricing-hero-inner > .section-lede,
   .pricing-hero-inner > .pricing-hero-actions,
   .pricing-hero-inner > .pricing-hero-region { grid-column: 1 / -1; grid-row: auto; }
+  .pricing-grid { grid-template-columns: 1fr; gap: 14px; }
+  .pricing-card.popular { grid-column: auto; transform: none; }
+  .pricing-guide { grid-template-columns: 1fr; }
 }
-/* 2-col tablet: centre the orphan 5th card so the bottom row is intentional, not awkward. */
-@media (max-width: 860px) { .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } .pricing-card:nth-child(5) { grid-column: 1 / -1; max-width: calc(50% - 7px); justify-self: center; } .pricing-card, .pricing-card:nth-child(4) { grid-column: auto; } .pricing-guide { grid-template-columns: 1fr; } }
-@media (max-width: 580px) { .pricing-grid { grid-template-columns: 1fr; } .pricing-card:nth-child(5) { grid-column: auto; max-width: none; justify-self: stretch; } .pricing-guide { grid-template-columns: 1fr; } .pricing-hero { padding: 36px 0 18px; } .pricing-hero h1 { font-size: 32px; } .pricing-hero-trust { gap: 10px 18px; } .pricing-hero-toggle { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 14px; } }
+@media (max-width: 580px) { .pricing-grid { grid-template-columns: 1fr; } .pricing-hero { padding: 36px 0 18px; } .pricing-hero h1 { font-size: 32px; } }
 
 /* Case study enhanced elements */
 .signal-architecture { display: flex; align-items: center; gap: 0; padding: 24px; border: 1px solid var(--rule); border-radius: 14px; background: var(--white); overflow-x: auto; }
@@ -1530,18 +1658,18 @@ button, input, textarea { font: inherit; }
    --sans token is replaced with --body (the token that exists in :root) — the old
    reference silently fell back to system-ui in browsers, which is fine, but was
    misleading for anyone scanning the cascade. */
-.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:180;max-width:560px;margin:0 auto;background:rgba(20,18,16,.94);color:var(--white);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 18px;backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:180;max-width:560px;margin:0 auto;background:var(--ivory);color:var(--ink);border:1px solid var(--rule);border-radius:16px;padding:16px 20px;backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);box-shadow:0 18px 50px -20px rgba(48,30,16,.35),0 4px 12px -4px rgba(48,30,16,.15)}
 .cookie-banner-inner{display:flex;flex-direction:column;gap:10px}
-.cookie-banner-text{font:500 13px/1.4 var(--body);margin:0;color:rgba(255,255,255,.86)}
+.cookie-banner-text{font:500 13px/1.5 var(--body);margin:0;color:var(--graphite)}
 .cookie-banner-actions{display:flex;gap:8px;flex-wrap:wrap}
 .cookie-banner-actions .btn{flex:1 1 auto;padding:8px 12px;border-radius:8px;font:600 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease}
 .cookie-banner-actions .btn:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
 .cookie-banner-actions .btn:disabled{opacity:.55;cursor:not-allowed}
-.cookie-banner-actions .btn-primary{background:var(--white);color:var(--ink)}
-.cookie-banner-actions .btn-primary:hover{background:#f0ede6;transform:translateY(-1px)}
+.cookie-banner-actions .btn-primary{background:var(--copper);color:var(--white);border-color:var(--copper)}
+.cookie-banner-actions .btn-primary:hover{background:color-mix(in oklab,var(--copper) 88%,var(--ink) 12%);border-color:color-mix(in oklab,var(--copper) 88%,var(--ink) 12%);transform:translateY(-1px)}
 .cookie-banner-actions .btn-primary:active{transform:translateY(0) scale(.98)}
-.cookie-banner-actions .btn-secondary{background:transparent;color:var(--white);border-color:rgba(255,255,255,.24)}
-.cookie-banner-actions .btn-secondary:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.45);transform:translateY(-1px)}
+.cookie-banner-actions .btn-secondary{background:transparent;color:var(--ink);border-color:var(--rule)}
+.cookie-banner-actions .btn-secondary:hover{background:var(--cream);border-color:var(--copper);transform:translateY(-1px)}
 .cookie-banner-actions .btn-secondary:active{transform:translateY(0) scale(.98)}
 @media (prefers-reduced-motion: reduce){.cookie-banner{transition:none}.cookie-banner-actions .btn{transition:none}}
 /* ponytail: lift the cookie banner above footer CTAs + the assistant launcher on
@@ -2272,6 +2400,17 @@ button, input, textarea { font: inherit; }
 .wa-fab--pending:hover { background: #edeae3; transform: none; }
 /* v14: live (real wa.me), fallback (routes to /contact), pending (provider-pending) */
 .wa-fab--live { box-shadow: 0 14px 36px -16px rgba(37, 211, 102, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4); }
+.wa-fab--neutral {
+  background: var(--copper);
+  color: var(--white);
+  border-color: color-mix(in oklab, var(--copper) 60%, var(--ink) 40%);
+  box-shadow: 0 14px 36px -16px color-mix(in oklab, var(--copper) 70%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.wa-fab--neutral:hover {
+  background: color-mix(in oklab, var(--copper) 88%, var(--ink) 12%);
+  color: var(--white);
+  transform: translateY(-1px);
+}
 .wa-fab--fallback { background: #0a0a0a; color: #fbfaf6; border-color: rgba(10, 10, 10, 0.85); box-shadow: 0 14px 36px -16px rgba(10, 10, 10, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
 .wa-fab--fallback:hover { background: #1a1a1a; color: #fbfaf6; transform: translateY(-1px); }
 .wa-fab__icon { width: 18px; height: 18px; display: inline-grid; place-items: center; flex: none; }
