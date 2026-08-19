@@ -1629,6 +1629,95 @@ button, input, textarea { font: inherit; }
 .auth-strength[data-match="match"] { color: #1f5e2c; }
 .auth-terms { display: flex; gap: .5rem; align-items: flex-start; font-size: .9rem; color: var(--ink-soft); }
 .auth-terms a { color: var(--ink); text-decoration: underline; }
+/* ponytail: keep the touch target ≥48px on mobile without inflating the
+   visible checkbox. min-width/height are the tap surface; transform scales
+   the visible glyph so the visual stays small but the target is comfortable. */
+.auth-terms input[type="checkbox"] {
+  flex: 0 0 auto;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin: 4px 0 0;
+  border: 1px solid var(--mineral, #5F7F87);
+  border-radius: 5px;
+  background: var(--surface-strong, #FFFFFF);
+  position: relative;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.auth-terms input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+}
+.auth-terms input[type="checkbox"]:hover { border-color: var(--graphite, #161B22); }
+.auth-terms input[type="checkbox"]:focus-visible {
+  outline: none;
+  border-color: var(--petrol, #1F5D67);
+  box-shadow: 0 0 0 4px rgba(31, 93, 103, .14);
+}
+.auth-terms input[type="checkbox"]:checked {
+  background: var(--petrol, #1F5D67);
+  border-color: var(--petrol, #1F5D67);
+}
+.auth-terms input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 1px;
+  width: 5px;
+  height: 11px;
+  border: solid var(--white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.auth-terms input[type="checkbox"][aria-invalid="true"] {
+  border-color: #b94536;
+  box-shadow: 0 0 0 3px rgba(185, 69, 54, .15);
+}
+.auth-terms > span { padding-top: 2px; }
+/* ponytail: fieldset wrapper around the auth-method choice (Google + form)
+   and the email/password form. Visually a transparent group; the
+   <legend> is SR-only because the method choice is implied by the visible
+   buttons (Google / email). */
+.auth-methods {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+/* ponytail: visually-hidden helper for screen-reader-only context that
+   sighted users do not need (form purpose, fieldset legends, etc.). The
+   classic 1px-clip technique — works across screen readers. */
+.iw-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+/* ponytail: when the live region has no content, give it a real node
+   height so the layout doesn't jump. aria-live still announces only
+   non-empty updates. */
+.auth-status:empty { min-height: 0; }
+.auth-status:not(:empty) { margin: .25rem 0 1rem; }
+/* ponytail: aside title (now an <h2> for proper landmark hierarchy). */
+.auth-aside-title { margin: 0 0 .5rem; font: 500 18px/1.2 var(--display); letter-spacing: -.025em; color: var(--ink); }
+/* ponytail: respect prefers-reduced-motion on the auth-card entry
+   animation. The existing is-entering animation already has a global
+   reset, but the checkbox transition above also respects this. */
+@media (prefers-reduced-motion: reduce) {
+  .auth-terms input[type="checkbox"],
+  .auth-field input { transition: none; }
+}
 .auth-submit {
   width: 100%;
   margin-top: .5rem;
@@ -3410,3 +3499,603 @@ button, input, textarea { font: inherit; }
     margin: 12px;
   }
 }
+
+/* -----------------------------------------------------------------------
+   v13 INTEGRATED COMMUNICATION PANEL
+   Pearl-dominant canvas, graphite structural text, scarce deep-petrol
+   accent, muted mineral supporting accent. The single primary entry
+   ("Talk to IronWake") opens a glassmorphic panel with three options:
+   Chat, Voice, WhatsApp. Touch targets >=48px. Honors reduced-motion.
+   ----------------------------------------------------------------------- */
+
+/* Glass card material — used inside the panel for each option. Uses the
+   Level-2 interactive glass token; sits inside the strong foreground
+   panel so it reads as a slightly elevated child surface. */
+.glass-card {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  min-height: 88px;
+  padding: 18px 20px;
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  background: var(--interactive-glass);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 1px 0 var(--glass-inner-highlight) inset,
+              0 6px 18px -10px var(--deep-shadow);
+  transition: transform var(--motion-base) var(--motion-spring),
+              box-shadow var(--motion-base) var(--motion-spring),
+              border-color var(--motion-base) var(--motion-spring);
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+.glass-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--petrol);
+  box-shadow: 0 1px 0 var(--glass-inner-highlight) inset,
+              0 10px 26px -10px var(--active-glow);
+}
+.glass-card:focus-visible {
+  outline: 2px solid var(--focus-accent);
+  outline-offset: 2px;
+  border-color: var(--petrol);
+}
+.glass-card__eyebrow {
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mineral);
+}
+.glass-card__title {
+  margin: 0;
+  font: 600 18px/1.25 var(--display);
+  letter-spacing: -0.02em;
+  color: var(--graphite-ink);
+}
+.glass-card__sub {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted-text);
+}
+.glass-card__state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--soft-mineral);
+  color: var(--petrol);
+  font: 600 10px/1.2 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.glass-card__state[data-state="unconfigured"] {
+  background: rgba(176, 58, 58, 0.08);
+  color: var(--semantic-error);
+}
+.glass-card__state[data-state="live"]::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--petrol);
+  box-shadow: 0 0 0 3px var(--active-glow);
+}
+
+/* The primary floating action button — single entry point. Sits in the
+   bottom-right corner. Honors the 48px touch-target rule. */
+.floating-action {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 65;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 22px;
+  border: 1px solid var(--petrol);
+  border-radius: 999px;
+  background: var(--petrol);
+  color: #f6fbfb;
+  font: 600 14px/1 var(--display);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow: 0 1px 0 var(--glass-inner-highlight) inset,
+              0 12px 30px -12px var(--active-glow),
+              0 24px 48px -18px var(--deep-shadow);
+  transition: transform var(--motion-base) var(--motion-spring),
+              background var(--motion-fast) ease-out,
+              box-shadow var(--motion-base) var(--motion-spring);
+}
+.floating-action:hover {
+  background: var(--petrol-hover);
+  transform: translateY(-1px);
+}
+.floating-action:active {
+  background: var(--petrol-pressed);
+  transform: translateY(0);
+}
+.floating-action:focus-visible {
+  outline: 2px solid var(--focus-accent);
+  outline-offset: 3px;
+}
+.floating-action[aria-expanded="true"] {
+  background: var(--graphite-ink);
+  border-color: var(--graphite-ink);
+}
+.floating-action__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+.floating-action__mark svg { display: block; }
+.floating-action__label { white-space: nowrap; }
+
+/* Glassmorphic panel that opens from the floating action. */
+.floating-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 92px;
+  z-index: 66;
+  width: min(420px, calc(100vw - 40px));
+  max-height: min(640px, calc(100vh - 120px));
+  overflow: auto;
+  padding: 22px;
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  background: var(--strong-foreground-glass);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  box-shadow: 0 1px 0 var(--glass-inner-highlight) inset,
+              0 1px 2px var(--depth-shadow),
+              0 14px 36px -12px var(--deep-shadow),
+              0 32px 64px -22px var(--deep-shadow);
+  color: var(--graphite-ink);
+}
+.floating-panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.floating-panel__eyebrow {
+  margin: 0;
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mineral);
+}
+.floating-panel__title {
+  margin: 6px 0 4px;
+  font: 600 22px/1.2 var(--display);
+  letter-spacing: -0.025em;
+  color: var(--graphite-ink);
+}
+.floating-panel__lede {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted-text);
+}
+.floating-panel__close {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  background: var(--interactive-glass);
+  color: var(--graphite-ink);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color var(--motion-fast) ease-out,
+              background var(--motion-fast) ease-out;
+}
+.floating-panel__close:hover {
+  border-color: var(--petrol);
+  background: var(--soft-mineral);
+}
+.floating-panel__close:focus-visible {
+  outline: 2px solid var(--focus-accent);
+  outline-offset: 2px;
+}
+.floating-panel__list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.floating-panel__item {
+  width: 100%;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.floating-panel__item[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.82;
+}
+
+/* Backdrop covers the page when the panel is open so clicks outside
+   dismiss the panel. Stays transparent to keep the pearl canvas visible. */
+.floating-panel__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 64;
+  background: rgba(22, 27, 34, 0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* panel-pop: entrance / exit animation for the integrated panel.
+   Default state is closed (translate + opacity). .is-open reverses. */
+.panel-pop {
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+  transform-origin: bottom right;
+  pointer-events: none;
+  transition: opacity var(--motion-base) var(--motion-spring),
+              transform var(--motion-base) var(--motion-spring);
+}
+.panel-pop.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.floating-panel__backdrop {
+  opacity: 0;
+  transition: opacity var(--motion-base) ease-out;
+}
+.floating-panel__backdrop.is-open {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel-pop,
+  .floating-panel__backdrop {
+    transition: none;
+    transform: none;
+  }
+  .glass-card,
+  .floating-action { transition: none; }
+}
+
+@media (max-width: 640px) {
+  .floating-action {
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    justify-content: center;
+  }
+  .floating-panel {
+    right: 12px;
+    left: 12px;
+    bottom: 84px;
+    width: auto;
+    max-height: min(72vh, calc(100vh - 110px));
+  }
+}
+
+/* -----------------------------------------------------------------------
+   ChatShell — wraps POST /api/chat inside a glass--strong panel.
+   ----------------------------------------------------------------------- */
+.chat-shell {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 22px;
+  color: var(--graphite-ink);
+}
+.chat-shell__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.chat-shell__eyebrow {
+  margin: 0;
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mineral);
+}
+.chat-shell__title {
+  margin: 4px 0 0;
+  font: 600 20px/1.2 var(--display);
+  letter-spacing: -0.025em;
+}
+.chat-shell__head-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.chat-shell__transcript {
+  display: grid;
+  gap: 10px;
+  max-height: 280px;
+  overflow: auto;
+  padding: 4px 2px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--soft-mineral) transparent;
+}
+.chat-shell__turn {
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+.chat-shell__turn--user {
+  background: var(--soft-mineral);
+  border-color: var(--frosted-blue-grey);
+  margin-left: 18%;
+}
+.chat-shell__turn--assistant {
+  margin-right: 12%;
+}
+.chat-shell__turn-label {
+  margin: 0 0 4px;
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mineral);
+}
+.chat-shell__turn--user .chat-shell__turn-label { color: var(--petrol); }
+.chat-shell__turn-content {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--graphite-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.chat-shell__turn-meta {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--muted-text);
+}
+.chat-shell__turn-meta--warn { color: var(--semantic-warning); }
+
+.chat-shell__suggest {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chat-shell__suggest-btn {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--interactive-glass);
+  color: var(--graphite-ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color var(--motion-fast) ease-out,
+              background var(--motion-fast) ease-out;
+}
+.chat-shell__suggest-btn:hover {
+  border-color: var(--petrol);
+  background: var(--soft-mineral);
+}
+.chat-shell__suggest-btn:focus-visible {
+  outline: 2px solid var(--focus-accent);
+  outline-offset: 2px;
+}
+.chat-shell__suggest-btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+.chat-shell__form {
+  display: grid;
+  gap: 6px;
+}
+.chat-shell__label {
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mineral);
+}
+.chat-shell__input {
+  width: 100%;
+  resize: vertical;
+  min-height: 56px;
+  max-height: 180px;
+  padding: 10px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--strong-foreground-glass);
+  color: var(--graphite-ink);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.chat-shell__input:focus-visible {
+  outline: 2px solid var(--focus-accent);
+  outline-offset: 2px;
+  border-color: var(--petrol);
+}
+.chat-shell__form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.chat-shell__hint {
+  font-size: 12px;
+  color: var(--muted-text);
+}
+.chat-shell__hint--warn { color: var(--semantic-warning); }
+.chat-shell__send {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--petrol);
+  border-radius: 999px;
+  background: var(--petrol);
+  color: #f6fbfb;
+  font: 600 13px/1 var(--display);
+  cursor: pointer;
+  transition: background var(--motion-fast) ease-out,
+              border-color var(--motion-fast) ease-out;
+}
+.chat-shell__send:hover { background: var(--petrol-hover); }
+.chat-shell__send:active { background: var(--petrol-pressed); }
+.chat-shell__send:focus-visible {
+  outline: 2px solid var(--focus-accent);
+  outline-offset: 2px;
+}
+.chat-shell__send[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+.chat-shell__dots {
+  display: inline-flex;
+  gap: 4px;
+}
+.chat-shell__dots span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--petrol);
+  animation: chat-shell-bounce 1.2s infinite ease-in-out;
+}
+.chat-shell__dots span:nth-child(2) { animation-delay: 0.15s; }
+.chat-shell__dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes chat-shell-bounce {
+  0%, 80%, 100% { opacity: 0.3; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-shell__dots span { animation: none; opacity: 0.7; }
+}
+
+@media (max-width: 640px) {
+  .chat-shell__turn--user { margin-left: 6%; }
+  .chat-shell__turn--assistant { margin-right: 0; }
+  .chat-shell__transcript { max-height: 48vh; }
+}
+
+/* -----------------------------------------------------------------------
+   VoicePanel — wraps VoiceSessionLauncher; the panel surface for the
+   Retell-backed live voice receptionist.
+   ----------------------------------------------------------------------- */
+.voice-panel {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 22px;
+  color: var(--graphite-ink);
+}
+.voice-panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.voice-panel__eyebrow {
+  margin: 0;
+  font: 600 10px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mineral);
+}
+.voice-panel__title {
+  margin: 4px 0 0;
+  font: 600 20px/1.2 var(--display);
+  letter-spacing: -0.025em;
+}
+.voice-panel__lede {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted-text);
+}
+.voice-panel__body {
+  padding: 4px 0;
+}
+.voice-panel__placeholder {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 1px dashed var(--glass-border);
+  border-radius: 16px;
+  background: var(--cool-mineral-glass);
+}
+.voice-panel__placeholder h4 {
+  margin: 0;
+  font: 600 14px/1.3 var(--display);
+  color: var(--graphite-ink);
+}
+.voice-panel__placeholder p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted-text);
+}
+.voice-panel__placeholder ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted-text);
+}
+
+/* ponytail: industry-grid 2-3col desktop override (v13 industries).
+   Default rule above uses repeat(2, 1fr); this lifts it to repeat(2, minmax(0, 1fr))
+   on wider viewports so industry index pages breathe. Mobile falls back to
+   single column at 768px. Existing single-fr override at 860/880px still wins. */
+.industry-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 32px); }
+@media (max-width: 768px) { .industry-grid { grid-template-columns: minmax(0,1fr); } }
+
+/* ponytail: 360 px defensive wrap — narrowest viewport safety net.
+   Ensures no element overflows viewport width regardless of upstream
+   font-size, padding, or grid math. Targets P1 text-wrapping findings
+   from QA at 360/390/430. */
+@media (max-width: 480px) {
+  .system-card, .industry-card, .pricing-card, .case-card, .flagship-card,
+  .flagship-beat-card, .wake-figure, .audit-card, .auth-card, .operational-lens,
+  .outcome-strip li, .founder-card, .signal-architecture {
+    padding: clamp(14px, 4vw, 22px) !important;
+    gap: clamp(10px, 2.5vw, 16px) !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    word-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
+    hyphens: auto !important;
+  }
+  .system-card h2, .industry-card h2, .flagship-card-title, .pricing-card h3 {
+    font-size: clamp(20px, 5vw, 28px) !important;
+    letter-spacing: -.02em !important;
+  }
+  .system-card p, .industry-card p, .flagship-card-list, .pricing-card p,
+  .audit-card p, .auth-section p {
+    font-size: clamp(14px, 3.6vw, 16px) !important;
+    line-height: 1.55 !important;
+  }
+  .pricing-card-price-anchor {
+    padding: 8px 10px !important;
+    gap: 4px !important;
+  }
+  .pricing-card-price-anchor-value {
+    font-size: 20px !important;
+  }
+  .shell, .container, .page-shell, main {
+    padding-inline: clamp(12px, 3.5vw, 20px) !important;
+  }
+  h1, h2, h3, h4 { letter-spacing: -.02em !important; }
+  .pricing-grid { grid-template-columns: minmax(0,1fr) !important; padding: 0 !important; }
+}
+
