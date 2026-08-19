@@ -1,6 +1,6 @@
 {
   "maxProductionAttempts": 14,
-  "productionAttemptsUsed": 12,
+  "productionAttemptsUsed": 13,
   "lastAttemptFailedProductionOnly": false,
   "ownerOverrideNote": "Owner 'you have new 5 more deploy chances' — 2026-08-18T09:45Z. Budget extended 9 -> 14 to enable v13(b1/b2) UI/UX/colour/button work deploys + final consolidated release. Honest ledger; productionAttemptsUsed tracks real Cloudflare successes only (deploys #10, #11, #12).",
   "workerName": "ironwake",
@@ -77,7 +77,7 @@
       "phase": "V14_P1_DESIGN_SYSTEM_PRIMITIVES",
       "purpose": "P1 design system: shared Field + Button JSX primitives with 17 unit tests (9 Field + 8 Button). New .iw-field* (label, control, control--invalid, error, help, icon, icon--leading, icon--trailing, required, shell) and .iw-button* (--sm, --lg, --block, __icon, __icon--leading, __icon--trailing, __label, __spinner) CSS shipped in fresh chunk _next/static/chunks/2zyakdp9j_tlt.css. BUILD_ID W0z-ivpk2-YM6IJZdjQ1F.",
       "status": "DEPLOYED_LIVE",
-      "bundle_gzipped_kiB": 2425.00,
+      "bundle_gzipped_kiB": 2425,
       "worker_startup_ms": 35,
       "tests_added": 17,
       "npm_test_total": 374
@@ -85,8 +85,8 @@
   ],
   "deploymentBudgetLedger": {
     "DEPLOY_TOTAL": 14,
-    "DEPLOY_USED": 12,
-    "DEPLOY_REMAINING": 2,
+    "DEPLOY_USED": 13,
+    "DEPLOY_REMAINING": 1,
     "entries": [
       {
         "at": "2026-08-17T08:50:00Z",
@@ -124,9 +124,9 @@
   "rollbackTag": "001f391-pre-cloudflare-batch-2",
   "rollbackHEAD": "001f3911829bd920efa8f951cbfcb8c38c6ddf30",
   "current_phase": "PHASE_CLOUDFLARE_PRODUCTION_COMPLETION",
-  "lastDeployVersion": "d7615477-2de5-4edc-9f2b-4ff472bafbd2",
-  "lastDeployAt": "2026-08-19T03:50:00Z",
-  "lastDeployCommit": "0f674799a57b3f88b3cae6da6be3484170bfca7c",
-  "lastDeployBundleGzipBytes": 2483200,
-  "lastAttemptNote": "Real Cloudflare deploy #12 of P1 design system primitives (Field + Button JSX with 17 tests, .iw-field* / .iw-button CSS). 2 fresh assets uploaded. Worker startup 35ms. Remaining deploys after this attempt: 2 of 14."
+  "lastDeployVersion": "7168cbec-6f4f-4e6e-a697-2b1b82f182b8",
+  "lastDeployAt": "2026-08-19T03:55:00Z",
+  "lastDeployCommit": "d17253131d26ff5f4ff93fd5aa4b4db95a01fbe5",
+  "lastDeployBundleGzipBytes": 2486553,
+  "lastAttemptNote": "Real Cloudflare deploy #13 of P1 design system migration round 1: /login, /signup, /forgot-password now use shared Field + Button + GoogleIcon primitives. 5 fresh assets uploaded (BUILD_ID + 2 .js + 2 .css including new iw-field/pw-toggle rules). Worker startup 24ms. Live verified: production /login renders .iw-field__label, .iw-field__control, .iw-field__pw-toggle, .iw-button--md, .iw-button--block, iw-button--has-leading. Remaining deploys after this attempt: 1 of 14."
 }

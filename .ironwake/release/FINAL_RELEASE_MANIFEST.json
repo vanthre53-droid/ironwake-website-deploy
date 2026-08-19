@@ -3,8 +3,8 @@
   "FROZEN_FOR_V13_DEPLOY": "2026-08-19",
   "DEPLOY_BUDGET": {
     "MAX": 14,
-    "USED": 10,
-    "REMAINING": 5,
+    "USED": 13,
+    "REMAINING": 1,
     "OVERRIDE_AUTHORITY": "owner-direct-message 2026-08-18T09:45Z '5 more deploy chances'"
   },
   "PRODUCTION_DEPLOYS_USED": 2,
@@ -105,9 +105,9 @@
   "PHASE": "PHASE_FINAL_CLOUDFLARE_PRODUCTION_CONSOLIDATED",
   "STATUS": "DEPLOYED_LIVE_V14_BATCH",
   "FROZEN_FOR_V14_DEPLOY": "2026-08-18",
-  "V14_BATCH_DEPLOY_ID": "PENDING_DEPLOY_13",
-  "V14_BATCH_DEPLOYED_HEAD": "0f674799a57b3f88b3cae6da6be3484170bfca7c",
-  "V14_BATCH_DEPLOYED_AT": "2026-08-19T03:50:00Z",
-  "V14_BATCH_REMAINING_DEPLOYS": 4,
+  "V14_BATCH_DEPLOY_ID": "7168cbec-6f4f-4e6e-a697-2b1b82f182b8",
+  "V14_BATCH_DEPLOYED_HEAD": "d17253131d26ff5f4ff93fd5aa4b4db95a01fbe5",
+  "V14_BATCH_DEPLOYED_AT": "2026-08-19T03:55:00Z",
+  "V14_BATCH_REMAINING_DEPLOYS": 1,
   "V14_BATCH_NOTE": "Real Cloudflare deploy via release-gate attempt #10. PWA manifest + IndexNow endpoint + home mobile CSS fix + 6 new tests shipped. Live verified at https://ironwake.dev (200), /manifest.webmanifest (200), /.well-known/indexnow-key.txt (200)."
 }
