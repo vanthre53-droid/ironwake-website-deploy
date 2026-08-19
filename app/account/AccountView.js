@@ -11,7 +11,15 @@ import Button from '../components/ui/Button.jsx';
 function SaveButton({ disabled }) {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" variant="primary" loading={pending} disabled={disabled || pending} block className="auth-submit">
+    <Button
+      type="submit"
+      variant="primary"
+      loading={pending}
+      disabled={disabled || pending}
+      block
+      className="auth-submit"
+      aria-label={pending ? 'Saving profile, please wait' : 'Save profile changes'}
+    >
       {pending ? 'Saving…' : 'Save profile'}
     </Button>
   );
@@ -19,7 +27,13 @@ function SaveButton({ disabled }) {
 
 function SignOutButton() {
   return (
-    <Button type="submit" variant="secondary" formAction={signOutAction} className="auth-submit">
+    <Button
+      type="submit"
+      variant="secondary"
+      formAction={signOutAction}
+      className="auth-submit"
+      aria-label="Sign out of your IronWake account"
+    >
       Sign out
     </Button>
   );
@@ -41,7 +55,15 @@ function ProfileForm({ initialDisplayName }) {
   const nameError = mounted && name.length > 0 && !nameValid ? 'Enter at least 2 characters.' : null;
   const dirty = name !== (initialDisplayName || '');
   const ready = dirty && nameValid;
-  return <form action={action} className="auth-form">
+  return <form
+    action={action}
+    className="auth-form"
+    aria-label="Update display name"
+    aria-describedby="account-profile-help"
+  >
+    <p id="account-profile-help" className="iw-visually-hidden">
+      The Save button enables when you change the display name and the value is at least 2 characters.
+    </p>
     <Field
       id="account-display-name"
       name="display_name"
@@ -55,8 +77,14 @@ function ProfileForm({ initialDisplayName }) {
       help="This is the name we use to greet you on the website and in your account."
       className="auth-field"
     />
-    {state?.error && <p className="auth-status auth-status-error" role="alert">{state.error}</p>}
-    {state?.ok && <p className="auth-status auth-status-ok" role="status">{state.ok}</p>}
+    <div
+      className={`auth-status${state?.error ? ' auth-status-error' : state?.ok ? ' auth-status-ok' : ''}`}
+      role={state?.error ? 'alert' : 'status'}
+      aria-live={state?.error ? 'assertive' : 'polite'}
+      aria-atomic="true"
+    >
+      {state?.error || state?.ok || ''}
+    </div>
     <SaveButton disabled={!ready} />
   </form>;
 }
@@ -64,20 +92,52 @@ function ProfileForm({ initialDisplayName }) {
 export function AccountView({ user, profile, sessions, inquiries, updated, configError }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
-  return <main className="shell">
+
+  // The page.js already redirects to /login when no user is returned and
+  // when the config is broken. This branch only renders if configError is
+  // set (the supabase env vars are missing) — we show a clear "not
+  // connected" state and absolutely no fake data.
+  if (configError) {
+    return <main className="shell" id="main">
+      <SiteHeader />
+      <section className="hero compact" aria-labelledby="account-error-title">
+        <span className="eyebrow">My account</span>
+        <h1 id="account-error-title">Account is unavailable right now.</h1>
+        <p>IronWake's authentication service is not connected. Please try again in a few minutes, or contact support if the issue persists.</p>
+        <p
+          className="auth-status auth-status-error"
+          role="alert"
+          aria-live="assertive"
+        >
+          {configError}
+        </p>
+        <div className="account-actions">
+          <Button as="a" href="/login" variant="primary">Back to sign in</Button>
+        </div>
+      </section>
+    </main>;
+  }
+
+  return <main className="shell" id="main">
     <SiteHeader />
-    <section className="hero compact">
+    <section className="hero compact" aria-labelledby="account-greeting-title">
       <span className="eyebrow">My account</span>
-      <h1>Welcome back{profile?.display_name ? `, ${profile.display_name}` : user?.email ? `, ${user.email}` : ''}.</h1>
+      <h1 id="account-greeting-title">Welcome back{profile?.display_name ? `, ${profile.display_name}` : user?.email ? `, ${user.email}` : ''}.</h1>
       <p>Manage your conversations, audit history, profile, and security.</p>
-      {updated && <p className="auth-status auth-status-ok" role="status">Your password has been updated.</p>}
-      {configError && <p className="auth-status auth-status-error" role="alert">{configError}</p>}
+      <div
+        className="auth-status"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {updated ? 'Your password has been updated.' : ''}
+      </div>
     </section>
 
-    <section className={`section account-grid${mounted ? ' is-entering' : ''}`}>
-      <article className="account-card">
+    <section className={`section account-grid${mounted ? ' is-entering' : ''}`} aria-label="Account sections">
+      <article className="account-card" aria-labelledby="account-overview-title">
         <span className="micro">Overview</span>
-        <h2>Account</h2>
+        <h2 id="account-overview-title">Account</h2>
         <dl className="account-meta">
           <div><dt>Email</dt><dd>{user?.email || '—'}</dd></div>
           <div><dt>Joined</dt><dd>{formatDate(user?.created_at)}</dd></div>
@@ -88,13 +148,13 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
         </div>
       </article>
 
-      <article className="account-card">
+      <article className="account-card" aria-labelledby="account-conversations-title">
         <span className="micro">Conversations</span>
-        <h2>Ask IronWake history</h2>
+        <h2 id="account-conversations-title">Ask IronWake history</h2>
         {(!sessions || sessions.length === 0) ? (
           <div className="account-empty">
             <p>No conversations yet.</p>
-            <Button as="a" href="/chat" variant="primary" block>Start a conversation</Button>
+            <Button as="a" href="/chat" variant="primary" block aria-label="Start a new Ask IronWake conversation">Start a conversation</Button>
           </div>
         ) : (
           <ul className="account-list">
@@ -109,9 +169,9 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
         <div className="account-actions"><Link className="text-link" href="/chat">Open Ask IronWake →</Link></div>
       </article>
 
-      <article className="account-card">
+      <article className="account-card" aria-labelledby="account-requests-title">
         <span className="micro">My requests</span>
-        <h2>Audit & booking history</h2>
+        <h2 id="account-requests-title">Audit & booking history</h2>
         {(!inquiries || inquiries.length === 0) ? (
           <div className="account-empty">
             <p>No audit or booking requests linked to your account yet.</p>
@@ -127,18 +187,18 @@ export function AccountView({ user, profile, sessions, inquiries, updated, confi
         )}
       </article>
 
-      <article className="account-card">
+      <article className="account-card" aria-labelledby="account-profile-title">
         <span className="micro">Profile</span>
-        <h2>Display name</h2>
+        <h2 id="account-profile-title">Display name</h2>
         <ProfileForm initialDisplayName={profile?.display_name || ''} />
       </article>
 
-      <article className="account-card">
+      <article className="account-card" aria-labelledby="account-security-title">
         <span className="micro">Security</span>
-        <h2>Password</h2>
+        <h2 id="account-security-title">Password</h2>
         <p>Your password is managed by Supabase Auth. Reset it any time — we never see the value.</p>
         <div className="account-actions">
-          <Button as="a" href="/forgot-password" variant="secondary">Reset password</Button>
+          <Button as="a" href="/forgot-password" variant="secondary" aria-label="Reset your IronWake account password">Reset password</Button>
         </div>
       </article>
     </section>
