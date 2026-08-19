@@ -1,5 +1,4 @@
 import { SiteHeader } from '../components/SiteHeader';
-import { SiteFooter } from '../components/SiteFooter';
 import { FlagshipHero } from '../components/FlagshipHero';
 import { DashboardDemo } from '../components/DashboardDemo';
 import { MotionReveal } from '../components/MotionReveal';
@@ -29,7 +28,7 @@ const systems = [
     limitation: 'Requires your existing CRM or spreadsheet to capture the audit trail.',
   },
   {
-    href: '/systems/booking-certainty',
+    href: '/systems/booking-control',
     eyebrow: 'Booking',
     title: 'Booking Certainty',
     body: 'Separate a booking request from a confirmed appointment so nobody assumes the wrong state.',
@@ -47,7 +46,7 @@ const systems = [
     eyebrow: 'AI receptionist',
     title: 'AI Receptionist',
     body: 'Planning requirements for a disclosed, human-supervised first response.',
-    limitation: 'No live receptionist is connected on this site.',
+    limitation: 'No live receptionist connected on this site.',
   },
 ];
 
@@ -100,11 +99,24 @@ const faqs = [
 //   - Repeated `LAST REVIEWED`, `LOGGED WITH REDACTED PAYLOADS`, `AUDIT TRAIL`,
 //     and `DEMONSTRATION — NOT LIVE DATA` micro labels — replaced by a single
 //     honest eyebrow per section.
+export const metadata = {
+  title: 'IronWake — operational systems for missed leads, booking, and AI reception',
+  description:
+    'IronWake exposes where enquiries stall and gives operators one reviewable path: missed lead recovery, booking control, AI receptionist planning, and intake capture.',
+  openGraph: {
+    title: 'IronWake — operational systems for missed leads, booking, and AI reception',
+    description:
+      'IronWake exposes where enquiries stall and gives operators one reviewable path across missed lead recovery, booking control, AI receptionist planning, and intake capture.',
+    url: '/',
+  },
+};
+
 export default function HomePage() {
   return (
     <>
       <SiteHeader />
       <main id="main" className="page-home">
+        <h1 className="visually-hidden">IronWake — operational systems for missed leads, booking, and AI reception.</h1>
         {/* === 1. Flagship hero (intro — no .section wrapper, no border) === */}
         <FlagshipHero auditLitePrice={PRICING.auditLitePrice} />
 
@@ -140,19 +152,19 @@ export default function HomePage() {
             not (the live telephony or messaging provider).
           </p>
           <div className="grid-3">
-            <a className="case-card glass-level-1" href="/case-studies/rapidpulse-response">
+            <a className="case-card glass-level-1" href="/work/rapidpulse">
               <span className="micro">Demonstration</span>
               <h3>RapidPulse Response</h3>
               <p>Inquiry-to-review handoff with queued notification intent.</p>
               <span className="card-cta">Open the demonstration →</span>
             </a>
-            <a className="case-card glass-level-1" href="/case-studies/dentacare-intake">
+            <a className="case-card glass-level-1" href="/work/dentacare-pro">
               <span className="micro">Demonstration</span>
               <h3>DentaCare Intake</h3>
               <p>Validated intake to reviewed booking request.</p>
               <span className="card-cta">Open the demonstration →</span>
             </a>
-            <a className="case-card glass-level-1" href="/case-studies/atelier-safe">
+            <a className="case-card glass-level-1" href="/work/atelier">
               <span className="micro">Demonstration</span>
               <h3>Atelier Safe</h3>
               <p>Consultation capture with a review task.</p>
@@ -160,7 +172,7 @@ export default function HomePage() {
             </a>
           </div>
           <div className="section-cta-row">
-            <a className="button secondary" href="/case-studies">All case studies</a>
+            <a className="button secondary" href="/work">All case studies</a>
           </div>
         </MotionReveal>
 
@@ -250,7 +262,6 @@ export default function HomePage() {
           </div>
         </MotionReveal>
       </main>
-      <SiteFooter />
       <JsonLd data={getHomepageJsonLd({ auditLitePrice: PRICING.auditLitePrice })} />
     </>
   );

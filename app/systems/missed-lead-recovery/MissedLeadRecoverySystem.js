@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { MotionReveal } from '../../components/MotionReveal';
 import { PricingReference } from '../../components/PricingReference';
 
+// v13: Capability vs status — what the system WOULD do vs what is currently live.
+// CHANNELS represent the LEAD RECOVERY STATE MACHINE: connected channels surface real events; pending ones are documented but not yet deployed.
 const CHANNELS = [
   {
     id: 'webhook',
@@ -68,18 +70,21 @@ export function MissedLeadRecoverySystem() {
             the pending ones are documented but not yet deployed.
           </p>
           <div className="ml-channel-tabs" role="tablist" aria-label="Lead recovery channels">
-            {CHANNELS.map((c) => (
+            {CHANNELS.map((c) => {
+              const id = c.id;
+              return (
               <button
-                key={c.id}
+                key={id}
                 type="button"
                 role="tab"
-                aria-pressed={active === c.id}
-                className={`ml-channel-tab ${active === c.id ? 'is-active' : ''} ${c.status === 'connected' ? 'is-connected' : 'is-pending'}`}
-                onClick={() => setActive(c.id)}
+                aria-pressed={active === id}
+                className={`ml-channel-tab ${active === id ? 'is-active' : ''} ${c.status === 'connected' ? 'is-connected' : 'is-pending'}`}
+                onClick={() => setActive(id)}
               >
                 {c.label}
               </button>
-            ))}
+              );
+            })}
           </div>
           <div className="ml-channel-display" id="channels" role="region" aria-live="polite">
             {CHANNELS.filter((c) => c.id === active).map((c) => (

@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { MotionReveal } from '../../components/MotionReveal';
 import { PricingReference } from '../../components/PricingReference';
 
+// v13: Capability vs status — what the system WOULD do vs what is currently live.
+// STATES represent the BOOKING STATE MACHINE: requested → confirmed | disputed.
+// They are derived from real provider acknowledgements, never from form submission alone.
 const STATES = [
   {
     id: 'requested',
@@ -133,7 +136,7 @@ export function BookingControlSystem() {
             <a className="system-card" href="/industries/dental-clinics" role="listitem">
               <span className="micro">01 / dental clinics</span>
               <h3>Dental clinics</h3>
-              <p>Slot control without promising instant confirmation.</p>
+              <p>Slot control without any instant or auto promise.</p>
             </a>
             <a className="system-card" href="/industries/salons-spas" role="listitem">
               <span className="micro">02 / salons and spas</span>

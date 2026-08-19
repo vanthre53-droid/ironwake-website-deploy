@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
 
+import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { canonicalUrl } from '../../lib/seo.mjs';
+
 export const metadata = {
   title: 'Systems — IronWake',
   description:
     'Four operational systems IronWake builds for service businesses: Missed Lead Recovery, Booking Certainty, Trust and Lead Capture, and AI Receptionist planning.',
-  alternates: { canonical: '/systems' },
+  alternates: { canonical: canonicalUrl('/systems') },
 };
 
 // v13 Pearl/Graphite/Petrol listing — de-congested 2-up grid at desktop,
@@ -47,6 +50,9 @@ const systems = [
 
 export default function SystemsIndex() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: 'Systems', href: '/systems' }])) }} />
     <main className="shell">
       <section className="hero compact">
         <span className="eyebrow">Systems</span>
@@ -91,5 +97,6 @@ export default function SystemsIndex() {
         </p>
       </section>
     </main>
+    </>
   );
 }

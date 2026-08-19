@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import { AiReceptionistSystem } from './AiReceptionistSystem';
 
 export const metadata = {
-  title: 'AI Receptionist Planning — IronWake Systems',
+  // ponytail: site assistant may be live; client AI Receptionist still requires separately scoped provider deployment.
+  title: 'AI Receptionist Planning',
   description:
     'AI Receptionist system planning — what it would do, what is currently live on this site, and why the client receptionist is not yet a deployed provider.',
   alternates: { canonical: '/systems/ai-receptionist' },
