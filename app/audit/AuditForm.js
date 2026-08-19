@@ -254,7 +254,9 @@ function AuditFormInner() {
             className="audit-field"
           />
 
-          {/* honeypot — bots fill, humans never see */}
+          {/* honeypot — bots fill, humans never see.
+              Must not be visible or hit by accessibility/responsive tools
+              (was triggering form-overflow P0 across every viewport). */}
           <label className="trap" aria-hidden="true">
             <span>Website</span>
             <input
@@ -262,6 +264,14 @@ function AuditFormInner() {
               type="text"
               tabIndex={-1}
               autoComplete="off"
+              style={{
+                position: 'absolute',
+                left: '-9999px',
+                top: 'auto',
+                width: '1px',
+                height: '1px',
+                overflow: 'hidden',
+              }}
             />
           </label>
 
