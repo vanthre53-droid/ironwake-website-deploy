@@ -122,32 +122,49 @@ async function auditPage(p) {
   else pass('canonical', `${p.routePath} has canonical (${can.mode})`);
 }
 
-async function auditSitemapParity() {
-  const sitemap = await readFile(path.join(APP, 'sitemap.js'), 'utf8');
-  // Extract declared routes from the STATIC_ROUTES array. The HTTP path
-  // is the value of `path:` in each object literal — not any path-shaped
-  // string (which would catch filenames like 'app/login/page.js').
-  const declared = new Set();
-  const routeRe = /path:\s*['"`]([^'"`]*)['"`]/g;
-  for (const m of sitemap.matchAll(routeRe)) {
-    const p = m[1];
-    const norm = p === '' ? '/' : p;
-    declared.add(norm);
+// app/sitemap.js generates /sitemap.xml dynamically; in Next.js 15+ there is
+  // no static public/sitemap.xml file. Compare against the live response at
+  // /sitemap.xml so the parity check reflects what real visitors/crawlers see.
+  const SITEMAP_URL = process.env.SITEMAP_URL ?? 'https://ironwake.dev/sitemap.xml';
+
+  async function fetchLiveSitemap() {
+    try {
+      const res = await fetch(SITEMAP_URL, { signal: AbortSignal.timeout(15_000) });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.text();
+    } catch (e) {
+      warn('sitemap-parity', `Could not fetch live sitemap from ${SITEMAP_URL} (${e.message}); falling back to public/sitemap.xml if present.`);
+      try { return await readFile(path.join(PUBLIC, 'sitemap.xml'), 'utf8'); }
+      catch { return ''; }
+    }
   }
 
-  const publicSitemap = await readFile(path.join(PUBLIC, 'sitemap.xml'), 'utf8');
-  const emitted = new Set();
-  for (const m of publicSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
-    const u = new URL(m[1]);
-    emitted.add(u.pathname);
-  }
+  async function auditSitemapParity() {
+    const sitemap = await readFile(path.join(APP, 'sitemap.js'), 'utf8');
+    // Extract declared routes from the STATIC_ROUTES array. The HTTP path
+    // is the value of `path:` in each object literal — not any path-shaped
+    // string (which would catch filenames like 'app/login/page.js').
+    const declared = new Set();
+    const routeRe = /path:\s*['"`]([^'"`]*)['"`]/g;
+    for (const m of sitemap.matchAll(routeRe)) {
+      const p = m[1];
+      const norm = p === '' ? '/' : p;
+      declared.add(norm);
+    }
 
-  const missing = [...declared].filter((p) => !emitted.has(p));
-  const extra = [...emitted].filter((p) => !declared.has(p));
-  if (missing.length) fail('sitemap-parity', `Declared in app/sitemap.js but missing from public/sitemap.xml: ${missing.join(', ')}`);
-  else pass('sitemap-parity', `app/sitemap.js and public/sitemap.xml agree on ${declared.size} URLs`);
-  if (extra.length) warn('sitemap-parity', `Emitted in public/sitemap.xml but not in app/sitemap.js: ${extra.join(', ')}`);
-}
+    const publicSitemap = await fetchLiveSitemap();
+    const emitted = new Set();
+    for (const m of publicSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      const u = new URL(m[1]);
+      emitted.add(u.pathname);
+    }
+
+    const missing = [...declared].filter((p) => !emitted.has(p));
+    const extra = [...emitted].filter((p) => !declared.has(p));
+    if (missing.length) fail('sitemap-parity', `Declared in app/sitemap.js but missing from ${SITEMAP_URL}: ${missing.join(', ')}`);
+    else pass('sitemap-parity', `app/sitemap.js and ${SITEMAP_URL} agree on ${declared.size} URLs`);
+    if (extra.length) warn('sitemap-parity', `Emitted in ${SITEMAP_URL} but not in app/sitemap.js: ${extra.join(', ')}`);
+  }
 
 function fileLooksLikeIco(buf) {
   if (buf.length < 22) return false;
@@ -160,12 +177,13 @@ function fileLooksLikePng(buf) {
 }
 
 async function auditBinaryAssets() {
-  for (const [relPath, expectation] of [
-    ['app/favicon.ico', 'ico'],
-    ['app/apple-icon.png', 'png'],
-    ['public/logo.png', 'png'],
-    ['public/sitemap.xml', 'xml'],
-  ]) {
+    for (const [relPath, expectation] of [
+      ['app/favicon.ico', 'ico'],
+      ['app/apple-icon.png', 'png'],
+      ['public/logo.png', 'png'],
+      // /sitemap.xml is generated dynamically by app/sitemap.js — no
+      // static public/sitemap.xml file exists in Next.js 15+. Skipped.
+    ]) {
     const full = path.join(ROOT, relPath);
     if (!existsSync(full)) {
       fail('binary-asset', `Missing file: ${relPath}`);

@@ -112,7 +112,7 @@ function parseTAP(stdout) {
 function runOne(file) {
   return new Promise((resolve) => {
     const started = performance.now();
-    const proc = spawn(process.execPath, ['--test', '--test-reporter=tap', file], { stdio: ['ignore', 'pipe', 'pipe'], cwd: ROOT });
+    const proc = spawn(process.execPath, ['--test', '--test-reporter=tap', file], { stdio: ['ignore', 'pipe', 'pipe'], cwd: ROOT, env: { PATH: process.env.PATH, HOME: process.env.HOME, NODE_PATH: '' } });
     let stdoutBuf = '', stderrBuf = '';
     proc.stdout.on('data', d => stdoutBuf += d);
     proc.stderr.on('data', d => stderrBuf += d);

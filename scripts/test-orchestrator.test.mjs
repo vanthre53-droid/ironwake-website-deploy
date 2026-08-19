@@ -159,7 +159,7 @@ test('orchestrator end-to-end on a fake isolated fixture', async () => {
   assert.match(report, /COMPONENT/);
   assert.match(report, /INTEGRATION/);
   assert.match(report, /ENVIRONMENT/);
-  assert.match(report, /AUTH/);
+  assert.match(report, /AUTH/, `AUTH missing. Report:\n${report}`);
   const json = JSON.parse(await fs.readFile(jsonPath, 'utf8'));
   const envTier = json.tiers.find(t => t.name === 'ENVIRONMENT');
   assert.ok(envTier, 'ENVIRONMENT tier missing from JSON');

@@ -3016,7 +3016,7 @@ button, input, textarea { font: inherit; }
 }
 .wa-overlay__lede {
   margin: 0;
-  font: 400 13px/1.55 var(--sans);
+  font: 400 13px/1.55 var(--body);
   color: var(--graphite);
 }
 .wa-overlay__form {
