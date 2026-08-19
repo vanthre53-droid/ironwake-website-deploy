@@ -3,6 +3,16 @@ import { PRICING_OFFERS, PRICING_TIERS } from '../../lib/pricing.mjs';
 import { SiteHeader } from '../components/SiteHeader';
 import PricingRegionToggle from './PricingRegionToggle';
 
+// ponytail: SSR anti-FOUC inline script. Runs synchronously after the price
+// nodes are in the DOM (this fragment is appended at the end of the rendered
+// output) and before React hydration. It mirrors PricingRegionToggle.applyRegion
+// so the first paint shows the correct region's prices for visitors who have
+// previously chosen International (or any other valid value). Idempotent: a
+// re-run cannot change a correct state. No deps, no React, no JSX. The key is
+// the same localStorage key the toggle writes ('ironwake:pricing-region').
+const STORAGE_KEY = 'ironwake:pricing-region';
+const SSR_REGION_BOOTSTRAP = `(function(){try{var r=window.localStorage.getItem('${STORAGE_KEY}');if(r!=='india'&&r!=='intl')r='india';document.documentElement.setAttribute('data-region',r);var n=document.querySelectorAll('[data-region=\"india\"],[data-region=\"intl\"]');for(var i=0;i<n.length;i++){var el=n[i];if(el.tagName==='SPAN'||el.tagName==='DIV'){el.hidden=el.getAttribute('data-region')!==r;}}var b=document.querySelectorAll('.pricing-card-pricing[data-region]');for(var j=0;j<b.length;j++){var bel=b[j];bel.hidden=bel.getAttribute('data-region')!==r;}var btns=document.querySelectorAll('button[data-pricing-region]');for(var k=0;k<btns.length;k++){var btn=btns[k];btn.setAttribute('aria-pressed',btn.getAttribute('data-pricing-region')===r?'true':'false');}}catch(e){}})();`;
+
 // Tier clarity — short, declarative descriptions of what each tier includes.
 // These are derived directly from the canonical offer matrix (lib/pricing.mjs)
 // and do not introduce new pricing, claims, or urgency.
@@ -226,6 +236,10 @@ export default function PricingPage() {
           <Link className="button secondary" href="/scope">Read the operating scope</Link>
         </section>
       </main>
+      {/* ponytail: anti-FOUC bootstrap. Runs synchronously after the price
+         spans above are in the DOM and before React hydration. Mirrors
+         PricingRegionToggle.applyRegion. See SSR_REGION_BOOTSTRAP at top. */}
+      <script dangerouslySetInnerHTML={{ __html: SSR_REGION_BOOTSTRAP }} />
     </>
   );
 }
