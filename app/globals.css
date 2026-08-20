@@ -1,43 +1,43 @@
 :root {
- /* ponytail: Pearl/Graphite/Petrol/Mineral system. Pearl-dominant canvas,
-    graphite structural text, scarce deep-petrol accent, muted mineral
-    supporting accent. The legacy --copper / --aqua names are preserved as
-    semantic aliases so existing JSX stays valid; their values now point
-    to the new authoritative palette. */
- --pearl: #F3F5F7;
- --pearl-canvas: #F3F5F7;
- --secondary-canvas: #E9EDF1;
- --high-emphasis-surface: #FBFCFD;
- --graphite-ink: #161B22;
- --secondary-ink: #343C45;
- --muted-text: #66717D;
+ /* Recovery: restore the owner-approved Apple-like copper/ivory identity
+    while retaining the later semantic token names used by newer routes. */
+ --pearl: #F5F3EE;
+ --pearl-canvas: #F5F3EE;
+ --secondary-canvas: #EDEAE3;
+ --high-emphasis-surface: #FFFFFF;
+ --graphite-ink: #0A0A0A;
+ --secondary-ink: #444748;
+ --muted-text: #68635D;
 
- --petrol: #1F5D67;
- --petrol-hover: #194C54;
- --petrol-pressed: #143F46;
- --mineral: #5F7F87;
- --soft-mineral: #D7E5E8;
- --frosted-blue-grey: #E5EEF1;
- --focus-accent: #2E7A85;
- --link: #1F5D67;
- --link-hover: #194C54;
+ /* Newer components call this family "petrol". It now resolves to the
+    recovered copper action system so functionality is preserved without
+    keeping the rejected teal presentation. */
+ --petrol: #B94D2F;
+ --petrol-hover: #A33D20;
+ --petrol-pressed: #842E18;
+ --mineral: #1E7582;
+ --soft-mineral: #EFE3DB;
+ --frosted-blue-grey: #E7EEEE;
+ --focus-accent: #1E7582;
+ --link: #A33D20;
+ --link-hover: #842E18;
 
  --semantic-success: #1F7A4D;
  --semantic-warning: #B67A0E;
  --semantic-error: #B03A3A;
 
  /* Glass material tokens — three levels of restrained translucency. */
- --base-glass: rgba(255, 255, 255, 0.54);
- --cool-mineral-glass: rgba(237, 244, 246, 0.44);
- --interactive-glass: rgba(248, 251, 252, 0.64);
- --strong-foreground-glass: rgba(255, 255, 255, 0.76);
- --glass-border: rgba(34, 61, 68, 0.14);
+ --base-glass: rgba(255, 255, 255, 0.58);
+ --cool-mineral-glass: rgba(239, 232, 224, 0.48);
+ --interactive-glass: rgba(255, 252, 248, 0.68);
+ --strong-foreground-glass: rgba(255, 255, 255, 0.80);
+ --glass-border: rgba(92, 66, 52, 0.14);
  --glass-secondary-border: rgba(255, 255, 255, 0.46);
  --glass-inner-highlight: rgba(255, 255, 255, 0.78);
- --depth-shadow: rgba(17, 35, 40, 0.09);
- --deep-shadow: rgba(14, 31, 36, 0.13);
- --active-glow: rgba(31, 93, 103, 0.12);
- --dark-glass-text: #161B22;
+ --depth-shadow: rgba(57, 39, 31, 0.09);
+ --deep-shadow: rgba(46, 29, 22, 0.13);
+ --active-glow: rgba(185, 77, 47, 0.12);
+ --dark-glass-text: #0A0A0A;
 
  /* Legacy semantic aliases — JSX uses these names freely; their values
     now resolve to the new system. No JSX needed for this migration. */
@@ -126,7 +126,7 @@
 
 * { box-sizing: border-box; }
 html { background: var(--paper); scroll-behavior: smooth; overflow-x: hidden; }
-body { margin: 0; min-height: 100vh; overflow-x: hidden; background: radial-gradient(circle at 82% -8%, rgba(31, 93, 103, 0.06), transparent 32rem), radial-gradient(circle at 2% 30%, rgba(95, 127, 135, 0.05), transparent 36rem), linear-gradient(135deg, var(--secondary-canvas) 0%, var(--pearl-canvas) 49%, var(--frosted-blue-grey) 100%); color: var(--ink); font: 17px/1.7 var(--body); }
+body { margin: 0; min-height: 100vh; overflow-x: hidden; background: radial-gradient(circle at 82% -12%, rgb(30 117 130 / .16), transparent 27rem), radial-gradient(circle at 2% 35%, rgb(185 77 47 / .14), transparent 31rem), linear-gradient(135deg, #EEF2F2 0%, var(--paper) 49%, #E7EEEE 100%); color: var(--ink); font: 17px/1.7 var(--body); }
 a { color: inherit; transition: color .2s ease; }
 button, input, textarea { font: inherit; }
 :focus-visible { outline: 3px solid var(--copper); outline-offset: 4px; }

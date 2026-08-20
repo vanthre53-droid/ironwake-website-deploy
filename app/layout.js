@@ -36,7 +36,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#F3F5F7',
+  themeColor: '#F5F3EE',
 };
 
 // ponytail: Next.js requires error boundaries as dedicated files, not logic inside a
