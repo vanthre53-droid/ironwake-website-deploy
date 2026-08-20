@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 test('work page keeps demonstrations labelled and free of client-engagement claims', async () => {
   const source = await readFile(new URL('./page.js', import.meta.url), 'utf8');
-  assert.match(source, /Nine businesses/);
+  assert.match(source, /Forty[- ]nine businesses/);
   assert.match(source, /RapidPulse Response/);
   assert.match(source, /DentaCare Intake/);
   assert.match(source, /Atelier Safe/);
