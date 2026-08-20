@@ -123,11 +123,20 @@ async function probeVoice() {
 
 async function probeWhatsApp() {
   if (typeof window === 'undefined') return 'unknown';
+  // If a real E.164 wa.me number is configured, we can open the deep link
+  // directly — treat that as live regardless of /api/whatsapp/start state.
   if (/^\+\d{8,15}$/.test(NUMBER)) return 'live';
   try {
-    const res = await fetch('/api/whatsapp/start', { method: 'HEAD', cache: 'no-store' });
+    const res = await fetch('/api/whatsapp/start', {
+      method: 'HEAD',
+      cache: 'no-store',
+      headers: { accept: 'application/json' },
+    });
+    // 405 Method Not Allowed = the route exists but only POSTs are accepted.
+    // That is still "live" — the in-page widget can submit to it.
     if (res.status === 404) return 'unconfigured';
-    return 'live';
+    if (res.status >= 200 && res.status < 500) return 'live';
+    return 'unknown';
   } catch {
     return 'unknown';
   }

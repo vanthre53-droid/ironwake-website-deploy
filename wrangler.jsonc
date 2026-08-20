@@ -35,6 +35,7 @@
     "crons": ["*/2 * * * *"]
   },
   "vars": {
-    "NEXT_PUBLIC_SITE_URL": "https://ironwake.dev"
+    "NEXT_PUBLIC_SITE_URL": "https://ironwake.dev",
+    "NEXT_PUBLIC_WHATSAPP_PREFILL": "Hi IronWake — I would like to learn more about your AI receptionist systems."
   }
 }
