@@ -5,6 +5,7 @@
 // for first-time visitors. No external state, no analytics, no PII. Pure DOM.
 
 import { useEffect, useRef } from 'react';
+import { applyRegion as applyRegionCore } from './apply-region.mjs';
 
 const STORAGE_KEY = 'ironwake:pricing-region';
 
@@ -19,14 +20,14 @@ export default function PricingRegionToggle({ defaultRegion = 'india' }) {
     } catch (_e) {
       /* localStorage blocked — fall through to default */
     }
-    applyRegion(region);
+    applyRegionCore(region);
 
     const buttons = groupRef.current?.querySelectorAll('button[data-pricing-region]') ?? [];
 
     const setRegion = (next) => {
       if (next !== 'india' && next !== 'intl') return;
       try { window.localStorage.setItem(STORAGE_KEY, next); } catch (_e) { /* ignore */ }
-      applyRegion(next);
+      applyRegionCore(next);
     };
 
     const handleClick = (event) => {
@@ -78,34 +79,4 @@ export default function PricingRegionToggle({ defaultRegion = 'india' }) {
       </button>
     </div>
   );
-}
-
-function applyRegion(region) {
-  const doc = typeof document === 'undefined' ? null : document;
-  if (!doc) return;
-
-  // Every visible price node on the page — both the per-tier-row prices
-  // AND any future .pricing-card-pricing blocks. The earlier selector
-  // missed this and the toggle became decorative; the broad selector fixes
-  // that without breaking anything because every data-region node carries
-  // the same semantics.
-  const priceNodes = doc.querySelectorAll('[data-region="india"], [data-region="intl"]');
-  priceNodes.forEach((el) => {
-    if (el.tagName === 'SPAN' || el.tagName === 'DIV') {
-      el.hidden = el.getAttribute('data-region') !== region;
-    }
-  });
-
-  // Also swap any block-level container marked with data-region
-  // (e.g. a future .pricing-card-pricing wrapper)
-  const blockNodes = doc.querySelectorAll('.pricing-card-pricing[data-region]');
-  blockNodes.forEach((el) => {
-    el.hidden = el.getAttribute('data-region') !== region;
-  });
-
-  const buttons = doc.querySelectorAll('button[data-pricing-region]');
-  buttons.forEach((b) => {
-    const pressed = b.getAttribute('data-pricing-region') === region;
-    b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
-  });
 }
