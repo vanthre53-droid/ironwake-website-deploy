@@ -1,0 +1,7 @@
+# V3 immutable brand lock: materialize exactly these owner-supplied lock bytes.
+# Do not add broad normalization rules here. Other repository files retain Git defaults.
+app/globals.css text eol=crlf
+app/layout.js text eol=crlf
+app/page.js text eol=crlf
+app/components/FlagshipHero.js text eol=crlf
+app/components/DashboardDemo.js text eol=crlf
