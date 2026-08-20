@@ -54,6 +54,7 @@ ROUTE: class=verification tier=COMMAND model=gpt-5.6-terra provider=openai-codex
 ROUTE: class=implementation tier=mid model=gpt-5.6-luna provider=openai-codex reason="one-file full V3 Copper/Ivory test-contract replacement after verifying nonintegrated candidate left current V13 test intact" step="V3 Copper/Ivory test repair"
 VERIFY: step="V3 stale-contract root-cause audit" gate=three-isolated-node-test-reproductions+source-hierarchy-trace result=PASS attempts=1 cause="rejected V13 stylesheet test; obsolete 9-project assertion; genuine 40-route registry gap"
 VERIFY: step="V3 24aa1fc independent review" gate=exact-diff+locked-hashes+targeted-tests+secret-scan+full-suite-record result=REJECT attempts=1 reviewer=t_c2b5bdae reason="test aliases Aqua but does not directly assert immutable --mineral: #1E7582; detached full-suite dependency failures are NOT_COMPARABLE, separate 40-route registry failure is genuine"
+VERIFY: step="V3 24aa1fc duplicate review closeout" gate=exact-diff+focused-tests+secret-scan+a11y+five-locked-hashes+direct-aqua-assertion result=REJECT attempts=1 reviewer=hermes-terra reason="direct --mineral: #1E7582 assertion absent; card comment records non-integration and successor t_9c11455f"
 
 ## DECISIONS
 - 2026-07-30 — Use the external Stitch design ZIP for visual tokens and the 30-screen archive for composition/route reference — because the current implementation matched neither source and the external design system is the approved token source.
