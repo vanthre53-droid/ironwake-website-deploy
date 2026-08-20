@@ -8,10 +8,10 @@
 - Owner skills: graphify, verification, model-router, coordination.
 
 ## STATE
-- Phase: V3 accepted Bangalore repair checkpoint; stale test-contract audit is next.
-- Verified source baseline: restored origin `e2ec0e9f6ec66f761a69947290bb1ddb37accbf9`; current valid descendant `2293d6bf2b9599c01c386540cacf3f258b2bfaaf` retains every Copper / Ivory owner lock hash through scoped CRLF materialization.
+- Phase: V3 C1 stale-contract audit complete; bounded test-contract repair is next.
+- Verified source baseline: restored origin `e2ec0e9f6ec66f761a69947290bb1ddb37accbf9`; current master is a valid Copper / Ivory descendant through accepted application repair `2293d6bf2b9599c01c386540cacf3f258b2bfaaf` and scoped CRLF lock materialization.
 - Completed: new Luna task `t_8a60c258` repaired both unlocked Lakme Bangalore surfaces and committed `2293d6b`; independent Terra review `t_b6cd0763` ACCEPTED it; master fast-forwarded only that two-file diff. Scoped metadata/secret gates PASS.
-- NEXT SINGLE ACTION: conduct a read-only source-hierarchy audit of the three remaining full-suite stale audit failures before any new mutation.
+- NEXT SINGLE ACTION: dispatch one isolated Luna worker to repair only the unlocked Copper/Ivory CSS test plus the stale portfolio cardinality test/comment; require independent review before integration. The 40 public work-route registry repair is separate.
 - Blockers: direct `npm run build` exceeded its one 600-second bound; full suite is PARTIAL at 381 pass / 3 known stale-contract failures. Cloudflare version enumeration is `NOT_RUN` because this task has no canonical compiled production target; do not bypass the gateway.
 
 ## HANDOFF
@@ -48,6 +48,8 @@ VERIFY: step="M1 W04 Instagram profile packet" gate=provider-readback+schema+bro
 VERIFY: step="V3 Bangalore pilot review gate" gate=runs+diff-check+source-reconciliation result=FAIL attempts=1 reason="rendered LakmeSalonBangaloreInCaseStudy.js retains Kolkata identity while route metadata says Bangalore"
 VERIFY: step="V3 locked-byte policy" gate=fresh-isolated-worktree+five-owner-sha256+attribute-scope+lock-diff result=PASS attempts=1 commit=ffa29ef70eb27b9b48c8eb7107a93c10d0c0f0e8 reason="five-path CRLF policy materializes all supplied owner hashes without changing locked source content"
 VERIFY: step="V3 Bangalore cross-surface identity repair" gate=luna-isolated-worktree+scoped-metadata-secret-tests+independent-terra-review+fast-forward-integration result=PASS attempts=1 commit=2293d6bf2b9599c01c386540cacf3f258b2bfaaf reviewer=t_b6cd0763 full_suite="381 pass, 3 stale-contract failures" direct_build=TIMEOUT_600S
+ROUTE: class=debugging tier=terra model=gpt-5.6-terra reason="C1 source-hierarchy audit of reproducible stale contracts" step="V3 post-Bangalore regression investigation"
+VERIFY: step="V3 stale-contract root-cause audit" gate=three-isolated-node-test-reproductions+source-hierarchy-trace result=PASS attempts=1 cause="rejected V13 stylesheet test; obsolete 9-project assertion; genuine 40-route registry gap"
 
 ## DECISIONS
 - 2026-07-30 — Use the external Stitch design ZIP for visual tokens and the 30-screen archive for composition/route reference — because the current implementation matched neither source and the external design system is the approved token source.
