@@ -1,0 +1,4 @@
+=== PROBE 9: Business ID direct read ===
+{"error":{"message":"(#200) Requires business_management permission to manage the object","type":"OAuthException","code":200,"fbtrace_id":"AM-tzM_WAHbM2-70iGlaNwD"}}
+HTTP_STATUS=403
+TIME_TOTAL=0.456672

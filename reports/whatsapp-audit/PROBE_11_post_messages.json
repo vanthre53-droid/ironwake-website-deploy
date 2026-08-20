@@ -1,0 +1,4 @@
+=== PROBE 11: outbound POST to phone/messages (readiness — uses Meta test recipient) ===
+{"error":{"message":"Unsupported post request. Object with ID '1334084079784439' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api","code":100,"type":"GraphMethodException","error_subcode":33,"fbtrace_id":"AeHaL3P7PBMae99TdGS2jCb"}}
+HTTP_STATUS=400
+TIME_TOTAL=1.045526

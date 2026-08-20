@@ -1,0 +1,4 @@
+=== PROBE 14: list owned WABAs (whatsapp_business_management via account type) ===
+{"error":{"message":"(#100) Tried accessing nonexisting field (owned_whatsapp_business_accounts)","type":"OAuthException","code":100,"fbtrace_id":"ARPxIkNcmvdRk4xln9NZQbY"}}
+HTTP_STATUS=400
+TIME_TOTAL=0.668793

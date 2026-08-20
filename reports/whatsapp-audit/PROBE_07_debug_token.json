@@ -1,0 +1,4 @@
+=== PROBE 7: debug_token to see token owner app ===
+{"data":{"app_id":"1050632807552604","type":"SYSTEM_USER","application":"ironwake","data_access_expires_at":0,"expires_at":0,"is_valid":true,"issued_at":1786881806,"scopes":["whatsapp_business_management","whatsapp_business_messaging","manage_app_solution","public_profile"],"granular_scopes":[{"scope":"whatsapp_business_management"},{"scope":"whatsapp_business_messaging"},{"scope":"manage_app_solution"}],"user_id":"122105065113434941"}}
+HTTP_STATUS=200
+TIME_TOTAL=0.574855

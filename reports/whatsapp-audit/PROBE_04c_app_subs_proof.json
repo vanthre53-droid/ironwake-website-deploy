@@ -1,0 +1,7 @@
+=== PROBE 4c: app subscriptions (correct appsecret_proof) ===
+token_prefix=EAAO7i token_len=205
+appsecret_proof=04c82eca93daa9cfcc8f464965f5d1e7f806e1223c1467d98cdf4ad9f561946e
+--- request URL: https://graph.facebook.com/v22.0/1050632807552604/subscriptions?access_token=***&appsecret_proof=04c82eca...
+{"error":{"message":"(#190) Application Secret required for this endpoint","type":"OAuthException","code":190,"fbtrace_id":"Ad219lpv18347qEuBOXZW2D"}}
+HTTP_STATUS=400
+TIME_TOTAL=0.468533

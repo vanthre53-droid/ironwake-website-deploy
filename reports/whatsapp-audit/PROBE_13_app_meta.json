@@ -1,0 +1,4 @@
+=== PROBE 13: app object direct (sanity check on META_APP_ID) ===
+{"id":"1050632807552604","name":"ironwake"}
+HTTP_STATUS=200
+TIME_TOTAL=0.416525

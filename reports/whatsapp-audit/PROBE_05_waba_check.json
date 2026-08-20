@@ -1,0 +1,4 @@
+=== PROBE 5: WABA accessible? (probe ID via /me/whatsapp_business_management_accounts) ===
+{"error":{"message":"Unknown path components: \/whatsapp_business_management_accounts","type":"OAuthException","code":2500,"fbtrace_id":"AZ-TQdWLHooROKFlSgDIrGI"}}
+HTTP_STATUS=400
+TIME_TOTAL=0.434604

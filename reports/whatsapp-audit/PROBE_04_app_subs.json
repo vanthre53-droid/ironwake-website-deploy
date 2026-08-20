@@ -1,0 +1,4 @@
+=== PROBE 4: app subscriptions (webhooks) ===
+{"error":{"message":"(#190) Application Secret required for this endpoint","type":"OAuthException","code":190,"fbtrace_id":"A8fTXBAgr_dzNBjQl4PEWPL"}}
+HTTP_STATUS=400
+TIME_TOTAL=0.479380

@@ -1,0 +1,4 @@
+=== PROBE 16: list phone numbers via /me/phone_numbers (if accessible) ===
+{"error":{"message":"(#100) Tried accessing nonexisting field (phone_numbers)","type":"OAuthException","code":100,"fbtrace_id":"AEPL-WgYOYEGn5kDb1tbZt0"}}
+HTTP_STATUS=400
+TIME_TOTAL=0.417122

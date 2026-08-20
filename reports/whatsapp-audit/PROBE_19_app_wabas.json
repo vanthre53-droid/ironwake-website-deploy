@@ -1,0 +1,7 @@
+=== PROBE 19: WABA read via app-owned field (a few variants) ===
+--- whatsapp_business_management_accounts ---
+{"error":{"message":"Unknown path components: \/whatsapp_business_management_accounts","type":"OAuthException","code":2500,"fbtrace_id":"AjYm06QDe6dnfm3yqrkmpKy"}}
+HTTP_STATUS=400
+--- whatsapp_business_management ---
+{"error":{"message":"Unknown path components: \/whatsapp_business_management","type":"OAuthException","code":2500,"fbtrace_id":"ANKh2SbSuVu1B0XcOYIOcMQ"}}
+HTTP_STATUS=400

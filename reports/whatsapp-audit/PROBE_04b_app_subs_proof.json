@@ -1,0 +1,5 @@
+=== PROBE 4b: app subscriptions with appsecret_proof ===
+appsecret_proof=469a1651cf432c47deb5ca5b21a6de540fcfe1584c67bbc1a664d7652aab4dc6
+{"error":{"message":"Invalid appsecret_proof provided in the API argument","type":"GraphMethodException","code":100,"fbtrace_id":"AiT6LqLpUBd5pavK9wztlYX"}}
+HTTP_STATUS=400
+TIME_TOTAL=0.434581
