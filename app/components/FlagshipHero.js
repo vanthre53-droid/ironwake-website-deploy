@@ -30,7 +30,7 @@ export function FlagshipHero() {
             IronWake maps the handoff between enquiry, booking, and follow-up — smallest system that makes the next action visible. Published, reviewed, verifiable.
           </p>
           <div className="flagship-hero__actions">
-            <a className="btn btn--primary" href="#contact">Map my leak</a>
+            <a className="btn btn--primary" href="/audit">Map my leak</a>
             <a className="btn btn--ghost" href="/pricing">See pricing</a>
           </div>
         </header>
@@ -98,7 +98,7 @@ export function FlagshipHero() {
               IronWake labels work a demonstration until independent evidence supports a stronger claim. Provider status, booking state, and outcomes are never asserted without proof.
             </p>
             <div className="flagship-hero__beat-actions">
-              <a className="btn btn--primary" href="#contact">Map my leak</a>
+              <a className="btn btn--primary" href="/audit">Map my leak</a>
               <a className="btn btn--ghost" href="/process">See process</a>
             </div>
           </li>
