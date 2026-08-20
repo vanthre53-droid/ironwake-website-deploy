@@ -1,5 +1,19 @@
+begin_v3_authoritative_owner_directive
+# IRONWAKE — FINAL PRODUCTION COMPLETION DIRECTIVE V3
+
+## Active, owner-authoritative execution record
+- Current source baseline: `e2ec0e9f6ec66f761a69947290bb1ddb37accbf9` (restored Copper / Ivory).
+- Immutable byte-locked files: `app/globals.css`, `app/layout.js`, `app/page.js`, `app/components/FlagshipHero.js`, and `app/components/DashboardDemo.js`. Do not edit, regenerate, reformat, stage, or override them without exact owner authorization.
+- Brand fingerprint: ivory canvas `#F5F3EE`, warm stone `#EDEAE3`, ink `#0A0A0A`, copper primary `#B94D2F`; supporting aqua is secondary only. Pearl / Graphite / Petrol redesign work is quarantined and must never be revived or deployed.
+- Current local gate: materialize the five supplied CRLF lock bytes in isolated worktrees through the intentionally narrow `.gitattributes` policy, then verify before worker dispatch.
+- First bounded repair after the lock gate: discard the rejected metadata-only Lakme pilot and repair both unlocked Bangalore route surfaces; it must preserve canonical route and demonstration-only truthfulness.
+- Do not deploy, publish, mutate providers, create external accounts, or spend funds unless the separately compiled action carries explicit target and owner authority.
+- This V3 section supersedes all historical V13/V14 status, plans, counts, palette claims, deployment budgets, and next actions below. Those entries are retained only as historical evidence.
+
+end_v3_authoritative_owner_directive
+
 begin_pony_tail
-# IRONWAKE V13 — A..AM
+# IRONWAKE V13 — A..AM (HISTORICAL — SUPERSEDED BY V3 ABOVE)
 
 Use this as the full to-do list. For every change update the todo list and mark done.
 
