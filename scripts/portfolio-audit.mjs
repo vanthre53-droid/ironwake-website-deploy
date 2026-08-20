@@ -1,5 +1,5 @@
 // ponytail: portfolio-proof audit. Verifies:
-//   - exactly 9 work/* projects exist (R053 acceptance)
+//   - exactly 49 work/* projects exist (R053 acceptance)
 //   - each project's page.js metadata mentions "demonstration" or "portfolio"
 //   - each project's page.js has a co-located page.test.js
 //   - the portfolio listing page.js labels work as "capability proof"
