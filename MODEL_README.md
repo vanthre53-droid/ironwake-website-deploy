@@ -11,7 +11,7 @@
 - Phase: V3 C1 stale-contract audit complete; first test-contract repair was independently rejected for an incomplete Aqua assertion.
 - Verified source baseline: restored origin `e2ec0e9f6ec66f761a69947290bb1ddb37accbf9`; current master is a valid Copper / Ivory descendant through accepted application repair `2293d6bf2b9599c01c386540cacf3f258b2bfaaf` and scoped CRLF lock materialization.
 - Completed: new Luna task `t_8a60c258` repaired both unlocked Lakme Bangalore surfaces and committed `2293d6b`; independent Terra review `t_b6cd0763` ACCEPTED it; master fast-forwarded only that two-file diff. Scoped metadata/secret gates PASS.
-- NEXT SINGLE ACTION: dispatch one new isolated Luna worker to change only `app/globals.css.test.js`, adding a direct assertion for the existing immutable `--mineral: #1E7582` Aqua fingerprint. Review before integration. Do not integrate rejected `24aa1fc`; the 40 public work-route registry repair remains separate.
+- NEXT SINGLE ACTION: dispatch one new isolated Luna worker to replace only the stale V13 contract in `app/globals.css.test.js` with the full V3 Copper/Ivory fingerprint contract. It must directly assert Paper `#F5F3EE`, Warm Stone `#EDEAE3`, Ink `#0A0A0A`, Copper `#B94D2F/#A33D20/#842E18`, and supporting Aqua `--mineral: #1E7582`, while preserving the motion test. Review before integration. Do not integrate rejected `24aa1fc`; the 40 public work-route registry repair remains separate.
 - Blockers: direct `npm run build` exceeded its one 600-second bound; primary full suite remains PARTIAL at 381 pass / 3 known stale-contract failures. Latest Cloudflare routing is verified 100% restored `7168cbec`; the Agency router plugin is enabled but its tools are not exposed in this session, so its tool smoke is STALE.
 
 ## HANDOFF
@@ -51,7 +51,7 @@ VERIFY: step="V3 Bangalore cross-surface identity repair" gate=luna-isolated-wor
 ROUTE: class=debugging tier=terra model=gpt-5.6-terra reason="C1 source-hierarchy audit of reproducible stale contracts" step="V3 post-Bangalore regression investigation"
 SESSION: 2026-08-20T20:50:03Z model=gpt-5.6-terra provider=openai-codex role=Commander trace=trace-1787258773046-8984ae29941a
 ROUTE: class=verification tier=COMMAND model=gpt-5.6-terra provider=openai-codex reason="independent review of scoped Copper/Ivory test-contract repair" step="V3 24aa1fc review gate"
-ROUTE: class=implementation tier=mid model=gpt-5.6-luna provider=openai-codex reason="one-file direct immutable Aqua assertion repair after review finding" step="V3 Aqua test repair"
+ROUTE: class=implementation tier=mid model=gpt-5.6-luna provider=openai-codex reason="one-file full V3 Copper/Ivory test-contract replacement after verifying nonintegrated candidate left current V13 test intact" step="V3 Copper/Ivory test repair"
 VERIFY: step="V3 stale-contract root-cause audit" gate=three-isolated-node-test-reproductions+source-hierarchy-trace result=PASS attempts=1 cause="rejected V13 stylesheet test; obsolete 9-project assertion; genuine 40-route registry gap"
 VERIFY: step="V3 24aa1fc independent review" gate=exact-diff+locked-hashes+targeted-tests+secret-scan+full-suite-record result=REJECT attempts=1 reviewer=t_c2b5bdae reason="test aliases Aqua but does not directly assert immutable --mineral: #1E7582; detached full-suite dependency failures are NOT_COMPARABLE, separate 40-route registry failure is genuine"
 
