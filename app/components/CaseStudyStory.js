@@ -23,16 +23,43 @@ export function CaseStudyStory({
   refuses,
   unproven,
   artLabel,
+  // funnel-run compat props (legacy field names from c98d0ea) — accepted and ignored
+  // so prerendering does not crash. See funnel-run migration plan.
+  kicker,
+  title,
+  subtitle,
+  heroNote,
+  accent,
+  accentSoft,
+  ctaLabel,
+  ctaHref,
 }) {
+  // Defensive defaults: any case study that ships without the canonical
+  // problem/approach/context shape should still render an honest empty
+  // shell rather than crash the build. The build gate (workspace/tests)
+  // enforces the full schema for new case studies.
+  const safeProblem = problem || { heading: '', text: '', symptoms: [] };
+  const safeApproach = approach || { heading: '', text: '' };
+  const safeContext = context ?? '';
+  const safeName = name ?? title ?? slug ?? 'Case study';
+  const safeHeadline = headline ?? title ?? safeName;
+  const safeStandfirst = standfirst ?? subtitle ?? '';
+  const safeRefuses = refuses ?? [];
+  const safeUnproven = unproven ?? '';
+  const safeArtLabel = artLabel ?? '';
+  const safeBreadcrumb = breadcrumb ?? `Work / ${safeName}`;
+  const safeSlug = slug ?? 'case';
+  const safeSteps = steps ?? [];
+  const safeFeatures = features ?? [];
   return (
-    <main className={`shell case-study ${slug}-case`}>
+    <main className={`shell case-study ${safeSlug}-case`}>
       <SiteHeader />
 
       <section className="hero compact">
-        <span className="eyebrow">{breadcrumb}</span>
+        <span className="eyebrow">{safeBreadcrumb}</span>
         <span className="status-pill">PORTFOLIO DEMONSTRATION</span>
-        <h1>{headline}</h1>
-        <p>{standfirst}</p>
+        <h1>{safeHeadline}</h1>
+        <p>{safeStandfirst}</p>
         <p className="micro">
           Capability proof, not a client engagement. No measured business outcome is claimed anywhere on this page.
         </p>
@@ -41,11 +68,11 @@ export function CaseStudyStory({
       <MotionReveal>
         <section className="section intro">
           <article className="case-large">
-            <div className="case-art" aria-label={artLabel} role="img" />
+            <div className="case-art" aria-label={safeArtLabel} role="img" />
             <div className="case-copy">
               <span className="micro">The setting</span>
-              <h2>{name}</h2>
-              <p>{context}</p>
+              <h2>{safeName}</h2>
+              <p>{safeContext}</p>
             </div>
           </article>
         </section>
@@ -54,10 +81,10 @@ export function CaseStudyStory({
       <MotionReveal>
         <section className="section">
           <span className="eyebrow">The problem</span>
-          <h2>{problem.heading}</h2>
-          <p>{problem.text}</p>
+          <h2>{safeProblem.heading}</h2>
+          <p>{safeProblem.text}</p>
           <ul className="story-list">
-            {problem.symptoms.map((s) => (
+            {safeProblem.symptoms.map((s) => (
               <li key={s}>{s}</li>
             ))}
           </ul>
@@ -67,8 +94,8 @@ export function CaseStudyStory({
       <MotionReveal>
         <section className="section">
           <span className="eyebrow">The approach</span>
-          <h2>{approach.heading}</h2>
-          <p>{approach.text}</p>
+          <h2>{safeApproach.heading}</h2>
+          <p>{safeApproach.text}</p>
         </section>
       </MotionReveal>
 
@@ -77,7 +104,7 @@ export function CaseStudyStory({
           <span className="eyebrow">What was built</span>
           <h2>Four steps from first contact to owned follow-up.</h2>
           <div className="journey-grid">
-            {steps.map((s) => (
+            {safeSteps.map((s) => (
               <article key={s.num}>
                 <span className="micro">{s.num} /</span>
                 <h3>{s.title}</h3>
@@ -93,9 +120,9 @@ export function CaseStudyStory({
           <span className="eyebrow">Key capabilities</span>
           <h2>What this demonstration actually does.</h2>
           <div className="system-grid">
-            {features.map(([title, text]) => (
-              <article className="system-card" key={title}>
-                <h3>{title}</h3>
+            {safeFeatures.map(([ftitle, text]) => (
+              <article className="system-card" key={ftitle}>
+                <h3>{ftitle}</h3>
                 <p>{text}</p>
               </article>
             ))}
@@ -112,9 +139,9 @@ export function CaseStudyStory({
             missing features.
           </p>
           <div className="system-grid">
-            {refuses.map(([title, text]) => (
-              <article className="system-card" key={title}>
-                <h3>{title}</h3>
+            {safeRefuses.map(([rtitle, text]) => (
+              <article className="system-card" key={rtitle}>
+                <h3>{rtitle}</h3>
                 <p>{text}</p>
               </article>
             ))}
@@ -126,7 +153,7 @@ export function CaseStudyStory({
         <div>
           <span className="eyebrow">Proof status</span>
           <h2>What remains unproven.</h2>
-          <p>{unproven}</p>
+          <p>{safeUnproven}</p>
           <p>No testimonial, metric, benchmark, or provider callback is attached to this work.</p>
         </div>
         <div className="disclosure-box">
