@@ -45,6 +45,7 @@ VERIFY: step="C1 visual-source reconciliation" gate=runs+schema+contains result=
 VERIFY: step="M1 W03 Instagram attestation" gate=contains+state-validation+secret-scan result=PASS attempts=1
 VERIFY: step="M1 W04 Instagram profile packet" gate=provider-readback+schema+browser-preflight+secret-scan result=PASS attempts=1
 VERIFY: step="V3 Bangalore pilot review gate" gate=runs+diff-check+source-reconciliation result=FAIL attempts=1 reason="rendered LakmeSalonBangaloreInCaseStudy.js retains Kolkata identity while route metadata says Bangalore"
+VERIFY: step="V3 locked-byte policy" gate=fresh-isolated-worktree+five-owner-sha256+attribute-scope+lock-diff result=PASS attempts=1 commit=ffa29ef70eb27b9b48c8eb7107a93c10d0c0f0e8 reason="five-path CRLF policy materializes all supplied owner hashes without changing locked source content"
 
 ## DECISIONS
 - 2026-07-30 — Use the external Stitch design ZIP for visual tokens and the 30-screen archive for composition/route reference — because the current implementation matched neither source and the external design system is the approved token source.
