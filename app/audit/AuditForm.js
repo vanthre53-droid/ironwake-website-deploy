@@ -59,30 +59,16 @@ function validate(values) {
 }
 
 export function AuditForm() {
-  return (
-    <Suspense fallback={<AuditFormSkeleton />}>
-      <AuditFormInner />
-    </Suspense>
-  );
-}
-
-function AuditFormSkeleton() {
-  return (
-    <section className="audit-shell">
-      <article className="audit-form" aria-busy="true">
-        <header className="audit-form__head">
-          <span className="eyebrow">Business Leak Audit</span>
-          <h1>Tell IronWake where the leaks are.</h1>
-        </header>
-        <p className="audit-form__intro">Loading the audit form…</p>
-      </article>
-    </section>
-  );
+  // The form body renders synchronously in the initial HTML.
+  // Only the small prefilled-offer banner depends on useSearchParams();
+  // it lives inside its own <Suspense> boundary so the static form fields
+  // ship in the prerendered HTML and do not get replaced by a loading
+  // fallback during the prerender-to-hydration transition.
+  return <AuditFormInner />;
 }
 
 function AuditFormInner() {
   const formId = useId();
-  const searchParams = useSearchParams();
   const ids = useMemo(
     () => ({
       business: `${formId}-business`,
@@ -103,16 +89,6 @@ function AuditFormInner() {
   const [touched, setTouched] = useState({});
   const formRef = useRef(null);
 
-  const rawOffer = searchParams?.get('offer');
-  const rawTier = searchParams?.get('tier');
-  const offerMatch = resolveOffer(rawOffer);
-  const tierMatch = resolveTier(rawTier);
-  const selectedOffer = offerMatch || null;
-  const selectedTier = tierMatch && offerMatch ? tierMatch : null;
-  const selectedLabel = selectedOffer && selectedTier
-    ? `${selectedOffer.name} · ${TIER_LABEL[selectedTier]} tier`
-    : null;
-
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -123,8 +99,8 @@ function AuditFormInner() {
       leak: String(data.get('leak') ?? ''),
       consent: data.get('consent') === 'on',
       website: String(data.get('website') ?? ''),
-      offer: selectedOffer?.id || undefined,
-      tier: selectedTier || undefined
+      offer: data.get('offer') ? String(data.get('offer')) : undefined,
+      tier: data.get('tier') ? String(data.get('tier')) : undefined
     };
     const nextErrors = validate(values);
     setErrors(nextErrors);
@@ -183,29 +159,9 @@ function AuditFormInner() {
           noValidate
           aria-describedby={ids.status}
         >
-          {selectedLabel ? (
-            <div
-              id={`${formId}-selected`}
-              className="audit-form__context-banner"
-              role="status"
-            >
-              <span className="audit-form__context-eyebrow">Pre-filled from Pricing</span>
-              <strong className="audit-form__context-title">{selectedLabel}</strong>
-              <p className="audit-form__context-body">
-                We&rsquo;ll review this against your leak description and reply
-                with what we can deliver for this tier. You can refine either below.
-              </p>
-              <input type="hidden" name="offer" value={selectedOffer.id} />
-              <input type="hidden" name="tier" value={selectedTier} />
-              <Link
-                href="/pricing"
-                className="audit-form__context-clear"
-                aria-label="Clear pre-filled offer and tier"
-              >
-                Change offer
-              </Link>
-            </div>
-          ) : null}
+          <Suspense fallback={null}>
+            <PrefilledOfferBanner formId={formId} />
+          </Suspense>
           <header className="audit-form__head">
             <span className="eyebrow">Business Leak Audit</span>
             <h1>Tell IronWake where the leaks are.</h1>
@@ -326,5 +282,48 @@ function AuditFormInner() {
         </form>
       </article>
     </section>
+  );
+}
+
+function PrefilledOfferBanner({ formId }) {
+  // The ONLY place useSearchParams() is called in this file.
+  // Wrapping it in <Suspense> lets the rest of the form (Business name,
+  // email, leak description, consent, submit) render in the static
+  // prerendered HTML — only this small banner is deferred. With no
+  // ?offer/?tier query, this component returns null and contributes
+  // nothing to the DOM.
+  const searchParams = useSearchParams();
+  const rawOffer = searchParams?.get('offer');
+  const rawTier = searchParams?.get('tier');
+  const offerMatch = resolveOffer(rawOffer);
+  const tierMatch = resolveTier(rawTier);
+  const selectedOffer = offerMatch || null;
+  const selectedTier = tierMatch && offerMatch ? tierMatch : null;
+  if (!selectedOffer || !selectedTier) return null;
+
+  const selectedLabel = `${selectedOffer.name} · ${TIER_LABEL[selectedTier]} tier`;
+
+  return (
+    <div
+      id={`${formId}-selected`}
+      className="audit-form__context-banner"
+      role="status"
+    >
+      <span className="audit-form__context-eyebrow">Pre-filled from Pricing</span>
+      <strong className="audit-form__context-title">{selectedLabel}</strong>
+      <p className="audit-form__context-body">
+        We&rsquo;ll review this against your leak description and reply
+        with what we can deliver for this tier. You can refine either below.
+      </p>
+      <input type="hidden" name="offer" value={selectedOffer.id} />
+      <input type="hidden" name="tier" value={selectedTier} />
+      <Link
+        href="/pricing"
+        className="audit-form__context-clear"
+        aria-label="Clear pre-filled offer and tier"
+      >
+        Change offer
+      </Link>
+    </div>
   );
 }

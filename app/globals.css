@@ -1578,10 +1578,17 @@ button, input, textarea { font: inherit; }
 .chat-history button[disabled] { opacity: .5; cursor: not-allowed; }
 .chat-history-date { color: var(--ink-soft); font-size: .85rem; }
 
-.nav-login { margin-left: .75rem; padding: .35rem .8rem; border: 1px solid var(--copper); border-radius: 999px; color: var(--copper); background: transparent; font-size: .85rem; transition: background .25s ease, color .25s ease, border-color .25s ease; }
-.nav-login:hover, .nav-login:focus-visible { background: var(--copper); color: var(--white); }
-.nav-signup { margin-left: .5rem; padding: .35rem .8rem; border: 1px solid var(--copper); border-radius: 999px; color: var(--white); font-size: .85rem; background: var(--copper); transition: background .25s ease, border-color .25s ease, transform .25s ease; }
-.nav-signup:hover, .nav-signup:focus-visible { background: var(--copper-deep); border-color: var(--copper-deep); }
+/* v17.13(color-migration): Pearl/Glass material for the secondary "Sign in" pill.
+   Was a copper outline; directive now puts it on the Pearl canvas with a glass
+   border so it does not compete with the petrol primary CTA. */
+.nav-login { margin-left: .75rem; padding: .35rem .8rem; border: 1px solid var(--glass-border); border-radius: 999px; color: var(--graphite-ink); background: var(--base-glass); font-size: .85rem; transition: background .25s ease, color .25s ease, border-color .25s ease; }
+.nav-login:hover, .nav-login:focus-visible { background: var(--interactive-glass); border-color: var(--glass-border); color: var(--graphite-ink); }
+/* v17.13(color-migration): petrol primary fill with petrol-hover for hover.
+   The previous --copper-deep reference was a dangling alias (no value defined),
+   so hover silently fell back to nothing. --petrol-hover is the canonical
+   hover token resolved to #194C54. */
+.nav-signup { margin-left: .5rem; padding: .35rem .8rem; border: 1px solid var(--petrol); border-radius: 999px; color: var(--white); font-size: .85rem; background: var(--petrol); transition: background .25s ease, border-color .25s ease, transform .25s ease; }
+.nav-signup:hover, .nav-signup:focus-visible { background: var(--petrol-hover); border-color: var(--petrol-hover); }
 .nav-signout { margin-left: .5rem; padding: .35rem .8rem; border: 1px solid var(--stone); border-radius: 999px; color: var(--ink-soft); font-size: .85rem; background: transparent; cursor: pointer; font: inherit; }
 .nav-signout:hover, .nav-signout:focus-visible { background: var(--stone-soft); color: var(--ink); }
 .nav-auth:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
@@ -1758,21 +1765,27 @@ button, input, textarea { font: inherit; }
   .auth-terms input[type="checkbox"],
   .auth-field input { transition: none; }
 }
+/* v17.13(color-migration): petrol primary fill with petrol-hover for hover.
+   Earlier block had the rest/hover inverted (rest used --copper-dark which
+   already resolves to --petrol-hover, so the resting state looked darker
+   than the canonical primary). This is the auth CTA "Create account with
+   email" / "Sign in with email" — must read as deep petrol on the Pearl
+   canvas, not as a darker secondary. */
 .auth-submit {
   width: 100%;
   margin-top: .5rem;
-  background: var(--copper-dark);
+  background: var(--petrol);
   color: var(--white);
-  border-color: var(--copper-dark);
+  border-color: var(--petrol);
 }
 .auth-submit:hover, .auth-submit:focus-visible {
-  background: var(--copper);
-  border-color: var(--copper);
+  background: var(--petrol-hover);
+  border-color: var(--petrol-hover);
 }
 .auth-submit:disabled {
-  background: var(--copper-dark);
+  background: var(--petrol);
   color: var(--white);
-  opacity: .7;
+  opacity: .55;
 }
 .auth-switch { margin-top: 1.5rem; text-align: center; color: var(--ink-soft); }
 .auth-switch a { color: var(--ink); text-decoration: underline; font-weight: 500; }
@@ -3628,12 +3641,33 @@ button, input, textarea { font: inherit; }
 }
 
 /* The primary floating action button — single entry point. Sits in the
-   bottom-right corner. Honors the 48px touch-target rule. */
+   bottom-right corner. Honors the 48px touch-target rule.
+
+   z-index layering — global stack (most-recent-on-top wins):
+     200  .skip-link               (a11y — always on top)
+     190  .floating-action__panel  (chat/voice/wa panel when open)
+     185  .floating-action         (the FAB pill — above cookie banner)
+     180  .cookie-banner           (bottom consent banner)
+     150  .site-modal / .drawer    (any future modal layer)
+      80  .scroll-progress / .iw-fab-stack
+      66  (was .floating-panel — see line below)
+      65  (was .floating-action — bumped to 185)
+      60  .site-assistant / .floating-chooser
+      55  .scroll-to-top
+      50  .header (sticky)
+
+   v17.12: bumped the FAB pill + panel + backdrop above the cookie consent
+   banner (180). The Chrome browser-QA sweep captured the FAB being eaten
+   by the cookie banner on a fresh visitor session because both are
+   position:fixed at the bottom-right of the viewport. Lifting the FAB
+   to 185/191/184 guarantees it sits above the consent banner regardless
+   of viewport width or text length. The skip-link (200) is unchanged so
+   keyboard users still get the a11y jump-first. */
 .floating-action {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  z-index: 65;
+  z-index: 185;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -3686,7 +3720,7 @@ button, input, textarea { font: inherit; }
   position: fixed;
   right: 20px;
   bottom: 92px;
-  z-index: 66;
+  z-index: 191;
   width: min(420px, calc(100vw - 40px));
   max-height: min(640px, calc(100vh - 120px));
   overflow: auto;
@@ -3774,11 +3808,17 @@ button, input, textarea { font: inherit; }
 }
 
 /* Backdrop covers the page when the panel is open so clicks outside
-   dismiss the panel. Stays transparent to keep the pearl canvas visible. */
+   dismiss the panel. Stays transparent to keep the pearl canvas visible.
+
+   v17.12: z-index bumped from 64 to 184 so the backdrop sits above the
+   cookie consent banner (180) when the FAB panel is expanded. Without
+   this bump, on first-visit sessions the cookie banner peeks through
+   the backdrop and stays clickable — breaking the "click outside to
+   dismiss" behavior. */
 .floating-panel__backdrop {
   position: fixed;
   inset: 0;
-  z-index: 64;
+  z-index: 184;
   background: rgba(22, 27, 34, 0.18);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);

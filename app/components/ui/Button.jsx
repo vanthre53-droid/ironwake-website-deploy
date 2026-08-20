@@ -6,11 +6,15 @@
  * focus management, and an icon slot. Suppresses native button click
  * while busy to prevent double-submits.
  *
- * Variants (copper-first brand — no black-dominant CTAs):
- *   - "primary"     (default) — copper fill, white text, lift on hover
- *   - "secondary"   — warm-light surface + copper border (premium outline)
- *   - "ghost"       — copper text, paper-warm hover wash
+ * Variants (v17.13 — Pearl/Petrol/Glass system, NO black-dominant CTAs):
+ *   - "primary"     (default) — deep petrol fill (#1F5D67), white text, lift on hover
+ *   - "secondary"   — Pearl/Glass surface + petrol border (premium outline)
+ *   - "ghost"       — graphite text, secondary-canvas hover wash
  *   - "destructive" — error red fill, white text
+ *
+ * Color tokens are aliased in globals.css: --copper → --petrol, --copper-dark →
+ * --petrol-hover. No change required here when the token mapping changes — this
+ * component is class-name-only so the CSS layer owns the contract.
  *
  * Sizes:
  *   - "md" (default) — 48px min-height, 14px 22px padding
