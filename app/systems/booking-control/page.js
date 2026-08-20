@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { BookingControlSystem } from './BookingControlSystem';
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 export const metadata = {
   title: 'Booking Certainty — IronWake Systems',

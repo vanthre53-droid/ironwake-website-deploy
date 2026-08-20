@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { TrustLeadCaptureSystem } from './TrustLeadCaptureSystem';
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 export const metadata = {
   title: 'Trust and Lead Capture — IronWake Systems',

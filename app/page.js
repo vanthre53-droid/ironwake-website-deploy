@@ -1,8 +1,8 @@
-import { SiteHeader } from '../components/SiteHeader';
-import { FlagshipHero } from '../components/FlagshipHero';
-import { DashboardDemo } from '../components/DashboardDemo';
-import { MotionReveal } from '../components/MotionReveal';
-import { JsonLd } from '../components/JsonLd';
+import { SiteHeader } from './components/SiteHeader';
+import { FlagshipHero } from './components/FlagshipHero';
+import { DashboardDemo } from './components/DashboardDemo';
+import { MotionReveal } from './components/MotionReveal';
+import { JsonLd } from './components/JsonLd';
 
 import { organizationLd, breadcrumbLd } from '../lib/seo.mjs';
 
@@ -74,7 +74,7 @@ const faqs = [
   { q: 'Is this a chatbot?',                              a: 'No. IronWake builds the operating system around enquiry, booking, and follow-up. Conversation is one input.' },
   { q: 'Do I need a new CRM?',                            a: 'No. The smallest system is usually a column in what you already use. New platforms come last.' },
   { q: 'How much does it cost to start?',                 a: `${PRICING.auditLitePrice} for the audit-lite, ${PRICING.enquiryAuditPrice} for a full enquiry audit, ${PRICING.diagnosticPrice} for a diagnostic engagement, and ${PRICING.implementationPrice} for a first build. No subscription.` },
-  { q: 'Do you replace my team?',                         a: 'No. IronWake makes the existing team's work visible. The smallest system is usually a column, not a hire.' },
+  { q: 'Do you replace my team?',                         a: "No. IronWake makes the existing team's work visible. The smallest system is usually a column, not a hire." },
   { q: 'Why does the site say "demonstration"?',          a: 'Because provider connections (telephony, messaging) are not active on this site. We label what is built and what is not, by review.' },
   { q: 'How does the free content audit work?',           a: 'Send the URL. The first review returns the three highest-value leaks in 48 hours, with named actions. No commitment.' },
 ];

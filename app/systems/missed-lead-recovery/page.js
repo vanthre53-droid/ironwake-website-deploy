@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { MissedLeadRecoverySystem } from './MissedLeadRecoverySystem';
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 export const metadata = {
   title: 'Missed Lead Recovery — IronWake Systems',

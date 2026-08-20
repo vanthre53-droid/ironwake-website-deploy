@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { AiReceptionistSystem } from './AiReceptionistSystem';
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 export const metadata = {
   // ponytail: site assistant may be live; client AI Receptionist still requires separately scoped provider deployment.
