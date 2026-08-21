@@ -33,8 +33,7 @@ const deliveryLabel = {
 };
 
 export function ServicesCatalog() {
-  const groups = groupByServiceId(OFFERED_NOW_MATRIX);
-
+  const groups = serviceCatalogGroups();
   return (
     <main className="page page-services">
       <section className="hero compact">
@@ -160,6 +159,10 @@ export function ServicesCatalog() {
       </MotionReveal>
     </main>
   );
+}
+
+export function serviceCatalogGroups() {
+  return groupByServiceId(OFFERED_NOW_MATRIX);
 }
 
 function groupByServiceId(matrix) {

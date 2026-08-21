@@ -1,8 +1,9 @@
 import { SiteHeader } from '../components/SiteHeader';
 import { MotionReveal } from '../components/MotionReveal';
 
-import { organizationLd, breadcrumbLd } from '../../lib/seo.mjs';
+import { organizationLd, breadcrumbLd, itemListLd } from '../../lib/seo.mjs';
 import { canonicalUrl } from '../../lib/seo.mjs';
+import { PROOF_CLASSES as PROOF_CLASS_LABELS } from '../../lib/canonical-entity.mjs';
 
 // ponytail: every claim on this page maps to a documented proof class in
 // lib/truth-registry.mjs. Copy is derived from the canonical definitions
@@ -93,6 +94,10 @@ export default function VerificationPage() {
         { name: 'Home', path: '/' },
         { name: 'Verification', path: '/verification' },
       ])) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd({
+        name: 'IronWake proof classes',
+        items: PROOF_CLASS_LABELS.map((label) => ({ name: label, path: '/verification' })),
+      })) }} />
 
       <SiteHeader />
 
