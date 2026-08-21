@@ -9,10 +9,11 @@ import { SkeletonNavAuth } from './Skeleton.js';
 const links = [
   ['/', 'Home'],
   ['/work', 'Work'],
-  ['/systems', 'Services'],
+  ['/services', 'Services'],
   ['/systems/ai-receptionist', 'AI Systems'],
   ['/process', 'Process'],
   ['/pricing', 'Pricing'],
+  ['/verification', 'Proof'],
   ['/insights', 'Insights'],
   ['/about', 'About']
 ];

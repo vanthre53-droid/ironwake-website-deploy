@@ -7,10 +7,11 @@ test('site header exposes every active route through native navigation', async (
   // ponytail: the links array is the single source of truth for nav items.
   assert.match(source, /\['\/', 'Home'\]/);
   assert.match(source, /\['\/work', 'Work'\]/);
-  assert.match(source, /\['\/systems', 'Services'\]/);
+  assert.match(source, /\['\/services', 'Services'\]/);
   assert.match(source, /\['\/systems\/ai-receptionist', 'AI Systems'\]/);
   assert.match(source, /\['\/process', 'Process'\]/);
   assert.match(source, /\['\/pricing', 'Pricing'\]/);
+  assert.match(source, /\['\/verification', 'Proof'\]/);
   assert.match(source, /\['\/insights', 'Insights'\]/);
   assert.match(source, /\['\/about', 'About'\]/);
   assert.match(source, /href="\/audit">Book Diagnostic/);
