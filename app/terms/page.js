@@ -20,7 +20,7 @@ export default function TermsPage() {
     <section className="hero compact">
       <span className="eyebrow">IronWake / Terms</span>
       <h1>What these terms cover right now.</h1>
-      <p>This site is a capability demo running in pre-launch mode. The published setup prices are real, the scope request is a real form, customer accounts are real, and the chatbot is a real AI — but proposals and contracts are handled by email until the first client is onboarded.</p>
+      <p>The published setup prices are real, the scope request is a real form, customer accounts are real, and the chatbot is a real AI. Proposals and contracts are handled by email during the current low-volume period — they will move to a formal contract before the first paying client is onboarded. Until automated payment is added, invoices are paid by manual bank transfer or UPI against the proposal.</p>
     </section>
 
     <section className="surface">

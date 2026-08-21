@@ -3,7 +3,7 @@ import { BookingControlSystem } from './BookingControlSystem';
 import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 export const metadata = {
-  title: 'Booking Certainty — IronWake Systems',
+  title: 'Booking Certainty — IronWake',
   description:
     'Booking Certainty system — separates requested slots from confirmed slots. Form submission alone can never reach the confirmed state.',
   alternates: { canonical: '/systems/booking-control' },

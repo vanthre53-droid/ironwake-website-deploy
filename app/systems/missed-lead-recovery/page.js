@@ -3,7 +3,7 @@ import { MissedLeadRecoverySystem } from './MissedLeadRecoverySystem';
 import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 export const metadata = {
-  title: 'Missed Lead Recovery — IronWake Systems',
+  title: 'Missed Lead Recovery — IronWake',
   description:
     'Missed Lead Recovery system — captures after-hours enquiry signals so a real owner-email reply is sent.',
   alternates: { canonical: '/systems/missed-lead-recovery' },

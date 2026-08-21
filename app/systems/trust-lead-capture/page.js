@@ -3,7 +3,7 @@ import { TrustLeadCaptureSystem } from './TrustLeadCaptureSystem';
 import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 export const metadata = {
-  title: 'Trust and Lead Capture — IronWake Systems',
+  title: 'Trust and Lead Capture — IronWake',
   description:
     'Trust and Lead Capture system — form integrity, consent log, and audit trail. Hidden trap fields keep bots out without ever blocking real customers.',
   alternates: { canonical: '/systems/trust-lead-capture' },

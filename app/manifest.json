@@ -1,7 +1,7 @@
 {
   "name": "IronWake — Systems that answer",
   "short_name": "IronWake",
-  "description": "Operational workflow mapping and implementation for service businesses, with provider-dependent capabilities disclosed before activation.",
+  "description": "IronWake designs and builds conversion websites, AI receptionists, booking and lead-recovery systems, and CRM/follow-up automation for service businesses. Provider-dependent capabilities are disclosed before activation.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f3ee",
