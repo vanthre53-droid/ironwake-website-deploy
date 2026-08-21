@@ -10,6 +10,7 @@ const NAV_EXPLORE = [
   { href: '/work', label: 'Work' },
   { href: '/systems', label: 'Services' },
   { href: '/systems/ai-receptionist', label: 'AI Systems' },
+  { href: '/services', label: 'Service catalogue' },
   { href: '/process', label: 'Process' },
 ];
 
@@ -17,6 +18,7 @@ const NAV_START = [
   { href: '/pricing', label: 'Pricing' },
   { href: '/audit', label: 'Map my leak' },
   { href: '/insights', label: 'Insights' },
+  { href: '/verification', label: 'Proof classes' },
   { href: '/about', label: 'About' },
 ];
 
