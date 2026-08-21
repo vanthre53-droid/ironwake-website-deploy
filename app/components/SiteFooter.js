@@ -76,7 +76,7 @@ export function SiteFooter() {
 
         <div className="footer-meta">
           <p className="footer-meta-copyright">
-            © {year} IronWake Systems Practice. All rights reserved.
+            © {year} IronWake. All rights reserved.
           </p>
           <p className="footer-meta-note">
             Demonstration build. Prices are published offer tiers. No booking,

@@ -10,7 +10,7 @@ import { canonicalUrl } from '../../lib/seo.mjs';
 export const metadata = {
   title: 'Industries — IronWake',
   description:
-    'How IronWake systems are scoped per industry. Field-appropriate architectures for home services, dental clinics, salons and spas, and dental practices.',
+    'How IronWake designs and builds custom websites, AI receptionists, booking systems, CRM/follow-up, and lead-recovery systems per industry. Field-appropriate architectures for home services, dental clinics, salons and spas, and dental practices.',
   alternates: { canonical: '/industries' },
   openGraph: {
     title: 'Industries — IronWake',

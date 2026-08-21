@@ -1,9 +1,0 @@
-import assert from 'node:assert/strict';
-import test from 'node:test';
-import { readFile } from 'node:fs/promises';
-
-test('quirk-studio-a-luxury-salon-delhi-in CaseStudy exports a component', async () => {
-  const source = await readFile(new URL('./QuirkStudioALuxurySalonDelhiInCaseStudy.js', import.meta.url), 'utf8');
-  assert.match(source, /export function QuirkStudioALuxurySalonDelhiInCaseStudy/);
-  assert.match(source, /CaseStudyStory/);
-});

@@ -87,7 +87,7 @@ export function AiReceptionistSystem() {
               <ul className="ai-status-list">
                 {CLIENT_PROVIDER_NOTES.map((note) => <li key={note}>{note}</li>)}
               </ul>
-              <p className="ai-status-foot">Provider pending — separately scoped.</p>
+              <p className="ai-status-foot">Provider pending — separately scoped. When the SOW calls for it, IronWake implements the full Retell-backed receptionist end-to-end on Cloudflare + Supabase as a paid engagement.</p>
             </article>
           </div>
         </section>

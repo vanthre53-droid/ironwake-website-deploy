@@ -10,8 +10,8 @@ export const metadata = {
 };
 
 const stages = [
-  ['01 / map', 'Map', 'Identify the exact handoff where a visitor loses context or a team loses ownership of a lead. This stage produces a written boundary, not a redesign.'],
-  ['02 / fix', 'Fix', 'Implement the smallest system that closes the gap. A bigger stack is not preferred over an understandable one.'],
+  ['01 / map', 'Map', 'Identify the exact handoff where a visitor loses context or a team loses ownership of a lead. This stage produces a written boundary (the diagnostic scope-lock); the implementation phase that follows is the design-and-build phase where IronWake designs UI/UX, writes frontend and backend code, integrates APIs, and deploys the complete system.'],
+  ['02 / fix', 'Fix', 'Implement the smallest system that closes the gap; for larger custom work (full website + AI receptionist + CRM + booking) the implementation phase is also right-sized, with explicit deliverables, milestones, and acceptance criteria documented in the SOW.'],
   ['03 / test', 'Test', 'Database and API behaviour is verified before any interface is allowed to show a success state. A green screen is never treated as proof by itself.'],
   ['04 / document', 'Document', 'Record what was verified, what remains pending, and what evidence supports each claim. Unverified states stay labelled rather than implied.']
 ];

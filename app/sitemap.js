@@ -22,7 +22,7 @@ const FALLBACK_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || PRODUCTION_CANONIC
 // ponytail: every public sitemap URL is computed from ROUTES (lib/routes.mjs).
 // changeFrequency and priority come from ROUTES — do NOT maintain them here.
 function toSitemapEntry(route) {
-  const file = route.file ? join(process.cwd(), route.file) : null;
+  const file = route.file ? join(/* turbopackIgnore: true */ process.cwd(), route.file) : null;
   let lastModified;
   if (file && existsSync(file)) {
     try {

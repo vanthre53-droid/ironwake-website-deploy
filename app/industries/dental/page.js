@@ -67,8 +67,9 @@ export default function DentalIndustryPage() {
           <h2 id="dental-scope-heading">What this page covers.</h2>
           <p className="reading-width">
             This is a planning surface, not a clinical, diagnostic, or compliance service.
-            It describes the IronWake systems wired for solo dental practices and stays
-            strictly outside the practice of dentistry.
+            It describes the custom websites, AI receptionists, booking, CRM/follow-up,
+            and lead-recovery systems IronWake designs and builds for solo dental
+            practices, and stays strictly outside the practice of dentistry.
           </p>
         </section>
       </MotionReveal>

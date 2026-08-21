@@ -25,7 +25,7 @@ const shapes = [
     index: '02',
     title: 'Workflow build',
     label: 'Build',
-    blurb: 'The smallest system that closes the gap the audit identified. One named owner, one visible next action, one due time per record. Stack size is constrained by legibility, not by capability.',
+    blurb: 'The smallest system that closes the gap the audit identified. One named owner, one visible next action, one due time per record. Stack size is constrained by legibility and right-sized to the engagement, not by IronWake’s capability ceiling — IronWake also delivers full custom platforms (website + AI receptionist + CRM + booking + integrations) when the SOW calls for it.',
     ownership: 'A workflow you can read end-to-end without a translator. Documented in the same language your team uses.',
     boundary: 'No paid media, no sales automation, no marketing site work. The leak is closed inside the existing operations.'
   },
