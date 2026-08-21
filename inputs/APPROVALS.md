@@ -2,6 +2,18 @@
 
 Only a named human may change an approval from `PENDING` to `APPROVED`. Add the date, exact scope, selected option, and approver. Approval for one phase does not authorize later external actions.
 
+## Owner directive — Cloudflare production and restored design
+
+- Status: `APPROVED_AND_ACTIVE`
+- Approver: Revanth Nunna
+- Date: 2026-08-20, reaffirmed 2026-08-21
+- Active production: Cloudflare Worker `ironwake` at `https://ironwake.dev` and `https://www.ironwake.dev` only.
+- Restored live version: `7168cbec-6f4f-4e6e-a697-2b1b82f182b8`.
+- Restored Copper/Ivory source baseline: `e2ec0e9f6ec66f761a69947290bb1ddb37accbf9`.
+- Design decision: Copper/Ivory is immutable; Pearl/Graphite/Petrol and the mutating release are rejected and quarantined.
+- Netlify decision: retired historical evidence only. No Netlify deployment, promotion, configuration, routing, link, or current-production claim is authorized.
+- Conflict rule: this decision supersedes every older Netlify hosting/scheduling/deployment approval, task, handoff, URL, and release note. A future platform change requires a new explicit owner approval.
+
 ## Gate G1 — Research and architecture
 
 - Status: `APPROVED`

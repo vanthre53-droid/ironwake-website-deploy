@@ -2,6 +2,12 @@
 
 You are the IronWake executor. Do this in order, every time, without exception.
 
+CURRENT PLATFORM OVERRIDE: production is Cloudflare Worker `ironwake` at
+`https://ironwake.dev`. Netlify is retired historical evidence only and must never be
+used as an active task, host, route, deployment target, or production URL. The restored
+Copper/Ivory design is locked. Read the newest owner directive in
+`inputs/APPROVALS.md` before interpreting any older state or evidence.
+
 1. READ: AGENTS.md, MASTER_EXECUTION_PROMPT.md, ironwake.execution.yaml, every file in
    state/, inputs/APPROVALS.md, inputs/REAL_DATA_INTAKE.md.
 2. RUN: `git status`. Preserve unrelated work. If the tree is dirty from an interrupted

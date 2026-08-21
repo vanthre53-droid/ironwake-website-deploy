@@ -6,21 +6,37 @@ programme: IRONWAKE_REAL_PRODUCT_COMPLETION
 programme_status: PARTIAL
 active_stage: C1
 required_role: C1
-current_phase: P0_POST_DEPLOY_TARGETED_VERIFICATION
-current_gate: MINIMAX_LIVE_BOUNDARY_AND_HUMAN_GATES
-next_exact_action: "Complete targeted owner AAL2/direct-object/session evidence using the live CRM control room, then record the D-008 legal-owner decision. Verified TOTP enrollment and owner CRM visibility are now evidenced."
+current_phase: P0_CLOUDFLARE_RESTORED_PRODUCTION
+current_gate: RESTORED_COPPER_IVORY_LOCK_AND_CLOUDFLARE_ONLY_RELEASE
+next_exact_action: "Continue from .ironwake/GOAL.md and the restored Copper/Ivory source baseline. Treat Netlify as historical evidence only. Do not deploy until the current Cloudflare-only release gate is green and explicitly authorized."
 
-harness: codex
+harness: hermes
 model: gpt-5.6-terra
-last_safe_boundary: 845775b
-last_verified_task: iw_owner_crm_control_room_live_deployment
-blocked_on: "Owner AAL2/direct-object/session evidence and the adult/legal-owner D-008 decision remain human-controlled."
-failed_live: []
+last_safe_boundary: e2ec0e9f6ec66f761a69947290bb1ddb37accbf9
+last_verified_task: cloudflare_copper_ivory_production_rollback
+blocked_on: "Current implementation and verification gates in .ironwake/GOAL.md; production deployment remains separately authorized."
+failed_live:
+  - a8dd2497_REJECTED_MUTATING_CLOUDFLARE_RELEASE
 waiting_external:
   - WAITING_EXTERNAL_OWNER_AAL2_DIRECT_OBJECT_AND_SESSION_EVIDENCE
   - WAITING_EXTERNAL_D008_ADULT_LEGAL_OWNER_DECISION
 
-new_netlify_release:
+authoritative_platform:
+  status: ACTIVE
+  provider: CLOUDFLARE_WORKERS
+  worker_name: ironwake
+  canonical_origin: https://ironwake.dev
+  www_origin: https://www.ironwake.dev
+  restored_live_version: 7168cbec-6f4f-4e6e-a697-2b1b82f182b8
+  restored_source_baseline: e2ec0e9f6ec66f761a69947290bb1ddb37accbf9
+  design: COPPER_IVORY_LOCKED
+  netlify_status: RETIRED_HISTORICAL_ONLY
+  routing_rule: "Never deploy, promote, link, configure, or describe Netlify as current IronWake production."
+
+historical_netlify_release:
+  classification: RETIRED_SUPERSEDED_EVIDENCE_ONLY
+  superseded_by: CLOUDFLARE_WORKERS
+  forbidden_as_current_instruction: true
   status: DEPLOYED_OWNER_CRM_UX_CORRECTED_TARGETED_VERIFICATION
   production_deploy_count_allowed: 3
   production_deploys_used_on_new_site: 3
@@ -83,7 +99,7 @@ gates:
   GC3_RELEASE_CANDIDATE_PASS: partial_not_approved
   G2_SCHEMA_AUTH_SERVER_APPROVAL: verified_notification_state_live_owner_session_pending
   G4_EXTERNAL_PROVIDER_APPROVAL: verified_live_resend_pre_domain_test
-  G5_PRODUCTION_DEPLOY_APPROVAL: verified_one_final_new_netlify_deploy_live
+  G5_PRODUCTION_DEPLOY_APPROVAL: historical_netlify_approval_superseded_cloudflare_only
   REAL_CAPABILITY_LEDGER_VERIFIED: verified
   IRONWAKE_REAL_PRODUCT_COMPLETION: partial
 
@@ -110,4 +126,4 @@ workstream_status:
   W19: verified_live_privileged_rpc_boundary
   W20: partial_authorization_repaired_aal2_direct_object_pending
   W21: blocked_release_dependencies
-  W22: deployed_new_netlify_targeted_verification_partial_minimax_timeout
+  W22: cloudflare_live_restored_copper_ivory_netlify_retired

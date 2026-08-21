@@ -1,11 +1,19 @@
 schema_version: 1
 spec_version: c1-real-product-remediation-v1
+queue_status: HISTORICAL_SUPERSEDED
+superseded_at: "2026-08-21"
+superseded_by: ".ironwake/GOAL.md and state/states.yaml"
+platform_supersession:
+  active_platform: CLOUDFLARE_WORKERS
+  canonical_origin: https://ironwake.dev
+  netlify_status: RETIRED_HISTORICAL_ONLY
+  rule: "The Netlify paths, schedule, deployment notes, and acceptance commands below are retained only as historical implementation evidence. They are not executable current tasks and must never be used to choose hosting, routing, or deployment."
 sealed_by: Codex C1; current IRONWAKE_REAL_PRODUCT_COMPLETION programme directed by the owner
 sealed_commit: 27db52d
 last_verified_implementation_commit: 542f15b
 gate: GC1_ARCHITECTURE_APPROVED
-immutable_during_m1: true
-activation: "Active for M1 after G1 approval; execute dependency order and stop at remaining gates."
+immutable_during_m1: false
+activation: "SUPERSEDED — not an active execution queue. Use .ironwake/GOAL.md and state/states.yaml."
 tasks:
   - id: IW-P0-SEC-03
     workstream: W19

@@ -2,6 +2,9 @@ project: IronWake production website and operator system
 version: 6.0.0-harness-neutral
 design_phase: complete
 production_phase: pending
+active_production_platform: CLOUDFLARE_WORKERS
+canonical_origin: https://ironwake.dev
+netlify_status: RETIRED_HISTORICAL_ONLY
 durable_state: state/PROJECT_STATE.yaml
 universal_resume_prompt: prompts/00_START_OR_RESUME.md
 cli_setup: CLI-SETUP.md

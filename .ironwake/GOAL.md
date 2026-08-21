@@ -3,6 +3,8 @@ begin_v3_authoritative_owner_directive
 
 ## Active, owner-authoritative execution record
 - Current source baseline: `e2ec0e9f6ec66f761a69947290bb1ddb37accbf9` (restored Copper / Ivory).
+- Active production platform: Cloudflare Worker `ironwake`; canonical origin `https://ironwake.dev`; restored live version `7168cbec-6f4f-4e6e-a697-2b1b82f182b8`.
+- Netlify is retired historical evidence only. Never deploy, promote, configure, link, or interpret any Netlify record as current production or current work.
 - Immutable byte-locked files: `app/globals.css`, `app/layout.js`, `app/page.js`, `app/components/FlagshipHero.js`, and `app/components/DashboardDemo.js`. Do not edit, regenerate, reformat, stage, or override them without exact owner authorization.
 - Brand fingerprint: ivory canvas `#F5F3EE`, warm stone `#EDEAE3`, ink `#0A0A0A`, copper primary `#B94D2F`; supporting aqua is secondary only. Pearl / Graphite / Petrol redesign work is quarantined and must never be revived or deployed.
 - Current local gate: materialize the five supplied CRLF lock bytes in isolated worktrees through the intentionally narrow `.gitattributes` policy, then verify before worker dispatch.

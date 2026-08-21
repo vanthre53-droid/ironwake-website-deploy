@@ -1,5 +1,15 @@
 # CLI Handoff
 
+## CURRENT AUTHORITATIVE HANDOFF — 2026-08-21 Cloudflare correction
+
+- Production is Cloudflare Worker `ironwake` at `https://ironwake.dev` and `https://www.ironwake.dev`.
+- Restored live Cloudflare version: `7168cbec-6f4f-4e6e-a697-2b1b82f182b8`.
+- Restored Copper/Ivory source baseline: `e2ec0e9f6ec66f761a69947290bb1ddb37accbf9`.
+- The active design is locked Copper/Ivory. Pearl/Graphite/Petrol work and the mutating release are quarantined and must not return.
+- Netlify is retired and historical only. Never deploy, promote, configure, link, inspect as the active host, or describe any `netlify.app` URL as current production.
+- Every Netlify statement in older handoffs below is superseded. It remains solely to preserve the audit trail and must not be converted into a present-tense task.
+- Resume only from `.ironwake/GOAL.md`, `state/PROJECT_STATE.yaml`, `state/states.yaml`, and `.ironwake/release/CLOUDFLARE_DEPLOY_LEDGER.json`, applying the newest dated instruction when records conflict.
+
 ## Current handoff — 2026-08-09 Codex owner lead-stage update
 
 - Live `owner_update_inquiry_stage(uuid,text)` is security-definer, rechecks `is_owner()`, validates allowed stages, writes audit metadata, denies `anon`, and grants only `authenticated` execution.
