@@ -5,12 +5,12 @@ import { readFile } from 'node:fs/promises';
 test('ai-receptionist page is a metadata wrapper around the client system view', async () => {
   const source = await readFile(new URL('./page.js', import.meta.url), 'utf8');
   assert.match(source, /export const metadata/);
-  assert.match(source, /title:\s*'AI Receptionist — Live Demo on This Site'/);
+  assert.match(source, /title:\s*'AI Receptionist Planning'/);
   assert.match(source, /<AiReceptionistSystem \/>/);
 });
 
-test('ai-receptionist metadata states the live-demo-vs-per-tenant distinction', async () => {
+test('ai-receptionist metadata states the unconnected provider reality', async () => {
   const source = await readFile(new URL('./page.js', import.meta.url), 'utf8');
-  // Live Retell web-call demo is honest on this domain; per-tenant client receptionist remains separately scoped.
-  assert.match(source, /live receptionist demo on this domain[\s\S]*separately scoped/i);
+  // Site assistant may be live; client AI Receptionist still requires separately-scoped provider deployment.
+  assert.match(source, /client AI Receptionist[\s\S]*separately scoped provider/);
 });

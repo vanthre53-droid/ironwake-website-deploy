@@ -1,6 +1,6 @@
 import './globals.css';
 import { SiteFooter } from './components/SiteFooter';
-import FloatingActions from './components/FloatingActions';
+import RoundFABStack from './components/RoundFABStack.jsx';
 import { ScrollToTop } from './components/ScrollToTop';
 import { CookieBanner } from './components/CookieBanner';
 import { ScrollProgress } from './components/motion';
@@ -60,5 +60,5 @@ export default function RootLayout({ children }) {
       { '@type': 'ListItem', position: 4, name: 'AI Receptionist', url: `${siteUrl}/systems/ai-receptionist` }
     ]}
   ]};
-  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to main content</a><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ScrollProgress /><main id="main-content" tabIndex={-1}>{children}</main><SiteFooter /><FloatingActions /><CookieBanner /><ScrollToTop /></body></html>;
+  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to main content</a><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} /><ScrollProgress /><main id="main-content" tabIndex={-1}>{children}</main><SiteFooter /><RoundFABStack /><CookieBanner /><ScrollToTop /></body></html>;
 }
