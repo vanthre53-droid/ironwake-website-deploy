@@ -3,15 +3,15 @@ import { AiReceptionistSystem } from './AiReceptionistSystem';
 import { organizationLd, breadcrumbLd } from '../../../lib/seo.mjs';
 
 export const metadata = {
-  // ponytail: site assistant may be live; client AI Receptionist still requires separately scoped provider deployment.
-  title: 'AI Receptionist Planning',
+  // ponytail: live receptionist demo on this domain against verified production Retell agent; per-tenant client receptionist remains separately scoped.
+  title: 'AI Receptionist — Live Demo on This Site',
   description:
-    'AI Receptionist system planning — what it would do, what is currently live on this site, and why the client receptionist is not yet a deployed provider.',
+    'AI Receptionist system plan and live demo — a real Retell-backed web-call you can start from this page, plus the per-tenant scope required for a client deployment.',
   alternates: { canonical: '/systems/ai-receptionist' },
   openGraph: {
-    title: 'AI Receptionist Planning — IronWake',
+    title: 'AI Receptionist — Live Demo — IronWake',
     description:
-      'Plan view of an AI receptionist system: capability vs status, live site assistant, and the separately-scoped provider work.',
+      'Live Retell-backed voice receptionist demo on ironwake.dev, plus the per-tenant scope for a client deployment.',
     url: '/systems/ai-receptionist',
   },
 };
@@ -20,7 +20,7 @@ export default function AiReceptionistPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd()) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: 'Home', url: '/' }, { name: 'Systems', url: '/systems' }, { name: 'AI Receptionist Planning', url: '/systems/ai-receptionist' }])) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: 'Home', url: '/' }, { name: 'Systems', url: '/systems' }, { name: 'AI Receptionist', url: '/systems/ai-receptionist' }])) }} />
       <AiReceptionistSystem />
     </>
   );
