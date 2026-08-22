@@ -18,6 +18,6 @@ test('worker secrets audit passes', { timeout: 60_000 }, () => {
   const report = JSON.parse(r.stdout);
   assert.equal(report.issues.length, 0, 'audit reported issues');
   assert.equal(report.missingCount, 0, 'missing required secrets');
-  assert.equal(report.requiredCount, 18, 'should check 18 required secrets');
-  assert.equal(report.presentCount, 18, 'all 18 required secrets present');
+  assert.equal(report.requiredCount, 19, 'should check 19 required secrets');
+  assert.equal(report.presentCount, 19, 'all 19 required secrets present');
 });
